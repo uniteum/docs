@@ -1,0 +1,170 @@
+# Uniteum Documentation Site Configuration
+# Jekyll configuration for uniteum.one → uniteum.github.io
+
+# Site Settings
+title: Uniteum
+tagline: Algebraic Liquidity Protocol
+description: >-
+  An experimental liquidity protocol on Ethereum where tokens have dimensional units 
+  that compose algebraically. Price consistency through arbitrage-enforced forge operations.
+
+# URLs
+url: "https://uniteum.one"
+baseurl: ""
+repository: "uniteum/docs"
+
+# Author/Organization
+author:
+  name: Paul Reinholdtsen
+  email: paul@uniteum.one
+  ens: reinholdtsen.eth
+
+# Social & Links
+github_username: uniteum
+twitter_username: uniteum
+ethereum:
+  mainnet_contract: "0x9df9b0501e8f6c05623b5b519f9f18b598d9b253"
+  ens_primary: "uniteum.eth"
+
+# Build Settings
+theme: minima
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    block:
+      line_numbers: false
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-github-metadata
+
+# Collections (for organizing docs)
+collections:
+  docs:
+    output: true
+    permalink: /:collection/:name
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "docs"
+    values:
+      layout: "doc"
+
+# Navigation
+nav_order:
+  - Introduction
+  - Getting Started
+  - Concepts
+  - Operations
+  - Examples
+  - Technical Reference
+  - Use Cases
+  - Safety & Risks
+
+# Site Features
+show_excerpts: true
+show_downloads: false
+google_analytics: # Add tracking ID when ready
+
+# Exclude from build
+exclude:
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/
+  - README.md
+  - LICENSE
+  - .gitignore
+  - .git/
+
+# Include files
+include:
+  - _pages
+
+# Permalink style
+permalink: /:title/
+
+# Sass/SCSS
+sass:
+  sass_dir: _sass
+  style: compressed
+
+# Timezone
+timezone: UTC
+
+# Experimental/Development Flags
+experimental: true
+version: "0.1"
+audit_status: "unaudited"
+
+# Custom variables (accessible via site.*)
+uniteum:
+  version: "0.1"
+  version_name: "1"
+  genesis_version: "0.0"
+  
+  contracts:
+    uniteum_v1: "0x9df9b0501e8f6c05623b5b519f9f18b598d9b253"
+    uniteum_genesis: "0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4"
+    discount_kiosk: "0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9"
+    deployer_safe: "0x2613a85186416383cef090886bc6abccdfa3878a"
+    
+  ens:
+    root: "uniteum.eth"
+    v1: "0-1.uniteum.eth"
+    genesis: "0-0.uniteum.eth"
+    kiosk: "buy.0-0.uniteum.eth"
+    deployer: "deployer.uniteum.eth"
+    vault: "vault.uniteum.eth"
+    
+  supply:
+    total: "1000000000" # 1 billion
+    kiosk: "900000000"  # 900M
+    reserve: "100000000" # 100M
+    
+  networks:
+    - name: "Ethereum Mainnet"
+      chain_id: 1
+      explorer: "https://etherscan.io"
+    - name: "Sepolia Testnet"
+      chain_id: 11155111
+      explorer: "https://sepolia.etherscan.io"
+
+# SEO
+twitter:
+  username: uniteum
+  card: summary_large_image
+
+social:
+  name: Uniteum
+  links:
+    - https://github.com/uniteum
+    - https://twitter.com/uniteum
+
+# Warnings/Disclaimers (for easy inclusion in templates)
+warnings:
+  experimental: "⚠️ Uniteum is experimental software. Use at your own risk."
+  unaudited: "This protocol is unaudited. Smart contract risk exists."
+  symbolic: "Symbolic units have no inherent value or backing."
+  not_financial_advice: "This documentation is not financial advice."
+  
