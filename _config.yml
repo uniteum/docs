@@ -21,7 +21,7 @@ author:
 
 # Social & Links
 github_username: uniteum
-twitter_username: uniteum
+twitter_username: uniteum1
 ethereum:
   mainnet_contract: "0x9df9b0501e8f6c05623b5b519f9f18b598d9b253"
   ens_primary: "uniteum.eth"
@@ -152,14 +152,14 @@ uniteum:
 
 # SEO
 twitter:
-  username: uniteum
+  username: uniteum1
   card: summary_large_image
 
 social:
   name: Uniteum
   links:
     - https://github.com/uniteum
-    - https://twitter.com/uniteum
+    - https://twitter.com/uniteum1
 
 # Warnings/Disclaimers (for easy inclusion in templates)
 warnings:
