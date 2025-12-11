@@ -26,7 +26,7 @@ uniteum.eth
 │   └── buy.0-0.uniteum.eth → 0x5581...6dc9 (Discount Kiosk)
 ├── 0-1.uniteum.eth → 0x9df9...b253 (Uniteum 0.1 "1")
 ├── eoa.uniteum.eth → 0x6056...496e
-│   ├── 0.eoa.uniteum.eth → 0xff96...a294 (main deployer)
+│   ├── 0.eoa.uniteum.eth → 0xff96...1004 (main deployer)
 │   ├── 1.eoa.uniteum.eth → 0x215a...7003
 │   ├── 2.eoa.uniteum.eth → 0xc935...8971
 │   └── 3.eoa.uniteum.eth → (reserved)
@@ -66,6 +66,13 @@ Forge works on ANY algebraically valid triad:
 
 Invariant enforcement: `sqrt(a * b) = ab` where lowercase = supplies
 
+**Price Formula:**
+- `price(U) = v/u` where v = 1/U supply, u = U supply
+- `price(1/U) = u/v` (reciprocal relationship)
+- Equal supplies (u = v) → both units trade at parity (price = 1)
+- More U (u > v) → U is cheaper, 1/U is more expensive
+- Standard constant-product AMM pricing
+
 ### 4. Anchored vs Symbolic Units
 
 **Anchored Units:**
@@ -82,6 +89,8 @@ Invariant enforcement: `sqrt(a * b) = ab` where lowercase = supplies
 
 **IMPORTANT:** Symbolic "USD" has zero inherent connection to US dollars. It's just a label.
 
+**Note on Terminology:** The contract code uses "anchored" and "unanchored" terminology (see IUnit.sol), but this documentation uses "anchored" and "symbolic" for clarity. They are equivalent: unanchored = symbolic.
+
 ### 5. Compound Units
 
 - Created by algebraic composition: `meter*second`, `ETH/USD`, `foo^2\3` (rational exponents)
@@ -96,6 +105,37 @@ With units A, B, A*B:
 - Can forge: A → 1 → 1/B → A/B (indirect via "1")
 - Multiple paths create arbitrage mesh
 - Price consistency emerges from profit-seeking
+
+### 7. Key Contract Implementation Details
+
+**ONE_MINTED Constant:**
+- Immutable value tracking total original "1" supply minted
+- Total "1" supply will never exceed this value
+- Set at deployment, provides supply ceiling
+
+**Name Prefix:**
+- All units are prefixed with "Uniteum 0.1 " in their ERC-20 name
+- Example: "Uniteum 0.1 meter"
+
+**Sign Convention for Forge:**
+- Positive `du`/`dv` values: mint units to caller
+- Negative `du`/`dv` values: burn units from caller
+- Critical for understanding forge operations
+
+**Exponent Division:**
+- Uses `\` character for division in exponents (not `/`)
+- Example: `foo^2\3` means foo^(2/3)
+- Simplifies parsing (avoids confusion with unit division)
+
+**Reentrancy Protection:**
+- Uses transient storage (EIP-1153) for reentrancy guards
+- Applied to all forge operations
+- Gas-efficient modern pattern
+
+**UPSTREAM_ONE:**
+- Points to v0.0 "1" token for migration
+- Enables reversible migrate/unmigrate between versions
+- Immutable, set at v0.1 deployment
 
 ## Project Status
 
@@ -228,6 +268,9 @@ uniteum.one/
 - ✅ Acknowledge unknowns ("This is experimental...")
 - ✅ Use analogies (physics, traditional finance, gaming)
 - ✅ Show multiple ways to accomplish things (direct vs indirect forge paths)
+- ✅ Document sign convention for forge parameters (+mint, -burn)
+- ✅ Note that code uses "unanchored" but docs say "symbolic"
+- ✅ Use correct price formula: price(U) = v/u
 
 ### Don't:
 
@@ -236,6 +279,46 @@ uniteum.one/
 - ❌ Forget to mention audit status (unaudited)
 - ❌ Assume only (U, 1/U, 1) forge triads exist
 - ❌ Use jargon without explanation
+
+## Key Functions Reference
+
+This is a quick reference. See IUnit.sol for complete signatures and documentation.
+
+**Core Operations:**
+- `forge(IUnit V, int256 du, int256 dv)` - Mint/burn unit combinations maintaining invariants
+- `forge(int256 du, int256 dv)` - Simplified forge with reciprocal
+- `forgeQuote(...)` - Preview forge results before execution (view function)
+
+**IMPORTANT NOTE ON FORGE BEHAVIOR:** There are two distinct forge mechanics that need clear documentation:
+1. **Reciprocal forging via "1"** (U, 1/U, 1 triad): Only mints/burns tokens, no transfers
+2. **Compound forging** (A, B, A*B triad): Mints/burns the product unit AND transfers the constituent units custodially to/from the caller during the forge operation
+
+**Unit Creation:**
+- `multiply(string symbol)` - Create base unit from "1"
+- `multiply(IUnit multiplier)` - Create compound from two units
+- `product(string expression)` - Parse and create compound from expression (e.g., "m/s^2")
+- `product(IUnit multiplier)` - Alternative to multiply
+- `anchored(IERC20 token)` - Create anchored unit backed by external token
+
+**Query Functions:**
+- `invariant()` - Get current (u, v, w) supplies
+- `invariant(uint256 u, uint256 v)` - Calculate w from supplies
+- `invariant(IUnit V)` - Get invariant for compound unit pair
+- `reciprocal()` - Get reciprocal unit address
+- `anchor()` - Get backing token for anchored units (returns zero address for symbolic)
+- `anchoredPredict(IERC20 token)` - Predict anchored unit address
+- `anchoredSymbol(IERC20 token)` - Get symbol format for anchored unit
+
+**Errors:**
+- `DuplicateUnits()` - Attempted forge with same unit twice
+- `FunctionCalledOnOne()` - Operation not allowed on "1" token
+- `FunctionNotCalledOnOne()` - Operation must be called on "1" token
+- `NegativeSupply(IUnit, int256)` - Forge would create negative supply
+- `ReentryForbidden()` - Reentrancy attempt detected
+
+**Events:**
+- `UnitCreate(...)` - Emitted when new unit is created
+- `Forge(...)` - Emitted when forge operation completes
 
 ## Open Questions (For Discovery)
 
