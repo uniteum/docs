@@ -1,0 +1,256 @@
+# CLAUDE.md - Uniteum Project
+
+## Project Overview
+
+Uniteum is an algebraic liquidity protocol on Ethereum where ERC-20 tokens have dimensional units (like physical quantities: m/s, kg*m, etc.) or symbolic units (USD, BTC, foo). Units compose algebraically, and price consistency is maintained through arbitrage-enforced forge operations rather than oracles.
+
+**Key Innovation:** Multi-dimensional constant-product AMM where algebraic relationships create liquidity pools. Forge operations work on any valid triad (not just U/1/U but also A/B/A*B), creating mesh topology of arbitrage paths.
+
+## Deployed Contracts
+
+| Contract | Address | Networks |
+|----------|---------|----------|
+| Uniteum 0.1 "1" | `0x9df9b0501e8f6c05623b5b519f9f18b598d9b253` | Mainnet, Sepolia |
+| Uniteum 0.0 "1" (genesis) | `0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4` | Mainnet, Sepolia |
+| Discount Kiosk | `0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9` | Mainnet, Sepolia |
+
+Deployment uses Nick's deterministic deployer (same addresses across networks).
+
+## ENS Structure
+
+Owned by `0xd441...6401`:
+
+```
+uniteum.eth
+├── 0-0.uniteum.eth → 0xC833...39E4 (genesis "1")
+│   └── buy.0-0.uniteum.eth → 0x5581...6dc9 (Discount Kiosk)
+├── 0-1.uniteum.eth → 0x9df9...b253 (Uniteum 0.1 "1")
+├── eoa.uniteum.eth → 0x6056...496e
+│   ├── 0.eoa.uniteum.eth → 0xff96...a294 (main deployer)
+│   ├── 1.eoa.uniteum.eth → 0x215a...7003
+│   ├── 2.eoa.uniteum.eth → 0xc935...8971
+│   └── 3.eoa.uniteum.eth → (reserved)
+├── deployer.uniteum.eth → 0x2613...878a (Safe multisig)
+├── vault.uniteum.eth → 0xebca...77d8
+└── ens.uniteum.eth → 0x6056...496e
+```
+
+## Core Mechanisms
+
+### 1. The "1" Token
+
+- Central liquidity token that mediates all base units
+- Total fixed supply: 1 billion tokens (minted in v0.0)
+- Can migrate from v0.0 → v0.1 via `migrate(amount)` (reversible via `unmigrate()`)
+
+### 2. Units & Reciprocals
+
+- Every unit `U` has reciprocal `1/U`
+- Invariant: `sqrt(U_supply * (1/U)_supply) = W_supply` where W is the mediating token
+- For base units: W = "1"
+- For compound units: W = parent unit
+
+### 3. Forge Operation (CRITICAL)
+
+**NOT just (U, 1/U, 1) triads!**
+
+Forge works on ANY algebraically valid triad:
+- `(meter, 1/second, meter/second)` — no "1" involved
+- `(A, B, A*B)` — direct compound unit creation
+- `(U, 1/U, 1)` — traditional reciprocal pair
+
+**This is the price control mechanism:**
+- To increase U's price: burn U, mint 1/U (consumes 1)
+- To decrease U's price: mint U, burn 1/U (generates 1)
+- For compounds: `price(A*B) = price(A) × price(B)` enforced by arbitrage
+
+Invariant enforcement: `sqrt(a * b) = ab` where lowercase = supplies
+
+### 4. Anchored vs Symbolic Units
+
+**Anchored Units:**
+- Format: `$0xTokenAddress` (e.g., `$0xdAC17F958D2ee523a2206206994597C13D831ec7` for USDT)
+- Backed 1:1 by external ERC-20 held by the Unit contract
+- Real value, custodial
+- Created via: `one().anchored(IERC20(address))`
+
+**Symbolic Units:**
+- Format: 30 chars max, `[a-zA-Z0-9_.-]+` (e.g., `USD`, `MSFT`, `kg`, `foo`)
+- NO connection to real-world entities (MSFT ≠ Microsoft stock!)
+- Value emerges from liquidity/consensus only
+- Created via: `one().multiply("symbol")`
+
+**IMPORTANT:** Symbolic "USD" has zero inherent connection to US dollars. It's just a label.
+
+### 5. Compound Units
+
+- Created by algebraic composition: `meter*second`, `ETH/USD`, `foo^2\3` (rational exponents)
+- Operators: `*` (multiply), `/` (divide), `^` (power), `\` (divide in exponent)
+- Example: `kg*m/s^2` = force unit
+- Address deterministically predicted via CREATE2 from symbol hash
+
+### 6. Multi-Dimensional Arbitrage
+
+With units A, B, A*B:
+- Can forge: A + B → A*B (direct, no "1")
+- Can forge: A → 1 → 1/B → A/B (indirect via "1")
+- Multiple paths create arbitrage mesh
+- Price consistency emerges from profit-seeking
+
+## Project Status
+
+### Current Phase
+
+- **Version:** 0.1 (experimental, unaudited)
+- **Status:** Deployed, ready for launch/announcement
+- **Risk:** Novel mechanism, smart contract risk, no audit
+- **Goal:** Publish for experimentation and discovery of emergent properties
+
+### Creator
+
+- Solo developer: Paul Reinholdtsen (reinholdtsen.eth)
+- GitHub: github.com/uniteum
+- ENS: 0.eoa.uniteum.eth
+
+### Tech Stack
+
+- **Contracts:** Solidity 0.8.30, Foundry (forge), OpenZeppelin
+- **Architecture:** Minimal proxy clones (EIP-1167), deterministic deployment
+- **Development:** VSCode, GitHub
+- **Documentation:** Jekyll, GitHub Pages
+- **Domain:** uniteum.one → uniteum.github.io
+- **Docs repo:** github.com/uniteum/docs
+
+## Common Commands
+
+```bash
+forge build
+forge test
+forge test -vvv          # verbose output
+forge script <script>    # deployment scripts
+```
+
+## Distribution Strategy
+
+1. **Genesis Supply:** 1B "1" tokens (v0.0)
+   - 900M → Discount Kiosk (public sale)
+   - 100M → Deployer Safe (reserve)
+2. **Kiosk:** Linear discount pricing (price ↓ as inventory → capacity)
+3. **Migration:** Users buy v0.0, migrate to v0.1 for full features
+
+## Design Philosophy
+
+### Core Principles
+
+- **No oracles:** Prices emerge from forge operations and arbitrage
+- **Algebraic composition:** Units multiply/divide like dimensional analysis
+- **Liquidity = price control:** Forging is market making
+- **Mathematical constraints = economic constraints:** Invariants enforce price relationships
+- **Permissionless:** Anyone can create units, forge, arbitrage
+- **Minimalist:** Simple primitives, complex emergent behavior
+
+### What Makes This Novel
+
+Traditional AMM: `x * y = k` (one pool, two tokens, isolated)
+
+Uniteum:
+- `sqrt(u * v) = w` for every unit pair
+- `sqrt(a * b) = ab` for compound units
+- Infinite interconnected pools
+- One operation (forge) handles all swaps, minting, burning
+- No oracles, no collateral requirements for synthetics
+
+## Documentation Approach
+
+### Target Audience
+
+- Crypto-native developers
+- DeFi experimenters and researchers
+- Technical sophistication assumed
+- NOT targeting mainstream/beginners initially
+
+### Voice & Style
+
+- **Technical but accessible:** Precise without being academic
+- **Show, don't just tell:** Concrete examples, Etherscan links
+- **Emphasize novelty:** This is experimental, invite exploration
+- **Honest about unknowns:** "We don't know what emerges at scale"
+- **Safety-conscious:** Clear risk disclosures
+
+### Documentation Structure
+
+```
+uniteum.one/
+├── Introduction (what/why/how)
+├── Getting Started (practical first steps)
+├── Concepts (forge, units, invariants, composition)
+├── Operations (creating units, forging, price control)
+├── Examples (concrete use cases with transactions)
+├── Technical Reference (contracts, functions, addresses)
+├── Use Cases (speculation on possibilities)
+└── Safety & Risks (disclaimers, experimental status)
+```
+
+### Writing Guidelines
+
+- Lead with concrete examples before theory
+- Include Etherscan transaction links for everything
+- Distinguish clearly between anchored and symbolic units
+- Explain forge triads beyond just (U, 1/U, 1)
+- Use dimensional analysis analogies (physics helps intuition)
+- Link related concepts bidirectionally
+- Provide "try it yourself" steps
+
+## Key Concepts to Emphasize
+
+### What Users Often Misunderstand
+
+1. **Symbolic ≠ synthetic:** `USD` symbol doesn't track real USD price
+2. **Forge beyond reciprocals:** Can forge any valid triad, not just (U, 1/U, 1)
+3. **Price control mechanism:** Forging IS how you influence prices
+4. **No collateral needed:** For symbolic units, just liquidity through forging
+5. **Compound units:** Their prices are arbitrage-enforced, not set by oracles
+
+### Critical Distinctions
+
+- **Anchored tokens:** Real backing, custodial, trust in contract
+- **Symbolic tokens:** No backing, trust in liquidity/mechanism
+- **Genesis "1" (v0.0):** Simple ERC-20, no Uniteum features, primordial supply
+- **Uniteum "1" (v0.1):** Full-featured, accepts migration from v0.0
+
+## When Writing Code or Docs
+
+### Do:
+
+- ✅ Reference actual contract addresses and ENS names
+- ✅ Link to Etherscan for examples
+- ✅ Explain both the math AND the economics
+- ✅ Acknowledge unknowns ("This is experimental...")
+- ✅ Use analogies (physics, traditional finance, gaming)
+- ✅ Show multiple ways to accomplish things (direct vs indirect forge paths)
+
+### Don't:
+
+- ❌ Claim symbolic units have inherent value/backing
+- ❌ Over-promise stability or safety
+- ❌ Forget to mention audit status (unaudited)
+- ❌ Assume only (U, 1/U, 1) forge triads exist
+- ❌ Use jargon without explanation
+
+## Open Questions (For Discovery)
+
+These are things that haven't been fully verified/explored:
+
+1. **Scale behavior:** What happens with hundreds of interconnected units?
+2. **Price stability:** Do compound units actually track product of constituents?
+3. **Arbitrage efficiency:** How quickly do prices converge?
+4. **Edge cases:** What breaks? What surprising patterns emerge?
+5. **Gas costs:** At what scale does forging become prohibitive?
+6. **Liquidity dynamics:** How does "1" supply affect entire system?
+
+Treat these as research questions, not solved problems.
+
+---
+
+**Last Updated:** December 2024
+**Creator:** Paul Reinholdtsen (reinholdtsen.eth)
