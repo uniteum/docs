@@ -8,11 +8,11 @@ Uniteum is an algebraic liquidity protocol on Ethereum where ERC-20 tokens have 
 
 ## Deployed Contracts
 
-| Contract | Address | Networks |
-|----------|---------|----------|
-| Uniteum 0.1 "1" | `0x9df9b0501e8f6c05623b5b519f9f18b598d9b253` | Mainnet, Sepolia |
-| Uniteum 0.0 "1" (genesis) | `0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4` | Mainnet, Sepolia |
-| Discount Kiosk | `0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9` | Mainnet, Sepolia |
+| Contract | Mainnet | Sepolia |
+|----------|---------|---------|
+| Uniteum 0.1 "1" | [`0x9df9...b253`](https://etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#code) | [`0x9df9...b253`](https://sepolia.etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#code) |
+| Uniteum 0.0 "1" (genesis) | [`0xC833...39E4`](https://etherscan.io/address/0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4#code) | [`0xC833...39E4`](https://sepolia.etherscan.io/address/0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4#code) |
+| Discount Kiosk | [`0x5581...6dc9`](https://etherscan.io/address/0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9#code) | [`0x5581...6dc9`](https://sepolia.etherscan.io/address/0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9#code) |
 
 Deployment uses Nick's deterministic deployer (same addresses across networks).
 
@@ -241,6 +241,29 @@ uniteum.one/
 - Link related concepts bidirectionally
 - Provide "try it yourself" steps
 
+### Linking Contract Addresses
+
+**ALWAYS link contract addresses to Etherscan with context-appropriate anchors:**
+
+**Network Selection:**
+- Main documentation → Mainnet (etherscan.io)
+- Developer/testing sections → Sepolia (sepolia.etherscan.io)
+- When showing both networks, clearly label each
+
+**Etherscan Section Anchors:**
+- `#code` - Verified source code (deployment tables, technical reference)
+- `#writeContract` - Interactive write functions (tutorials, "try it yourself")
+- `#readContract` - Query contract state (exploring invariants, checking balances)
+- `#events` - Event logs and transaction history
+- No anchor - General contract overview page
+- Specific transaction: Full tx hash link (e.g., `https://etherscan.io/tx/0x...`)
+
+**Examples:**
+- Deployment table: `[0x9df9...b253](https://etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#code)`
+- Tutorial forge step: `[Uniteum contract](https://etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#writeContract)`
+- Checking invariants: `[read the invariant](https://etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#readContract)`
+- Example transaction: `[This forge transaction](https://etherscan.io/tx/0xabc...123)` (use full tx hash in real links)
+
 ## Key Concepts to Emphasize
 
 ### What Users Often Misunderstand
@@ -263,7 +286,9 @@ uniteum.one/
 ### Do:
 
 - ✅ Reference actual contract addresses and ENS names
-- ✅ Link to Etherscan for examples
+- ✅ Link contract addresses to Etherscan with appropriate section anchors (#code, #writeContract, #readContract)
+- ✅ Use context-appropriate Etherscan links (mainnet vs sepolia, specific sections)
+- ✅ Link to specific transactions as examples (full tx hash URLs)
 - ✅ Explain both the math AND the economics
 - ✅ Acknowledge unknowns ("This is experimental...")
 - ✅ Use analogies (physics, traditional finance, gaming)
