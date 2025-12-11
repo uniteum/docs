@@ -1,0 +1,3 @@
+[submodule "lib/uniteum"]
+	path = lib/uniteum
+	url = https://github.com/uniteum/uniteum.git
