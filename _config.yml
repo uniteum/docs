@@ -96,6 +96,7 @@ exclude:
   - LICENSE
   - .gitignore
   - .git/
+  - CLAUDE.md
 
 # Include files
 include:
