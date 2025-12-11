@@ -13,7 +13,7 @@ categories:
   - getting-started
 
 # Metadata
-last_updated: 2024-12-09
+last_updated: 2024-12-11
 version: "0.1"
 status: draft
 ---
@@ -50,8 +50,8 @@ This is novel mechanism design. We don't know what emerges at scale. Proceed wit
 
 ## Contracts
 
-| Contract | Address |
-|----------|---------|
-| Uniteum 0.1 "1" | `0x9df9b0501e8f6c05623b5b519f9f18b598d9b253` |
-| Uniteum 0.0 "1" (genesis) | `0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4` |
-| Discount Kiosk | `0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9` |
+| Contract | Mainnet | Sepolia |
+|----------|---------|---------|
+| Uniteum 0.1 "1" | [`0x9df9...b253`](https://etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#code) | [`0x9df9...b253`](https://sepolia.etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#code) |
+| Uniteum 0.0 "1" (genesis) | [`0xC833...39E4`](https://etherscan.io/address/0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4#code) | [`0xC833...39E4`](https://sepolia.etherscan.io/address/0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4#code) |
+| Discount Kiosk | [`0x5581...6dc9`](https://etherscan.io/address/0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9#code) | [`0x5581...6dc9`](https://sepolia.etherscan.io/address/0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9#code) |
