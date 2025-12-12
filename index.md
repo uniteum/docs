@@ -36,6 +36,16 @@ Uniteum:
 - **No oracles**—prices emerge from forge operations and arbitrage
 - **No collateral requirements** for symbolic units
 
+## Why This Matters
+
+**Hedge without oracles:** Every anchored token has a reciprocal that acts as an automatic hedge. `$USDC` depegs? Your `1/$USDC` gains offset the losses. No oracles, no collateral, no liquidations.
+
+**Power perpetuals:** `$WETH^2` gives you squared exposure to ETH price movements—leverage without borrowing or liquidation risk. Rational exponents let you design custom convexity profiles.
+
+**Multi-token derivatives:** `$WETH/$USDC` IS the ETH/USD price ratio. `$WETH*$WBTC` is a diversified basket. Combine them algebraically for complex positions. Prices are enforced by arbitrage, not oracles.
+
+See [Use Cases](/use-cases/) for detailed examples and strategies.
+
 ## Current Status
 
 **Version 0.1** — Experimental, unaudited, deployed on Mainnet and Sepolia.
@@ -44,6 +54,7 @@ This is novel mechanism design. We don't know what emerges at scale. Proceed wit
 
 ## Quick Links
 
+- [Use Cases](/use-cases/) — What you can build and why it matters
 - [Getting Started](/getting-started/) — Buy "1", create your first unit
 - [Concepts](/concepts/) — Understand how the system works
 - [Safety](/safety/) — Risks and disclaimers
