@@ -21,7 +21,14 @@ All other product names, logos, and brands mentioned in this documentation are p
 
 ## Software License
 
-The Uniteum protocol smart contracts are made available under open-source licenses. See the [GitHub repository](https://github.com/uniteum) for specific license terms.
+The Uniteum protocol smart contracts are licensed under the **[Uniteum License](/license/)** — an open-source license with anti-dilution protections.
+
+**Key points:**
+- ✅ Free to use, modify, fork, and deploy
+- ⚠️ Must provide attribution
+- ❌ Cannot create competing protocols using "Uniteum" or "1" names (unless fully interoperable)
+
+**[Read the full license →](/license/)**
 
 ## Disclaimer
 
