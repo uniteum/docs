@@ -156,9 +156,9 @@ fail_count=0
 
 for unit in "${UNITS[@]}"; do
     if deploy_unit "$unit"; then
-        ((success_count++))
+        success_count=$((success_count + 1))
     else
-        ((fail_count++))
+        fail_count=$((fail_count + 1))
     fi
 
     # Rate limit to avoid overwhelming RPC or nonce issues
