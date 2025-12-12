@@ -32,15 +32,13 @@ This guide walks you through your first interactions with Uniteum.
 
 The "1" token is the liquidity backbone of Uniteum. You need it to create and forge units.
 
-### Option A: Discount Kiosk (Recommended)
+### Buy from the Discount Kiosk
 
 The Discount Kiosk sells genesis "1" tokens (v0.0) at a linear discount—price increases as inventory depletes. Early buyers pay less.
 
-**Contract:** [`0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9`](https://etherscan.io/address/0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9#writeContract)
+**The easiest way:** Send ETH directly to `buy.0-0.uniteum.eth` (resolves to [`0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9`](https://etherscan.io/address/0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9#code)). Your "1" tokens will be returned automatically.
 
-1. Go to the [Kiosk contract on Etherscan](https://etherscan.io/address/0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9#writeContract)
-2. Call `buy()` with ETH attached
-3. Receive v0.0 "1" tokens
+**Alternative:** Call `buy()` on the [Kiosk contract via Etherscan](https://etherscan.io/address/0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9#writeContract) with ETH attached, or acquire "1" tokens through secondary markets if available.
 
 #### Why Buy from the Kiosk?
 
@@ -52,21 +50,49 @@ Beyond supporting ongoing development, you're:
 
 The Kiosk uses linear discount pricing—price increases as inventory depletes toward capacity. Early acquisition is cheaper and positions you before broader discovery.
 
-### Option B: Secondary Market
-
-If available on DEXes, you can acquire "1" tokens there.
-
 ## Step 2: Migrate to v0.1
 
-Genesis "1" (v0.0) is a simple ERC-20. To use Uniteum features, migrate to v0.1.
+Genesis "1" (v0.0) is a simple ERC-20 with a fixed 1 billion token supply. To access Uniteum's full functionality—creating units, forging, building compound units—you need to migrate to v0.1.
+
+**Why migrate?** The v0.1 contract implements all the core Uniteum mechanisms: algebraic unit composition, forge operations, invariant enforcement, and reciprocal pairs. The v0.0 token exists only as the primordial supply source.
 
 **Uniteum 0.1 Contract:** [`0x9df9b0501e8f6c05623b5b519f9f18b598d9b253`](https://etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#writeContract)
 
-1. Approve the [v0.1 contract](https://etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#writeContract) to spend your v0.0 tokens
-2. Call `migrate(amount)` on the v0.1 contract
-3. Your v0.0 tokens are held; you receive v0.1 tokens
+### Migration Process
 
-Migration is reversible via `unmigrate()`.
+**Step 2a: Approve the v0.1 contract**
+
+First, you need to authorize the Uniteum 0.1 contract to transfer your v0.0 tokens.
+
+1. Go to the [v0.0 "1" contract on Etherscan](https://etherscan.io/address/0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4#writeContract)
+2. Connect your wallet
+3. Find the `approve` function
+4. Enter:
+   - `spender`: `0x9df9b0501e8f6c05623b5b519f9f18b598d9b253` (the v0.1 contract)
+   - `amount`: The number of tokens you want to migrate (in wei—multiply by 10^18 for whole tokens)
+5. Execute the transaction
+
+**Step 2b: Migrate your tokens**
+
+Now call the migration function to exchange your v0.0 tokens for v0.1 tokens.
+
+1. Go to the [v0.1 contract on Etherscan](https://etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#writeContract)
+2. Connect your wallet
+3. Find the `migrate` function
+4. Enter the `amount` to migrate (same format as approval—in wei)
+5. Execute the transaction
+
+**What happens:** Your v0.0 tokens are transferred to the v0.1 contract (held custodially), and you receive an equal amount of v0.1 tokens. The total circulating supply of "1" across both versions remains constant.
+
+### Reversing Migration
+
+Migration is **fully reversible**. If you want to convert v0.1 tokens back to v0.0:
+
+1. Go to the [v0.1 contract on Etherscan](https://etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#writeContract)
+2. Call `unmigrate(amount)`
+3. Your v0.1 tokens are burned, and your v0.0 tokens are returned
+
+This reversibility ensures that the v0.0 supply remains liquid and accessible, even as features evolve.
 
 ## Step 3: Create Your First Unit
 
