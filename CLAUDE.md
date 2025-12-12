@@ -281,8 +281,15 @@ Common anchored unit shorthands (all have dedicated reference pages):
 - No anchor - General contract overview page
 - Specific transaction: Full tx hash link (e.g., `https://etherscan.io/tx/0x...`)
 
+**Link Format by Type:**
+- **Contracts** (Uniteum, Kiosk, etc.): Use `/address/<ADDRESS>#code`
+  - Example: `https://etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#code`
+- **Unit Tokens** (foo, bar, meter, etc.): Use `/token/<ADDRESS>`
+  - Example: `https://etherscan.io/token/0x966108210F3B2eC0f01B646a61Ce7D8F1aDE7430`
+
 **Examples:**
-- Deployment table: `[0x9df9b0501e8f6c05623b5b519f9f18b598d9b253](https://etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#code)` (display full address)
+- Contract deployment table: `[0x9df9b0501e8f6c05623b5b519f9f18b598d9b253](https://etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#code)` (display full address)
+- Unit token reference: `[foo](https://etherscan.io/token/0x966108210F3B2eC0f01B646a61Ce7D8F1aDE7430)` (descriptive anchor text)
 - Tutorial forge step: `[Uniteum contract](https://etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#writeContract)` (descriptive anchor text)
 - Checking invariants: `[read the invariant](https://etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#readContract)` (descriptive anchor text)
 - Example transaction: `[This forge transaction](https://etherscan.io/tx/0xabcd1234...)` (use full tx hash in URL, can shorten display text)

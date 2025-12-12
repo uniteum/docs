@@ -85,11 +85,11 @@ deploy_unit() {
 
     if [ "$code" != "0x" ] && [ -n "$code" ]; then
         echo "✅ $symbol (canonical: $canonical)"
-        echo "   Already deployed: $EXPLORER/address/$address#code"
+        echo "   Already deployed: $EXPLORER/token/$address"
     else
         if [ "$DRY_RUN" = true ]; then
             echo "🔍 $symbol (canonical: $canonical)"
-            echo "   Would deploy to: $EXPLORER/address/$address#code"
+            echo "   Would deploy to: $EXPLORER/token/$address"
         else
             echo "🚀 Deploying: $symbol (canonical: $canonical)"
             local tx=$(cast send "$ONE" "multiply(string)(address)" "$symbol" \
@@ -100,7 +100,7 @@ deploy_unit() {
             if [ $? -eq 0 ]; then
                 local tx_hash=$(echo "$tx" | jq -r '.transactionHash')
                 echo "   ✅ Deployed: $EXPLORER/tx/$tx_hash"
-                echo "   Address: $EXPLORER/address/$address#code"
+                echo "   Address: $EXPLORER/token/$address"
             else
                 echo "   ❌ Deployment failed: $tx"
                 return 1

@@ -87,9 +87,9 @@ for unit in "${UNITS[@]}"; do
     if [ "$address" != "ERROR" ]; then
         # Check if canonical differs from input
         if [ "$canonical" != "$unit" ]; then
-            echo "| \`$unit\` | \`$canonical\` | [\`$address\`](https://etherscan.io/address/$address#code) |"
+            echo "| \`$unit\` | \`$canonical\` | [\`$address\`](https://etherscan.io/token/$address) |"
         else
-            echo "| \`$unit\` |  | [\`$address\`](https://etherscan.io/address/$address#code) |"
+            echo "| \`$unit\` |  | [\`$address\`](https://etherscan.io/token/$address) |"
         fi
     else
         echo "| \`$unit\` | ERROR | ERROR |"

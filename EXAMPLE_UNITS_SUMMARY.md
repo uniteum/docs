@@ -34,20 +34,20 @@ This document catalogs all symbolic example units (`foo`, `bar`, etc.) used thro
 ## Key Addresses (Selected Examples)
 
 ### Most Common Examples
-- `foo`: [`0x966108210F3B2eC0f01B646a61Ce7D8F1aDE7430`](https://etherscan.io/address/0x966108210F3B2eC0f01B646a61Ce7D8F1aDE7430#code)
-- `bar`: [`0xCa0D8fF22509E38A6E7Cc17A6dccEB2b26E123EA`](https://etherscan.io/address/0xCa0D8fF22509E38A6E7Cc17A6dccEB2b26E123EA#code)
-- `1/foo`: [`0xECEb7691f8c5A9D4d8bA2E97E0CfE0eD5b601C8b`](https://etherscan.io/address/0xECEb7691f8c5A9D4d8bA2E97E0CfE0eD5b601C8b#code)
+- `foo`: [`0x966108210F3B2eC0f01B646a61Ce7D8F1aDE7430`](https://etherscan.io/token/0x966108210F3B2eC0f01B646a61Ce7D8F1aDE7430)
+- `bar`: [`0xCa0D8fF22509E38A6E7Cc17A6dccEB2b26E123EA`](https://etherscan.io/token/0xCa0D8fF22509E38A6E7Cc17A6dccEB2b26E123EA)
+- `1/foo`: [`0xECEb7691f8c5A9D4d8bA2E97E0CfE0eD5b601C8b`](https://etherscan.io/token/0xECEb7691f8c5A9D4d8bA2E97E0CfE0eD5b601C8b)
 
 ### Physics Examples
-- `meter`: [`0x4CC76063C30Db2dD5612873Ae17CD4823c307C7e`](https://etherscan.io/address/0x4CC76063C30Db2dD5612873Ae17CD4823c307C7e#code)
-- `second`: [`0x0DC61065a2fD440f112F08790A590fD31A866880`](https://etherscan.io/address/0x0DC61065a2fD440f112F08790A590fD31A866880#code)
-- `meter/second`: [`0xCbdc3D8ca6255CbbD1a49F19AE2816a102Ee049F`](https://etherscan.io/address/0xCbdc3D8ca6255CbbD1a49F19AE2816a102Ee049F#code)
-- `kg*m/s^2` (force): [`0xEb171Bea0bB215E91B41ca6546e30aabF0Fe58Dd`](https://etherscan.io/address/0xEb171Bea0bB215E91B41ca6546e30aabF0Fe58Dd#code)
+- `meter`: [`0x4CC76063C30Db2dD5612873Ae17CD4823c307C7e`](https://etherscan.io/token/0x4CC76063C30Db2dD5612873Ae17CD4823c307C7e)
+- `second`: [`0x0DC61065a2fD440f112F08790A590fD31A866880`](https://etherscan.io/token/0x0DC61065a2fD440f112F08790A590fD31A866880)
+- `meter/second`: [`0xCbdc3D8ca6255CbbD1a49F19AE2816a102Ee049F`](https://etherscan.io/token/0xCbdc3D8ca6255CbbD1a49F19AE2816a102Ee049F)
+- `kg*m/s^2` (force): [`0xEb171Bea0bB215E91B41ca6546e30aabF0Fe58Dd`](https://etherscan.io/token/0xEb171Bea0bB215E91B41ca6546e30aabF0Fe58Dd)
 
 ### Cautionary Examples (Symbolic, NOT Anchored)
-- `USD` (symbolic): [`0xb937B9a0fe95208894329188A32720788e099967`](https://etherscan.io/address/0xb937B9a0fe95208894329188A32720788e099967#code)
-- `ETH` (symbolic): [`0x4055c468567fBf86DaE7e483aD75b9EE78344BB2`](https://etherscan.io/address/0x4055c468567fBf86DaE7e483aD75b9EE78344BB2#code)
-- `BTC` (symbolic): [`0x67a006CEa7435c156299290713Df3B0cd567619B`](https://etherscan.io/address/0x67a006CEa7435c156299290713Df3B0cd567619B#code)
+- `USD` (symbolic): [`0xb937B9a0fe95208894329188A32720788e099967`](https://etherscan.io/token/0xb937B9a0fe95208894329188A32720788e099967)
+- `ETH` (symbolic): [`0x4055c468567fBf86DaE7e483aD75b9EE78344BB2`](https://etherscan.io/token/0x4055c468567fBf86DaE7e483aD75b9EE78344BB2)
+- `BTC` (symbolic): [`0x67a006CEa7435c156299290713Df3B0cd567619B`](https://etherscan.io/token/0x67a006CEa7435c156299290713Df3B0cd567619B)
 
 ## Important Notes
 
@@ -94,12 +94,12 @@ Uses `\` (backslash) for division in exponents:
 
 For base/common examples:
 ```markdown
-Try creating a [`foo`](https://etherscan.io/address/0x966108210F3B2eC0f01B646a61Ce7D8F1aDE7430#code) unit...
+Try creating a [`foo`](https://etherscan.io/token/0x966108210F3B2eC0f01B646a61Ce7D8F1aDE7430) unit...
 ```
 
 For compounds:
 ```markdown
-The [`meter/second`](https://etherscan.io/address/0xCbdc3D8ca6255CbbD1a49F19AE2816a102Ee049F#code) unit represents velocity...
+The [`meter/second`](https://etherscan.io/token/0xCbdc3D8ca6255CbbD1a49F19AE2816a102Ee049F) unit represents velocity...
 ```
 
 ### When to Use Mainnet vs Sepolia Links

@@ -20,9 +20,9 @@ This page catalogs all symbolic example units used throughout the Uniteum docume
 
 | Unit Type | Count | Example |
 |-----------|-------|---------|
-| Base Units | 14 | [`foo`](https://etherscan.io/address/0x966108210F3B2eC0f01B646a61Ce7D8F1aDE7430#code) |
-| Reciprocals | 6 | [`1/foo`](https://etherscan.io/address/0xECEb7691f8c5A9D4d8bA2E97E0CfE0eD5b601C8b#code) |
-| Compounds | 11 | [`meter/second`](https://etherscan.io/address/0xCbdc3D8ca6255CbbD1a49F19AE2816a102Ee049F#code) |
+| Base Units | 14 | [`foo`](https://etherscan.io/token/0x966108210F3B2eC0f01B646a61Ce7D8F1aDE7430) |
+| Reciprocals | 6 | [`1/foo`](https://etherscan.io/token/0xECEb7691f8c5A9D4d8bA2E97E0CfE0eD5b601C8b) |
+| Compounds | 11 | [`meter/second`](https://etherscan.io/token/0xCbdc3D8ca6255CbbD1a49F19AE2816a102Ee049F) |
 
 ## Base Units
 
@@ -30,27 +30,27 @@ This page catalogs all symbolic example units used throughout the Uniteum docume
 
 | Symbol | Address | Description |
 |--------|---------|-------------|
-| [`foo`](https://etherscan.io/address/0x966108210F3B2eC0f01B646a61Ce7D8F1aDE7430#code) | `0x966108210F3B2eC0f01B646a61Ce7D8F1aDE7430` | Generic placeholder unit for examples |
-| [`bar`](https://etherscan.io/address/0xCa0D8fF22509E38A6E7Cc17A6dccEB2b26E123EA#code) | `0xCa0D8fF22509E38A6E7Cc17A6dccEB2b26E123EA` | Generic placeholder unit for examples |
-| [`baz`](https://etherscan.io/address/0x5E122f39E8DAD06dCA6e1Ed89a1ECAA0Ee104000#code) | `0x5E122f39E8DAD06dCA6e1Ed89a1ECAA0Ee104000` | Generic placeholder unit for examples |
-| [`acme`](https://etherscan.io/address/0x44FFA0957db719EEe78E288A8411e159641f24Aa#code) | `0x44FFA0957db719EEe78E288A8411e159641f24Aa` | Example company/entity unit |
-| [`widget`](https://etherscan.io/address/0x7385D32d8ee6f16f2Ae3732493146F689713228f#code) | `0x7385D32d8ee6f16f2Ae3732493146F689713228f` | Example product unit |
+| [`foo`](https://etherscan.io/token/0x966108210F3B2eC0f01B646a61Ce7D8F1aDE7430) | `0x966108210F3B2eC0f01B646a61Ce7D8F1aDE7430` | Generic placeholder unit for examples |
+| [`bar`](https://etherscan.io/token/0xCa0D8fF22509E38A6E7Cc17A6dccEB2b26E123EA) | `0xCa0D8fF22509E38A6E7Cc17A6dccEB2b26E123EA` | Generic placeholder unit for examples |
+| [`baz`](https://etherscan.io/token/0x5E122f39E8DAD06dCA6e1Ed89a1ECAA0Ee104000) | `0x5E122f39E8DAD06dCA6e1Ed89a1ECAA0Ee104000` | Generic placeholder unit for examples |
+| [`acme`](https://etherscan.io/token/0x44FFA0957db719EEe78E288A8411e159641f24Aa) | `0x44FFA0957db719EEe78E288A8411e159641f24Aa` | Example company/entity unit |
+| [`widget`](https://etherscan.io/token/0x7385D32d8ee6f16f2Ae3732493146F689713228f) | `0x7385D32d8ee6f16f2Ae3732493146F689713228f` | Example product unit |
 
 ### Physics/Dimensional Units
 
 | Symbol | Address | Description |
 |--------|---------|-------------|
-| [`meter`](https://etherscan.io/address/0x4CC76063C30Db2dD5612873Ae17CD4823c307C7e#code) | `0x4CC76063C30Db2dD5612873Ae17CD4823c307C7e` | Example length dimension |
-| [`second`](https://etherscan.io/address/0x0DC61065a2fD440f112F08790A590fD31A866880#code) | `0x0DC61065a2fD440f112F08790A590fD31A866880` | Example time dimension |
-| [`kilogram`](https://etherscan.io/address/0x67b86C196a7E13aC3af7cE465Cf3Ea980D35b8FB#code) | `0x67b86C196a7E13aC3af7cE465Cf3Ea980D35b8FB` | Example mass dimension |
-| [`kg`](https://etherscan.io/address/0x665da6de0B16b10A625527F47eDfACa4f736c110#code) | `0x665da6de0B16b10A625527F47eDfACa4f736c110` | Abbreviated mass dimension |
+| [`meter`](https://etherscan.io/token/0x4CC76063C30Db2dD5612873Ae17CD4823c307C7e) | `0x4CC76063C30Db2dD5612873Ae17CD4823c307C7e` | Example length dimension |
+| [`second`](https://etherscan.io/token/0x0DC61065a2fD440f112F08790A590fD31A866880) | `0x0DC61065a2fD440f112F08790A590fD31A866880` | Example time dimension |
+| [`kilogram`](https://etherscan.io/token/0x67b86C196a7E13aC3af7cE465Cf3Ea980D35b8FB) | `0x67b86C196a7E13aC3af7cE465Cf3Ea980D35b8FB` | Example mass dimension |
+| [`kg`](https://etherscan.io/token/0x665da6de0B16b10A625527F47eDfACa4f736c110) | `0x665da6de0B16b10A625527F47eDfACa4f736c110` | Abbreviated mass dimension |
 
 ### Gaming/Community Examples
 
 | Symbol | Address | Description |
 |--------|---------|-------------|
-| [`sword`](https://etherscan.io/address/0xcd3a567773675d2b32263613fEdb6eAB920EA28f#code) | `0xcd3a567773675d2b32263613fEdb6eAB920EA28f` | Gaming item example |
-| [`shield`](https://etherscan.io/address/0x4ee12ae9725f7Ef18F8cF03052a1e61c9337BB68#code) | `0x4ee12ae9725f7Ef18F8cF03052a1e61c9337BB68` | Gaming item example |
+| [`sword`](https://etherscan.io/token/0xcd3a567773675d2b32263613fEdb6eAB920EA28f) | `0xcd3a567773675d2b32263613fEdb6eAB920EA28f` | Gaming item example |
+| [`shield`](https://etherscan.io/token/0x4ee12ae9725f7Ef18F8cF03052a1e61c9337BB68) | `0x4ee12ae9725f7Ef18F8cF03052a1e61c9337BB68` | Gaming item example |
 
 ### Symbolic Real-World Assets
 
@@ -60,21 +60,21 @@ This page catalogs all symbolic example units used throughout the Uniteum docume
 
 | Symbol | Address | Description |
 |--------|---------|-------------|
-| [`USD`](https://etherscan.io/address/0xb937B9a0fe95208894329188A32720788e099967#code) | `0xb937B9a0fe95208894329188A32720788e099967` | Symbolic USD (NO connection to US dollars) |
-| [`ETH`](https://etherscan.io/address/0x4055c468567fBf86DaE7e483aD75b9EE78344BB2#code) | `0x4055c468567fBf86DaE7e483aD75b9EE78344BB2` | Symbolic ETH (distinct from anchored [$WETH](/tokens/weth/)) |
-| [`BTC`](https://etherscan.io/address/0x67a006CEa7435c156299290713Df3B0cd567619B#code) | `0x67a006CEa7435c156299290713Df3B0cd567619B` | Symbolic BTC (NO connection to Bitcoin) |
-| [`MSFT`](https://etherscan.io/address/0x006c4b92431f5584791ff74Fc0bEB2429b572faA#code) | `0x006c4b92431f5584791ff74Fc0bEB2429b572faA` | Symbolic MSFT (NO connection to Microsoft stock) |
+| [`USD`](https://etherscan.io/token/0xb937B9a0fe95208894329188A32720788e099967) | `0xb937B9a0fe95208894329188A32720788e099967` | Symbolic USD (NO connection to US dollars) |
+| [`ETH`](https://etherscan.io/token/0x4055c468567fBf86DaE7e483aD75b9EE78344BB2) | `0x4055c468567fBf86DaE7e483aD75b9EE78344BB2` | Symbolic ETH (distinct from anchored [$WETH](/tokens/weth/)) |
+| [`BTC`](https://etherscan.io/token/0x67a006CEa7435c156299290713Df3B0cd567619B) | `0x67a006CEa7435c156299290713Df3B0cd567619B` | Symbolic BTC (NO connection to Bitcoin) |
+| [`MSFT`](https://etherscan.io/token/0x006c4b92431f5584791ff74Fc0bEB2429b572faA) | `0x006c4b92431f5584791ff74Fc0bEB2429b572faA` | Symbolic MSFT (NO connection to Microsoft stock) |
 
 ## Reciprocal Units
 
 | Symbol | Address | Base Unit |
 |--------|---------|-----------|
-| [`1/foo`](https://etherscan.io/address/0xECEb7691f8c5A9D4d8bA2E97E0CfE0eD5b601C8b#code) | `0xECEb7691f8c5A9D4d8bA2E97E0CfE0eD5b601C8b` | [`foo`](https://etherscan.io/address/0x966108210F3B2eC0f01B646a61Ce7D8F1aDE7430#code) |
-| [`1/bar`](https://etherscan.io/address/0xDbB28A2de8A27E7e8Ea395a7fd58DD9CdA20E73E#code) | `0xDbB28A2de8A27E7e8Ea395a7fd58DD9CdA20E73E` | [`bar`](https://etherscan.io/address/0xCa0D8fF22509E38A6E7Cc17A6dccEB2b26E123EA#code) |
-| [`1/meter`](https://etherscan.io/address/0x9aEEeF70d400199DDd7C48AD2e8acc9F931413d2#code) | `0x9aEEeF70d400199DDd7C48AD2e8acc9F931413d2` | [`meter`](https://etherscan.io/address/0x4CC76063C30Db2dD5612873Ae17CD4823c307C7e#code) |
-| [`1/second`](https://etherscan.io/address/0x479834E7418551FbcE308c4214145E420B9901C8#code) | `0x479834E7418551FbcE308c4214145E420B9901C8` | [`second`](https://etherscan.io/address/0x0DC61065a2fD440f112F08790A590fD31A866880#code) |
-| [`1/kilogram`](https://etherscan.io/address/0x2CBAf283fb52f977188d009E8B6D4B72897f3276#code) | `0x2CBAf283fb52f977188d009E8B6D4B72897f3276` | [`kilogram`](https://etherscan.io/address/0x67b86C196a7E13aC3af7cE465Cf3Ea980D35b8FB#code) |
-| [`1/kg`](https://etherscan.io/address/0x081654B748f61E6CAe74aDfcC89DBCBA90AcAA3d#code) | `0x081654B748f61E6CAe74aDfcC89DBCBA90AcAA3d` | [`kg`](https://etherscan.io/address/0x665da6de0B16b10A625527F47eDfACa4f736c110#code) |
+| [`1/foo`](https://etherscan.io/token/0xECEb7691f8c5A9D4d8bA2E97E0CfE0eD5b601C8b) | `0xECEb7691f8c5A9D4d8bA2E97E0CfE0eD5b601C8b` | [`foo`](https://etherscan.io/token/0x966108210F3B2eC0f01B646a61Ce7D8F1aDE7430) |
+| [`1/bar`](https://etherscan.io/token/0xDbB28A2de8A27E7e8Ea395a7fd58DD9CdA20E73E) | `0xDbB28A2de8A27E7e8Ea395a7fd58DD9CdA20E73E` | [`bar`](https://etherscan.io/token/0xCa0D8fF22509E38A6E7Cc17A6dccEB2b26E123EA) |
+| [`1/meter`](https://etherscan.io/token/0x9aEEeF70d400199DDd7C48AD2e8acc9F931413d2) | `0x9aEEeF70d400199DDd7C48AD2e8acc9F931413d2` | [`meter`](https://etherscan.io/token/0x4CC76063C30Db2dD5612873Ae17CD4823c307C7e) |
+| [`1/second`](https://etherscan.io/token/0x479834E7418551FbcE308c4214145E420B9901C8) | `0x479834E7418551FbcE308c4214145E420B9901C8` | [`second`](https://etherscan.io/token/0x0DC61065a2fD440f112F08790A590fD31A866880) |
+| [`1/kilogram`](https://etherscan.io/token/0x2CBAf283fb52f977188d009E8B6D4B72897f3276) | `0x2CBAf283fb52f977188d009E8B6D4B72897f3276` | [`kilogram`](https://etherscan.io/token/0x67b86C196a7E13aC3af7cE465Cf3Ea980D35b8FB) |
+| [`1/kg`](https://etherscan.io/token/0x081654B748f61E6CAe74aDfcC89DBCBA90AcAA3d) | `0x081654B748f61E6CAe74aDfcC89DBCBA90AcAA3d` | [`kg`](https://etherscan.io/token/0x665da6de0B16b10A625527F47eDfACa4f736c110) |
 
 ## Compound Units
 
@@ -86,25 +86,25 @@ This page catalogs all symbolic example units used throughout the Uniteum docume
 
 | Symbol | Canonical | Address | Description |
 |--------|-----------|---------|-------------|
-| `foo*bar` | [`bar*foo`](https://etherscan.io/address/0xe45897a7d5b52264708d035C03a14DE1621F0E29#code) | `0xe45897a7d5b52264708d035C03a14DE1621F0E29` | Product of foo and bar |
-| [`meter*second`](https://etherscan.io/address/0xA0BBB690E951162A025F685c06098032F1d22c99#code) | `meter*second` | `0xA0BBB690E951162A025F685c06098032F1d22c99` | Product of meter and second |
-| [`kg*m`](https://etherscan.io/address/0x305D8D8323dfd1d8601E465D42C7D273b09cc620#code) | `kg*m` | `0x305D8D8323dfd1d8601E465D42C7D273b09cc620` | Product of kg and m |
-| [`kilogram*meter`](https://etherscan.io/address/0x4b29F6E86cB14B93970Fa8F6596A8a3497A5f1B1#code) | `kilogram*meter` | `0x4b29F6E86cB14B93970Fa8F6596A8a3497A5f1B1` | Product of kilogram and meter |
-| `sword*shield` | [`shield*sword`](https://etherscan.io/address/0xD7d57d5323fB646BbC786139Ff42805f3e9dC99C#code) | `0xD7d57d5323fB646BbC786139Ff42805f3e9dC99C` | Gaming composite item |
+| `foo*bar` | [`bar*foo`](https://etherscan.io/token/0xe45897a7d5b52264708d035C03a14DE1621F0E29) | `0xe45897a7d5b52264708d035C03a14DE1621F0E29` | Product of foo and bar |
+| [`meter*second`](https://etherscan.io/token/0xA0BBB690E951162A025F685c06098032F1d22c99) | `meter*second` | `0xA0BBB690E951162A025F685c06098032F1d22c99` | Product of meter and second |
+| [`kg*m`](https://etherscan.io/token/0x305D8D8323dfd1d8601E465D42C7D273b09cc620) | `kg*m` | `0x305D8D8323dfd1d8601E465D42C7D273b09cc620` | Product of kg and m |
+| [`kilogram*meter`](https://etherscan.io/token/0x4b29F6E86cB14B93970Fa8F6596A8a3497A5f1B1) | `kilogram*meter` | `0x4b29F6E86cB14B93970Fa8F6596A8a3497A5f1B1` | Product of kilogram and meter |
+| `sword*shield` | [`shield*sword`](https://etherscan.io/token/0xD7d57d5323fB646BbC786139Ff42805f3e9dC99C) | `0xD7d57d5323fB646BbC786139Ff42805f3e9dC99C` | Gaming composite item |
 
 ### Ratios/Division
 
 | Symbol | Address | Description |
 |--------|---------|-------------|
-| [`meter/second`](https://etherscan.io/address/0xCbdc3D8ca6255CbbD1a49F19AE2816a102Ee049F#code) | `0xCbdc3D8ca6255CbbD1a49F19AE2816a102Ee049F` | Velocity (meters per second) |
-| [`foo/bar`](https://etherscan.io/address/0x3401d5A36594ec9754e13827fb6E00509F607006#code) | `0x3401d5A36594ec9754e13827fb6E00509F607006` | Ratio of foo to bar |
-| [`second/meter`](https://etherscan.io/address/0x6aCB3b4938aC84258BC6Cb1C23d665c597d5F4AF#code) | `0x6aCB3b4938aC84258BC6Cb1C23d665c597d5F4AF` | Reciprocal of velocity |
+| [`meter/second`](https://etherscan.io/token/0xCbdc3D8ca6255CbbD1a49F19AE2816a102Ee049F) | `0xCbdc3D8ca6255CbbD1a49F19AE2816a102Ee049F` | Velocity (meters per second) |
+| [`foo/bar`](https://etherscan.io/token/0x3401d5A36594ec9754e13827fb6E00509F607006) | `0x3401d5A36594ec9754e13827fb6E00509F607006` | Ratio of foo to bar |
+| [`second/meter`](https://etherscan.io/token/0x6aCB3b4938aC84258BC6Cb1C23d665c597d5F4AF) | `0x6aCB3b4938aC84258BC6Cb1C23d665c597d5F4AF` | Reciprocal of velocity |
 
 ### Complex Combinations
 
 | Symbol | Address | Description |
 |--------|---------|-------------|
-| [`kg*m/s^2`](https://etherscan.io/address/0xEb171Bea0bB215E91B41ca6546e30aabF0Fe58Dd#code) | `0xEb171Bea0bB215E91B41ca6546e30aabF0Fe58Dd` | Force unit (Newtons) |
+| [`kg*m/s^2`](https://etherscan.io/token/0xEb171Bea0bB215E91B41ca6546e30aabF0Fe58Dd) | `0xEb171Bea0bB215E91B41ca6546e30aabF0Fe58Dd` | Force unit (Newtons) |
 
 ### Powers/Exponents
 
@@ -114,9 +114,9 @@ This page catalogs all symbolic example units used throughout the Uniteum docume
 
 | Symbol | Address | Description |
 |--------|---------|-------------|
-| [`foo^2`](https://etherscan.io/address/0xb1a94eCc74B567b241a0B59541e3D44BD60B302A#code) | `0xb1a94eCc74B567b241a0B59541e3D44BD60B302A` | Foo squared |
-| [`foo^2\3`](https://etherscan.io/address/0x5AFd4791a696cdB5337a90c1dFbE586cE9A878C9#code) | `0x5AFd4791a696cdB5337a90c1dFbE586cE9A878C9` | Foo to the power 2/3 |
-| [`bar^1\2`](https://etherscan.io/address/0x1533c600E82a4837C75D7C041a3f35173bD1f477#code) | `0x1533c600E82a4837C75D7C041a3f35173bD1f477` | Square root of bar |
+| [`foo^2`](https://etherscan.io/token/0xb1a94eCc74B567b241a0B59541e3D44BD60B302A) | `0xb1a94eCc74B567b241a0B59541e3D44BD60B302A` | Foo squared |
+| [`foo^2\3`](https://etherscan.io/token/0x5AFd4791a696cdB5337a90c1dFbE586cE9A878C9) | `0x5AFd4791a696cdB5337a90c1dFbE586cE9A878C9` | Foo to the power 2/3 |
+| [`bar^1\2`](https://etherscan.io/token/0x1533c600E82a4837C75D7C041a3f35173bD1f477) | `0x1533c600E82a4837C75D7C041a3f35173bD1f477` | Square root of bar |
 
 ## How to Deploy
 
