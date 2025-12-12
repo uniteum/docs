@@ -76,10 +76,11 @@ Uniteum is provided as-is. The creator makes no guarantees about:
 
 ## Recommendations
 
-1. **Start small:** Experiment with amounts you can lose entirely
-2. **Verify contracts:** Check addresses against official sources
-3. **Understand before acting:** Read the [Concepts](/concepts/) section
-4. **Monitor transactions:** Use Etherscan to verify what you're signing
+1. **Use Sepolia testnet first:** All contracts are deployed at identical addresses on both Mainnet and Sepolia testnet, including [Uniteum 0.0 "1"](https://sepolia.etherscan.io/address/0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4#code) and the [Discount Kiosk](https://sepolia.etherscan.io/address/0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9#code). Test your operations with testnet ETH before risking real funds.
+2. **Start small:** Experiment with amounts you can lose entirely
+3. **Verify contracts:** Check addresses against official sources
+4. **Understand before acting:** Read the [Concepts](/concepts/) section
+5. **Monitor transactions:** Use Etherscan to verify what you're signing
 
 ## Reporting Issues
 
