@@ -36,9 +36,9 @@ The "1" token is the liquidity backbone of Uniteum. You need it to create and fo
 
 The Discount Kiosk sells genesis "1" tokens (v0.0) at a linear discount—price decreases as inventory approaches capacity.
 
-**Contract:** `0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9`
+**Contract:** [`0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9`](https://etherscan.io/address/0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9#writeContract)
 
-1. Go to the Kiosk contract on Etherscan
+1. Go to the [Kiosk contract on Etherscan](https://etherscan.io/address/0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9#writeContract)
 2. Call `buy()` with ETH attached
 3. Receive v0.0 "1" tokens
 
@@ -50,9 +50,9 @@ If available on DEXes, you can acquire "1" tokens there.
 
 Genesis "1" (v0.0) is a simple ERC-20. To use Uniteum features, migrate to v0.1.
 
-**Uniteum 0.1 Contract:** `0x9df9b0501e8f6c05623b5b519f9f18b598d9b253`
+**Uniteum 0.1 Contract:** [`0x9df9b0501e8f6c05623b5b519f9f18b598d9b253`](https://etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#writeContract)
 
-1. Approve the v0.1 contract to spend your v0.0 tokens
+1. Approve the [v0.1 contract](https://etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#writeContract) to spend your v0.0 tokens
 2. Call `migrate(amount)` on the v0.1 contract
 3. Your v0.0 tokens are held; you receive v0.1 tokens
 

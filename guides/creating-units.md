@@ -36,7 +36,7 @@ This creates both `foo` and its reciprocal `1/foo`, bound by the invariant.
 
 ### Via Etherscan
 
-1. Go to the Uniteum 0.1 contract: `0x9df9b0501e8f6c05623b5b519f9f18b598d9b253`
+1. Go to the [Uniteum 0.1 contract](https://etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#writeContract): `0x9df9b0501e8f6c05623b5b519f9f18b598d9b253`
 2. Navigate to "Write Contract"
 3. Connect your wallet
 4. Find the `multiply` function

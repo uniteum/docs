@@ -31,11 +31,11 @@ The current version with full Uniteum functionality.
 
 | Network | Address |
 |---------|---------|
-| Mainnet | `0x9df9b0501e8f6c05623b5b519f9f18b598d9b253` |
-| Sepolia | `0x9df9b0501e8f6c05623b5b519f9f18b598d9b253` |
+| Mainnet | [`0x9df9b0501e8f6c05623b5b519f9f18b598d9b253`](https://etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#code) |
+| Sepolia | [`0x9df9b0501e8f6c05623b5b519f9f18b598d9b253`](https://sepolia.etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#code) |
 
-- [Mainnet Etherscan](https://etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253)
-- [Sepolia Etherscan](https://sepolia.etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253)
+- [Mainnet Etherscan](https://etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#code)
+- [Sepolia Etherscan](https://sepolia.etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#code)
 
 ### Uniteum 0.0 "1" (Genesis)
 
@@ -43,11 +43,11 @@ The genesis token—a simple ERC-20 holding the initial 1 billion supply.
 
 | Network | Address |
 |---------|---------|
-| Mainnet | `0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4` |
-| Sepolia | `0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4` |
+| Mainnet | [`0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4`](https://etherscan.io/address/0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4#code) |
+| Sepolia | [`0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4`](https://sepolia.etherscan.io/address/0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4#code) |
 
-- [Mainnet Etherscan](https://etherscan.io/address/0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4)
-- [Sepolia Etherscan](https://sepolia.etherscan.io/address/0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4)
+- [Mainnet Etherscan](https://etherscan.io/address/0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4#code)
+- [Sepolia Etherscan](https://sepolia.etherscan.io/address/0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4#code)
 
 ### Discount Kiosk
 
@@ -55,11 +55,11 @@ Sells genesis "1" tokens at a linear discount.
 
 | Network | Address |
 |---------|---------|
-| Mainnet | `0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9` |
-| Sepolia | `0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9` |
+| Mainnet | [`0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9`](https://etherscan.io/address/0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9#code) |
+| Sepolia | [`0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9`](https://sepolia.etherscan.io/address/0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9#code) |
 
-- [Mainnet Etherscan](https://etherscan.io/address/0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9)
-- [Sepolia Etherscan](https://sepolia.etherscan.io/address/0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9)
+- [Mainnet Etherscan](https://etherscan.io/address/0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9#code)
+- [Sepolia Etherscan](https://sepolia.etherscan.io/address/0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9#code)
 
 ## Deployment
 
@@ -67,7 +67,7 @@ Sells genesis "1" tokens at a linear discount.
 
 Nick's deterministic deployment method ensures identical addresses across any EVM chain.
 
-**Deployer EOA:** `0xff96a8c70dcc85a0cc4d690bfc02166a90e71004` (0.eoa.uniteum.eth)
+**Deployer EOA:** [`0xff96a8c70dcc85a0cc4d690bfc02166a90e71004`](https://etherscan.io/address/0xff96a8c70dcc85a0cc4d690bfc02166a90e71004) (0.eoa.uniteum.eth)
 
 ### Architecture
 

@@ -283,7 +283,7 @@ Get the "1" token address (universal liquidity token).
 
 **Returns:** Address of "1" token
 
-**Contract:** `0x9df9b0501e8f6c05623b5b519f9f18b598d9b253` (Uniteum 0.1)
+**Contract:** [`0x9df9b0501e8f6c05623b5b519f9f18b598d9b253`](https://etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#code) (Uniteum 0.1)
 
 ---
 
@@ -450,7 +450,7 @@ Address of v0.0 "1" token accepted for migration.
 
 **Returns:** ERC-20 address of upstream "1"
 
-**Value:** `0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4` (v0.0)
+**Value:** [`0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4`](https://etherscan.io/address/0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4#code) (v0.0)
 
 ---
 
@@ -531,7 +531,7 @@ Reverted when reentrancy is attempted during a forge operation.
 
 The Discount Kiosk is a separate contract for selling v0.0 "1" tokens.
 
-**Contract:** `0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9`
+**Contract:** [`0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9`](https://etherscan.io/address/0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9#code)
 
 ### `buy() → (uint256 q, bool soldOut)` {payable}
 
