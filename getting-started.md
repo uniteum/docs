@@ -80,3 +80,7 @@ Migration is reversible via `unmigrate()`.
 
 - [Concepts](/concepts/) — Understand the mechanics
 - [Safety](/safety/) — Know the risks
+
+---
+
+Uniteum, "1", and related marks are trademarks. See [Legal](/legal/) for details.

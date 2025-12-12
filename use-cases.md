@@ -351,3 +351,5 @@ Open research questions:
 ---
 
 **Remember:** This is Version 0.1 — experimental, unaudited, novel mechanism design. Proceed with curiosity and caution.
+
+Uniteum, "1", and related marks are trademarks. See [Legal](/legal/) for details.
