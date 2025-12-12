@@ -54,18 +54,25 @@ This creates both `foo` and its reciprocal `1/foo`, bound by the invariant.
 To create `meter/second`:
 
 ```solidity
-meter().divide(second())
+IUnit meter = one().multiply("meter");
+IUnit second = one().multiply("second");
+IUnit meterPerSecond = meter.multiply(second.reciprocal());
 ```
 
-Or equivalently:
+Or use the expression syntax:
 
 ```solidity
-meter().multiply(oneOverSecond())
+IUnit meterPerSecond = one().multiply("meter/second");
 ```
 
 ### Via Etherscan
 
-*Detailed steps coming soon.*
+1. Go to the [Uniteum 0.1 contract](https://etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#writeContract)
+2. Navigate to "Write Contract"
+3. Connect your wallet
+4. Find the `multiply` function (string version)
+5. Enter the expression (e.g., `meter/second` or `kg*m/s^2`)
+6. Execute the transaction
 
 ## Creating an Anchored Unit
 

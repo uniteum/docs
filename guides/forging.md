@@ -56,10 +56,23 @@ Provide "1", receive foo and 1/foo:
 
 ```javascript
 // Example using ethers.js
-const uniteum = new ethers.Contract(UNITEUM_ADDRESS, UNITEUM_ABI, signer);
+const fooUnit = new ethers.Contract(FOO_UNIT_ADDRESS, UNIT_ABI, signer);
 
-// Forward forge
-await uniteum.forge(fooAddress, amount, reciprocalAmount);
+// Forge the reciprocal pair (foo, 1/foo, 1)
+// Mint 100 foo, burn 50 1/foo, receive "1"
+const tx = await fooUnit.forge(
+  ethers.utils.parseEther("100"),   // du: mint 100 foo
+  ethers.utils.parseEther("-50")    // dv: burn 50 1/foo
+);
+
+// For compound unit forging (meter, second, meter*second)
+const meterUnit = new ethers.Contract(METER_UNIT_ADDRESS, UNIT_ABI, signer);
+const secondUnit = new ethers.Contract(SECOND_UNIT_ADDRESS, UNIT_ABI, signer);
+const tx2 = await meterUnit.forge(
+  secondUnit.address,               // V: the other unit
+  ethers.utils.parseEther("100"),   // du: change in meter
+  ethers.utils.parseEther("-50")    // dv: change in second
+);
 ```
 
 *Full code examples coming soon.*
