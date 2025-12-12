@@ -29,6 +29,8 @@ This page explores two related hypotheses about "1" token economics. **These are
 
 **Central claim:** As anchored collateral and symbolic unit participation grow, the value of "1" will tend to reflect aggregate system value (anchored + symbolic).
 
+> **Notation:** We use [$WETH](/tokens/weth/), [$USDC](/tokens/usdc/), etc. as readable shorthands. These actually represent full address-based symbols. See [Token Reference](/tokens/) for details.
+
 ### The Intuition
 
 Think of "1" as an **unintentional index fund** of all Uniteum value.
@@ -37,7 +39,7 @@ Every unit needs "1" for liquidity. When value flows into the system—whether r
 
 ### Anchored Collateral Effect
 
-When you create an anchored unit like `$WETH`:
+When you create an anchored unit like [$WETH](/tokens/weth/):
 
 1. Real WETH gets locked in the contract (1:1 backing)
 2. `$WETH` and `1/$WETH` are created as a reciprocal pair
@@ -46,7 +48,7 @@ When you create an anchored unit like `$WETH`:
 
 **Result:** Real WETH value becomes indirectly tied to "1" value through the liquidity relationship.
 
-As more anchored units launch (`$USDC`, `$WBTC`, `$LINK`), each brings real collateral that requires "1" for liquidity. The "1" token becomes the common denominator for all this value.
+As more anchored units launch ([$USDC](/tokens/usdc/), [$WBTC](/tokens/wbtc/), etc.), each brings real collateral that requires "1" for liquidity. The "1" token becomes the common denominator for all this value.
 
 ### Mathematical Framing
 

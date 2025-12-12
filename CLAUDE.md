@@ -245,17 +245,24 @@ uniteum.one/
 
 For documentation readability, use shorthand notation like `$WETH`, `$USDC`, `$WBTC` in explanations and examples, BUT:
 
-- Always clarify on first use that anchored units actually use full addresses
-- Example first mention: "We'll use `$WETH` to represent the anchored WETH unit (`$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`)"
-- Add a callout box or footnote: "**Documentation Convention:** For readability, we write `$WETH` in examples, but the actual symbol uses the full contract address."
+- **Link first occurrence** to token reference pages (e.g., `[$WETH](/tokens/weth/)`)
+- Add callout at top of page: "We use [$WETH](/tokens/weth/), [$USDC](/tokens/usdc/), etc. as readable shorthands. See [Token Reference](/tokens/) for actual symbols."
 - In technical reference or code examples, show real addresses
 - Emphasize the distinction: symbolic `WETH` ≠ anchored `$0xC02a...56Cc2`
 
-Common anchored unit shorthands:
-- `$WETH` = `$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
-- `$USDC` = `$0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
-- `$USDT` = `$0xdAC17F958D2ee523a2206206994597C13D831ec7`
-- `$WBTC` = `$0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599`
+Common anchored unit shorthands (all have dedicated reference pages):
+- [$WETH](/tokens/weth/) = `$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
+- [$USDC](/tokens/usdc/) = `$0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
+- [$USDT](/tokens/usdt/) = `$0xdAC17F958D2ee523a2206206994597C13D831ec7`
+- [$WBTC](/tokens/wbtc/) = `$0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599`
+- [$DAI](/tokens/dai/) = `$0x6B175474E89094C44Da98b954EedeAC495271d0F`
+
+**Token Reference Pages:** Located in `/tokens/` directory. Each page explains:
+- The shorthand vs actual symbol
+- What the token is backed by (with Etherscan link)
+- Symbolic vs anchored distinction
+- Example derivatives and use cases
+- How to create the anchored unit
 
 ### Linking Contract Addresses
 
