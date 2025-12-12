@@ -23,7 +23,7 @@ status: hypothesis
 
 The "1" token is Uniteum's universal mediator—the backbone that connects all base units and enables forge operations. But what determines the value of "1" itself?
 
-This page explores two related hypotheses about "1" token economics. **These are hypotheses, not proven mechanisms.** They represent testable predictions about emergent system behavior.
+This page explores three related hypotheses about "1" token economics. **These are hypotheses, not proven mechanisms.** They represent testable predictions about emergent system behavior.
 
 ## Hypothesis 1: "1" as Aggregate Value Index
 
@@ -102,9 +102,97 @@ Hypothetical "1" behavior:
 - "1" value influenced by aggregate locked collateral and activity
 - Diversified exposure to entire Uniteum ecosystem
 
-## Hypothesis 2: Diversification Reduces Volatility
+## Hypothesis 2: Anchored Units Provide Price Stability Through Reactance
 
-**Central claim:** With many diverse units, "1" may exhibit reduced volatility compared to individual units or external assets.
+**Central claim:** Anchored units create asymmetric arbitrage resistance that dampens "1" price volatility, while symbolic units passively float.
+
+> **Note:** For a detailed technical exploration of this mechanism, see [Anchored Unit Stability](/concepts/anchored-stability/).
+
+### The Asymmetry Between Anchored and Symbolic
+
+**Symbolic units** (`foo`, `bar`, etc.):
+- Both unit and reciprocal float freely
+- If "1" value doubles, both `foo` and `1/foo` can adjust proportionally
+- No external reference creates resistance
+- They move *with* "1", not *against* it
+
+**Anchored units** (`$WETH`, `$USDC`, etc.):
+- The anchored unit has fixed real-world backing (1 `$WETH` = 1 WETH locked)
+- The reciprocal `1/$WETH` floats with the "1" token
+- External reference (real WETH price) creates resistance
+- They *react against* changes in "1" value
+
+### The Stabilization Mechanism
+
+When "1" value increases relative to external markets:
+
+1. **Overvaluation occurs:** `1/$WETH` becomes overvalued (because "1" is worth more, but real WETH price unchanged)
+2. **Arbitrage opportunity:** Forge to mint `$WETH` (locks cheap real WETH), burn expensive `1/$WETH`, extract "1"
+3. **Backpressure:** This creates selling pressure on "1" → dampens the price increase
+4. **Equilibrium restoration:** Process continues until "1" value aligns with anchored unit prices
+
+**Symmetric effect** when "1" value decreases:
+- `$WETH` becomes overvalued relative to `1/$WETH`
+- Arbitrage: burn cheap `$WETH` (reclaim real WETH), mint `1/$WETH`, extract value
+- Creates buying pressure on "1" → dampens the decrease
+
+### The Spring Analogy
+
+Think of anchored units as **springs** attached to "1":
+
+- **Symbolic units:** Weightless, float along with "1" (no resistance)
+- **Anchored units:** Springs anchored to external prices (resist movement)
+- **"1" volatility:** Damped by spring tension from all anchored units
+- **More anchored units:** More springs, stronger stabilization
+
+The anchored units don't prevent "1" from moving—they just make it harder and create profitable resistance.
+
+### Why This Differs from Diversification
+
+**Diversification hypothesis (below):** Uncorrelated assets reduce volatility through portfolio effects.
+
+**Reactance hypothesis (this):** Anchored units actively push back against price deviations through arbitrage.
+
+These mechanisms work together:
+- Diversification: Reduces volatility from uncorrelated movements
+- Reactance: Dampens volatility through arbitrage resistance
+
+Anchored units provide *both* effects, symbolic units provide only diversification.
+
+### Testable Predictions
+
+If reactance hypothesis holds:
+
+**Early phase (few/no anchored units):**
+- "1" price highly volatile
+- Large price swings possible
+- Minimal arbitrage resistance
+
+**After major anchored units launch:**
+- "1" price volatility decreases
+- Price deviations trigger visible arbitrage activity
+- "1" price correlates with anchored unit TVL
+- Sharp "1" moves get dampened quickly
+
+**Observable signal:** Correlation between anchored unit creation/TVL and "1" volatility reduction.
+
+### Mathematical Framing
+
+Consider `$WETH` anchored unit with external WETH price `P_WETH`:
+
+**Internal implied "1" price from this unit:**
+```
+P_1_implied = (locked WETH value) / (locked "1" in $WETH contract)
+            = (supply_$WETH × P_WETH) / (w)
+```
+
+If market "1" price diverges from `P_1_implied`, arbitrage profit exists.
+
+With N anchored units, N different implied "1" prices → N arbitrage springs → stronger stability.
+
+## Hypothesis 3: Diversification Reduces Volatility
+
+**Central claim:** With many diverse units, "1" may exhibit reduced volatility compared to individual units or external assets through portfolio effects.
 
 ### The Diversification Mechanism
 
@@ -234,6 +322,14 @@ Good hypotheses are falsifiable. What observations would prove these wrong?
 - Major anchored unit launch (e.g., $10M WETH locked) has zero impact on "1" price
 - "1" trades below reasonable value implied by locked collateral
 - External "1" markets diverge wildly from internal forge prices with no arbitrage
+
+### Against Reactance Hypothesis
+
+**Evidence that would falsify:**
+- Major anchored unit launches have no dampening effect on "1" volatility
+- "1" price deviates wildly from anchored unit-implied prices with no arbitrage
+- Volatility remains high even with substantial anchored TVL
+- No correlation between anchored unit TVL and stability
 
 ### Against Diversification Hypothesis
 
@@ -423,7 +519,9 @@ Enumerate all created units via `UnitCreate` events, query each for locked "1".
 
 **Hypothesis 1:** "1" value may reflect aggregate system value (anchored collateral + symbolic participation) as ecosystem grows.
 
-**Hypothesis 2:** "1" volatility may decrease as diverse units create diversification effects.
+**Hypothesis 2:** Anchored units create stabilizing reactance through asymmetric arbitrage, dampening "1" volatility.
+
+**Hypothesis 3:** "1" volatility may decrease as diverse units create diversification effects.
 
 **Status:** Untested. These are predictions about emergent behavior in a novel mechanism.
 
