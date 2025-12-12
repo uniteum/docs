@@ -32,9 +32,8 @@ The contracts are novel mechanism design. They have been tested but not formally
 
 All smart contract interactions carry risk:
 
-- **Bugs:** Undiscovered bugs could result in loss of funds
+- **Bugs:** Undiscovered bugs could result in loss of funds. The contracts are immutable and cannot be patched or upgraded.
 - **Exploits:** Novel mechanisms may have unexpected attack vectors
-- **Immutability:** Deployed contracts cannot be changed
 
 Only interact with funds you can afford to lose.
 
