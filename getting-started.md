@@ -34,13 +34,23 @@ The "1" token is the liquidity backbone of Uniteum. You need it to create and fo
 
 ### Option A: Discount Kiosk (Recommended)
 
-The Discount Kiosk sells genesis "1" tokens (v0.0) at a linear discount—price decreases as inventory approaches capacity.
+The Discount Kiosk sells genesis "1" tokens (v0.0) at a linear discount—price increases as inventory depletes. Early buyers pay less.
 
 **Contract:** [`0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9`](https://etherscan.io/address/0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9#writeContract)
 
 1. Go to the [Kiosk contract on Etherscan](https://etherscan.io/address/0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9#writeContract)
 2. Call `buy()` with ETH attached
 3. Receive v0.0 "1" tokens
+
+#### Why Buy from the Kiosk?
+
+Beyond supporting ongoing development, you're:
+- Acquiring the universal liquidity token for the entire ecosystem
+- Taking an early position if the ["1" as value index](/economics-of-one/) hypothesis proves correct
+- Enabling yourself to create units, forge, and experiment
+- Participating in novel mechanism design from the ground up
+
+The Kiosk uses linear discount pricing—price increases as inventory depletes toward capacity. Early acquisition is cheaper and positions you before broader discovery.
 
 ### Option B: Secondary Market
 

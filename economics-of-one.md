@@ -384,6 +384,18 @@ These hypotheses raise questions that can only be answered through observation:
 7. **Price Discovery Path:** How does "1"/USD price initially form? Via which markets/pairs?
 8. **Stability vs Growth:** Does diversification create stability at the cost of growth potential?
 
+## Participating in the Experiment
+
+If these hypotheses intrigue you, the most direct way to participate is to acquire "1" tokens via the [Discount Kiosk](https://etherscan.io/address/0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9#writeContract).
+
+This isn't just financial support—it's a position in the experiment:
+- You hold the universal liquidity token
+- If the value index hypothesis holds, early accumulation matters
+- You can create units, provide liquidity, test the mechanism
+- Your participation contributes to the bootstrapping question
+
+The Kiosk's linear discount pricing means earlier buyers pay less (price increases as inventory depletes). Acquire now before wider discovery.
+
 ## Related Concepts
 
 - [Tokenomics](/concepts/tokenomics/) — The invariant and supply mechanics

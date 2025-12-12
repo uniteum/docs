@@ -535,7 +535,7 @@ The Discount Kiosk is a separate contract for selling v0.0 "1" tokens.
 
 ### `buy() → (uint256 q, bool soldOut)` {payable}
 
-Purchase "1" tokens by sending ETH. Price decreases linearly as inventory approaches capacity.
+Purchase "1" tokens by sending ETH. Price increases linearly as inventory depletes to zero.
 
 **Payment:** ETH sent with transaction (`msg.value`)
 

@@ -52,6 +52,14 @@ See [Use Cases](/use-cases/) for detailed examples and strategies.
 
 This is novel mechanism design. We don't know what emerges at scale. Proceed with curiosity and caution.
 
+## Support This Experiment
+
+If this work interests you and you'd like to participate: the best way to contribute is to [buy "1" tokens from the Discount Kiosk](https://etherscan.io/address/0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9#writeContract). You're not just supporting development—you're acquiring the liquidity backbone of the system and becoming part of the experiment.
+
+The Kiosk uses linear discount pricing—price increases as inventory depletes. Early acquisition is cheaper.
+
+Early "1" token holders may benefit if the [value hypothesis](/economics-of-one/) holds: as anchored collateral and participation grow, "1" could reflect aggregate system value.
+
 ## Quick Links
 
 - [Use Cases](/use-cases/) — What you can build and why it matters
