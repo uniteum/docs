@@ -27,6 +27,7 @@ Technical reference documentation for developers and advanced users.
 1. **[Contracts](/reference/contracts/)** — Addresses, deployment info, verification
 2. **[Functions](/reference/functions/)** — Contract function reference
 3. **[ENS](/reference/ens/)** — ENS naming structure
+4. **[Example Units](/reference/example-units/)** — Catalog of example units with addresses
 
 ## Quick Reference
 

@@ -1,8 +1,22 @@
 ---
-layout: default
-title: Example Units Reference
-nav_order: 5
+title: Example Units
+description: >-
+  Catalog of symbolic example units used throughout Uniteum documentation,
+  with deterministic addresses and deployment instructions.
+
+# Navigation
+nav_order: 4
 parent: Reference
+has_children: false
+
+# Taxonomy
+categories:
+  - development
+
+# Metadata
+last_updated: 2024-12-12
+version: "0.1"
+status: published
 ---
 
 # Example Units Reference
