@@ -98,6 +98,8 @@ exclude:
   - .git/
   - CLAUDE.md
   - lib/
+  - EXAMPLE_UNITS_SUMMARY.md
+  - scripts/
 
 # Include files
 include:
