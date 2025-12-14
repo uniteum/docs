@@ -26,6 +26,19 @@ Tokens have dimensional units—like physical quantities (meter, second, kilogra
 
 Prices aren't set by oracles. They emerge from a single operation—**forge**—and the arbitrage it enables.
 
+---
+
+{: .warning }
+> **⚠️ Mainnet Warning: Uniteum 0.1 Has Critical Bugs**
+>
+> Do not use Uniteum 0.1 forge operations on Mainnet. Critical bugs affect anchored units and compound units.
+>
+> **Safe:** [Uniteum 0.0 (Primordial)](https://etherscan.io/address/0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4#code) on Mainnet, or Sepolia testnet for experimentation.
+>
+> See [Known Issues](/known-issues/) for details.
+
+---
+
 ## What Makes This Different
 
 Traditional AMMs: isolated pools, oracle-dependent synthetics, external price feeds.
@@ -62,6 +75,7 @@ Early "1" token holders may benefit if the [value hypothesis](/economics-of-one/
 
 ## Quick Links
 
+- **[Known Issues](/known-issues/)** — Critical bugs in version 0.1
 - [Use Cases](/use-cases/) — What you can build and why it matters
 - [Getting Started](/getting-started/) — Buy "1", create your first unit
 - [Concepts](/concepts/) — Understand how the system works
