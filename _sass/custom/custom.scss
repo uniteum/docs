@@ -1,0 +1,35 @@
+// Custom styles for Uniteum documentation
+
+// Fix aux nav scrolling issues
+.aux-nav {
+  overflow-x: visible !important;
+  overflow-y: visible !important;
+}
+
+.aux-nav-list {
+  overflow: visible !important;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+
+.aux-nav-list-item {
+  flex-shrink: 0;
+}
+
+// Constrain alert banner width for better readability
+.alert-banner {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// Prevent header elements from creating scrollbars
+.main-header {
+  overflow-x: visible !important;
+  overflow-y: visible !important;
+}
+
+.main-header .search,
+.main-header .aux-nav {
+  overflow: visible !important;
+}
