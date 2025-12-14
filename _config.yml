@@ -29,6 +29,46 @@ ethereum:
 # Build Settings
 remote_theme: just-the-docs/just-the-docs
 markdown: kramdown
+
+# Just the Docs Theme Configuration
+# Enable search
+search_enabled: true
+search:
+  # Split pages into sections for search
+  heading_level: 2
+  # Maximum amount of previews per search result
+  previews: 2
+  # Maximum amount of words to display before a matched word
+  preview_words_before: 3
+  # Maximum amount of words to display after a matched word
+  preview_words_after: 3
+  # Set the search token separator
+  tokenizer_separator: /[\s/]+/
+  # Display the relative url in search results
+  rel_url: true
+  # Enable or disable the search button that appears in the bottom right corner
+  button: false
+
+# Enable back to top link
+back_to_top: true
+back_to_top_text: "Back to top"
+
+# Footer content appears at the bottom of every page's main content
+footer_content: "Copyright &copy; 2024 Paul Reinholdtsen. Distributed under the MIT license."
+
+# Enable or disable heading anchors
+heading_anchors: true
+
+# Aux links for the upper right navigation
+aux_links:
+  "GitHub":
+    - "https://github.com/uniteum/docs"
+  "Etherscan (0.1)":
+    - "https://etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#code"
+
+# Makes Aux links open in a new tab
+aux_links_new_tab: true
+
 kramdown:
   input: GFM
   syntax_highlighter: rouge
@@ -65,7 +105,7 @@ defaults:
       path: ""
       type: "docs"
     values:
-      layout: "doc"
+      layout: "default"
 
 # Navigation
 nav_order:
