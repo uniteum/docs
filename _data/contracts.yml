@@ -1,0 +1,21 @@
+# Uniteum Contract Addresses
+# All contracts use deterministic deployment (same address on all networks)
+
+contracts:
+  - name: "Uniteum 0.1 '1'"
+    address: "0x9df9b0501e8f6c05623b5b519f9f18b598d9b253"
+    version: "0.1"
+    ens: "0-1.uniteum.eth"
+
+  - name: "Uniteum 0.0 '1'"
+    address: "0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4"
+    version: "0.0"
+    ens: "0-0.uniteum.eth"
+
+  - name: "Discount Kiosk"
+    address: "0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9"
+    ens: "buy.0-0.uniteum.eth"
+
+  - name: "Migrating Kiosk"
+    address: "0xb1e179cbf76cec54658fe3932ce854afaf530809"
+    ens: "buy.0-1.uniteum.eth"

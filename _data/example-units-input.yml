@@ -1,0 +1,112 @@
+# Example Units for Documentation
+# Input-only: symbol and description
+# Addresses and canonical forms are computed by scripts
+
+units:
+  # Generic/Abstract Examples
+  - symbol: "foo"
+    description: "Generic placeholder unit for examples"
+
+  - symbol: "bar"
+    description: "Generic placeholder unit for examples"
+
+  - symbol: "baz"
+    description: "Generic placeholder unit for examples"
+
+  - symbol: "acme"
+    description: "Example company/entity unit"
+
+  - symbol: "widget"
+    description: "Example product unit"
+
+  # Physics/Dimensional Units
+  - symbol: "meter"
+    description: "Example length dimension"
+
+  - symbol: "second"
+    description: "Example time dimension"
+
+  - symbol: "kilogram"
+    description: "Example mass dimension"
+
+  - symbol: "kg"
+    description: "Abbreviated mass dimension"
+
+  # Gaming/Community Examples
+  - symbol: "sword"
+    description: "Gaming item example"
+
+  - symbol: "shield"
+    description: "Gaming item example"
+
+  # Symbolic versions of real-world assets (NOT anchored, NO actual connection)
+  - symbol: "USD"
+    description: "Symbolic USD (NO connection to real US dollars)"
+
+  - symbol: "ETH"
+    description: "Symbolic ETH (distinct from anchored $WETH)"
+
+  - symbol: "BTC"
+    description: "Symbolic BTC (NO connection to Bitcoin)"
+
+  - symbol: "MSFT"
+    description: "Symbolic MSFT (NO connection to Microsoft stock)"
+
+  # Reciprocals
+  - symbol: "1/foo"
+    description: "Reciprocal of foo"
+
+  - symbol: "1/bar"
+    description: "Reciprocal of bar"
+
+  - symbol: "1/meter"
+    description: "Reciprocal of meter (inverse length)"
+
+  - symbol: "1/second"
+    description: "Reciprocal of second (frequency)"
+
+  - symbol: "1/kilogram"
+    description: "Reciprocal of kilogram"
+
+  - symbol: "1/kg"
+    description: "Reciprocal of kg"
+
+  # Simple products
+  - symbol: "foo*bar"
+    description: "Product of foo and bar"
+
+  - symbol: "meter*second"
+    description: "Product of meter and second"
+
+  - symbol: "kg*m"
+    description: "Product of kg and m"
+
+  - symbol: "kilogram*meter"
+    description: "Product of kilogram and meter"
+
+  - symbol: "sword*shield"
+    description: "Gaming composite item"
+
+  # Ratios/Division
+  - symbol: "meter/second"
+    description: "Velocity unit (meters per second)"
+
+  - symbol: "foo/bar"
+    description: "Ratio of foo to bar"
+
+  - symbol: "second/meter"
+    description: "Reciprocal of velocity"
+
+  # Complex combinations
+  - symbol: "kg*m/s^2"
+    description: "Force unit (Newtons)"
+
+  # Powers/Exponents
+  - symbol: "foo^2"
+    description: "Foo squared"
+
+  - symbol: "foo^2\\3"
+    description: "Foo to the power 2/3 (demonstrates rational exponents)"
+
+  - symbol: "bar^1\\2"
+    description: "Square root of bar"
