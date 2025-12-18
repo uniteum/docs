@@ -158,15 +158,15 @@ timezone: UTC
 
 # Experimental/Development Flags
 experimental: true
-version: "0.1"
+version: "0.3"
 audit_status: "unaudited"
 
 # Custom variables (accessible via site.*)
 uniteum:
-  version: "0.1"
+  version: "0.3"
   version_name: "1"
   genesis_version: "0.0"
-  show_v01_warning: true  # Set to false when 0.2 is released
+  show_v01_warning: false  # Version 0.3 has no known issues
   
   contracts:
     uniteum_v1: "0x9df9b0501e8f6c05623b5b519f9f18b598d9b253"
