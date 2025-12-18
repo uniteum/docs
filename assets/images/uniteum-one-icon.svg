@@ -39,17 +39,17 @@
   <!-- Shadow for embossed effect on "1" -->
   <text x="259" y="269"
         font-family="'Latin Modern Math', 'STIX Two Math', 'Cambria Math', 'Times New Roman', serif"
-        font-size="380"
+        font-size="400"
         font-weight="700"
-        fill="#4A3A0D"
-        opacity="0.5"
+        fill="#3A2A08"
+        opacity="0.6"
         text-anchor="middle"
         dominant-baseline="central">1</text>
 
   <!-- Highlight for embossed effect on "1" -->
   <text x="253" y="263"
         font-family="'Latin Modern Math', 'STIX Two Math', 'Cambria Math', 'Times New Roman', serif"
-        font-size="380"
+        font-size="400"
         font-weight="700"
         fill="#F5E6B8"
         opacity="0.7"
@@ -59,27 +59,27 @@
   <!-- Central "1" -->
   <text x="256" y="266"
         font-family="'Latin Modern Math', 'STIX Two Math', 'Cambria Math', 'Times New Roman', serif"
-        font-size="380"
+        font-size="400"
         font-weight="700"
-        fill="#7A5F1A"
+        fill="#5C4610"
         text-anchor="middle"
         dominant-baseline="central">1</text>
 
   <!-- Shadow for embossed "*" -->
   <text x="121" y="267"
         font-family="'Latin Modern Math', 'STIX Two Math', 'Cambria Math', 'Times New Roman', serif"
-        font-size="60"
-        font-weight="600"
-        fill="#4A3A0D"
-        opacity="0.4"
+        font-size="70"
+        font-weight="700"
+        fill="#3A2A08"
+        opacity="0.5"
         text-anchor="middle"
         dominant-baseline="central">*</text>
 
   <!-- Highlight for embossed "*" -->
   <text x="119" y="265"
         font-family="'Latin Modern Math', 'STIX Two Math', 'Cambria Math', 'Times New Roman', serif"
-        font-size="60"
-        font-weight="600"
+        font-size="70"
+        font-weight="700"
         fill="#E8D4A0"
         opacity="0.6"
         text-anchor="middle"
@@ -88,27 +88,27 @@
   <!-- Left mathematical symbols -->
   <text x="120" y="266"
         font-family="'Latin Modern Math', 'STIX Two Math', 'Cambria Math', 'Times New Roman', serif"
-        font-size="60"
-        font-weight="600"
-        fill="#6B5416"
+        font-size="70"
+        font-weight="700"
+        fill="#5C4610"
         text-anchor="middle"
         dominant-baseline="central">*</text>
 
   <!-- Shadow for embossed "/" -->
   <text x="393" y="267"
         font-family="'Latin Modern Math', 'STIX Two Math', 'Cambria Math', 'Times New Roman', serif"
-        font-size="60"
-        font-weight="600"
-        fill="#4A3A0D"
-        opacity="0.4"
+        font-size="70"
+        font-weight="700"
+        fill="#3A2A08"
+        opacity="0.5"
         text-anchor="middle"
         dominant-baseline="central">/</text>
 
   <!-- Highlight for embossed "/" -->
   <text x="391" y="265"
         font-family="'Latin Modern Math', 'STIX Two Math', 'Cambria Math', 'Times New Roman', serif"
-        font-size="60"
-        font-weight="600"
+        font-size="70"
+        font-weight="700"
         fill="#E8D4A0"
         opacity="0.6"
         text-anchor="middle"
@@ -117,9 +117,9 @@
   <!-- Right mathematical symbols -->
   <text x="392" y="266"
         font-family="'Latin Modern Math', 'STIX Two Math', 'Cambria Math', 'Times New Roman', serif"
-        font-size="60"
-        font-weight="600"
-        fill="#6B5416"
+        font-size="70"
+        font-weight="700"
+        fill="#5C4610"
         text-anchor="middle"
         dominant-baseline="central">/</text>
 </svg>
