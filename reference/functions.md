@@ -166,7 +166,7 @@ Create a symbolic unit (or compound unit) from a string expression. If the unit 
 
 **Example:**
 ```solidity
-IUnit one = IUnit(0x9df9b0501e8f6c05623b5b519f9f18b598d9b253);
+IUnit one = IUnit({% include uniteum_address.html %});
 IUnit meter = one.multiply("meter");
 IUnit force = one.multiply("kg*m/s^2");
 ```
@@ -283,7 +283,8 @@ Get the "1" token address (universal liquidity token).
 
 **Returns:** Address of "1" token
 
-**Contract:** [`0x9df9b0501e8f6c05623b5b519f9f18b598d9b253`](https://etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#code) (Uniteum 0.1)
+{% assign current_uniteum = site.data.contracts.uniteum[site.data.contracts.current.uniteum] -%}
+**Contract:** [`{{ current_uniteum.mainnet }}`](https://etherscan.io/address/{{ current_uniteum.mainnet }}#code) ({{ current_uniteum.name }})
 
 ---
 
@@ -387,13 +388,14 @@ Migrate v0.0 "1" tokens to v0.1 "1" tokens.
 - v0.1 tokens minted to caller
 - Total circulating supply conserved
 
+{% assign genesis_uniteum = site.data.contracts.uniteum.v0_0 -%}
 **Example:**
 ```solidity
-IERC20 v0 = IERC20(0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4);
-IUnit v1 = IUnit(0x9df9b0501e8f6c05623b5b519f9f18b598d9b253);
+IERC20 v0 = IERC20({{ genesis_uniteum.mainnet }});
+IUnit current = IUnit({{ current_uniteum.mainnet }});
 
-v0.approve(address(v1), 1000e18);
-v1.migrate(1000e18);
+v0.approve(address(current), 1000e18);
+current.migrate(1000e18);
 ```
 
 ---
@@ -428,9 +430,9 @@ Constant string for "1" token symbol.
 
 Prefix for all unit names.
 
-**Value:** `"Uniteum 0.1 "`
+**Value:** Version-specific (e.g., `"Uniteum 0.3 "` for current version)
 
-**Example:** Unit "meter" has name "Uniteum 0.1 meter"
+**Example:** Unit "meter" has name "Uniteum 0.3 meter" (on current version)
 
 ---
 

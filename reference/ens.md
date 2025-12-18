@@ -25,15 +25,21 @@ Uniteum uses ENS for human-readable addressing. All names are under `uniteum.eth
 
 ## Hierarchy
 
+{% assign current_uniteum = site.data.contracts.uniteum[site.data.contracts.current.uniteum] -%}
+{% assign genesis_uniteum = site.data.contracts.uniteum.v0_0 -%}
+{% assign current_kiosk = site.data.contracts.kiosk[site.data.contracts.current.kiosk] -%}
+{% assign genesis_kiosk = site.data.contracts.kiosk.v0_0 -%}
 ```
 uniteum.eth
-├── 0-0.uniteum.eth          → 0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4
-│   │                           (Uniteum 0.0 "1" - genesis)
-│   └── buy.0-0.uniteum.eth  → 0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9
-│                               (Discount Kiosk)
+├── {{ genesis_uniteum.ens }}          → {{ genesis_uniteum.mainnet }}
+│   │                           ({{ genesis_uniteum.name }} - genesis)
+│   └── {{ genesis_kiosk.ens }}  → {{ genesis_kiosk.mainnet }}
+│                               ({{ genesis_kiosk.name }})
 │
-├── 0-1.uniteum.eth          → 0x9df9b0501e8f6c05623b5b519f9f18b598d9b253
-│                               (Uniteum 0.1 "1")
+├── {{ current_uniteum.ens }}          → {{ current_uniteum.mainnet }}
+│   │                           ({{ current_uniteum.name }})
+│   └── {{ current_kiosk.ens }}  → {{ current_kiosk.mainnet }}
+│                               ({{ current_kiosk.name }})
 │
 ├── eoa.uniteum.eth          → 0x6056...496e
 │   ├── 0.eoa.uniteum.eth    → 0xff96a8c70dcc85a0cc4d690bfc02166a90e71004

@@ -501,9 +501,10 @@ The Kiosk's linear discount pricing means earlier buyers pay less (price increas
 
 ## Observing in Practice
 
+{% assign current_uniteum = site.data.contracts.uniteum[site.data.contracts.current.uniteum] -%}
 **Check "1" contract:**
-- Mainnet: [`0x9df9b0501e8f6c05623b5b519f9f18b598d9b253`](https://etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#readContract)
-- Sepolia: [`0x9df9b0501e8f6c05623b5b519f9f18b598d9b253`](https://sepolia.etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#readContract)
+- Mainnet: [`{{ current_uniteum.mainnet }}`](https://etherscan.io/address/{{ current_uniteum.mainnet }}#readContract)
+- Sepolia: [`{{ current_uniteum.sepolia }}`](https://sepolia.etherscan.io/address/{{ current_uniteum.sepolia }}#readContract)
 
 **Query total supply:**
 ```solidity

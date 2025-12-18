@@ -48,13 +48,13 @@ Wrapped Bitcoin is Bitcoin represented as an ERC-20 token on Ethereum. 1 WBTC = 
 
 ```solidity
 // Get the "1" token contract
-IUnit one = IUnit(0x9df9b0501e8f6c05623b5b519f9f18b598d9b253);
+IUnit one = IUnit({% include uniteum_address.html %});
 
 // Create anchored WBTC unit
-IERC20 wbtc = IERC20(0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599);
+IERC20 wbtc = IERC20({{ site.data.contracts.tokens.wbtc.mainnet }});
 IUnit wbtcUnit = one.anchored(wbtc);
 
-// wbtcUnit.symbol() returns: "$0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599"
+// wbtcUnit.symbol() returns: "${{ site.data.contracts.tokens.wbtc.mainnet }}"
 ```
 
 ## Reciprocal Unit

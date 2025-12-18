@@ -187,9 +187,10 @@ Unlike [anchored units](/reference/anchored-units/), floating units have no exte
 
 These units are not automatically deployed. To deploy any unit:
 
+{% assign current_uniteum = site.data.contracts.uniteum[site.data.contracts.current.uniteum] -%}
 ### Using Etherscan (mainnet or Sepolia)
 
-1. Go to [Uniteum 0.1 on Etherscan](https://etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#writeContract)
+1. Go to [current Uniteum contract on Etherscan](https://etherscan.io/address/{{ current_uniteum.mainnet }}#writeContract)
 2. Connect your wallet
 3. Call `multiply(string expression)` with the symbol (e.g., `"foo"`)
 4. The unit will be deployed to its deterministic address
@@ -199,12 +200,12 @@ These units are not automatically deployed. To deploy any unit:
 
 ```bash
 # Predict address (read-only, no gas cost)
-cast call 0x9df9b0501e8f6c05623b5b519f9f18b598d9b253 \
+cast call {{ current_uniteum.mainnet }} \
   "product(string)(address,string)" "foo" \
   --rpc-url https://eth.llamarpc.com
 
 # Deploy (requires wallet and gas)
-cast send 0x9df9b0501e8f6c05623b5b519f9f18b598d9b253 \
+cast send {{ current_uniteum.mainnet }} \
   "multiply(string)(address)" "foo" \
   --rpc-url https://eth.llamarpc.com \
   --private-key $PRIVATE_KEY
@@ -214,7 +215,7 @@ cast send 0x9df9b0501e8f6c05623b5b519f9f18b598d9b253 \
 
 ```javascript
 const uniteum = new ethers.Contract(
-  "0x9df9b0501e8f6c05623b5b519f9f18b598d9b253",
+  "{{ current_uniteum.mainnet }}",
   uniteumABI,
   signer
 );

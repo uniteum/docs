@@ -47,13 +47,13 @@ Tether USD is the largest stablecoin by market cap, pegged to the US Dollar. Int
 
 ```solidity
 // Get the "1" token contract
-IUnit one = IUnit(0x9df9b0501e8f6c05623b5b519f9f18b598d9b253);
+IUnit one = IUnit({% include uniteum_address.html %});
 
 // Create anchored USDT unit
-IERC20 usdt = IERC20(0xdAC17F958D2ee523a2206206994597C13D831ec7);
+IERC20 usdt = IERC20({{ site.data.contracts.tokens.usdt.mainnet }});
 IUnit usdtUnit = one.anchored(usdt);
 
-// usdtUnit.symbol() returns: "$0xdAC17F958D2ee523a2206206994597C13D831ec7"
+// usdtUnit.symbol() returns: "${{ site.data.contracts.tokens.usdt.mainnet }}"
 ```
 
 ## Reciprocal Unit

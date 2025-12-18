@@ -16,7 +16,6 @@ categories:
 
 # Metadata
 last_updated: 2024-12-09
-version: "0.1"
 status: draft
 ---
 
@@ -36,7 +35,8 @@ This creates both `foo` and its reciprocal `1/foo`, bound by the invariant.
 
 ### Via Etherscan
 
-1. Go to the [Uniteum 0.1 contract](https://etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#writeContract): `0x9df9b0501e8f6c05623b5b519f9f18b598d9b253`
+{% assign current_uniteum = site.data.contracts.uniteum[site.data.contracts.current.uniteum] -%}
+1. Go to the [current Uniteum contract](https://etherscan.io/address/{{ current_uniteum.mainnet }}#writeContract): `{{ current_uniteum.mainnet }}`
 2. Navigate to "Write Contract"
 3. Connect your wallet
 4. Find the `multiply` function
@@ -67,7 +67,7 @@ IUnit meterPerSecond = one().multiply("meter/second");
 
 ### Via Etherscan
 
-1. Go to the [Uniteum 0.1 contract](https://etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#writeContract)
+1. Go to the [current Uniteum contract](https://etherscan.io/address/{{ current_uniteum.mainnet }}#writeContract)
 2. Navigate to "Write Contract"
 3. Connect your wallet
 4. Find the `multiply` function (string version)

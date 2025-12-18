@@ -52,13 +52,13 @@ Anyone can create symbolic units with labels like "USDC" or "USD". They have NO 
 
 ```solidity
 // Get the "1" token contract
-IUnit one = IUnit(0x9df9b0501e8f6c05623b5b519f9f18b598d9b253);
+IUnit one = IUnit({% include uniteum_address.html %});
 
 // Create anchored USDC unit
-IERC20 usdc = IERC20(0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48);
+IERC20 usdc = IERC20({{ site.data.contracts.tokens.usdc.mainnet }});
 IUnit usdcUnit = one.anchored(usdc);
 
-// usdcUnit.symbol() returns: "$0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+// usdcUnit.symbol() returns: "${{ site.data.contracts.tokens.usdc.mainnet }}"
 ```
 
 ## Reciprocal Unit: Depeg Hedge

@@ -84,7 +84,7 @@ The shorthand keeps examples readable. Click the links for technical accuracy.
 To create any anchored unit:
 
 ```solidity
-IUnit one = IUnit(0x9df9b0501e8f6c05623b5b519f9f18b598d9b253);
+IUnit one = IUnit({% include uniteum_address.html %});
 IERC20 token = IERC20(0x...); // The ERC-20 you want to anchor
 IUnit anchoredUnit = one.anchored(token);
 ```
@@ -98,7 +98,7 @@ See [Creating Units](/guides/creating-units/) for detailed instructions.
 Anchored unit addresses are deterministically computed via CREATE2:
 
 ```solidity
-IUnit one = IUnit(0x9df9b0501e8f6c05623b5b519f9f18b598d9b253);
+IUnit one = IUnit({% include uniteum_address.html %});
 address predictedAddress = one.anchoredPredict(IERC20(tokenAddress));
 ```
 
