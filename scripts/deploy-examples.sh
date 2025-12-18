@@ -1,7 +1,7 @@
 #!/bin/bash
 # Deploy all example units used in documentation
-# Usage: ./deploy-examples.sh --network mainnet --dry-run
-# Usage: ./deploy-examples.sh --network sepolia --dry-run
+# Usage: scripts/deploy-examples.sh --network mainnet --dry-run
+# Usage: scripts/deploy-examples.sh --network sepolia --dry-run
 
 set -e
 
