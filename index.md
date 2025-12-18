@@ -13,8 +13,8 @@ categories:
   - getting-started
 
 # Metadata
-last_updated: 2024-12-11
-version: "0.1"
+last_updated: 2024-12-17
+version: "0.3"
 status: draft
 ---
 
@@ -25,17 +25,6 @@ Uniteum is an algebraic liquidity protocol on Ethereum.
 Tokens have dimensional units—like physical quantities (meter, second, kilogram) or arbitrary symbols (foo, bar). Units compose algebraically: `meter` divided by `second` gives `meter/second`. Every unit has a reciprocal. Every composition creates new tokens.
 
 Prices aren't set by oracles. They emerge from a single operation—**forge**—and the arbitrage it enables.
-
----
-
-{: .warning }
-> **⚠️ Mainnet Warning: Uniteum 0.1 Has Critical Bugs**
->
-> Do not use Uniteum 0.1 forge operations on Mainnet. Critical bugs affect anchored units and compound units.
->
-> **Safe:** [Uniteum 0.0 (Primordial)](https://etherscan.io/address/0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4#code) on Mainnet, or Sepolia testnet for experimentation.
->
-> See [Known Issues](/known-issues/) for details.
 
 ---
 
@@ -61,9 +50,11 @@ See [Use Cases](/use-cases/) for detailed examples and strategies.
 
 ## Current Status
 
-**Version 0.1** — Experimental, unaudited, deployed on Mainnet and Sepolia.
+**Version 0.3** — Experimental, unaudited, deployed on Mainnet and Sepolia.
 
 This is novel mechanism design. We don't know what emerges at scale. Proceed with curiosity and caution.
+
+No known issues. See [Known Issues](/known-issues/) for version history and reporting guidelines.
 
 ## Support This Experiment
 
@@ -75,17 +66,17 @@ Early "1" token holders may benefit if the [value hypothesis](/economics-of-one/
 
 ## Quick Links
 
-- **[Known Issues](/known-issues/)** — Critical bugs in version 0.1
-- [Use Cases](/use-cases/) — What you can build and why it matters
 - [Getting Started](/getting-started/) — Buy "1", create your first unit
+- [Use Cases](/use-cases/) — What you can build and why it matters
 - [Concepts](/concepts/) — Understand how the system works
+- [Known Issues](/known-issues/) — Version history and bug reporting
 - [Safety](/safety/) — Risks and disclaimers
 
 ## Contracts
 
 | Contract | Mainnet | Sepolia |
 |----------|---------|---------|
-| Uniteum 0.1 "1" | [`0x9df9b0501e8f6c05623b5b519f9f18b598d9b253`](https://etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#code) | [`0x9df9b0501e8f6c05623b5b519f9f18b598d9b253`](https://sepolia.etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#code) |
+| Uniteum 0.3 "1" | [`0x9df9b0501e8f6c05623b5b519f9f18b598d9b253`](https://etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#code) | [`0x9df9b0501e8f6c05623b5b519f9f18b598d9b253`](https://sepolia.etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#code) |
 | Uniteum 0.0 "1" (genesis) | [`0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4`](https://etherscan.io/address/0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4#code) | [`0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4`](https://sepolia.etherscan.io/address/0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4#code) |
 | Discount Kiosk | [`0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9`](https://etherscan.io/address/0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9#code) | [`0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9`](https://sepolia.etherscan.io/address/0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9#code) |
 

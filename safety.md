@@ -13,8 +13,8 @@ categories:
   - safety
 
 # Metadata
-last_updated: 2024-12-09
-version: "0.1"
+last_updated: 2024-12-17
+version: "0.3"
 status: draft
 ---
 
@@ -22,22 +22,16 @@ status: draft
 
 Uniteum is experimental. Read this page before interacting with the protocol.
 
-{: .warning }
-> **⚠️ Critical Bugs in Uniteum 0.1**
->
-> Uniteum 0.1 has critical bugs affecting forge operations with anchored units and compound units.
->
-> **Do not use Uniteum 0.1 on Mainnet.** Use [Uniteum 0.0 (Primordial)](https://etherscan.io/address/0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4#code) on Mainnet or Sepolia testnet for experimentation.
->
-> See [Known Issues](/known-issues/) for complete details.
+## Current Status
 
-## Known Issues
+**Version 0.3** has no known issues as of December 2024.
 
-**Version 0.1 has critical forge bugs.** Before using any version:
+All core functionality is operational. However, Uniteum remains experimental and unaudited. Smart contract risk persists even with no currently known bugs.
 
-1. Check [Known Issues](/known-issues/) for current bug status
-2. Verify which operations are safe for your use case
-3. Understand network-specific limitations (Mainnet vs Sepolia)
+Before using:
+1. Check [Known Issues](/known-issues/) for current status
+2. Understand the risks outlined on this page
+3. Start with small amounts on Sepolia testnet
 
 ## Audit Status
 
