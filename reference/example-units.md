@@ -51,6 +51,7 @@ This page catalogs all symbolic example units used throughout the Uniteum docume
 {% assign generic = "" | split: "" %}
 {% assign physics = "" | split: "" %}
 {% assign gaming = "" | split: "" %}
+{% assign symbolic = "" | split: "" %}
 {% for unit in all_base %}
   {% if unit.symbol == "foo" or unit.symbol == "bar" or unit.symbol == "baz" or unit.symbol == "acme" or unit.symbol == "widget" %}
     {% assign generic = generic | push: unit %}
@@ -58,9 +59,10 @@ This page catalogs all symbolic example units used throughout the Uniteum docume
     {% assign physics = physics | push: unit %}
   {% elsif unit.symbol == "sword" or unit.symbol == "shield" %}
     {% assign gaming = gaming | push: unit %}
+  {% elsif unit.warning %}
+    {% assign symbolic = symbolic | push: unit %}
   {% endif %}
 {% endfor %}
-{% assign symbolic = site.data.example-units.base_units | where: "warning" %}
 
 ### Generic/Abstract Examples
 
