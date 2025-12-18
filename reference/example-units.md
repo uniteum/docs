@@ -47,9 +47,19 @@ This page catalogs all symbolic example units used throughout the Uniteum docume
 
 ## Base Units
 
-{% assign generic = site.data.example-units.base_units | where_exp: "unit", "unit.symbol == 'foo' or unit.symbol == 'bar' or unit.symbol == 'baz' or unit.symbol == 'acme' or unit.symbol == 'widget'" %}
-{% assign physics = site.data.example-units.base_units | where_exp: "unit", "unit.symbol == 'meter' or unit.symbol == 'second' or unit.symbol == 'kilogram' or unit.symbol == 'kg'" %}
-{% assign gaming = site.data.example-units.base_units | where_exp: "unit", "unit.symbol == 'sword' or unit.symbol == 'shield'" %}
+{% assign all_base = site.data.example-units.base_units %}
+{% assign generic = "" | split: "" %}
+{% assign physics = "" | split: "" %}
+{% assign gaming = "" | split: "" %}
+{% for unit in all_base %}
+  {% if unit.symbol == "foo" or unit.symbol == "bar" or unit.symbol == "baz" or unit.symbol == "acme" or unit.symbol == "widget" %}
+    {% assign generic = generic | push: unit %}
+  {% elsif unit.symbol == "meter" or unit.symbol == "second" or unit.symbol == "kilogram" or unit.symbol == "kg" %}
+    {% assign physics = physics | push: unit %}
+  {% elsif unit.symbol == "sword" or unit.symbol == "shield" %}
+    {% assign gaming = gaming | push: unit %}
+  {% endif %}
+{% endfor %}
 {% assign symbolic = site.data.example-units.base_units | where: "warning" %}
 
 ### Generic/Abstract Examples
@@ -99,10 +109,22 @@ This page catalogs all symbolic example units used throughout the Uniteum docume
 
 ## Compound Units
 
-{% assign products = site.data.example-units.compound_units | where_exp: "unit", "unit.symbol contains '*' and unit.symbol != 'kg*m/s^2'" | where_exp: "unit", "unit.symbol contains '/' == false" | where_exp: "unit", "unit.symbol contains '^' == false" %}
-{% assign ratios = site.data.example-units.compound_units | where_exp: "unit", "unit.symbol contains '/' and unit.symbol != 'kg*m/s^2'" %}
-{% assign complex = site.data.example-units.compound_units | where: "symbol", "kg*m/s^2" %}
-{% assign powers = site.data.example-units.compound_units | where_exp: "unit", "unit.symbol contains '^'" %}
+{% assign all_compounds = site.data.example-units.compound_units %}
+{% assign products = "" | split: "" %}
+{% assign ratios = "" | split: "" %}
+{% assign complex = "" | split: "" %}
+{% assign powers = "" | split: "" %}
+{% for unit in all_compounds %}
+  {% if unit.symbol == "kg*m/s^2" %}
+    {% assign complex = complex | push: unit %}
+  {% elsif unit.symbol contains "^" %}
+    {% assign powers = powers | push: unit %}
+  {% elsif unit.symbol contains "/" %}
+    {% assign ratios = ratios | push: unit %}
+  {% elsif unit.symbol contains "*" %}
+    {% assign products = products | push: unit %}
+  {% endif %}
+{% endfor %}
 
 ### Simple Products
 
