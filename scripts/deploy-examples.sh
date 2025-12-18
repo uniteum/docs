@@ -5,8 +5,20 @@
 
 set -e
 
+# Get contract address from .env (generated from _data/contracts.yml)
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ENV_FILE="$SCRIPT_DIR/.env"
+
+# Generate .env if it doesn't exist
+if [ ! -f "$ENV_FILE" ]; then
+    echo "Generating .env file..."
+    "$SCRIPT_DIR/generate-env.sh"
+fi
+
+# Source the .env file
+source "$ENV_FILE"
+
 # Configuration
-ONE="0x9df9b0501e8f6c05623b5b519f9f18b598d9b253"
 NETWORK="mainnet"
 DRY_RUN=false
 
@@ -112,42 +124,34 @@ deploy_unit() {
     echo ""
 }
 
-# List of units to deploy
-UNITS=(
-    # Base units - generic
-    "foo"
-    "bar"
-    "baz"
-    "acme"
-    "widget"
-    # Base units - physics
-    "meter"
-    "second"
-    "kilogram"
-    "kg"
-    # Base units - gaming
-    "sword"
-    "shield"
-    # Base units - symbolic (for warnings/examples)
-    "USD"
-    "ETH"
-    "BTC"
-    "MSFT"
-    # Reciprocals (will auto-deploy when base is deployed)
-    # Compounds
-    "foo*bar"
-    "meter*second"
-    "kg*m"
-    "kilogram*meter"
-    "sword*shield"
-    "meter/second"
-    "foo/bar"
-    "second/meter"
-    "kg*m/s^2"
-    "foo^2"
-    "foo^2\\3"
-    "bar^1\\2"
-)
+# Read units from example-units-input.yml
+INPUT_FILE="$SCRIPT_DIR/../_data/example-units-input.yml"
+
+if [ ! -f "$INPUT_FILE" ]; then
+    echo "Error: $INPUT_FILE not found"
+    exit 1
+fi
+
+# Check if yq is available
+if ! command -v yq &> /dev/null; then
+    echo "Error: yq is required but not installed"
+    echo "Install with: brew install yq (macOS) or apt-get install yq (Linux)"
+    exit 1
+fi
+
+# Extract all unit symbols from the YAML file
+echo "Reading units from $INPUT_FILE..."
+mapfile -t UNITS < <(yq eval '.units[].symbol' "$INPUT_FILE")
+
+# Filter out reciprocal units (they auto-deploy with base units)
+UNITS_TO_DEPLOY=()
+for unit in "${UNITS[@]}"; do
+    if [[ ! "$unit" =~ ^1/ ]]; then
+        UNITS_TO_DEPLOY+=("$unit")
+    fi
+done
+
+UNITS=("${UNITS_TO_DEPLOY[@]}")
 
 echo "Deploying ${#UNITS[@]} units..."
 echo ""
