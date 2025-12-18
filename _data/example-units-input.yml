@@ -39,18 +39,18 @@ units:
   - symbol: "shield"
     description: "Gaming item example"
 
-  # Symbolic versions of real-world assets (NOT anchored, NO actual connection)
+  # Floating versions of real-world assets (NOT anchored, NO actual connection)
   - symbol: "USD"
-    description: "Symbolic USD (NO connection to real US dollars)"
+    description: "Floating USD (NO connection to real US dollars)"
 
   - symbol: "ETH"
-    description: "Symbolic ETH (distinct from anchored $WETH)"
+    description: "Floating ETH (distinct from anchored $WETH)"
 
   - symbol: "BTC"
-    description: "Symbolic BTC (NO connection to Bitcoin)"
+    description: "Floating BTC (NO connection to Bitcoin)"
 
   - symbol: "MSFT"
-    description: "Symbolic MSFT (NO connection to Microsoft stock)"
+    description: "Floating MSFT (NO connection to Microsoft stock)"
 
   # Reciprocals
   - symbol: "1/foo"

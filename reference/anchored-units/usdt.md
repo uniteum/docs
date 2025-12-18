@@ -40,7 +40,7 @@ Tether USD is the largest stablecoin by market cap, pegged to the US Dollar. Int
 | Symbol | Type | Backing |
 |--------|------|---------|
 | `$0xdAC17F958D2ee523a2206206994597C13D831ec7` | Anchored unit | 1:1 USDT in contract |
-| `USDT` (no $) | Symbolic unit | None (just a label) |
+| `USDT` (no $) | Floating unit | None (just a label) |
 | `$USDT` | Documentation shorthand | Refers to anchored version |
 
 ## Creating This Unit

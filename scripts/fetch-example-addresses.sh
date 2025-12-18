@@ -57,7 +57,7 @@ declare -a UNITS=(
     # Base units - gaming
     "sword"
     "shield"
-    # Base units - symbolic (cautionary examples)
+    # Base units - floating (cautionary examples)
     "USD"
     "ETH"
     "BTC"

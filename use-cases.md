@@ -244,7 +244,7 @@ This is experimental territory:
 - Shape liquidity in new unit pairs
 - Front-run conceptual understanding
 
-### Symbolic Units
+### Floating Units
 
 Create units with arbitrary labels:
 - `foo`, `bar`, `ACME`, `moon`
@@ -252,7 +252,7 @@ Create units with arbitrary labels:
 - Value emerges purely from consensus/liquidity
 - Speculative social tokens
 
-**IMPORTANT:** Symbolic `MSFT` has ZERO connection to Microsoft stock. It's just a label.
+**IMPORTANT:** Floating `MSFT` has ZERO connection to Microsoft stock. It's just a label.
 
 ## Builder Primitives
 
@@ -305,9 +305,9 @@ Common anchored units (click for details):
 
 See [Token Reference](/reference/anchored-units/) for complete list and usage examples.
 
-### Anchored vs Symbolic
+### Anchored vs Floating
 
-| Aspect | Anchored (`$0xAddress`) | Symbolic (`symbol`) |
+| Aspect | Anchored (`$0xAddress`) | Floating (`symbol`) |
 |--------|------------------------|---------------------|
 | Backing | 1:1 ERC-20 in contract | None |
 | Value | Real, custodial | Consensus/liquidity only |
@@ -315,9 +315,9 @@ See [Token Reference](/reference/anchored-units/) for complete list and usage ex
 | Redeemable | Yes, for underlying | No |
 | Trust | Contract security | Market belief |
 
-**Symbolic `WETH` ≠ Anchored `$0xC02a...56Cc2`**
+**Floating `WETH` ≠ Anchored `$0xC02a...56Cc2`**
 
-A symbolic unit with label "WETH" has no connection to actual WETH. It's just a name.
+A floating unit with label "WETH" has no connection to actual WETH. It's just a name.
 
 ## Risk Considerations
 
@@ -327,7 +327,7 @@ All use cases carry significant risks:
 - **Novel mechanism risk** — unknown emergent properties at scale
 - **Liquidity risk** — needs critical mass to function well
 - **Gas costs** — complex operations may be expensive
-- **Symbolic units** — have NO inherent value or backing
+- **Floating units** — have NO inherent value or backing
 
 See [Safety](/safety/) for detailed risk disclosures.
 

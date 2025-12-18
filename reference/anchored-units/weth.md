@@ -40,12 +40,12 @@ Wrapped Ether is ETH converted to an ERC-20 token for DeFi compatibility. 1 WETH
 | Symbol | Type | Backing |
 |--------|------|---------|
 | `${{ site.data.contracts.tokens.weth.mainnet }}` | Anchored unit | 1:1 WETH in contract |
-| `WETH` (no $) | Symbolic unit | None (just a label) |
+| `WETH` (no $) | Floating unit | None (just a label) |
 | `$WETH` | Documentation shorthand | Refers to anchored version |
 
 **Critical:** Symbolic `WETH` ≠ Anchored `${{ site.data.contracts.tokens.weth.mainnet | slice: 0, 6 }}...{{ site.data.contracts.tokens.weth.mainnet | slice: -4, 4 }}`
 
-A symbolic unit with the label "WETH" has NO connection to real Wrapped Ether. Anyone can create it. It's worthless unless consensus gives it value.
+A floating unit with the label "WETH" has NO connection to real Wrapped Ether. Anyone can create it. It's worthless unless consensus gives it value.
 
 ## Creating This Unit
 

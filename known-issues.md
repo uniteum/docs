@@ -16,7 +16,7 @@ last_updated: 2024-12-17
 Uniteum 0.3 is the current production version. All previously identified bugs from versions 0.1 and 0.2 have been resolved.
 
 All core functionality is operational:
-- ✅ Forge operations with symbolic units
+- ✅ Forge operations with floating units
 - ✅ Forge operations with anchored units
 - ✅ Forge operations with compound units
 - ✅ Creating units via `multiply()` and `product()`

@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document catalogs all symbolic example units (`foo`, `bar`, etc.) used throughout the Uniteum documentation, along with their deterministically predicted addresses.
+This document catalogs all floating example units (`foo`, `bar`, etc.) used throughout the Uniteum documentation, along with their deterministically predicted addresses.
 
 **Key Decisions:**
 1. ✅ Deploy real units on both mainnet and Sepolia (addresses are identical due to CREATE2)
@@ -44,10 +44,10 @@ This document catalogs all symbolic example units (`foo`, `bar`, etc.) used thro
 - `meter/second`: [`0xCbdc3D8ca6255CbbD1a49F19AE2816a102Ee049F`](https://etherscan.io/token/0xCbdc3D8ca6255CbbD1a49F19AE2816a102Ee049F)
 - `kg*m/s^2` (force): [`0xEb171Bea0bB215E91B41ca6546e30aabF0Fe58Dd`](https://etherscan.io/token/0xEb171Bea0bB215E91B41ca6546e30aabF0Fe58Dd)
 
-### Cautionary Examples (Symbolic, NOT Anchored)
-- `USD` (symbolic): [`0xb937B9a0fe95208894329188A32720788e099967`](https://etherscan.io/token/0xb937B9a0fe95208894329188A32720788e099967)
-- `ETH` (symbolic): [`0x4055c468567fBf86DaE7e483aD75b9EE78344BB2`](https://etherscan.io/token/0x4055c468567fBf86DaE7e483aD75b9EE78344BB2)
-- `BTC` (symbolic): [`0x67a006CEa7435c156299290713Df3B0cd567619B`](https://etherscan.io/token/0x67a006CEa7435c156299290713Df3B0cd567619B)
+### Cautionary Examples (Floating, NOT Anchored)
+- `USD` (floating): [`0xb937B9a0fe95208894329188A32720788e099967`](https://etherscan.io/token/0xb937B9a0fe95208894329188A32720788e099967)
+- `ETH` (floating): [`0x4055c468567fBf86DaE7e483aD75b9EE78344BB2`](https://etherscan.io/token/0x4055c468567fBf86DaE7e483aD75b9EE78344BB2)
+- `BTC` (floating): [`0x67a006CEa7435c156299290713Df3B0cd567619B`](https://etherscan.io/token/0x67a006CEa7435c156299290713Df3B0cd567619B)
 
 ## Important Notes
 
@@ -120,7 +120,7 @@ Continue using shorthands like `$WETH`, `$USDC` in documentation text, but:
 After deploying, update these files to link to example units:
 
 1. **`getting-started.md`** - Link first `foo` example
-2. **`concepts/units.md`** - Link symbolic unit examples
+2. **`concepts/units.md`** - Link floating unit examples
 3. **`concepts/forge.md`** - Link triad examples
 4. **`concepts/triads.md`** - Link compound units
 5. **`concepts/arbitrage.md`** - Link multi-unit examples

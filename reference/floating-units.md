@@ -66,7 +66,7 @@ Unlike [anchored units](/reference/anchored-units/), floating units have no exte
 {% assign generic = "" | split: "" %}
 {% assign physics = "" | split: "" %}
 {% assign gaming = "" | split: "" %}
-{% assign symbolic = "" | split: "" %}
+{% assign floating_examples = "" | split: "" %}
 {% for unit in base_units %}
   {% if unit.symbol == "foo" or unit.symbol == "bar" or unit.symbol == "baz" or unit.symbol == "acme" or unit.symbol == "widget" %}
     {% assign generic = generic | push: unit %}
@@ -75,7 +75,7 @@ Unlike [anchored units](/reference/anchored-units/), floating units have no exte
   {% elsif unit.symbol == "sword" or unit.symbol == "shield" %}
     {% assign gaming = gaming | push: unit %}
   {% elsif unit.symbol == "USD" or unit.symbol == "ETH" or unit.symbol == "BTC" or unit.symbol == "MSFT" %}
-    {% assign symbolic = symbolic | push: unit %}
+    {% assign floating_examples = floating_examples | push: unit %}
   {% endif %}
 {% endfor %}
 
@@ -103,15 +103,15 @@ Unlike [anchored units](/reference/anchored-units/), floating units have no exte
 | [`{{ unit.symbol }}`](https://etherscan.io/token/{{ unit.address }}) | `{{ unit.address }}` | {{ unit.description }} |
 {% endfor %}
 
-### Symbolic Real-World Assets
+### Floating Real-World Asset Examples
 
 {: .warning }
-> **These are symbolic units with NO inherent value or backing.**
+> **These are floating units with NO inherent value or backing.**
 > They have NO connection to real-world assets despite their names.
 
 | Symbol | Address | Description |
 |--------|---------|-------------|
-{% for unit in symbolic -%}
+{% for unit in floating_examples -%}
 | [`{{ unit.symbol }}`](https://etherscan.io/token/{{ unit.address }}) | `{{ unit.address }}` | {{ unit.description }} |
 {% endfor %}
 

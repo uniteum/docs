@@ -57,14 +57,14 @@ Uniteum's price discovery mechanism is untested at scale:
 - **Arbitrage assumptions:** Price consistency depends on arbitrageurs acting rationally
 - **Liquidity dynamics:** Thin liquidity can cause extreme price movements
 
-## Symbolic Units Are Not Backed
+## Floating Units Are Not Backed
 
-**Critical:** Symbolic units (e.g., `foo`, `meter`) have no inherent value or backing.
+**Critical:** Floating units (e.g., `foo`, `meter`) have no inherent value or backing.
 
 - They are not pegged to anything
 - They are not collateralized
 - Their value comes purely from liquidity and market consensus
-- A symbolic unit named `USD` has zero connection to US dollars
+- A floating unit named `USD` has zero connection to US dollars
 
 Only anchored units (format: `$0xAddress`) have real backing.
 

@@ -2,7 +2,7 @@
 title: Units
 description: >-
   The four types of units in Uniteum: base, compound,
-  anchored, and symbolic. How they differ and compose.
+  anchored, and floating. How they differ and compose.
 
 # Navigation
 nav_order: 1
@@ -71,20 +71,20 @@ Anchored units are backed 1:1 by an external ERC-20 token. The backing tokens ar
 - ⚠️ Custodial—you trust the contract
 - Created via: `one().anchored(IERC20(address))`
 
-### Symbolic Units
+### Floating Units
 
 **Format:** Up to 30 characters, `[a-zA-Z0-9_.-]+`
 
 **Examples:** `foo`, `meter`, `acme`, `widget`
 
-Symbolic units have no backing. They're just labels. Value emerges from liquidity and consensus.
+Floating units have no backing. They're just labels. Value emerges from liquidity and consensus.
 
 - ❌ Not pegged to anything real
 - ❌ No collateral
 - ✅ Permissionless creation
 - Created via: `one().multiply("symbol")`
 
-**Warning:** A symbolic unit named `USD` has no connection to US dollars. Avoid real-world financial symbols to prevent confusion.
+**Warning:** A floating unit named `USD` has no connection to US dollars. Avoid real-world financial symbols to prevent confusion.
 
 ## Reciprocals
 

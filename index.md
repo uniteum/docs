@@ -38,7 +38,7 @@ Uniteum:
 - **One invariant** governs all operations: `u · v = w²`
 - **Infinite interconnected pools** through algebraic composition
 - **No oracles**—prices emerge from forge operations and arbitrage
-- **No collateral requirements** for symbolic units
+- **No collateral requirements** for floating units
 
 ## Why This Matters
 

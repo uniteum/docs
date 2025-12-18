@@ -204,6 +204,6 @@ social:
 warnings:
   experimental: "⚠️ Uniteum is experimental software. Use at your own risk."
   unaudited: "This protocol is unaudited. Smart contract risk exists."
-  symbolic: "Symbolic units have no inherent value or backing."
+  symbolic: "Floating units have no inherent value or backing."
   not_financial_advice: "This documentation is not financial advice."
   

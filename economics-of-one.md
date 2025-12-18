@@ -27,7 +27,7 @@ This page explores three related hypotheses about "1" token economics. **These a
 
 ## Hypothesis 1: "1" as Aggregate Value Index
 
-**Central claim:** As anchored collateral and symbolic unit participation grow, the value of "1" will tend to reflect aggregate system value (anchored + symbolic).
+**Central claim:** As anchored collateral and floating unit participation grow, the value of "1" will tend to reflect aggregate system value (anchored + symbolic).
 
 > **Notation:** We use [$WETH](/reference/anchored-units/weth/), [$USDC](/reference/anchored-units/usdc/), etc. as readable shorthands. These actually represent full address-based symbols. See [Token Reference](/reference/anchored-units/) for details.
 
@@ -35,7 +35,7 @@ This page explores three related hypotheses about "1" token economics. **These a
 
 Think of "1" as an **unintentional index fund** of all Uniteum value.
 
-Every unit needs "1" for liquidity. When value flows into the system—whether real collateral (anchored units) or consensus value (symbolic units)—that value becomes tied to "1" through the invariant.
+Every unit needs "1" for liquidity. When value flows into the system—whether real collateral (anchored units) or consensus value (floating units)—that value becomes tied to "1" through the invariant.
 
 ### Anchored Collateral Effect
 
@@ -63,18 +63,18 @@ Consider a simplified scenario with three anchored units:
 
 If "1" reflects proportional value: `$1M / 1.5M = $0.67 per "1"`
 
-This is crude (ignores symbolic units, compounds, circulation), but illustrates the mechanism: anchored collateral value distributed across locked "1" supply.
+This is crude (ignores floating units, compounds, circulation), but illustrates the mechanism: anchored collateral value distributed across locked "1" supply.
 
 ### Symbolic Unit Participation
 
-Symbolic units (no backing, pure consensus) can also contribute value:
+Floating units (no backing, pure consensus) can also contribute value:
 
 - If `foo` token gains market acceptance and trades at meaningful prices
 - Its reciprocal `1/foo` also has value (enforced by invariant)
 - Both require "1" for liquidity
-- Successful symbolic units increase demand for "1"
+- Successful floating units increase demand for "1"
 
-**Example:** A gaming community adopts `sword` and `shield` as in-game currency. Players forge compound units (`sword*shield`), provide liquidity, trade on secondary markets. This activity increases "1" utility and potentially value—even though these are unbacked symbolic units.
+**Example:** A gaming community adopts `sword` and `shield` as in-game currency. Players forge compound units (`sword*shield`), provide liquidity, trade on secondary markets. This activity increases "1" utility and potentially value—even though these are unbacked floating units.
 
 ### Network Effects
 
@@ -104,13 +104,13 @@ Hypothetical "1" behavior:
 
 ## Hypothesis 2: Anchored Units Provide Price Stability Through Reactance
 
-**Central claim:** Anchored units create asymmetric arbitrage resistance that dampens "1" price volatility, while symbolic units passively float.
+**Central claim:** Anchored units create asymmetric arbitrage resistance that dampens "1" price volatility, while floating units passively float.
 
 > **Note:** For a detailed technical exploration of this mechanism, see [Anchored Unit Stability](/concepts/anchored-stability/).
 
 ### The Asymmetry Between Anchored and Symbolic
 
-**Symbolic units** (`foo`, `bar`, etc.):
+**Floating units** (`foo`, `bar`, etc.):
 - Both unit and reciprocal float freely
 - If "1" value doubles, both `foo` and `1/foo` can adjust proportionally
 - No external reference creates resistance
@@ -140,7 +140,7 @@ When "1" value increases relative to external markets:
 
 Think of anchored units as **springs** attached to "1":
 
-- **Symbolic units:** Weightless, float along with "1" (no resistance)
+- **Floating units:** Weightless, float along with "1" (no resistance)
 - **Anchored units:** Springs anchored to external prices (resist movement)
 - **"1" volatility:** Damped by spring tension from all anchored units
 - **More anchored units:** More springs, stronger stabilization
@@ -157,7 +157,7 @@ These mechanisms work together:
 - Diversification: Reduces volatility from uncorrelated movements
 - Reactance: Dampens volatility through arbitrage resistance
 
-Anchored units provide *both* effects, symbolic units provide only diversification.
+Anchored units provide *both* effects, floating units provide only diversification.
 
 ### Testable Predictions
 
@@ -201,7 +201,7 @@ With N anchored units, N different implied "1" prices → N arbitrage springs �
 Applied to "1":
 - "1" is locked across many different unit contracts
 - If `$WETH` dumps but `$WBTC` pumps, offsetting effects
-- If `foo` symbolic unit collapses, but `$USDC` is stable, net impact reduced
+- If `foo` floating unit collapses, but `$USDC` is stable, net impact reduced
 - "1" volatility < weighted average volatility of constituent units
 
 ### Correlation Structure Matters
@@ -216,7 +216,7 @@ Applied to "1":
 - Low correlation with crypto
 - Stabilizing effect on "1"
 
-**Symbolic units** (`foo`, `bar`, `gaming_token`):
+**Floating units** (`foo`, `bar`, `gaming_token`):
 - Potentially uncorrelated with external markets
 - Could reduce volatility if they gain independent value
 
@@ -278,14 +278,14 @@ Could "1" get drained from critical pools?
 
 ### Symbolic Unit Collapse Risk
 
-**Challenge:** If major symbolic units collapse to zero, does "1" suffer?
+**Challenge:** If major floating units collapse to zero, does "1" suffer?
 
-**Analysis:** Symbolic units aren't backed, so their collapse doesn't destroy real value. But:
+**Analysis:** Floating units aren't backed, so their collapse doesn't destroy real value. But:
 - Locked "1" in collapsed unit pools becomes stranded
 - Reduces effective "1" circulation
 - Could create temporary supply shock
 
-**Mitigant:** "1" can be recovered by forging with worthless symbolic units (essentially burning the symbolic, reclaiming "1").
+**Mitigant:** "1" can be recovered by forging with worthless floating units (essentially burning the symbolic, reclaiming "1").
 
 ### External "1" Pricing
 
@@ -398,7 +398,7 @@ Sum across all units for total locked "1" supply.
 
 ### Scenario 3: Symbolic Unit Success
 
-**Setup:** A popular symbolic unit (`gaming_coin`) gains consensus value independent of crypto markets.
+**Setup:** A popular floating unit (`gaming_coin`) gains consensus value independent of crypto markets.
 
 **Prediction:**
 - "1" gains value from symbolic participation (not just anchored)
@@ -437,7 +437,7 @@ If these hypotheses hold, how does it affect decisions?
 - But also fragments "1" supply across pools
 - Net effect depends on TVL magnitude
 
-**Symbolic unit creators:**
+**Floating unit creators:**
 - Can contribute to "1" value via consensus/activity
 - No collateral required
 - Success benefits entire ecosystem (including "1" holders)
@@ -476,7 +476,7 @@ These hypotheses raise questions that can only be answered through observation:
 3. **Correlation Structure:** What's the actual correlation matrix of anchored units?
 4. **Optimal "1" Distribution:** Is there an ideal Gini coefficient for "1" across pools?
 5. **Fragmentation Threshold:** At what unit count does fragmentation harm outweigh network effects?
-6. **Symbolic Value Ceiling:** Can symbolic units contribute substantial value, or only anchored matter?
+6. **Symbolic Value Ceiling:** Can floating units contribute substantial value, or only anchored matter?
 7. **Price Discovery Path:** How does "1"/USD price initially form? Via which markets/pairs?
 8. **Stability vs Growth:** Does diversification create stability at the cost of growth potential?
 

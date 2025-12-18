@@ -40,8 +40,8 @@ Wrapped Bitcoin is Bitcoin represented as an ERC-20 token on Ethereum. 1 WBTC = 
 | Symbol | Type | Backing |
 |--------|------|---------|
 | `$0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599` | Anchored unit | 1:1 WBTC in contract |
-| `WBTC` (no $) | Symbolic unit | None (just a label) |
-| `BTC` (no $) | Symbolic unit | None (NOT Bitcoin!) |
+| `WBTC` (no $) | Floating unit | None (just a label) |
+| `BTC` (no $) | Floating unit | None (NOT Bitcoin!) |
 | `$WBTC` | Documentation shorthand | Refers to anchored version |
 
 ## Creating This Unit

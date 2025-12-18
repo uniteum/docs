@@ -136,11 +136,11 @@ Calculate the product unit and balance change for a compound forge operation.
 
 ## Unit Creation
 
-### Creating Symbolic Units
+### Creating Floating Units
 
 #### `multiply(string expression) → IUnit unit`
 
-Create a symbolic unit (or compound unit) from a string expression. If the unit already exists, returns its address without creating a new one.
+Create a floating unit (or compound unit) from a string expression. If the unit already exists, returns its address without creating a new one.
 
 **Parameters:**
 - `expression` — Unit symbol or expression
@@ -309,7 +309,7 @@ Get the backing token for anchored units.
 
 **Returns:**
 - ERC-20 address for anchored units
-- Zero address for symbolic units
+- Zero address for floating units
 
 **Use:** Check if unit is anchored
 

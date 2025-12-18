@@ -61,22 +61,22 @@ units:
   - symbol: "USD"
     canonical: "USD"
     address: "0x9577F5748b8F05F055558c75Ac85124c4920551c"
-    description: "Symbolic USD (NO connection to real US dollars)"
+    description: "Floating USD (NO connection to real US dollars)"
 
   - symbol: "ETH"
     canonical: "ETH"
     address: "0xCb357A1CF2a825d203c8Db3Fe0b97b32D9De9dD1"
-    description: "Symbolic ETH (distinct from anchored $WETH)"
+    description: "Floating ETH (distinct from anchored $WETH)"
 
   - symbol: "BTC"
     canonical: "BTC"
     address: "0x91B8266208E4277Be45ae70E764886D5dD23E3F3"
-    description: "Symbolic BTC (NO connection to Bitcoin)"
+    description: "Floating BTC (NO connection to Bitcoin)"
 
   - symbol: "MSFT"
     canonical: "MSFT"
     address: "0x0eFC17bCEDFCbEc5aA36477A59022850C25DD260"
-    description: "Symbolic MSFT (NO connection to Microsoft stock)"
+    description: "Floating MSFT (NO connection to Microsoft stock)"
 
   - symbol: "1/foo"
     canonical: "1/foo"

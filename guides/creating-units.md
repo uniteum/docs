@@ -23,9 +23,9 @@ status: draft
 
 This guide walks through creating different types of units in Uniteum.
 
-## Creating a Symbolic Base Unit
+## Creating a Floating Base Unit
 
-To create a symbolic unit like `foo`:
+To create a floating unit like `foo`:
 
 ```solidity
 one().multiply("foo")

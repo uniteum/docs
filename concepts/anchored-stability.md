@@ -3,7 +3,7 @@ title: Anchored Unit Stability
 description: >-
   How anchored units provide price stability to "1" through asymmetric
   arbitrage reactance, creating a stabilization mechanism distinct from
-  symbolic units.
+  floating units.
 
 # Navigation
 parent: Concepts
@@ -23,15 +23,15 @@ status: hypothesis
 
 # Anchored Unit Stability
 
-Anchored units create a unique stabilization mechanism for the "1" token through **asymmetric arbitrage reactance**. This page explores why anchored units actively dampen "1" price volatility while symbolic units passively float.
+Anchored units create a unique stabilization mechanism for the "1" token through **asymmetric arbitrage reactance**. This page explores why anchored units actively dampen "1" price volatility while floating units passively float.
 
 > **Note:** This is a hypothesis about emergent behavior, not a proven mechanism. See also [Economics of "1"](/economics-of-one/) for broader context.
 
 ## The Core Asymmetry
 
-### Symbolic Units: Floating Together
+### Floating Units: Floating Together
 
-When you create a symbolic unit like `foo`:
+When you create a floating unit like `foo`:
 - Both `foo` and `1/foo` have no external reference
 - Both derive value purely from internal consensus/liquidity
 - If "1" value doubles, `foo` and `1/foo` can adjust proportionally
@@ -101,7 +101,7 @@ When you create an anchored unit like `$WETH`:
 
 Think of the system as "1" connected to multiple springs:
 
-### Symbolic Units: No Springs
+### Floating Units: No Springs
 
 ```
 [foo] ~~~ ["1"] ~~~ [1/foo]
@@ -199,7 +199,7 @@ P_1_implied_WBTC = f(WBTC_locked, "1"_locked_in_WBTC_contract, P_WBTC)
 
 ### 1. Anchored Units Provide Active Stability
 
-Unlike symbolic units that passively track "1", anchored units actively resist changes through profitable arbitrage.
+Unlike floating units that passively track "1", anchored units actively resist changes through profitable arbitrage.
 
 **Implication:** More anchored unit TVL = stronger "1" price stability.
 
@@ -214,9 +214,9 @@ If these external prices move independently, "1" is anchored to a **basket** rat
 
 **Result:** "1" volatility < any single constituent (diversification + reactance).
 
-### 3. Symbolic Units Still Contribute Value
+### 3. Floating Units Still Contribute Value
 
-While symbolic units don't provide reactance, they:
+While floating units don't provide reactance, they:
 - Add liquidity and utility to the system
 - Contribute to aggregate value (Hypothesis 1 in [Economics of "1"](/economics-of-one/))
 - Provide diversification (Hypothesis 3)
@@ -250,7 +250,7 @@ If this mechanism works as hypothesized:
 
 **Expected:** Spike in anchored unit forge operations during price deviations.
 
-**Falsification:** No arbitrage response, or symbolic units show equal activity.
+**Falsification:** No arbitrage response, or floating units show equal activity.
 
 ### Prediction 3: Price Convergence Speed
 
@@ -273,7 +273,7 @@ If this mechanism works as hypothesized:
 ### Scenario A: Early Phase (No Anchored Units)
 
 **Setup:**
-- Only symbolic units exist (`foo`, `bar`, etc.)
+- Only floating units exist (`foo`, `bar`, etc.)
 - "1" trades on speculative/consensus value only
 - No external anchors
 
@@ -289,7 +289,7 @@ If this mechanism works as hypothesized:
 
 **Setup:**
 - `$WETH` launched with $1M TVL
-- Still some symbolic units
+- Still some floating units
 - "1" has external reference point
 
 **Behavior:**
@@ -513,7 +513,7 @@ On [Etherscan](https://etherscan.io/address/{{ current_uniteum.mainnet }}#readCo
 - [Economics of "1"](/economics-of-one/) — Broader hypotheses about "1" value
 - [Arbitrage](/concepts/arbitrage/) — How arbitrage maintains price consistency
 - [Forge](/concepts/forge/) — The operation that enables arbitrage
-- [Units](/concepts/units/) — Anchored vs symbolic unit mechanics
+- [Units](/concepts/units/) — Anchored vs floating unit mechanics
 
 ## Summary
 
@@ -521,7 +521,7 @@ On [Etherscan](https://etherscan.io/address/{{ current_uniteum.mainnet }}#readCo
 
 **How it works:**
 - Anchored units tied to external prices (springs)
-- Symbolic units float freely (no springs)
+- Floating units float freely (no springs)
 - Deviations in "1" price create profitable arbitrage
 - Arbitrage activity creates backpressure (reactance)
 - More anchored TVL = stronger stabilization

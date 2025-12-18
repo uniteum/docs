@@ -1,5 +1,5 @@
 #!/bin/bash
-# Predict CREATE2 addresses for symbolic example units
+# Predict CREATE2 addresses for floating example units
 # Uses OpenZeppelin Clones.predictDeterministicAddress logic
 
 set -e

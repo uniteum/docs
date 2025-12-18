@@ -108,7 +108,7 @@ This allows you to reference anchored units before they're created.
 
 **Unambiguous:** `$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2` uniquely identifies WETH mainnet contract.
 
-**No naming conflicts:** Multiple tokens could claim "WETH" as a symbolic unit. Addresses are unique.
+**No naming conflicts:** Multiple tokens could claim "WETH" as a floating unit. Addresses are unique.
 
 **Programmatically verifiable:** Code can validate the backing token by reading the address.
 

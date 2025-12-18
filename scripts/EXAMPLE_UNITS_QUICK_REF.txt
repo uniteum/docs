@@ -26,7 +26,7 @@ Gaming:
   sword      0xcd3a567773675d2b32263613fEdb6eAB920EA28f
   shield     0x4ee12ae9725f7Ef18F8cF03052a1e61c9337BB68
 
-Symbolic (WARNING: NO real-world connection!):
+Floating (WARNING: NO real-world connection!):
   USD        0xb937B9a0fe95208894329188A32720788e099967
   ETH        0x4055c468567fBf86DaE7e483aD75b9EE78344BB2
   BTC        0x67a006CEa7435c156299290713Df3B0cd567619B
@@ -106,7 +106,7 @@ Uniteum Contract:
 • All addresses are deterministic via CREATE2
 • Same addresses on ALL networks (mainnet, Sepolia, etc.)
 • Units may not be deployed yet - call multiply() to deploy
-• Symbolic USD/ETH/BTC have NO connection to real assets!
+• Floating USD/ETH/BTC have NO connection to real assets!
 • Compounds are alphabetically sorted (foo*bar → bar*foo)
 • Use \ not / for exponent division (foo^2\3 = foo^(2/3))
 
