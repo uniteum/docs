@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Rich deep gold gradient -->
+    <radialGradient id="darkGold" cx="40%" cy="40%">
+      <stop offset="0%" style="stop-color:#D4A841;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#C49A2C;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#9B7719;stop-opacity:1" />
+    </radialGradient>
+    <!-- Rim gradient -->
+    <linearGradient id="rimGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#7A5F1A;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#9B7719;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6B5416;stop-opacity:1" />
+    </linearGradient>
+    <!-- Emboss filter -->
+    <filter id="emboss" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="blur"/>
+      <feOffset in="blur" dx="-2" dy="-2" result="offsetBlur"/>
+      <feSpecularLighting in="blur" surfaceScale="5" specularConstant="0.75"
+                          specularExponent="20" lighting-color="#F4E4C1" result="specOut">
+        <fePointLight x="-100" y="-100" z="200"/>
+      </feSpecularLighting>
+      <feComposite in="specOut" in2="SourceAlpha" operator="in" result="specOut"/>
+      <feComposite in="SourceGraphic" in2="specOut" operator="arithmetic"
+                   k1="0" k2="1" k3="1" k4="0"/>
+    </filter>
+  </defs>
+
+  <!-- Outer dark rim -->
+  <circle cx="256" cy="256" r="240" fill="#5C4A0F"/>
+
+  <!-- Lighter band inside -->
+  <circle cx="256" cy="256" r="230" fill="#D4A841"/>
+
+  <!-- Inner dark region -->
+  <circle cx="256" cy="256" r="200" fill="url(#darkGold)"/>
+
+  <!-- Shadow for embossed effect on "1" -->
+  <text x="259" y="269"
+        font-family="'Latin Modern Math', 'STIX Two Math', 'Cambria Math', 'Times New Roman', serif"
+        font-size="380"
+        font-weight="700"
+        fill="#4A3A0D"
+        opacity="0.5"
+        text-anchor="middle"
+        dominant-baseline="central">1</text>
+
+  <!-- Highlight for embossed effect on "1" -->
+  <text x="253" y="263"
+        font-family="'Latin Modern Math', 'STIX Two Math', 'Cambria Math', 'Times New Roman', serif"
+        font-size="380"
+        font-weight="700"
+        fill="#F5E6B8"
+        opacity="0.7"
+        text-anchor="middle"
+        dominant-baseline="central">1</text>
+
+  <!-- Central "1" -->
+  <text x="256" y="266"
+        font-family="'Latin Modern Math', 'STIX Two Math', 'Cambria Math', 'Times New Roman', serif"
+        font-size="380"
+        font-weight="700"
+        fill="#7A5F1A"
+        text-anchor="middle"
+        dominant-baseline="central">1</text>
+
+  <!-- Shadow for embossed "*" -->
+  <text x="121" y="267"
+        font-family="'Latin Modern Math', 'STIX Two Math', 'Cambria Math', 'Times New Roman', serif"
+        font-size="60"
+        font-weight="600"
+        fill="#4A3A0D"
+        opacity="0.4"
+        text-anchor="middle"
+        dominant-baseline="central">*</text>
+
+  <!-- Highlight for embossed "*" -->
+  <text x="119" y="265"
+        font-family="'Latin Modern Math', 'STIX Two Math', 'Cambria Math', 'Times New Roman', serif"
+        font-size="60"
+        font-weight="600"
+        fill="#E8D4A0"
+        opacity="0.6"
+        text-anchor="middle"
+        dominant-baseline="central">*</text>
+
+  <!-- Left mathematical symbols -->
+  <text x="120" y="266"
+        font-family="'Latin Modern Math', 'STIX Two Math', 'Cambria Math', 'Times New Roman', serif"
+        font-size="60"
+        font-weight="600"
+        fill="#6B5416"
+        text-anchor="middle"
+        dominant-baseline="central">*</text>
+
+  <!-- Shadow for embossed "/" -->
+  <text x="393" y="267"
+        font-family="'Latin Modern Math', 'STIX Two Math', 'Cambria Math', 'Times New Roman', serif"
+        font-size="60"
+        font-weight="600"
+        fill="#4A3A0D"
+        opacity="0.4"
+        text-anchor="middle"
+        dominant-baseline="central">/</text>
+
+  <!-- Highlight for embossed "/" -->
+  <text x="391" y="265"
+        font-family="'Latin Modern Math', 'STIX Two Math', 'Cambria Math', 'Times New Roman', serif"
+        font-size="60"
+        font-weight="600"
+        fill="#E8D4A0"
+        opacity="0.6"
+        text-anchor="middle"
+        dominant-baseline="central">/</text>
+
+  <!-- Right mathematical symbols -->
+  <text x="392" y="266"
+        font-family="'Latin Modern Math', 'STIX Two Math', 'Cambria Math', 'Times New Roman', serif"
+        font-size="60"
+        font-weight="600"
+        fill="#6B5416"
+        text-anchor="middle"
+        dominant-baseline="central">/</text>
+</svg>

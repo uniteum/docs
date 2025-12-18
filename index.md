@@ -20,6 +20,8 @@ status: draft
 
 # Uniteum
 
+<img src="/assets/images/uniteum-one-icon.svg" alt="Uniteum 1 Token" width="120" height="120" style="float: right; margin-left: 20px; margin-bottom: 10px;">
+
 Uniteum is an algebraic liquidity protocol on Ethereum.
 
 Tokens have dimensional units—like physical quantities (meter, second, kilogram) or arbitrary symbols (foo, bar). Units compose algebraically: `meter` divided by `second` gives `meter/second`. Every unit has a reciprocal. Every composition creates new tokens.
