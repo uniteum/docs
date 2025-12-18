@@ -1,11 +1,11 @@
 ---
 title: $WBTC
 description: Documentation shorthand for the WBTC anchored unit
-parent: Token Reference
+parent: Anchored Units
 nav_order: 4
 
 # Metadata
-last_updated: 2024-12-11
+last_updated: 2024-12-18
 version: "0.1"
 ---
 
@@ -109,8 +109,8 @@ See [Use Cases: Correlation Trading](/use-cases/#correlation-trading).
 
 ## Related Documentation
 
-- [Token Reference](/tokens/) — All common shorthands
-- [$WETH](/tokens/weth/) — Ethereum counterpart
+- [Token Reference](/reference/anchored-units/) — All common shorthands
+- [$WETH](/reference/anchored-units/weth/) — Ethereum counterpart
 - [Use Cases: Multi-Token Derivatives](/use-cases/#multi-token-derivatives)
 - [Economics of "1"](/economics-of-one/) — How BTC collateral affects system value
 

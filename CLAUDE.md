@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-Uniteum is an algebraic liquidity protocol on Ethereum where ERC-20 tokens have dimensional units (like physical quantities: m/s, kg*m, etc.) or symbolic units (USD, BTC, foo). Units compose algebraically, and price consistency is maintained through arbitrage-enforced forge operations rather than oracles.
+Uniteum is an algebraic liquidity protocol on Ethereum where ERC-20 tokens have dimensional units (like physical quantities: m/s, kg*m, etc.) or floating units (USD, BTC, foo). Units compose algebraically, and price consistency is maintained through arbitrage-enforced forge operations rather than oracles.
 
 **Key Innovation:** Multi-dimensional constant-product AMM where algebraic relationships create liquidity pools. Forge operations work on any valid triad (not just U/1/U but also A/B/A*B), creating mesh topology of arbitrage paths.
 
@@ -73,7 +73,7 @@ Invariant enforcement: `sqrt(a * b) = ab` where lowercase = supplies
 - More U (u > v) → U is cheaper, 1/U is more expensive
 - Standard constant-product AMM pricing
 
-### 4. Anchored vs Symbolic Units
+### 4. Anchored vs Floating Units
 
 **Anchored Units:**
 - Format: `$0xTokenAddress` (e.g., `$0xdAC17F958D2ee523a2206206994597C13D831ec7` for USDT)
@@ -81,15 +81,15 @@ Invariant enforcement: `sqrt(a * b) = ab` where lowercase = supplies
 - Real value, custodial
 - Created via: `one().anchored(IERC20(address))`
 
-**Symbolic Units:**
+**Floating Units:**
 - Format: 30 chars max, `[a-zA-Z0-9_.-]+` (e.g., `USD`, `MSFT`, `kg`, `foo`)
 - NO connection to real-world entities (MSFT ≠ Microsoft stock!)
 - Value emerges from liquidity/consensus only
 - Created via: `one().multiply("symbol")`
 
-**IMPORTANT:** Symbolic "USD" has zero inherent connection to US dollars. It's just a label.
+**IMPORTANT:** Floating "USD" has zero inherent connection to US dollars. It's just a label.
 
-**Note on Terminology:** The contract code uses "anchored" and "unanchored" terminology (see IUnit.sol), but this documentation uses "anchored" and "symbolic" for clarity. They are equivalent: unanchored = symbolic.
+**Note on Terminology:** The contract code uses "anchored" and "unanchored" terminology (see IUnit.sol), but this documentation uses "anchored" and "floating" for clarity. They are equivalent: unanchored = floating.
 
 ### 5. Compound Units
 
@@ -235,7 +235,7 @@ uniteum.one/
 
 - Lead with concrete examples before theory
 - Include Etherscan transaction links for everything
-- Distinguish clearly between anchored and symbolic units
+- Distinguish clearly between anchored and floating units
 - Explain forge triads beyond just (U, 1/U, 1)
 - Use dimensional analysis analogies (physics helps intuition)
 - Link related concepts bidirectionally
@@ -245,22 +245,22 @@ uniteum.one/
 
 For documentation readability, use shorthand notation like `$WETH`, `$USDC`, `$WBTC` in explanations and examples, BUT:
 
-- **Link first occurrence** to token reference pages (e.g., `[$WETH](/tokens/weth/)`)
-- Add callout at top of page: "We use [$WETH](/tokens/weth/), [$USDC](/tokens/usdc/), etc. as readable shorthands. See [Token Reference](/tokens/) for actual symbols."
+- **Link first occurrence** to token reference pages (e.g., `[$WETH](/reference/anchored-units/weth/)`)
+- Add callout at top of page: "We use [$WETH](/reference/anchored-units/weth/), [$USDC](/reference/anchored-units/usdc/), etc. as readable shorthands. See [Anchored Units](/reference/anchored-units/) for actual symbols."
 - In technical reference or code examples, show real addresses
-- Emphasize the distinction: symbolic `WETH` ≠ anchored `$0xC02a...56Cc2`
+- Emphasize the distinction: floating `WETH` ≠ anchored `$0xC02a...56Cc2`
 
 Common anchored unit shorthands (all have dedicated reference pages):
-- [$WETH](/tokens/weth/) = `$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
-- [$USDC](/tokens/usdc/) = `$0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
-- [$USDT](/tokens/usdt/) = `$0xdAC17F958D2ee523a2206206994597C13D831ec7`
-- [$WBTC](/tokens/wbtc/) = `$0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599`
-- [$DAI](/tokens/dai/) = `$0x6B175474E89094C44Da98b954EedeAC495271d0F`
+- [$WETH](/reference/anchored-units/weth/) = `$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
+- [$USDC](/reference/anchored-units/usdc/) = `$0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
+- [$USDT](/reference/anchored-units/usdt/) = `$0xdAC17F958D2ee523a2206206994597C13D831ec7`
+- [$WBTC](/reference/anchored-units/wbtc/) = `$0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599`
+- [$DAI](/reference/anchored-units/dai/) = `$0x6B175474E89094C44Da98b954EedeAC495271d0F`
 
-**Token Reference Pages:** Located in `/tokens/` directory. Each page explains:
+**Anchored Unit Pages:** Located in `/reference/anchored-units/` directory. Each page explains:
 - The shorthand vs actual symbol
 - What the token is backed by (with Etherscan link)
-- Symbolic vs anchored distinction
+- Floating vs anchored distinction
 - Example derivatives and use cases
 - How to create the anchored unit
 
@@ -298,16 +298,16 @@ Common anchored unit shorthands (all have dedicated reference pages):
 
 ### What Users Often Misunderstand
 
-1. **Symbolic ≠ synthetic:** `USD` symbol doesn't track real USD price
+1. **Floating ≠ synthetic:** `USD` symbol doesn't track real USD price
 2. **Forge beyond reciprocals:** Can forge any valid triad, not just (U, 1/U, 1)
 3. **Price control mechanism:** Forging IS how you influence prices
-4. **No collateral needed:** For symbolic units, just liquidity through forging
+4. **No collateral needed:** For floating units, just liquidity through forging
 5. **Compound units:** Their prices are arbitrage-enforced, not set by oracles
 
 ### Critical Distinctions
 
-- **Anchored tokens:** Real backing, custodial, trust in contract
-- **Symbolic tokens:** No backing, trust in liquidity/mechanism
+- **Anchored units:** Real backing, custodial, trust in contract
+- **Floating units:** No backing, trust in liquidity/mechanism
 - **Genesis "1" (v0.0):** Simple ERC-20, no Uniteum features, primordial supply
 - **Uniteum "1" (v0.1):** Full-featured, accepts migration from v0.0
 
@@ -324,12 +324,12 @@ Common anchored unit shorthands (all have dedicated reference pages):
 - ✅ Use analogies (physics, traditional finance, gaming)
 - ✅ Show multiple ways to accomplish things (direct vs indirect forge paths)
 - ✅ Document sign convention for forge parameters (+mint, -burn)
-- ✅ Note that code uses "unanchored" but docs say "symbolic"
+- ✅ Note that code uses "unanchored" but docs say "floating"
 - ✅ Use correct price formula: price(U) = v/u
 
 ### Don't:
 
-- ❌ Claim symbolic units have inherent value/backing
+- ❌ Claim floating units have inherent value/backing
 - ❌ Over-promise stability or safety
 - ❌ Forget to mention audit status (unaudited)
 - ❌ Assume only (U, 1/U, 1) forge triads exist

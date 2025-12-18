@@ -1,11 +1,11 @@
 ---
-title: Example Units
+title: Floating Units
 description: >-
-  Catalog of symbolic example units used throughout Uniteum documentation,
+  Catalog of floating (unbacked) example units used throughout Uniteum documentation,
   with deterministic addresses and deployment instructions.
 
 # Navigation
-nav_order: 4
+nav_order: 2
 parent: Reference
 has_children: false
 
@@ -14,14 +14,16 @@ categories:
   - development
 
 # Metadata
-last_updated: 2024-12-12
+last_updated: 2024-12-18
 version: "0.1"
 status: published
 ---
 
-# Example Units Reference
+# Floating Units Reference
 
-This page catalogs all symbolic example units used throughout the Uniteum documentation. These units serve as pedagogical examples and can be deployed on any network for experimentation.
+This page catalogs all floating (unbacked) example units used throughout the Uniteum documentation. These units serve as pedagogical examples and can be deployed on any network for experimentation.
+
+Unlike [anchored units](/reference/anchored-units/), floating units have no external backing—their value emerges purely from liquidity and market consensus.
 
 ## Key Properties
 
@@ -244,6 +246,6 @@ Or deploy to Sepolia testnet for experimentation:
 
 ## See Also
 
-- [Anchored Units (Token Reference)](/tokens/) - Real ERC-20 backed units
+- [Anchored Units](/reference/anchored-units/) - Real ERC-20 backed units
 - [Creating Units Guide](/guides/creating-units/) - How to create your own units
 - [Contracts Reference](/reference/contracts/) - Contract addresses and interfaces

@@ -1,11 +1,11 @@
 ---
 title: $USDC
 description: Documentation shorthand for the USDC anchored unit
-parent: Token Reference
+parent: Anchored Units
 nav_order: 2
 
 # Metadata
-last_updated: 2024-12-11
+last_updated: 2024-12-18
 version: "0.1"
 ---
 
@@ -141,7 +141,7 @@ To get USDC back:
 
 ## Related Documentation
 
-- [Token Reference](/tokens/) — All common shorthands
+- [Token Reference](/reference/anchored-units/) — All common shorthands
 - [Anchored Units Concept](/concepts/units/#anchored-units)
 - [Use Cases: Hedging](/use-cases/#hedging-with-reciprocals)
 - [Economics of "1"](/economics-of-one/) — How stablecoin collateral stabilizes "1"

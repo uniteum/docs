@@ -1,11 +1,11 @@
 ---
 title: $WETH
 description: Documentation shorthand for the WETH anchored unit
-parent: Token Reference
+parent: Anchored Units
 nav_order: 1
 
 # Metadata
-last_updated: 2024-12-11
+last_updated: 2024-12-18
 version: "0.1"
 ---
 
@@ -132,7 +132,7 @@ See [Forging Guide](/guides/forging/) for detailed instructions.
 
 ## Related Documentation
 
-- [Token Reference](/tokens/) — All common shorthands
+- [Token Reference](/reference/anchored-units/) — All common shorthands
 - [Anchored Units Concept](/concepts/units/#anchored-units)
 - [Creating Anchored Units](/guides/creating-units/#anchored-units)
 - [Use Cases](/use-cases/) — What you can build

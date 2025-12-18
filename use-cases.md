@@ -23,7 +23,7 @@ status: draft
 
 Uniteum enables novel financial primitives through algebraic composition of units. Here are the key value propositions and use cases.
 
-> **Notation:** For readability, we use [$WETH](/tokens/weth/), [$USDC](/tokens/usdc/), etc. in examples. Remember that anchored units actually use full contract addresses: `$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2` for WETH. Click any token link to see its actual symbol. See [Token Reference](/tokens/) and [Anchored Units](#anchored-units) below.
+> **Notation:** For readability, we use [$WETH](/reference/anchored-units/weth/), [$USDC](/reference/anchored-units/usdc/), etc. in examples. Remember that anchored units actually use full contract addresses: `$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2` for WETH. Click any token link to see its actual symbol. See [Token Reference](/reference/anchored-units/) and [Anchored Units](#anchored-units) below.
 
 ## Hedging with Reciprocals
 
@@ -33,7 +33,7 @@ Uniteum enables novel financial primitives through algebraic composition of unit
 
 Create an anchored USDC unit and its reciprocal:
 
-- [$USDC](/tokens/usdc/) — backed 1:1 by real USDC held in the contract
+- [$USDC](/reference/anchored-units/usdc/) — backed 1:1 by real USDC held in the contract
 - `1/$USDC` — synthetic reciprocal (not backed)
 
 **Price relationship:** `price($USDC) × price(1/$USDC) = price(1)`
@@ -54,12 +54,12 @@ When USDC depegs:
 
 The same mechanism works for any ERC-20:
 
-**[$WETH](/tokens/weth/) and `1/$WETH`:**
-- Long ETH? Hold [$WETH](/tokens/weth/)
+**[$WETH](/reference/anchored-units/weth/) and `1/$WETH`:**
+- Long ETH? Hold [$WETH](/reference/anchored-units/weth/)
 - Short ETH? Hold `1/$WETH`
 - Hedged exposure? Hold both
 
-**[$WBTC](/tokens/wbtc/) and `1/$WBTC`:**
+**[$WBTC](/reference/anchored-units/wbtc/) and `1/$WBTC`:**
 - Protect BTC holdings from dumps
 - Gain from BTC price increases
 - No borrowing, no collateral, no liquidations
@@ -297,13 +297,13 @@ Real format: `$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2` (WETH)
 Created via: `one().anchored(IERC20(0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2))`
 
 Common anchored units (click for details):
-- [$WETH](/tokens/weth/) — `$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
-- [$USDC](/tokens/usdc/) — `$0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
-- [$USDT](/tokens/usdt/) — `$0xdAC17F958D2ee523a2206206994597C13D831ec7`
-- [$WBTC](/tokens/wbtc/) — `$0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599`
-- [$DAI](/tokens/dai/) — `$0x6B175474E89094C44Da98b954EedeAC495271d0F`
+- [$WETH](/reference/anchored-units/weth/) — `$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
+- [$USDC](/reference/anchored-units/usdc/) — `$0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
+- [$USDT](/reference/anchored-units/usdt/) — `$0xdAC17F958D2ee523a2206206994597C13D831ec7`
+- [$WBTC](/reference/anchored-units/wbtc/) — `$0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599`
+- [$DAI](/reference/anchored-units/dai/) — `$0x6B175474E89094C44Da98b954EedeAC495271d0F`
 
-See [Token Reference](/tokens/) for complete list and usage examples.
+See [Token Reference](/reference/anchored-units/) for complete list and usage examples.
 
 ### Anchored vs Symbolic
 

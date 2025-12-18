@@ -1,11 +1,11 @@
 ---
 title: $DAI
 description: Documentation shorthand for the DAI anchored unit
-parent: Token Reference
+parent: Anchored Units
 nav_order: 5
 
 # Metadata
-last_updated: 2024-12-11
+last_updated: 2024-12-18
 version: "0.1"
 ---
 
@@ -67,7 +67,7 @@ Synthetic unit providing depeg hedge for DAI.
 
 ### Stablecoin Diversification
 
-With [$USDC](/tokens/usdc/), [$USDT](/tokens/usdt/), and `$DAI`:
+With [$USDC](/reference/anchored-units/usdc/), [$USDT](/reference/anchored-units/usdt/), and `$DAI`:
 
 **`$USDC*$USDT*$DAI`** — Three-stablecoin basket:
 - Reduces single-point-of-failure risk
@@ -83,8 +83,8 @@ With [$USDC](/tokens/usdc/), [$USDT](/tokens/usdt/), and `$DAI`:
 
 ## Related Documentation
 
-- [Token Reference](/tokens/) — All common shorthands
-- [$USDC](/tokens/usdc/) — Centralized stablecoin comparison
+- [Token Reference](/reference/anchored-units/) — All common shorthands
+- [$USDC](/reference/anchored-units/usdc/) — Centralized stablecoin comparison
 - [Use Cases: Hedging](/use-cases/#hedging-with-reciprocals)
 
 ---

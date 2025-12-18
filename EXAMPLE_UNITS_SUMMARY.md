@@ -14,7 +14,7 @@ This document catalogs all symbolic example units (`foo`, `bar`, etc.) used thro
 
 ### Data & Reference
 - **`_data/example-units.yml`** - Structured data file with all units, addresses, and descriptions
-- **`reference/example-units.md`** - User-facing reference page with tables and links
+- **`reference/floating-units.md`** - User-facing reference page with tables and links
 - **`EXAMPLE_UNITS_SUMMARY.md`** (this file) - Internal summary for project maintainers
 
 ### Scripts
@@ -112,7 +112,7 @@ The [`meter/second`](https://etherscan.io/token/0xCbdc3D8ca6255CbbD1a49F19AE2816
 
 Continue using shorthands like `$WETH`, `$USDC` in documentation text, but:
 1. Link first occurrence to token reference pages
-2. Add callout at top: "We use [$WETH](/tokens/weth/), [$USDC](/tokens/usdc/), etc. as shorthands. See [Token Reference](/tokens/)."
+2. Add callout at top: "We use [$WETH](/reference/anchored-units/weth/), [$USDC](/reference/anchored-units/usdc/), etc. as shorthands. See [Token Reference](/reference/anchored-units/)."
 3. In code examples, show real addresses
 
 ## Documentation Updates Needed
@@ -170,7 +170,7 @@ cast send 0x9df9b0501e8f6c05623b5b519f9f18b598d9b253 \
 
 See [`_data/example-units.yml`](_data/example-units.yml) for the complete structured list.
 
-See [`reference/example-units.md`](reference/example-units.md) for the user-facing reference page.
+See [`reference/floating-units.md`](reference/floating-units.md) for the user-facing reference page.
 
 ---
 

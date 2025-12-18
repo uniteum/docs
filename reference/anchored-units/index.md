@@ -1,11 +1,12 @@
 ---
-title: Token Reference
+title: Anchored Units
 description: >-
   Common anchored token shorthands used in documentation and their
   actual address-based symbols.
 
 # Navigation
-nav_order: 10
+parent: Reference
+nav_order: 1
 has_children: true
 
 # Taxonomy
@@ -14,12 +15,12 @@ categories:
   - tokens
 
 # Metadata
-last_updated: 2024-12-11
+last_updated: 2024-12-18
 version: "0.1"
 status: reference
 ---
 
-# Token Reference
+# Anchored Units
 
 ## Documentation Convention
 
@@ -49,11 +50,11 @@ This is readable and matches how developers think about tokens, while clearly in
 |--------|-----------|---------|
 | `$WETH` (shorthand) | Documentation convenience | Refers to `$0xC02a...56Cc2` |
 | `$0xC02a...56Cc2` (actual) | Real anchored unit symbol | 1:1 backed by WETH |
-| `WETH` (no $) | Symbolic unit | NO backing, just a label |
+| `WETH` (no $) | Floating unit | NO backing, just a label |
 
-**Symbolic `WETH` ≠ Anchored `$0xC02a...56Cc2`**
+**Floating `WETH` ≠ Anchored `$0xC02a...56Cc2`**
 
-A symbolic unit with the label "WETH" has zero connection to actual Wrapped Ether. It's an unbacked token that happens to use that name.
+A floating unit with the label "WETH" has zero connection to actual Wrapped Ether. It's an unbacked token that happens to use that name.
 
 ## Common Anchored Token Shorthands
 
@@ -61,11 +62,11 @@ Click any shorthand to see its actual symbol, backing token details, and usage e
 
 | Shorthand | Token Name | Actual Symbol (first 10 & last 4) | Mainnet Contract |
 |-----------|------------|-----------------------------------|------------------|
-| [$WETH](/tokens/weth/) | Wrapped Ether | `$0xC02aaA39...56Cc2` | [View on Etherscan](https://etherscan.io/address/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2) |
-| [$USDC](/tokens/usdc/) | USD Coin | `$0xA0b86991...eB48` | [View on Etherscan](https://etherscan.io/address/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48) |
-| [$USDT](/tokens/usdt/) | Tether USD | `$0xdAC17F95...1ec7` | [View on Etherscan](https://etherscan.io/address/0xdAC17F958D2ee523a2206206994597C13D831ec7) |
-| [$WBTC](/tokens/wbtc/) | Wrapped BTC | `$0x2260FAC5...2C599` | [View on Etherscan](https://etherscan.io/address/0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599) |
-| [$DAI](/tokens/dai/) | Dai Stablecoin | `$0x6B175474...cB4` | [View on Etherscan](https://etherscan.io/address/0x6B175474E89094C44Da98b954EedeAC495271d0F) |
+| [$WETH](/reference/anchored-units/weth/) | Wrapped Ether | `$0xC02aaA39...56Cc2` | [View on Etherscan](https://etherscan.io/address/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2) |
+| [$USDC](/reference/anchored-units/usdc/) | USD Coin | `$0xA0b86991...eB48` | [View on Etherscan](https://etherscan.io/address/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48) |
+| [$USDT](/reference/anchored-units/usdt/) | Tether USD | `$0xdAC17F95...1ec7` | [View on Etherscan](https://etherscan.io/address/0xdAC17F958D2ee523a2206206994597C13D831ec7) |
+| [$WBTC](/reference/anchored-units/wbtc/) | Wrapped BTC | `$0x2260FAC5...2C599` | [View on Etherscan](https://etherscan.io/address/0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599) |
+| [$DAI](/reference/anchored-units/dai/) | Dai Stablecoin | `$0x6B175474...cB4` | [View on Etherscan](https://etherscan.io/address/0x6B175474E89094C44Da98b954EedeAC495271d0F) |
 
 ## How to Read Documentation Examples
 
@@ -116,7 +117,8 @@ This allows you to reference anchored units before they're created.
 
 ## Related Documentation
 
-- [Anchored vs Symbolic Units](/concepts/units/#anchored-vs-symbolic)
+- [Floating Units](/reference/floating-units/) — Example unbacked units for testing
+- [Anchored vs Floating Units](/concepts/units/#anchored-vs-symbolic)
 - [Creating Anchored Units](/guides/creating-units/#anchored-units)
 - [Use Cases](/use-cases/) — Examples using these tokens
 - [Economics of "1"](/economics-of-one/) — How anchored collateral affects system value

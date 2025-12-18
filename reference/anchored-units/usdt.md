@@ -1,11 +1,11 @@
 ---
 title: $USDT
 description: Documentation shorthand for the USDT anchored unit
-parent: Token Reference
+parent: Anchored Units
 nav_order: 3
 
 # Metadata
-last_updated: 2024-12-11
+last_updated: 2024-12-18
 version: "0.1"
 ---
 
@@ -63,13 +63,13 @@ IUnit usdtUnit = one.anchored(usdt);
 
 Synthetic unit (not backed) that provides depeg hedge similar to `1/$USDC`.
 
-See [$USDC: Depeg Protection](/tokens/usdc/#reciprocal-unit-depeg-hedge) for mechanism details.
+See [$USDC: Depeg Protection](/reference/anchored-units/usdc/#reciprocal-unit-depeg-hedge) for mechanism details.
 
 ## Example Use Cases
 
 ### Stablecoin Arbitrage
 
-With both [$USDC](/tokens/usdc/) and `$USDT` anchored:
+With both [$USDC](/reference/anchored-units/usdc/) and `$USDT` anchored:
 
 **`$USDC/$USDT`** — USDC/USDT price ratio:
 - Should trade near 1.0 when both pegged
@@ -84,8 +84,8 @@ With both [$USDC](/tokens/usdc/) and `$USDT` anchored:
 
 ## Related Documentation
 
-- [Token Reference](/tokens/) — All common shorthands
-- [$USDC](/tokens/usdc/) — Similar stablecoin with detailed examples
+- [Token Reference](/reference/anchored-units/) — All common shorthands
+- [$USDC](/reference/anchored-units/usdc/) — Similar stablecoin with detailed examples
 - [Use Cases: Hedging](/use-cases/#hedging-with-reciprocals)
 
 ---
