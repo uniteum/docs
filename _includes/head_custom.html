@@ -2,6 +2,21 @@
 <link rel="icon" type="image/svg+xml" href="/assets/images/uniteum-one-icon.svg">
 <link rel="alternate icon" href="/assets/images/uniteum-one-icon.svg">
 
+<!-- Custom styling for site logo -->
+<style>
+  .site-title::before {
+    content: '';
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    background-image: url('/assets/images/uniteum-one-icon.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+    margin-right: 10px;
+  }
+</style>
+
 <!-- KaTeX for mathematical notation -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
