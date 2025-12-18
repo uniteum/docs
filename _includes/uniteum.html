@@ -1,0 +1,17 @@
+{%- comment -%}
+Returns the current Uniteum contract.
+
+Usage: {% include uniteum.html %}
+       {% include uniteum.html network="sepolia" section="writeContract" %}
+
+This automatically uses the current version defined in _data/contracts.yml
+{%- endcomment -%}
+
+{%- assign current_version = site.data.contracts.current.uniteum -%}
+{%- assign contract = site.data.contracts.uniteum[current_version] -%}
+
+{%- assign network = include.network | default: "mainnet" -%}
+{%- assign section = include.section | default: "code" -%}
+{%- assign text = include.text -%}
+
+{% include contract_link.html contract=contract network=network section=section text=text %}

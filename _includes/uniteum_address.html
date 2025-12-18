@@ -1,0 +1,19 @@
+{%- comment -%}
+Returns the current Uniteum contract address for the specified network.
+
+Usage: {{ site.data.contracts.uniteum.v0_3.mainnet }}  ❌ BAD (hardcoded version)
+       {% include uniteum_address.html %}               ✅ GOOD (mainnet, current)
+       {% include uniteum_address.html network="sepolia" %}  ✅ GOOD (sepolia, current)
+
+This automatically uses the current version defined in _data/contracts.yml
+{%- endcomment -%}
+
+{%- assign current_version = site.data.contracts.current.uniteum -%}
+{%- assign contract = site.data.contracts.uniteum[current_version] -%}
+{%- assign network = include.network | default: "mainnet" -%}
+
+{%- if network == "mainnet" -%}
+{{ contract.mainnet }}
+{%- elsif network == "sepolia" -%}
+{{ contract.sepolia }}
+{%- endif -%}

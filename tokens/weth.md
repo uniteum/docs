@@ -12,20 +12,20 @@ version: "0.1"
 # $WETH (Wrapped Ether)
 
 **Documentation Shorthand:** `$WETH`
-**Actual Symbol:** `$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
+**Actual Symbol:** `${{ site.data.contracts.tokens.weth.mainnet }}`
 
 ## What This Represents
 
-In Uniteum documentation, `$WETH` is a **readable shorthand** for an anchored unit backed by [Wrapped Ether (WETH)](https://etherscan.io/address/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2).
+In Uniteum documentation, `$WETH` is a **readable shorthand** for an anchored unit backed by {% include contract_link.html contract=site.data.contracts.tokens.weth text="Wrapped Ether (WETH)" %}.
 
 The actual Uniteum symbol uses the full WETH contract address:
 ```
-$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2
+${{ site.data.contracts.tokens.weth.mainnet }}
 ```
 
 ## Backing Token
 
-**WETH Contract:** [`0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`](https://etherscan.io/address/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2)
+**WETH Contract:** {% include contract_link.html contract=site.data.contracts.tokens.weth %}
 
 Wrapped Ether is ETH converted to an ERC-20 token for DeFi compatibility. 1 WETH = 1 ETH, redeemable 1:1.
 
@@ -40,11 +40,11 @@ Wrapped Ether is ETH converted to an ERC-20 token for DeFi compatibility. 1 WETH
 
 | Symbol | Type | Backing |
 |--------|------|---------|
-| `$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2` | Anchored unit | 1:1 WETH in contract |
+| `${{ site.data.contracts.tokens.weth.mainnet }}` | Anchored unit | 1:1 WETH in contract |
 | `WETH` (no $) | Symbolic unit | None (just a label) |
 | `$WETH` | Documentation shorthand | Refers to anchored version |
 
-**Critical:** Symbolic `WETH` ≠ Anchored `$0xC02a...56Cc2`
+**Critical:** Symbolic `WETH` ≠ Anchored `${{ site.data.contracts.tokens.weth.mainnet | slice: 0, 6 }}...{{ site.data.contracts.tokens.weth.mainnet | slice: -4, 4 }}`
 
 A symbolic unit with the label "WETH" has NO connection to real Wrapped Ether. Anyone can create it. It's worthless unless consensus gives it value.
 
@@ -52,20 +52,20 @@ A symbolic unit with the label "WETH" has NO connection to real Wrapped Ether. A
 
 ```solidity
 // Get the "1" token contract
-IUnit one = IUnit(0x9df9b0501e8f6c05623b5b519f9f18b598d9b253);
+IUnit one = IUnit({% include uniteum_address.html %});
 
 // Create anchored WETH unit
-IERC20 weth = IERC20(0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2);
+IERC20 weth = IERC20({{ site.data.contracts.tokens.weth.mainnet }});
 IUnit wethUnit = one.anchored(weth);
 
-// wethUnit.symbol() returns: "$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
+// wethUnit.symbol() returns: "${{ site.data.contracts.tokens.weth.mainnet }}"
 ```
 
 ## Reciprocal Unit
 
 Every anchored unit has a reciprocal:
 
-**`1/$WETH`** (shorthand) = `1/$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2` (actual)
+**`1/$WETH`** (shorthand) = `1/${{ site.data.contracts.tokens.weth.mainnet }}` (actual)
 
 This is a **synthetic unit** (NOT backed by WETH). Its price is the inverse of the WETH unit's price, enforced by the invariant.
 
@@ -140,4 +140,4 @@ See [Forging Guide](/guides/forging/) for detailed instructions.
 
 ---
 
-**Remember:** In your code, use the full address `$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`. The `$WETH` shorthand is for documentation readability only.
+**Remember:** In your code, use the full address `${{ site.data.contracts.tokens.weth.mainnet }}`. The `$WETH` shorthand is for documentation readability only.

@@ -1,0 +1,28 @@
+{%- comment -%}
+Inline contract reference for use in prose.
+
+Usage: {% include contract.html name="uniteum.v0_3" %}
+       {% include contract.html name="uniteum.v0_3" network="sepolia" section="writeContract" %}
+
+This is a shorthand that looks up the contract by path and creates a link.
+{%- endcomment -%}
+
+{%- assign parts = include.name | split: "." -%}
+{%- assign category = parts[0] -%}
+{%- assign version = parts[1] -%}
+
+{%- if category == "uniteum" -%}
+  {%- assign contract = site.data.contracts.uniteum[version] -%}
+{%- elsif category == "kiosk" -%}
+  {%- assign contract = site.data.contracts.kiosk[version] -%}
+{%- elsif category == "deployer" -%}
+  {%- assign contract = site.data.contracts.deployer[version] -%}
+{%- elsif category == "token" -%}
+  {%- assign contract = site.data.contracts.tokens[version] -%}
+{%- endif -%}
+
+{%- assign network = include.network | default: "mainnet" -%}
+{%- assign section = include.section | default: "code" -%}
+{%- assign text = include.text | default: contract.name -%}
+
+{% include contract_link.html contract=contract network=network section=section text=text %}

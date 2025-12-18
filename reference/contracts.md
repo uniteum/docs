@@ -14,8 +14,8 @@ categories:
   - development
 
 # Metadata
-last_updated: 2024-12-09
-version: "0.1"
+last_updated: 2024-12-17
+version: "0.3"
 status: draft
 ---
 
@@ -25,41 +25,37 @@ All Uniteum contracts are deployed using Nick's deterministic deployer, resultin
 
 ## Core Contracts
 
-### Uniteum 0.1 "1"
+{%- assign current_uniteum = site.data.contracts.uniteum[site.data.contracts.current.uniteum] %}
+{%- assign genesis_uniteum = site.data.contracts.uniteum.v0_0 %}
 
-The current version with full Uniteum functionality.
+### {{ current_uniteum.name }}
 
-| Network | Address |
-|---------|---------|
-| Mainnet | [`0x9df9b0501e8f6c05623b5b519f9f18b598d9b253`](https://etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#code) |
-| Sepolia | [`0x9df9b0501e8f6c05623b5b519f9f18b598d9b253`](https://sepolia.etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#code) |
+{{ current_uniteum.description }}
 
-- [Mainnet Etherscan](https://etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#code)
-- [Sepolia Etherscan](https://sepolia.etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#code)
+{% include contract_table.html contract=current_uniteum %}
 
-### Uniteum 0.0 "1" (Genesis)
+### {{ genesis_uniteum.name }}
 
-The genesis token—a simple ERC-20 holding the initial 1 billion supply.
+{{ genesis_uniteum.description }}
 
-| Network | Address |
-|---------|---------|
-| Mainnet | [`0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4`](https://etherscan.io/address/0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4#code) |
-| Sepolia | [`0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4`](https://sepolia.etherscan.io/address/0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4#code) |
+{% include contract_table.html contract=genesis_uniteum %}
 
-- [Mainnet Etherscan](https://etherscan.io/address/0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4#code)
-- [Sepolia Etherscan](https://sepolia.etherscan.io/address/0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4#code)
+## Kiosk Contracts
 
-### Discount Kiosk
+{%- assign current_kiosk = site.data.contracts.kiosk[site.data.contracts.current.kiosk] %}
+{%- assign genesis_kiosk = site.data.contracts.kiosk.v0_0 %}
 
-Sells genesis "1" tokens at a linear discount.
+### {{ current_kiosk.name }}
 
-| Network | Address |
-|---------|---------|
-| Mainnet | [`0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9`](https://etherscan.io/address/0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9#code) |
-| Sepolia | [`0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9`](https://sepolia.etherscan.io/address/0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9#code) |
+{{ current_kiosk.description }}
 
-- [Mainnet Etherscan](https://etherscan.io/address/0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9#code)
-- [Sepolia Etherscan](https://sepolia.etherscan.io/address/0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9#code)
+{% include contract_table.html contract=current_kiosk %}
+
+### {{ genesis_kiosk.name }}
+
+{{ genesis_kiosk.description }}
+
+{% include contract_table.html contract=genesis_kiosk %}
 
 ## Deployment
 
@@ -67,7 +63,7 @@ Sells genesis "1" tokens at a linear discount.
 
 Nick's deterministic deployment method ensures identical addresses across any EVM chain.
 
-**Deployer EOA:** [`0xff96a8c70dcc85a0cc4d690bfc02166a90e71004`](https://etherscan.io/address/0xff96a8c70dcc85a0cc4d690bfc02166a90e71004) (0.eoa.uniteum.eth)
+**Deployer EOA:** {% include contract_link.html contract=site.data.contracts.deployer.eoa text="0.eoa.uniteum.eth" %}
 
 ### Architecture
 

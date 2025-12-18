@@ -1,0 +1,17 @@
+{%- comment -%}
+Returns the current Kiosk contract.
+
+Usage: {% include kiosk.html %}
+       {% include kiosk.html network="sepolia" section="writeContract" %}
+
+This automatically uses the current version defined in _data/contracts.yml
+{%- endcomment -%}
+
+{%- assign current_version = site.data.contracts.current.kiosk -%}
+{%- assign contract = site.data.contracts.kiosk[current_version] -%}
+
+{%- assign network = include.network | default: "mainnet" -%}
+{%- assign section = include.section | default: "code" -%}
+{%- assign text = include.text -%}
+
+{% include contract_link.html contract=contract network=network section=section text=text %}

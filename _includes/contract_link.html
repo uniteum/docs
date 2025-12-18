@@ -1,0 +1,28 @@
+{%- comment -%}
+Usage: {% include contract_link.html contract=site.data.contracts.uniteum.v0_3 network="mainnet" section="code" %}
+
+Parameters:
+- contract (required): Contract object from _data/contracts.yml
+- network (optional): "mainnet" or "sepolia", defaults to "mainnet"
+- section (optional): Etherscan section anchor ("code", "writeContract", "readContract", "events"), defaults to "code"
+- text (optional): Link text, defaults to contract address
+{%- endcomment -%}
+
+{%- assign network = include.network | default: "mainnet" -%}
+{%- assign section = include.section | default: "code" -%}
+
+{%- if network == "mainnet" -%}
+  {%- assign explorer = "https://etherscan.io" -%}
+  {%- assign address = include.contract.mainnet -%}
+{%- elsif network == "sepolia" -%}
+  {%- assign explorer = "https://sepolia.etherscan.io" -%}
+  {%- assign address = include.contract.sepolia -%}
+{%- endif -%}
+
+{%- if include.text -%}
+  {%- assign link_text = include.text -%}
+{%- else -%}
+  {%- assign link_text = address -%}
+{%- endif -%}
+
+[`{{ link_text }}`]({{ explorer }}/address/{{ address }}#{{ section }})

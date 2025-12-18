@@ -1,21 +1,83 @@
 # Uniteum Contract Addresses
 # All contracts use deterministic deployment (same address on all networks)
 
-contracts:
-  - name: "Uniteum 0.0 '1'"
-    address: "0x8af6774Bec3b698a6dC873b117c4415367dEfea6"
-    version: "0.0"
-    ens: "0-0.uniteum.eth"
+# Current versions (update these pointers when releasing new versions)
+current:
+  uniteum: "v0_3"
+  kiosk: "v0_3"
 
-  - name: "Uniteum 0.3 '1'"
-    address: "0x210C655F8a51244bA7607726DeAdEB5866723D87"
+# Core Uniteum contracts
+uniteum:
+  v0_3:
+    name: "Uniteum 0.3 '1'"
     version: "0.3"
+    description: "Current version with full Uniteum functionality"
+    mainnet: "0x210C655F8a51244bA7607726DeAdEB5866723D87"
+    sepolia: "0x210C655F8a51244bA7607726DeAdEB5866723D87"
     ens: "0-3.uniteum.eth"
 
-  - name: "Buy Uniteum 0.0 '1'"
-    address: "0x64dB548312da6D88fB4016157e521d9f2f65AFFc"
+  v0_0:
+    name: "Uniteum 0.0 '1'"
+    version: "0.0"
+    description: "Genesis token—simple ERC-20 with initial 1 billion supply"
+    mainnet: "0x8af6774Bec3b698a6dC873b117c4415367dEfea6"
+    sepolia: "0x8af6774Bec3b698a6dC873b117c4415367dEfea6"
+    ens: "0-0.uniteum.eth"
+
+# Buy/Kiosk contracts
+kiosk:
+  v0_3:
+    name: "Buy Uniteum 0.3 '1'"
+    version: "0.3"
+    description: "Kiosk for purchasing Uniteum 0.3 tokens"
+    mainnet: "0xc675692d2EaF904C3A3414ABb0942282Bf82A7EC"
+    sepolia: "0xc675692d2EaF904C3A3414ABb0942282Bf82A7EC"
+    ens: "buy.0-3.uniteum.eth"
+
+  v0_0:
+    name: "Buy Uniteum 0.0 '1'"
+    version: "0.0"
+    description: "Kiosk for purchasing Uniteum 0.0 genesis tokens"
+    mainnet: "0x64dB548312da6D88fB4016157e521d9f2f65AFFc"
+    sepolia: "0x64dB548312da6D88fB4016157e521d9f2f65AFFc"
     ens: "buy.0-0.uniteum.eth"
 
-  - name: "Buy Uniteum 0.3 '1'"
-    address: "0xc675692d2EaF904C3A3414ABb0942282Bf82A7EC"
-    ens: "buy.0-3.uniteum.eth"
+# Deployer information
+deployer:
+  eoa:
+    name: "Main Deployer EOA"
+    mainnet: "0xff96a8c70dcc85a0cc4d690bfc02166a90e71004"
+    sepolia: "0xff96a8c70dcc85a0cc4d690bfc02166a90e71004"
+    ens: "0.eoa.uniteum.eth"
+
+# Common anchored tokens (for reference)
+tokens:
+  weth:
+    name: "Wrapped Ether"
+    symbol: "WETH"
+    mainnet: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
+    sepolia: "0x7b79995e5f793A07Bc00c21412e50Ecae098E7f9"
+
+  usdc:
+    name: "USD Coin"
+    symbol: "USDC"
+    mainnet: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+    sepolia: "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"
+
+  usdt:
+    name: "Tether USD"
+    symbol: "USDT"
+    mainnet: "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+    sepolia: "0xaA8E23Fb1079EA71e0a56F48a2aA51851D8433D0"
+
+  wbtc:
+    name: "Wrapped Bitcoin"
+    symbol: "WBTC"
+    mainnet: "0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599"
+    sepolia: "0x29f2D40B0605204364af54EC677bD022dA425d03"
+
+  dai:
+    name: "Dai Stablecoin"
+    symbol: "DAI"
+    mainnet: "0x6B175474E89094C44Da98b954EedeAC495271d0F"
+    sepolia: "0xFF34B3d4Aee8ddCd6F9AFFFB6Fe49bD371b8a357"

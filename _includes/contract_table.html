@@ -1,0 +1,16 @@
+{%- comment -%}
+Usage: {% include contract_table.html contract=site.data.contracts.uniteum.v0_3 %}
+
+Creates a two-column table with Mainnet and Sepolia addresses
+
+Parameters:
+- contract (required): Contract object from _data/contracts.yml
+- section (optional): Etherscan section anchor, defaults to "code"
+{%- endcomment -%}
+
+{%- assign section = include.section | default: "code" -%}
+
+| Network | Address |
+|---------|---------|
+| Mainnet | {% include contract_link.html contract=include.contract network="mainnet" section=section %} |
+| Sepolia | {% include contract_link.html contract=include.contract network="sepolia" section=section %} |
