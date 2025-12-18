@@ -6,7 +6,6 @@ nav_order: 5
 
 # Metadata
 last_updated: 2024-12-18
-version: "0.1"
 ---
 
 # $DAI (Dai Stablecoin)

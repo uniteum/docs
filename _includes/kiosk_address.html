@@ -1,0 +1,18 @@
+{%- comment -%}
+Returns the current Kiosk contract address for the specified network.
+
+Usage: {% include kiosk_address.html %}               ✅ GOOD (mainnet, current)
+       {% include kiosk_address.html network="sepolia" %}  ✅ GOOD (sepolia, current)
+
+This automatically uses the current version defined in _data/contracts.yml
+{%- endcomment -%}
+
+{%- assign current_version = site.data.contracts.current.kiosk -%}
+{%- assign contract = site.data.contracts.kiosk[current_version] -%}
+{%- assign network = include.network | default: "mainnet" -%}
+
+{%- if network == "mainnet" -%}
+{{ contract.mainnet }}
+{%- elsif network == "sepolia" -%}
+{{ contract.sepolia }}
+{%- endif -%}

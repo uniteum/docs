@@ -6,7 +6,6 @@ nav_order: 4
 
 # Metadata
 last_updated: 2024-12-18
-version: "0.1"
 ---
 
 # $WBTC (Wrapped Bitcoin)

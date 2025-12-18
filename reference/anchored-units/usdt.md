@@ -6,7 +6,6 @@ nav_order: 3
 
 # Metadata
 last_updated: 2024-12-18
-version: "0.1"
 ---
 
 # $USDT (Tether USD)

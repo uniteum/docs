@@ -1,0 +1,10 @@
+{%- comment -%}
+Returns the current Uniteum version number (e.g., "0.3").
+
+Usage: {% include uniteum_version.html %}
+
+This automatically uses the current version defined in _data/contracts.yml
+{%- endcomment -%}
+{%- assign current_version = site.data.contracts.current.uniteum -%}
+{%- assign contract = site.data.contracts.uniteum[current_version] -%}
+{{ contract.version }}

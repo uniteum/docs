@@ -8,13 +8,13 @@ Uniteum is an algebraic liquidity protocol on Ethereum where ERC-20 tokens have 
 
 ## Deployed Contracts
 
-| Contract | Mainnet | Sepolia |
-|----------|---------|---------|
-| Uniteum 0.1 "1" | [`0x9df9b0501e8f6c05623b5b519f9f18b598d9b253`](https://etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#code) | [`0x9df9b0501e8f6c05623b5b519f9f18b598d9b253`](https://sepolia.etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#code) |
-| Uniteum 0.0 "1" (genesis) | [`0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4`](https://etherscan.io/address/0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4#code) | [`0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4`](https://sepolia.etherscan.io/address/0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4#code) |
-| Discount Kiosk | [`0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9`](https://etherscan.io/address/0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9#code) | [`0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9`](https://sepolia.etherscan.io/address/0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9#code) |
+Current contract addresses are maintained in `_data/contracts.yml`. Key contracts:
 
-Deployment uses Nick's deterministic deployer (same addresses across networks).
+- **Current Uniteum "1"**: See `site.data.contracts.uniteum.v0_3` (0.3 as of December 2024)
+- **Genesis Uniteum "1"**: See `site.data.contracts.uniteum.v0_0` (original supply)
+- **Current Kiosk**: See `site.data.contracts.kiosk.v0_3`
+
+All contracts use Nick's deterministic deployer (same addresses across networks).
 
 ## ENS Structure
 
@@ -22,9 +22,10 @@ Owned by `0xd441...6401`:
 
 ```
 uniteum.eth
-├── 0-0.uniteum.eth → 0xC833...39E4 (genesis "1")
-│   └── buy.0-0.uniteum.eth → 0x5581...6dc9 (Discount Kiosk)
-├── 0-1.uniteum.eth → 0x9df9...b253 (Uniteum 0.1 "1")
+├── 0-0.uniteum.eth → Genesis "1" (see _data/contracts.yml)
+│   └── buy.0-0.uniteum.eth → Genesis Kiosk
+├── 0-3.uniteum.eth → Current "1" (see _data/contracts.yml)
+│   └── buy.0-3.uniteum.eth → Current Kiosk
 ├── eoa.uniteum.eth → 0x6056...496e
 │   ├── 0.eoa.uniteum.eth → 0xff96...1004 (main deployer)
 │   ├── 1.eoa.uniteum.eth → 0x215a...7003
@@ -41,7 +42,7 @@ uniteum.eth
 
 - Central liquidity token that mediates all base units
 - Total fixed supply: 1 billion tokens (minted in v0.0)
-- Can migrate from v0.0 → v0.1 via `migrate(amount)` (reversible via `unmigrate()`)
+- Can migrate from v0.0 → current version via `migrate(amount)` (reversible via `unmigrate()`)
 
 ### 2. Units & Reciprocals
 
@@ -114,8 +115,9 @@ With units A, B, A*B:
 - Set at deployment, provides supply ceiling
 
 **Name Prefix:**
-- All units are prefixed with "Uniteum 0.1 " in their ERC-20 name
-- Example: "Uniteum 0.1 meter"
+- All units are prefixed with version name (e.g., "Uniteum 0.3 ") in their ERC-20 name
+- Example: "Uniteum 0.3 meter"
+- Version prefix comes from contract deployment
 
 **Sign Convention for Forge:**
 - Positive `du`/`dv` values: mint units to caller
@@ -135,13 +137,13 @@ With units A, B, A*B:
 **UPSTREAM_ONE:**
 - Points to v0.0 "1" token for migration
 - Enables reversible migrate/unmigrate between versions
-- Immutable, set at v0.1 deployment
+- Immutable, set at contract deployment
 
 ## Project Status
 
 ### Current Phase
 
-- **Version:** 0.1 (experimental, unaudited)
+- **Version:** See `site.data.contracts.current.uniteum` (experimental, unaudited)
 - **Status:** Deployed, ready for launch/announcement
 - **Risk:** Novel mechanism, smart contract risk, no audit
 - **Goal:** Publish for experimentation and discovery of emergent properties
@@ -176,7 +178,7 @@ forge script <script>    # deployment scripts
    - 900M → Discount Kiosk (public sale)
    - 100M → Deployer Safe (reserve)
 2. **Kiosk:** Linear discount pricing (price ↓ as inventory → capacity)
-3. **Migration:** Users buy v0.0, migrate to v0.1 for full features
+3. **Migration:** Users buy v0.0, migrate to current version for full features
 
 ## Design Philosophy
 
@@ -309,7 +311,7 @@ Common anchored unit shorthands (all have dedicated reference pages):
 - **Anchored units:** Real backing, custodial, trust in contract
 - **Floating units:** No backing, trust in liquidity/mechanism
 - **Genesis "1" (v0.0):** Simple ERC-20, no Uniteum features, primordial supply
-- **Uniteum "1" (v0.1):** Full-featured, accepts migration from v0.0
+- **Current Uniteum "1":** Full-featured, accepts migration from v0.0
 
 ## When Writing Code or Docs
 

@@ -6,7 +6,6 @@ nav_order: 1
 
 # Metadata
 last_updated: 2024-12-18
-version: "0.1"
 ---
 
 # $WETH (Wrapped Ether)

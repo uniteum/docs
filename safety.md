@@ -24,7 +24,8 @@ Uniteum is experimental. Read this page before interacting with the protocol.
 
 ## Current Status
 
-**Version 0.3** has no known issues as of December 2024.
+{% assign current_version = site.data.contracts.uniteum[site.data.contracts.current.uniteum].version -%}
+**Version {{ current_version }}** has no known issues as of December 2024.
 
 All core functionality is operational. However, Uniteum remains experimental and unaudited. Smart contract risk persists even with no currently known bugs.
 
@@ -86,7 +87,9 @@ Uniteum is provided as-is. The creator makes no guarantees about:
 
 ## Recommendations
 
-1. **Use Sepolia testnet first:** All contracts are deployed at identical addresses on both Mainnet and Sepolia testnet, including [Uniteum 0.0 "1"](https://sepolia.etherscan.io/address/0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4#code) and the [Discount Kiosk](https://sepolia.etherscan.io/address/0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9#code). Test your operations with testnet ETH before risking real funds.
+{% assign genesis_uniteum = site.data.contracts.uniteum.v0_0 -%}
+{% assign genesis_kiosk = site.data.contracts.kiosk.v0_0 -%}
+1. **Use Sepolia testnet first:** All contracts are deployed at identical addresses on both Mainnet and Sepolia testnet, including [{{ genesis_uniteum.name }}](https://sepolia.etherscan.io/address/{{ genesis_uniteum.sepolia }}#code) and the [{{ genesis_kiosk.name }}](https://sepolia.etherscan.io/address/{{ genesis_kiosk.sepolia }}#code). Test your operations with testnet ETH before risking real funds.
 2. **Start small:** Experiment with amounts you can lose entirely
 3. **Verify contracts:** Check addresses against official sources
 4. **Understand before acting:** Read the [Concepts](/concepts/) section

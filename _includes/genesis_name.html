@@ -1,0 +1,9 @@
+{%- comment -%}
+Returns the genesis Uniteum contract full name (e.g., "Uniteum 0.0 '1'").
+
+Usage: {% include genesis_name.html %}
+
+This automatically uses v0_0 from _data/contracts.yml
+{%- endcomment -%}
+{%- assign contract = site.data.contracts.uniteum.v0_0 -%}
+{{ contract.name }}

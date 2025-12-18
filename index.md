@@ -74,11 +74,17 @@ Early "1" token holders may benefit if the [value hypothesis](/economics-of-one/
 
 ## Contracts
 
+{% assign current_uniteum = site.data.contracts.uniteum[site.data.contracts.current.uniteum] -%}
+{% assign genesis_uniteum = site.data.contracts.uniteum.v0_0 -%}
+{% assign current_kiosk = site.data.contracts.kiosk[site.data.contracts.current.kiosk] -%}
+{% assign genesis_kiosk = site.data.contracts.kiosk.v0_0 -%}
+
 | Contract | Mainnet | Sepolia |
 |----------|---------|---------|
-| Uniteum 0.3 "1" | [`0x9df9b0501e8f6c05623b5b519f9f18b598d9b253`](https://etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#code) | [`0x9df9b0501e8f6c05623b5b519f9f18b598d9b253`](https://sepolia.etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#code) |
-| Uniteum 0.0 "1" (genesis) | [`0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4`](https://etherscan.io/address/0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4#code) | [`0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4`](https://sepolia.etherscan.io/address/0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4#code) |
-| Discount Kiosk | [`0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9`](https://etherscan.io/address/0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9#code) | [`0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9`](https://sepolia.etherscan.io/address/0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9#code) |
+| {{ current_uniteum.name }} | [`{{ current_uniteum.mainnet }}`](https://etherscan.io/address/{{ current_uniteum.mainnet }}#code) | [`{{ current_uniteum.sepolia }}`](https://sepolia.etherscan.io/address/{{ current_uniteum.sepolia }}#code) |
+| {{ genesis_uniteum.name }} | [`{{ genesis_uniteum.mainnet }}`](https://etherscan.io/address/{{ genesis_uniteum.mainnet }}#code) | [`{{ genesis_uniteum.sepolia }}`](https://sepolia.etherscan.io/address/{{ genesis_uniteum.sepolia }}#code) |
+| {{ current_kiosk.name }} | [`{{ current_kiosk.mainnet }}`](https://etherscan.io/address/{{ current_kiosk.mainnet }}#code) | [`{{ current_kiosk.sepolia }}`](https://sepolia.etherscan.io/address/{{ current_kiosk.sepolia }}#code) |
+| {{ genesis_kiosk.name }} | [`{{ genesis_kiosk.mainnet }}`](https://etherscan.io/address/{{ genesis_kiosk.mainnet }}#code) | [`{{ genesis_kiosk.sepolia }}`](https://sepolia.etherscan.io/address/{{ genesis_kiosk.sepolia }}#code) |
 
 ---
 
