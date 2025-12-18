@@ -32,12 +32,27 @@ This page catalogs all symbolic example units used throughout the Uniteum docume
 
 ## Quick Reference
 
-{% assign base_count = site.data.example-units.base_units | size %}
-{% assign reciprocal_count = site.data.example-units.reciprocal_units | size %}
-{% assign compound_count = site.data.example-units.compound_units | size %}
-{% assign foo = site.data.example-units.base_units | where: "symbol", "foo" | first %}
-{% assign one_foo = site.data.example-units.reciprocal_units | where: "symbol", "1/foo" | first %}
-{% assign velocity = site.data.example-units.compound_units | where: "symbol", "meter/second" | first %}
+{% comment %} Categorize units from flat array {% endcomment %}
+{% assign all_units = site.data.example-units.units %}
+{% assign base_units = "" | split: "" %}
+{% assign reciprocal_units = "" | split: "" %}
+{% assign compound_units = "" | split: "" %}
+{% for unit in all_units %}
+  {% if unit.symbol contains "1/" %}
+    {% assign reciprocal_units = reciprocal_units | push: unit %}
+  {% elsif unit.symbol contains "*" or unit.symbol contains "/" or unit.symbol contains "^" %}
+    {% assign compound_units = compound_units | push: unit %}
+  {% else %}
+    {% assign base_units = base_units | push: unit %}
+  {% endif %}
+{% endfor %}
+
+{% assign base_count = base_units | size %}
+{% assign reciprocal_count = reciprocal_units | size %}
+{% assign compound_count = compound_units | size %}
+{% assign foo = base_units | where: "symbol", "foo" | first %}
+{% assign one_foo = reciprocal_units | where: "symbol", "1/foo" | first %}
+{% assign velocity = compound_units | where: "symbol", "meter/second" | first %}
 
 | Unit Type | Count | Example |
 |-----------|-------|---------|
@@ -47,19 +62,18 @@ This page catalogs all symbolic example units used throughout the Uniteum docume
 
 ## Base Units
 
-{% assign all_base = site.data.example-units.base_units %}
 {% assign generic = "" | split: "" %}
 {% assign physics = "" | split: "" %}
 {% assign gaming = "" | split: "" %}
 {% assign symbolic = "" | split: "" %}
-{% for unit in all_base %}
+{% for unit in base_units %}
   {% if unit.symbol == "foo" or unit.symbol == "bar" or unit.symbol == "baz" or unit.symbol == "acme" or unit.symbol == "widget" %}
     {% assign generic = generic | push: unit %}
   {% elsif unit.symbol == "meter" or unit.symbol == "second" or unit.symbol == "kilogram" or unit.symbol == "kg" %}
     {% assign physics = physics | push: unit %}
   {% elsif unit.symbol == "sword" or unit.symbol == "shield" %}
     {% assign gaming = gaming | push: unit %}
-  {% elsif unit.warning %}
+  {% elsif unit.symbol == "USD" or unit.symbol == "ETH" or unit.symbol == "BTC" or unit.symbol == "MSFT" %}
     {% assign symbolic = symbolic | push: unit %}
   {% endif %}
 {% endfor %}
@@ -104,19 +118,19 @@ This page catalogs all symbolic example units used throughout the Uniteum docume
 
 | Symbol | Address | Base Unit |
 |--------|---------|-----------|
-{% for unit in site.data.example-units.reciprocal_units -%}
-{% assign base_unit = site.data.example-units.base_units | where: "symbol", unit.base | first -%}
-| [`{{ unit.symbol }}`](https://etherscan.io/token/{{ unit.address }}) | `{{ unit.address }}` | [`{{ unit.base }}`](https://etherscan.io/token/{{ base_unit.address }}) |
+{% for unit in reciprocal_units -%}
+{% assign base_symbol = unit.symbol | replace: "1/", "" -%}
+{% assign base_unit = base_units | where: "symbol", base_symbol | first -%}
+| [`{{ unit.symbol }}`](https://etherscan.io/token/{{ unit.address }}) | `{{ unit.address }}` | [`{{ base_symbol }}`](https://etherscan.io/token/{{ base_unit.address }}) |
 {% endfor %}
 
 ## Compound Units
 
-{% assign all_compounds = site.data.example-units.compound_units %}
 {% assign products = "" | split: "" %}
 {% assign ratios = "" | split: "" %}
 {% assign complex = "" | split: "" %}
 {% assign powers = "" | split: "" %}
-{% for unit in all_compounds %}
+{% for unit in compound_units %}
   {% if unit.symbol == "kg*m/s^2" %}
     {% assign complex = complex | push: unit %}
   {% elsif unit.symbol contains "^" %}

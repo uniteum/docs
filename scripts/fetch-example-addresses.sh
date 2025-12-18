@@ -1,11 +1,22 @@
 #!/bin/bash
 # Fetch deterministic addresses for all example units used in documentation
-# Queries the deployed Uniteum 0.1 contract to predict CREATE2 addresses
+# Queries the deployed Uniteum contract to predict CREATE2 addresses
 
 set -e
 
-# Uniteum 0.1 "1" contract
-ONE="0x9df9b0501e8f6c05623b5b519f9f18b598d9b253"
+# Get contract address from .env (generated from _data/contracts.yml)
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ENV_FILE="$SCRIPT_DIR/.env"
+
+# Generate .env if it doesn't exist
+if [ ! -f "$ENV_FILE" ]; then
+    echo "Generating .env file..."
+    "$SCRIPT_DIR/generate-env.sh"
+fi
+
+# Source the .env file
+source "$ENV_FILE"
+
 RPC_URL="${RPC_URL:-https://eth.llamarpc.com}"
 
 echo "Fetching CREATE2 addresses for example units..."
