@@ -110,3 +110,37 @@ units:
 
   - symbol: "bar^1\\2"
     description: "Square root of bar"
+
+  # Anchored Units (backed 1:1 by external ERC-20 tokens)
+  # Format: $0xTokenAddress
+  # These are real-world backed units (custodial)
+  - symbol: "$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
+    description: "Anchored WETH (Wrapped Ether) - mainnet"
+
+  - symbol: "$0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+    description: "Anchored USDC (USD Coin) - mainnet"
+
+  - symbol: "$0xdAC17F958D2ee523a2206206994597C13D831ec7"
+    description: "Anchored USDT (Tether USD) - mainnet"
+
+  - symbol: "$0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599"
+    description: "Anchored WBTC (Wrapped Bitcoin) - mainnet"
+
+  - symbol: "$0x6B175474E89094C44Da98b954EedeAC495271d0F"
+    description: "Anchored DAI (Dai Stablecoin) - mainnet"
+
+  # Sepolia testnet anchored units
+  - symbol: "$0x7b79995e5f793A07Bc00c21412e50Ecae098E7f9"
+    description: "Anchored WETH (Wrapped Ether) - sepolia"
+
+  - symbol: "$0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"
+    description: "Anchored USDC (USD Coin) - sepolia"
+
+  - symbol: "$0xaA8E23Fb1079EA71e0a56F48a2aA51851D8433D0"
+    description: "Anchored USDT (Tether USD) - sepolia"
+
+  - symbol: "$0x29f2D40B0605204364af54EC677bD022dA425d03"
+    description: "Anchored WBTC (Wrapped Bitcoin) - sepolia"
+
+  - symbol: "$0xFF34B3d4Aee8ddCd6F9AFFFB6Fe49bD371b8a357"
+    description: "Anchored DAI (Dai Stablecoin) - sepolia"
