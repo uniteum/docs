@@ -29,7 +29,7 @@ This page explores three related hypotheses about "1" token economics. **These a
 
 **Central claim:** As anchored collateral and floating unit participation grow, the value of "1" will tend to reflect aggregate system value (anchored + floating).
 
-> **Notation:** We use [$WETH](/reference/anchored-units/weth/), [$USDC](/reference/anchored-units/usdc/), etc. as readable shorthands. These actually represent full address-based symbols. See [Token Reference](/reference/anchored-units/) for details.
+> **Notation:** We use [$WETH](/reference/anchored-units/weth/), [$USDC](/reference/anchored-units/usdc/), etc. as readable shorthands. These actually represent full address-based symbols. See [Anchored Units](/reference/anchored-units/) for details.
 
 ### The Intuition
 

@@ -140,7 +140,7 @@ To get USDC back:
 
 ## Related Documentation
 
-- [Token Reference](/reference/anchored-units/) — All common shorthands
+- [Anchored Units](/reference/anchored-units/) — All common shorthands
 - [Anchored Units Concept](/concepts/units/#anchored-units)
 - [Use Cases: Hedging](/use-cases/#hedging-with-reciprocals)
 - [Economics of "1"](/economics-of-one/) — How stablecoin collateral stabilizes "1"

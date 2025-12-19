@@ -131,7 +131,7 @@ See [Forging Guide](/guides/forging/) for detailed instructions.
 
 ## Related Documentation
 
-- [Token Reference](/reference/anchored-units/) — All common shorthands
+- [Anchored Units](/reference/anchored-units/) — All common shorthands
 - [Anchored Units Concept](/concepts/units/#anchored-units)
 - [Creating Anchored Units](/guides/creating-units/#anchored-units)
 - [Use Cases](/use-cases/) — What you can build

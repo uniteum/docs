@@ -82,7 +82,7 @@ With [$USDC](/reference/anchored-units/usdc/), [$USDT](/reference/anchored-units
 
 ## Related Documentation
 
-- [Token Reference](/reference/anchored-units/) — All common shorthands
+- [Anchored Units](/reference/anchored-units/) — All common shorthands
 - [$USDC](/reference/anchored-units/usdc/) — Centralized stablecoin comparison
 - [Use Cases: Hedging](/use-cases/#hedging-with-reciprocals)
 

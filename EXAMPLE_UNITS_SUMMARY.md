@@ -111,8 +111,8 @@ The [`meter/second`](https://etherscan.io/token/0xCbdc3D8ca6255CbbD1a49F19AE2816
 ### Anchored Unit Shorthands
 
 Continue using shorthands like `$WETH`, `$USDC` in documentation text, but:
-1. Link first occurrence to token reference pages
-2. Add callout at top: "We use [$WETH](/reference/anchored-units/weth/), [$USDC](/reference/anchored-units/usdc/), etc. as shorthands. See [Token Reference](/reference/anchored-units/)."
+1. Link first occurrence to anchored unit reference pages
+2. Add callout at top: "We use [$WETH](/reference/anchored-units/weth/), [$USDC](/reference/anchored-units/usdc/), etc. as shorthands. See [Anchored Units](/reference/anchored-units/)."
 3. In code examples, show real addresses
 
 ## Documentation Updates Needed

@@ -23,7 +23,7 @@ status: draft
 
 Uniteum enables novel financial primitives through algebraic composition of units. Here are the key value propositions and use cases.
 
-> **Notation:** For readability, we use [$WETH](/reference/anchored-units/weth/), [$USDC](/reference/anchored-units/usdc/), etc. in examples. Remember that anchored units actually use full contract addresses: `$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2` for WETH. Click any token link to see its actual symbol. See [Token Reference](/reference/anchored-units/) and [Anchored Units](#anchored-units) below.
+> **Notation:** For readability, we use [$WETH](/reference/anchored-units/weth/), [$USDC](/reference/anchored-units/usdc/), etc. in examples. Remember that anchored units actually use full contract addresses: `$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2` for WETH. Click any link to see its actual symbol. See [Anchored Units Reference](/reference/anchored-units/) and [Anchored Units](#anchored-units) below.
 
 ## Hedging with Reciprocals
 
@@ -303,7 +303,7 @@ Common anchored units (click for details):
 - [$WBTC](/reference/anchored-units/wbtc/) — `$0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599`
 - [$DAI](/reference/anchored-units/dai/) — `$0x6B175474E89094C44Da98b954EedeAC495271d0F`
 
-See [Token Reference](/reference/anchored-units/) for complete list and usage examples.
+See [Anchored Units Reference](/reference/anchored-units/) for complete list and usage examples.
 
 ### Anchored vs Floating
 

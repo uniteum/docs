@@ -108,7 +108,7 @@ See [Use Cases: Correlation Trading](/use-cases/#correlation-trading).
 
 ## Related Documentation
 
-- [Token Reference](/reference/anchored-units/) — All common shorthands
+- [Anchored Units](/reference/anchored-units/) — All common shorthands
 - [$WETH](/reference/anchored-units/weth/) — Ethereum counterpart
 - [Use Cases: Multi-Token Derivatives](/use-cases/#multi-token-derivatives)
 - [Economics of "1"](/economics-of-one/) — How BTC collateral affects system value
