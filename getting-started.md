@@ -62,7 +62,7 @@ The Kiosk uses linear discount pricing—price increases as inventory depletes t
 
 If you already have v0.0 "1" tokens or bought them directly from the genesis Discount Kiosk, you can manually migrate to the current version.
 
-**Why migrate?** Genesis "1" (v0.0) is a simple ERC-20 with a fixed 1 billion token supply. The current contract implements all the core Uniteum mechanisms: algebraic unit composition, forge operations, invariant enforcement, and reciprocal pairs. The v0.0 token exists only as the primordial supply source.
+**Why migrate?** Genesis "1" (v0.0) is a simple ERC-20 that holds the primordial 1 billion token supply (the ceiling for all versions). The current contract implements all the core Uniteum mechanisms: algebraic unit composition, forge operations, invariant enforcement, and reciprocal pairs. The v0.0 token exists only as the primordial supply source.
 
 {% assign current_uniteum = site.data.contracts.uniteum[site.data.contracts.current.uniteum] -%}
 **Current Uniteum Contract:** [`{{ current_uniteum.mainnet }}`](https://etherscan.io/address/{{ current_uniteum.mainnet }}#writeContract)
@@ -92,7 +92,7 @@ Now call the migration function to exchange your v0.0 tokens for current version
 4. Enter the `amount` to migrate (same format as approval—in wei)
 5. Execute the transaction
 
-**What happens:** Your v0.0 tokens are transferred to the current contract (held custodially), and you receive an equal amount of current version tokens. The total circulating supply of "1" across both versions remains constant.
+**What happens:** Your v0.0 tokens are transferred to the current contract (held custodially), and you receive an equal amount of current version tokens. The total circulating supply of "1" across both versions remains constant (and never exceeds the 1 billion ceiling).
 
 ### Reversing Migration
 

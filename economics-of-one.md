@@ -257,7 +257,15 @@ If diversification hypothesis holds:
 
 ### Supply Dynamics
 
-**Challenge:** Total "1" supply is fixed (1 billion), but forging can move "1" between contracts and circulation.
+**Challenge:** Total "1" supply across all versions is capped at 1 billion (primordial supply minted in v0.0), but this supply is distributed across versions and within each version, forging moves "1" between contracts and circulation.
+
+**Version distribution:**
+- v0.0 tokens can migrate to current version (and vice versa via unmigrate)
+- Current version supply grows only through migration from v0.0
+- Total circulating "1" across both versions ≤ 1 billion
+- Early in the lifecycle, most supply may remain in v0.0 until users migrate
+
+**Within-version dynamics:**
 
 Could "1" get drained from critical pools?
 - If users heavily forge one direction, "1" concentrates in certain contracts
@@ -270,7 +278,7 @@ Could "1" get drained from critical pools?
 
 **Challenge:** More units = "1" spread across more pools = less liquidity per pool?
 
-- 1 billion "1" divided among 1,000 units = 1M average per pool
+- Available "1" supply (which may be significantly less than 1 billion, especially early) divided among many units = potentially shallow liquidity per pool
 - Shallow liquidity = high slippage = less utility
 - Could fragmentation reduce "1" value?
 
@@ -508,8 +516,16 @@ The Kiosk's linear discount pricing means earlier buyers pay less (price increas
 
 **Query total supply:**
 ```solidity
-totalSupply()  // Should return 1 billion (1e9 × 1e18)
+totalSupply()  // Returns current version's supply (≤ ONE_MINTED ceiling)
 ```
+
+**Important supply mechanics:**
+- The primordial 1 billion "1" tokens were minted in v0.0 (genesis)
+- Current version tokens are created through migration from v0.0
+- Total "1" supply across **all versions** will always be ≤ 1 billion
+- Any particular version will have less than 1 billion until enough migration occurs
+- `totalSupply()` on the current contract shows only that version's supply
+- To see the complete picture, check both current and v0.0 contract supplies
 
 **Check unit distribution:**
 Enumerate all created units via `UnitCreate` events, query each for locked "1".

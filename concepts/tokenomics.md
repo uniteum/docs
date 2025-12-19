@@ -169,10 +169,17 @@ The "1" tokens aren't created or destroyed—they transfer. But foo and 1/foo ca
 
 ### The "1" Supply
 
-The total "1" supply is fixed at 1 billion (minted in v0.0). But this supply is distributed across:
+The primordial "1" supply of 1 billion was minted once in v0.0 (genesis). This is the ceiling—total "1" across all versions will never exceed this amount.
+
+The current version's "1" supply grows through migration from v0.0. At any given time:
+- Total supply across all versions ≤ 1 billion
+- Current version supply ≤ 1 billion (less until migration occurs)
+- v0.0 supply decreases as users migrate to current version
+
+Within each version, the supply is distributed across:
 - User wallets
 - Unit contracts (as locked liquidity)
-- The Discount Kiosk (unsold inventory)
+- The Discount Kiosk (unsold inventory for v0.0)
 
 When you forge a base unit, "1" moves between your wallet and the unit contract. The invariant determines how much.
 

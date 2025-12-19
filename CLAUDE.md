@@ -41,8 +41,10 @@ uniteum.eth
 ### 1. The "1" Token
 
 - Central liquidity token that mediates all base units
-- Total fixed supply: 1 billion tokens (minted in v0.0)
-- Can migrate from v0.0 → current version via `migrate(amount)` (reversible via `unmigrate()`)
+- Primordial supply: 1 billion tokens (minted once in v0.0, this is the ceiling)
+- Total "1" supply across all versions ≤ 1 billion
+- Current version supply grows through migration from v0.0 (reversible via `unmigrate()`)
+- Any particular version will have less than 1 billion until sufficient migration occurs
 
 ### 2. Units & Reciprocals
 
@@ -110,8 +112,9 @@ With units A, B, A*B:
 ### 7. Key Contract Implementation Details
 
 **ONE_MINTED Constant:**
-- Immutable value tracking total original "1" supply minted
-- Total "1" supply will never exceed this value
+- Immutable value tracking the primordial "1" supply ceiling (1 billion)
+- Total "1" supply across all versions will never exceed this value
+- For current version: acts as maximum possible supply (reached only if 100% migration from v0.0)
 - Set at deployment, provides supply ceiling
 
 **Name Prefix:**
@@ -174,11 +177,12 @@ forge script <script>    # deployment scripts
 
 ## Distribution Strategy
 
-1. **Genesis Supply:** 1B "1" tokens (v0.0)
+1. **Genesis Supply:** 1B "1" tokens minted once in v0.0 (primordial supply, this is the ceiling)
    - 900M → Discount Kiosk (public sale)
    - 100M → Deployer Safe (reserve)
 2. **Kiosk:** Linear discount pricing (price ↓ as inventory → capacity)
 3. **Migration:** Users buy v0.0, migrate to current version for full features
+4. **Supply across versions:** Total circulating "1" across all versions ≤ 1 billion. Current version supply grows only through migration from v0.0.
 
 ## Design Philosophy
 

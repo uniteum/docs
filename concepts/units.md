@@ -28,9 +28,10 @@ In Uniteum, every token is a **unit**—a dimensional type that composes algebra
 
 At the center is "1"—the dimensionless unit. It mediates all base units and serves as the liquidity backbone of the protocol.
 
-- **Total supply:** 1 billion (fixed, minted in v0.0)
+- **Primordial supply:** 1 billion (minted once in v0.0, this is the ceiling for all versions)
+- **Supply mechanics:** Current version supply grows through migration from v0.0; total across all versions ≤ 1 billion
 - **Role:** Mediates base unit / reciprocal pairs
-- **Versions:** v0.0 (genesis ERC-20), v0.1 (full Uniteum features)
+- **Versions:** v0.0 (genesis ERC-20, primordial supply), current version (full Uniteum features)
 
 ## Unit Types
 
