@@ -117,7 +117,7 @@ This allows you to reference anchored units before they're created.
 ## Related Documentation
 
 - [Floating Units](/reference/floating-units/) — Example unbacked units for testing
-- [Anchored vs Floating Units](/concepts/units/#anchored-vs-symbolic)
+- [Anchored vs Floating Units](/concepts/units/#floating-units)
 - [Creating Anchored Units](/guides/creating-units/#anchored-units)
 - [Use Cases](/use-cases/) — Examples using these tokens
 - [Economics of "1"](/economics-of-one/) — How anchored collateral affects system value

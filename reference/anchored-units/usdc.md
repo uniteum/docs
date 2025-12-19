@@ -44,7 +44,7 @@ USD Coin is a stablecoin pegged to the US Dollar, issued by Circle. Intended to 
 | `USD` (no $) | Floating unit | None (NOT US dollars!) |
 | `$USDC` | Documentation shorthand | Refers to anchored version |
 
-**Critical:** Symbolic `USDC` or `USD` ≠ Anchored `$0xA0b8...eB48` ≠ Real US Dollars
+**Critical:** Floating `USDC` or `USD` ≠ Anchored `$0xA0b8...eB48` ≠ Real US Dollars
 
 Anyone can create floating units with labels like "USDC" or "USD". They have NO connection to real stablecoins or US currency.
 

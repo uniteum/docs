@@ -27,7 +27,7 @@ This page explores three related hypotheses about "1" token economics. **These a
 
 ## Hypothesis 1: "1" as Aggregate Value Index
 
-**Central claim:** As anchored collateral and floating unit participation grow, the value of "1" will tend to reflect aggregate system value (anchored + symbolic).
+**Central claim:** As anchored collateral and floating unit participation grow, the value of "1" will tend to reflect aggregate system value (anchored + floating).
 
 > **Notation:** We use [$WETH](/reference/anchored-units/weth/), [$USDC](/reference/anchored-units/usdc/), etc. as readable shorthands. These actually represent full address-based symbols. See [Token Reference](/reference/anchored-units/) for details.
 
@@ -65,7 +65,7 @@ If "1" reflects proportional value: `$1M / 1.5M = $0.67 per "1"`
 
 This is crude (ignores floating units, compounds, circulation), but illustrates the mechanism: anchored collateral value distributed across locked "1" supply.
 
-### Symbolic Unit Participation
+### Floating Unit Participation
 
 Floating units (no backing, pure consensus) can also contribute value:
 
@@ -108,7 +108,7 @@ Hypothetical "1" behavior:
 
 > **Note:** For a detailed technical exploration of this mechanism, see [Anchored Unit Stability](/concepts/anchored-stability/).
 
-### The Asymmetry Between Anchored and Symbolic
+### The Asymmetry Between Anchored and Floating
 
 **Floating units** (`foo`, `bar`, etc.):
 - Both unit and reciprocal float freely
@@ -276,7 +276,7 @@ Could "1" get drained from critical pools?
 
 **Counter:** Network effects may dominate. More units = more forge paths = more utility = higher value, despite fragmentation.
 
-### Symbolic Unit Collapse Risk
+### Floating Unit Collapse Risk
 
 **Challenge:** If major floating units collapse to zero, does "1" suffer?
 
@@ -285,7 +285,7 @@ Could "1" get drained from critical pools?
 - Reduces effective "1" circulation
 - Could create temporary supply shock
 
-**Mitigant:** "1" can be recovered by forging with worthless floating units (essentially burning the symbolic, reclaiming "1").
+**Mitigant:** "1" can be recovered by forging with worthless floating units (essentially burning the floating units, reclaiming "1").
 
 ### External "1" Pricing
 
@@ -396,19 +396,19 @@ Sum across all units for total locked "1" supply.
 - "1" price stabilizes (stablecoins anchor one side)
 - "1" becomes useful as multi-asset numeraire
 
-### Scenario 3: Symbolic Unit Success
+### Scenario 3: Floating Unit Success
 
 **Setup:** A popular floating unit (`gaming_coin`) gains consensus value independent of crypto markets.
 
 **Prediction:**
-- "1" gains value from symbolic participation (not just anchored)
+- "1" gains value from floating participation (not just anchored)
 - "1" correlation with external crypto further reduced
 - Demonstrates value beyond just collateral backing
 - May exhibit unique price dynamics
 
 ### Scenario 4: Ecosystem Maturity
 
-**Setup:** 100+ units (50 anchored, 50 symbolic, many compounds), $10M+ TVL, daily trading activity.
+**Setup:** 100+ units (50 anchored, 50 floating, many compounds), $10M+ TVL, daily trading activity.
 
 **Prediction:**
 - "1" behaves like diversified crypto index
@@ -476,7 +476,7 @@ These hypotheses raise questions that can only be answered through observation:
 3. **Correlation Structure:** What's the actual correlation matrix of anchored units?
 4. **Optimal "1" Distribution:** Is there an ideal Gini coefficient for "1" across pools?
 5. **Fragmentation Threshold:** At what unit count does fragmentation harm outweigh network effects?
-6. **Symbolic Value Ceiling:** Can floating units contribute substantial value, or only anchored matter?
+6. **Floating Value Ceiling:** Can floating units contribute substantial value, or only anchored matter?
 7. **Price Discovery Path:** How does "1"/USD price initially form? Via which markets/pairs?
 8. **Stability vs Growth:** Does diversification create stability at the cost of growth potential?
 
@@ -518,7 +518,7 @@ Enumerate all created units via `UnitCreate` events, query each for locked "1".
 
 ## Summary
 
-**Hypothesis 1:** "1" value may reflect aggregate system value (anchored collateral + symbolic participation) as ecosystem grows.
+**Hypothesis 1:** "1" value may reflect aggregate system value (anchored collateral + floating participation) as ecosystem grows.
 
 **Hypothesis 2:** Anchored units create stabilizing reactance through asymmetric arbitrage, dampening "1" volatility.
 

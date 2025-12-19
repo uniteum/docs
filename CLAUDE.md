@@ -362,7 +362,7 @@ This is a quick reference. See IUnit.sol for complete signatures and documentati
 - `invariant(uint256 u, uint256 v)` - Calculate w from supplies
 - `invariant(IUnit V)` - Get invariant for compound unit pair
 - `reciprocal()` - Get reciprocal unit address
-- `anchor()` - Get backing token for anchored units (returns zero address for symbolic)
+- `anchor()` - Get backing token for anchored units (returns zero address for floating)
 - `anchoredPredict(IERC20 token)` - Predict anchored unit address
 - `anchoredSymbol(IERC20 token)` - Get symbol format for anchored unit
 
