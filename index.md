@@ -40,7 +40,7 @@ Uniteum:
 - **Infinite interconnected pools** through algebraic composition
 - **Arbitrary power perps**: Generalizes beyond Uniswap's 0.5 power perps—create any convexity profile (0.5x, 1x, 2x, custom rational exponents)
 - **No oracles**—prices emerge from forge operations and arbitrage
-- **No collateral requirements** for floating units
+- **Permissionless liquidity creation**—anyone can create units and provide "1" token liquidity
 
 ## Why This Matters
 
