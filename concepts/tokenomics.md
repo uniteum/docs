@@ -30,40 +30,44 @@ Throughout this page, we use lowercase letters for **circulating supplies**:
 
 | Symbol | Meaning |
 |--------|---------|
-| u | Supply of the first token in a triad |
-| v | Supply of the second token in a triad |
-| w | Supply of the mediating token |
+| u | Supply of the first reserve unit in a triad |
+| v | Supply of the second reserve unit in a triad |
+| w | Supply of the liquidity unit |
 
-These are positional. In the triad (meter, 1/second, meter/second):
-- u = supply of `meter`
-- v = supply of `1/second`
-- w = supply of `meter/second`
+Every triad has the form (U, V, √(U*V)) where √(U*V) is the liquidity unit. In the triad (meter², 1/second², meter/second):
+- u = supply of `meter²` (reserve unit)
+- v = supply of `1/second²` (reserve unit)
+- w = supply of `meter/second` (liquidity unit)
 
 ## The Invariant
 
 All triads obey:
 
-$$u \cdot v = w^2$$
+$$\sqrt{u \cdot v} = w$$
 
-The product of the two operand supplies equals the square of the mediator supply.
+Or equivalently: $$u \cdot v = w^2$$
 
-If you're familiar with constant-product AMMs like Uniswap, this should look familiar. The difference: in Uniswap, *k* is an arbitrary constant set at pool creation. In Uniteum, **k = w²**—the mediator's supply determines the liquidity depth.
+The liquidity unit supply is the geometric mean of the two reserve unit supplies.
+
+If you're familiar with constant-product AMMs like Uniswap, this should look familiar. The difference: in Uniswap, *k* is an arbitrary constant set at pool creation. In Uniteum, **k = w²**—the liquidity unit's supply determines the liquidity depth.
 
 ### What This Means Geometrically
 
-The mediator supply *w* is the **geometric mean** of *u* and *v*:
+The liquidity unit supply *w* is the **geometric mean** of *u* and *v*:
 
 $$w = \sqrt{u \cdot v}$$
 
-This creates a symmetric relationship. Neither operand is privileged; they jointly determine the mediator.
+This creates a symmetric relationship between the reserve units. Neither reserve is privileged; they jointly determine the liquidity unit supply.
+
+This geometric mean structure implements 0.5 power perpetuals, connecting Uniteum to the theoretical framework of constant product AMMs.
 
 ## Forge Mechanics
 
 Forging transforms tokens while preserving the invariant. There are two directions:
 
-### Forward Forge: Consume Operands, Mint Mediator
+### Forward Forge: Consume Reserves, Mint Liquidity
 
-You provide some amount of U and V; you receive W.
+You provide some amount of reserve units U and V; you receive liquidity unit W.
 
 Before: u₀, v₀, w₀ (where u₀ · v₀ = w₀²)
 
@@ -81,7 +85,7 @@ $$w_1 = \sqrt{(u_0 + \Delta u)(v_0 + \Delta v)}$$
 
 You receive w₁ - w₀ of the mediator token.
 
-### Reverse Forge: Burn Mediator, Receive Operands
+### Reverse Forge: Burn Liquidity, Receive Reserves
 
 You provide W; you receive U and V.
 

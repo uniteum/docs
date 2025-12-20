@@ -35,8 +35,10 @@ Prices aren't set by oracles. They emerge from a single operation—**forge**—
 Traditional AMMs: isolated pools, oracle-dependent synthetics, external price feeds.
 
 Uniteum:
-- **One invariant** governs all operations: `u · v = w²`
+- **Geometric mean triads**: Every forge operates on (U, V, √(U*V)) where liquidity units mediate reserve units
+- **One invariant** governs all operations: `√(u · v) = w`
 - **Infinite interconnected pools** through algebraic composition
+- **0.5 power perps**: Implements the theoretical framework of constant product AMMs
 - **No oracles**—prices emerge from forge operations and arbitrage
 - **No collateral requirements** for floating units
 

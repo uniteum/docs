@@ -2,7 +2,7 @@
 title: Forge
 description: >-
   The single operation that powers all of Uniteum:
-  creating, destroying, and swapping tokens.
+  creating, destroying, and swapping tokens through geometric mean triads.
 
 # Navigation
 nav_order: 2
@@ -15,8 +15,8 @@ categories:
   - trading
 
 # Metadata
-last_updated: 2024-12-09
-version: "0.1"
+last_updated: 2024-12-20
+version: "0.2"
 status: draft
 ---
 
@@ -25,35 +25,41 @@ status: draft
 {: .note }
 > For valid triad patterns and multi-path trading, see [Triads](/concepts/triads/). For the mathematics, see [Tokenomics](/concepts/tokenomics/).
 
-Forge is the universal operation in Uniteum. Every swap, every mint, every burn—all are forge operations.
+Forge is the universal operation in Uniteum. Every swap, every mint, every burn—all are forge operations on triads with geometric mean structure.
 
 ## What Forge Does
 
-Forge transforms tokens within a valid triad while preserving the invariant:
+Forge transforms tokens within a valid triad (U, V, √(U*V)) while preserving the invariant:
 
-$$u \cdot v = w^2$$
+$$\sqrt{u \cdot v} = w$$
 
-You provide some combination of the three tokens; forge adjusts all supplies to maintain the invariant and returns the difference.
+Or equivalently: $$u \cdot v = w^2$$
+
+Where:
+- **u, v** = supplies of the two **reserve units**
+- **w** = supply of the **liquidity unit** (the geometric mean √(U*V))
+
+You provide some combination of the three tokens; forge adjusts all supplies to maintain the invariant.
 
 ## Two Directions
 
-### Forward: Operands → Mediator
+### Forward: Reserves → Liquidity
 
-Provide U and V, receive W.
+Provide reserve units U and V, receive liquidity unit W.
 
 Example with triad (foo, 1/foo, 1):
-- You provide foo and 1/foo
-- You receive "1"
+- You provide foo and 1/foo (the reserves)
+- You receive "1" (the liquidity unit)
 - Supplies of foo and 1/foo increase
 - "1" transfers from contract to you
 
-### Reverse: Mediator → Operands
+### Reverse: Liquidity → Reserves
 
-Provide W, receive U and V.
+Provide liquidity unit W, receive reserve units U and V.
 
 Example:
-- You provide "1"
-- You receive foo and 1/foo
+- You provide "1" (the liquidity unit)
+- You receive foo and 1/foo (the reserves)
 - "1" transfers to contract
 - Supplies of foo and 1/foo decrease
 
@@ -64,9 +70,9 @@ Want to swap foo for 1/foo?
 1. Forge forward: provide foo + some 1/foo → receive "1"
 2. Forge reverse: provide "1" → receive foo + 1/foo (different ratio)
 
-Net effect: you've traded foo for 1/foo, passing through "1".
+Net effect: you've traded foo for 1/foo, passing through the "1" liquidity unit.
 
-But with triads like (foo, bar, foo*bar), you can swap more directly. See [Triads](/concepts/triads/).
+With compound unit triads like (meter², 1/second², meter/second), you can create more complex exposures. See [Triads](/concepts/triads/).
 
 ## Price Impact
 
