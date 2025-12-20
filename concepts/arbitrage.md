@@ -2,7 +2,7 @@
 title: Arbitrage
 description: >-
   How price consistency emerges from arbitrage across
-  the mesh of interconnected triads.
+  the mesh of geometric mean triads.
 
 # Navigation
 nav_order: 5
@@ -15,39 +15,40 @@ categories:
   - trading
 
 # Metadata
-last_updated: 2024-12-09
-version: "0.1"
+last_updated: 2024-12-20
+version: "0.2"
 status: draft
 ---
 
 # Arbitrage
 
-Uniteum has no price oracles. Instead, price consistency emerges from arbitrage across interconnected triads.
+Uniteum has no price oracles. Instead, price consistency emerges from arbitrage across interconnected geometric mean triads.
 
-## The Mesh
+## The Mesh Topology
 
-Every unit participates in multiple triads:
+Every unit participates in multiple triads with different roles:
 
-- Base unit `foo` is in (foo, 1/foo, 1)
-- It might also be in (foo, bar, foo*bar)
-- And (foo, 1/baz, foo/baz)
+**Example: `meter/second`**
+- **As liquidity unit**: In (meter², 1/second², meter/second)
+- **As reserve unit**: Could appear in other triads like (meter²/second², kg², kg*meter/second)
+- **In reciprocal triad**: (meter/second, second/meter, 1)
 
-These triads share tokens. When one triad's price diverges from another's implied price, arbitrage opportunities appear.
+These triads share units. When price relationships diverge across triads, arbitrage opportunities appear.
 
 ## Arbitrage Mechanics
 
-**Scenario:** `meter/second` is mispriced.
+**Scenario:** `meter/second` price is inconsistent across paths.
 
-The compound `meter/second` participates in two triads:
-1. (meter, 1/second, meter/second) — its formation triad
-2. (meter/second, second/meter, 1) — its reciprocal triad
+The unit `meter/second` appears in multiple triads:
+1. (meter², 1/second², meter/second) — creation triad where it's the liquidity unit
+2. (meter/second, second/meter, 1) — reciprocal triad where it's a reserve unit
 
-If the price in triad 1 implies a different value than triad 2 (via "1"), an arbitrageur can:
-1. Forge in one triad to acquire tokens
-2. Forge in the other to convert at a better rate
+If the implied price of meter/second differs across these paths, an arbitrageur can:
+1. Forge in one triad to acquire meter/second at one effective price
+2. Forge in another triad to sell at a different price
 3. Pocket the difference
 
-This profit-seeking closes the gap. Prices converge.
+This profit-seeking closes the gap. Prices converge through geometric mean relationships.
 
 ## Price Consistency Emerges
 

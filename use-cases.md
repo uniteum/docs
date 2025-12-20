@@ -207,15 +207,16 @@ Traditional AMMs: Choose specific pools (ETH/USDC, WBTC/ETH, etc.)
 
 Uniteum: **Forging any unit pair IS market making**
 
-- One operation (`forge`) provides liquidity
-- "1" tokens are the universal mediator
+- One operation (`forge`) provides liquidity through geometric mean triads
+- "1" tokens are the universal liquidity unit for reciprocal pairs
 - Liquidity provision across infinite interconnected pools
+- Units serve different roles (reserve or liquidity) in different triads
 
 ### Composable Returns
 
 Provide liquidity to base units (meter, second):
-- Indirectly creates liquidity for compounds (meter/second, meter²)
-- Network effects amplify positions
+- Indirectly creates liquidity for compounds (meter/second via (meter², 1/second², meter/second), meter² via other triads)
+- Network effects amplify positions through multi-role composition
 - Earn on entire algebraic mesh
 
 ### Fee Opportunities
