@@ -4,7 +4,7 @@
 
 Uniteum is an algebraic liquidity protocol on Ethereum where ERC-20 tokens have dimensional units (like physical quantities: m/s, kg*m, etc.) or floating units (USD, BTC, foo). Units compose algebraically, and price consistency is maintained through arbitrage-enforced forge operations rather than oracles.
 
-**Key Innovation:** Multi-dimensional constant-product AMM where algebraic relationships create liquidity pools. Forge operations work on any valid triad (not just U/1/U but also A/B/A*B), creating mesh topology of arbitrage paths.
+**Key Innovation:** Multi-dimensional constant-product AMM where algebraic relationships create liquidity pools. Forge operations work on triads (U, V, √(U*V)) where the liquidity unit is the geometric mean of two reserve units, creating a mesh topology of arbitrage paths.
 
 ## Deployed Contracts
 
@@ -29,35 +29,53 @@ See [reference/ens.md](/reference/ens/) for the complete ENS naming hierarchy. K
 
 ### 1. The "1" Token
 
-- Central liquidity token that mediates all base units
+- Universal liquidity unit for all reciprocal pairs (U, 1/U, 1)
+- Can ONLY occupy the liquidity unit position in triads, never a reserve position
 - Primordial supply: 1 billion tokens (minted once in v0.0, this is the ceiling for all versions)
 - Current version supply grows through migration from v0.0 (reversible)
+- Special property: √(U * 1/U) = 1 for any unit U
 
 See [concepts/units.md](/concepts/units/) for complete "1" token mechanics and [economics-of-one.md](/economics-of-one/) for value hypotheses.
 
 ### 2. Units & Reciprocals
 
 - Every unit `U` has reciprocal `1/U`
-- Invariant: `u · v = w²` where u, v are operand supplies and w is mediating token supply
-- For base units: w = "1" supply; for compounds: w = product unit supply
+- Invariant: `√(u · v) = w` where u, v are reserve unit supplies and w is liquidity unit supply
+- Equivalently: `u · v = w²`
+- For reciprocal pairs (U, 1/U): "1" serves as the liquidity unit, so √(u · v) = 1's supply
+- For compound units: the geometric mean unit serves as the liquidity unit
 
 See [concepts/tokenomics.md](/concepts/tokenomics/) for complete invariant mathematics and derivations.
 
 ### 3. Forge Operation (CRITICAL)
 
-**NOT just (U, 1/U, 1) triads!**
+**Forge Triad Structure:**
 
-Forge works on ANY algebraically valid triad:
-- `(meter, 1/second, meter/second)` — no "1" involved
-- `(A, B, A*B)` — direct compound unit creation
-- `(U, 1/U, 1)` — traditional reciprocal pair
+Every forge operation works on a triad of three units: two **reserve units** and one **liquidity unit**. The liquidity unit is always the geometric mean of the two reserve units.
+
+**Triad format:** `(U, V, √(U*V))` where:
+- U and V are the **reserve units** (what you're exchanging)
+- √(U*V) is the **liquidity unit** (mediates the exchange, analogous to Uniswap LP tokens)
+
+**Examples of valid triads:**
+- `(U, 1/U, 1)` — reciprocal pair with "1" as liquidity unit (since √(U * 1/U) = 1)
+- `(meter², 1/second², meter/second)` — creates meter/second as liquidity unit (since √(meter² * 1/second²) = meter/second)
+- `(foo², bar², foo*bar)` — creates foo*bar as liquidity unit (since √(foo² * bar²) = foo*bar)
+
+**Critical constraint:** "1" can ONLY occupy the liquidity unit position, never a reserve position.
+
+**Connection to Power Perps:**
+
+This geometric mean structure implements 0.5 power perpetuals (see [Paradigm research](https://www.paradigm.xyz/2024/03/everything-is-a-perp)). Just as Uniswap LP positions have value `V = 2√(k*price)`, Uniteum's liquidity units track the square root relationship of their reserves.
 
 **This is the price control mechanism:**
-- To increase U's price: burn U, mint 1/U (consumes 1)
-- To decrease U's price: mint U, burn 1/U (generates 1)
-- For compounds: `price(A*B) = price(A) × price(B)` enforced by arbitrage
+- To increase U's price: burn U, mint 1/U (consumes "1")
+- To decrease U's price: mint U, burn 1/U (generates "1")
+- For compound units: `price(A^p*B^q)` enforced by arbitrage across triads
 
-Invariant enforcement: `sqrt(a * b) = ab` where lowercase = supplies
+**Invariant enforcement:** `√(u * v) = w` where:
+- u, v are reserve unit supplies
+- w is liquidity unit supply
 
 **Price Formula:**
 - `price(U) = v/u` where v = 1/U supply, u = U supply (see [concepts/tokenomics.md](/concepts/tokenomics/) for derivation)
@@ -83,18 +101,41 @@ Invariant enforcement: `sqrt(a * b) = ab` where lowercase = supplies
 
 ### 5. Compound Units
 
-- Created by algebraic composition: `meter*second`, `ETH/USD`, `foo^2\3` (rational exponents)
+**Creation through Geometric Mean Forging:**
+
+Compound units are created by forging triads where the compound unit serves as the liquidity unit. To create any compound unit `A^p*B^q`, you forge the triad where it appears as the geometric mean of the reserves.
+
+**Pattern:** To create `A^p*B^q`, forge `(A^(2p), B^(2q), A^p*B^q)`
+
+**Examples:**
+- Create `meter*second`: forge `(meter², second², meter*second)` since √(meter² * second²) = meter*second
+- Create `meter/second`: forge `(meter², 1/second², meter/second)` since √(meter² * 1/second²) = meter/second
+- Create `foo^(2/3)`: forge `(foo^(4/3), 1, foo^(2/3))` since √(foo^(4/3) * 1) = foo^(2/3)
+
+**Algebraic notation:**
 - Operators: `*` (multiply), `/` (divide), `^` (power), `\` (divide in exponent)
-- Example: `kg*m/s^2` = force unit
+- Example: `kg*m/s^2` = force unit, `foo^2\3` = foo^(2/3)
 - Address deterministically predicted via CREATE2 from symbol hash
 
 ### 6. Multi-Dimensional Arbitrage
 
-With units A, B, A*B:
-- Can forge: A + B → A*B (direct, no "1")
-- Can forge: A → 1 → 1/B → A/B (indirect via "1")
-- Multiple paths create arbitrage mesh
-- Price consistency emerges from profit-seeking
+**Arbitrage Paths through Geometric Mean Triads:**
+
+The geometric mean structure creates multiple interconnected paths for achieving the same outcome, enabling arbitrage to enforce price consistency.
+
+**Example: Creating exposure to A/B**
+
+Multiple valid triads can involve the same units in different roles:
+- **Direct path:** Forge `(A², 1/B², A/B)` — A/B serves as liquidity unit
+- **Indirect path:** Forge `(A, 1/A, 1)` to exchange A for "1", then forge `(B, 1/B, 1)` to exchange "1" for 1/B
+- **Compound path:** Create intermediate units and chain multiple forges
+
+**Price Consistency through Arbitrage:**
+
+Since the same unit can serve as a reserve in one triad and a liquidity unit in another, arbitrageurs will exploit any price inconsistencies across these paths. This creates a self-balancing mesh topology where:
+- Liquidity flows through geometric mean relationships
+- No oracles needed—prices emerge from invariant enforcement
+- Multi-hop arbitrage paths keep all units aligned
 
 ### 7. Key Contract Implementation Details
 
@@ -128,6 +169,41 @@ With units A, B, A*B:
 - Points to v0.0 "1" token for migration
 - Enables reversible migrate/unmigrate between versions
 - Immutable, set at contract deployment
+
+### 8. Terminology: Reserve Units and Liquidity Units
+
+**Understanding Triad Positions:**
+
+Every forge operation involves three units in specific roles:
+
+**Reserve Units (U and V):**
+- The two units being exchanged in a forge operation
+- Called "reserve units" by analogy to AMM reserves (the x and y in x*y=k)
+- Can be any valid units EXCEPT "1" (see constraint below)
+- In function calls: one is `this` (the calling contract), the other is parameter `V`
+
+**Liquidity Unit (√(U*V)):**
+- The geometric mean of the two reserve units
+- Mediates the exchange between reserve units (analogous to Uniswap LP tokens)
+- Its supply follows the invariant: `√(u * v) = w` where u, v are reserve supplies, w is liquidity supply
+- Can be "1" for reciprocal pairs, or any compound unit like `meter/second`
+
+**Critical Constraint:**
+- "1" can ONLY occupy the liquidity unit position
+- "1" can NEVER be a reserve unit
+- Other units can occupy ANY position depending on the triad
+
+**Example:**
+In triad `(meter², 1/second², meter/second)`:
+- Reserve units: meter² and 1/second²
+- Liquidity unit: meter/second (since √(meter² * 1/second²) = meter/second)
+
+**Multi-Role Composition:**
+The same unit can serve different roles in different triads:
+- `meter/second` is a liquidity unit in `(meter², 1/second², meter/second)`
+- `meter/second` could be a reserve unit in `(meter²/second², kg², kg*meter/second)`
+
+This multi-role capability creates the interconnected mesh topology of liquidity.
 
 ## Project Status
 
@@ -185,10 +261,12 @@ See [getting-started.md](/getting-started/) for complete acquisition and migrati
 Traditional AMM: `x * y = k` (one pool, two tokens, isolated)
 
 Uniteum:
-- `sqrt(u * v) = w` for every unit pair
-- `sqrt(a * b) = ab` for compound units
-- Infinite interconnected pools
+- `√(u * v) = w` for every forge triad (two reserves, one liquidity unit)
+- Liquidity units are geometric means: √(U*V) mediates U and V
+- Units can serve as reserves in one triad, liquidity in another
+- Infinite interconnected pools through multi-role composition
 - One operation (forge) handles all swaps, minting, burning
+- Implements 0.5 power perps structure (see Paradigm research)
 - No oracles, no collateral requirements for synthetics
 
 ## Documentation Approach
@@ -227,10 +305,13 @@ uniteum.one/
 - Lead with concrete examples before theory
 - Include Etherscan transaction links for everything
 - Distinguish clearly between anchored and floating units
-- Explain forge triads beyond just (U, 1/U, 1)
+- **Explain geometric mean triads:** All forges use `(U, V, √(U*V))` structure
+- **Emphasize liquidity unit role:** Units serve different roles in different triads
+- **Show the "1" constraint:** "1" only in liquidity position, never as reserve
 - Use dimensional analysis analogies (physics helps intuition)
 - Link related concepts bidirectionally
 - Provide "try it yourself" steps
+- Reference power perp connection for theoretical grounding
 
 **Anchored Unit Notation Convention:**
 
@@ -290,10 +371,12 @@ Common anchored unit shorthands (all have dedicated reference pages):
 ### What Users Often Misunderstand
 
 1. **Floating ≠ synthetic:** `USD` symbol doesn't track real USD price
-2. **Forge beyond reciprocals:** Can forge any valid triad, not just (U, 1/U, 1)
-3. **Price control mechanism:** Forging IS how you influence prices
-4. **No collateral needed:** For floating units, just liquidity through forging
-5. **Compound units:** Their prices are arbitrage-enforced, not set by oracles
+2. **Geometric mean triads:** All forges use `(U, V, √(U*V))` structure—the liquidity unit is always the geometric mean
+3. **Liquidity units vs reserves:** Same unit can be a reserve in one triad, liquidity unit in another
+4. **The "1" constraint:** "1" can ONLY be a liquidity unit, never a reserve
+5. **Creating compounds:** To create `A*B`, forge `(A², B², A*B)` where A*B is the liquidity unit
+6. **Price control mechanism:** Forging IS how you influence prices
+7. **No collateral needed:** For floating units, just liquidity through forging
 
 ### Critical Distinctions
 
@@ -317,13 +400,17 @@ Common anchored unit shorthands (all have dedicated reference pages):
 - ✅ Document sign convention for forge parameters (+mint, -burn)
 - ✅ Note that code uses "unanchored" but docs say "floating"
 - ✅ Use correct price formula: price(U) = v/u
+- ✅ Use correct triad structure: `(U, V, √(U*V))` with geometric mean as liquidity unit
+- ✅ Explain reserve units vs liquidity unit roles
+- ✅ Emphasize "1" constraint (liquidity position only)
 
 ### Don't:
 
 - ❌ Claim floating units have inherent value/backing
 - ❌ Over-promise stability or safety
 - ❌ Forget to mention audit status (unaudited)
-- ❌ Assume only (U, 1/U, 1) forge triads exist
+- ❌ Show incorrect triads like `(A, B, A*B)` — must be geometric mean
+- ❌ Forget that "1" cannot be a reserve unit
 - ❌ Use jargon without explanation
 
 ## Key Functions Reference
@@ -335,9 +422,11 @@ This is a quick reference. See IUnit.sol for complete signatures and documentati
 - `forge(int256 du, int256 dv)` - Simplified forge with reciprocal
 - `forgeQuote(...)` - Preview forge results before execution (view function)
 
-**IMPORTANT NOTE ON FORGE BEHAVIOR:** There are two distinct forge mechanics that need clear documentation:
-1. **Reciprocal forging via "1"** (U, 1/U, 1 triad): Only mints/burns tokens, no transfers
-2. **Compound forging** (A, B, A*B triad): Mints/burns the product unit AND transfers the constituent units custodially to/from the caller during the forge operation
+**IMPORTANT NOTE ON FORGE BEHAVIOR:** There are two distinct forge mechanics:
+1. **Reciprocal forging via "1"** (U, 1/U, 1 triad): Only mints/burns tokens, no transfers. "1" serves as liquidity unit.
+2. **Compound unit forging** (e.g., (A², B², A*B) triad): Mints/burns the liquidity unit (A*B) AND transfers the reserve units (A² and B²) custodially to/from the caller during the forge operation.
+
+**Note on triad structure:** All valid triads follow `(U, V, √(U*V))` where √(U*V) is the liquidity unit (geometric mean).
 
 **Unit Creation:**
 - `multiply(string symbol)` - Create base unit from "1"
