@@ -30,10 +30,10 @@ See [reference/ens.md](/reference/ens/) for the complete ENS naming hierarchy. K
 ### 1. The "1" Token
 
 - Universal liquidity unit for all reciprocal pairs (U, 1/U, 1)
-- Can ONLY occupy the liquidity unit position in triads, never a reserve position
+- Special property: √(U * 1/U) = 1 for any unit U
 - Primordial supply: 1 billion tokens (minted once in v0.0, this is the ceiling for all versions)
 - Current version supply grows through migration from v0.0 (reversible)
-- Special property: √(U * 1/U) = 1 for any unit U
+- Can also serve as reserve in triads like (1, U², U) where √(1 * U²) = U
 
 See [concepts/units.md](/concepts/units/) for complete "1" token mechanics and [economics-of-one.md](/economics-of-one/) for value hypotheses.
 
@@ -61,8 +61,7 @@ Every forge operation works on a triad of three units: two **reserve units** and
 - `(U, 1/U, 1)` — reciprocal pair with "1" as liquidity unit (since √(U * 1/U) = 1)
 - `(meter², 1/second², meter/second)` — creates meter/second as liquidity unit (since √(meter² * 1/second²) = meter/second)
 - `(foo², bar², foo*bar)` — creates foo*bar as liquidity unit (since √(foo² * bar²) = foo*bar)
-
-**Critical constraint:** "1" can ONLY occupy the liquidity unit position, never a reserve position.
+- `(1, meter², meter)` — "1" as reserve unit (since √(1 * meter²) = meter)
 
 **Connection to Power Perps:**
 
@@ -179,7 +178,7 @@ Every forge operation involves three units in specific roles:
 **Reserve Units (U and V):**
 - The two units being exchanged in a forge operation
 - Called "reserve units" by analogy to AMM reserves (the x and y in x*y=k)
-- Can be any valid units EXCEPT "1" (see constraint below)
+- Can be any valid units, including "1"
 - In function calls: one is `this` (the calling contract), the other is parameter `V`
 
 **Liquidity Unit (√(U*V)):**
@@ -188,10 +187,11 @@ Every forge operation involves three units in specific roles:
 - Its supply follows the invariant: `√(u * v) = w` where u, v are reserve supplies, w is liquidity supply
 - Can be "1" for reciprocal pairs, or any compound unit like `meter/second`
 
-**Critical Constraint:**
-- "1" can ONLY occupy the liquidity unit position
-- "1" can NEVER be a reserve unit
-- Other units can occupy ANY position depending on the triad
+**Geometric Mean Constraint:**
+- ALL triads must satisfy √(U * V) = W (the geometric mean relationship)
+- This is why `(1, m, m)` is invalid: √(1 * m) = √m ≠ m
+- But `(1, m², m)` is valid: √(1 * m²) = m ✓
+- Units can occupy different roles in different triads
 
 **Example:**
 In triad `(meter², 1/second², meter/second)`:
@@ -373,7 +373,7 @@ Common anchored unit shorthands (all have dedicated reference pages):
 1. **Floating ≠ synthetic:** `USD` symbol doesn't track real USD price
 2. **Geometric mean triads:** All forges use `(U, V, √(U*V))` structure—the liquidity unit is always the geometric mean
 3. **Liquidity units vs reserves:** Same unit can be a reserve in one triad, liquidity unit in another
-4. **The "1" constraint:** "1" can ONLY be a liquidity unit, never a reserve
+4. **Geometric mean constraint:** Triads must satisfy √(U*V) = W, so `(1, m, m)` is invalid but `(1, m², m)` is valid
 5. **Creating compounds:** To create `A*B`, forge `(A², B², A*B)` where A*B is the liquidity unit
 6. **Price control mechanism:** Forging IS how you influence prices
 7. **No collateral needed:** For floating units, just liquidity through forging
@@ -402,15 +402,15 @@ Common anchored unit shorthands (all have dedicated reference pages):
 - ✅ Use correct price formula: price(U) = v/u
 - ✅ Use correct triad structure: `(U, V, √(U*V))` with geometric mean as liquidity unit
 - ✅ Explain reserve units vs liquidity unit roles
-- ✅ Emphasize "1" constraint (liquidity position only)
+- ✅ Emphasize geometric mean constraint: √(U*V) must equal W
 
 ### Don't:
 
 - ❌ Claim floating units have inherent value/backing
 - ❌ Over-promise stability or safety
 - ❌ Forget to mention audit status (unaudited)
-- ❌ Show incorrect triads like `(A, B, A*B)` — must be geometric mean
-- ❌ Forget that "1" cannot be a reserve unit
+- ❌ Show invalid triads that violate geometric mean (e.g., `(A, B, A*B)` should be `(A², B², A*B)`)
+- ❌ Claim "1" cannot be a reserve unit (it can, e.g., `(1, m², m)`)
 - ❌ Use jargon without explanation
 
 ## Key Functions Reference

@@ -54,7 +54,7 @@ Examples:
 
 This is the fundamental pattern connecting all base units through "1".
 
-**Critical constraint**: "1" can ONLY occupy the liquidity unit position, never a reserve position.
+**Note on "1"**: While "1" commonly appears as the liquidity unit for reciprocal pairs, it can also serve as a reserve unit in triads like `(1, meter², meter)` where √(1 * meter²) = meter.
 
 ### Compound Unit Creation Triads
 
