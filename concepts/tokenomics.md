@@ -169,6 +169,9 @@ The "1" tokens aren't created or destroyed—they transfer. But foo and 1/foo ca
 
 ### The "1" Supply
 
+{: .note }
+> For economic hypotheses about "1" value, see [Economics of "1"](/economics-of-one/).
+
 The primordial "1" supply of 1 billion was minted once in v0.0 (genesis). This is the ceiling—total "1" across all versions will never exceed this amount.
 
 The current version's "1" supply grows through migration from v0.0. At any given time:

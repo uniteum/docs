@@ -22,6 +22,9 @@ status: draft
 
 # Forge
 
+{: .note }
+> For valid triad patterns and multi-path trading, see [Triads](/concepts/triads/). For the mathematics, see [Tokenomics](/concepts/tokenomics/).
+
 Forge is the universal operation in Uniteum. Every swap, every mint, every burn—all are forge operations.
 
 ## What Forge Does

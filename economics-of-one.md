@@ -21,6 +21,9 @@ status: hypothesis
 
 # The Economics of "1"
 
+{: .note }
+> For "1" supply mechanics and invariant mathematics, see [Tokenomics](/concepts/tokenomics/). This page focuses on economic value hypotheses.
+
 The "1" token is Uniteum's universal mediator—the backbone that connects all base units and enables forge operations. But what determines the value of "1" itself?
 
 This page explores three related hypotheses about "1" token economics. **These are hypotheses, not proven mechanisms.** They represent testable predictions about emergent system behavior.

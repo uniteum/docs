@@ -22,6 +22,9 @@ status: draft
 
 # Triads
 
+{: .note }
+> For the forge operation details, see [Forge](/concepts/forge/). For invariant mathematics, see [Tokenomics](/concepts/tokenomics/).
+
 A triad is a valid three-token relationship where forge can operate. Understanding triads unlocks Uniteum's full power.
 
 ## Beyond (U, 1/U, 1)

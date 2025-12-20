@@ -20,40 +20,28 @@ All contracts use Nick's deterministic deployer (same addresses across networks)
 
 ## ENS Structure
 
-Owned by `0xd441...6401`:
-
-```
-uniteum.eth
-├── 0-0.uniteum.eth → Genesis "1" (v0.0, see _data/contracts.yml)
-│   └── buy.0-0.uniteum.eth → Genesis Kiosk
-├── [version].uniteum.eth → Current "1" (see current.uniteum in _data/contracts.yml)
-│   └── buy.[version].uniteum.eth → Current Kiosk
-├── eoa.uniteum.eth → 0x6056...496e
-│   ├── 0.eoa.uniteum.eth → 0xff96...1004 (main deployer)
-│   ├── 1.eoa.uniteum.eth → 0x215a...7003
-│   ├── 2.eoa.uniteum.eth → 0xc935...8971
-│   └── 3.eoa.uniteum.eth → (reserved)
-├── deployer.uniteum.eth → 0x2613...878a (Safe multisig)
-├── vault.uniteum.eth → 0xebca...77d8
-└── ens.uniteum.eth → 0x6056...496e
-```
+See [reference/ens.md](/reference/ens/) for the complete ENS naming hierarchy. Key points:
+- All names under `uniteum.eth`
+- Version format: `{major}-{minor}.uniteum.eth` (e.g., `0-1.uniteum.eth`)
+- Current and genesis "1" tokens have dedicated ENS names with Kiosk subdomains
 
 ## Core Mechanisms
 
 ### 1. The "1" Token
 
 - Central liquidity token that mediates all base units
-- Primordial supply: 1 billion tokens (minted once in v0.0, this is the ceiling)
-- Total "1" supply across all versions ≤ 1 billion
-- Current version supply grows through migration from v0.0 (reversible via `unmigrate()`)
-- Any particular version will have less than 1 billion until sufficient migration occurs
+- Primordial supply: 1 billion tokens (minted once in v0.0, this is the ceiling for all versions)
+- Current version supply grows through migration from v0.0 (reversible)
+
+See [concepts/units.md](/concepts/units/) for complete "1" token mechanics and [economics-of-one.md](/economics-of-one/) for value hypotheses.
 
 ### 2. Units & Reciprocals
 
 - Every unit `U` has reciprocal `1/U`
-- Invariant: `sqrt(U_supply * (1/U)_supply) = W_supply` where W is the mediating token
-- For base units: W = "1"
-- For compound units: W = parent unit
+- Invariant: `u · v = w²` where u, v are operand supplies and w is mediating token supply
+- For base units: w = "1" supply; for compounds: w = product unit supply
+
+See [concepts/tokenomics.md](/concepts/tokenomics/) for complete invariant mathematics and derivations.
 
 ### 3. Forge Operation (CRITICAL)
 
@@ -72,11 +60,8 @@ Forge works on ANY algebraically valid triad:
 Invariant enforcement: `sqrt(a * b) = ab` where lowercase = supplies
 
 **Price Formula:**
-- `price(U) = v/u` where v = 1/U supply, u = U supply
-- `price(1/U) = u/v` (reciprocal relationship)
-- Equal supplies (u = v) → both units trade at parity (price = 1)
-- More U (u > v) → U is cheaper, 1/U is more expensive
-- Standard constant-product AMM pricing
+- `price(U) = v/u` where v = 1/U supply, u = U supply (see [concepts/tokenomics.md](/concepts/tokenomics/) for derivation)
+- Equal supplies → parity; more U → U cheaper, 1/U more expensive
 
 ### 4. Anchored vs Floating Units
 
@@ -179,12 +164,10 @@ forge script <script>    # deployment scripts
 
 ## Distribution Strategy
 
-1. **Genesis Supply:** 1B "1" tokens minted once in v0.0 (primordial supply, this is the ceiling)
-   - 900M → Discount Kiosk (public sale)
-   - 100M → Deployer Safe (reserve)
-2. **Kiosk:** Linear discount pricing (price ↓ as inventory → capacity)
-3. **Migration:** Users buy v0.0, migrate to current version for full features
-4. **Supply across versions:** Total circulating "1" across all versions ≤ 1 billion. Current version supply grows only through migration from v0.0.
+See [getting-started.md](/getting-started/) for complete acquisition and migration instructions. Key points:
+- Genesis supply: 1B "1" tokens (primordial ceiling for all versions)
+- Available via Discount Kiosk with linear discount pricing
+- Current version supply grows through migration from v0.0 (reversible)
 
 ## Design Philosophy
 

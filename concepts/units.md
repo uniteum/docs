@@ -22,6 +22,9 @@ status: draft
 
 # Units
 
+{: .note }
+> For complete technical specifications, see [Functions Reference](/reference/functions/). For supply mechanics, see [Tokenomics](/concepts/tokenomics/).
+
 In Uniteum, every token is a **unit**—a dimensional type that composes algebraically with other units.
 
 ## The "1" Token
@@ -61,6 +64,9 @@ Operators:
 Compound units are first-class citizens. They have their own reciprocals and can participate in forge operations with "1".
 
 ### Anchored Units
+
+{: .note }
+> For documentation shorthands ($WETH, $USDC, etc.) and complete reference, see [Anchored Units](/reference/anchored-units/).
 
 **Format:** `$0xTokenAddress`
 
