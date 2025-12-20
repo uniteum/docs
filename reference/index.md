@@ -38,9 +38,9 @@ Technical reference documentation for developers and advanced users.
 
 | Contract | Address |
 |----------|---------|
-| {{ current_uniteum.name }} | [`{{ current_uniteum.mainnet }}`](https://etherscan.io/address/{{ current_uniteum.mainnet }}#code) |
-| {{ genesis_uniteum.name }} | [`{{ genesis_uniteum.mainnet }}`](https://etherscan.io/address/{{ genesis_uniteum.mainnet }}#code) |
-| {{ current_kiosk.name }} | [`{{ current_kiosk.mainnet }}`](https://etherscan.io/address/{{ current_kiosk.mainnet }}#code) |
+| {{ current_uniteum.name }} | {% include etherscan.html address=current_uniteum.mainnet section="code" text=current_uniteum.mainnet %} |
+| {{ genesis_uniteum.name }} | {% include etherscan.html address=genesis_uniteum.mainnet section="code" text=genesis_uniteum.mainnet %} |
+| {{ current_kiosk.name }} | {% include etherscan.html address=current_kiosk.mainnet section="code" text=current_kiosk.mainnet %} |
 
 ### Networks
 

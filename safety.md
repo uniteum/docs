@@ -89,7 +89,7 @@ Uniteum is provided as-is. The creator makes no guarantees about:
 
 {% assign genesis_uniteum = site.data.contracts.uniteum.v0_0 -%}
 {% assign genesis_kiosk = site.data.contracts.kiosk.v0_0 -%}
-1. **Use Sepolia testnet first:** All contracts are deployed at identical addresses on both Mainnet and Sepolia testnet, including [{{ genesis_uniteum.name }}](https://sepolia.etherscan.io/address/{{ genesis_uniteum.sepolia }}#code) and the [{{ genesis_kiosk.name }}](https://sepolia.etherscan.io/address/{{ genesis_kiosk.sepolia }}#code). Test your operations with testnet ETH before risking real funds.
+1. **Use Sepolia testnet first:** All contracts are deployed at identical addresses on both Mainnet and Sepolia testnet, including {% include etherscan.html address=genesis_uniteum.sepolia network="sepolia" section="code" text=genesis_uniteum.name %} and the {% include etherscan.html address=genesis_kiosk.sepolia network="sepolia" section="code" text=genesis_kiosk.name %}. Test your operations with testnet ETH before risking real funds.
 2. **Start small:** Experiment with amounts you can lose entirely
 3. **Verify contracts:** Check addresses against official sources
 4. **Understand before acting:** Read the [Concepts](/concepts/) section

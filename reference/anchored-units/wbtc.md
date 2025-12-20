@@ -15,16 +15,17 @@ last_updated: 2024-12-18
 
 ## What This Represents
 
-In Uniteum documentation, `$WBTC` is a **readable shorthand** for an anchored unit backed by [Wrapped Bitcoin (WBTC)](https://etherscan.io/address/0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599).
+{% assign wbtc = site.data.contracts.tokens.wbtc -%}
+In Uniteum documentation, `$WBTC` is a **readable shorthand** for an anchored unit backed by {% include etherscan.html address=wbtc.mainnet text="Wrapped Bitcoin (WBTC)" %}.
 
 The actual Uniteum symbol uses the full WBTC contract address:
 ```
-$0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599
+${{ wbtc.mainnet }}
 ```
 
 ## Backing Token
 
-**WBTC Contract:** [`0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599`](https://etherscan.io/address/0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599)
+**WBTC Contract:** {% include etherscan.html address=wbtc.mainnet text=wbtc.mainnet %}
 
 Wrapped Bitcoin is Bitcoin represented as an ERC-20 token on Ethereum. 1 WBTC = 1 BTC, backed by Bitcoin held by custodians.
 

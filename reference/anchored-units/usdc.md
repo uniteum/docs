@@ -15,16 +15,17 @@ last_updated: 2024-12-18
 
 ## What This Represents
 
-In Uniteum documentation, `$USDC` is a **readable shorthand** for an anchored unit backed by [USD Coin (USDC)](https://etherscan.io/address/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48).
+{% assign usdc = site.data.contracts.tokens.usdc -%}
+In Uniteum documentation, `$USDC` is a **readable shorthand** for an anchored unit backed by {% include etherscan.html address=usdc.mainnet text="USD Coin (USDC)" %}.
 
 The actual Uniteum symbol uses the full USDC contract address:
 ```
-$0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48
+${{ usdc.mainnet }}
 ```
 
 ## Backing Token
 
-**USDC Contract:** [`0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`](https://etherscan.io/address/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48)
+**USDC Contract:** {% include etherscan.html address=usdc.mainnet text=usdc.mainnet %}
 
 USD Coin is a stablecoin pegged to the US Dollar, issued by Circle. Intended to maintain 1 USDC = $1 USD.
 

@@ -59,13 +59,19 @@ A floating unit with the label "WETH" has zero connection to actual Wrapped Ethe
 
 Click any shorthand to see its actual symbol, backing token details, and usage examples.
 
+{% assign weth = site.data.contracts.tokens.weth -%}
+{% assign usdc = site.data.contracts.tokens.usdc -%}
+{% assign usdt = site.data.contracts.tokens.usdt -%}
+{% assign wbtc = site.data.contracts.tokens.wbtc -%}
+{% assign dai = site.data.contracts.tokens.dai -%}
+
 | Shorthand | Token Name | Actual Symbol (first 10 & last 4) | Mainnet Contract |
 |-----------|------------|-----------------------------------|------------------|
-| [$WETH](/reference/anchored-units/weth/) | Wrapped Ether | `$0xC02aaA39...56Cc2` | [View on Etherscan](https://etherscan.io/address/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2) |
-| [$USDC](/reference/anchored-units/usdc/) | USD Coin | `$0xA0b86991...eB48` | [View on Etherscan](https://etherscan.io/address/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48) |
-| [$USDT](/reference/anchored-units/usdt/) | Tether USD | `$0xdAC17F95...1ec7` | [View on Etherscan](https://etherscan.io/address/0xdAC17F958D2ee523a2206206994597C13D831ec7) |
-| [$WBTC](/reference/anchored-units/wbtc/) | Wrapped BTC | `$0x2260FAC5...2C599` | [View on Etherscan](https://etherscan.io/address/0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599) |
-| [$DAI](/reference/anchored-units/dai/) | Dai Stablecoin | `$0x6B175474...cB4` | [View on Etherscan](https://etherscan.io/address/0x6B175474E89094C44Da98b954EedeAC495271d0F) |
+| [$WETH](/reference/anchored-units/weth/) | Wrapped Ether | `$0xC02aaA39...56Cc2` | {% include etherscan.html address=weth.mainnet text="View on Etherscan" %} |
+| [$USDC](/reference/anchored-units/usdc/) | USD Coin | `$0xA0b86991...eB48` | {% include etherscan.html address=usdc.mainnet text="View on Etherscan" %} |
+| [$USDT](/reference/anchored-units/usdt/) | Tether USD | `$0xdAC17F95...1ec7` | {% include etherscan.html address=usdt.mainnet text="View on Etherscan" %} |
+| [$WBTC](/reference/anchored-units/wbtc/) | Wrapped BTC | `$0x2260FAC5...2C599` | {% include etherscan.html address=wbtc.mainnet text="View on Etherscan" %} |
+| [$DAI](/reference/anchored-units/dai/) | Dai Stablecoin | `$0x6B175474...cB4` | {% include etherscan.html address=dai.mainnet text="View on Etherscan" %} |
 
 ## How to Read Documentation Examples
 

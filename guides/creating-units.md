@@ -36,12 +36,11 @@ This creates both `foo` and its reciprocal `1/foo`, bound by the invariant.
 ### Via Etherscan
 
 {% assign current_uniteum = site.data.contracts.uniteum[site.data.contracts.current.uniteum] -%}
-1. Go to the [current Uniteum contract](https://etherscan.io/address/{{ current_uniteum.mainnet }}#writeContract): `{{ current_uniteum.mainnet }}`
-2. Navigate to "Write Contract"
-3. Connect your wallet
-4. Find the `multiply` function
-5. Enter your symbol (e.g., `foo`)
-6. Execute the transaction
+1. Go to the {% include etherscan.html address=current_uniteum.mainnet section="writeContract" text="Uniteum contract on Etherscan" %}
+2. Connect your wallet
+3. Find the `multiply` function
+4. Enter your symbol (e.g., `foo`)
+5. Execute the transaction
 
 ### Symbol Rules
 
@@ -74,12 +73,11 @@ IUnit meterPerSecond = one().product("meter/second");
 
 ### Via Etherscan
 
-1. Go to the [current Uniteum contract](https://etherscan.io/address/{{ current_uniteum.mainnet }}#writeContract)
-2. Navigate to "Write Contract"
-3. Connect your wallet
-4. Find the `product` function (string version)
-5. Enter the expression (e.g., `meter/second` or `kg*m/s^2`)
-6. Execute the transaction
+1. Go to the {% include etherscan.html address=current_uniteum.mainnet section="writeContract" text="Uniteum contract on Etherscan" %}
+2. Connect your wallet
+3. Find the `product` function (string version)
+4. Enter the expression (e.g., `meter/second` or `kg*m/s^2`)
+5. Execute the transaction
 
 This automatically creates the necessary intermediate units and sets up the geometric mean relationship.
 

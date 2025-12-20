@@ -15,16 +15,17 @@ last_updated: 2024-12-18
 
 ## What This Represents
 
-In Uniteum documentation, `$WETH` is a **readable shorthand** for an anchored unit backed by {% include contract_link.html contract=site.data.contracts.tokens.weth text="Wrapped Ether (WETH)" %}.
+{% assign weth = site.data.contracts.tokens.weth -%}
+In Uniteum documentation, `$WETH` is a **readable shorthand** for an anchored unit backed by {% include etherscan.html address=weth.mainnet text="Wrapped Ether (WETH)" %}.
 
 The actual Uniteum symbol uses the full WETH contract address:
 ```
-${{ site.data.contracts.tokens.weth.mainnet }}
+${{ weth.mainnet }}
 ```
 
 ## Backing Token
 
-**WETH Contract:** {% include contract_link.html contract=site.data.contracts.tokens.weth %}
+**WETH Contract:** {% include etherscan.html address=weth.mainnet text=weth.mainnet %}
 
 Wrapped Ether is ETH converted to an ERC-20 token for DeFi compatibility. 1 WETH = 1 ETH, redeemable 1:1.
 
