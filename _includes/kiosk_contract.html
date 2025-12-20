@@ -4,7 +4,7 @@ Returns the current Kiosk contract object.
 Usage: {% assign kiosk = include "kiosk_contract.html" %}
        {{ kiosk.name }}
        {{ kiosk.mainnet }}
-       {% include contract_link.html contract=kiosk %}
+       {% include contract.html address=kiosk.mainnet %}
 
 This automatically uses the current version defined in _data/contracts.yml
 {%- endcomment -%}

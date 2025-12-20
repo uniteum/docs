@@ -16,7 +16,7 @@ last_updated: 2024-12-18
 ## What This Represents
 
 {% assign usdt = site.data.contracts.tokens.usdt -%}
-In Uniteum documentation, `$USDT` is a **readable shorthand** for an anchored unit backed by {% include etherscan.html address=usdt.mainnet text="Tether USD (USDT)" %}.
+In Uniteum documentation, `$USDT` is a **readable shorthand** for an anchored unit backed by {% include token.html address=usdt.mainnet text="Tether USD (USDT)" %}.
 
 The actual Uniteum symbol uses the full USDT contract address:
 ```
@@ -25,7 +25,7 @@ ${{ usdt.mainnet }}
 
 ## Backing Token
 
-**USDT Contract:** {% include etherscan.html address=usdt.mainnet text=usdt.mainnet %}
+**USDT Contract:** {% include token.html address=usdt.mainnet text=usdt.mainnet %}
 
 Tether USD is the largest stablecoin by market cap, pegged to the US Dollar. Intended to maintain 1 USDT = $1 USD.
 

@@ -163,10 +163,19 @@ Choose section anchors based on user intent:
 ## Link Types: Contracts vs Tokens
 
 ### Contracts
-Use `/address/` path with section anchors:
+Use `/address/` path with section anchors.
 
+**Option A - Direct (explicit type):**
 ```liquid
 {% include etherscan.html
+   address="0x5bA96211E3679FDcc7047a5c64d40A4Dd3fBdAD7"
+   section="code"
+   text="Uniteum 0.4 '1'" %}
+```
+
+**Option B - Wrapper (recommended for clarity):**
+```liquid
+{% include contract.html
    address="0x5bA96211E3679FDcc7047a5c64d40A4Dd3fBdAD7"
    section="code"
    text="Uniteum 0.4 '1'" %}
@@ -175,13 +184,26 @@ Use `/address/` path with section anchors:
 → `https://etherscan.io/address/0x5bA96211E3679FDcc7047a5c64d40A4Dd3fBdAD7#code`
 
 ### Unit Tokens
-Use `/token/` path (no section anchor needed):
+Use `/token/` path (no section anchor needed).
 
-```markdown
-[foo](https://etherscan.io/token/0x966108210F3B2eC0f01B646a61Ce7D8F1aDE7430)
+**Option A - Direct:**
+```liquid
+{% include etherscan.html
+   address="0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
+   type="token"
+   text="View on Etherscan" %}
 ```
 
-**Note:** Unit tokens should link to the token page for holder lists, transfers, etc.
+**Option B - Wrapper (recommended for clarity):**
+```liquid
+{% include token.html
+   address="0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
+   text="View on Etherscan" %}
+```
+
+→ `https://etherscan.io/token/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
+
+**Note:** Token links show holder lists, transfers, etc. Contract links show code and interactive functions.
 
 ### Transactions
 Use `/tx/` path with `type="tx"`:

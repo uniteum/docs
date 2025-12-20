@@ -4,7 +4,7 @@ Returns the current Uniteum contract object.
 Usage: {% assign uniteum = include "uniteum_contract.html" %}
        {{ uniteum.name }}
        {{ uniteum.mainnet }}
-       {% include contract_link.html contract=uniteum %}
+       {% include contract.html address=uniteum.mainnet %}
 
 This automatically uses the current version defined in _data/contracts.yml
 {%- endcomment -%}

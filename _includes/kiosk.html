@@ -14,4 +14,10 @@ This automatically uses the current version defined in _data/contracts.yml
 {%- assign section = include.section | default: "code" -%}
 {%- assign text = include.text -%}
 
-{% include contract_link.html contract=contract network=network section=section text=text %}
+{%- if network == "mainnet" -%}
+  {%- assign address = contract.mainnet -%}
+{%- elsif network == "sepolia" -%}
+  {%- assign address = contract.sepolia -%}
+{%- endif -%}
+
+{% include contract.html address=address network=network section=section text=text %}

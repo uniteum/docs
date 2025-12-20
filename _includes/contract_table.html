@@ -15,5 +15,5 @@ Parameters:
 
 | Network | Address |
 |---------|---------|
-| Mainnet | {% include contract_link.html contract=include.contract network="mainnet" section=section %} |
-| Sepolia | {% include contract_link.html contract=include.contract network="sepolia" section=section %} |
+| Mainnet | {% include contract.html address=include.contract.mainnet network="mainnet" section=section text=include.contract.mainnet %} |
+| Sepolia | {% include contract.html address=include.contract.sepolia network="sepolia" section=section text=include.contract.sepolia %} |

@@ -63,7 +63,7 @@ All Uniteum contracts are deployed using Nick's deterministic deployer, resultin
 
 Nick's deterministic deployment method ensures identical addresses across any EVM chain.
 
-**Deployer EOA:** {% include contract_link.html contract=site.data.contracts.deployer.eoa text="0.eoa.uniteum.eth" %}
+**Deployer EOA:** {% include contract.html address=site.data.contracts.deployer.eoa.mainnet text="0.eoa.uniteum.eth" %}
 
 ### Architecture
 

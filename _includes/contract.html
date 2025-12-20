@@ -1,32 +1,17 @@
 {%- comment -%}
-Inline contract reference for use in prose.
+Wrapper for etherscan.html that defaults to contract (/address/) links.
 
-Usage - Use current version via variable:
-{%- assign current_version = site.data.contracts.current.uniteum -%}
-{% include contract.html name="uniteum.#{current_version}" %}
+Usage:
+  {% include contract.html address="0x..." %}
+  {% include contract.html address="0x..." section="code" %}
+  {% include contract.html address="0x..." section="writeContract" text="View Contract" %}
+  {% include contract.html address="0x..." network="sepolia" section="readContract" %}
 
-OR for specific versions (only when needed, e.g., migration docs):
-{% include contract.html name="uniteum.v0_0" %}
-
-This is a shorthand that looks up the contract by path and creates a link.
+Parameters:
+  - address (required): Contract address
+  - network (optional): "mainnet" (default) or "sepolia"
+  - section (optional): Etherscan section anchor ("code", "writeContract", "readContract", "events")
+  - text (optional): Link text (defaults to address)
 {%- endcomment -%}
 
-{%- assign parts = include.name | split: "." -%}
-{%- assign category = parts[0] -%}
-{%- assign version = parts[1] -%}
-
-{%- if category == "uniteum" -%}
-  {%- assign contract = site.data.contracts.uniteum[version] -%}
-{%- elsif category == "kiosk" -%}
-  {%- assign contract = site.data.contracts.kiosk[version] -%}
-{%- elsif category == "deployer" -%}
-  {%- assign contract = site.data.contracts.deployer[version] -%}
-{%- elsif category == "token" -%}
-  {%- assign contract = site.data.contracts.tokens[version] -%}
-{%- endif -%}
-
-{%- assign network = include.network | default: "mainnet" -%}
-{%- assign section = include.section | default: "code" -%}
-{%- assign text = include.text | default: contract.name -%}
-
-{% include contract_link.html contract=contract network=network section=section text=text %}
+{% include etherscan.html address=include.address network=include.network section=include.section text=include.text %}

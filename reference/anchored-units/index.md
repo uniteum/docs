@@ -67,11 +67,11 @@ Click any shorthand to see its actual symbol, backing token details, and usage e
 
 | Shorthand | Token Name | Actual Symbol (first 10 & last 4) | Mainnet Contract |
 |-----------|------------|-----------------------------------|------------------|
-| [$WETH](/reference/anchored-units/weth/) | Wrapped Ether | `$0xC02aaA39...56Cc2` | {% include etherscan.html address=weth.mainnet text="View on Etherscan" %} |
-| [$USDC](/reference/anchored-units/usdc/) | USD Coin | `$0xA0b86991...eB48` | {% include etherscan.html address=usdc.mainnet text="View on Etherscan" %} |
-| [$USDT](/reference/anchored-units/usdt/) | Tether USD | `$0xdAC17F95...1ec7` | {% include etherscan.html address=usdt.mainnet text="View on Etherscan" %} |
-| [$WBTC](/reference/anchored-units/wbtc/) | Wrapped BTC | `$0x2260FAC5...2C599` | {% include etherscan.html address=wbtc.mainnet text="View on Etherscan" %} |
-| [$DAI](/reference/anchored-units/dai/) | Dai Stablecoin | `$0x6B175474...cB4` | {% include etherscan.html address=dai.mainnet text="View on Etherscan" %} |
+| [$WETH](/reference/anchored-units/weth/) | Wrapped Ether | `$0xC02aaA39...56Cc2` | {% include token.html address=weth.mainnet text="View on Etherscan" %} |
+| [$USDC](/reference/anchored-units/usdc/) | USD Coin | `$0xA0b86991...eB48` | {% include token.html address=usdc.mainnet text="View on Etherscan" %} |
+| [$USDT](/reference/anchored-units/usdt/) | Tether USD | `$0xdAC17F95...1ec7` | {% include token.html address=usdt.mainnet text="View on Etherscan" %} |
+| [$WBTC](/reference/anchored-units/wbtc/) | Wrapped BTC | `$0x2260FAC5...2C599` | {% include token.html address=wbtc.mainnet text="View on Etherscan" %} |
+| [$DAI](/reference/anchored-units/dai/) | Dai Stablecoin | `$0x6B175474...cB4` | {% include token.html address=dai.mainnet text="View on Etherscan" %} |
 
 ## How to Read Documentation Examples
 
