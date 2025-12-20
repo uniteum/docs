@@ -63,7 +63,7 @@ No known issues. See [Known Issues](/known-issues/) for version history and repo
 
 ## Support This Experiment
 
-If this work interests you and you'd like to participate: the best way to contribute is to [buy "1" tokens from the Discount Kiosk](https://etherscan.io/address/0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9#writeContract). You're not just supporting development—you're acquiring the liquidity backbone of the system and becoming part of the experiment.
+If this work interests you and you'd like to participate: the best way to contribute is to {% include etherscan.html address="0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9" section="writeContract" text="buy \"1\" tokens from the Discount Kiosk" %}. You're not just supporting development—you're acquiring the liquidity backbone of the system and becoming part of the experiment.
 
 The Kiosk uses linear discount pricing—price increases as inventory depletes. Early acquisition is cheaper.
 
@@ -86,10 +86,10 @@ Early "1" token holders may benefit if the [value hypothesis](/economics-of-one/
 
 | Contract | Mainnet | Sepolia |
 |----------|---------|---------|
-| {{ current_uniteum.name }} | [`{{ current_uniteum.mainnet }}`](https://etherscan.io/address/{{ current_uniteum.mainnet }}#code) | [`{{ current_uniteum.sepolia }}`](https://sepolia.etherscan.io/address/{{ current_uniteum.sepolia }}#code) |
-| {{ genesis_uniteum.name }} | [`{{ genesis_uniteum.mainnet }}`](https://etherscan.io/address/{{ genesis_uniteum.mainnet }}#code) | [`{{ genesis_uniteum.sepolia }}`](https://sepolia.etherscan.io/address/{{ genesis_uniteum.sepolia }}#code) |
-| {{ current_kiosk.name }} | [`{{ current_kiosk.mainnet }}`](https://etherscan.io/address/{{ current_kiosk.mainnet }}#code) | [`{{ current_kiosk.sepolia }}`](https://sepolia.etherscan.io/address/{{ current_kiosk.sepolia }}#code) |
-| {{ genesis_kiosk.name }} | [`{{ genesis_kiosk.mainnet }}`](https://etherscan.io/address/{{ genesis_kiosk.mainnet }}#code) | [`{{ genesis_kiosk.sepolia }}`](https://sepolia.etherscan.io/address/{{ genesis_kiosk.sepolia }}#code) |
+| {{ current_uniteum.name }} | {% include etherscan.html address=current_uniteum.mainnet section="code" text=current_uniteum.mainnet %} | {% include etherscan.html address=current_uniteum.sepolia network="sepolia" section="code" text=current_uniteum.sepolia %} |
+| {{ genesis_uniteum.name }} | {% include etherscan.html address=genesis_uniteum.mainnet section="code" text=genesis_uniteum.mainnet %} | {% include etherscan.html address=genesis_uniteum.sepolia network="sepolia" section="code" text=genesis_uniteum.sepolia %} |
+| {{ current_kiosk.name }} | {% include etherscan.html address=current_kiosk.mainnet section="code" text=current_kiosk.mainnet %} | {% include etherscan.html address=current_kiosk.sepolia network="sepolia" section="code" text=current_kiosk.sepolia %} |
+| {{ genesis_kiosk.name }} | {% include etherscan.html address=genesis_kiosk.mainnet section="code" text=genesis_kiosk.mainnet %} | {% include etherscan.html address=genesis_kiosk.sepolia network="sepolia" section="code" text=genesis_kiosk.sepolia %} |
 
 ---
 
