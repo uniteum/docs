@@ -72,10 +72,14 @@ for ((i=0; i<unit_count; i++)); do
     canonical=$(echo "$result" | jq -r '.canonical')
     one=$(echo "$result" | jq -r '.one')
 
+    # Escape backslashes for YAML
+    symbol_escaped="${symbol//\\/\\\\}"
+    canonical_escaped="${canonical//\\/\\\\}"
+
     # Append to output file
     cat >> "$OUTPUT_FILE" << EOF
-  - symbol: "$symbol"
-    canonical: "$canonical"
+  - symbol: "$symbol_escaped"
+    canonical: "$canonical_escaped"
     address: "$address"
     one: "$one"
     description: "$description"

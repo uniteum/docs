@@ -189,14 +189,14 @@ units:
     one: "0x5bA96211E3679FDcc7047a5c64d40A4Dd3fBdAD7"
     description: "Foo squared"
 
-  - symbol: "foo^2\3"
-    canonical: "foo^2\3"
+  - symbol: "foo^2\\3"
+    canonical: "foo^2\\3"
     address: "0x2ab175326286b3eAd40Ae5751aF84BFd15E0A950"
     one: "0x5bA96211E3679FDcc7047a5c64d40A4Dd3fBdAD7"
     description: "Foo to the power 2/3 (demonstrates rational exponents)"
 
-  - symbol: "bar^1\2"
-    canonical: "bar^1\2"
+  - symbol: "bar^1\\2"
+    canonical: "bar^1\\2"
     address: "0x0B9ef73963D8B8eDc39ebEC961B43801A76e1f45"
     one: "0x5bA96211E3679FDcc7047a5c64d40A4Dd3fBdAD7"
     description: "Square root of bar"
