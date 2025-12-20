@@ -10,7 +10,9 @@ Creates a markdown link to a contract on Etherscan.
 
 **Usage:**
 ```liquid
-{% include contract_link.html contract=site.data.contracts.uniteum.v0_3 network="mainnet" section="code" %}
+{%- assign current_version = site.data.contracts.current.uniteum -%}
+{%- assign uniteum = site.data.contracts.uniteum[current_version] -%}
+{% include contract_link.html contract=uniteum network="mainnet" section="code" %}
 ```
 
 **Parameters:**
@@ -21,17 +23,20 @@ Creates a markdown link to a contract on Etherscan.
 
 **Examples:**
 ```liquid
+{%- assign current_version = site.data.contracts.current.uniteum -%}
+{%- assign uniteum = site.data.contracts.uniteum[current_version] -%}
+
 {%- comment -%} Basic usage - mainnet code view {%- endcomment -%}
-{% include contract_link.html contract=site.data.contracts.uniteum.v0_3 %}
+{% include contract_link.html contract=uniteum %}
 
 {%- comment -%} Sepolia testnet {%- endcomment -%}
-{% include contract_link.html contract=site.data.contracts.uniteum.v0_3 network="sepolia" %}
+{% include contract_link.html contract=uniteum network="sepolia" %}
 
 {%- comment -%} Write functions {%- endcomment -%}
-{% include contract_link.html contract=site.data.contracts.uniteum.v0_3 section="writeContract" %}
+{% include contract_link.html contract=uniteum section="writeContract" %}
 
 {%- comment -%} Custom link text {%- endcomment -%}
-{% include contract_link.html contract=site.data.contracts.uniteum.v0_3 text="Uniteum contract" %}
+{% include contract_link.html contract=uniteum text="Uniteum contract" %}
 
 {%- comment -%} Token reference (uses /token/ instead of /address/) {%- endcomment -%}
 For unit tokens, just use regular markdown: [foo](https://etherscan.io/token/0x...)
@@ -43,7 +48,9 @@ Creates a two-column table showing both Mainnet and Sepolia addresses.
 
 **Usage:**
 ```liquid
-{% include contract_table.html contract=site.data.contracts.uniteum.v0_3 %}
+{%- assign current_version = site.data.contracts.current.uniteum -%}
+{%- assign uniteum = site.data.contracts.uniteum[current_version] -%}
+{% include contract_table.html contract=uniteum %}
 ```
 
 **Parameters:**
@@ -52,11 +59,14 @@ Creates a two-column table showing both Mainnet and Sepolia addresses.
 
 **Example:**
 ```liquid
-### Uniteum 0.3
+{%- assign current_version = site.data.contracts.current.uniteum -%}
+{%- assign uniteum = site.data.contracts.uniteum[current_version] -%}
+
+### {{ uniteum.name }}
 
 The current version with full Uniteum functionality.
 
-{% include contract_table.html contract=site.data.contracts.uniteum.v0_3 %}
+{% include contract_table.html contract=uniteum %}
 ```
 
 ## Contract Data Structure
@@ -64,6 +74,10 @@ The current version with full Uniteum functionality.
 Contract data is defined in `_data/contracts.yml`:
 
 ```yaml
+current:
+  uniteum: "v0_3"  # Update this pointer when releasing new versions
+  kiosk: "v0_3"
+
 uniteum:
   v0_3:
     name: "Uniteum 0.3 '1'"
@@ -77,9 +91,11 @@ uniteum:
 ### Accessing Contract Data
 
 ```liquid
-{%- comment -%} Direct property access {%- endcomment -%}
-{{ site.data.contracts.uniteum.v0_3.name }}
-{{ site.data.contracts.uniteum.v0_3.mainnet }}
+{%- comment -%} ALWAYS use current pointer - never hardcode version {%- endcomment -%}
+{%- assign current_version = site.data.contracts.current.uniteum -%}
+{%- assign uniteum = site.data.contracts.uniteum[current_version] -%}
+{{ uniteum.name }}
+{{ uniteum.mainnet }}
 
 {%- comment -%} Loop through all Uniteum versions {%- endcomment -%}
 {% for version in site.data.contracts.uniteum %}

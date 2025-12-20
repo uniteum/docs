@@ -2,55 +2,72 @@
 
 This file shows various ways to reference contracts in documentation.
 
+**IMPORTANT**: Never hardcode version keys like `v0_3`. Use helper includes or the `current` pointer.
+
 ## Basic Contract Link
 
 ```liquid
-Deploy to {% include contract_link.html contract=site.data.contracts.uniteum.v0_3 %}
+{%- comment -%} Get current version dynamically {%- endcomment -%}
+{%- assign current_version = site.data.contracts.current.uniteum -%}
+{%- assign uniteum = site.data.contracts.uniteum[current_version] -%}
+Deploy to {% include contract_link.html contract=uniteum %}
 ```
 Renders: Deploy to [`0x210C655F8a51244bA7607726DeAdEB5866723D87`](https://etherscan.io/address/0x210C655F8a51244bA7607726DeAdEB5866723D87#code)
 
 ## Different Networks
 
 ```liquid
+{%- assign current_version = site.data.contracts.current.uniteum -%}
+{%- assign uniteum = site.data.contracts.uniteum[current_version] -%}
+
 {%- comment -%} Mainnet (default) {%- endcomment -%}
-{% include contract_link.html contract=site.data.contracts.uniteum.v0_3 %}
+{% include contract_link.html contract=uniteum %}
 
 {%- comment -%} Sepolia {%- endcomment -%}
-{% include contract_link.html contract=site.data.contracts.uniteum.v0_3 network="sepolia" %}
+{% include contract_link.html contract=uniteum network="sepolia" %}
 ```
 
 ## Different Etherscan Sections
 
 ```liquid
+{%- assign current_version = site.data.contracts.current.uniteum -%}
+{%- assign uniteum = site.data.contracts.uniteum[current_version] -%}
+
 {%- comment -%} View source code (default) {%- endcomment -%}
-{% include contract_link.html contract=site.data.contracts.uniteum.v0_3 section="code" %}
+{% include contract_link.html contract=uniteum section="code" %}
 
 {%- comment -%} Write to contract {%- endcomment -%}
-{% include contract_link.html contract=site.data.contracts.uniteum.v0_3 section="writeContract" %}
+{% include contract_link.html contract=uniteum section="writeContract" %}
 
 {%- comment -%} Read from contract {%- endcomment -%}
-{% include contract_link.html contract=site.data.contracts.uniteum.v0_3 section="readContract" %}
+{% include contract_link.html contract=uniteum section="readContract" %}
 
 {%- comment -%} View events {%- endcomment -%}
-{% include contract_link.html contract=site.data.contracts.uniteum.v0_3 section="events" %}
+{% include contract_link.html contract=uniteum section="events" %}
 ```
 
 ## Custom Link Text
 
 ```liquid
+{%- assign current_version = site.data.contracts.current.uniteum -%}
+{%- assign uniteum = site.data.contracts.uniteum[current_version] -%}
+
 {%- comment -%} Using descriptive text instead of address {%- endcomment -%}
-Call the {% include contract_link.html contract=site.data.contracts.uniteum.v0_3 text="Uniteum contract" section="writeContract" %} to forge units.
+Call the {% include contract_link.html contract=uniteum text="Uniteum contract" section="writeContract" %} to forge units.
 ```
 Renders: Call the [`Uniteum contract`](https://etherscan.io/address/0x210C655F8a51244bA7607726DeAdEB5866723D87#writeContract) to forge units.
 
 ## Contract Tables
 
 ```liquid
-### Uniteum 0.3 '1'
+{%- assign current_version = site.data.contracts.current.uniteum -%}
+{%- assign uniteum = site.data.contracts.uniteum[current_version] -%}
+
+### {{ uniteum.name }}
 
 The current version with full functionality.
 
-{% include contract_table.html contract=site.data.contracts.uniteum.v0_3 %}
+{% include contract_table.html contract=uniteum %}
 ```
 
 Renders:
@@ -62,24 +79,28 @@ Renders:
 ## Shorthand Contract Reference
 
 ```liquid
-{%- comment -%} Shorthand syntax using contract.html {%- endcomment -%}
-Deploy to {% include contract.html name="uniteum.v0_3" %}
+{%- comment -%} Shorthand syntax using contract.html with current pointer {%- endcomment -%}
+{%- assign current_version = site.data.contracts.current.uniteum -%}
+Deploy to {% include contract.html name=current_version %}
 
-{%- comment -%} With custom options {%- endcomment -%}
-Call {% include contract.html name="uniteum.v0_3" section="writeContract" text="the Uniteum contract" %}
+{%- comment -%} ALTERNATIVE: For specific versions (only when needed, e.g., migration docs) {%- endcomment -%}
+Migrate from {% include contract.html name="uniteum.v0_0" %}
 ```
 
 ## Using Contract Data Directly
 
 ```liquid
+{%- assign current_version = site.data.contracts.current.uniteum -%}
+{%- assign uniteum = site.data.contracts.uniteum[current_version] -%}
+
 {%- comment -%} Access properties {%- endcomment -%}
-Contract name: {{ site.data.contracts.uniteum.v0_3.name }}
-Version: {{ site.data.contracts.uniteum.v0_3.version }}
-ENS: {{ site.data.contracts.uniteum.v0_3.ens }}
+Contract name: {{ uniteum.name }}
+Version: {{ uniteum.version }}
+ENS: {{ uniteum.ens }}
 
 {%- comment -%} Conditional logic {%- endcomment -%}
-{% if site.data.contracts.uniteum.v0_3.ens %}
-  ENS available: {{ site.data.contracts.uniteum.v0_3.ens }}
+{% if uniteum.ens %}
+  ENS available: {{ uniteum.ens }}
 {% endif %}
 ```
 
@@ -104,27 +125,33 @@ ENS: {{ site.data.contracts.uniteum.v0_3.ens }}
 title: Getting Started
 ---
 
+{%- comment -%} Set up contract references at page level {%- endcomment -%}
+{%- assign current_uniteum_version = site.data.contracts.current.uniteum -%}
+{%- assign uniteum = site.data.contracts.uniteum[current_uniteum_version] -%}
+{%- assign genesis = site.data.contracts.uniteum.v0_0 -%}
+{%- assign genesis_kiosk = site.data.contracts.kiosk.v0_0 -%}
+
 # Getting Started with Uniteum
 
 ## Prerequisites
 
-You'll need to interact with {{ site.data.contracts.uniteum.v0_3.name }} at:
+You'll need to interact with {{ uniteum.name }} at:
 
-{% include contract_table.html contract=site.data.contracts.uniteum.v0_3 %}
+{% include contract_table.html contract=uniteum %}
 
 ## Step 1: Buy Genesis Tokens
 
-Purchase tokens from {% include contract.html name="kiosk.v0_0" section="writeContract" text="the v0.0 kiosk" %}.
+Purchase tokens from {% include contract_link.html contract=genesis_kiosk section="writeContract" text="the v0.0 kiosk" %}.
 
-## Step 2: Migrate to v0.3
+## Step 2: Migrate to Current Version
 
-Migrate your tokens using the {% include contract_link.html contract=site.data.contracts.uniteum.v0_3 section="writeContract" text="migrate function" %}.
+Migrate your tokens using the {% include contract_link.html contract=uniteum section="writeContract" text="migrate function" %}.
 
 ## Step 3: Create Your First Unit
 
-Call `multiply("foo")` on {% include contract.html name="uniteum.v0_3" section="writeContract" %}.
+Call `multiply("foo")` on {% include contract_link.html contract=uniteum section="writeContract" text="the Uniteum contract" %}.
 
-For testing on Sepolia, use {% include contract.html name="uniteum.v0_3" network="sepolia" %}.
+For testing on Sepolia, use {% include contract_link.html contract=uniteum network="sepolia" text="Sepolia Uniteum" %}.
 ```
 
 ## Accessing Token Data

@@ -15,43 +15,43 @@ fi
 
 echo "Generating .env from $CONTRACTS_FILE..."
 
-# Extract addresses from contracts.yml using grep/awk
-UNITEUM_0_3=$(grep -A5 "^  v0_3:" "$CONTRACTS_FILE" | grep "mainnet:" | head -1 | awk '{print $2}' | tr -d '"')
-UNITEUM_0_0=$(grep -A5 "^  v0_0:" "$CONTRACTS_FILE" | grep "mainnet:" | head -1 | awk '{print $2}' | tr -d '"')
-KIOSK_0_3=$(grep -A5 "kiosk:" "$CONTRACTS_FILE" | grep -A5 "v0_3:" | grep "mainnet:" | awk '{print $2}' | tr -d '"')
-KIOSK_0_0=$(grep -A5 "kiosk:" "$CONTRACTS_FILE" | grep -A5 "v0_0:" | grep "mainnet:" | awk '{print $2}' | tr -d '"')
+# Get current versions (data-driven)
+CURRENT_UNITEUM_VERSION=$(yq eval '.current.uniteum' "$CONTRACTS_FILE")
+CURRENT_KIOSK_VERSION=$(yq eval '.current.kiosk' "$CONTRACTS_FILE")
 
-# Get current version
-CURRENT_VERSION=$(grep -A1 "^current:" "$CONTRACTS_FILE" | grep "uniteum:" | awk '{print $2}' | tr -d '"')
+# Extract addresses dynamically using yq
+UNITEUM_CURRENT=$(yq eval ".uniteum.${CURRENT_UNITEUM_VERSION}.mainnet" "$CONTRACTS_FILE")
+UNITEUM_0_0=$(yq eval '.uniteum.v0_0.mainnet' "$CONTRACTS_FILE")
+KIOSK_CURRENT=$(yq eval ".kiosk.${CURRENT_KIOSK_VERSION}.mainnet" "$CONTRACTS_FILE")
+KIOSK_0_0=$(yq eval '.kiosk.v0_0.mainnet' "$CONTRACTS_FILE")
 
 # Generate .env file
 cat > "$ENV_FILE" << EOF
 # Auto-generated from _data/contracts.yml
 # DO NOT EDIT MANUALLY - Run ./generate-env.sh to regenerate
-# Current version: $CURRENT_VERSION
+# Current Uniteum version: $CURRENT_UNITEUM_VERSION
+# Current Kiosk version: $CURRENT_KIOSK_VERSION
 
-# Uniteum 0.3 '1'
-UNITEUM_0_3=$UNITEUM_0_3
+# Current versions (data-driven)
+UNITEUM_CURRENT=$UNITEUM_CURRENT
+KIOSK_CURRENT=$KIOSK_CURRENT
 
-# Uniteum 0.0 '1' (Genesis)
+# Genesis (stable)
 UNITEUM_0_0=$UNITEUM_0_0
-
-# Kiosks
-KIOSK_0_3=$KIOSK_0_3
 KIOSK_0_0=$KIOSK_0_0
 
-# Convenience aliases (point to current version)
-ONE=\$UNITEUM_0_3
-KIOSK=\$KIOSK_0_3
+# Convenience aliases
+ONE=\$UNITEUM_CURRENT
+KIOSK=\$KIOSK_CURRENT
 GENESIS=\$UNITEUM_0_0
 EOF
 
 echo "✅ Generated $ENV_FILE"
 echo ""
 echo "Environment variables available:"
-echo "  UNITEUM_0_3=$UNITEUM_0_3"
-echo "  UNITEUM_0_0=$UNITEUM_0_0"
-echo "  KIOSK_0_3=$KIOSK_0_3"
-echo "  KIOSK_0_0=$KIOSK_0_0"
-echo "  ONE=\$UNITEUM_0_3 (current version)"
+echo "  UNITEUM_CURRENT=$UNITEUM_CURRENT (version: $CURRENT_UNITEUM_VERSION)"
+echo "  KIOSK_CURRENT=$KIOSK_CURRENT (version: $CURRENT_KIOSK_VERSION)"
+echo "  UNITEUM_0_0=$UNITEUM_0_0 (genesis)"
+echo "  KIOSK_0_0=$KIOSK_0_0 (genesis)"
+echo "  ONE=\$UNITEUM_CURRENT"
 echo "  GENESIS=\$UNITEUM_0_0"

@@ -1,8 +1,12 @@
 {%- comment -%}
 Inline contract reference for use in prose.
 
-Usage: {% include contract.html name="uniteum.v0_3" %}
-       {% include contract.html name="uniteum.v0_3" network="sepolia" section="writeContract" %}
+Usage - Use current version via variable:
+{%- assign current_version = site.data.contracts.current.uniteum -%}
+{% include contract.html name="uniteum.#{current_version}" %}
+
+OR for specific versions (only when needed, e.g., migration docs):
+{% include contract.html name="uniteum.v0_0" %}
 
 This is a shorthand that looks up the contract by path and creates a link.
 {%- endcomment -%}

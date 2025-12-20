@@ -93,8 +93,9 @@ tokens:
 
 ## Benefits
 
-### Before (Hardcoded Versions)
+### Before (Hardcoded Versions) ❌
 ```liquid
+{%- comment -%} BAD: Hardcoded version {%- endcomment -%}
 {% include contract_link.html contract=site.data.contracts.uniteum.v0_3 %}
 ```
 
@@ -134,16 +135,18 @@ one.multiply("foo");
 
 ### Migration Documentation
 ```liquid
-{%- assign current = site.data.contracts.uniteum[site.data.contracts.current.uniteum] %}
-{%- assign genesis = site.data.contracts.uniteum.v0_0 %}
+{%- assign current_version = site.data.contracts.current.uniteum -%}
+{%- assign uniteum = site.data.contracts.uniteum[current_version] -%}
+{%- assign genesis = site.data.contracts.uniteum.v0_0 -%}
 
 Migrate from {% include contract_link.html contract=genesis text="v0.0" %}
-to {% include contract_link.html contract=current %}.
+to {% include contract_link.html contract=uniteum %}.
 ```
 
 ### Reference Page
 ```liquid
-{%- assign uniteum = site.data.contracts.uniteum[site.data.contracts.current.uniteum] %}
+{%- assign current_version = site.data.contracts.current.uniteum -%}
+{%- assign uniteum = site.data.contracts.uniteum[current_version] -%}
 
 ## {{ uniteum.name }}
 

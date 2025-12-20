@@ -10,9 +10,11 @@ Uniteum is an algebraic liquidity protocol on Ethereum where ERC-20 tokens have 
 
 Current contract addresses are maintained in `_data/contracts.yml`. Key contracts:
 
-- **Current Uniteum "1"**: See `site.data.contracts.uniteum.v0_3` (0.3 as of December 2024)
-- **Genesis Uniteum "1"**: See `site.data.contracts.uniteum.v0_0` (original supply)
-- **Current Kiosk**: See `site.data.contracts.kiosk.v0_3`
+- **Current Uniteum "1"**: Use `site.data.contracts.current.uniteum` to get current version key, then access `site.data.contracts.uniteum[current_version]`
+- **Genesis Uniteum "1"**: See `site.data.contracts.uniteum.v0_0` (original supply - this is stable)
+- **Current Kiosk**: Use `site.data.contracts.current.kiosk` to get current version key, then access `site.data.contracts.kiosk[current_version]`
+
+**IMPORTANT**: Never hardcode version keys like `v0_3`. Always use the `site.data.contracts.current.*` pointers to get the current version dynamically.
 
 All contracts use Nick's deterministic deployer (same addresses across networks).
 
@@ -22,10 +24,10 @@ Owned by `0xd441...6401`:
 
 ```
 uniteum.eth
-├── 0-0.uniteum.eth → Genesis "1" (see _data/contracts.yml)
+├── 0-0.uniteum.eth → Genesis "1" (v0.0, see _data/contracts.yml)
 │   └── buy.0-0.uniteum.eth → Genesis Kiosk
-├── 0-3.uniteum.eth → Current "1" (see _data/contracts.yml)
-│   └── buy.0-3.uniteum.eth → Current Kiosk
+├── [version].uniteum.eth → Current "1" (see current.uniteum in _data/contracts.yml)
+│   └── buy.[version].uniteum.eth → Current Kiosk
 ├── eoa.uniteum.eth → 0x6056...496e
 │   ├── 0.eoa.uniteum.eth → 0xff96...1004 (main deployer)
 │   ├── 1.eoa.uniteum.eth → 0x215a...7003

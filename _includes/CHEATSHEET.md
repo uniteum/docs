@@ -67,11 +67,12 @@ Purchase from {% include kiosk.html section="writeContract" %}.
 Sometimes you need to reference a specific version (e.g., migration docs):
 
 ```liquid
-{%- assign uniteum_v0_3 = site.data.contracts.uniteum.v0_3 %}
-{%- assign uniteum_v0_0 = site.data.contracts.uniteum.v0_0 %}
+{%- assign current_version = site.data.contracts.current.uniteum -%}
+{%- assign uniteum = site.data.contracts.uniteum[current_version] -%}
+{%- assign genesis = site.data.contracts.uniteum.v0_0 -%}
 
-Migrate from {% include contract_link.html contract=uniteum_v0_0 %}
-to {% include contract_link.html contract=uniteum_v0_3 %}.
+Migrate from {% include contract_link.html contract=genesis %}
+to {% include contract_link.html contract=uniteum %}.
 ```
 
 ## Network Options

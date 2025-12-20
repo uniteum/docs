@@ -1,0 +1,12 @@
+{%- comment -%}
+Returns the current Kiosk contract object.
+
+Usage: {% assign kiosk = include "kiosk_contract.html" %}
+       {{ kiosk.name }}
+       {{ kiosk.mainnet }}
+       {% include contract_link.html contract=kiosk %}
+
+This automatically uses the current version defined in _data/contracts.yml
+{%- endcomment -%}
+{%- assign current_version = site.data.contracts.current.kiosk -%}
+{{ site.data.contracts.kiosk[current_version] }}

@@ -1,5 +1,8 @@
 {%- comment -%}
-Usage: {% include contract_link.html contract=site.data.contracts.uniteum.v0_3 network="mainnet" section="code" %}
+Usage:
+{%- assign current_version = site.data.contracts.current.uniteum -%}
+{%- assign uniteum = site.data.contracts.uniteum[current_version] -%}
+{% include contract_link.html contract=uniteum network="mainnet" section="code" %}
 
 Parameters:
 - contract (required): Contract object from _data/contracts.yml
