@@ -70,6 +70,7 @@ for ((i=0; i<unit_count; i++)); do
     # Parse JSON result
     address=$(echo "$result" | jq -r '.address')
     canonical=$(echo "$result" | jq -r '.canonical')
+    one=$(echo "$result" | jq -r '.one')
 
     # Append to output file
     cat >> "$OUTPUT_FILE" << EOF
