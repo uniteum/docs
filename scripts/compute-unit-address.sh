@@ -16,7 +16,7 @@ else
 fi
 
 SYMBOL="$1"
-RPC_URL="${2:-https://eth.llamarpc.com}"
+RPC_URL="${2:-https://ethereum.publicnode.com}"
 
 if [ -z "$SYMBOL" ]; then
     echo "Error: No symbol provided" >&2
@@ -35,12 +35,13 @@ fi
 
 # Parse address (first line) and canonical (second line)
 address=$(echo "$result" | sed -n '1p')
-canonical=$(echo "$result" | sed -n '2p' | tr -d '"')
+canonical=$(echo "$result" | sed -n '2p' | tr -d '"' | sed 's/\\\\/\\/g')
 
 if [ -z "$address" ] || [ -z "$canonical" ]; then
     echo "Error: Could not parse result for '$SYMBOL'" >&2
     exit 1
 fi
 
-# Output as JSON
-echo "{\"symbol\":\"$SYMBOL\",\"canonical\":\"$canonical\",\"address\":\"$address\"}"
+# Output as JSON using jq to properly escape strings
+jq -n --arg sym "$SYMBOL" --arg can "$canonical" --arg addr "$address" --arg one "$ONE" \
+    '{symbol: $sym, canonical: $can, address: $addr, one: $one}'

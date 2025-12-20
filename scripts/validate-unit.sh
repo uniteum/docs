@@ -16,7 +16,7 @@ else
 fi
 
 SYMBOL="$1"
-RPC_URL="${2:-https://eth.llamarpc.com}"
+RPC_URL="${2:-https://ethereum.publicnode.com}"
 
 if [ -z "$SYMBOL" ]; then
     echo "Error: No symbol provided" >&2
@@ -34,7 +34,8 @@ if [ $? -ne 0 ]; then
 fi
 
 # Parse canonical form (second line of output)
-canonical=$(echo "$result" | sed -n '2p' | tr -d '"')
+# Use sed to convert \\ to \
+canonical=$(echo "$result" | sed -n '2p' | tr -d '"' | sed 's/\\\\/\\/g')
 
 if [ -z "$canonical" ]; then
     echo "Error: Could not parse canonical form for '$SYMBOL'" >&2

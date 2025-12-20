@@ -6,7 +6,7 @@ set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 INPUT_FILE="$SCRIPT_DIR/../_data/example-units-input.yml"
-RPC_URL="${1:-https://eth.llamarpc.com}"
+RPC_URL="${1:-https://ethereum.publicnode.com}"
 
 if [ ! -f "$INPUT_FILE" ]; then
     echo "Error: Input file not found: $INPUT_FILE" >&2
@@ -54,7 +54,7 @@ while IFS= read -r symbol; do
     fi
 
     # Rate limit
-    sleep 0.1
+    sleep 0.3
 done <<< "$symbols"
 
 echo ""

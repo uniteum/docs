@@ -8,7 +8,7 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 INPUT_FILE="$SCRIPT_DIR/../_data/example-units-input.yml"
 OUTPUT_FILE="$SCRIPT_DIR/../_data/example-units.yml"
-RPC_URL="${1:-https://eth.llamarpc.com}"
+RPC_URL="${1:-https://ethereum.publicnode.com}"
 
 if [ ! -f "$INPUT_FILE" ]; then
     echo "Error: Input file not found: $INPUT_FILE" >&2
@@ -76,12 +76,13 @@ for ((i=0; i<unit_count; i++)); do
   - symbol: "$symbol"
     canonical: "$canonical"
     address: "$address"
+    one: "$one"
     description: "$description"
 
 EOF
 
     # Rate limit
-    sleep 0.1
+    sleep 0.3
 done
 
 echo ""

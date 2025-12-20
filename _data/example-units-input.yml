@@ -72,7 +72,7 @@ units:
     description: "Reciprocal of kg"
 
   # Simple products
-  - symbol: "foo*bar"
+  - symbol: "bar*foo"
     description: "Product of foo and bar"
 
   - symbol: "meter*second"
@@ -84,7 +84,7 @@ units:
   - symbol: "kilogram*meter"
     description: "Product of kilogram and meter"
 
-  - symbol: "sword*shield"
+  - symbol: "shield*sword"
     description: "Gaming composite item"
 
   # Ratios/Division
@@ -123,7 +123,7 @@ units:
   - symbol: "$0xdAC17F958D2ee523a2206206994597C13D831ec7"
     description: "Anchored USDT (Tether USD) - mainnet"
 
-  - symbol: "$0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599"
+  - symbol: "$0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599"
     description: "Anchored WBTC (Wrapped Bitcoin) - mainnet"
 
   - symbol: "$0x6B175474E89094C44Da98b954EedeAC495271d0F"
