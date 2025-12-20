@@ -176,10 +176,18 @@ This multi-role capability creates interconnected liquidity across the entire sy
 
 ## Valid vs Invalid Triads
 
-A triad is valid if the geometric mean relationship holds:
+A triad is valid if it satisfies **both** constraints:
+
+**1. Geometric mean relationship**: √(U * V) = W
 
 ✅ **(meter², 1/second², meter/second)** — √(meter² * 1/second²) = meter/second
 
 ❌ **(meter, 1/second, meter/second)** — √(meter * 1/second) ≠ meter/second
 
-The contract enforces geometric mean validity. You can't forge invalid triads.
+**2. No duplicate reserves**: U ≠ V
+
+✅ **(1, meter², meter)** — Different reserve units (1 and meter²)
+
+❌ **(bar, bar, bar)** — Duplicate reserves, even though √(bar * bar) = bar
+
+The contract enforces both constraints. Attempting invalid triads raises errors like `DuplicateUnits()`.

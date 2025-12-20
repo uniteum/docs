@@ -195,11 +195,15 @@ Every forge operation involves three units in specific roles:
 - Its supply follows the invariant: `√(u * v) = w` where u, v are reserve supplies, w is liquidity supply
 - Can be "1" for reciprocal pairs, or any compound unit like `meter/second`
 
-**Geometric Mean Constraint:**
-- ALL triads must satisfy √(U * V) = W (the geometric mean relationship)
-- This is why `(1, m, m)` is invalid: √(1 * m) = √m ≠ m
-- But `(1, m², m)` is valid: √(1 * m²) = m ✓
-- Units can occupy different roles in different triads
+**Triad Validity Constraints:**
+1. **Geometric mean**: √(U * V) must equal W
+   - Example: `(1, m², m)` is valid because √(1 * m²) = m ✓
+   - Example: `(1, m, m)` is invalid because √(1 * m) = √m ≠ m ✗
+2. **No duplicate reserves**: U ≠ V (reserve units must be different)
+   - Example: `(bar, bar, bar)` is invalid even though √(bar * bar) = bar (duplicate reserves)
+   - Raises `DuplicateUnits()` error
+
+Units can occupy different roles in different triads, enabling multi-role composition.
 
 **Example:**
 In triad `(meter², 1/second², meter/second)`:
@@ -381,10 +385,11 @@ Common anchored unit shorthands (all have dedicated reference pages):
 1. **Floating ≠ synthetic:** `USD` symbol doesn't track real USD price
 2. **Geometric mean triads:** All forges use `(U, V, √(U*V))` structure—the liquidity unit is always the geometric mean
 3. **Liquidity units vs reserves:** Same unit can be a reserve in one triad, liquidity unit in another
-4. **Geometric mean constraint:** Triads must satisfy √(U*V) = W, so `(1, m, m)` is invalid but `(1, m², m)` is valid
-5. **Creating compounds:** To create `A*B`, forge `(A², B², A*B)` where A*B is the liquidity unit
-6. **Price control mechanism:** Forging IS how you influence prices
-7. **No collateral needed:** For floating units, just liquidity through forging
+4. **Triad validity:** Two constraints apply: (1) √(U*V) = W and (2) U ≠ V (no duplicate reserves)
+5. **Why `(bar, bar, bar)` fails:** Even though √(bar * bar) = bar, duplicate reserves violate constraint #2
+6. **Creating compounds:** To create `A*B`, forge `(A², B², A*B)` where A*B is the liquidity unit
+7. **Price control mechanism:** Forging IS how you influence prices
+8. **No collateral needed:** For floating units, just liquidity through forging
 
 ### Critical Distinctions
 
