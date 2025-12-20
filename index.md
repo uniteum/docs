@@ -38,7 +38,7 @@ Uniteum:
 - **Geometric mean triads**: Every forge operates on (U, V, √(U*V)) where liquidity units mediate reserve units
 - **One invariant** governs all operations: `√(u · v) = w`
 - **Infinite interconnected pools** through algebraic composition
-- **0.5 power perps**: Implements the theoretical framework of constant product AMMs
+- **Arbitrary power perps**: Generalizes beyond Uniswap's 0.5 power perps—create any convexity profile (0.5x, 1x, 2x, custom rational exponents)
 - **No oracles**—prices emerge from forge operations and arbitrage
 - **No collateral requirements** for floating units
 
@@ -46,7 +46,7 @@ Uniteum:
 
 **Hedge without oracles:** Every anchored token has a reciprocal that acts as an automatic hedge. `$USDC` depegs? Your `1/$USDC` gains offset the losses. No oracles, no collateral, no liquidations.
 
-**Power perpetuals:** `$WETH^2` gives you squared exposure to ETH price movements—leverage without borrowing or liquidation risk. Rational exponents let you design custom convexity profiles.
+**Power perpetuals:** Create any convexity profile through geometric mean triads. `$WETH^2` (2x power) gives squared exposure, `$WETH` (1x power) gives linear exposure, `$WETH^(1/2)` (0.5x power like Uniswap) gives square root exposure—all without borrowing, collateral, or liquidation risk. Design custom convexity with any rational exponent.
 
 **Multi-token derivatives:** `$WETH/$USDC` IS the ETH/USD price ratio. `$WETH*$WBTC` is a diversified basket. Combine them algebraically for complex positions. Prices are enforced by arbitrage, not oracles.
 
@@ -54,7 +54,8 @@ See [Use Cases](/use-cases/) for detailed examples and strategies.
 
 ## Current Status
 
-**Version 0.3** — Experimental, unaudited, deployed on Mainnet and Sepolia.
+{% assign current_uniteum = site.data.contracts.uniteum[site.data.contracts.current.uniteum] -%}
+**Version {{ current_uniteum.version }}** — Experimental, unaudited, deployed on Mainnet and Sepolia.
 
 This is novel mechanism design. We don't know what emerges at scale. Proceed with curiosity and caution.
 
