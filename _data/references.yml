@@ -1,0 +1,11 @@
+# External References
+# Links to related research, protocols, and resources
+
+research:
+  - title: "Everything Is A Perp"
+    url: "https://www.paradigm.xyz/2024/03/everything-is-a-perp"
+    authors: "Dan Robinson, Joe Clark, Andrew Leone"
+    date: "2024-03-06"
+    publisher: "Paradigm"
+    description: "Explores how power perpetuals provide a unified framework for understanding DeFi primitives: stablecoins as 0-perps, margined futures as 1-perps, and constant product AMMs as 0.5-perps"
+    relevance: "Theoretical framework for understanding AMM mechanics and price relationships"
