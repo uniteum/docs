@@ -239,6 +239,7 @@ This multi-role capability creates the interconnected mesh topology of liquidity
 - **Development:** VSCode, GitHub
 - **Documentation:** Jekyll, GitHub Pages
 - **Domain:** uniteum.one → uniteum.github.io
+- **Main repo:** github.com/uniteum/uniteum
 - **Docs repo:** github.com/uniteum/docs
 
 ## Common Commands

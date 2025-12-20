@@ -29,9 +29,9 @@ If you discover any issues, please [report them](#reporting-issues).
 
 Found a bug or unexpected behavior?
 
-- **GitHub Issues:** [uniteum/docs/issues](https://github.com/uniteum/docs/issues)
+- **GitHub Issues:** [uniteum/uniteum/issues](https://github.com/uniteum/uniteum/issues)
 - **Twitter:** [@uniteum1](https://twitter.com/uniteum1)
-- **Email:** paul@uniteum.one
+- **Email:** team@uniteum.com
 
 Include:
 - Transaction hash (if applicable)

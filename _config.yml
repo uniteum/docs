@@ -13,15 +13,24 @@ url: "https://uniteum.one"
 baseurl: ""
 repository: "uniteum/docs"
 
+# GitHub Repositories
+repositories:
+  docs: "uniteum/docs"
+  main: "uniteum/uniteum"
+
 # Author/Organization
 author:
   name: Paul Reinholdtsen
-  email: paul@uniteum.one
+  email: team@uniteum.com
   ens: reinholdtsen.eth
 
 # Social & Links
 github_username: uniteum
 twitter_username: uniteum1
+contact:
+  email: team@uniteum.com
+  twitter: "@uniteum1"
+  github_issues: "https://github.com/uniteum/uniteum/issues"
 ethereum:
   mainnet_contract: "0x9df9b0501e8f6c05623b5b519f9f18b598d9b253"
   ens_primary: "uniteum.eth"
