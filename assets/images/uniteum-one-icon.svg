@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <!-- Rich deep gold gradient -->
+    <!-- Rich bright gold gradient -->
     <radialGradient id="darkGold" cx="40%" cy="40%">
-      <stop offset="0%" style="stop-color:#D4A841;stop-opacity:1" />
-      <stop offset="50%" style="stop-color:#C49A2C;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#9B7719;stop-opacity:1" />
+      <stop offset="0%" style="stop-color:#F4C430;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#E6B422;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#C9A01C;stop-opacity:1" />
     </radialGradient>
     <!-- Rim gradient -->
     <linearGradient id="rimGradient" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -28,13 +28,13 @@
   </defs>
 
   <!-- Outer dark rim -->
-  <circle cx="256" cy="256" r="240" fill="#5C4A0F"/>
+  <circle cx="256" cy="256" r="256" fill="#5C4A0F"/>
 
   <!-- Lighter band inside -->
-  <circle cx="256" cy="256" r="230" fill="#D4A841"/>
+  <circle cx="256" cy="256" r="246" fill="#F4C430"/>
 
   <!-- Inner dark region -->
-  <circle cx="256" cy="256" r="200" fill="url(#darkGold)"/>
+  <circle cx="256" cy="256" r="215" fill="url(#darkGold)"/>
 
   <!-- Shadow for embossed effect on "1" -->
   <text x="259" y="269"
@@ -61,7 +61,7 @@
         font-family="'Latin Modern Math', 'STIX Two Math', 'Cambria Math', 'Times New Roman', serif"
         font-size="400"
         font-weight="700"
-        fill="#5C4610"
+        fill="#3D2F08"
         text-anchor="middle"
         dominant-baseline="central">1</text>
 
@@ -90,7 +90,7 @@
         font-family="'Latin Modern Math', 'STIX Two Math', 'Cambria Math', 'Times New Roman', serif"
         font-size="60"
         font-weight="700"
-        fill="#5C4610"
+        fill="#3D2F08"
         text-anchor="middle"
         dominant-baseline="central">^</text>
 
@@ -119,12 +119,12 @@
         font-family="'Latin Modern Math', 'STIX Two Math', 'Cambria Math', 'Times New Roman', serif"
         font-size="80"
         font-weight="700"
-        fill="#5C4610"
+        fill="#3D2F08"
         text-anchor="middle"
         dominant-baseline="central">*</text>
 
   <!-- Shadow for embossed "\" -->
-  <text x="393" y="222"
+  <text x="393" y="217"
         font-family="'Latin Modern Math', 'STIX Two Math', 'Cambria Math', 'Times New Roman', serif"
         font-size="70"
         font-weight="700"
@@ -134,7 +134,7 @@
         dominant-baseline="central">\</text>
 
   <!-- Highlight for embossed "\" -->
-  <text x="391" y="220"
+  <text x="391" y="215"
         font-family="'Latin Modern Math', 'STIX Two Math', 'Cambria Math', 'Times New Roman', serif"
         font-size="70"
         font-weight="700"
@@ -144,16 +144,16 @@
         dominant-baseline="central">\</text>
 
   <!-- Right top symbol "\" -->
-  <text x="392" y="221"
+  <text x="392" y="216"
         font-family="'Latin Modern Math', 'STIX Two Math', 'Cambria Math', 'Times New Roman', serif"
         font-size="70"
         font-weight="700"
-        fill="#5C4610"
+        fill="#3D2F08"
         text-anchor="middle"
         dominant-baseline="central">\</text>
 
   <!-- Shadow for embossed "/" -->
-  <text x="393" y="302"
+  <text x="393" y="308"
         font-family="'Latin Modern Math', 'STIX Two Math', 'Cambria Math', 'Times New Roman', serif"
         font-size="70"
         font-weight="700"
@@ -163,7 +163,7 @@
         dominant-baseline="central">/</text>
 
   <!-- Highlight for embossed "/" -->
-  <text x="391" y="300"
+  <text x="391" y="306"
         font-family="'Latin Modern Math', 'STIX Two Math', 'Cambria Math', 'Times New Roman', serif"
         font-size="70"
         font-weight="700"
@@ -173,11 +173,11 @@
         dominant-baseline="central">/</text>
 
   <!-- Right bottom symbol "/" -->
-  <text x="392" y="301"
+  <text x="392" y="307"
         font-family="'Latin Modern Math', 'STIX Two Math', 'Cambria Math', 'Times New Roman', serif"
         font-size="70"
         font-weight="700"
-        fill="#5C4610"
+        fill="#3D2F08"
         text-anchor="middle"
         dominant-baseline="central">/</text>
 </svg>
