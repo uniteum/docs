@@ -37,7 +37,7 @@ Where:
 - **U and V** are the **reserve units** (what you're exchanging)
 - **√(U*V)** is the **liquidity unit** (mediates the exchange, analogous to Uniswap LP tokens)
 
-This geometric mean structure implements 0.5 power perpetuals, connecting Uniteum to fundamental AMM theory.
+This geometric mean structure implements **arbitrary power perpetuals**, generalizing beyond Uniswap's 0.5 power perps. By choosing different reserve units, you can create any power/convexity profile.
 
 ## Triad Patterns
 
@@ -85,6 +85,30 @@ Compound units have reciprocals too, mediated by "1".
 Examples:
 - (meter/second, second/meter, 1) — since √((meter/second) * (second/meter)) = 1
 - (foo\*bar, 1/(foo\*bar), 1)
+
+### Power Perpetual Triads
+
+The geometric mean structure enables arbitrary power perpetuals by choosing appropriate reserve units.
+
+**Pattern**: `(1, U^(2p), U^p)` creates a p-power perp for U
+
+Examples:
+
+**(1, meter², meter)** — 1.0 power perp
+- **Reserve units**: 1 and meter²
+- **Liquidity unit**: meter (since √(1 * meter²) = meter)
+- Linear exposure to meter² price
+
+**(1, foo^4, foo²)** — 2.0 power perp
+- **Reserve units**: 1 and foo^4
+- **Liquidity unit**: foo² (since √(1 * foo^4) = foo²)
+- Squared exposure to foo^4 price
+
+**(meter^(2/3), meter^(4/3), meter)** — Custom fractional power
+- **Reserve units**: meter^(2/3) and meter^(4/3)
+- **Liquidity unit**: meter (since √(meter^(2/3) * meter^(4/3)) = meter)
+
+This generalizes Uniswap's 0.5 power perp `(U, 1/U, 1)` to support any rational power/convexity profile.
 
 ## The Universal Invariant
 
@@ -137,7 +161,8 @@ This mesh enables:
 - **Arbitrage:** Price inconsistencies create profit opportunities
 - **Liquidity sharing:** Deep liquidity in one triad supports others
 - **Price discovery:** No oracles needed—arbitrage enforces consistency
-- **Power perp mechanics:** Liquidity units track geometric mean relationships
+- **Arbitrary power perps:** Create any convexity profile via geometric mean triads
+- **Custom leverage:** From 0.5x (sqrt) to 2x (squared) and beyond, without borrowing
 
 ## Multi-Role Composition
 

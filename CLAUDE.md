@@ -65,7 +65,15 @@ Every forge operation works on a triad of three units: two **reserve units** and
 
 **Connection to Power Perps:**
 
-This geometric mean structure implements 0.5 power perpetuals (see [Paradigm research](https://www.paradigm.xyz/2024/03/everything-is-a-perp)). Just as Uniswap LP positions have value `V = 2√(k*price)`, Uniteum's liquidity units track the square root relationship of their reserves.
+This geometric mean structure implements **arbitrary power perpetuals** (see [Paradigm research](https://www.paradigm.xyz/2024/03/everything-is-a-perp)).
+
+**Examples:**
+- `(U, 1/U, 1)` → 0.5 power perp (like Uniswap LP: √(U * 1/U) = 1)
+- `(1, m², m)` → 1.0 power perp (linear exposure to m²)
+- `(1, m^4, m²)` → 2.0 power perp (squared exposure to m^4)
+- `(A^p, B^q, A^(p/2)*B^(q/2))` → Custom power perps with any rational exponent
+
+This generalizes beyond Uniswap's 0.5 power perp to support arbitrary convexity profiles.
 
 **This is the price control mechanism:**
 - To increase U's price: burn U, mint 1/U (consumes "1")
@@ -266,7 +274,7 @@ Uniteum:
 - Units can serve as reserves in one triad, liquidity in another
 - Infinite interconnected pools through multi-role composition
 - One operation (forge) handles all swaps, minting, burning
-- Implements 0.5 power perps structure (see Paradigm research)
+- Implements **arbitrary power perps** via geometric mean structure (generalizes Uniswap's 0.5 power perps)
 - No oracles, no collateral requirements for synthetics
 
 ## Documentation Approach
