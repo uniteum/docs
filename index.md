@@ -24,9 +24,9 @@ status: draft
 
 Uniteum is an algebraic liquidity protocol on Ethereum.
 
-Tokens have dimensional units—like physical quantities (meter, second, kilogram) or arbitrary symbols (foo, bar). Units compose algebraically: `meter` divided by `second` gives `meter/second`. Every unit has a reciprocal. Every composition creates new tokens.
+Tokens have dimensional units that compose algebraically: `meter/second`, `USD/BTC`, `foo*bar`. The value of `meter/second` is the value of `meter` divided by the value of `second`. The value of `foo²` tracks `foo` squared. What you see is what you get—the notation is the price relationship.
 
-Prices aren't set by oracles. They emerge from a single operation—**forge**—and the arbitrage it enables.
+One operation—**forge**—maintains these algebraic relationships through arbitrage. Build custom derivatives with any power profile. No oracles needed.
 
 ---
 
