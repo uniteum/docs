@@ -1,8 +1,8 @@
 ---
 title: Uniteum
 description: >-
-  An algebraic liquidity protocol where tokens have dimensional units
-  and prices emerge from forge operations, not oracles.
+  Tokens and derivatives with units like physics and finance.
+  Relationships create liquidity, arbitrage sets prices.
 
 # Navigation
 nav_order: 1
