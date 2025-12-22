@@ -2,6 +2,7 @@
 layout: page
 title: "Volatility Hedge Test Case - Code Analysis"
 permalink: /research/test-case-analysis/
+parent: Research Materials - Volatility Hedge Discovery
 ---
 
 # Volatility Hedge Test Case Analysis

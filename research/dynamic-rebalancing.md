@@ -2,6 +2,7 @@
 layout: page
 title: "Dynamic Rebalancing Strategy - Maximizing Hedge Returns"
 permalink: /research/dynamic-rebalancing/
+parent: Research Materials - Volatility Hedge Discovery
 ---
 
 # Dynamic Rebalancing: Maximizing Volatility Hedge Returns

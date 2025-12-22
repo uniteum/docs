@@ -2,6 +2,7 @@
 layout: page
 title: "Academic Outreach Checklist"
 permalink: /research/outreach-checklist/
+parent: Research Materials - Volatility Hedge Discovery
 published: false
 ---
 

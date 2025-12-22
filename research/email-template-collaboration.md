@@ -2,6 +2,7 @@
 layout: page
 title: "Email Template - Collaboration"
 permalink: /research/email-template-collaboration/
+parent: Research Materials - Volatility Hedge Discovery
 published: false
 ---
 

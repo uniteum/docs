@@ -2,6 +2,7 @@
 layout: page
 title: "Native Volatility Hedging - One Page Summary"
 permalink: /research/one-page-summary/
+parent: Research Materials - Volatility Hedge Discovery
 ---
 
 # Native Volatility Hedging in Uniteum
