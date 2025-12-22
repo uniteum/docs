@@ -3,18 +3,26 @@
 
 # Current versions (update these pointers when releasing new versions)
 current:
-  uniteum: "v0_4"
-  kiosk: "v0_4"
+  uniteum: "v0_5"
+  kiosk: "v0_5"
 
 # Core Uniteum contracts
 uniteum:
+  v0_5:
+    name: "Uniteum 0.5 '1'"
+    version: "0.5"
+    description: "Current version with full Uniteum functionality"
+    mainnet: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
+    sepolia: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
+    ens: "uniteum.eth"
+
   v0_4:
     name: "Uniteum 0.4 '1'"
     version: "0.4"
     description: "Current version with full Uniteum functionality"
     mainnet: "0x5bA96211E3679FDcc7047a5c64d40A4Dd3fBdAD7"
     sepolia: "0x5bA96211E3679FDcc7047a5c64d40A4Dd3fBdAD7"
-    ens: "uniteum.eth"
+    ens: "0-4.uniteum.eth"
 
   v0_3:
     name: "Uniteum 0.3 '1'"
@@ -34,13 +42,21 @@ uniteum:
 
 # Buy/Kiosk contracts
 kiosk:
+  v0_5:
+    name: "Buy Uniteum 0.5 '1'"
+    version: "0.5"
+    description: "Kiosk for purchasing Uniteum 0.5 tokens"
+    mainnet: "0xBFdf4Cf25EC0DB0Be49a04213D230495291C6fFA"
+    sepolia: "0xBFdf4Cf25EC0DB0Be49a04213D230495291C6fFA"
+    ens: "buy.uniteum.eth"
+
   v0_4:
     name: "Buy Uniteum 0.4 '1'"
     version: "0.4"
     description: "Kiosk for purchasing Uniteum 0.4 tokens"
     mainnet: "0xffAcC47570dfE1B1980b0475b13Fb07479CEf7EA"
     sepolia: "0xffAcC47570dfE1B1980b0475b13Fb07479CEf7EA"
-    ens: "buy.uniteum.eth"
+    ens: "buy.0-4.uniteum.eth"
 
   v0_3:
     name: "Buy Uniteum 0.3 '1'"
