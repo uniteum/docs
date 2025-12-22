@@ -5,6 +5,7 @@
 current:
   uniteum: "v0_5"
   kiosk: "v0_5"
+  helper: "v0_5"
 
 # Core Uniteum contracts
 uniteum:

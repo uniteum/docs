@@ -76,17 +76,19 @@ Uses `:` (colon) for division in exponents:
 2. Test deployment script in dry-run mode:
    ```bash
    cd /home/paul/git/uniteum/docs
-   ./scripts/deploy-examples.sh --network sepolia --dry-run
+   ./scripts/deploy-all-units.sh sepolia --dry-run
    ```
 3. Deploy to Sepolia for testing:
    ```bash
    export PRIVATE_KEY=0x...
-   ./scripts/deploy-examples.sh --network sepolia
+   ./scripts/deploy-all-units.sh sepolia
    ```
 4. Deploy to mainnet when ready:
    ```bash
-   ./scripts/deploy-examples.sh --network mainnet
+   ./scripts/deploy-all-units.sh mainnet
    ```
+
+**Note**: Uses UnitHelper for batch deployment - all units deployed in a single transaction!
 
 ## Usage in Documentation
 

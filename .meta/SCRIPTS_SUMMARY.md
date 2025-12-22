@@ -1,140 +1,270 @@
 # Scripts Implementation Summary
 
-## What Was Created
+## Overview
 
-A clean separation of concerns for managing example units in the documentation.
+Streamlined script architecture using UnitHelper contract for efficient batch operations.
 
 ## File Structure
 
 ```
 _data/
-├── contracts.yml              (NEW - contract addresses config)
-├── example-units-input.yml    (NEW - input: symbols + descriptions)
+├── contracts.yml              (contract addresses config)
+├── example-units-input.yml    (input: symbols + descriptions)
 └── example-units.yml          (GENERATED - output: addresses computed)
 
 scripts/
-├── README.md                  (NEW - complete documentation)
-├── validate-unit.sh           (NEW - atomic: validate one symbol)
-├── compute-unit-address.sh    (NEW - atomic: compute one address)
-├── deploy-unit.sh             (NEW - atomic: deploy one unit)
-├── validate-all-units.sh      (NEW - wrapper: validate all)
-├── compute-all-addresses.sh   (NEW - wrapper: compute all)
-└── deploy-all-units.sh        (NEW - wrapper: deploy all)
+├── generate-env.sh            (generate .env from contracts.yml)
+├── compute-all-addresses.sh   (batch predict addresses using UnitHelper)
+└── deploy-all-units.sh        (batch deploy using UnitHelper)
 ```
 
-## Design Principles Applied
+## Key Architecture Changes
 
-1. **Input vs Computed Data Separation**
-   - Input: `example-units-input.yml` (symbol + description only)
-   - Output: `example-units.yml` (includes addresses, generated)
+### Batch Operations via UnitHelper
 
-2. **Canonical Form Enforcement**
-   - All symbols must be canonical
-   - Validation happens before computation
-   - Contract is source of truth
+All scripts now use the UnitHelper contract for efficient batch operations:
 
-3. **Atomic + Wrapper Pattern**
-   - Small scripts do one thing (one unit)
-   - Wrapper scripts call atomic scripts for each unit
-   - Easy to test, debug, and reuse
+- **UnitHelper.product(IUnit, string[])** - Predict addresses for multiple units in one call
+- **UnitHelper.multiply(IUnit, string[])** - Deploy multiple units in one transaction
 
-4. **Independent from Protocol Repo**
-   - Uses `cast` (no forge scripts needed)
-   - No dependency on uniteum submodule
-   - Only needs contract address + RPC
+### Benefits
 
-5. **Minimal Config Files**
-   - Only non-derivable data stored
-   - YAML format for all configs
-   - Human-readable and machine-parseable
+1. **Single RPC Call** - All addresses computed at once (vs. N calls)
+2. **Single Transaction** - All units deployed together (vs. N transactions)
+3. **Atomic Operations** - All-or-nothing deployments
+4. **Gas Efficiency** - Batch operations save gas
+5. **Simplicity** - Removed 8 helper scripts, down to 3 core scripts
 
-## Config Files
+## Removed Scripts (Obsolete)
 
-### `_data/contracts.yml`
-```yaml
-contracts:
-  - name: "Uniteum 0.1 '1'"
-    address: "0x9df9b0501e8f6c05623b5b519f9f18b598d9b253"
-    version: "0.1"
-    ens: "0-1.uniteum.eth"
+The following scripts have been removed as they're no longer needed:
+
+- ❌ `deploy-unit.sh` - Single unit deployment (use batch instead)
+- ❌ `compute-unit-address.sh` - Single unit prediction (use batch instead)
+- ❌ `validate-unit.sh` - Single unit validation (no longer needed)
+- ❌ `validate-all-units.sh` - Batch validation (contract validates)
+- ❌ `fetch-example-addresses.sh` - Duplicate of compute-all
+- ❌ `predict-unit-addresses.sh` - Duplicate with CREATE2 math
+- ❌ `deploy-examples.sh` - Replaced by deploy-all-units.sh
+- ❌ `test-backslash.sh` - Testing old `\` operator (now `:`)
+
+## Core Scripts
+
+### 1. `generate-env.sh`
+
+Generates `.env` file from `contracts.yml` with current contract addresses.
+
+**Output:**
+```bash
+UNITEUM_CURRENT=0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da
+KIOSK_CURRENT=0xBFdf4Cf25EC0DB0Be49a04213D230495291C6fFA
+HELPER_CURRENT=0x456dcb7a3f7d9A6DB77DDf6a4eA8B10453acF7F9
+ONE=$UNITEUM_CURRENT
+HELPER=$HELPER_CURRENT
 ```
 
-### `_data/example-units-input.yml`
-```yaml
-units:
-  - symbol: "foo"
-    description: "Generic placeholder unit"
+**Usage:**
+```bash
+./scripts/generate-env.sh
 ```
 
-## Script Architecture
+### 2. `compute-all-addresses.sh`
 
+Computes addresses for all units in `example-units-input.yml` using UnitHelper batch prediction.
+
+**Features:**
+- Single RPC call via `UnitHelper.product()`
+- Reads from `_data/example-units-input.yml`
+- Generates `_data/example-units.yml` with addresses
+- Includes canonical forms from contract
+
+**Usage:**
+```bash
+./scripts/compute-all-addresses.sh [rpc-url]
 ```
-Atomic Scripts (single unit):
-├── validate-unit.sh <symbol>           → exit 0/1
-├── compute-unit-address.sh <symbol>    → JSON output
-└── deploy-unit.sh <symbol> [network]   → deploy if needed
 
-Wrapper Scripts (all units):
-├── validate-all-units.sh               → validate input file
-├── compute-all-addresses.sh            → generate output file
-└── deploy-all-units.sh [network]       → deploy all units
+**Example:**
+```bash
+# Use default RPC
+./scripts/compute-all-addresses.sh
+
+# Use custom RPC
+./scripts/compute-all-addresses.sh https://eth.llamarpc.com
+```
+
+### 3. `deploy-all-units.sh`
+
+Deploys all units in a single batch transaction using UnitHelper.
+
+**Features:**
+- Single transaction via `UnitHelper.multiply()`
+- Checks deployment status first
+- **Dry-run by default** for safety
+- Requires `--broadcast` flag to actually deploy
+- Works on mainnet and sepolia
+
+**Usage:**
+```bash
+./scripts/deploy-all-units.sh [network] [--broadcast]
+```
+
+**Examples:**
+```bash
+# Dry run on sepolia (default behavior)
+./scripts/deploy-all-units.sh sepolia
+
+# Deploy to sepolia (requires --broadcast)
+export PRIVATE_KEY=0x...
+./scripts/deploy-all-units.sh sepolia --broadcast
+
+# Deploy to mainnet (requires --broadcast)
+./scripts/deploy-all-units.sh mainnet --broadcast
 ```
 
 ## Workflows
 
 ### Adding a New Unit
-1. Add to `_data/example-units-input.yml`
-2. Validate: `./scripts/validate-unit.sh "symbol"`
-3. Compute: `./scripts/compute-all-addresses.sh`
-4. Deploy (optional): `./scripts/deploy-unit.sh "symbol" sepolia`
 
-### Regenerating All Data
-```bash
-./scripts/compute-all-addresses.sh
-```
+1. Add to `_data/example-units-input.yml`:
+   ```yaml
+   - symbol: "newunit"
+     description: "Description of new unit"
+   ```
 
-### Deploying All Units
-```bash
-# Dry run first
-./scripts/deploy-all-units.sh sepolia --dry-run
-
-# Then deploy
-export PRIVATE_KEY=0x...
-./scripts/deploy-all-units.sh sepolia
-```
-
-## Testing Results
-
-✅ `validate-unit.sh "foo"` - Passes (canonical)
-✅ `validate-unit.sh "foo*bar"` - Fails correctly (non-canonical, should be "bar*foo")
-✅ `compute-unit-address.sh "foo"` - Returns correct JSON with address
-
-## Next Steps
-
-1. **Update existing scripts** - Old scripts can be deprecated:
-   - `fetch-example-addresses.sh` → replaced by `compute-all-addresses.sh`
-   - `deploy-examples.sh` → replaced by `deploy-all-units.sh`
-   - `predict-unit-addresses.sh` → can be removed (incomplete)
-
-2. **Run compute script** - Generate the new `example-units.yml`:
+2. Regenerate addresses:
    ```bash
    ./scripts/compute-all-addresses.sh
    ```
 
-3. **Update documentation pages** - Modify markdown to use new YAML structure
+3. (Optional) Deploy:
+   ```bash
+   ./scripts/deploy-all-units.sh sepolia
+   ```
 
-4. **Add CI validation** - GitHub Actions to validate units on PR
+### Regenerating All Data
 
-5. **Protocol repo** - Create similar structure there with shared format
+After editing `example-units-input.yml`:
+
+```bash
+./scripts/compute-all-addresses.sh
+```
+
+This updates `example-units.yml` with correct addresses and canonical forms.
+
+### Deploying All Units
+
+```bash
+# Dry run first (default behavior)
+./scripts/deploy-all-units.sh sepolia
+
+# Deploy (requires --broadcast flag)
+export PRIVATE_KEY=0x...
+./scripts/deploy-all-units.sh sepolia --broadcast
+```
+
+## Config Files
+
+### `_data/contracts.yml`
+
+Contract addresses for all versions and networks.
+
+```yaml
+current:
+  uniteum: "v0_5"
+  kiosk: "v0_5"
+  helper: "v0_5"
+
+uniteum:
+  v0_5:
+    mainnet: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
+    sepolia: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
+
+helper:
+  v0_5:
+    mainnet: "0x456dcb7a3f7d9A6DB77DDf6a4eA8B10453acF7F9"
+    sepolia: "0x456dcb7a3f7d9A6DB77DDf6a4eA8B10453acF7F9"
+```
+
+### `_data/example-units-input.yml`
+
+Input file with symbols and descriptions only:
+
+```yaml
+units:
+  - symbol: "foo"
+    description: "Generic placeholder unit"
+  - symbol: "foo^2:3"
+    description: "Foo to the power 2/3"
+```
+
+**Note:** Uses `:` for exponent division (not `\`)
+
+### `_data/example-units.yml` (Generated)
+
+Output file with computed addresses:
+
+```yaml
+units:
+  - symbol: "foo"
+    canonical: "foo"
+    address: "0xa2Eb33714a4a9551c6aF5492c85128376c882Ad0"
+    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
+    description: "Generic placeholder unit"
+```
+
+**DO NOT EDIT MANUALLY** - Generated by `compute-all-addresses.sh`
+
+## UnitHelper Contract
+
+Deployed at same address on all networks (deterministic).
+
+```solidity
+contract UnitHelper {
+    // Batch deployment
+    function multiply(IUnit unit, string[] memory expressions)
+        external returns (IUnit[] memory);
+
+    // Batch prediction (view-only)
+    function product(IUnit unit, string[] memory expressions)
+        external view returns (IUnit[] memory, string[] memory);
+}
+```
+
+See `_data/contracts.yml` for addresses.
 
 ## Dependencies
 
-- `cast` (Foundry)
-- `yq` (YAML processor)
-- `jq` (JSON processor)
+- `cast` (Foundry) - For contract calls
+- `yq` (YAML processor) - For reading YAML files
+- `jq` (JSON processor) - For parsing JSON
 
-All standard tools, easy to install.
+Install:
+```bash
+# macOS
+brew install foundry yq jq
 
-## Documentation
+# Linux
+curl -L https://foundry.paradigm.xyz | bash
+snap install yq
+apt install jq
+```
 
-Complete usage guide in [scripts/README.md](scripts/README.md)
+## Migration Notes
+
+If you have old scripts or workflows using the removed scripts:
+
+**Old:**
+```bash
+./scripts/deploy-unit.sh "foo" sepolia
+./scripts/compute-unit-address.sh "foo"
+./scripts/validate-unit.sh "foo"
+```
+
+**New:**
+```bash
+# Add to example-units-input.yml, then:
+./scripts/compute-all-addresses.sh
+./scripts/deploy-all-units.sh sepolia --broadcast  # Note: --broadcast required
+```
+
+The contract validates symbols automatically during batch operations.
