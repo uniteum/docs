@@ -3,261 +3,218 @@
 # DO NOT EDIT MANUALLY - Edit _data/example-units-input.yml instead
 
 units:
-  - symbol: "foo"
-    canonical: "foo"
-    address: "0x7c0eA79E15A8d526De3c86DFF3E3B155181f4d72"
-    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
-    description: "Generic placeholder unit for examples"
-
-  - symbol: "bar"
-    canonical: "bar"
-    address: "0xA7A1E10800A139b260083E12E28b9236aFCB0954"
-    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
-    description: "Generic placeholder unit for examples"
-
-  - symbol: "baz"
-    canonical: "baz"
-    address: "0xEefd99f2E77A6e698588bFB35be998d9b394D83c"
-    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
-    description: "Generic placeholder unit for examples"
-
-  - symbol: "acme"
-    canonical: "acme"
-    address: "0x1F52FD8Daf3546DA33085e3B7eCEAEFcb20Eef2A"
-    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
-    description: "Example company/entity unit"
-
-  - symbol: "widget"
-    canonical: "widget"
-    address: "0x08C95118E38dc2Ac4D727C305d5dF0F73A503948"
-    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
-    description: "Example product unit"
-
-  - symbol: "meter"
-    canonical: "meter"
-    address: "0x61BA41338eb8c52e8127bBf7EcCc21c66D733534"
-    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
-    description: "Example length dimension"
-
-  - symbol: "second"
-    canonical: "second"
-    address: "0xda98B744f76CD77385CdAfAcddc38089e713e965"
-    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
-    description: "Example time dimension"
-
-  - symbol: "kilogram"
-    canonical: "kilogram"
-    address: "0x82C909f22aB1Ea4D6D02ae1a0DC5B48f78A8912B"
-    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
-    description: "Example mass dimension"
-
-  - symbol: "kg"
-    canonical: "kg"
-    address: "0xd4a64c485707753D4648352C16d07b27e1171DFC"
-    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
-    description: "Abbreviated mass dimension"
-
-  - symbol: "sword"
-    canonical: "sword"
-    address: "0x650c940FA3e008CceD6c930DFf261603361e8b3b"
-    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
-    description: "Gaming item example"
-
-  - symbol: "shield"
-    canonical: "shield"
-    address: "0x0C2D5e73a96446D4414AAfec1105efE8bc6108c1"
-    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
-    description: "Gaming item example"
-
-  - symbol: "USD"
-    canonical: "USD"
-    address: "0x4fcBcb329d4C76180dCAae25952B424e0Fe4fD99"
-    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
-    description: "Floating USD (NO connection to real US dollars)"
-
-  - symbol: "ETH"
-    canonical: "ETH"
-    address: "0xf60acCfb08489A72D55dBFb9C29694e70A6D39Df"
-    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
-    description: "Floating ETH (distinct from anchored $WETH)"
-
-  - symbol: "BTC"
-    canonical: "BTC"
-    address: "0xcC909F3e55F2C8E05cAE31eE483464394a896197"
-    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
-    description: "Floating BTC (NO connection to Bitcoin)"
-
-  - symbol: "MSFT"
-    canonical: "MSFT"
-    address: "0xb260E14F329e3e311D4C92b1F259E7333ed98ceB"
-    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
-    description: "Floating MSFT (NO connection to Microsoft stock)"
-
-  - symbol: "1/foo"
-    canonical: "1/foo"
-    address: "0x2f988A31A1753c81a6fAA1a623D2CBb712Ee69c5"
-    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
-    description: "Reciprocal of foo"
-
-  - symbol: "1/bar"
-    canonical: "1/bar"
-    address: "0xb61195Abc6E018506d45F17372b7C9C88EF4CfbE"
-    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
-    description: "Reciprocal of bar"
-
-  - symbol: "1/meter"
-    canonical: "1/meter"
-    address: "0x80B7E6382Eab26764e3dDFfBAE375D7ded1b73f7"
-    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
-    description: "Reciprocal of meter (inverse length)"
-
-  - symbol: "1/second"
-    canonical: "1/second"
-    address: "0x51Ff58a329a2Dd27FeD894898e0B1D1A330215e3"
-    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
-    description: "Reciprocal of second (frequency)"
-
-  - symbol: "1/kilogram"
-    canonical: "1/kilogram"
-    address: "0x0E09fC323F29ff528E3bF9e62c0D54D9e690Bb5D"
-    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
-    description: "Reciprocal of kilogram"
-
-  - symbol: "1/kg"
-    canonical: "1/kg"
-    address: "0x9991c5E232502539f5940f1ee7E52EDeb212fA18"
-    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
-    description: "Reciprocal of kg"
-
-  - symbol: "bar*foo"
-    canonical: "bar*foo"
-    address: "0xeCA1b4f2eB533999777A492CF4435d7d90f6D4eA"
-    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
-    description: "Product of foo and bar"
-
-  - symbol: "meter*second"
-    canonical: "meter*second"
-    address: "0xac34691d4E911E59498F4D4422f2A56c2B10B35e"
-    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
-    description: "Product of meter and second"
-
-  - symbol: "kg*m"
-    canonical: "kg*m"
-    address: "0x046b719C87225fEaB1C2D051385Ba07ed078D448"
-    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
-    description: "Product of kg and m"
-
-  - symbol: "kilogram*meter"
-    canonical: "kilogram*meter"
-    address: "0xc595bDA7C63cE40639b6AC1c5d2B9CE5209007C9"
-    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
-    description: "Product of kilogram and meter"
-
-  - symbol: "shield*sword"
-    canonical: "shield*sword"
-    address: "0xD1ffF4B8e807190e0299f71480658b0EDb19cA45"
-    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
-    description: "Gaming composite item"
-
-  - symbol: "meter/second"
-    canonical: "meter/second"
-    address: "0x07ED93b3A6478EA2E7e8517D8eD8432021b4d5D7"
-    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
-    description: "Velocity unit (meters per second)"
-
-  - symbol: "foo/bar"
-    canonical: "foo/bar"
-    address: "0xf931a53D2E45694847CdFa7F7A6b2C5582BAf003"
-    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
-    description: "Ratio of foo to bar"
-
-  - symbol: "second/meter"
-    canonical: "second/meter"
-    address: "0xE9A2F7354E88B4eE37036d2378801a0280a4B399"
-    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
-    description: "Reciprocal of velocity"
-
-  - symbol: "kg*m/s^2"
-    canonical: "kg*m/s^2"
-    address: "0x0AD2AA66263e3c7d41adfc6D45974047dCda8C91"
-    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
-    description: "Force unit (Newtons)"
-
-  - symbol: "foo^2"
-    canonical: "foo^2"
-    address: "0x08931E75B0CbF72b7780738ee33C06B8DB32c1fA"
-    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
-    description: "Foo squared"
-
-  - symbol: "foo^2:3"
-    canonical: "foo^2:3"
-    address: "0x7b1F2AB6BD6e89a71445307f4F7973dE36518d84"
-    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
-    description: "Foo to the power 2/3 (demonstrates rational exponents)"
-
-  - symbol: "bar^1:2"
-    canonical: "bar^1:2"
-    address: "0x320e38f3DFC04841C4DbdaEFD4aD906c448f651e"
-    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
-    description: "Square root of bar"
-
-  - symbol: "$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
-    canonical: "$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
-    address: "0x78f6ad41838E4A04a029802174bFe1B1B4a9F9EF"
-    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
-    description: "Anchored WETH (Wrapped Ether) - mainnet"
-
-  - symbol: "$0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
-    canonical: "$0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
-    address: "0xCB7d480874fF0340Bd2b8dEb5e1C2D5a6Da541b0"
-    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
-    description: "Anchored USDC (USD Coin) - mainnet"
-
-  - symbol: "$0xdAC17F958D2ee523a2206206994597C13D831ec7"
-    canonical: "$0xdAC17F958D2ee523a2206206994597C13D831ec7"
-    address: "0x9c55da79c2df700601F3819B068AaE006ED14E3C"
-    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
-    description: "Anchored USDT (Tether USD) - mainnet"
-
-  - symbol: "$0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599"
-    canonical: "$0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599"
-    address: "0xdCFc5B197637fF2862f7A6CdDf09F88a4Cd054ae"
-    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
-    description: "Anchored WBTC (Wrapped Bitcoin) - mainnet"
-
-  - symbol: "$0x6B175474E89094C44Da98b954EedeAC495271d0F"
-    canonical: "$0x6B175474E89094C44Da98b954EedeAC495271d0F"
-    address: "0x0d5f91Ce6840497245CF7a68Ec63786b2267A42f"
-    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
-    description: "Anchored DAI (Dai Stablecoin) - mainnet"
-
-  - symbol: "$0x7b79995e5f793A07Bc00c21412e50Ecae098E7f9"
-    canonical: "$0x7b79995e5f793A07Bc00c21412e50Ecae098E7f9"
-    address: "0x6A955b2b29014Caa7F8b2c0A4eF86Dd30B19227b"
-    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
-    description: "Anchored WETH (Wrapped Ether) - sepolia"
-
-  - symbol: "$0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"
-    canonical: "$0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"
-    address: "0x62CF7B07ffA42B56ADe9B299b546613563017e05"
-    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
-    description: "Anchored USDC (USD Coin) - sepolia"
-
-  - symbol: "$0xaA8E23Fb1079EA71e0a56F48a2aA51851D8433D0"
-    canonical: "$0xaA8E23Fb1079EA71e0a56F48a2aA51851D8433D0"
-    address: "0x8BD075f73F2cC0D40daD86f1105dC06199A2dBD6"
-    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
-    description: "Anchored USDT (Tether USD) - sepolia"
-
-  - symbol: "$0x29f2D40B0605204364af54EC677bD022dA425d03"
-    canonical: "$0x29f2D40B0605204364af54EC677bD022dA425d03"
-    address: "0x550714Ce5aFE51746Ed04B52770f4f4413F764F3"
-    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
-    description: "Anchored WBTC (Wrapped Bitcoin) - sepolia"
-
-  - symbol: "$0xFF34B3d4Aee8ddCd6F9AFFFB6Fe49bD371b8a357"
-    canonical: "$0xFF34B3d4Aee8ddCd6F9AFFFB6Fe49bD371b8a357"
-    address: "0x2BFDBe41e8075309d46813E24E906Fa0D1C18c0E"
-    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
-    description: "Anchored DAI (Dai Stablecoin) - sepolia"
-
+  - symbol: foo
+    description: Generic placeholder unit for examples
+    canonical: foo
+    address: 0x7c0eA79E15A8d526De3c86DFF3E3B155181f4d72
+    one: 0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da
+  - symbol: bar
+    description: Generic placeholder unit for examples
+    canonical: bar
+    address: 0xA7A1E10800A139b260083E12E28b9236aFCB0954
+    one: 0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da
+  - symbol: baz
+    description: Generic placeholder unit for examples
+    canonical: baz
+    address: 0xEefd99f2E77A6e698588bFB35be998d9b394D83c
+    one: 0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da
+  - symbol: acme
+    description: Example company/entity unit
+    canonical: acme
+    address: 0x1F52FD8Daf3546DA33085e3B7eCEAEFcb20Eef2A
+    one: 0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da
+  - symbol: widget
+    description: Example product unit
+    canonical: widget
+    address: 0x08C95118E38dc2Ac4D727C305d5dF0F73A503948
+    one: 0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da
+  - symbol: meter
+    description: Example length dimension
+    canonical: meter
+    address: 0x61BA41338eb8c52e8127bBf7EcCc21c66D733534
+    one: 0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da
+  - symbol: second
+    description: Example time dimension
+    canonical: second
+    address: 0xda98B744f76CD77385CdAfAcddc38089e713e965
+    one: 0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da
+  - symbol: kilogram
+    description: Example mass dimension
+    canonical: kilogram
+    address: 0x82C909f22aB1Ea4D6D02ae1a0DC5B48f78A8912B
+    one: 0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da
+  - symbol: kg
+    description: Abbreviated mass dimension
+    canonical: kg
+    address: 0xd4a64c485707753D4648352C16d07b27e1171DFC
+    one: 0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da
+  - symbol: sword
+    description: Gaming item example
+    canonical: sword
+    address: 0x650c940FA3e008CceD6c930DFf261603361e8b3b
+    one: 0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da
+  - symbol: shield
+    description: Gaming item example
+    canonical: shield
+    address: 0x0C2D5e73a96446D4414AAfec1105efE8bc6108c1
+    one: 0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da
+  - symbol: USD
+    description: Floating USD (NO connection to real US dollars)
+    canonical: USD
+    address: 0x4fcBcb329d4C76180dCAae25952B424e0Fe4fD99
+    one: 0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da
+  - symbol: ETH
+    description: Floating ETH (distinct from anchored $WETH)
+    canonical: ETH
+    address: 0xf60acCfb08489A72D55dBFb9C29694e70A6D39Df
+    one: 0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da
+  - symbol: BTC
+    description: Floating BTC (NO connection to Bitcoin)
+    canonical: BTC
+    address: 0xcC909F3e55F2C8E05cAE31eE483464394a896197
+    one: 0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da
+  - symbol: MSFT
+    description: Floating MSFT (NO connection to Microsoft stock)
+    canonical: MSFT
+    address: 0xb260E14F329e3e311D4C92b1F259E7333ed98ceB
+    one: 0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da
+  - symbol: 1/foo
+    description: Reciprocal of foo
+    canonical: 1/foo
+    address: 0x2f988A31A1753c81a6fAA1a623D2CBb712Ee69c5
+    one: 0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da
+  - symbol: 1/bar
+    description: Reciprocal of bar
+    canonical: 1/bar
+    address: 0xb61195Abc6E018506d45F17372b7C9C88EF4CfbE
+    one: 0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da
+  - symbol: 1/meter
+    description: Reciprocal of meter (inverse length)
+    canonical: 1/meter
+    address: 0x80B7E6382Eab26764e3dDFfBAE375D7ded1b73f7
+    one: 0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da
+  - symbol: 1/second
+    description: Reciprocal of second (frequency)
+    canonical: 1/second
+    address: 0x51Ff58a329a2Dd27FeD894898e0B1D1A330215e3
+    one: 0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da
+  - symbol: 1/kilogram
+    description: Reciprocal of kilogram
+    canonical: 1/kilogram
+    address: 0x0E09fC323F29ff528E3bF9e62c0D54D9e690Bb5D
+    one: 0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da
+  - symbol: 1/kg
+    description: Reciprocal of kg
+    canonical: 1/kg
+    address: 0x9991c5E232502539f5940f1ee7E52EDeb212fA18
+    one: 0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da
+  - symbol: bar*foo
+    description: Product of foo and bar
+    canonical: bar*foo
+    address: 0xeCA1b4f2eB533999777A492CF4435d7d90f6D4eA
+    one: 0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da
+  - symbol: meter*second
+    description: Product of meter and second
+    canonical: meter*second
+    address: 0xac34691d4E911E59498F4D4422f2A56c2B10B35e
+    one: 0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da
+  - symbol: kg*m
+    description: Product of kg and m
+    canonical: kg*m
+    address: 0x046b719C87225fEaB1C2D051385Ba07ed078D448
+    one: 0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da
+  - symbol: kilogram*meter
+    description: Product of kilogram and meter
+    canonical: kilogram*meter
+    address: 0xc595bDA7C63cE40639b6AC1c5d2B9CE5209007C9
+    one: 0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da
+  - symbol: shield*sword
+    description: Gaming composite item
+    canonical: shield*sword
+    address: 0xD1ffF4B8e807190e0299f71480658b0EDb19cA45
+    one: 0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da
+  - symbol: meter/second
+    description: Velocity unit (meters per second)
+    canonical: meter/second
+    address: 0x07ED93b3A6478EA2E7e8517D8eD8432021b4d5D7
+    one: 0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da
+  - symbol: foo/bar
+    description: Ratio of foo to bar
+    canonical: foo/bar
+    address: 0xf931a53D2E45694847CdFa7F7A6b2C5582BAf003
+    one: 0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da
+  - symbol: second/meter
+    description: Reciprocal of velocity
+    canonical: second/meter
+    address: 0xE9A2F7354E88B4eE37036d2378801a0280a4B399
+    one: 0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da
+  - symbol: kg*m/s^2
+    description: Force unit (Newtons)
+    canonical: kg*m/s^2
+    address: 0x0AD2AA66263e3c7d41adfc6D45974047dCda8C91
+    one: 0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da
+  - symbol: foo^2
+    description: Foo squared
+    canonical: foo^2
+    address: 0x08931E75B0CbF72b7780738ee33C06B8DB32c1fA
+    one: 0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da
+  - symbol: foo^2:3
+    description: Foo to the power 2/3 (demonstrates rational exponents)
+    canonical: foo^2:3
+    address: 0x7b1F2AB6BD6e89a71445307f4F7973dE36518d84
+    one: 0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da
+  - symbol: bar^1:2
+    description: Square root of bar
+    canonical: bar^1:2
+    address: 0x320e38f3DFC04841C4DbdaEFD4aD906c448f651e
+    one: 0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da
+  - symbol: $0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2
+    description: Anchored WETH (Wrapped Ether) - mainnet
+    canonical: $0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2
+    address: 0x78f6ad41838E4A04a029802174bFe1B1B4a9F9EF
+    one: 0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da
+  - symbol: $0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48
+    description: Anchored USDC (USD Coin) - mainnet
+    canonical: $0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48
+    address: 0xCB7d480874fF0340Bd2b8dEb5e1C2D5a6Da541b0
+    one: 0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da
+  - symbol: $0xdAC17F958D2ee523a2206206994597C13D831ec7
+    description: Anchored USDT (Tether USD) - mainnet
+    canonical: $0xdAC17F958D2ee523a2206206994597C13D831ec7
+    address: 0x9c55da79c2df700601F3819B068AaE006ED14E3C
+    one: 0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da
+  - symbol: $0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599
+    description: Anchored WBTC (Wrapped Bitcoin) - mainnet
+    canonical: $0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599
+    address: 0xdCFc5B197637fF2862f7A6CdDf09F88a4Cd054ae
+    one: 0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da
+  - symbol: $0x6B175474E89094C44Da98b954EedeAC495271d0F
+    description: Anchored DAI (Dai Stablecoin) - mainnet
+    canonical: $0x6B175474E89094C44Da98b954EedeAC495271d0F
+    address: 0x0d5f91Ce6840497245CF7a68Ec63786b2267A42f
+    one: 0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da
+  - symbol: $0x7b79995e5f793A07Bc00c21412e50Ecae098E7f9
+    description: Anchored WETH (Wrapped Ether) - sepolia
+    canonical: $0x7b79995e5f793A07Bc00c21412e50Ecae098E7f9
+    address: 0x6A955b2b29014Caa7F8b2c0A4eF86Dd30B19227b
+    one: 0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da
+  - symbol: $0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238
+    description: Anchored USDC (USD Coin) - sepolia
+    canonical: $0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238
+    address: 0x62CF7B07ffA42B56ADe9B299b546613563017e05
+    one: 0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da
+  - symbol: $0xaA8E23Fb1079EA71e0a56F48a2aA51851D8433D0
+    description: Anchored USDT (Tether USD) - sepolia
+    canonical: $0xaA8E23Fb1079EA71e0a56F48a2aA51851D8433D0
+    address: 0x8BD075f73F2cC0D40daD86f1105dC06199A2dBD6
+    one: 0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da
+  - symbol: $0x29f2D40B0605204364af54EC677bD022dA425d03
+    description: Anchored WBTC (Wrapped Bitcoin) - sepolia
+    canonical: $0x29f2D40B0605204364af54EC677bD022dA425d03
+    address: 0x550714Ce5aFE51746Ed04B52770f4f4413F764F3
+    one: 0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da
+  - symbol: $0xFF34B3d4Aee8ddCd6F9AFFFB6Fe49bD371b8a357
+    description: Anchored DAI (Dai Stablecoin) - sepolia
+    canonical: $0xFF34B3d4Aee8ddCd6F9AFFFB6Fe49bD371b8a357
+    address: 0x2BFDBe41e8075309d46813E24E906Fa0D1C18c0E
+    one: 0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da
