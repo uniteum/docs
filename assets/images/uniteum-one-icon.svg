@@ -49,13 +49,13 @@
   </g>
 
   <!-- Left top symbol "^" -->
-  <g transform="translate(120, 226)" font-size="100">
+  <g transform="translate(120, 224)" font-size="100">
     <use href="#embossed"/>
     <text class="base-text main" x="0" y="0">^</text>
   </g>
 
   <!-- Left bottom symbol "*" -->
-  <g transform="translate(120, 316)" font-size="100">
+  <g transform="translate(120, 320)" font-size="100">
     <use href="#embossed"/>
     <text class="base-text main" x="0" y="0">*</text>
   </g>
