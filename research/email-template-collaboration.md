@@ -26,9 +26,9 @@ Specifically:
 - In Uniteum, holding equal amounts of √(A*B) and 1/√(A*B) produces a ~6% **profit** when prices move in either direction
 - This position has no directional bias, no expiration, no theta decay, and requires no fees or counterparty
 
-The mathematics appear sound (detailed calculations attached), but the economic implications are puzzling:
-- Where does the profit come from?
-- Who holds the offsetting loss?
+The mathematics appear sound, and I have **working test cases** that empirically demonstrate the mechanism (detailed calculations and code attached), but the economic implications are puzzling:
+- Where does the profit come from? (Initial finding: from unhedged LPs, like traditional IL)
+- Who holds the offsetting loss? (Test shows: complementary payoffs between hedgers and LPs)
 - Can everyone hedge simultaneously, or is there a conservation constraint?
 - What's the equilibrium between liquidity providers and volatility traders?
 
@@ -57,10 +57,14 @@ I would greatly appreciate:
 
 ## Materials
 
-- Research summary: [attached/linked]
-- Live protocol: https://uniteum.one
-- Smart contracts: https://etherscan.io/address/0x5bA96211E3679FDcc7047a5c64d40A4Dd3fBdAD7#code
-- Documentation: https://uniteum.one/concepts/
+I've prepared comprehensive documentation including:
+- **Research summary:** Mathematical formulation, worked examples, open questions (volatility-hedge-mechanism.md)
+- **Test case analysis:** Empirical proof with executable Foundry tests (test-case-analysis.md)
+- **One-page summary:** Quick visual reference with tables and comparisons (one-page-summary.md)
+- **Live protocol:** https://uniteum.one
+- **Smart contracts:** https://etherscan.io/address/0x5bA96211E3679FDcc7047a5c64d40A4Dd3fBdAD7#code (verified source)
+- **Test suite:** Foundry tests demonstrating the mechanism in action
+- **Documentation:** https://uniteum.one/concepts/
 
 I understand you're busy, so even brief feedback or a pointer to relevant literature would be valuable. If this interests you, I'm happy to:
 - Provide additional technical details
@@ -83,8 +87,9 @@ Paul Reinholdtsen
 ---
 
 ## Attachments:
-1. Research Summary: volatility-hedge-mechanism.md
-2. Quick Reference: one-page-summary.md (optional, create below)
+1. **volatility-hedge-mechanism.md** - Full research summary (~3,000 words)
+2. **test-case-analysis.md** - Empirical proof with code walkthrough
+3. **one-page-summary.md** - Quick reference sheet
 
 ---
 

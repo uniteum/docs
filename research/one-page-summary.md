@@ -44,6 +44,12 @@ PnL(r) = x(√r + 1/√r - 2)
 
 **Result:** +6.07% profit from volatility in either direction
 
+**Key Enhancement:** Continuous rebalancing amplifies returns
+- Static hold: Profit on one-way moves only
+- Dynamic rebalancing: Profit on ALL volatility (bidirectional)
+- Example: Price oscillates 1→2→1 yields ~12% vs 0% for static hold
+- **Limited only by gas costs** (highly profitable on L2s)
+
 ---
 
 ### Comparison to Traditional AMM
