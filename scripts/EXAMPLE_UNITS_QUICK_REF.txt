@@ -62,10 +62,10 @@ Ratios:
 Complex:
   kg*m/s^2 (force)              0xEb171Bea0bB215E91B41ca6546e30aabF0Fe58Dd
 
-Powers (NOTE: \ for exponent division):
+Powers (NOTE: : for exponent division):
   foo^2                         0xb1a94eCc74B567b241a0B59541e3D44BD60B302A
-  foo^2\3                       0x5AFd4791a696cdB5337a90c1dFbE586cE9A878C9
-  bar^1\2                       0x1533c600E82a4837C75D7C041a3f35173bD1f477
+  foo^2:3                       0x5AFd4791a696cdB5337a90c1dFbE586cE9A878C9
+  bar^1:2                       0x1533c600E82a4837C75D7C041a3f35173bD1f477
 
 ───────────────────────────────────────────────────────────────────
   QUICK COMMANDS
@@ -108,6 +108,6 @@ Uniteum Contract:
 • Units may not be deployed yet - call multiply() to deploy
 • Floating USD/ETH/BTC have NO connection to real assets!
 • Compounds are alphabetically sorted (foo*bar → bar*foo)
-• Use \ not / for exponent division (foo^2\3 = foo^(2/3))
+• Use : not / for exponent division (foo^2:3 = foo^(2/3))
 
 ═══════════════════════════════════════════════════════════════════

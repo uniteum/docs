@@ -74,6 +74,15 @@ kiosk:
     sepolia: "0x64dB548312da6D88fB4016157e521d9f2f65AFFc"
     ens: "buy.0-0.uniteum.eth"
 
+helper:
+  v0_5:
+    name: "UnitHelper 0.5"
+    version: "0.5"
+    description: "Helper contract for Uniteum 0.5"
+    mainnet: "0x456dcb7a3f7d9A6DB77DDf6a4eA8B10453acF7F9"
+    sepolia: "0x456dcb7a3f7d9A6DB77DDf6a4eA8B10453acF7F9"
+    ens: "helper.uniteum.eth"
+
 # Deployer information
 deployer:
   eoa:

@@ -515,9 +515,9 @@ uniteum.eth
 - Critical for understanding forge operations
 
 **Exponent Division:**
-- Uses `\` character for division in exponents (not `/`)
-- Example: `foo^2\3` means foo^(2/3)
-- Simplifies parsing (avoids confusion with unit division)
+- Uses `:` character for division in exponents (not `/`)
+- Example: `foo^2:3` means foo^(2/3)
+- Simplifies parsing (avoids confusion with unit division and escaping issues)
 
 **Reentrancy Protection:**
 - Uses transient storage (EIP-1153) for reentrancy guards

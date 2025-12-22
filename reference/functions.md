@@ -146,7 +146,7 @@ Create a floating unit (or compound unit) from a string expression. If the unit 
 - `expression` — Unit symbol or expression
   - Base unit: `"meter"`, `"USD"`, `"kg"`
   - Compound: `"kg*m/s^2"`, `"USD/BTC"`
-  - Rational powers: `"foo^2\3"` (foo to the 2/3 power)
+  - Rational powers: `"foo^2:3"` (foo to the 2/3 power)
 
 **Returns:**
 - `unit` — Address of created or existing unit
@@ -160,7 +160,7 @@ Create a floating unit (or compound unit) from a string expression. If the unit 
 - `*` — multiply units
 - `/` — divide units
 - `^` — power
-- `\` — divide in exponents (e.g., `^2\3` = ^(2/3))
+- `:` — divide in exponents (e.g., `^2:3` = ^(2/3))
 
 **Emits:** `UnitCreate(IUnit unit, IERC20 anchor, bytes32 hash, string symbol)` (if new)
 

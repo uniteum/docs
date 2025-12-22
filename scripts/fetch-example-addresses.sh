@@ -83,8 +83,8 @@ declare -a UNITS=(
     "kg*m/s^2"
     # Powers
     "foo^2"
-    "foo^2\3"
-    "bar^1\2"
+    "foo^2:3"
+    "bar^1:2"
 )
 
 # Output format: markdown table

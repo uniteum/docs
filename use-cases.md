@@ -103,12 +103,12 @@ Price relationship: `price($WETH^2) = price($WETH)²`
 
 ### Rational Exponents
 
-**`$WETH^3\2` (ETH to the 3/2 power):**
+**`$WETH^3:2` (ETH to the 3/2 power):**
 - Custom convexity profiles
 - Design exact risk/reward curves
 - Build exotic options-like payoffs
 
-Note: Exponent division uses `\` (backslash): `^3\2` means "to the 3/2 power"
+Note: Exponent division uses `:` (colon): `^3:2` means "to the 3/2 power"
 
 ### Comparison to Traditional Perpetuals
 

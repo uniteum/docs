@@ -174,8 +174,8 @@ Unlike [anchored units](/reference/anchored-units/), floating units have no exte
 ### Powers/Exponents
 
 {: .note }
-> **Exponent Division**: Uses `\` character for division in exponents.
-> Example: `foo^2\3` means foo^(2/3)
+> **Exponent Division**: Uses `:` character for division in exponents.
+> Example: `foo^2:3` means foo^(2/3)
 
 | Symbol | Address | Description |
 |--------|---------|-------------|

@@ -53,13 +53,13 @@ Created by algebraic composition:
 - `meter/second` — meter divided by second
 - `kilogram*meter` — kilogram times meter
 - `foo^2` — foo squared
-- `bar^1\2` — bar to the power of 1/2 (square root)
+- `bar^1:2` — bar to the power of 1/2 (square root)
 
 Operators:
 - `*` — multiply
 - `/` — divide
 - `^` — power
-- `\` — divide (in exponent context)
+- `:` — divide (in exponent context)
 
 Compound units are first-class citizens. They have their own reciprocals and can participate in forge operations with "1".
 

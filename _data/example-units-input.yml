@@ -105,10 +105,10 @@ units:
   - symbol: "foo^2"
     description: "Foo squared"
 
-  - symbol: "foo^2\\3"
+  - symbol: "foo^2:3"
     description: "Foo to the power 2/3 (demonstrates rational exponents)"
 
-  - symbol: "bar^1\\2"
+  - symbol: "bar^1:2"
     description: "Square root of bar"
 
   # Anchored Units (backed 1:1 by external ERC-20 tokens)

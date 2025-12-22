@@ -120,8 +120,8 @@ Compound units are created by forging triads where the compound unit serves as t
 - Create `foo^(2/3)`: forge `(foo^(4/3), 1, foo^(2/3))` since √(foo^(4/3) * 1) = foo^(2/3)
 
 **Algebraic notation:**
-- Operators: `*` (multiply), `/` (divide), `^` (power), `\` (divide in exponent)
-- Example: `kg*m/s^2` = force unit, `foo^2\3` = foo^(2/3)
+- Operators: `*` (multiply), `/` (divide), `^` (power), `:` (divide in exponent)
+- Example: `kg*m/s^2` = force unit, `foo^2:3` = foo^(2/3)
 - Address deterministically predicted via CREATE2 from symbol hash
 
 ### 6. Multi-Dimensional Arbitrage
@@ -163,9 +163,9 @@ Since the same unit can serve as a reserve in one triad and a liquidity unit in 
 - Critical for understanding forge operations
 
 **Exponent Division:**
-- Uses `\` character for division in exponents (not `/`)
-- Example: `foo^2\3` means foo^(2/3)
-- Simplifies parsing (avoids confusion with unit division)
+- Uses `:` character for division in exponents (not `/`)
+- Example: `foo^2:3` means foo^(2/3)
+- Simplifies parsing (avoids confusion with unit division and escaping issues)
 
 **Reentrancy Protection:**
 - Uses transient storage (EIP-1153) for reentrancy guards
@@ -176,6 +176,16 @@ Since the same unit can serve as a reserve in one triad and a liquidity unit in 
 - Points to v0.0 "1" token for migration
 - Enables reversible migrate/unmigrate between versions
 - Immutable, set at contract deployment
+
+**UnitHelper Contract:**
+- Helper contract for batch operations on units
+- Deployed at same address across networks (deterministic deployment)
+- See `site.data.contracts.helper` in contracts.yml for addresses
+- Key functions:
+  - `multiply(IUnit unit, string[] expressions)` - Create multiple units in one transaction
+  - `product(IUnit unit, string[] expressions)` - Predict multiple unit addresses (view-only)
+- Useful for deploying many units efficiently or batch address prediction
+- Example: Deploy foo, bar, baz in single transaction by calling `helper.multiply(one, ["foo", "bar", "baz"])`
 
 ### 8. Terminology: Reserve Units and Liquidity Units
 

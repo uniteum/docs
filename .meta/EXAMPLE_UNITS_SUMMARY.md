@@ -62,10 +62,10 @@ Some units have different canonical forms than input (alphabetically sorted):
 
 ### Exponent Division
 
-Uses `\` (backslash) for division in exponents:
-- Input: `foo^2\3` (foo to the power 2/3)
-- In YAML/code: Must escape as `foo^2\\3`
-- Canonical: `foo^2\3`
+Uses `:` (colon) for division in exponents:
+- Input: `foo^2:3` (foo to the power 2/3)
+- In YAML/code: `foo^2:3` (no escaping needed)
+- Canonical: `foo^2:3`
 
 ## Deployment Status
 

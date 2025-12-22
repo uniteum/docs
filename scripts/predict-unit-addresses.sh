@@ -80,8 +80,8 @@ declare -a UNITS=(
     "second/meter"
     "kg*m/s^2"
     "foo^2"
-    "foo^2\3"
-    "bar^1\2"
+    "foo^2:3"
+    "bar^1:2"
 )
 
 # Generate output
