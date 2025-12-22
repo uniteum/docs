@@ -89,54 +89,16 @@ symbols_json=$(yq eval '.units[].symbol' "$INPUT_FILE" | jq -R . | jq -s -c .)
 echo "Found $unit_count units to deploy"
 echo ""
 
-# First, check which units are already deployed
-echo "Checking deployment status..."
-echo ""
-
-result=$(cast call "$HELPER" "product(address,string[])(address[],string[])" "$ONE" "$symbols_json" --rpc-url "$RPC_URL" 2>&1)
-
-if [ $? -ne 0 ]; then
-    echo "Error: Failed to call UnitHelper.product()" >&2
-    echo "$result" >&2
-    exit 1
-fi
-
-# Parse addresses
-addresses_raw=$(echo "$result" | grep -A 999 "^\[" | head -1)
-addresses_clean=$(echo "$addresses_raw" | tr -d '[]' | tr ',' '\n' | xargs)
-IFS=$'\n' read -r -d '' -a addresses_array <<< "$addresses_clean" || true
-
-# Check which units are deployed
-deployed_count=0
-undeployed_count=0
-
-for ((i=0; i<unit_count; i++)); do
-    address="${addresses_array[$i]}"
-    symbol=$(yq eval ".units[$i].symbol" "$INPUT_FILE")
-
-    # Check if contract exists
-    code=$(cast code "$address" --rpc-url "$RPC_URL" 2>/dev/null)
-
-    if [ "$code" != "0x" ] && [ -n "$code" ]; then
-        echo "  ✓ Already deployed: $symbol"
-        ((deployed_count++))
-    else
-        echo "  ○ Not deployed: $symbol"
-        ((undeployed_count++))
-    fi
-done
-
-echo ""
-echo "Status: $deployed_count deployed, $undeployed_count to deploy"
-echo ""
-
-if [ $undeployed_count -eq 0 ]; then
-    echo "✅ All units already deployed!"
-    exit 0
-fi
-
 if [ "$DRY_RUN" = true ]; then
-    echo "🔍 DRY RUN MODE - would deploy $undeployed_count units"
+    echo "🔍 DRY RUN MODE - would deploy units using UnitHelper.multiply() (idempotent)"
+    echo ""
+    echo "Units to process:"
+    for ((i=0; i<unit_count; i++)); do
+        symbol=$(yq eval ".units[$i].symbol" "$INPUT_FILE")
+        echo "  • $symbol"
+    done
+    echo ""
+    echo "Note: UnitHelper.multiply() is idempotent - it only deploys units that don't exist yet."
     echo ""
     echo "To actually deploy, run:"
     echo "  $0 $NETWORK --broadcast"
@@ -144,13 +106,14 @@ if [ "$DRY_RUN" = true ]; then
 fi
 
 # Deploy all units in one transaction using UnitHelper.multiply()
+# Note: multiply() is idempotent - it only deploys units that don't already exist
 if [ -z "$PRIVATE_KEY" ]; then
     echo "Error: PRIVATE_KEY not set" >&2
     echo "Set via environment variable or in .env file" >&2
     exit 1
 fi
 
-echo "🚀 Deploying all $unit_count units in a single batch transaction..."
+echo "🚀 Deploying units using UnitHelper.multiply() (idempotent)..."
 echo ""
 
 tx=$(cast send "$HELPER" "multiply(address,string[])(address[])" "$ONE" "$symbols_json" \
@@ -160,14 +123,20 @@ tx=$(cast send "$HELPER" "multiply(address,string[])(address[])" "$ONE" "$symbol
 
 if [ $? -eq 0 ]; then
     tx_hash=$(echo "$tx" | jq -r '.transactionHash')
-    echo "✅ Batch deployment successful!"
+
+    # Get addresses for display
+    result=$(cast call "$HELPER" "product(address,string[])(address[],string[])" "$ONE" "$symbols_json" --rpc-url "$RPC_URL" 2>&1)
+    addresses_raw=$(echo "$result" | head -1)
+    addresses_json=$(echo "$addresses_raw" | tr -d ' ' | sed 's/^\[/["/' | sed 's/,/","/g' | sed 's/\]$/"]/')
+
+    echo "✅ Batch deployment complete!"
     echo ""
     echo "Transaction: $EXPLORER/tx/$tx_hash"
     echo ""
-    echo "Units deployed:"
+    echo "Units processed:"
     for ((i=0; i<unit_count; i++)); do
         symbol=$(yq eval ".units[$i].symbol" "$INPUT_FILE")
-        address="${addresses_array[$i]}"
+        address=$(echo "$addresses_json" | jq -r ".[$i]")
         echo "  • $symbol → $EXPLORER/token/$address"
     done
     exit 0
