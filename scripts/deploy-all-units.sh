@@ -59,7 +59,7 @@ source "$SCRIPT_DIR/.env"
 # Set RPC and explorer based on network
 case $NETWORK in
     mainnet)
-        RPC_URL="https://eth.llamarpc.com"
+        RPC_URL="https://ethereum.publicnode.com"
         EXPLORER="https://etherscan.io"
         ;;
     sepolia)
