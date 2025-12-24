@@ -31,6 +31,7 @@ A unit expression names either:
 - a **base Unit** (a single symbol), like `meter` or `USD`
 - a **compound Unit** built from other Units, like `meter/second` or `kg*meter/second^2`
 - the **identity Unit**, written as `1`
+- an **anchored Unit** (prefixed with `$`), like `$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2` (WETH)
 
 All Units are ERC-20 tokens; the expression describes structure, not magnitude.
 
@@ -130,12 +131,64 @@ A parser may accept more inputs than the canonical renderer emits.
 
 Documentation and examples should use canonical forms unless explicitly labeled “non-canonical input”.
 
+## Anchored units
+
+**Anchored Units** are backed 1:1 by external ERC-20 tokens. Their syntax uses a `$` prefix followed by the token contract address:
+
+```
+$0xTokenAddress
+```
+
+### Key properties
+
+- **Format**: `$` + 40-character hexadecimal Ethereum address
+- **Backing**: Real ERC-20 tokens held custodially by the Unit contract
+- **Value**: Inherits value from the underlying token
+- **Creation**: `one().anchored(IERC20(address))`
+
+### Examples
+
+Common anchored units (using shorthand notation for readability):
+- `$WETH` → {% include token.html address=site.data.contracts.tokens.weth.mainnet text="<code>$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2</code>" %}
+- `$USDC` → {% include token.html address=site.data.contracts.tokens.usdc.mainnet text="<code>$0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48</code>" %}
+- `$USDT` → {% include token.html address=site.data.contracts.tokens.usdt.mainnet text="<code>$0xdAC17F958D2ee523a2206206994597C13D831ec7</code>" %}
+- `$WBTC` → {% include token.html address=site.data.contracts.tokens.wbtc.mainnet text="<code>$0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599</code>" %}
+
+See [Anchored Units reference](/reference/anchored-units/) for complete list and details.
+
+### Floating vs anchored distinction
+
+**CRITICAL**: An anchored unit like `$WETH` is fundamentally different from a floating unit `WETH`:
+
+- **Anchored** `$0xC02a...56Cc2`: Backed 1:1 by real WETH tokens held by the contract. Custodial, has inherent value.
+- **Floating** `WETH`: Just a label with NO connection to the real WETH token. Value emerges only from liquidity/consensus.
+
+This distinction applies to ALL symbols:
+- `$USDC` (anchored) has real value from backing tokens
+- `USDC` (floating) is just a label with zero inherent value
+
+### Using anchored units in compounds
+
+Anchored units can be combined with other units using the standard operators:
+
+```
+$WETH*meter
+$USDC/second
+$WBTC^2
+```
+
+The full address form must be used in canonical expressions.
+
 ## Examples
 
 ### Base and identity
-- `USD`
-- `meter`
-- `1`
+- `USD` (floating)
+- `meter` (floating)
+- `1` (identity)
+
+### Anchored units
+- {% include token.html address=site.data.contracts.tokens.weth.mainnet text="<code>$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2</code>" %} (WETH, anchored)
+- {% include token.html address=site.data.contracts.tokens.usdc.mainnet text="<code>$0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48</code>" %} (USDC, anchored)
 
 ### Compound products
 - `foo*bar`
@@ -148,9 +201,13 @@ Documentation and examples should use canonical forms unless explicitly labeled 
 ### Reciprocal pair
 - `foo*(1/foo)` → canonicalizes to `1`
 
+### Anchored compounds
+- {% include token.html address=site.data.contracts.tokens.weth.mainnet text="<code>$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2</code>" %}`/second` (WETH per second)
+
 ## See also
 
 - [Canonicalization](/concepts/canonicalization)
 - [Unit Creation](/concepts/unit-creation)
 - [Triads](/concepts/triads)
 - [Forge](/concepts/forge)
+- [Anchored Units Reference](/reference/anchored-units/)
