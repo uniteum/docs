@@ -25,192 +25,92 @@ status: draft
 {: .note }
 > For complete technical specifications, see [Functions Reference](/reference/functions/). For supply mechanics, see [Tokenomics](/concepts/tokenomics/).
 
-In Uniteum, every token is a **unit** — a symbolic type that composes algebraically with other units.
+In Uniteum, every token is a **unit**—a dimensional type that composes algebraically with other units.
 
-This page defines **what a unit is** and **how unit symbols compose**. Protocol mechanics (liquidity, pricing, invariants, supply rules) are documented elsewhere.
+## The "1" Token
 
----
+At the center is "1"—the dimensionless unit. It mediates all base units and serves as the liquidity backbone of the protocol.
 
-## Normative Definition
-
-A **unit** is a finite multiset of **terms**. Each term consists of:
-- a **base** (either a symbol or an anchored address), and
-- an **exponent**, represented as a **rational number**.
-
-A unit is in **canonical form** if:
-- terms are sorted deterministically by base,
-- like bases are merged by adding exponents,
-- any term whose exponent becomes zero is removed, and
-- rational exponents are reduced to lowest terms.
-
-Two units are equal **if and only if** their canonical forms are identical.
-
-Units are purely **symbolic**. They do not encode quantity, magnitude, conversion rates, or physical meaning.
-
----
-
-## Exponents
-
-Exponents are rationals of the form **n/d**, where:
-- **n** is a signed integer numerator, and
-- **d** is a positive integer denominator.
-
-Rational exponents are a first-class part of the unit system.
-
-Examples:
-- `foo^2` → exponent `2/1`
-- `bar^1:2` → exponent `1/2`
-
-{: .note }
-> Exponents are symbolic only. Uniteum does not interpret expressions such as `meter^1:2` physically or numerically.
-
----
-
-## The Identity Unit (`1`)
-
-The identity unit is **`1`**.
-
-In mathematics, the multiplicative identity is sometimes called *unity*, but Uniteum uses the symbol `1` consistently in unit expressions and token names.
-
-Algebraically:
-- `U * 1 = U`
-- `U / U = 1`
-
-The ERC-20 token written as `"1"` is the token associated with the identity unit. Its protocol role and supply rules are described in [Tokenomics](/concepts/tokenomics/).
-
----
+- **Primordial supply:** 1 billion (minted once in v0.0, this is the ceiling for all versions)
+- **Supply mechanics:** Current version supply grows through migration from v0.0; total across all versions ≤ 1 billion
+- **Role:** Mediates base unit / reciprocal pairs
+- **Versions:** v0.0 (genesis ERC-20, primordial supply), current version (full Uniteum features)
 
 ## Unit Types
 
 ### Base Units
 
-Base units are simple, non-compound symbolic identifiers.
+Simple, non-compound units. Examples: `foo`, `meter`, `kilogram`.
 
-Examples:
-```
-
-foo
-meter
-kilogram
-
-```
-
-A base unit consists of a single base with exponent `+1`.
-
-Every base unit has a reciprocal (`1/foo`). Any additional relationships involving `1` are protocol mechanics, not part of the unit definition.
-
----
+Every base unit has:
+- A **reciprocal** (e.g., `1/foo`)
+- A relationship with "1" via the triad (foo, 1/foo, 1)
 
 ### Compound Units
 
-Compound units are created by algebraic composition of other units.
+Created by algebraic composition:
 
-Examples:
-```
+- `meter/second` — meter divided by second
+- `kilogram*meter` — kilogram times meter
+- `foo^2` — foo squared
+- `bar^1:2` — bar to the power of 1/2 (square root)
 
-meter/second
-kilogram*meter
-foo^2
-bar^1:2
+Operators:
+- `*` — multiply
+- `/` — divide
+- `^` — power
+- `:` — divide (in exponent context)
 
-```
-
-Supported operators:
-- `*` — multiplication
-- `/` — division
-- `^` — raise to a rational power
-- `:` — divides numerator and denominator **inside the exponent** (e.g. `^1:2`)
-
-Compound units are first-class units. They may be composed further, inverted, or exponentiated.
-
----
+Compound units are first-class citizens. They have their own reciprocals and can participate in forge operations with "1".
 
 ### Anchored Units
 
 {: .note }
 > For documentation shorthands ($WETH, $USDC, etc.) and complete reference, see [Anchored Units](/reference/anchored-units/).
 
-Anchored units bind a unit to an external ERC-20 token address.
+**Format:** `$0xTokenAddress`
 
-**Format:**
-```
+**Example:** `$0xdAC17F958D2ee523a2206206994597C13D831ec7` (USDT)
 
-$0xTokenAddress
+Anchored units are backed 1:1 by an external ERC-20 token. The backing tokens are held by the Unit contract.
 
-```
-
-**Example:**
-```
-
-$0xdAC17F958D2ee523a2206206994597C13D831ec7
-
-```
-
-Anchored units are backed 1:1 by the external ERC-20 token. The backing tokens are held by the Unit contract.
-
-- ✅ Redeemable for the backing token
-- ⚠️ Custodial by construction
+- ✅ Real value, redeemable
+- ⚠️ Custodial—you trust the contract
 - Created via: `one().anchored(IERC20(address))`
-
-Anchoring affects **token behavior**, not the algebraic definition of units.
-
----
 
 ### Floating Units
 
-Floating units are unanchored base units.
+**Format:** Up to 30 characters, `[a-zA-Z0-9_.-]+`
 
-**Format:** up to 30 characters, `[a-zA-Z0-9_.-]+`
+**Examples:** `foo`, `meter`, `acme`, `widget`
 
-**Examples:**
-```
+Floating units have no backing. They're just labels. Value emerges from liquidity and consensus.
 
-foo
-meter
-acme
-widget
-
-```
-
-Floating units have no backing. They are purely symbolic labels.
-
+- ❌ Not pegged to anything real
+- ❌ No collateral
 - ✅ Permissionless creation
-- ❌ No collateral or peg implied by the name
 - Created via: `one().multiply("symbol")`
 
-**Warning:** A floating unit named `USD` has no connection to U.S. dollars. Avoid real-world financial symbols to prevent confusion.
-
----
+**Warning:** A floating unit named `USD` has no connection to US dollars. Avoid real-world financial symbols to prevent confusion.
 
 ## Reciprocals
 
-Every unit `U` has a reciprocal `1/U`.
+Every unit U has a reciprocal 1/U. They are bound by the invariant:
 
-Symbolically:
-- the reciprocal negates all exponents, and
-- `U * (1/U) = 1`.
+$$u \cdot v = w^2$$
 
-Any supply, liquidity, or invariant relationships involving reciprocals are protocol mechanics and are not part of the unit definition.
+Where:
+- u = supply of U
+- v = supply of 1/U
+- w = supply of "1" held by the U contract
 
----
-
-## Canonical Form
-
-A unit is in canonical form if:
-- all zero-exponent terms are omitted,
-- each base appears at most once,
-- bases are ordered deterministically, and
-- rational exponents are normalized.
-
-Canonical form ensures that structurally equivalent units have identical representations and addresses.
-
----
+You cannot have U without 1/U. They are created together and maintain this relationship through all forge operations.
 
 ## Address Derivation
 
-Unit contract addresses are deterministically derived from the **canonical unit representation** using `CREATE2`.
+Unit contract addresses are deterministically derived from their symbol via CREATE2. Given a symbol, you can predict its address before it exists.
 
 This enables:
-- predicting unit addresses before deployment,
-- verifying unit authenticity, and
-- relying on composability guarantees.
+- Referencing units before creation
+- Verifying unit authenticity
+- Building on composability guarantees
