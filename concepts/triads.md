@@ -2,7 +2,7 @@
 title: Triads
 description: >-
   Valid three-token relationships in Uniteum. Every forge operates on
-  (U, V, √(U*V)) where the liquidity unit is the geometric mean of two reserve units.
+  (U, V, √(U·V)) subject to a local geometric-mean invariant.
 
 # Navigation
 nav_order: 3
@@ -23,171 +23,184 @@ status: draft
 # Triads
 
 {: .note }
-> For the forge operation details, see [Forge](/concepts/forge/). For invariant mathematics, see [Tokenomics](/concepts/tokenomics/).
+> For forge mechanics, see [Forge](/concepts/forge/).  
+> For invariant mathematics, see [Tokenomics](/concepts/tokenomics/).
 
-A triad is a valid three-token relationship where forge can operate. Every triad has two **reserve units** and one **liquidity unit** that is the geometric mean of the reserves.
+A **triad** is a valid three-Unit relationship on which forge can operate.
 
-## The Geometric Mean Structure
+Every triad links three ERC-20 Units whose supplies are constrained by a **local geometric-mean invariant**. Forge never operates outside a triad.
+
+## The Geometric-Mean Structure
 
 Every forge triad follows the pattern:
 
-**(U, V, √(U*V))**
+**(U, V, √(U·V))**
 
 Where:
-- **U and V** are the **reserve units** (what you're exchanging)
-- **√(U*V)** is the **liquidity unit** (mediates the exchange, analogous to Uniswap LP tokens)
+- **U and V** are two Units in the triad (often treated as reserves by convention)
+- **√(U·V)** is the geometric-mean Unit associated with the pair
 
-This geometric mean structure implements **arbitrary power perpetuals**, generalizing beyond Uniswap's 0.5 power perps. By choosing different reserve units, you can create any power/convexity profile.
+The geometric-mean Unit is a **first-class ERC-20 Unit**.  
+Its supply is **constrained by the invariant**, not derived on demand from U and V.
 
-## Triad Patterns
-
-### Reciprocal Pair Triad
-
-**(U, 1/U, 1)**
-
-- **Reserve units**: U and 1/U (a reciprocal pair)
-- **Liquidity unit**: "1" (since √(U * 1/U) = 1)
-
-Examples:
-- (foo, 1/foo, 1)
-- (meter, 1/meter, 1)
-
-This is the fundamental pattern connecting all base units through "1".
-
-**Note on "1"**: While "1" commonly appears as the liquidity unit for reciprocal pairs, it can also serve as a reserve unit in triads like `(1, meter², meter)` where √(1 * meter²) = meter.
-
-### Compound Unit Creation Triads
-
-To create a compound unit, you forge the triad where it appears as the geometric mean.
-
-**Pattern**: To create A^p*B^q, forge (A^(2p), B^(2q), A^p*B^q)
-
-Examples:
-
-**(meter², second², meter\*second)**
-- **Reserve units**: meter² and second²
-- **Liquidity unit**: meter\*second (since √(meter² * second²) = meter\*second)
-
-**(meter², 1/second², meter/second)**
-- **Reserve units**: meter² and 1/second²
-- **Liquidity unit**: meter/second (since √(meter² * 1/second²) = meter/second)
-
-**(foo², bar², foo\*bar)**
-- **Reserve units**: foo² and bar²
-- **Liquidity unit**: foo\*bar (since √(foo² * bar²) = foo\*bar)
-
-### Compound Unit Reciprocal Triad
-
-**(A·B, 1/(A·B), 1)**
-
-Compound units have reciprocals too, mediated by "1".
-
-Examples:
-- (meter/second, second/meter, 1) — since √((meter/second) * (second/meter)) = 1
-- (foo\*bar, 1/(foo\*bar), 1)
-
-### Power Perpetual Triads
-
-The geometric mean structure enables arbitrary power perpetuals by choosing appropriate reserve units.
-
-**Pattern**: `(1, U^(2p), U^p)` creates a p-power perp for U
-
-Examples:
-
-**(1, meter², meter)** — 1.0 power perp
-- **Reserve units**: 1 and meter²
-- **Liquidity unit**: meter (since √(1 * meter²) = meter)
-- Linear exposure to meter² price
-
-**(1, foo^4, foo²)** — 2.0 power perp
-- **Reserve units**: 1 and foo^4
-- **Liquidity unit**: foo² (since √(1 * foo^4) = foo²)
-- Squared exposure to foo^4 price
-
-**(meter^(2/3), meter^(4/3), meter)** — Custom fractional power
-- **Reserve units**: meter^(2/3) and meter^(4/3)
-- **Liquidity unit**: meter (since √(meter^(2/3) * meter^(4/3)) = meter)
-
-This generalizes Uniswap's 0.5 power perp `(U, 1/U, 1)` to support any rational power/convexity profile.
-
-## The Universal Invariant
+## Local Invariant (Normative)
 
 All triads obey the same invariant:
 
 $$\sqrt{u \cdot v} = w$$
 
-Or equivalently: $$u \cdot v = w^2$$
+Or equivalently:
+
+$$u \cdot v = w^2$$
 
 Where:
-- **u, v** = supplies of the two reserve units
-- **w** = supply of the liquidity unit
+- **u, v** = supplies of the two Units in the triad
+- **w** = supply of the geometric-mean Unit
 
-The liquidity unit supply is always the geometric mean of the reserve supplies.
+This invariant is enforced **strictly and locally per triad**.
 
-| Triad | Reserve U | Reserve V | Liquidity Unit |
-|-------|-----------|-----------|----------------|
-| (foo, 1/foo, 1) | foo supply | 1/foo supply | "1" supply |
-| (meter², 1/second², meter/second) | meter² supply | 1/second² supply | meter/second supply |
-| (foo\*bar, 1/(foo\*bar), 1) | foo\*bar supply | reciprocal supply | "1" supply |
+{: .note }
+> **There is no higher-order invariant.**  
+> Uniteum enforces no constraint spanning multiple triads.  
+> Global behavior emerges solely from overlapping triads and arbitrage.
 
-Different triads, same mathematical relationship.
+## Triad Roles (Conventional)
+
+In examples and intuition:
+- U and V are often called *reserve Units*
+- √(U·V) is often called the *liquidity* or *geometric-mean Unit*
+
+These roles are **conventional, not fundamental**.  
+A Unit may act as a reserve in one triad and a geometric-mean Unit in another.
+
+## Common Triad Patterns
+
+### Reciprocal Pair Triad
+
+**(U, 1/U, 1)**
+
+- Units: U and its reciprocal
+- Geometric-mean Unit: `1`, since √(U · 1/U) = 1
+
+Examples:
+- (foo, 1/foo, 1)
+- (meter, 1/meter, 1)
+
+This pattern connects all Units through `1`.
+
+{: .note }
+> Although `1` commonly appears as the geometric-mean Unit here, it may also appear as a reserve in other triads.
+
+---
+
+### Compound-Unit Creation Triads
+
+A compound Unit may appear as the geometric-mean Unit of a triad.
+
+**Pattern:**  
+To obtain **A^p · B^q**, the corresponding triad is:
+
+```
+
+(A^(2p), B^(2q), A^p · B^q)
+
+```
+
+Examples:
+
+**(meter², second², meter·second)**  
+**(meter², 1/second², meter/second)**  
+**(foo², bar², foo·bar)**
+
+In each case, the compound Unit is a **Unit identity** created separately (see [Unit Creation](/concepts/unit-creation)) and participates economically through the triad.
+
+---
+
+### Compound Reciprocal Triad
+
+Compound Units also have reciprocal triads:
+
+**(A·B, 1/(A·B), 1)**
+
+Examples:
+- (meter/second, second/meter, 1)
+- (foo·bar, 1/(foo·bar), 1)
+
+---
+
+### Power-Structured Triads
+
+By choosing appropriate Units, triads can express **non-linear price exposure**.
+
+Examples:
+
+**(1, meter², meter)**  
+- √(1 · meter²) = meter  
+- Produces linear exposure to meter²
+
+**(1, foo⁴, foo²)**  
+- √(1 · foo⁴) = foo²  
+- Produces squared exposure to foo⁴
+
+Fractional exponents follow the same structure, provided the Units exist.
+
+{: .note }
+> These behaviors arise from **geometric-mean constraints**, not from a separate “power-perpetual” primitive.
 
 ## Multi-Path Trading
 
-Because the same unit can serve as a reserve in one triad and a liquidity unit in another, there are often multiple paths between two units.
+Because Units may participate in many triads, there are often multiple forge paths between two Units.
 
-**Example:** Creating exposure to meter/second
+**Example: exposure to meter/second**
 
-Path A (Direct):
-1. Forge (meter², 1/second², meter/second) where meter/second is the liquidity unit
+**Direct path**
+1. Forge (meter², 1/second², meter/second)
 
-Path B (Through "1"):
-1. Forge (meter, 1/meter, 1) to get "1"
-2. Forge (second, 1/second, 1) to exchange "1" for 1/second
-3. Then combine through other triads
+**Indirect path**
+1. Forge (meter, 1/meter, 1)
+2. Forge (second, 1/second, 1)
+3. Combine through additional triads
 
-Different paths may have different costs. Arbitrageurs exploit differences, keeping prices consistent.
+Different paths may have different costs. Arbitrageurs exploit discrepancies, enforcing price consistency across the mesh.
 
-## Why This Matters
+## Mesh Topology
 
-Triads create a **mesh topology**:
+Triads form a **mesh**:
 
-- Every base unit connects to "1" via reciprocal pairs
-- Compound units can serve as liquidity units in their creation triads
-- The same compound units can serve as reserve units in other triads
-- Multiple paths exist between any two units
+- Every base Unit connects to `1`
+- Compound Units connect through their creation triads
+- Units may act in multiple roles across triads
+- No single triad is privileged
 
-This mesh enables:
-- **Arbitrage:** Price inconsistencies create profit opportunities
-- **Liquidity sharing:** Deep liquidity in one triad supports others
-- **Price discovery:** No oracles needed—arbitrage enforces consistency
-- **Arbitrary power perps:** Create any convexity profile via geometric mean triads
-- **Custom leverage:** From 0.5x (sqrt) to 2x (squared) and beyond, without borrowing
-
-## Multi-Role Composition
-
-The power of triads comes from units serving different roles:
-
-**Example: meter/second**
-- **As liquidity unit**: In triad (meter², 1/second², meter/second)
-- **As reserve unit**: Could appear in (meter²/second², kg², kg*meter/second)
-
-This multi-role capability creates interconnected liquidity across the entire system.
+This enables:
+- Arbitrage-driven price discovery
+- Liquidity sharing across the system
+- Custom non-linear exposures
+- No reliance on external oracles
 
 ## Valid vs Invalid Triads
 
-A triad is valid if it satisfies **both** constraints:
+A triad is valid only if **both** conditions hold:
 
-**1. Geometric mean relationship**: √(U * V) = W
+### 1. Geometric-Mean Relationship
 
-✅ **(meter², 1/second², meter/second)** — √(meter² * 1/second²) = meter/second
+√(U · V) = W
 
-❌ **(meter, 1/second, meter/second)** — √(meter * 1/second) ≠ meter/second
+✅ (meter², 1/second², meter/second)  
+❌ (meter, 1/second, meter/second)
 
-**2. No duplicate reserves**: U ≠ V
+### 2. Distinct Units
 
-✅ **(1, meter², meter)** — Different reserve units (1 and meter²)
+U ≠ V
 
-❌ **(bar, bar, bar)** — Duplicate reserves, even though √(bar * bar) = bar
+✅ (1, meter², meter)  
+❌ (bar, bar, bar)
 
-The contract enforces both constraints. Attempting invalid triads raises errors like `DuplicateUnits()`.
+The contract enforces both constraints. Invalid triads revert.
+
+## Summary
+
+- Triads are the **only context** in which forge operates
+- Each triad enforces one local invariant
+- There is **no global invariant**
+- Global coherence emerges from overlapping triads and arbitrage
