@@ -4,7 +4,24 @@
 
 Uniteum is an algebraic liquidity protocol on Ethereum where ERC-20 tokens have dimensional units (like physical quantities: m/s, kg*m, etc.) or floating units (USD, BTC, foo). Units compose algebraically, and price consistency is maintained through arbitrage-enforced forge operations rather than oracles.
 
-**Key Innovation:** Multi-dimensional constant-product AMM where algebraic relationships create liquidity pools. Forge operations work on triads (U, V, √(U*V)) where the liquidity unit is the geometric mean of two reserve units, creating a mesh topology of arbitrage paths.
+**Key Innovation:** Multi-dimensional constant-product AMM where algebraic relationships create liquidity pools. Forge operations work on triads (U, V, √(U·V)) where the geometric-mean Unit is √(U·V), creating a mesh topology of arbitrage paths.
+
+## Collaboration Context
+
+This project uses both **Claude** and **ChatGPT** for documentation and development:
+
+- **ChatGPT** focuses on: conceptual consistency, normative spec text, Jekyll markdown pages, terminology
+- **Claude** focuses on: code implementation, contract interactions, technical reference, examples
+
+**Key collaboration files:**
+- `.meta/CHATGPT.md` - ChatGPT's guidelines and constraints
+- `.meta/PROJECT_CONSTITUTION.md` - Normative rules (authoritative alongside Unit.json)
+- `.meta/HANDOFF_TEMPLATE.md` - Template for handoffs between AI assistants
+
+**Authoritative sources (in order):**
+1. Unit.json (compiled source bundle / canonical reference for implementation intent)
+2. `.meta/PROJECT_CONSTITUTION.md` (normative rules and scope)
+3. Other docs in this project (non-normative unless explicitly stated)
 
 ## Deployed Contracts
 
@@ -51,11 +68,17 @@ See [concepts/tokenomics.md](/concepts/tokenomics/) for complete invariant mathe
 
 **Forge Triad Structure:**
 
-Every forge operation works on a triad of three units: two **reserve units** and one **liquidity unit**. The liquidity unit is always the geometric mean of the two reserve units.
+Every forge operation works on a triad of three units: two **reserve units** (by convention) and one **geometric-mean Unit**. The geometric-mean Unit is always √(U·V) where U and V are the other two units in the triad.
 
-**Triad format:** `(U, V, √(U*V))` where:
-- U and V are the **reserve units** (what you're exchanging)
-- √(U*V) is the **liquidity unit** (mediates the exchange, analogous to Uniswap LP tokens)
+**IMPORTANT TERMINOLOGY (ChatGPT normative language):**
+- The geometric-mean Unit is a **first-class ERC-20 Unit** with its own supply
+- Its supply is **constrained by the invariant** (w² = u · v), not computed on demand
+- "Reserve units" and "geometric-mean Unit" are **conventional roles**, not fundamental distinctions
+- The same Unit can be a reserve in one triad and a geometric-mean Unit in another
+
+**Triad format:** `(U, V, √(U·V))` where:
+- U and V are the **reserve units** (conventional terminology: the units being exchanged)
+- √(U·V) is the **geometric-mean Unit** (conventional terminology: mediates the exchange, like Uniswap LP tokens)
 
 **Examples of valid triads:**
 - `(U, 1/U, 1)` — reciprocal pair with "1" as liquidity unit (since √(U * 1/U) = 1)
@@ -80,9 +103,15 @@ This generalizes beyond Uniswap's 0.5 power perp to support arbitrary convexity 
 - To decrease U's price: mint U, burn 1/U (generates "1")
 - For compound units: `price(A^p*B^q)` enforced by arbitrage across triads
 
-**Invariant enforcement:** `√(u * v) = w` where:
+**Invariant enforcement:** `√(u · v) = w` where:
 - u, v are reserve unit supplies
-- w is liquidity unit supply
+- w is geometric-mean Unit supply
+
+**Local vs Global Invariants (ChatGPT emphasis):**
+- Each triad enforces **one local invariant**: u · v = w²
+- There is **NO global invariant** spanning multiple triads
+- Global price consistency emerges from **arbitrage across overlapping triads**
+- This is fundamental to the mesh topology design
 
 **Price Formula:**
 - `price(U) = v/u` where v = 1/U supply, u = U supply (see [concepts/tokenomics.md](/concepts/tokenomics/) for derivation)
@@ -187,7 +216,52 @@ Since the same unit can serve as a reserve in one triad and a liquidity unit in 
 - Useful for deploying many units efficiently or batch address prediction
 - Example: Deploy foo, bar, baz in single transaction by calling `helper.multiply(one, ["foo", "bar", "baz"])`
 
-### 8. Terminology: Reserve Units and Liquidity Units
+### 8. Two Distinct Layers (ChatGPT Framework)
+
+**CRITICAL CONCEPTUAL SEPARATION:**
+
+ChatGPT has established a clear framework distinguishing two layers that are often confused:
+
+**Layer 1: Unit Identity Creation** (symbolic, structural)
+- Determines **which Units exist** as ERC-20 contracts
+- Parsing symbolic expressions (e.g., "m/s^2")
+- Multiplication and reciprocal operations
+- Canonicalization (deterministic normalization)
+- Does NOT mint/burn balances
+- Does NOT affect prices
+- See [concepts/unit-creation.md](/concepts/unit-creation/)
+
+**Layer 2: Forge Operations** (economic, balance changes)
+- Mints and burns balances of **existing Units**
+- Operates on triads with geometric-mean invariants
+- Changes prices through supply changes
+- Never creates new Unit identities
+- See [concepts/forge.md](/concepts/forge/)
+
+**Why this matters:**
+- Confusing these layers leads to incorrect mental models
+- Unit creation is permissionless and gas-efficient (just creates contracts)
+- Economic impact only happens through forge
+- A Unit can exist without any supply (no one has forged it yet)
+
+### 9. Canonicalization Rules (ChatGPT Normative)
+
+From `.meta/PROJECT_CONSTITUTION.md` and [concepts/canonicalization.md](/concepts/canonicalization/):
+
+**Canonical Form Rules:**
+- The identity unit is named **`1`** (not "unity" - this is a recent clarification)
+- Canonical form **never uses negative exponents**
+- Reciprocals are expressed structurally (e.g., `1/bar`, not `bar^-1`)
+- Terms are ordered canonically (lexical ordering of packed terms)
+- Canonical rendering is deterministic: same unit → exactly one canonical string
+- Exponent division uses `:` character (e.g., `foo^2:3` means foo^(2/3))
+
+**Parser vs Canonical:**
+- Parser may accept non-canonical input (e.g., `bar^-1`)
+- All output must use canonical form (e.g., `1/bar`)
+- Documentation should use canonical forms unless explicitly labeled
+
+### 10. Terminology: Reserve Units and Geometric-Mean Units
 
 **Understanding Triad Positions:**
 
@@ -292,6 +366,53 @@ Uniteum:
 - Implements **arbitrary power perps** via geometric mean structure (generalizes Uniswap's 0.5 power perps)
 - No oracles, no collateral requirements for synthetics
 
+## Key Documentation Added by ChatGPT
+
+The following pages provide normative definitions and conceptual framework:
+
+### Core Conceptual Pages
+
+1. **[Mental Model](/concepts/mental-model/)** - High-level way to think about Uniteum
+   - "Units are tokens, not labels"
+   - "Triads are the only place economics happens"
+   - "Everything is local, consistency is global"
+
+2. **[Unit Syntax](/concepts/unit-syntax/)** - How unit expressions are written
+   - Operators: `*`, `/`, `^`
+   - Identity unit: `1`
+   - Precedence rules
+
+3. **[Unit Creation](/concepts/unit-creation/)** - How Unit identities come into existence
+   - **Separate from forge** (this is critical)
+   - Parsing, multiplication, reciprocals
+   - Canonicalization
+
+4. **[Canonicalization](/concepts/canonicalization/)** - Normalization rules
+   - Ensures uniqueness of Unit identities
+   - No negative exponents in canonical form
+   - Deterministic rendering
+
+5. **[Glossary](/reference/glossary/)** - Canonical definitions
+   - Unit, Base Unit, Compound Unit
+   - Identity Unit, Reciprocal
+   - Forge, Triad, Geometric-Mean Unit
+   - Invariant, Mesh, Arbitrage
+
+### Meta/Normative Documents
+
+1. **`.meta/PROJECT_CONSTITUTION.md`** - Normative rules
+   - Authoritative alongside Unit.json
+   - Defines scope (what's in/out)
+   - Canonical form rules
+
+2. **`.meta/CHATGPT.md`** - ChatGPT collaboration guide
+   - What ChatGPT can/cannot do
+   - Constraints and deliverable format
+
+3. **`.meta/HANDOFF_TEMPLATE.md`** - Template for AI handoffs
+   - Goal, constraints, files to touch
+   - Definition of done
+
 ## Documentation Approach
 
 ### Target Audience
@@ -388,6 +509,36 @@ Common anchored unit shorthands (all have dedicated reference pages):
 - Tutorial forge step: `[Uniteum contract](https://etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#writeContract)` (descriptive anchor text)
 - Checking invariants: `[read the invariant](https://etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#readContract)` (descriptive anchor text)
 - Example transaction: `[This forge transaction](https://etherscan.io/tx/0xabcd1234...)` (use full tx hash in URL, can shorten display text)
+
+## Terminology Alignment (Claude ↔ ChatGPT)
+
+To ensure consistency between AI assistants, use these aligned terms:
+
+### Preferred Terms (ChatGPT normative)
+
+| Use This | Not This | Why |
+|----------|----------|-----|
+| **geometric-mean Unit** | "liquidity unit" (acceptable for intuition) | Emphasizes it's a first-class ERC-20, not derived |
+| **Unit** (capital U) | "token" (when referring to Uniteum tokens) | Distinguishes Uniteum Units from generic ERC-20s |
+| **identity Unit** or **`1`** | "unity" | PROJECT_CONSTITUTION.md specifies `1` |
+| **triad** | "pool" or "pair" | Accurate (three units, not two) |
+| **local invariant** | "the invariant" | Emphasizes no global invariant exists |
+| **Unit identity creation** | "creating a unit" (ambiguous) | Separates from forge/minting |
+| **canonical form** | "normalized form" | Matches PROJECT_CONSTITUTION.md |
+| **structural reciprocal** | "inverse" | Emphasizes it's a distinct Unit, not math operation |
+
+### Context-Dependent Terms
+
+- **"Reserve units"** and **"geometric-mean Unit"** are **conventional roles** in a triad, not fundamental properties
+- The same Unit can be a reserve in one triad and geometric-mean Unit in another
+- Use these terms for intuition and examples, but note they're conventional
+
+### Symbol Notation
+
+- Use `·` (middle dot) for multiplication in mathematical notation: `√(U·V)`
+- Use `*` for multiplication in code/expressions: `foo*bar`
+- Use `:` for exponent division: `foo^2:3` means foo^(2/3)
+- Avoid `^-1` for reciprocals; use `1/foo` instead
 
 ## Key Concepts to Emphasize
 
