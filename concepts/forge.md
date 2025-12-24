@@ -23,87 +23,96 @@ status: draft
 # Forge
 
 {: .note }
-> For valid triad patterns and multi-path trading, see [Triads](/concepts/triads/). For the mathematics, see [Tokenomics](/concepts/tokenomics/).
+> For valid triad patterns and multi-path trading, see [Triads](/concepts/triads/).  
+> For the mathematics, see [Tokenomics](/concepts/tokenomics/).
 
 Forge is the universal operation in Uniteum. Every swap, every mint, every burn—all are forge operations on triads with geometric mean structure.
 
 ## What Forge Does
 
-Forge transforms tokens within a valid triad (U, V, √(U*V)) while preserving the invariant:
+Forge transforms tokens within a valid triad **(U, V, √(U·V))** while preserving the invariant:
 
 $$\sqrt{u \cdot v} = w$$
 
-Or equivalently: $$u \cdot v = w^2$$
+Or equivalently:
+
+$$u \cdot v = w^2$$
 
 Where:
-- **u, v** = supplies of the two **reserve units**
-- **w** = supply of the **liquidity unit** (the geometric mean √(U*V))
+- **u, v** = supplies of two Units in the triad (often treated as reserves by convention)
+- **w** = supply of the geometric-mean Unit in the same triad
+
+Here, **W is an independent ERC-20 Unit whose supply is constrained by the invariant**, not a value derived on demand from U and V.
 
 You provide some combination of the three tokens; forge adjusts all supplies to maintain the invariant.
 
 ## Two Directions
 
-### Forward: Reserves → Liquidity
+### Forward: Reserves → Geometric-Mean Unit
 
-Provide reserve units U and V, receive liquidity unit W.
+Provide Units U and V, receive the geometric-mean Unit W.
 
 Example with triad (foo, 1/foo, 1):
-- You provide foo and 1/foo (the reserves)
-- You receive "1" (the liquidity unit)
+- You provide foo and 1/foo
+- You receive `1`
 - Supplies of foo and 1/foo increase
-- "1" transfers from contract to you
+- `1` transfers from the contract to you
 
-### Reverse: Liquidity → Reserves
+### Reverse: Geometric-Mean Unit → Reserves
 
-Provide liquidity unit W, receive reserve units U and V.
+Provide the geometric-mean Unit W, receive Units U and V.
 
 Example:
-- You provide "1" (the liquidity unit)
-- You receive foo and 1/foo (the reserves)
-- "1" transfers to contract
+- You provide `1`
+- You receive foo and 1/foo
+- `1` transfers to the contract
 - Supplies of foo and 1/foo decrease
 
 ## Forge as Swap
 
 Want to swap foo for 1/foo?
 
-1. Forge forward: provide foo + some 1/foo → receive "1"
-2. Forge reverse: provide "1" → receive foo + 1/foo (different ratio)
+1. Forge forward: provide foo and some 1/foo → receive `1`
+2. Forge reverse: provide `1` → receive foo and 1/foo (in a different ratio)
 
-Net effect: you've traded foo for 1/foo, passing through the "1" liquidity unit.
+Net effect: you have traded foo for 1/foo, passing through the `1` Unit.
 
-With compound unit triads like (meter², 1/second², meter/second), you can create more complex exposures. See [Triads](/concepts/triads/).
+With compound-unit triads like (meter², 1/second², meter/second), you can create more complex exposures. See [Triads](/concepts/triads/).
 
 ## Price Impact
 
-Forging changes supply ratios, which changes prices.
+Price effects **emerge from supply changes enforced by the invariant**.
 
-**To increase foo's price:**
-- Burn foo (decrease u)
-- Mint 1/foo (increase v)
-- This consumes "1"
+For intuition:
 
-**To decrease foo's price:**
-- Mint foo (increase u)
-- Burn 1/foo (decrease v)
-- This releases "1"
+**To increase foo’s price:**
+- Decrease the supply of foo
+- Increase the supply of 1/foo
+- This consumes `1`
 
-Forging isn't just trading—it's market making.
+**To decrease foo’s price:**
+- Increase the supply of foo
+- Decrease the supply of 1/foo
+- This releases `1`
+
+Forging is not just trading—it is market making through invariant-constrained minting and burning.
 
 ## The Invariant Constraint
 
-You can't forge arbitrary amounts. The invariant constrains the relationship:
+You cannot forge arbitrary amounts. The invariant constrains the relationship:
 
 $$u_1 \cdot v_1 = w_1^2$$
 
-After forging, this must hold. The contract calculates what's possible and executes accordingly.
+After forging, this relationship must still hold. The contract calculates what combinations of minting and burning are possible and executes accordingly.
 
-See [Tokenomics](/concepts/tokenomics/) for the full math.
+See [Tokenomics](/concepts/tokenomics/) for the full mathematics.
 
 ## No Separate Operations
 
-There is no "mint" function. No "burn" function. No "swap" function.
+There is no separate “mint” function.  
+There is no separate “burn” function.  
+There is no separate “swap” function.
 
 Just forge.
 
-This simplicity is intentional. One operation, one invariant, infinite possibilities.
+This simplicity is intentional: one operation, one invariant, emergent global behavior.
