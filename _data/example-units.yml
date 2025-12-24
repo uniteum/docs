@@ -218,3 +218,23 @@ units:
     canonical: $0xFF34B3d4Aee8ddCd6F9AFFFB6Fe49bD371b8a357
     address: "0x2BFDBe41e8075309d46813E24E906Fa0D1C18c0E"
     one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
+  - symbol: $0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2*meter
+    description: WETH times meter (example compound with anchored unit)
+    canonical: $0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2*meter
+    address: "0x54DFf559b2c5B8E8ef09c3C0fC3541d89968e109"
+    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
+  - symbol: $0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/second
+    description: WETH per second (example compound with anchored unit)
+    canonical: $0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/second
+    address: "0xA9d2C7b8082f23f9C4a09572d65916Ab364B9431"
+    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
+  - symbol: $0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/second
+    description: USDC per second (example compound with anchored unit)
+    canonical: $0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/second
+    address: "0xeF9BFD304394AcF9004DC5DcA699992734EDcd12"
+    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
+  - symbol: $0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599^2
+    description: WBTC squared (example compound with anchored unit)
+    canonical: $0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599^2
+    address: "0xCdec785A658b04F709A202910Beb0a93c24eb22e"
+    one: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"

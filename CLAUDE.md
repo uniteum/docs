@@ -457,6 +457,56 @@ uniteum.one/
 - Provide "try it yourself" steps
 - Reference power perp connection for theoretical grounding
 
+**Unit Expression Formatting:**
+
+When displaying unit expressions (base units, compound units, or anchored units), the entire expression is a single syntactic entity and must be formatted as such:
+
+- ✅ CORRECT: `meter/second`, `$WETH/second`, `foo*bar^2`
+- ❌ WRONG: `meter`/`second`, {% include token.html ... %}`/second`, `foo*`bar`^2`
+
+**Key principle:** Never split a unit expression across formatting boundaries. If using code formatting, links, or Jekyll includes, the entire compound expression should be treated as one unit.
+
+**Examples:**
+- Simple compound: `meter/second` (not `meter`/`second`)
+- With links: Use `<code>$0xC02a...56Cc2/second</code>` as the link text (not `<code>$0xC02a...56Cc2</code>` followed by `/second`)
+- In prose: "The unit `kg*meter/second^2` represents force" (not "The unit `kg*meter`/`second^2`...")
+
+**CRITICAL: Three Distinct Entities for Tokens**
+
+When working with tokens like WETH, there are THREE distinct entities that must NOT be confused:
+
+1. **External ERC-20 Token Contract** - `0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
+   - This is the actual WETH contract on Ethereum
+   - Lives in `site.data.contracts.tokens.weth.mainnet`
+   - Link using: `{% include token.html address=site.data.contracts.tokens.weth.mainnet %}`
+   - This is what backs the anchored unit
+
+2. **Anchored Uniteum Unit** - `$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
+   - This is the Uniteum Unit that wraps the external WETH token 1:1
+   - Has its own address (different from the WETH contract!)
+   - Stored in `site.data.example_units` as symbol `$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
+   - Link using: `{% include unit.html symbol="$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" %}`
+   - The `$` prefix indicates it's an anchored Unit
+
+3. **Floating WETH Unit** - `WETH`
+   - This is a Uniteum Unit with the symbol "WETH" (NO $ prefix, NO address)
+   - Has ZERO connection to real WETH or the WETH contract
+   - Just a label/symbol, value emerges only from liquidity
+   - Stored in `site.data.example_units` as symbol `WETH` (if it exists)
+   - Link using: `{% include unit.html symbol="WETH" %}`
+
+**Linking Rules:**
+
+- External token (0xC02a...): Use `token.html` with address from `contracts.tokens.*.mainnet`
+- Anchored Unit ($0xC02a...): Use `unit.html` with symbol including `$` prefix
+- Floating Unit (WETH): Use `unit.html` with symbol (no `$` prefix)
+
+**Common Mistakes to Avoid:**
+
+- ❌ Linking `$0xC02a...` to the WETH contract (they're different contracts!)
+- ❌ Treating `WETH` (floating) as if it has connection to real WETH
+- ❌ Confusing the external token address with the anchored Unit address
+
 **Anchored Unit Notation Convention:**
 
 For documentation readability, use shorthand notation like `$WETH`, `$USDC`, `$WBTC` in explanations and examples, BUT:
@@ -464,18 +514,18 @@ For documentation readability, use shorthand notation like `$WETH`, `$USDC`, `$W
 - **Link first occurrence** to token reference pages (e.g., `[$WETH](/reference/anchored-units/weth/)`)
 - Add callout at top of page: "We use [$WETH](/reference/anchored-units/weth/), [$USDC](/reference/anchored-units/usdc/), etc. as readable shorthands. See [Anchored Units](/reference/anchored-units/) for actual symbols."
 - In technical reference or code examples, show real addresses
-- Emphasize the distinction: floating `WETH` ≠ anchored `$0xC02a...56Cc2`
+- Emphasize the distinction: floating `WETH` ≠ anchored `$0xC02a...56Cc2` ≠ WETH contract `0xC02a...56Cc2`
 
 Common anchored unit shorthands (all have dedicated reference pages):
-- [$WETH](/reference/anchored-units/weth/) = `$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
-- [$USDC](/reference/anchored-units/usdc/) = `$0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
-- [$USDT](/reference/anchored-units/usdt/) = `$0xdAC17F958D2ee523a2206206994597C13D831ec7`
-- [$WBTC](/reference/anchored-units/wbtc/) = `$0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599`
-- [$DAI](/reference/anchored-units/dai/) = `$0x6B175474E89094C44Da98b954EedeAC495271d0F`
+- [$WETH](/reference/anchored-units/weth/) = anchored Unit `$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2` (backed by WETH contract)
+- [$USDC](/reference/anchored-units/usdc/) = anchored Unit `$0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48` (backed by USDC contract)
+- [$USDT](/reference/anchored-units/usdt/) = anchored Unit `$0xdAC17F958D2ee523a2206206994597C13D831ec7` (backed by USDT contract)
+- [$WBTC](/reference/anchored-units/wbtc/) = anchored Unit `$0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599` (backed by WBTC contract)
+- [$DAI](/reference/anchored-units/dai/) = anchored Unit `$0x6B175474E89094C44Da98b954EedeAC495271d0F` (backed by DAI contract)
 
 **Anchored Unit Pages:** Located in `/reference/anchored-units/` directory. Each page explains:
 - The shorthand vs actual symbol
-- What the token is backed by (with Etherscan link)
+- What the token is backed by (with Etherscan link to the external token contract)
 - Floating vs anchored distinction
 - Example derivatives and use cases
 - How to create the anchored unit
@@ -642,6 +692,39 @@ These are things that haven't been fully verified/explored:
 6. **Liquidity dynamics:** How does "1" supply affect entire system?
 
 Treat these as research questions, not solved problems.
+
+## Self-Improvement Protocol
+
+**CRITICAL:** When you make mistakes or the user corrects your understanding, IMMEDIATELY update this CLAUDE.md file to prevent repeating the same mistake.
+
+### When to Update CLAUDE.md:
+
+1. **After being corrected** - If the user points out a mistake in your approach
+2. **When discovering ambiguity** - If you realize existing guidance is unclear or incomplete
+3. **When establishing new patterns** - If the user provides new conventions to follow
+4. **When creating new tools/includes** - Document how and when to use them
+
+### How to Update:
+
+1. **Identify the root cause** - What knowledge was missing or wrong?
+2. **Add clear guidance** - Write explicit rules with examples
+3. **Include anti-patterns** - Show what NOT to do (with ❌)
+4. **Test your understanding** - Verify the new guidance would prevent the mistake
+
+### Example Pattern:
+
+When you realize you've been doing X wrong:
+```markdown
+**[Topic Name]:**
+
+✅ CORRECT: [What to do]
+❌ WRONG: [What not to do]
+
+**Why:** [Explanation]
+**Examples:** [Concrete examples]
+```
+
+**Remember:** This file is your persistent memory. If you don't update it, you'll repeat the same mistakes.
 
 ---
 

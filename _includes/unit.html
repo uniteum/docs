@@ -1,0 +1,36 @@
+{%- comment -%}
+Link to a Unit token on Etherscan.
+
+Usage:
+  {% include unit.html symbol="foo" %}
+  {% include unit.html symbol="meter/second" %}
+  {% include unit.html symbol="foo" text="custom text" %}
+  {% include unit.html symbol="kg*meter/second^2" network="sepolia" %}
+
+Parameters:
+  - symbol (required): Unit symbol (must exist in site.data.example_units.units)
+  - network (optional): "mainnet" (default) or "sepolia"
+  - text (optional): Link text (defaults to <code>symbol</code>)
+
+Looks up the unit address from example-units.yml and creates an Etherscan token link.
+{%- endcomment -%}
+
+{%- assign unit_entry = nil -%}
+{%- for unit in site.data.example_units.units -%}
+  {%- if unit.symbol == include.symbol -%}
+    {%- assign unit_entry = unit -%}
+    {%- break -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- if unit_entry -%}
+  {%- if include.text -%}
+    {%- assign link_text = include.text -%}
+  {%- else -%}
+    {%- assign link_text = "<code>" | append: include.symbol | append: "</code>" -%}
+  {%- endif -%}
+  {% include etherscan.html address=unit_entry.address network=include.network text=link_text type="token" %}
+{%- else -%}
+  {%- comment -%}Unit not found in example-units.yml, just display as code{%- endcomment -%}
+  <code>{{ include.symbol }}</code>
+{%- endif -%}
