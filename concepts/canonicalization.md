@@ -50,11 +50,11 @@ The identity Unit is named:
 
 ```
 
-unity
+1
 
 ```
 
-All expressions that reduce to the identity resolve to `unity`.
+All expressions that reduce to the identity resolve to `1`.
 
 ### No negative exponents
 

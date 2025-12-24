@@ -96,7 +96,7 @@ Canonicalization ensures:
 - consistent identity across the system
 
 Canonical rules include:
-- the identity Unit is named `unity`
+- the identity Unit is named `1`
 - canonical form never uses negative exponents
 - reciprocals are represented structurally as `1/x`
 - terms are ordered canonically
