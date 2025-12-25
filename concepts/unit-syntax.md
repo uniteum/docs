@@ -31,7 +31,7 @@ A unit expression names either:
 - a **base Unit** (a single symbol), like `meter` or `USD`
 - a **compound Unit** built from other Units, like `meter/second` or `kg*meter/second^2`
 - the **identity Unit**, written as `1`
-- an **anchored Unit** (prefixed with `$`), like {% include token.html address=site.data.contracts.tokens.weth.mainnet text="<code>$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2</code>" %} (WETH)
+- an **anchored Unit** (prefixed with `$`), like {% include unit.html symbol="$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" %} (WETH)
 
 All Units are ERC-20 tokens; the expression describes structure, not magnitude.
 
@@ -149,10 +149,10 @@ $0xTokenAddress
 ### Examples
 
 Common anchored units (using shorthand notation for readability):
-- `$WETH` → {% include token.html address=site.data.contracts.tokens.weth.mainnet text="<code>$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2</code>" %}
-- `$USDC` → {% include token.html address=site.data.contracts.tokens.usdc.mainnet text="<code>$0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48</code>" %}
-- `$USDT` → {% include token.html address=site.data.contracts.tokens.usdt.mainnet text="<code>$0xdAC17F958D2ee523a2206206994597C13D831ec7</code>" %}
-- `$WBTC` → {% include token.html address=site.data.contracts.tokens.wbtc.mainnet text="<code>$0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599</code>" %}
+- `$WETH` → {% include unit.html symbol="$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" %}
+- `$USDC` → {% include unit.html symbol="$0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48" %}
+- `$USDT` → {% include unit.html symbol="$0xdAC17F958D2ee523a2206206994597C13D831ec7" %}
+- `$WBTC` → {% include unit.html symbol="$0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599" %}
 
 See [Anchored Units reference](/reference/anchored-units/) for complete list and details.
 
@@ -160,11 +160,11 @@ See [Anchored Units reference](/reference/anchored-units/) for complete list and
 
 **CRITICAL**: An anchored unit like `$WETH` is fundamentally different from a floating unit `WETH`:
 
-- **Anchored** {% include token.html address=site.data.contracts.tokens.weth.mainnet text="<code>$0xC02a...56Cc2</code>" %}: Backed 1:1 by real WETH tokens held by the contract. Custodial, has inherent value.
+- **Anchored** {% include unit.html symbol="$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" text="<code>$0xC02a...56Cc2</code>" %}: Backed 1:1 by real WETH tokens held by the contract. Custodial, has inherent value.
 - **Floating** `WETH`: Just a label with NO connection to the real WETH token. Value emerges only from liquidity/consensus.
 
 This distinction applies to ALL symbols:
-- {% include token.html address=site.data.contracts.tokens.usdc.mainnet text="<code>$USDC</code>" %} (anchored) has real value from backing tokens
+- {% include unit.html symbol="$0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48" text="<code>$USDC</code>" %} (anchored) has real value from backing tokens
 - `USDC` (floating) is just a label with zero inherent value
 
 ### Using anchored units in compounds

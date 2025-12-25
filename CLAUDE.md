@@ -503,9 +503,26 @@ When working with tokens like WETH, there are THREE distinct entities that must 
 
 **Common Mistakes to Avoid:**
 
+- ❌ **CRITICAL:** Using `token.html` for anchored Units
+  - Example wrong: `{% include token.html address=site.data.contracts.tokens.weth.mainnet text="$0xC02a..." %}`
+  - **Why wrong:** This links to the external WETH contract (0xC02a...), NOT the anchored Uniteum Unit
+  - **Correct:** `{% include unit.html symbol="$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" %}`
 - ❌ Linking `$0xC02a...` to the WETH contract (they're different contracts!)
 - ❌ Treating `WETH` (floating) as if it has connection to real WETH
 - ❌ Confusing the external token address with the anchored Unit address
+
+**Quick Reference - Which Include to Use:**
+
+```liquid
+{%- comment -%} External WETH token contract (0xC02a...) - NOT anchored Unit {%- endcomment -%}
+{% include token.html address=site.data.contracts.tokens.weth.mainnet %}
+
+{%- comment -%} Anchored Uniteum Unit ($0xC02a...) - The wrapper Unit {%- endcomment -%}
+{% include unit.html symbol="$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" %}
+
+{%- comment -%} Floating Uniteum Unit (WETH) - No connection to real WETH {%- endcomment -%}
+{% include unit.html symbol="WETH" %}
+```
 
 **Anchored Unit Notation Convention:**
 
