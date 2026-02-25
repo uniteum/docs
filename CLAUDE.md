@@ -484,7 +484,7 @@ When working with tokens like WETH, there are THREE distinct entities that must 
 2. **Anchored Uniteum Unit** - `$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
    - This is the Uniteum Unit that wraps the external WETH token 1:1
    - Has its own address (different from the WETH contract!)
-   - Stored in `site.data.example_units` as symbol `$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
+   - Stored in `site.data.units` as symbol `$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
    - Link using: `{% include unit.html symbol="$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" %}`
    - The `$` prefix indicates it's an anchored Unit
 
@@ -492,7 +492,7 @@ When working with tokens like WETH, there are THREE distinct entities that must 
    - This is a Uniteum Unit with the symbol "WETH" (NO $ prefix, NO address)
    - Has ZERO connection to real WETH or the WETH contract
    - Just a label/symbol, value emerges only from liquidity
-   - Stored in `site.data.example_units` as symbol `WETH` (if it exists)
+   - Stored in `site.data.units` as symbol `WETH` (if it exists)
    - Link using: `{% include unit.html symbol="WETH" %}`
 
 **Linking Rules:**

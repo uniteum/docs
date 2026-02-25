@@ -20,7 +20,7 @@ _data/example-units-input.yml  (manual, input only)
            ↓
     compute-all-addresses.sh  (generates addresses)
            ↓
-_data/example-units.yml  (generated, for Jekyll)
+_data/units.yml  (generated, for Jekyll)
            ↓
     deploy-all-units.sh  (optional deployment)
 ```
@@ -86,16 +86,15 @@ units:
     description: "Velocity unit"
 ```
 
-### `_data/example-units.yml`
+### `_data/units.yml`
 
 Generated output with computed addresses. **DO NOT EDIT MANUALLY.**
 
 ```yaml
-units:
-  - symbol: "foo"
-    canonical: "foo"
-    address: "0x966108210F3B2eC0f01B646a61Ce7D8F1aDE7430"
-    description: "Generic placeholder unit"
+foo:
+  canonical: "foo"
+  address: "0x966108210F3B2eC0f01B646a61Ce7D8F1aDE7430"
+  description: "Generic placeholder unit"
 ```
 
 ## Atomic Scripts
@@ -190,12 +189,12 @@ Validates that all units in the input file are in canonical form.
 
 ### `compute-all-addresses.sh`
 
-Generates `_data/example-units.yml` with computed addresses for all units.
+Generates `_data/units.yml` with computed addresses for all units.
 
 **This script:**
 1. Validates all units first (fails if any non-canonical)
 2. Computes addresses for each unit
-3. Writes output to `_data/example-units.yml`
+3. Writes output to `_data/units.yml`
 
 ```bash
 ./compute-all-addresses.sh
@@ -215,7 +214,7 @@ Generates `_data/example-units.yml` with computed addresses for all units.
 ./compute-all-addresses.sh [rpc-url]
 ```
 
-**Output file:** `_data/example-units.yml`
+**Output file:** `_data/units.yml`
 
 ### `deploy-all-units.sh`
 
@@ -268,7 +267,7 @@ export PRIVATE_KEY=0x...
 
 4. **Commit changes:**
    ```bash
-   git add _data/example-units-input.yml _data/example-units.yml
+   git add _data/example-units-input.yml _data/units.yml
    git commit -m "Add new example unit: your-symbol"
    ```
 
@@ -284,8 +283,8 @@ If the contract changes or you want to refresh all computed data:
 
 ```bash
 ./scripts/compute-all-addresses.sh
-git diff _data/example-units.yml  # Review changes
-git add _data/example-units.yml
+git diff _data/units.yml  # Review changes
+git add _data/units.yml
 git commit -m "Regenerate example unit addresses"
 ```
 
@@ -343,12 +342,12 @@ All scripts:
 
 ## Integration with Jekyll
 
-Jekyll automatically reads `_data/example-units.yml` and makes it available as `site.data.example-units.units` in Liquid templates.
+Jekyll automatically reads `_data/units.yml` and makes it available as `site.data.units` in Liquid templates.
 
 Example usage in markdown:
 ```liquid
-{% for unit in site.data.example-units.units %}
-- [{{ unit.symbol }}](https://etherscan.io/token/{{ unit.address }})
+{% for pair in site.data.units %}
+- [{{ pair[0] }}](https://etherscan.io/token/{{ pair[1].address }})
 {% endfor %}
 ```
 

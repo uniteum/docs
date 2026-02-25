@@ -33,27 +33,27 @@ Unlike [anchored units](/reference/anchored-units/), floating units have no exte
 
 ## Quick Reference
 
-{% comment %} Categorize units from flat array {% endcomment %}
-{% assign all_units = site.data.example-units.units %}
+{% comment %} Categorize units from hash {% endcomment %}
 {% assign base_units = "" | split: "" %}
 {% assign reciprocal_units = "" | split: "" %}
 {% assign compound_units = "" | split: "" %}
-{% for unit in all_units %}
-  {% if unit.symbol contains "1/" %}
-    {% assign reciprocal_units = reciprocal_units | push: unit %}
-  {% elsif unit.symbol contains "*" or unit.symbol contains "/" or unit.symbol contains "^" %}
-    {% assign compound_units = compound_units | push: unit %}
+{% for pair in site.data.units %}
+  {% assign sym = pair[0] %}
+  {% if sym contains "1/" %}
+    {% assign reciprocal_units = reciprocal_units | push: pair %}
+  {% elsif sym contains "*" or sym contains "/" or sym contains "^" %}
+    {% assign compound_units = compound_units | push: pair %}
   {% else %}
-    {% assign base_units = base_units | push: unit %}
+    {% assign base_units = base_units | push: pair %}
   {% endif %}
 {% endfor %}
 
 {% assign base_count = base_units | size %}
 {% assign reciprocal_count = reciprocal_units | size %}
 {% assign compound_count = compound_units | size %}
-{% assign foo = base_units | where: "symbol", "foo" | first %}
-{% assign one_foo = reciprocal_units | where: "symbol", "1/foo" | first %}
-{% assign velocity = compound_units | where: "symbol", "meter/second" | first %}
+{% assign foo = site.data.units["foo"] %}
+{% assign one_foo = site.data.units["1/foo"] %}
+{% assign velocity = site.data.units["meter/second"] %}
 
 | Unit Type | Count | Example |
 |-----------|-------|---------|
@@ -61,21 +61,23 @@ Unlike [anchored units](/reference/anchored-units/), floating units have no exte
 | Reciprocals | {{ reciprocal_count }} | [`1/foo`](https://etherscan.io/token/{{ one_foo.address }}){:target="_blank"} |
 | Compounds | {{ compound_count }} | [`meter/second`](https://etherscan.io/token/{{ velocity.address }}){:target="_blank"} |
 
+
 ## Base Units
 
 {% assign generic = "" | split: "" %}
 {% assign physics = "" | split: "" %}
 {% assign gaming = "" | split: "" %}
 {% assign floating_examples = "" | split: "" %}
-{% for unit in base_units %}
-  {% if unit.symbol == "foo" or unit.symbol == "bar" or unit.symbol == "baz" or unit.symbol == "acme" or unit.symbol == "widget" %}
-    {% assign generic = generic | push: unit %}
-  {% elsif unit.symbol == "meter" or unit.symbol == "second" or unit.symbol == "kilogram" or unit.symbol == "kg" %}
-    {% assign physics = physics | push: unit %}
-  {% elsif unit.symbol == "sword" or unit.symbol == "shield" %}
-    {% assign gaming = gaming | push: unit %}
-  {% elsif unit.symbol == "USD" or unit.symbol == "ETH" or unit.symbol == "BTC" or unit.symbol == "MSFT" %}
-    {% assign floating_examples = floating_examples | push: unit %}
+{% for pair in base_units %}
+  {% assign sym = pair[0] %}
+  {% if sym == "foo" or sym == "bar" or sym == "baz" or sym == "acme" or sym == "widget" %}
+    {% assign generic = generic | push: pair %}
+  {% elsif sym == "meter" or sym == "second" or sym == "kilogram" or sym == "kg" %}
+    {% assign physics = physics | push: pair %}
+  {% elsif sym == "sword" or sym == "shield" %}
+    {% assign gaming = gaming | push: pair %}
+  {% elsif sym == "USD" or sym == "ETH" or sym == "BTC" or sym == "MSFT" %}
+    {% assign floating_examples = floating_examples | push: pair %}
   {% endif %}
 {% endfor %}
 
@@ -83,24 +85,24 @@ Unlike [anchored units](/reference/anchored-units/), floating units have no exte
 
 | Symbol | Address | Description |
 |--------|---------|-------------|
-{% for unit in generic -%}
-| [`{{ unit.symbol }}`](https://etherscan.io/token/{{ unit.address }}){:target="_blank"} | `{{ unit.address }}` | {{ unit.description }} |
+{% for pair in generic -%}
+| [`{{ pair[0] }}`](https://etherscan.io/token/{{ pair[1].address }}){:target="_blank"} | `{{ pair[1].address }}` | {{ pair[1].description }} |
 {% endfor %}
 
 ### Physics/Dimensional Units
 
 | Symbol | Address | Description |
 |--------|---------|-------------|
-{% for unit in physics -%}
-| [`{{ unit.symbol }}`](https://etherscan.io/token/{{ unit.address }}){:target="_blank"} | `{{ unit.address }}` | {{ unit.description }} |
+{% for pair in physics -%}
+| [`{{ pair[0] }}`](https://etherscan.io/token/{{ pair[1].address }}){:target="_blank"} | `{{ pair[1].address }}` | {{ pair[1].description }} |
 {% endfor %}
 
 ### Gaming/Community Examples
 
 | Symbol | Address | Description |
 |--------|---------|-------------|
-{% for unit in gaming -%}
-| [`{{ unit.symbol }}`](https://etherscan.io/token/{{ unit.address }}){:target="_blank"} | `{{ unit.address }}` | {{ unit.description }} |
+{% for pair in gaming -%}
+| [`{{ pair[0] }}`](https://etherscan.io/token/{{ pair[1].address }}){:target="_blank"} | `{{ pair[1].address }}` | {{ pair[1].description }} |
 {% endfor %}
 
 ### Floating Real-World Asset Examples
@@ -111,18 +113,18 @@ Unlike [anchored units](/reference/anchored-units/), floating units have no exte
 
 | Symbol | Address | Description |
 |--------|---------|-------------|
-{% for unit in floating_examples -%}
-| [`{{ unit.symbol }}`](https://etherscan.io/token/{{ unit.address }}){:target="_blank"} | `{{ unit.address }}` | {{ unit.description }} |
+{% for pair in floating_examples -%}
+| [`{{ pair[0] }}`](https://etherscan.io/token/{{ pair[1].address }}){:target="_blank"} | `{{ pair[1].address }}` | {{ pair[1].description }} |
 {% endfor %}
 
 ## Reciprocal Units
 
 | Symbol | Address | Base Unit |
 |--------|---------|-----------|
-{% for unit in reciprocal_units -%}
-{% assign base_symbol = unit.symbol | replace: "1/", "" -%}
-{% assign base_unit = base_units | where: "symbol", base_symbol | first -%}
-| [`{{ unit.symbol }}`](https://etherscan.io/token/{{ unit.address }}){:target="_blank"} | `{{ unit.address }}` | [`{{ base_symbol }}`](https://etherscan.io/token/{{ base_unit.address }}){:target="_blank"} |
+{% for pair in reciprocal_units -%}
+{% assign base_symbol = pair[0] | replace: "1/", "" -%}
+{% assign base_unit = site.data.units[base_symbol] -%}
+| [`{{ pair[0] }}`](https://etherscan.io/token/{{ pair[1].address }}){:target="_blank"} | `{{ pair[1].address }}` | [`{{ base_symbol }}`](https://etherscan.io/token/{{ base_unit.address }}){:target="_blank"} |
 {% endfor %}
 
 ## Compound Units
@@ -131,15 +133,16 @@ Unlike [anchored units](/reference/anchored-units/), floating units have no exte
 {% assign ratios = "" | split: "" %}
 {% assign complex = "" | split: "" %}
 {% assign powers = "" | split: "" %}
-{% for unit in compound_units %}
-  {% if unit.symbol == "kg*m/s^2" %}
-    {% assign complex = complex | push: unit %}
-  {% elsif unit.symbol contains "^" %}
-    {% assign powers = powers | push: unit %}
-  {% elsif unit.symbol contains "/" %}
-    {% assign ratios = ratios | push: unit %}
-  {% elsif unit.symbol contains "*" %}
-    {% assign products = products | push: unit %}
+{% for pair in compound_units %}
+  {% assign sym = pair[0] %}
+  {% if sym == "kg*m/s^2" %}
+    {% assign complex = complex | push: pair %}
+  {% elsif sym contains "^" %}
+    {% assign powers = powers | push: pair %}
+  {% elsif sym contains "/" %}
+    {% assign ratios = ratios | push: pair %}
+  {% elsif sym contains "*" %}
+    {% assign products = products | push: pair %}
   {% endif %}
 {% endfor %}
 
@@ -151,24 +154,24 @@ Unlike [anchored units](/reference/anchored-units/), floating units have no exte
 
 | Symbol | Canonical | Address | Description |
 |--------|-----------|---------|-------------|
-{% for unit in products -%}
-| {% if unit.symbol != unit.canonical %}`{{ unit.symbol }}`{% else %}[`{{ unit.symbol }}`](https://etherscan.io/token/{{ unit.address }}){:target="_blank"}{% endif %} | {% if unit.symbol != unit.canonical %}[`{{ unit.canonical }}`](https://etherscan.io/token/{{ unit.address }}){:target="_blank"}{% else %}`{{ unit.canonical }}`{% endif %} | `{{ unit.address }}` | {{ unit.description }} |
+{% for pair in products -%}
+| {% if pair[0] != pair[1].canonical %}`{{ pair[0] }}`{% else %}[`{{ pair[0] }}`](https://etherscan.io/token/{{ pair[1].address }}){:target="_blank"}{% endif %} | {% if pair[0] != pair[1].canonical %}[`{{ pair[1].canonical }}`](https://etherscan.io/token/{{ pair[1].address }}){:target="_blank"}{% else %}`{{ pair[1].canonical }}`{% endif %} | `{{ pair[1].address }}` | {{ pair[1].description }} |
 {% endfor %}
 
 ### Ratios/Division
 
 | Symbol | Address | Description |
 |--------|---------|-------------|
-{% for unit in ratios -%}
-| [`{{ unit.symbol }}`](https://etherscan.io/token/{{ unit.address }}){:target="_blank"} | `{{ unit.address }}` | {{ unit.description }} |
+{% for pair in ratios -%}
+| [`{{ pair[0] }}`](https://etherscan.io/token/{{ pair[1].address }}){:target="_blank"} | `{{ pair[1].address }}` | {{ pair[1].description }} |
 {% endfor %}
 
 ### Complex Combinations
 
 | Symbol | Address | Description |
 |--------|---------|-------------|
-{% for unit in complex -%}
-| [`{{ unit.symbol }}`](https://etherscan.io/token/{{ unit.address }}){:target="_blank"} | `{{ unit.address }}` | {{ unit.description }} |
+{% for pair in complex -%}
+| [`{{ pair[0] }}`](https://etherscan.io/token/{{ pair[1].address }}){:target="_blank"} | `{{ pair[1].address }}` | {{ pair[1].description }} |
 {% endfor %}
 
 ### Powers/Exponents
@@ -179,8 +182,8 @@ Unlike [anchored units](/reference/anchored-units/), floating units have no exte
 
 | Symbol | Address | Description |
 |--------|---------|-------------|
-{% for unit in powers -%}
-| [`{{ unit.symbol }}`](https://etherscan.io/token/{{ unit.address }}){:target="_blank"} | `{{ unit.address }}` | {{ unit.description }} |
+{% for pair in powers -%}
+| [`{{ pair[0] }}`](https://etherscan.io/token/{{ pair[1].address }}){:target="_blank"} | `{{ pair[1].address }}` | {{ pair[1].description }} |
 {% endfor %}
 
 ## How to Deploy

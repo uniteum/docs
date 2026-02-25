@@ -13,7 +13,7 @@ This document catalogs all floating example units (`foo`, `bar`, etc.) used thro
 ## Files Created
 
 ### Data & Reference
-- **`_data/example-units.yml`** - Structured data file with all units, addresses, and descriptions
+- **`_data/units.yml`** - Structured data file with all units, addresses, and descriptions
 - **`reference/floating-units.md`** - User-facing reference page with tables and links
 - **`EXAMPLE_UNITS_SUMMARY.md`** (this file) - Internal summary for project maintainers
 
@@ -170,7 +170,7 @@ cast send 0x9df9b0501e8f6c05623b5b519f9f18b598d9b253 \
 
 ## Complete Address List
 
-See [`_data/example-units.yml`](_data/example-units.yml) for the complete structured list.
+See [`_data/units.yml`](_data/units.yml) for the complete structured list.
 
 See [`reference/floating-units.md`](reference/floating-units.md) for the user-facing reference page.
 

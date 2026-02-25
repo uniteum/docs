@@ -8,20 +8,14 @@ Usage:
   {% include unit.html symbol="kg*meter/second^2" network="sepolia" %}
 
 Parameters:
-  - symbol (required): Unit symbol (must exist in site.data.example_units.units)
+  - symbol (required): Unit symbol (must exist in site.data.units)
   - network (optional): "mainnet" (default) or "sepolia"
   - text (optional): Link text (defaults to <code>symbol</code>)
 
-Looks up the unit address from example-units.yml and creates an Etherscan token link.
+Looks up the unit address from units.yml and creates an Etherscan token link.
 {%- endcomment -%}
 
-{%- assign unit_entry = nil -%}
-{%- for unit in site.data.example_units.units -%}
-  {%- if unit.symbol == include.symbol -%}
-    {%- assign unit_entry = unit -%}
-    {%- break -%}
-  {%- endif -%}
-{%- endfor -%}
+{%- assign unit_entry = site.data.units[include.symbol] -%}
 
 {%- if unit_entry -%}
   {%- if include.text -%}
@@ -31,6 +25,6 @@ Looks up the unit address from example-units.yml and creates an Etherscan token 
   {%- endif -%}
   {% include etherscan.html address=unit_entry.address network=include.network text=link_text type="token" %}
 {%- else -%}
-  {%- comment -%}Unit not found in example-units.yml, just display as code{%- endcomment -%}
+  {%- comment -%}Unit not found in units.yml, just display as code{%- endcomment -%}
   <code>{{ include.symbol }}</code>
 {%- endif -%}
