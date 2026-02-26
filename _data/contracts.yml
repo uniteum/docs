@@ -91,35 +91,3 @@ deployer:
     mainnet: "0xff96a8c70dcc85a0cc4d690bfc02166a90e71004"
     sepolia: "0xff96a8c70dcc85a0cc4d690bfc02166a90e71004"
     ens: "0.eoa.uniteum.eth"
-
-# Common anchored tokens (for reference)
-tokens:
-  weth:
-    name: "Wrapped Ether"
-    symbol: "WETH"
-    mainnet: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
-    sepolia: "0x7b79995e5f793A07Bc00c21412e50Ecae098E7f9"
-
-  usdc:
-    name: "USD Coin"
-    symbol: "USDC"
-    mainnet: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
-    sepolia: "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"
-
-  usdt:
-    name: "Tether USD"
-    symbol: "USDT"
-    mainnet: "0xdAC17F958D2ee523a2206206994597C13D831ec7"
-    sepolia: "0xaA8E23Fb1079EA71e0a56F48a2aA51851D8433D0"
-
-  wbtc:
-    name: "Wrapped Bitcoin"
-    symbol: "WBTC"
-    mainnet: "0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599"
-    sepolia: "0x29f2D40B0605204364af54EC677bD022dA425d03"
-
-  dai:
-    name: "Dai Stablecoin"
-    symbol: "DAI"
-    mainnet: "0x6B175474E89094C44Da98b954EedeAC495271d0F"
-    sepolia: "0xFF34B3d4Aee8ddCd6F9AFFFB6Fe49bD371b8a357"

@@ -477,8 +477,8 @@ When working with tokens like WETH, there are THREE distinct entities that must 
 
 1. **External ERC-20 Token Contract** - `0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
    - This is the actual WETH contract on Ethereum
-   - Lives in `site.data.contracts.tokens.weth.mainnet`
-   - Link using: `{% include token.html address=site.data.contracts.tokens.weth.mainnet %}`
+   - Lives in `site.data.tokens.weth.mainnet`
+   - Link using: `{% include token.html address=site.data.tokens.weth.mainnet %}`
    - This is what backs the anchored unit
 
 2. **Anchored Uniteum Unit** - `$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
@@ -497,14 +497,14 @@ When working with tokens like WETH, there are THREE distinct entities that must 
 
 **Linking Rules:**
 
-- External token (0xC02a...): Use `token.html` with address from `contracts.tokens.*.mainnet`
+- External token (0xC02a...): Use `token.html` with address from `tokens.*.mainnet`
 - Anchored Unit ($0xC02a...): Use `unit.html` with symbol including `$` prefix
 - Floating Unit (WETH): Use `unit.html` with symbol (no `$` prefix)
 
 **Common Mistakes to Avoid:**
 
 - ❌ **CRITICAL:** Using `token.html` for anchored Units
-  - Example wrong: `{% include token.html address=site.data.contracts.tokens.weth.mainnet text="$0xC02a..." %}`
+  - Example wrong: `{% include token.html address=site.data.tokens.weth.mainnet text="$0xC02a..." %}`
   - **Why wrong:** This links to the external WETH contract (0xC02a...), NOT the anchored Uniteum Unit
   - **Correct:** `{% include unit.html symbol="$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" %}`
 - ❌ Linking `$0xC02a...` to the WETH contract (they're different contracts!)
@@ -515,7 +515,7 @@ When working with tokens like WETH, there are THREE distinct entities that must 
 
 ```liquid
 {%- comment -%} External WETH token contract (0xC02a...) - NOT anchored Unit {%- endcomment -%}
-{% include token.html address=site.data.contracts.tokens.weth.mainnet %}
+{% include token.html address=site.data.tokens.weth.mainnet %}
 
 {%- comment -%} Anchored Uniteum Unit ($0xC02a...) - The wrapper Unit {%- endcomment -%}
 {% include unit.html symbol="$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" %}

@@ -15,7 +15,7 @@ last_updated: 2024-12-18
 
 ## What This Represents
 
-{% assign usdc = site.data.contracts.tokens.usdc -%}
+{% assign usdc = site.data.tokens.usdc -%}
 In Uniteum documentation, `$USDC` is a **readable shorthand** for an anchored unit backed by {% include token.html address=usdc.mainnet text="USD Coin (USDC)" %}.
 
 The actual Uniteum symbol uses the full USDC contract address:
@@ -56,10 +56,10 @@ Anyone can create floating units with labels like "USDC" or "USD". They have NO 
 IUnit one = IUnit({% include uniteum_address.html %});
 
 // Create anchored USDC unit
-IERC20 usdc = IERC20({{ site.data.contracts.tokens.usdc.mainnet }});
+IERC20 usdc = IERC20({{ site.data.tokens.usdc.mainnet }});
 IUnit usdcUnit = one.anchored(usdc);
 
-// usdcUnit.symbol() returns: "${{ site.data.contracts.tokens.usdc.mainnet }}"
+// usdcUnit.symbol() returns: "${{ site.data.tokens.usdc.mainnet }}"
 ```
 
 ## Reciprocal Unit: Depeg Hedge

@@ -15,7 +15,7 @@ last_updated: 2024-12-18
 
 ## What This Represents
 
-{% assign wbtc = site.data.contracts.tokens.wbtc -%}
+{% assign wbtc = site.data.tokens.wbtc -%}
 In Uniteum documentation, `$WBTC` is a **readable shorthand** for an anchored unit backed by {% include token.html address=wbtc.mainnet text="Wrapped Bitcoin (WBTC)" %}.
 
 The actual Uniteum symbol uses the full WBTC contract address:
@@ -52,10 +52,10 @@ Wrapped Bitcoin is Bitcoin represented as an ERC-20 token on Ethereum. 1 WBTC = 
 IUnit one = IUnit({% include uniteum_address.html %});
 
 // Create anchored WBTC unit
-IERC20 wbtc = IERC20({{ site.data.contracts.tokens.wbtc.mainnet }});
+IERC20 wbtc = IERC20({{ site.data.tokens.wbtc.mainnet }});
 IUnit wbtcUnit = one.anchored(wbtc);
 
-// wbtcUnit.symbol() returns: "${{ site.data.contracts.tokens.wbtc.mainnet }}"
+// wbtcUnit.symbol() returns: "${{ site.data.tokens.wbtc.mainnet }}"
 ```
 
 ## Reciprocal Unit

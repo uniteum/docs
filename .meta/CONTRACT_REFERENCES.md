@@ -208,7 +208,7 @@ docs/
 
 - **Default to version-agnostic** - Use `{% include uniteum.html %}`
 - **Only reference specific versions** when documenting migrations or history
-- **Tokens don't have versions** - Reference directly via `site.data.contracts.tokens.weth.mainnet`
+- **Tokens don't have versions** - Reference directly via `site.data.tokens.weth.mainnet`
 - **Update `current:` pointers** when releasing new versions
 - **Zero hardcoded version numbers** in documentation (except contracts.yml itself)
 

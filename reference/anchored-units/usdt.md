@@ -15,7 +15,7 @@ last_updated: 2024-12-18
 
 ## What This Represents
 
-{% assign usdt = site.data.contracts.tokens.usdt -%}
+{% assign usdt = site.data.tokens.usdt -%}
 In Uniteum documentation, `$USDT` is a **readable shorthand** for an anchored unit backed by {% include token.html address=usdt.mainnet text="Tether USD (USDT)" %}.
 
 The actual Uniteum symbol uses the full USDT contract address:
@@ -51,10 +51,10 @@ Tether USD is the largest stablecoin by market cap, pegged to the US Dollar. Int
 IUnit one = IUnit({% include uniteum_address.html %});
 
 // Create anchored USDT unit
-IERC20 usdt = IERC20({{ site.data.contracts.tokens.usdt.mainnet }});
+IERC20 usdt = IERC20({{ site.data.tokens.usdt.mainnet }});
 IUnit usdtUnit = one.anchored(usdt);
 
-// usdtUnit.symbol() returns: "${{ site.data.contracts.tokens.usdt.mainnet }}"
+// usdtUnit.symbol() returns: "${{ site.data.tokens.usdt.mainnet }}"
 ```
 
 ## Reciprocal Unit

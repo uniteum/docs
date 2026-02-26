@@ -11,11 +11,11 @@ last_updated: 2024-12-18
 # $WETH (Wrapped Ether)
 
 **Documentation Shorthand:** `$WETH`
-**Actual Symbol:** `${{ site.data.contracts.tokens.weth.mainnet }}`
+**Actual Symbol:** `${{ site.data.tokens.weth.mainnet }}`
 
 ## What This Represents
 
-{% assign weth = site.data.contracts.tokens.weth -%}
+{% assign weth = site.data.tokens.weth -%}
 In Uniteum documentation, `$WETH` is a **readable shorthand** for an anchored unit backed by {% include token.html address=weth.mainnet text="Wrapped Ether (WETH)" %}.
 
 The actual Uniteum symbol uses the full WETH contract address:
@@ -40,11 +40,11 @@ Wrapped Ether is ETH converted to an ERC-20 token for DeFi compatibility. 1 WETH
 
 | Symbol | Type | Backing |
 |--------|------|---------|
-| `${{ site.data.contracts.tokens.weth.mainnet }}` | Anchored unit | 1:1 WETH in contract |
+| `${{ site.data.tokens.weth.mainnet }}` | Anchored unit | 1:1 WETH in contract |
 | `WETH` (no $) | Floating unit | None (just a label) |
 | `$WETH` | Documentation shorthand | Refers to anchored version |
 
-**Critical:** Floating `WETH` ≠ Anchored `${{ site.data.contracts.tokens.weth.mainnet | slice: 0, 6 }}...{{ site.data.contracts.tokens.weth.mainnet | slice: -4, 4 }}`
+**Critical:** Floating `WETH` ≠ Anchored `${{ site.data.tokens.weth.mainnet | slice: 0, 6 }}...{{ site.data.tokens.weth.mainnet | slice: -4, 4 }}`
 
 A floating unit with the label "WETH" has NO connection to real Wrapped Ether. Anyone can create it. It's worthless unless consensus gives it value.
 
@@ -55,17 +55,17 @@ A floating unit with the label "WETH" has NO connection to real Wrapped Ether. A
 IUnit one = IUnit({% include uniteum_address.html %});
 
 // Create anchored WETH unit
-IERC20 weth = IERC20({{ site.data.contracts.tokens.weth.mainnet }});
+IERC20 weth = IERC20({{ site.data.tokens.weth.mainnet }});
 IUnit wethUnit = one.anchored(weth);
 
-// wethUnit.symbol() returns: "${{ site.data.contracts.tokens.weth.mainnet }}"
+// wethUnit.symbol() returns: "${{ site.data.tokens.weth.mainnet }}"
 ```
 
 ## Reciprocal Unit
 
 Every anchored unit has a reciprocal:
 
-**`1/$WETH`** (shorthand) = `1/${{ site.data.contracts.tokens.weth.mainnet }}` (actual)
+**`1/$WETH`** (shorthand) = `1/${{ site.data.tokens.weth.mainnet }}` (actual)
 
 This is a **synthetic unit** (NOT backed by WETH). Its price is the inverse of the WETH unit's price, enforced by the invariant.
 
@@ -140,4 +140,4 @@ See [Forging Guide](/guides/forging/) for detailed instructions.
 
 ---
 
-**Remember:** In your code, use the full address `${{ site.data.contracts.tokens.weth.mainnet }}`. The `$WETH` shorthand is for documentation readability only.
+**Remember:** In your code, use the full address `${{ site.data.tokens.weth.mainnet }}`. The `$WETH` shorthand is for documentation readability only.

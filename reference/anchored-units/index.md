@@ -59,11 +59,11 @@ A floating unit with the label "WETH" has zero connection to actual Wrapped Ethe
 
 Click any shorthand to see its actual symbol, backing token details, and usage examples.
 
-{% assign weth = site.data.contracts.tokens.weth -%}
-{% assign usdc = site.data.contracts.tokens.usdc -%}
-{% assign usdt = site.data.contracts.tokens.usdt -%}
-{% assign wbtc = site.data.contracts.tokens.wbtc -%}
-{% assign dai = site.data.contracts.tokens.dai -%}
+{% assign weth = site.data.tokens.weth -%}
+{% assign usdc = site.data.tokens.usdc -%}
+{% assign usdt = site.data.tokens.usdt -%}
+{% assign wbtc = site.data.tokens.wbtc -%}
+{% assign dai = site.data.tokens.dai -%}
 
 | Shorthand | Token Name | Actual Symbol (first 10 & last 4) | Mainnet Contract |
 |-----------|------------|-----------------------------------|------------------|
