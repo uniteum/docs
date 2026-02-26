@@ -1,0 +1,123 @@
+# Example Units for Documentation
+# Input-only: symbol (as key) and description
+# Addresses and canonical forms are computed by scripts
+
+# Generic/Abstract Examples
+foo:
+  description: "Generic placeholder unit for examples"
+bar:
+  description: "Generic placeholder unit for examples"
+baz:
+  description: "Generic placeholder unit for examples"
+acme:
+  description: "Example company/entity unit"
+widget:
+  description: "Example product unit"
+
+# Physics/Dimensional Units
+meter:
+  description: "Example length dimension"
+second:
+  description: "Example time dimension"
+kilogram:
+  description: "Example mass dimension"
+kg:
+  description: "Abbreviated mass dimension"
+
+# Gaming/Community Examples
+sword:
+  description: "Gaming item example"
+shield:
+  description: "Gaming item example"
+
+# Floating versions of real-world assets (NOT anchored, NO actual connection)
+USD:
+  description: "Floating USD (NO connection to real US dollars)"
+ETH:
+  description: "Floating ETH (distinct from anchored $WETH)"
+BTC:
+  description: "Floating BTC (NO connection to Bitcoin)"
+MSFT:
+  description: "Floating MSFT (NO connection to Microsoft stock)"
+
+# Reciprocals
+"1/foo":
+  description: "Reciprocal of foo"
+"1/bar":
+  description: "Reciprocal of bar"
+"1/meter":
+  description: "Reciprocal of meter (inverse length)"
+"1/second":
+  description: "Reciprocal of second (frequency)"
+"1/kilogram":
+  description: "Reciprocal of kilogram"
+"1/kg":
+  description: "Reciprocal of kg"
+
+# Simple products
+"bar*foo":
+  description: "Product of foo and bar"
+"meter*second":
+  description: "Product of meter and second"
+"kg*m":
+  description: "Product of kg and m"
+"kilogram*meter":
+  description: "Product of kilogram and meter"
+"shield*sword":
+  description: "Gaming composite item"
+
+# Ratios/Division
+"meter/second":
+  description: "Velocity unit (meters per second)"
+"foo/bar":
+  description: "Ratio of foo to bar"
+"second/meter":
+  description: "Reciprocal of velocity"
+
+# Complex combinations
+"kg*m/s^2":
+  description: "Force unit (Newtons)"
+
+# Powers/Exponents
+"foo^2":
+  description: "Foo squared"
+"foo^2:3":
+  description: "Foo to the power 2/3 (demonstrates rational exponents)"
+"bar^1:2":
+  description: "Square root of bar"
+
+# Anchored Units (backed 1:1 by external ERC-20 tokens)
+# Format: $0xTokenAddress
+# These are real-world backed units (custodial)
+"$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2":
+  description: "Anchored WETH (Wrapped Ether) - mainnet"
+"$0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48":
+  description: "Anchored USDC (USD Coin) - mainnet"
+"$0xdAC17F958D2ee523a2206206994597C13D831ec7":
+  description: "Anchored USDT (Tether USD) - mainnet"
+"$0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599":
+  description: "Anchored WBTC (Wrapped Bitcoin) - mainnet"
+"$0x6B175474E89094C44Da98b954EedeAC495271d0F":
+  description: "Anchored DAI (Dai Stablecoin) - mainnet"
+
+# Sepolia testnet anchored units
+"$0x7b79995e5f793A07Bc00c21412e50Ecae098E7f9":
+  description: "Anchored WETH (Wrapped Ether) - sepolia"
+"$0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238":
+  description: "Anchored USDC (USD Coin) - sepolia"
+"$0xaA8E23Fb1079EA71e0a56F48a2aA51851D8433D0":
+  description: "Anchored USDT (Tether USD) - sepolia"
+"$0x29f2D40B0605204364af54EC677bD022dA425d03":
+  description: "Anchored WBTC (Wrapped Bitcoin) - sepolia"
+"$0xFF34B3d4Aee8ddCd6F9AFFFB6Fe49bD371b8a357":
+  description: "Anchored DAI (Dai Stablecoin) - sepolia"
+
+# Compound units with anchored units
+"$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2*meter":
+  description: "WETH times meter (example compound with anchored unit)"
+"$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/second":
+  description: "WETH per second (example compound with anchored unit)"
+"$0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/second":
+  description: "USDC per second (example compound with anchored unit)"
+"$0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599^2":
+  description: "WBTC squared (example compound with anchored unit)"

@@ -14,7 +14,7 @@ The scripts follow a clean separation of concerns:
 ## Architecture
 
 ```
-_data/example-units-input.yml  (manual, input only)
+_data/unit-inputs.yml  (manual, input only)
            ↓
     validate-all-units.sh  (enforces canonical forms)
            ↓
@@ -71,7 +71,7 @@ contracts:
     ens: "0-1.uniteum.eth"
 ```
 
-### `_data/example-units-input.yml`
+### `_data/unit-inputs.yml`
 
 Input file listing example units. Manually maintained.
 
@@ -162,7 +162,7 @@ export PRIVATE_KEY=0x...
 
 ## Wrapper Scripts
 
-These process all units from `_data/example-units-input.yml`.
+These process all units from `_data/unit-inputs.yml`.
 
 ### `validate-all-units.sh`
 
@@ -251,7 +251,7 @@ export PRIVATE_KEY=0x...
 
 1. **Add to input file:**
    ```bash
-   # Edit _data/example-units-input.yml
+   # Edit _data/unit-inputs.yml
    # Add new unit with symbol and description
    ```
 
@@ -267,7 +267,7 @@ export PRIVATE_KEY=0x...
 
 4. **Commit changes:**
    ```bash
-   git add _data/example-units-input.yml _data/units.yml
+   git add _data/unit-inputs.yml _data/units.yml
    git commit -m "Add new example unit: your-symbol"
    ```
 
@@ -309,7 +309,7 @@ If validation fails:
 # Output shows:
 # Error: Symbol 'foo*bar' is not canonical. Canonical form is: 'bar*foo'
 
-# Fix in _data/example-units-input.yml:
+# Fix in _data/unit-inputs.yml:
 # Change symbol: "foo*bar" to symbol: "bar*foo"
 
 # Re-validate

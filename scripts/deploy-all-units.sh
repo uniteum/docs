@@ -1,5 +1,5 @@
 #!/bin/bash
-# Deploy all units from example-units-input.yml using UnitHelper for batch deployment
+# Deploy all units from unit-inputs.yml using UnitHelper for batch deployment
 # Usage: ./deploy-all-units.sh [network] [--broadcast]
 # Networks: mainnet, sepolia
 # Note: Dry-run by default; use --broadcast to actually deploy
@@ -7,7 +7,7 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-INPUT_FILE="$SCRIPT_DIR/../_data/example-units-input.yml"
+INPUT_FILE="$SCRIPT_DIR/../_data/unit-inputs.yml"
 NETWORK="mainnet"
 DRY_RUN=true  # Default to dry-run for safety
 
@@ -83,8 +83,8 @@ echo "Dry run: $DRY_RUN"
 echo ""
 
 # Extract all symbols from input file and build JSON array using yq
-unit_count=$(yq eval '.units | length' "$INPUT_FILE")
-symbols_json=$(yq eval '.units[].symbol' "$INPUT_FILE" | jq -R . | jq -s -c .)
+unit_count=$(yq eval '. | length' "$INPUT_FILE")
+symbols_json=$(yq eval 'keys[]' "$INPUT_FILE" | jq -R . | jq -s -c .)
 
 echo "Found $unit_count units to deploy"
 echo ""
@@ -94,7 +94,7 @@ if [ "$DRY_RUN" = true ]; then
     echo ""
     echo "Units to process:"
     for ((i=0; i<unit_count; i++)); do
-        symbol=$(yq eval ".units[$i].symbol" "$INPUT_FILE")
+        symbol=$(yq eval "keys[$i]" "$INPUT_FILE")
         echo "  • $symbol"
     done
     echo ""
@@ -135,7 +135,7 @@ if [ $? -eq 0 ]; then
     echo ""
     echo "Units processed:"
     for ((i=0; i<unit_count; i++)); do
-        symbol=$(yq eval ".units[$i].symbol" "$INPUT_FILE")
+        symbol=$(yq eval "keys[$i]" "$INPUT_FILE")
         address=$(echo "$addresses_json" | jq -r ".[$i]")
         echo "  • $symbol → $EXPLORER/token/$address"
     done

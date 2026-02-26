@@ -9,7 +9,7 @@ Streamlined script architecture using UnitHelper contract for efficient batch op
 ```
 _data/
 ├── contracts.yml              (contract addresses config)
-├── example-units-input.yml    (input: symbols + descriptions)
+├── unit-inputs.yml            (input: symbols + descriptions)
 └── units.yml                  (GENERATED - output: addresses computed)
 
 scripts/
@@ -70,11 +70,11 @@ HELPER=$HELPER_CURRENT
 
 ### 2. `compute-all-addresses.sh`
 
-Computes addresses for all units in `example-units-input.yml` using UnitHelper batch prediction.
+Computes addresses for all units in `unit-inputs.yml` using UnitHelper batch prediction.
 
 **Features:**
 - Single RPC call via `UnitHelper.product()`
-- Reads from `_data/example-units-input.yml`
+- Reads from `_data/unit-inputs.yml`
 - Generates `_data/units.yml` with addresses
 - Includes canonical forms from contract
 
@@ -125,7 +125,7 @@ export PRIVATE_KEY=0x...
 
 ### Adding a New Unit
 
-1. Add to `_data/example-units-input.yml`:
+1. Add to `_data/unit-inputs.yml`:
    ```yaml
    - symbol: "newunit"
      description: "Description of new unit"
@@ -143,7 +143,7 @@ export PRIVATE_KEY=0x...
 
 ### Regenerating All Data
 
-After editing `example-units-input.yml`:
+After editing `unit-inputs.yml`:
 
 ```bash
 ./scripts/compute-all-addresses.sh
@@ -185,7 +185,7 @@ helper:
     sepolia: "0x456dcb7a3f7d9A6DB77DDf6a4eA8B10453acF7F9"
 ```
 
-### `_data/example-units-input.yml`
+### `_data/unit-inputs.yml`
 
 Input file with symbols and descriptions only:
 
@@ -261,7 +261,7 @@ If you have old scripts or workflows using the removed scripts:
 
 **New:**
 ```bash
-# Add to example-units-input.yml, then:
+# Add to unit-inputs.yml, then:
 ./scripts/compute-all-addresses.sh
 ./scripts/deploy-all-units.sh sepolia --broadcast  # Note: --broadcast required
 ```
