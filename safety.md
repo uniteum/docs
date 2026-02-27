@@ -24,7 +24,7 @@ Uniteum is experimental. Read this page before interacting with the protocol.
 
 ## Current Status
 
-**Version {{ site.data.contracts.uniteum.version }}** has no known issues as of December 2024.
+No known issues as of December 2024.
 
 All core functionality is operational. However, Uniteum remains experimental and unaudited. Smart contract risk persists even with no currently known bugs.
 

@@ -54,7 +54,7 @@ See [Use Cases](/use-cases/) for detailed examples and strategies.
 
 ## Current Status
 
-**Version {{ site.data.contracts.uniteum.version }}** — Experimental, unaudited, deployed on Mainnet.
+Experimental, unaudited, deployed on Mainnet.
 
 This is novel mechanism design. We don't know what emerges at scale. Proceed with curiosity and caution.
 
