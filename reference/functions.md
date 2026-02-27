@@ -283,8 +283,7 @@ Get the "1" token address (universal liquidity token).
 
 **Returns:** Address of "1" token
 
-{% assign current_uniteum = site.data.contracts.uniteum[site.data.contracts.current.uniteum] -%}
-**Contract:** [`{{ current_uniteum.mainnet }}`](https://etherscan.io/address/{{ current_uniteum.mainnet }}#code) ({{ current_uniteum.name }})
+**Contract:** [`{{ site.data.contracts.uniteum.address }}`](https://etherscan.io/address/{{ site.data.contracts.uniteum.address }}#code) ({{ site.data.contracts.uniteum.name }})
 
 ---
 
@@ -388,11 +387,10 @@ Migrate v0.0 "1" tokens to v0.1 "1" tokens.
 - v0.1 tokens minted to caller
 - Total circulating supply conserved
 
-{% assign genesis_uniteum = site.data.contracts.uniteum.v0_0 -%}
 **Example:**
 ```solidity
-IERC20 v0 = IERC20({{ genesis_uniteum.mainnet }});
-IUnit current = IUnit({{ current_uniteum.mainnet }});
+IERC20 v0 = IERC20({{ site.data.contracts.genesis.address }});
+IUnit current = IUnit({{ site.data.contracts.uniteum.address }});
 
 v0.approve(address(current), 1000e18);
 current.migrate(1000e18);

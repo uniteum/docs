@@ -54,8 +54,7 @@ See [Use Cases](/use-cases/) for detailed examples and strategies.
 
 ## Current Status
 
-{% assign current_uniteum = site.data.contracts.uniteum[site.data.contracts.current.uniteum] -%}
-**Version {{ current_uniteum.version }}** — Experimental, unaudited, deployed on Mainnet and Sepolia.
+**Version {{ site.data.contracts.uniteum.version }}** — Experimental, unaudited, deployed on Mainnet.
 
 This is novel mechanism design. We don't know what emerges at scale. Proceed with curiosity and caution.
 
@@ -79,17 +78,11 @@ Early "1" token holders may benefit if the [value hypothesis](/economics-of-one/
 
 ## Contracts
 
-{% assign current_uniteum = site.data.contracts.uniteum[site.data.contracts.current.uniteum] -%}
-{% assign genesis_uniteum = site.data.contracts.uniteum.v0_0 -%}
-{% assign current_kiosk = site.data.contracts.kiosk[site.data.contracts.current.kiosk] -%}
-{% assign genesis_kiosk = site.data.contracts.kiosk.v0_0 -%}
-
-| Contract | Mainnet | Sepolia |
-|----------|---------|---------|
-| {{ current_uniteum.name }} | {% include etherscan.html address=current_uniteum.mainnet section="code" text=current_uniteum.mainnet %} | {% include etherscan.html address=current_uniteum.sepolia network="sepolia" section="code" text=current_uniteum.sepolia %} |
-| {{ genesis_uniteum.name }} | {% include etherscan.html address=genesis_uniteum.mainnet section="code" text=genesis_uniteum.mainnet %} | {% include etherscan.html address=genesis_uniteum.sepolia network="sepolia" section="code" text=genesis_uniteum.sepolia %} |
-| {{ current_kiosk.name }} | {% include etherscan.html address=current_kiosk.mainnet section="code" text=current_kiosk.mainnet %} | {% include etherscan.html address=current_kiosk.sepolia network="sepolia" section="code" text=current_kiosk.sepolia %} |
-| {{ genesis_kiosk.name }} | {% include etherscan.html address=genesis_kiosk.mainnet section="code" text=genesis_kiosk.mainnet %} | {% include etherscan.html address=genesis_kiosk.sepolia network="sepolia" section="code" text=genesis_kiosk.sepolia %} |
+| Contract | Address |
+|----------|---------|
+| {{ site.data.contracts.uniteum.name }} | {% include etherscan.html address=site.data.contracts.uniteum.address section="code" text=site.data.contracts.uniteum.address %} |
+| {{ site.data.contracts.genesis.name }} | {% include etherscan.html address=site.data.contracts.genesis.address section="code" text=site.data.contracts.genesis.address %} |
+| {{ site.data.contracts.kiosk.name }} | {% include etherscan.html address=site.data.contracts.kiosk.address section="code" text=site.data.contracts.kiosk.address %} |
 
 ---
 

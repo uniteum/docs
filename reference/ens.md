@@ -25,21 +25,17 @@ Uniteum uses ENS for human-readable addressing. All names are under `uniteum.eth
 
 ## Hierarchy
 
-{% assign current_uniteum = site.data.contracts.uniteum[site.data.contracts.current.uniteum] -%}
-{% assign genesis_uniteum = site.data.contracts.uniteum.v0_0 -%}
-{% assign current_kiosk = site.data.contracts.kiosk[site.data.contracts.current.kiosk] -%}
-{% assign genesis_kiosk = site.data.contracts.kiosk.v0_0 -%}
 ```
 uniteum.eth
-├── {{ genesis_uniteum.ens }}          → {{ genesis_uniteum.mainnet }}
-│   │                           ({{ genesis_uniteum.name }} - genesis)
-│   └── {{ genesis_kiosk.ens }}  → {{ genesis_kiosk.mainnet }}
-│                               ({{ genesis_kiosk.name }})
+├── {{ site.data.contracts.genesis.ens }}          → {{ site.data.contracts.genesis.address }}
+│   │                           ({{ site.data.contracts.genesis.name }} - genesis)
+│   └── buy.0-0.uniteum.eth  → 0x64dB548312da6D88fB4016157e521d9f2f65AFFc
+│                               (Buy Uniteum 0.0 '1')
 │
-├── {{ current_uniteum.ens }}          → {{ current_uniteum.mainnet }}
-│   │                           ({{ current_uniteum.name }})
-│   └── {{ current_kiosk.ens }}  → {{ current_kiosk.mainnet }}
-│                               ({{ current_kiosk.name }})
+├── {{ site.data.contracts.uniteum.ens }}          → {{ site.data.contracts.uniteum.address }}
+│   │                           ({{ site.data.contracts.uniteum.name }})
+│   └── {{ site.data.contracts.kiosk.ens }}  → {{ site.data.contracts.kiosk.address }}
+│                               ({{ site.data.contracts.kiosk.name }})
 │
 ├── eoa.uniteum.eth          → 0x6056...496e
 │   ├── 0.eoa.uniteum.eth    → 0xff96a8c70dcc85a0cc4d690bfc02166a90e71004

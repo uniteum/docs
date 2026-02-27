@@ -25,37 +25,25 @@ All Uniteum contracts are deployed using Nick's deterministic deployer, resultin
 
 ## Core Contracts
 
-{%- assign current_uniteum = site.data.contracts.uniteum[site.data.contracts.current.uniteum] %}
-{%- assign genesis_uniteum = site.data.contracts.uniteum.v0_0 %}
+### {{ site.data.contracts.uniteum.name }}
 
-### {{ current_uniteum.name }}
+{{ site.data.contracts.uniteum.description }}
 
-{{ current_uniteum.description }}
+{% include contract_table.html contract=site.data.contracts.uniteum %}
 
-{% include contract_table.html contract=current_uniteum %}
+### {{ site.data.contracts.genesis.name }}
 
-### {{ genesis_uniteum.name }}
+{{ site.data.contracts.genesis.description }}
 
-{{ genesis_uniteum.description }}
-
-{% include contract_table.html contract=genesis_uniteum %}
+{% include contract_table.html contract=site.data.contracts.genesis %}
 
 ## Kiosk Contracts
 
-{%- assign current_kiosk = site.data.contracts.kiosk[site.data.contracts.current.kiosk] %}
-{%- assign genesis_kiosk = site.data.contracts.kiosk.v0_0 %}
+### {{ site.data.contracts.kiosk.name }}
 
-### {{ current_kiosk.name }}
+{{ site.data.contracts.kiosk.description }}
 
-{{ current_kiosk.description }}
-
-{% include contract_table.html contract=current_kiosk %}
-
-### {{ genesis_kiosk.name }}
-
-{{ genesis_kiosk.description }}
-
-{% include contract_table.html contract=genesis_kiosk %}
+{% include contract_table.html contract=site.data.contracts.kiosk %}
 
 ## Deployment
 
@@ -63,7 +51,7 @@ All Uniteum contracts are deployed using Nick's deterministic deployer, resultin
 
 Nick's deterministic deployment method ensures identical addresses across any EVM chain.
 
-**Deployer EOA:** {% include contract.html address=site.data.contracts.deployer.eoa.mainnet text="0.eoa.uniteum.eth" %}
+**Deployer EOA:** {% include contract.html address=site.data.contracts.deployer.address text="0.eoa.uniteum.eth" %}
 
 ### Architecture
 

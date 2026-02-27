@@ -190,10 +190,9 @@ Unlike [anchored units](/reference/anchored-units/), floating units have no exte
 
 These units are not automatically deployed. To deploy any unit:
 
-{% assign current_uniteum = site.data.contracts.uniteum[site.data.contracts.current.uniteum] -%}
-### Using Etherscan (mainnet or Sepolia)
+### Using Etherscan
 
-1. Go to [current Uniteum contract on Etherscan](https://etherscan.io/address/{{ current_uniteum.mainnet }}#writeContract)
+1. Go to [current Uniteum contract on Etherscan](https://etherscan.io/address/{{ site.data.contracts.uniteum.address }}#writeContract)
 2. Connect your wallet
 3. Call `multiply(string expression)` with the symbol (e.g., `"foo"`)
 4. The unit will be deployed to its deterministic address
@@ -203,12 +202,12 @@ These units are not automatically deployed. To deploy any unit:
 
 ```bash
 # Predict address (read-only, no gas cost)
-cast call {{ current_uniteum.mainnet }} \
+cast call {{ site.data.contracts.uniteum.address }} \
   "product(string)(address,string)" "foo" \
   --rpc-url https://eth.llamarpc.com
 
 # Deploy (requires wallet and gas)
-cast send {{ current_uniteum.mainnet }} \
+cast send {{ site.data.contracts.uniteum.address }} \
   "multiply(string)(address)" "foo" \
   --rpc-url https://eth.llamarpc.com \
   --private-key $PRIVATE_KEY
@@ -218,7 +217,7 @@ cast send {{ current_uniteum.mainnet }} \
 
 ```javascript
 const uniteum = new ethers.Contract(
-  "{{ current_uniteum.mainnet }}",
+  "{{ site.data.contracts.uniteum.address }}",
   uniteumABI,
   signer
 );

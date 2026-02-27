@@ -27,11 +27,15 @@ This project uses both **Claude** and **ChatGPT** for documentation and developm
 
 Current contract addresses are maintained in `_data/contracts.yml`. Key contracts:
 
-- **Current Uniteum "1"**: Use `site.data.contracts.current.uniteum` to get current version key, then access `site.data.contracts.uniteum[current_version]`
-- **Genesis Uniteum "1"**: See `site.data.contracts.uniteum.v0_0` (original supply - this is stable)
-- **Current Kiosk**: Use `site.data.contracts.current.kiosk` to get current version key, then access `site.data.contracts.kiosk[current_version]`
+- **Current Uniteum "1"**: `site.data.contracts.uniteum` (flat, no version indirection)
+- **Genesis Uniteum "1"**: `site.data.contracts.genesis` (original v0.0 supply)
+- **Current Kiosk**: `site.data.contracts.kiosk`
+- **Helper**: `site.data.contracts.helper`
+- **Deployer**: `site.data.contracts.deployer`
 
-**IMPORTANT**: Never hardcode version keys like `v0_3`. Always use the `site.data.contracts.current.*` pointers to get the current version dynamically.
+**Address field**: Use `.address` (not `.mainnet` — `sepolia` field removed, same address on all networks).
+
+**IMPORTANT**: No version indirection. Access data directly: `site.data.contracts.uniteum.address`, not `site.data.contracts.uniteum[site.data.contracts.current.uniteum].mainnet`.
 
 All contracts use Nick's deterministic deployer (same addresses across networks).
 
@@ -305,7 +309,7 @@ This multi-role capability creates the interconnected mesh topology of liquidity
 
 ### Current Phase
 
-- **Version:** See `site.data.contracts.current.uniteum` (experimental, unaudited)
+- **Version:** See `site.data.contracts.uniteum.version` (experimental, unaudited)
 - **Status:** Deployed, ready for launch/announcement
 - **Risk:** Novel mechanism, smart contract risk, no audit
 - **Goal:** Publish for experimentation and discovery of emergent properties

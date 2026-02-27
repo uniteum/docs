@@ -1,12 +1,9 @@
 {%- comment -%}
 Returns the current Uniteum contract object.
 
-Usage: {% assign uniteum = include "uniteum_contract.html" %}
+Usage: {% assign uniteum = site.data.contracts.uniteum %}
        {{ uniteum.name }}
-       {{ uniteum.mainnet }}
-       {% include contract.html address=uniteum.mainnet %}
-
-This automatically uses the current version defined in _data/contracts.yml
+       {{ uniteum.address }}
+       {% include contract.html address=uniteum.address %}
 {%- endcomment -%}
-{%- assign current_version = site.data.contracts.current.uniteum -%}
-{{ site.data.contracts.uniteum[current_version] }}
+{{ site.data.contracts.uniteum }}

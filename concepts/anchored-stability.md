@@ -361,10 +361,9 @@ If this mechanism works as hypothesized:
 
 ### Example Analysis
 
-{% assign current_uniteum = site.data.contracts.uniteum[site.data.contracts.current.uniteum] -%}
 **Check `$WETH` implied "1" price:**
 
-On [Etherscan](https://etherscan.io/address/{{ current_uniteum.mainnet }}#readContract):
+On [Etherscan](https://etherscan.io/address/{{ site.data.contracts.uniteum.address }}#readContract):
 
 1. Call `anchoredPredict(0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2)` to get `$WETH` address
 2. Call `invariant(address)` on the returned address

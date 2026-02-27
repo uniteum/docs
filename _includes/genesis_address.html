@@ -1,17 +1,6 @@
 {%- comment -%}
-Returns the genesis Uniteum contract address for the specified network.
+Returns the genesis Uniteum (v0.0) contract address.
 
-Usage: {% include genesis_address.html %}               ✅ GOOD (mainnet)
-       {% include genesis_address.html network="sepolia" %}  ✅ GOOD (sepolia)
-
-This automatically uses v0_0 from _data/contracts.yml
+Usage: {% include genesis_address.html %}
 {%- endcomment -%}
-
-{%- assign contract = site.data.contracts.uniteum.v0_0 -%}
-{%- assign network = include.network | default: "mainnet" -%}
-
-{%- if network == "mainnet" -%}
-{{ contract.mainnet }}
-{%- elsif network == "sepolia" -%}
-{{ contract.sepolia }}
-{%- endif -%}
+{{ site.data.contracts.genesis.address }}

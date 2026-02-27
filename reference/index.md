@@ -32,15 +32,11 @@ Technical reference documentation for developers and advanced users.
 
 ### Key Addresses
 
-{% assign current_uniteum = site.data.contracts.uniteum[site.data.contracts.current.uniteum] -%}
-{% assign genesis_uniteum = site.data.contracts.uniteum.v0_0 -%}
-{% assign current_kiosk = site.data.contracts.kiosk[site.data.contracts.current.kiosk] -%}
-
 | Contract | Address |
 |----------|---------|
-| {{ current_uniteum.name }} | {% include etherscan.html address=current_uniteum.mainnet section="code" text=current_uniteum.mainnet %} |
-| {{ genesis_uniteum.name }} | {% include etherscan.html address=genesis_uniteum.mainnet section="code" text=genesis_uniteum.mainnet %} |
-| {{ current_kiosk.name }} | {% include etherscan.html address=current_kiosk.mainnet section="code" text=current_kiosk.mainnet %} |
+| {{ site.data.contracts.uniteum.name }} | {% include etherscan.html address=site.data.contracts.uniteum.address section="code" text=site.data.contracts.uniteum.address %} |
+| {{ site.data.contracts.genesis.name }} | {% include etherscan.html address=site.data.contracts.genesis.address section="code" text=site.data.contracts.genesis.address %} |
+| {{ site.data.contracts.kiosk.name }} | {% include etherscan.html address=site.data.contracts.kiosk.address section="code" text=site.data.contracts.kiosk.address %} |
 
 ### Networks
 

@@ -1,10 +1,8 @@
 {%- comment -%}
 Usage:
-{%- assign current_version = site.data.contracts.current.uniteum -%}
-{%- assign uniteum = site.data.contracts.uniteum[current_version] -%}
-{% include contract_table.html contract=uniteum %}
+{% include contract_table.html contract=site.data.contracts.uniteum %}
 
-Creates a two-column table with Mainnet and Sepolia addresses
+Creates an address row linking to Etherscan.
 
 Parameters:
 - contract (required): Contract object from _data/contracts.yml
@@ -13,7 +11,6 @@ Parameters:
 
 {%- assign section = include.section | default: "code" -%}
 
-| Network | Address |
-|---------|---------|
-| Mainnet | {% include contract.html address=include.contract.mainnet network="mainnet" section=section text=include.contract.mainnet %} |
-| Sepolia | {% include contract.html address=include.contract.sepolia network="sepolia" section=section text=include.contract.sepolia %} |
+| Address |
+|---------|
+| {% include contract.html address=include.contract.address section=section text=include.contract.address %} |

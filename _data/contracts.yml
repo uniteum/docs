@@ -1,93 +1,35 @@
 # Uniteum Contract Addresses
 # All contracts use deterministic deployment (same address on all networks)
 
-# Current versions (update these pointers when releasing new versions)
-current:
-  uniteum: "v0_5"
-  kiosk: "v0_5"
-  helper: "v0_5"
-
-# Core Uniteum contracts
 uniteum:
-  v0_5:
-    name: "Uniteum 0.5 '1'"
-    version: "0.5"
-    description: "Current version with full Uniteum functionality"
-    mainnet: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
-    sepolia: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
-    ens: "uniteum.eth"
+  name: "Uniteum 0.5 '1'"
+  version: "0.5"
+  description: "Current version with full Uniteum functionality"
+  address: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
+  ens: "uniteum.eth"
 
-  v0_4:
-    name: "Uniteum 0.4 '1'"
-    version: "0.4"
-    description: "Current version with full Uniteum functionality"
-    mainnet: "0x5bA96211E3679FDcc7047a5c64d40A4Dd3fBdAD7"
-    sepolia: "0x5bA96211E3679FDcc7047a5c64d40A4Dd3fBdAD7"
-    ens: "0-4.uniteum.eth"
+genesis:
+  name: "Uniteum 0.0 '1'"
+  version: "0.0"
+  description: "Genesis token—simple ERC-20 with initial 1 billion supply"
+  address: "0x8af6774Bec3b698a6dC873b117c4415367dEfea6"
+  ens: "0-0.uniteum.eth"
 
-  v0_3:
-    name: "Uniteum 0.3 '1'"
-    version: "0.3"
-    description: "Version 0.3 with full Uniteum functionality"
-    mainnet: "0x210C655F8a51244bA7607726DeAdEB5866723D87"
-    sepolia: "0x210C655F8a51244bA7607726DeAdEB5866723D87"
-    ens: "0-3.uniteum.eth"
-
-  v0_0:
-    name: "Uniteum 0.0 '1'"
-    version: "0.0"
-    description: "Genesis token—simple ERC-20 with initial 1 billion supply"
-    mainnet: "0x8af6774Bec3b698a6dC873b117c4415367dEfea6"
-    sepolia: "0x8af6774Bec3b698a6dC873b117c4415367dEfea6"
-    ens: "0-0.uniteum.eth"
-
-# Buy/Kiosk contracts
 kiosk:
-  v0_5:
-    name: "Buy Uniteum 0.5 '1'"
-    version: "0.5"
-    description: "Kiosk for purchasing Uniteum 0.5 tokens"
-    mainnet: "0xBFdf4Cf25EC0DB0Be49a04213D230495291C6fFA"
-    sepolia: "0xBFdf4Cf25EC0DB0Be49a04213D230495291C6fFA"
-    ens: "buy.uniteum.eth"
-
-  v0_4:
-    name: "Buy Uniteum 0.4 '1'"
-    version: "0.4"
-    description: "Kiosk for purchasing Uniteum 0.4 tokens"
-    mainnet: "0xffAcC47570dfE1B1980b0475b13Fb07479CEf7EA"
-    sepolia: "0xffAcC47570dfE1B1980b0475b13Fb07479CEf7EA"
-    ens: "buy.0-4.uniteum.eth"
-
-  v0_3:
-    name: "Buy Uniteum 0.3 '1'"
-    version: "0.3"
-    description: "Kiosk for purchasing Uniteum 0.3 tokens"
-    mainnet: "0xc675692d2EaF904C3A3414ABb0942282Bf82A7EC"
-    sepolia: "0xc675692d2EaF904C3A3414ABb0942282Bf82A7EC"
-    ens: "buy.0-3.uniteum.eth"
-
-  v0_0:
-    name: "Buy Uniteum 0.0 '1'"
-    version: "0.0"
-    description: "Kiosk for purchasing Uniteum 0.0 genesis tokens"
-    mainnet: "0x64dB548312da6D88fB4016157e521d9f2f65AFFc"
-    sepolia: "0x64dB548312da6D88fB4016157e521d9f2f65AFFc"
-    ens: "buy.0-0.uniteum.eth"
+  name: "Buy Uniteum 0.5 '1'"
+  version: "0.5"
+  description: "Kiosk for purchasing Uniteum 0.5 tokens"
+  address: "0xBFdf4Cf25EC0DB0Be49a04213D230495291C6fFA"
+  ens: "buy.uniteum.eth"
 
 helper:
-  v0_5:
-    name: "UnitHelper 0.5"
-    version: "0.5"
-    description: "Helper contract for Uniteum 0.5"
-    mainnet: "0x456dcb7a3f7d9A6DB77DDf6a4eA8B10453acF7F9"
-    sepolia: "0x456dcb7a3f7d9A6DB77DDf6a4eA8B10453acF7F9"
-    ens: "helper.uniteum.eth"
+  name: "UnitHelper 0.5"
+  version: "0.5"
+  description: "Helper contract for Uniteum 0.5"
+  address: "0x456dcb7a3f7d9A6DB77DDf6a4eA8B10453acF7F9"
+  ens: "helper.uniteum.eth"
 
-# Deployer information
 deployer:
-  eoa:
-    name: "Main Deployer EOA"
-    mainnet: "0xff96a8c70dcc85a0cc4d690bfc02166a90e71004"
-    sepolia: "0xff96a8c70dcc85a0cc4d690bfc02166a90e71004"
-    ens: "0.eoa.uniteum.eth"
+  name: "Main Deployer EOA"
+  address: "0xff96a8c70dcc85a0cc4d690bfc02166a90e71004"
+  ens: "0.eoa.uniteum.eth"

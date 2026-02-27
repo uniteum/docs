@@ -493,8 +493,7 @@ These hypotheses raise questions that can only be answered through observation:
 
 ## Participating in the Experiment
 
-{% assign current_kiosk = site.data.contracts.kiosk[site.data.contracts.current.kiosk] -%}
-If these hypotheses intrigue you, the most direct way to participate is to acquire "1" tokens via the {% include etherscan.html address=current_kiosk.mainnet section="writeContract" text="Discount Kiosk" %}.
+If these hypotheses intrigue you, the most direct way to participate is to acquire "1" tokens via the {% include etherscan.html address=site.data.contracts.kiosk.address section="writeContract" text="Discount Kiosk" %}.
 
 This isn't just financial support—it's a position in the experiment:
 - You hold the universal liquidity token
@@ -513,10 +512,8 @@ The Kiosk's linear discount pricing means earlier buyers pay less (price increas
 
 ## Observing in Practice
 
-{% assign current_uniteum = site.data.contracts.uniteum[site.data.contracts.current.uniteum] -%}
 **Check "1" contract:**
-- {% include etherscan.html address=current_uniteum.mainnet section="readContract" text="Mainnet" %}
-- {% include etherscan.html address=current_uniteum.sepolia network="sepolia" section="readContract" text="Sepolia" %}
+- {% include etherscan.html address=site.data.contracts.uniteum.address section="readContract" text="Mainnet" %}
 
 **Query total supply:**
 ```solidity

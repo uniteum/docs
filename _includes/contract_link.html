@@ -1,26 +1,15 @@
 {%- comment -%}
 Usage:
-{%- assign current_version = site.data.contracts.current.uniteum -%}
-{%- assign uniteum = site.data.contracts.uniteum[current_version] -%}
-{% include contract_link.html contract=uniteum network="mainnet" section="code" %}
+{% include contract_link.html contract=site.data.contracts.uniteum section="code" %}
 
 Parameters:
 - contract (required): Contract object from _data/contracts.yml
-- network (optional): "mainnet" or "sepolia", defaults to "mainnet"
-- section (optional): Etherscan section anchor ("code", "writeContract", "readContract", "events"), defaults to "code"
+- section (optional): Etherscan section anchor, defaults to "code"
 - text (optional): Link text, defaults to contract address
 {%- endcomment -%}
 
-{%- assign network = include.network | default: "mainnet" -%}
 {%- assign section = include.section | default: "code" -%}
-
-{%- if network == "mainnet" -%}
-  {%- assign explorer = "https://etherscan.io" -%}
-  {%- assign address = include.contract.mainnet -%}
-{%- elsif network == "sepolia" -%}
-  {%- assign explorer = "https://sepolia.etherscan.io" -%}
-  {%- assign address = include.contract.sepolia -%}
-{%- endif -%}
+{%- assign address = include.contract.address -%}
 
 {%- if include.text -%}
   {%- assign link_text = include.text -%}
@@ -28,4 +17,4 @@ Parameters:
   {%- assign link_text = address -%}
 {%- endif -%}
 
-[`{{ link_text }}`]({{ explorer }}/address/{{ address }}#{{ section }})
+[`{{ link_text }}`](https://etherscan.io/address/{{ address }}#{{ section }})
