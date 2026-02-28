@@ -82,9 +82,10 @@ echo "RPC: $RPC_URL"
 echo "Dry run: $DRY_RUN"
 echo ""
 
-# Extract all symbols from input file and build JSON array using yq
-unit_count=$(yq eval '. | length' "$INPUT_FILE")
-symbols_json=$(yq eval 'keys[]' "$INPUT_FILE" | jq -R . | jq -s -c .)
+# Extract all symbols once into a bash array (avoids re-spawning yq per iteration)
+mapfile -t symbols < <(yq eval 'keys[]' "$INPUT_FILE")
+unit_count=${#symbols[@]}
+symbols_json=$(printf '%s\n' "${symbols[@]}" | jq -R . | jq -s -c .)
 
 echo "Found $unit_count units to deploy"
 echo ""
@@ -93,8 +94,7 @@ if [ "$DRY_RUN" = true ]; then
     echo "🔍 DRY RUN MODE - would deploy units using UnitHelper.multiply() (idempotent)"
     echo ""
     echo "Units to process:"
-    for ((i=0; i<unit_count; i++)); do
-        symbol=$(yq eval "keys[$i]" "$INPUT_FILE")
+    for symbol in "${symbols[@]}"; do
         echo "  • $symbol"
     done
     echo ""
@@ -134,10 +134,9 @@ if [ $? -eq 0 ]; then
     echo "Transaction: $EXPLORER/tx/$tx_hash"
     echo ""
     echo "Units processed:"
+    mapfile -t addresses < <(echo "$addresses_json" | jq -r '.[]')
     for ((i=0; i<unit_count; i++)); do
-        symbol=$(yq eval "keys[$i]" "$INPUT_FILE")
-        address=$(echo "$addresses_json" | jq -r ".[$i]")
-        echo "  • $symbol → $EXPLORER/token/$address"
+        echo "  • ${symbols[$i]} → $EXPLORER/token/${addresses[$i]}"
     done
     exit 0
 else
