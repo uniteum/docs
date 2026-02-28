@@ -1,3 +1,11 @@
 [submodule "lib/uniteum"]
 	path = lib/uniteum
 	url = https://github.com/uniteum/uniteum.git
+[submodule "lib/solid"]
+	path = lib/solid
+	url = https://github.com/uniteum/solid.git
+	branch = jekyll
+[submodule "lib/liquid"]
+	path = lib/liquid
+	url = https://github.com/uniteum/liquid.git
+	branch = jekyll
