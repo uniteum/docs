@@ -1,0 +1,3 @@
+[profile.default]
+src = "lib/uniteum/src"
+libs = ["lib/uniteum/lib"]
