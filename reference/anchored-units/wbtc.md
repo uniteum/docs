@@ -1,5 +1,5 @@
 ---
-title: $WBTC
+title: 0xWBTC
 description: Documentation shorthand for the WBTC anchored unit
 parent: Anchored Units
 nav_order: 4
@@ -8,15 +8,15 @@ nav_order: 4
 last_updated: 2024-12-18
 ---
 
-# $WBTC (Wrapped Bitcoin)
+# 0xWBTC (Wrapped Bitcoin)
 
-**Documentation Shorthand:** `$WBTC`
+**Documentation Shorthand:** `0xWBTC`
 **Actual Symbol:** `$0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599`
 
 ## What This Represents
 
 {% assign wbtc = site.data.tokens.wbtc -%}
-In Uniteum documentation, `$WBTC` is a **readable shorthand** for an anchored unit backed by {% include token.html address=wbtc.mainnet text="Wrapped Bitcoin (WBTC)" %}.
+In Uniteum documentation, `0xWBTC` is a **readable shorthand** for an anchored unit backed by {% include token.html address=wbtc.mainnet text="Wrapped Bitcoin (WBTC)" %}.
 
 The actual Uniteum symbol uses the full WBTC contract address:
 ```
@@ -43,7 +43,7 @@ Wrapped Bitcoin is Bitcoin represented as an ERC-20 token on Ethereum. 1 WBTC = 
 | `$0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599` | Anchored unit | 1:1 WBTC in contract |
 | `WBTC` (no $) | Floating unit | None (just a label) |
 | `BTC` (no $) | Floating unit | None (NOT Bitcoin!) |
-| `$WBTC` | Documentation shorthand | Refers to anchored version |
+| `0xWBTC` | Documentation shorthand | Refers to anchored version |
 
 ## Creating This Unit
 
@@ -60,47 +60,47 @@ IUnit wbtcUnit = one.anchored(wbtc);
 
 ## Reciprocal Unit
 
-**`1/$WBTC`** (shorthand) = `1/$0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599` (actual)
+**`1/0xWBTC`** (shorthand) = `1/$0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599` (actual)
 
-Synthetic unit providing inverse BTC exposure. If BTC dumps, `1/$WBTC` gains.
+Synthetic unit providing inverse BTC exposure. If BTC dumps, `1/0xWBTC` gains.
 
 ## Example Derivatives
 
 ### Crypto Basket
 
-**`$WETH*$WBTC`** — Diversified ETH+BTC exposure:
-- `price($WETH*$WBTC) = price($WETH) × price($WBTC)`
+**`0xWETH*0xWBTC`** — Diversified ETH+BTC exposure:
+- `price(0xWETH*0xWBTC) = price(0xWETH) × price(0xWBTC)`
 - Gains when either asset pumps
 - Permissionless crypto index
 
-**`$WETH*$WBTC*$LINK`** — Three-token basket:
+**`0xWETH*0xWBTC*0xLINK`** — Three-token basket:
 - Add more assets for further diversification
 
 ### Relative Value Trading
 
-**`$WBTC/$WETH`** — BTC/ETH price ratio:
+**`0xWBTC/0xWETH`** — BTC/ETH price ratio:
 - Don't care about USD price
 - Only care about BTC vs ETH
 - Oracle-free pair trading
 - Long BTC, short ETH in one token
 
-**`$WETH/$WBTC`** — Inverse ratio (ETH/BTC):
+**`0xWETH/0xWBTC`** — Inverse ratio (ETH/BTC):
 - Long ETH, short BTC
 
 ### Power Perpetuals
 
-**`$WBTC^2`** — Squared Bitcoin exposure:
+**`0xWBTC^2`** — Squared Bitcoin exposure:
 - If BTC 2x → this goes 4x
 - Leverage without borrowing
 
-**`$WBTC^2/$USDC`** — Squared BTC vs stable:
+**`0xWBTC^2/0xUSDC`** — Squared BTC vs stable:
 - Leveraged BTC exposure denominated in USD terms
 
 ## Correlation Trading
 
 Bitcoin and Ethereum often move together but not perfectly:
 
-**Long `$WBTC/$WETH`, short `$WBTC*$WETH`:**
+**Long `0xWBTC/0xWETH`, short `0xWBTC*0xWETH`:**
 - Profits when correlation between BTC and ETH changes
 - If they diverge (BTC up, ETH down or vice versa), gain
 - If they move together, neutral
@@ -110,10 +110,10 @@ See [Use Cases: Correlation Trading](/use-cases/#correlation-trading).
 ## Related Documentation
 
 - [Anchored Units](/reference/anchored-units/) — All common shorthands
-- [$WETH](/reference/anchored-units/weth/) — Ethereum counterpart
+- [0xWETH](/reference/anchored-units/weth/) — Ethereum counterpart
 - [Use Cases: Multi-Token Derivatives](/use-cases/#multi-token-derivatives)
 - [Economics of "1"](/economics-of-one/) — How BTC collateral affects system value
 
 ---
 
-**Remember:** In your code, use the full address `$0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599`. The `$WBTC` shorthand is for documentation readability only.
+**Remember:** In your code, use the full address `$0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599`. The `0xWBTC` shorthand is for documentation readability only.

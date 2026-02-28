@@ -46,17 +46,17 @@ When you create a floating unit like `foo`:
 
 ### Anchored Units: External Anchor Creates Resistance
 
-When you create an anchored unit like `$WETH`:
-- `$WETH` has 1:1 backing with real WETH (fixed external value)
-- `1/$WETH` floats with the "1" token
+When you create an anchored unit like `0xWETH`:
+- `0xWETH` has 1:1 backing with real WETH (fixed external value)
+- `1/0xWETH` floats with the "1" token
 - External WETH price creates a reference point
 - Deviations from alignment create arbitrage opportunities
 - They **react against** changes in "1" value
 
 **Example:** If "1" goes up 2x while WETH price unchanged:
-- `$WETH` value unchanged (still backed by real WETH)
-- `1/$WETH` becomes 2x more valuable (denominated in "1")
-- **Arbitrage opportunity:** `1/$WETH` now overvalued relative to real WETH
+- `0xWETH` value unchanged (still backed by real WETH)
+- `1/0xWETH` becomes 2x more valuable (denominated in "1")
+- **Arbitrage opportunity:** `1/0xWETH` now overvalued relative to real WETH
 - Profitable to forge, creating backpressure on "1"
 
 ## The Stabilization Mechanism
@@ -67,12 +67,12 @@ When you create an anchored unit like `$WETH`:
 
 **What happens:**
 
-1. **Overvaluation:** `1/$WETH` becomes expensive relative to actual WETH
+1. **Overvaluation:** `1/0xWETH` becomes expensive relative to actual WETH
 2. **Arbitrage path:**
    - Buy WETH on external market (cheap)
-   - Deposit WETH, mint `$WETH` via anchored unit (1:1)
-   - Forge: burn `$WETH` + mint `1/$WETH` (consumes "1")
-   - Sell `1/$WETH` for "1" (expensive)
+   - Deposit WETH, mint `0xWETH` via anchored unit (1:1)
+   - Forge: burn `0xWETH` + mint `1/0xWETH` (consumes "1")
+   - Sell `1/0xWETH` for "1" (expensive)
    - Net: extracted value from "1" price premium
 3. **Market impact:** Selling "1" creates downward pressure
 4. **Equilibrium:** Arbitrage continues until "1" price aligns with WETH-implied value
@@ -85,10 +85,10 @@ When you create an anchored unit like `$WETH`:
 
 **What happens:**
 
-1. **Undervaluation:** `$WETH` becomes expensive relative to "1" value
+1. **Undervaluation:** `0xWETH` becomes expensive relative to "1" value
 2. **Arbitrage path:**
-   - Forge: mint `$WETH` + burn `1/$WETH` (generates "1")
-   - Burn `$WETH`, withdraw WETH (1:1)
+   - Forge: mint `0xWETH` + burn `1/0xWETH` (generates "1")
+   - Burn `0xWETH`, withdraw WETH (1:1)
    - Sell WETH on external market
    - Buy cheap "1" on external market
    - Net: extracted value from "1" price discount
@@ -113,7 +113,7 @@ Think of the system as "1" connected to multiple springs:
 ### Anchored Units: Spring-Loaded
 
 ```
-[Real WETH] ===[$WETH]=== ["1"] ~~~ [1/$WETH]
+[Real WETH] ===[0xWETH]=== ["1"] ~~~ [1/0xWETH]
 ```
 - `===` represents spring (resistance)
 - Real WETH anchors one side
@@ -123,10 +123,10 @@ Think of the system as "1" connected to multiple springs:
 ### Multiple Anchored Units: Multiple Springs
 
 ```
-[Real WETH] ===[$WETH]=== ["1"] ===[$USDC]=== [Real USDC]
+[Real WETH] ===[0xWETH]=== ["1"] ===[0xUSDC]=== [Real USDC]
                   ||
                   ||
-          [Real WBTC] ===[$WBTC]===
+          [Real WBTC] ===[0xWBTC]===
 ```
 
 - Each anchored unit is a spring to external market
@@ -138,20 +138,20 @@ Think of the system as "1" connected to multiple springs:
 
 ### Implied "1" Price from Anchored Unit
 
-For an anchored unit like `$WETH`:
+For an anchored unit like `0xWETH`:
 
 **Invariant:**
 ```
-sqrt(supply_$WETH × supply_1/$WETH) = locked_"1"_in_contract
+sqrt(supply_0xWETH × supply_1/0xWETH) = locked_"1"_in_contract
 ```
 
 **External WETH price:** `P_WETH` (e.g., $2000)
 
-**Total WETH value locked:** `supply_$WETH × P_WETH`
+**Total WETH value locked:** `supply_0xWETH × P_WETH`
 
 **Implied "1" price:**
 ```
-P_1_implied = (supply_$WETH × P_WETH) / locked_"1"
+P_1_implied = (supply_0xWETH × P_WETH) / locked_"1"
 ```
 
 If market "1" price `P_1_market ≠ P_1_implied`, arbitrage profit exists.
@@ -165,8 +165,8 @@ profit = P_1_market - P_1_implied (per unit of arbitrage)
 ```
 
 Arbitrageurs exploit by:
-- Minting cheap `$WETH` (external cost: `P_WETH`)
-- Burning expensive `1/$WETH` (internal value: `P_1_market`)
+- Minting cheap `0xWETH` (external cost: `P_WETH`)
+- Burning expensive `1/0xWETH` (internal value: `P_1_market`)
 - Extracting profit, selling "1"
 
 **When P_1_market < P_1_implied** ("1" undervalued):
@@ -176,8 +176,8 @@ profit = P_1_implied - P_1_market (per unit of arbitrage)
 ```
 
 Arbitrageurs exploit by:
-- Burning `$WETH` (reclaim `P_WETH` value)
-- Minting cheap `1/$WETH` (internal cost: `P_1_market`)
+- Burning `0xWETH` (reclaim `P_WETH` value)
+- Minting cheap `1/0xWETH` (internal cost: `P_1_market`)
 - Extracting profit, buying "1"
 
 ### Multiple Anchored Units
@@ -206,9 +206,9 @@ Unlike floating units that passively track "1", anchored units actively resist c
 ### 2. Stability Increases With Anchored Diversity
 
 Multiple anchored units provide multiple reference points:
-- `$WETH` ties "1" to ETH price
-- `$USDC` ties "1" to USD
-- `$WBTC` ties "1" to BTC price
+- `0xWETH` ties "1" to ETH price
+- `0xUSDC` ties "1" to USD
+- `0xWBTC` ties "1" to BTC price
 
 If these external prices move independently, "1" is anchored to a **basket** rather than single asset.
 
@@ -288,7 +288,7 @@ If this mechanism works as hypothesized:
 ### Scenario B: Single Large Anchored Unit
 
 **Setup:**
-- `$WETH` launched with $1M TVL
+- `0xWETH` launched with $1M TVL
 - Still some floating units
 - "1" has external reference point
 
@@ -303,7 +303,7 @@ If this mechanism works as hypothesized:
 ### Scenario C: Diversified Anchored Portfolio
 
 **Setup:**
-- `$WETH` ($1M), `$USDC` ($2M), `$WBTC` ($1M), `$DAI` ($500k)
+- `0xWETH` ($1M), `0xUSDC` ($2M), `0xWBTC` ($1M), `0xDAI` ($500k)
 - Multiple external anchors
 - "1" connected to basket of real assets
 
@@ -325,7 +325,7 @@ If this mechanism works as hypothesized:
 1. **All `1/[anchored]` become massively overvalued**
 2. **Arbitrage bots activate:**
    - Buy WETH, USDC, WBTC on external markets
-   - Mint `$WETH`, `$USDC`, `$WBTC` (cheap collateral)
+   - Mint `0xWETH`, `0xUSDC`, `0xWBTC` (cheap collateral)
    - Forge to burn these, mint reciprocals
    - Sell reciprocals for "1" (expensive)
    - Dump "1" on market
@@ -361,11 +361,11 @@ If this mechanism works as hypothesized:
 
 ### Example Analysis
 
-**Check `$WETH` implied "1" price:**
+**Check `0xWETH` implied "1" price:**
 
 On [Etherscan](https://etherscan.io/address/{{ site.data.contracts.uniteum.address }}#readContract):
 
-1. Call `anchoredPredict(0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2)` to get `$WETH` address
+1. Call `anchoredPredict(0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2)` to get `0xWETH` address
 2. Call `invariant(address)` on the returned address
 3. Get current WETH price from external source (e.g., Uniswap, Chainlink)
 4. Calculate: `P_1_implied = (u × P_WETH) / w`

@@ -44,9 +44,9 @@ Uniteum:
 
 ## Why This Matters
 
-**Power perpetuals:** Create any convexity profile through geometric mean triads. `$WETH^2` (2x power) gives squared exposure, `$WETH` (1x power) gives linear exposure, `$WETH^(1/2)` (0.5x power like Uniswap) gives square root exposure—all without borrowing, collateral, or liquidation risk. Design custom convexity with any rational exponent.
+**Power perpetuals:** Create any convexity profile through geometric mean triads. `0xWETH^2` (2x power) gives squared exposure, `0xWETH` (1x power) gives linear exposure, `0xWETH^(1/2)` (0.5x power like Uniswap) gives square root exposure—all without borrowing, collateral, or liquidation risk. Design custom convexity with any rational exponent.
 
-**Multi-token derivatives:** `$WETH/$USDC` IS the ETH/USD price ratio. `$WETH*$WBTC` is a diversified basket. Combine them algebraically for complex positions. Prices are enforced by arbitrage, not oracles.
+**Multi-token derivatives:** `0xWETH/0xUSDC` IS the ETH/USD price ratio. `0xWETH*0xWBTC` is a diversified basket. Combine them algebraically for complex positions. Prices are enforced by arbitrage, not oracles.
 
 **Reciprocal pairs:** Every unit has a reciprocal. Hold both sides to dampen volatility or speculate on relative price movements within diversified baskets.
 

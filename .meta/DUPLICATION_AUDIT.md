@@ -354,7 +354,7 @@ Floating units have no backing. They're just labels. Value emerges from liquidit
 
 ## Documentation Convention
 
-Throughout Uniteum documentation, we use **readable shorthands** like `$WETH`, `$USDC`, `$WBTC` for clarity in examples and explanations.
+Throughout Uniteum documentation, we use **readable shorthands** like `0xWETH`, `0xUSDC`, `0xWBTC` for clarity in examples and explanations.
 
 **IMPORTANT:** These are NOT the actual symbols. Anchored units use full contract addresses.
 
@@ -369,7 +369,7 @@ This is accurate but unwieldy in documentation. Reading paragraphs full of 42-ch
 
 **Shorthand format:**
 ```
-$WETH
+0xWETH
 ```
 
 This is readable and matches how developers think about tokens, while clearly indicating "anchored unit" with the `$` prefix.
@@ -378,7 +378,7 @@ This is readable and matches how developers think about tokens, while clearly in
 
 | Format | What It Is | Backing |
 |--------|-----------|---------|
-| `$WETH` (shorthand) | Documentation convenience | Refers to `$0xC02a...56Cc2` |
+| `0xWETH` (shorthand) | Documentation convenience | Refers to `$0xC02a...56Cc2` |
 | `$0xC02a...56Cc2` (actual) | Real anchored unit symbol | 1:1 backed by WETH |
 | `WETH` (no $) | Floating unit | NO backing, just a label |
 
@@ -643,11 +643,11 @@ Full detailed documentation of every function, parameter, return value, example,
 ### CLAUDE.md (Lines 261-266)
 ```
 Common anchored unit shorthands (all have dedicated reference pages):
-- [$WETH](/reference/anchored-units/weth/) = `$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
-- [$USDC](/reference/anchored-units/usdc/) = `$0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
-- [$USDT](/reference/anchored-units/usdt/) = `$0xdAC17F958D2ee523a2206206994597C13D831ec7`
-- [$WBTC](/reference/anchored-units/wbtc/) = `$0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599`
-- [$DAI](/reference/anchored-units/dai/) = `$0x6B175474E89094C44Da98b954EedeAC495271d0F`
+- [0xWETH](/reference/anchored-units/weth/) = `$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
+- [0xUSDC](/reference/anchored-units/usdc/) = `$0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
+- [0xUSDT](/reference/anchored-units/usdt/) = `$0xdAC17F958D2ee523a2206206994597C13D831ec7`
+- [0xWBTC](/reference/anchored-units/wbtc/) = `$0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599`
+- [0xDAI](/reference/anchored-units/dai/) = `$0x6B175474E89094C44Da98b954EedeAC495271d0F`
 ```
 
 ### Duplicated in:
@@ -656,11 +656,11 @@ Common anchored unit shorthands (all have dedicated reference pages):
 ```
 | Shorthand | Token Name | Actual Symbol (first 10 & last 4) | Mainnet Contract |
 |-----------|------------|-----------------------------------|------------------|
-| [$WETH](/reference/anchored-units/weth/) | Wrapped Ether | `$0xC02aaA39...56Cc2` | [View on Etherscan](https://etherscan.io/address/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2) |
-| [$USDC](/reference/anchored-units/usdc/) | USD Coin | `$0xA0b86991...eB48` | [View on Etherscan](https://etherscan.io/address/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48) |
-| [$USDT](/reference/anchored-units/usdt/) | Tether USD | `$0xdAC17F95...1ec7` | [View on Etherscan](https://etherscan.io/address/0xdAC17F958D2ee523a2206206994597C13D831ec7) |
-| [$WBTC](/reference/anchored-units/wbtc/) | Wrapped BTC | `$0x2260FAC5...2C599` | [View on Etherscan](https://etherscan.io/address/0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599) |
-| [$DAI](/reference/anchored-units/dai/) | Dai Stablecoin | `$0x6B175474...cB4` | [View on Etherscan](https://etherscan.io/address/0x6B175474E89094C44Da98b954EedeAC495271d0F) |
+| [0xWETH](/reference/anchored-units/weth/) | Wrapped Ether | `$0xC02aaA39...56Cc2` | [View on Etherscan](https://etherscan.io/address/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2) |
+| [0xUSDC](/reference/anchored-units/usdc/) | USD Coin | `$0xA0b86991...eB48` | [View on Etherscan](https://etherscan.io/address/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48) |
+| [0xUSDT](/reference/anchored-units/usdt/) | Tether USD | `$0xdAC17F95...1ec7` | [View on Etherscan](https://etherscan.io/address/0xdAC17F958D2ee523a2206206994597C13D831ec7) |
+| [0xWBTC](/reference/anchored-units/wbtc/) | Wrapped BTC | `$0x2260FAC5...2C599` | [View on Etherscan](https://etherscan.io/address/0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599) |
+| [0xDAI](/reference/anchored-units/dai/) | Dai Stablecoin | `$0x6B175474...cB4` | [View on Etherscan](https://etherscan.io/address/0x6B175474E89094C44Da98b954EedeAC495271d0F) |
 ```
 
 ### Recommendation

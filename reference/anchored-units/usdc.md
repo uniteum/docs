@@ -1,5 +1,5 @@
 ---
-title: $USDC
+title: 0xUSDC
 description: Documentation shorthand for the USDC anchored unit
 parent: Anchored Units
 nav_order: 2
@@ -8,15 +8,15 @@ nav_order: 2
 last_updated: 2024-12-18
 ---
 
-# $USDC (USD Coin)
+# 0xUSDC (USD Coin)
 
-**Documentation Shorthand:** `$USDC`
+**Documentation Shorthand:** `0xUSDC`
 **Actual Symbol:** `$0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
 
 ## What This Represents
 
 {% assign usdc = site.data.tokens.usdc -%}
-In Uniteum documentation, `$USDC` is a **readable shorthand** for an anchored unit backed by {% include token.html address=usdc.mainnet text="USD Coin (USDC)" %}.
+In Uniteum documentation, `0xUSDC` is a **readable shorthand** for an anchored unit backed by {% include token.html address=usdc.mainnet text="USD Coin (USDC)" %}.
 
 The actual Uniteum symbol uses the full USDC contract address:
 ```
@@ -43,7 +43,7 @@ USD Coin is a stablecoin pegged to the US Dollar, issued by Circle. Intended to 
 | `$0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48` | Anchored unit | 1:1 USDC in contract |
 | `USDC` (no $) | Floating unit | None (just a label) |
 | `USD` (no $) | Floating unit | None (NOT US dollars!) |
-| `$USDC` | Documentation shorthand | Refers to anchored version |
+| `0xUSDC` | Documentation shorthand | Refers to anchored version |
 
 **Critical:** Floating `USDC` or `USD` ≠ Anchored `$0xA0b8...eB48` ≠ Real US Dollars
 
@@ -64,7 +64,7 @@ IUnit usdcUnit = one.anchored(usdc);
 
 ## Reciprocal Unit: Depeg Hedge
 
-**`1/$USDC`** (shorthand) = `1/$0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48` (actual)
+**`1/0xUSDC`** (shorthand) = `1/$0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48` (actual)
 
 This is a **synthetic unit** (NOT backed) that acts as an automatic hedge against USDC depeg events.
 
@@ -72,12 +72,12 @@ This is a **synthetic unit** (NOT backed) that acts as an automatic hedge agains
 
 **The mechanism:** Price relationship enforced by invariant:
 ```
-price($USDC) × price(1/$USDC) = constant
+price(0xUSDC) × price(1/0xUSDC) = constant
 ```
 
-When USDC depegs, your `1/$USDC` gains offset losses:
+When USDC depegs, your `1/0xUSDC` gains offset losses:
 
-| USDC Price | $USDC Value | 1/$USDC Value | Hedge Effect |
+| USDC Price | 0xUSDC Value | 1/0xUSDC Value | Hedge Effect |
 |------------|-------------|---------------|--------------|
 | $1.00 | Parity | Parity | Balanced |
 | $0.95 | ↓ 5% | ↑ 5.3% | Slight gain |
@@ -92,29 +92,29 @@ See [Use Cases: Stablecoin Depeg Protection](/use-cases/#stablecoin-depeg-protec
 
 ### Ratio Units (Pair Trading)
 
-**`$WETH/$USDC`** — ETH/USD price ratio:
+**`0xWETH/0xUSDC`** — ETH/USD price ratio:
 - This token IS the price of ETH in USD terms
-- `price($WETH/$USDC) = price($WETH) / price($USDC)`
+- `price(0xWETH/0xUSDC) = price(0xWETH) / price(0xUSDC)`
 - Long ETH, short USD in one token
 - Arbitrage keeps it aligned with external markets
 
-**`$WBTC/$USDC`** — BTC/USD price ratio:
+**`0xWBTC/0xUSDC`** — BTC/USD price ratio:
 - Similar to above, for Bitcoin
 
 ### Complex Combinations
 
-**`$WETH^2/$USDC`** — Squared ETH exposure vs stable:
+**`0xWETH^2/0xUSDC`** — Squared ETH exposure vs stable:
 - Leveraged long ETH, denominated in USD terms
 - If ETH 2x, this goes ~4x
 
-**`1/($WETH*$USDC)`** — Inverse of ETH price:
+**`1/(0xWETH*0xUSDC)`** — Inverse of ETH price:
 - Gains when ETH dumps (priced in USDC)
 
 ## Forge Operations
 
 ### Minting the Anchored Unit
 
-To create `$USDC` tokens:
+To create `0xUSDC` tokens:
 
 1. Approve USDC spending to the anchored unit contract
 2. Call `forge()` to deposit USDC and mint the anchored unit
@@ -130,10 +130,10 @@ To get USDC back:
 
 ## Stablecoin Considerations
 
-**Why use `$USDC` instead of just USDC?**
+**Why use `0xUSDC` instead of just USDC?**
 
-1. **Composability:** Can create derivatives (`$WETH/$USDC`, ratios, powers)
-2. **Depeg hedge:** Access to `1/$USDC` for automatic protection
+1. **Composability:** Can create derivatives (`0xWETH/0xUSDC`, ratios, powers)
+2. **Depeg hedge:** Access to `1/0xUSDC` for automatic protection
 3. **Unified liquidity:** Part of Uniteum's interconnected mesh
 4. **Forge operations:** Price control via minting/burning
 
@@ -148,4 +148,4 @@ To get USDC back:
 
 ---
 
-**Remember:** In your code, use the full address `$0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`. The `$USDC` shorthand is for documentation readability only.
+**Remember:** In your code, use the full address `$0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`. The `0xUSDC` shorthand is for documentation readability only.

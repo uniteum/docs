@@ -465,7 +465,7 @@ uniteum.one/
 
 When displaying unit expressions (base units, compound units, or anchored units), the entire expression is a single syntactic entity and must be formatted as such:
 
-- ✅ CORRECT: `meter/second`, `$WETH/second`, `foo*bar^2`
+- ✅ CORRECT: `meter/second`, `0xWETH/second`, `foo*bar^2`
 - ❌ WRONG: `meter`/`second`, {% include token.html ... %}`/second`, `foo*`bar`^2`
 
 **Key principle:** Never split a unit expression across formatting boundaries. If using code formatting, links, or Jekyll includes, the entire compound expression should be treated as one unit.
@@ -530,19 +530,19 @@ When working with tokens like WETH, there are THREE distinct entities that must 
 
 **Anchored Unit Notation Convention:**
 
-For documentation readability, use shorthand notation like `$WETH`, `$USDC`, `$WBTC` in explanations and examples, BUT:
+For documentation readability, use shorthand notation like `0xWETH`, `0xUSDC`, `0xWBTC` in explanations and examples, BUT:
 
-- **Link first occurrence** to token reference pages (e.g., `[$WETH](/reference/anchored-units/weth/)`)
-- Add callout at top of page: "We use [$WETH](/reference/anchored-units/weth/), [$USDC](/reference/anchored-units/usdc/), etc. as readable shorthands. See [Anchored Units](/reference/anchored-units/) for actual symbols."
+- **Link first occurrence** to token reference pages (e.g., `[0xWETH](/reference/anchored-units/weth/)`)
+- Add callout at top of page: "We use [0xWETH](/reference/anchored-units/weth/), [0xUSDC](/reference/anchored-units/usdc/), etc. as readable shorthands. See [Anchored Units](/reference/anchored-units/) for actual symbols."
 - In technical reference or code examples, show real addresses
 - Emphasize the distinction: floating `WETH` ≠ anchored `$0xC02a...56Cc2` ≠ WETH contract `0xC02a...56Cc2`
 
 Common anchored unit shorthands (all have dedicated reference pages):
-- [$WETH](/reference/anchored-units/weth/) = anchored Unit `$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2` (backed by WETH contract)
-- [$USDC](/reference/anchored-units/usdc/) = anchored Unit `$0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48` (backed by USDC contract)
-- [$USDT](/reference/anchored-units/usdt/) = anchored Unit `$0xdAC17F958D2ee523a2206206994597C13D831ec7` (backed by USDT contract)
-- [$WBTC](/reference/anchored-units/wbtc/) = anchored Unit `$0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599` (backed by WBTC contract)
-- [$DAI](/reference/anchored-units/dai/) = anchored Unit `$0x6B175474E89094C44Da98b954EedeAC495271d0F` (backed by DAI contract)
+- [0xWETH](/reference/anchored-units/weth/) = anchored Unit `$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2` (backed by WETH contract)
+- [0xUSDC](/reference/anchored-units/usdc/) = anchored Unit `$0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48` (backed by USDC contract)
+- [0xUSDT](/reference/anchored-units/usdt/) = anchored Unit `$0xdAC17F958D2ee523a2206206994597C13D831ec7` (backed by USDT contract)
+- [0xWBTC](/reference/anchored-units/wbtc/) = anchored Unit `$0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599` (backed by WBTC contract)
+- [0xDAI](/reference/anchored-units/dai/) = anchored Unit `$0x6B175474E89094C44Da98b954EedeAC495271d0F` (backed by DAI contract)
 
 **Anchored Unit Pages:** Located in `/reference/anchored-units/` directory. Each page explains:
 - The shorthand vs actual symbol

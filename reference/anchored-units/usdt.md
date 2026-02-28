@@ -1,5 +1,5 @@
 ---
-title: $USDT
+title: 0xUSDT
 description: Documentation shorthand for the USDT anchored unit
 parent: Anchored Units
 nav_order: 3
@@ -8,15 +8,15 @@ nav_order: 3
 last_updated: 2024-12-18
 ---
 
-# $USDT (Tether USD)
+# 0xUSDT (Tether USD)
 
-**Documentation Shorthand:** `$USDT`
+**Documentation Shorthand:** `0xUSDT`
 **Actual Symbol:** `$0xdAC17F958D2ee523a2206206994597C13D831ec7`
 
 ## What This Represents
 
 {% assign usdt = site.data.tokens.usdt -%}
-In Uniteum documentation, `$USDT` is a **readable shorthand** for an anchored unit backed by {% include token.html address=usdt.mainnet text="Tether USD (USDT)" %}.
+In Uniteum documentation, `0xUSDT` is a **readable shorthand** for an anchored unit backed by {% include token.html address=usdt.mainnet text="Tether USD (USDT)" %}.
 
 The actual Uniteum symbol uses the full USDT contract address:
 ```
@@ -42,7 +42,7 @@ Tether USD is the largest stablecoin by market cap, pegged to the US Dollar. Int
 |--------|------|---------|
 | `$0xdAC17F958D2ee523a2206206994597C13D831ec7` | Anchored unit | 1:1 USDT in contract |
 | `USDT` (no $) | Floating unit | None (just a label) |
-| `$USDT` | Documentation shorthand | Refers to anchored version |
+| `0xUSDT` | Documentation shorthand | Refers to anchored version |
 
 ## Creating This Unit
 
@@ -59,35 +59,35 @@ IUnit usdtUnit = one.anchored(usdt);
 
 ## Reciprocal Unit
 
-**`1/$USDT`** (shorthand) = `1/$0xdAC17F958D2ee523a2206206994597C13D831ec7` (actual)
+**`1/0xUSDT`** (shorthand) = `1/$0xdAC17F958D2ee523a2206206994597C13D831ec7` (actual)
 
-Synthetic unit (not backed) that provides depeg hedge similar to `1/$USDC`.
+Synthetic unit (not backed) that provides depeg hedge similar to `1/0xUSDC`.
 
-See [$USDC: Depeg Protection](/reference/anchored-units/usdc/#reciprocal-unit-depeg-hedge) for mechanism details.
+See [0xUSDC: Depeg Protection](/reference/anchored-units/usdc/#reciprocal-unit-depeg-hedge) for mechanism details.
 
 ## Example Use Cases
 
 ### Stablecoin Arbitrage
 
-With both [$USDC](/reference/anchored-units/usdc/) and `$USDT` anchored:
+With both [0xUSDC](/reference/anchored-units/usdc/) and `0xUSDT` anchored:
 
-**`$USDC/$USDT`** — USDC/USDT price ratio:
+**`0xUSDC/0xUSDT`** — USDC/USDT price ratio:
 - Should trade near 1.0 when both pegged
 - Deviations create arbitrage opportunity
 - Useful for stablecoin pair trading
 
 ### Diversified Stable Basket
 
-**`$USDC*$USDT*$DAI`** — Multi-stablecoin exposure:
+**`0xUSDC*0xUSDT*0xDAI`** — Multi-stablecoin exposure:
 - Reduces single-stablecoin risk
 - Diversified peg reliance
 
 ## Related Documentation
 
 - [Anchored Units](/reference/anchored-units/) — All common shorthands
-- [$USDC](/reference/anchored-units/usdc/) — Similar stablecoin with detailed examples
+- [0xUSDC](/reference/anchored-units/usdc/) — Similar stablecoin with detailed examples
 - [Use Cases: Hedging](/use-cases/#hedging-with-reciprocals)
 
 ---
 
-**Remember:** In your code, use the full address `$0xdAC17F958D2ee523a2206206994597C13D831ec7`. The `$USDT` shorthand is for documentation readability only.
+**Remember:** In your code, use the full address `$0xdAC17F958D2ee523a2206206994597C13D831ec7`. The `0xUSDT` shorthand is for documentation readability only.

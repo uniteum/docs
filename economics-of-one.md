@@ -32,7 +32,7 @@ This page explores three related hypotheses about "1" token economics. **These a
 
 **Central claim:** As anchored collateral and floating unit participation grow, the value of "1" will tend to reflect aggregate system value (anchored + floating).
 
-> **Notation:** We use [$WETH](/reference/anchored-units/weth/), [$USDC](/reference/anchored-units/usdc/), etc. as readable shorthands. These actually represent full address-based symbols. See [Anchored Units](/reference/anchored-units/) for details.
+> **Notation:** We use [0xWETH](/reference/anchored-units/weth/), [0xUSDC](/reference/anchored-units/usdc/), etc. as readable shorthands. These actually represent full address-based symbols. See [Anchored Units](/reference/anchored-units/) for details.
 
 ### The Intuition
 
@@ -42,16 +42,16 @@ Every unit needs "1" for liquidity. When value flows into the system—whether r
 
 ### Anchored Collateral Effect
 
-When you create an anchored unit like [$WETH](/reference/anchored-units/weth/):
+When you create an anchored unit like [0xWETH](/reference/anchored-units/weth/):
 
 1. Real WETH gets locked in the contract (1:1 backing)
-2. `$WETH` and `1/$WETH` are created as a reciprocal pair
+2. `0xWETH` and `1/0xWETH` are created as a reciprocal pair
 3. To provide liquidity, users must lock "1" tokens in the contract
-4. The invariant ties these together: `$WETH × (1/$WETH) = 1²`
+4. The invariant ties these together: `0xWETH × (1/0xWETH) = 1²`
 
 **Result:** Real WETH value becomes indirectly tied to "1" value through the liquidity relationship.
 
-As more anchored units launch ([$USDC](/reference/anchored-units/usdc/), [$WBTC](/reference/anchored-units/wbtc/), etc.), each brings real collateral that requires "1" for liquidity. The "1" token becomes the common denominator for all this value.
+As more anchored units launch ([0xUSDC](/reference/anchored-units/usdc/), [0xWBTC](/reference/anchored-units/wbtc/), etc.), each brings real collateral that requires "1" for liquidity. The "1" token becomes the common denominator for all this value.
 
 ### Mathematical Framing
 
@@ -59,9 +59,9 @@ Consider a simplified scenario with three anchored units:
 
 | Anchored Unit | Collateral Locked | "1" Locked in Contract |
 |---------------|-------------------|------------------------|
-| `$WETH` | 100 WETH ($200k) | 500k "1" |
-| `$USDC` | 300k USDC ($300k) | 300k "1" |
-| `$WBTC` | 5 WBTC ($500k) | 700k "1" |
+| `0xWETH` | 100 WETH ($200k) | 500k "1" |
+| `0xUSDC` | 300k USDC ($300k) | 300k "1" |
+| `0xWBTC` | 5 WBTC ($500k) | 700k "1" |
 | **Total** | **$1M** | **1.5M "1"** |
 
 If "1" reflects proportional value: `$1M / 1.5M = $0.67 per "1"`
@@ -85,7 +85,7 @@ As the unit mesh grows:
 
 **More units → More "1" demand:**
 - Each new base unit needs "1" for reciprocal liquidity
-- Compound units (`$WETH/$USDC`, `$WBTC^2`) create additional forge paths
+- Compound units (`0xWETH/0xUSDC`, `0xWBTC^2`) create additional forge paths
 - All paths flow through "1" (directly or indirectly)
 
 **More forge paths → Stronger price consistency:**
@@ -119,9 +119,9 @@ Hypothetical "1" behavior:
 - No external reference creates resistance
 - They move *with* "1", not *against* it
 
-**Anchored units** (`$WETH`, `$USDC`, etc.):
-- The anchored unit has fixed real-world backing (1 `$WETH` = 1 WETH locked)
-- The reciprocal `1/$WETH` floats with the "1" token
+**Anchored units** (`0xWETH`, `0xUSDC`, etc.):
+- The anchored unit has fixed real-world backing (1 `0xWETH` = 1 WETH locked)
+- The reciprocal `1/0xWETH` floats with the "1" token
 - External reference (real WETH price) creates resistance
 - They *react against* changes in "1" value
 
@@ -129,14 +129,14 @@ Hypothetical "1" behavior:
 
 When "1" value increases relative to external markets:
 
-1. **Overvaluation occurs:** `1/$WETH` becomes overvalued (because "1" is worth more, but real WETH price unchanged)
-2. **Arbitrage opportunity:** Forge to mint `$WETH` (locks cheap real WETH), burn expensive `1/$WETH`, extract "1"
+1. **Overvaluation occurs:** `1/0xWETH` becomes overvalued (because "1" is worth more, but real WETH price unchanged)
+2. **Arbitrage opportunity:** Forge to mint `0xWETH` (locks cheap real WETH), burn expensive `1/0xWETH`, extract "1"
 3. **Backpressure:** This creates selling pressure on "1" → dampens the price increase
 4. **Equilibrium restoration:** Process continues until "1" value aligns with anchored unit prices
 
 **Symmetric effect** when "1" value decreases:
-- `$WETH` becomes overvalued relative to `1/$WETH`
-- Arbitrage: burn cheap `$WETH` (reclaim real WETH), mint `1/$WETH`, extract value
+- `0xWETH` becomes overvalued relative to `1/0xWETH`
+- Arbitrage: burn cheap `0xWETH` (reclaim real WETH), mint `1/0xWETH`, extract value
 - Creates buying pressure on "1" → dampens the decrease
 
 ### The Spring Analogy
@@ -181,12 +181,12 @@ If reactance hypothesis holds:
 
 ### Mathematical Framing
 
-Consider `$WETH` anchored unit with external WETH price `P_WETH`:
+Consider `0xWETH` anchored unit with external WETH price `P_WETH`:
 
 **Internal implied "1" price from this unit:**
 ```
-P_1_implied = (locked WETH value) / (locked "1" in $WETH contract)
-            = (supply_$WETH × P_WETH) / (w)
+P_1_implied = (locked WETH value) / (locked "1" in 0xWETH contract)
+            = (supply_0xWETH × P_WETH) / (w)
 ```
 
 If market "1" price diverges from `P_1_implied`, arbitrage profit exists.
@@ -203,19 +203,19 @@ With N anchored units, N different implied "1" prices → N arbitrage springs �
 
 Applied to "1":
 - "1" is locked across many different unit contracts
-- If `$WETH` dumps but `$WBTC` pumps, offsetting effects
-- If `foo` floating unit collapses, but `$USDC` is stable, net impact reduced
+- If `0xWETH` dumps but `0xWBTC` pumps, offsetting effects
+- If `foo` floating unit collapses, but `0xUSDC` is stable, net impact reduced
 - "1" volatility < weighted average volatility of constituent units
 
 ### Correlation Structure Matters
 
 **Key question:** How correlated are different units?
 
-**Anchored crypto assets** (`$WETH`, `$WBTC`, `$LINK`):
+**Anchored crypto assets** (`0xWETH`, `0xWBTC`, `0xLINK`):
 - Likely high correlation (crypto moves together)
 - Limited diversification benefit
 
-**Anchored stablecoins** (`$USDC`, `$USDT`, `$DAI`):
+**Anchored stablecoins** (`0xUSDC`, `0xUSDT`, `0xDAI`):
 - Low correlation with crypto
 - Stabilizing effect on "1"
 
@@ -225,7 +225,7 @@ Applied to "1":
 
 **Compound units:**
 - Inherit correlation structure of constituents
-- `$WETH/$USDC` correlated with WETH
+- `0xWETH/0xUSDC` correlated with WETH
 - `foo*bar` depends on foo/bar correlation
 
 ### Mathematical Intuition
@@ -389,17 +389,17 @@ Sum across all units for total locked "1" supply.
 
 ### Scenario 1: First Major Anchored Unit
 
-**Setup:** Someone creates `$WETH` and locks 100 WETH ($200k) with equivalent "1" liquidity.
+**Setup:** Someone creates `0xWETH` and locks 100 WETH ($200k) with equivalent "1" liquidity.
 
 **Prediction (if hypothesis holds):**
 - "1" price should move toward value implied by WETH collateral
-- Arbitrage between `$WETH/1` and external WETH/USD markets
+- Arbitrage between `0xWETH/1` and external WETH/USD markets
 - Increased "1" trading volume
 - "1" volatility initially high (single asset correlation)
 
 ### Scenario 2: Stablecoin Diversification
 
-**Setup:** After `$WETH`, users add `$USDC` and `$USDT` with significant TVL.
+**Setup:** After `0xWETH`, users add `0xUSDC` and `0xUSDT` with significant TVL.
 
 **Prediction:**
 - "1" correlation with WETH decreases

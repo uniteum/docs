@@ -1,5 +1,5 @@
 ---
-title: $WETH
+title: 0xWETH
 description: Documentation shorthand for the WETH anchored unit
 parent: Anchored Units
 nav_order: 1
@@ -8,15 +8,15 @@ nav_order: 1
 last_updated: 2024-12-18
 ---
 
-# $WETH (Wrapped Ether)
+# 0xWETH (Wrapped Ether)
 
-**Documentation Shorthand:** `$WETH`
+**Documentation Shorthand:** `0xWETH`
 **Actual Symbol:** `${{ site.data.tokens.weth.mainnet }}`
 
 ## What This Represents
 
 {% assign weth = site.data.tokens.weth -%}
-In Uniteum documentation, `$WETH` is a **readable shorthand** for an anchored unit backed by {% include token.html address=weth.mainnet text="Wrapped Ether (WETH)" %}.
+In Uniteum documentation, `0xWETH` is a **readable shorthand** for an anchored unit backed by {% include token.html address=weth.mainnet text="Wrapped Ether (WETH)" %}.
 
 The actual Uniteum symbol uses the full WETH contract address:
 ```
@@ -42,7 +42,7 @@ Wrapped Ether is ETH converted to an ERC-20 token for DeFi compatibility. 1 WETH
 |--------|------|---------|
 | `${{ site.data.tokens.weth.mainnet }}` | Anchored unit | 1:1 WETH in contract |
 | `WETH` (no $) | Floating unit | None (just a label) |
-| `$WETH` | Documentation shorthand | Refers to anchored version |
+| `0xWETH` | Documentation shorthand | Refers to anchored version |
 
 **Critical:** Floating `WETH` ≠ Anchored `${{ site.data.tokens.weth.mainnet | slice: 0, 6 }}...{{ site.data.tokens.weth.mainnet | slice: -4, 4 }}`
 
@@ -65,15 +65,15 @@ IUnit wethUnit = one.anchored(weth);
 
 Every anchored unit has a reciprocal:
 
-**`1/$WETH`** (shorthand) = `1/${{ site.data.tokens.weth.mainnet }}` (actual)
+**`1/0xWETH`** (shorthand) = `1/${{ site.data.tokens.weth.mainnet }}` (actual)
 
 This is a **synthetic unit** (NOT backed by WETH). Its price is the inverse of the WETH unit's price, enforced by the invariant.
 
 ### Hedging Use Case
 
-Hold both `$WETH` and `1/$WETH`:
+Hold both `0xWETH` and `1/0xWETH`:
 
-| WETH Price | $WETH Value | 1/$WETH Value | Net Effect |
+| WETH Price | 0xWETH Value | 1/0xWETH Value | Net Effect |
 |------------|-------------|---------------|------------|
 | $2000 | 1× | 1× | Balanced |
 | $3000 | ↑ 50% | ↓ 33% | Net gain |
@@ -85,26 +85,26 @@ See [Use Cases: Hedging with Reciprocals](/use-cases/#hedging-with-reciprocals) 
 
 ### Power Perpetuals
 
-**`$WETH^2`** — Squared WETH exposure:
-- Price relationship: `price($WETH^2) = price($WETH)²`
-- If WETH 2x → `$WETH^2` goes 4x
+**`0xWETH^2`** — Squared WETH exposure:
+- Price relationship: `price(0xWETH^2) = price(0xWETH)²`
+- If WETH 2x → `0xWETH^2` goes 4x
 - Leverage without borrowing or liquidation
 
-**`1/$WETH^2`** — Inverse squared:
+**`1/0xWETH^2`** — Inverse squared:
 - Convex hedge against WETH dumps
 - If WETH drops 50% → this gains 300%
 
 ### Multi-Token Combinations
 
-**`$WETH/$USDC`** — ETH/USD price ratio itself:
+**`0xWETH/0xUSDC`** — ETH/USD price ratio itself:
 - Not tracking the price, IS the price
 - Long ETH, short USD in one token
 
-**`$WETH*$WBTC`** — Diversified crypto basket:
+**`0xWETH*0xWBTC`** — Diversified crypto basket:
 - Gains when either pumps
-- `price($WETH*$WBTC) = price($WETH) × price($WBTC)`
+- `price(0xWETH*0xWBTC) = price(0xWETH) × price(0xWBTC)`
 
-**`$WETH^2/$USDC`** — Squared ETH vs USD:
+**`0xWETH^2/0xUSDC`** — Squared ETH vs USD:
 - Leveraged ETH exposure relative to stablecoin
 - Custom convexity profile
 
@@ -114,7 +114,7 @@ See [Use Cases: Power Perpetuals](/use-cases/#power-perpetuals) and [Multi-Token
 
 ### Minting the Anchored Unit
 
-To create `$WETH` tokens:
+To create `0xWETH` tokens:
 
 1. Approve WETH spending to the anchored unit contract
 2. Call `forge()` with positive parameters to mint
@@ -140,4 +140,4 @@ See [Forging Guide](/guides/forging/) for detailed instructions.
 
 ---
 
-**Remember:** In your code, use the full address `${{ site.data.tokens.weth.mainnet }}`. The `$WETH` shorthand is for documentation readability only.
+**Remember:** In your code, use the full address `${{ site.data.tokens.weth.mainnet }}`. The `0xWETH` shorthand is for documentation readability only.

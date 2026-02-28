@@ -34,7 +34,7 @@ shield:
 USD:
   description: "Floating USD (NO connection to real US dollars)"
 ETH:
-  description: "Floating ETH (distinct from anchored $WETH)"
+  description: "Floating ETH (distinct from anchored 0xWETH)"
 BTC:
   description: "Floating BTC (NO connection to Bitcoin)"
 MSFT:

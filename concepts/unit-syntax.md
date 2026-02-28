@@ -149,22 +149,22 @@ $0xTokenAddress
 ### Examples
 
 Common anchored units (using shorthand notation for readability):
-- `$WETH` → {% include unit.html symbol="$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" %}
-- `$USDC` → {% include unit.html symbol="$0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48" %}
-- `$USDT` → {% include unit.html symbol="$0xdAC17F958D2ee523a2206206994597C13D831ec7" %}
-- `$WBTC` → {% include unit.html symbol="$0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599" %}
+- `0xWETH` → {% include unit.html symbol="$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" %}
+- `0xUSDC` → {% include unit.html symbol="$0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48" %}
+- `0xUSDT` → {% include unit.html symbol="$0xdAC17F958D2ee523a2206206994597C13D831ec7" %}
+- `0xWBTC` → {% include unit.html symbol="$0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599" %}
 
 See [Anchored Units reference](/reference/anchored-units/) for complete list and details.
 
 ### Floating vs anchored distinction
 
-**CRITICAL**: An anchored unit like `$WETH` is fundamentally different from a floating unit `WETH`:
+**CRITICAL**: An anchored unit like `0xWETH` is fundamentally different from a floating unit `WETH`:
 
 - **Anchored** {% include unit.html symbol="$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" text="<code>$0xC02a...56Cc2</code>" %}: Backed 1:1 by real WETH tokens held by the contract. Custodial, has inherent value.
 - **Floating** `WETH`: Just a label with NO connection to the real WETH token. Value emerges only from liquidity/consensus.
 
 This distinction applies to ALL symbols:
-- {% include unit.html symbol="$0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48" text="<code>$USDC</code>" %} (anchored) has real value from backing tokens
+- {% include unit.html symbol="$0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48" text="<code>0xUSDC</code>" %} (anchored) has real value from backing tokens
 - `USDC` (floating) is just a label with zero inherent value
 
 ### Using anchored units in compounds

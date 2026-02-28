@@ -23,7 +23,7 @@ status: reference
 
 ## Documentation Convention
 
-Throughout Uniteum documentation, we use **readable shorthands** like `$WETH`, `$USDC`, `$WBTC` for clarity in examples and explanations.
+Throughout Uniteum documentation, we use **readable shorthands** like `0xWETH`, `0xUSDC`, `0xWBTC` for clarity in examples and explanations.
 
 **IMPORTANT:** These are NOT the actual symbols. Anchored units use full contract addresses.
 
@@ -38,7 +38,7 @@ This is accurate but unwieldy in documentation. Reading paragraphs full of 42-ch
 
 **Shorthand format:**
 ```
-$WETH
+0xWETH
 ```
 
 This is readable and matches how developers think about tokens, while clearly indicating "anchored unit" with the `$` prefix.
@@ -47,7 +47,7 @@ This is readable and matches how developers think about tokens, while clearly in
 
 | Format | What It Is | Backing |
 |--------|-----------|---------|
-| `$WETH` (shorthand) | Documentation convenience | Refers to `$0xC02a...56Cc2` |
+| `0xWETH` (shorthand) | Documentation convenience | Refers to `$0xC02a...56Cc2` |
 | `$0xC02a...56Cc2` (actual) | Real anchored unit symbol | 1:1 backed by WETH |
 | `WETH` (no $) | Floating unit | NO backing, just a label |
 
@@ -67,17 +67,17 @@ Click any shorthand to see its actual symbol, backing token details, and usage e
 
 | Shorthand | Token Name | Actual Symbol (first 10 & last 4) | Mainnet Contract |
 |-----------|------------|-----------------------------------|------------------|
-| [$WETH](/reference/anchored-units/weth/) | Wrapped Ether | `$0xC02aaA39...56Cc2` | {% include token.html address=weth.mainnet text="View on Etherscan" %} |
-| [$USDC](/reference/anchored-units/usdc/) | USD Coin | `$0xA0b86991...eB48` | {% include token.html address=usdc.mainnet text="View on Etherscan" %} |
-| [$USDT](/reference/anchored-units/usdt/) | Tether USD | `$0xdAC17F95...1ec7` | {% include token.html address=usdt.mainnet text="View on Etherscan" %} |
-| [$WBTC](/reference/anchored-units/wbtc/) | Wrapped BTC | `$0x2260FAC5...2C599` | {% include token.html address=wbtc.mainnet text="View on Etherscan" %} |
-| [$DAI](/reference/anchored-units/dai/) | Dai Stablecoin | `$0x6B175474...cB4` | {% include token.html address=dai.mainnet text="View on Etherscan" %} |
+| [0xWETH](/reference/anchored-units/weth/) | Wrapped Ether | `$0xC02aaA39...56Cc2` | {% include token.html address=weth.mainnet text="View on Etherscan" %} |
+| [0xUSDC](/reference/anchored-units/usdc/) | USD Coin | `$0xA0b86991...eB48` | {% include token.html address=usdc.mainnet text="View on Etherscan" %} |
+| [0xUSDT](/reference/anchored-units/usdt/) | Tether USD | `$0xdAC17F95...1ec7` | {% include token.html address=usdt.mainnet text="View on Etherscan" %} |
+| [0xWBTC](/reference/anchored-units/wbtc/) | Wrapped BTC | `$0x2260FAC5...2C599` | {% include token.html address=wbtc.mainnet text="View on Etherscan" %} |
+| [0xDAI](/reference/anchored-units/dai/) | Dai Stablecoin | `$0x6B175474...cB4` | {% include token.html address=dai.mainnet text="View on Etherscan" %} |
 
 ## How to Read Documentation Examples
 
 When you see:
 
-> "Create `$WETH^2` for squared exposure to ETH price movements"
+> "Create `0xWETH^2` for squared exposure to ETH price movements"
 
 Understand this as:
 

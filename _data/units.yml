@@ -63,7 +63,7 @@ USD:
   address: "0x8f3f1F36938a958213Ed94fA109d8e4581758861"
   one: "0xace41cf6d750d7ba06f4de57ac9e063246b2b090"
 ETH:
-  description: Floating ETH (distinct from anchored $WETH)
+  description: Floating ETH (distinct from anchored 0xWETH)
   canonical: ETH
   address: "0x713b3Fe7901258023dD8B64845AAcba12C1E377f"
   one: "0xace41cf6d750d7ba06f4de57ac9e063246b2b090"

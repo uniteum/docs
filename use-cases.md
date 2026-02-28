@@ -23,7 +23,7 @@ status: draft
 
 Uniteum enables novel financial primitives through algebraic composition of units. Here are the key value propositions and use cases.
 
-> **Notation:** For readability, we use [$WETH](/reference/anchored-units/weth/), [$USDC](/reference/anchored-units/usdc/), etc. in examples. Remember that anchored units actually use full contract addresses: `$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2` for WETH. Click any link to see its actual symbol. See [Anchored Units Reference](/reference/anchored-units/) and [Anchored Units](#anchored-units) below.
+> **Notation:** For readability, we use [0xWETH](/reference/anchored-units/weth/), [0xUSDC](/reference/anchored-units/usdc/), etc. in examples. Remember that anchored units actually use full contract addresses: `$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2` for WETH. Click any link to see its actual symbol. See [Anchored Units Reference](/reference/anchored-units/) and [Anchored Units](#anchored-units) below.
 
 ## Hedging with Reciprocals
 
@@ -33,20 +33,20 @@ Uniteum enables novel financial primitives through algebraic composition of unit
 
 Create an anchored USDC unit and its reciprocal:
 
-- [$USDC](/reference/anchored-units/usdc/) — backed 1:1 by real USDC held in the contract
-- `1/$USDC` — synthetic reciprocal (not backed)
+- [0xUSDC](/reference/anchored-units/usdc/) — backed 1:1 by real USDC held in the contract
+- `1/0xUSDC` — synthetic reciprocal (not backed)
 
-**Price relationship:** `price($USDC) × price(1/$USDC) = price(1)`
+**Price relationship:** `price(0xUSDC) × price(1/0xUSDC) = price(1)`
 
 When USDC depegs:
 
-| USDC Price | $USDC Value | 1/$USDC Value | Effect |
+| USDC Price | 0xUSDC Value | 1/0xUSDC Value | Effect |
 |------------|-------------|---------------|--------|
 | $1.00 | ~1 "1" | ~1 "1" | Equilibrium |
 | $0.90 | ↓ 10% | ↑ 11% | Hedge gains |
 | $0.50 | ↓ 50% | ↑ 100% | Strong protection |
 
-**Hold both:** Your `1/$USDC` gains offset `$USDC` losses automatically.
+**Hold both:** Your `1/0xUSDC` gains offset `0xUSDC` losses automatically.
 
 **No oracle needed** — the reciprocal relationship is enforced by the invariant and arbitrage.
 
@@ -54,12 +54,12 @@ When USDC depegs:
 
 The same mechanism works for any ERC-20:
 
-**[$WETH](/reference/anchored-units/weth/) and `1/$WETH`:**
-- Long ETH? Hold [$WETH](/reference/anchored-units/weth/)
-- Short ETH? Hold `1/$WETH`
+**[0xWETH](/reference/anchored-units/weth/) and `1/0xWETH`:**
+- Long ETH? Hold [0xWETH](/reference/anchored-units/weth/)
+- Short ETH? Hold `1/0xWETH`
 - Hedged exposure? Hold both
 
-**[$WBTC](/reference/anchored-units/wbtc/) and `1/$WBTC`:**
+**[0xWBTC](/reference/anchored-units/wbtc/) and `1/0xWBTC`:**
 - Protect BTC holdings from dumps
 - Gain from BTC price increases
 - No borrowing, no collateral, no liquidations
@@ -73,7 +73,7 @@ Traditional DeFi hedging requires:
 
 Uniteum reciprocal hedging:
 - ✅ No oracles (pure arbitrage enforcement)
-- ✅ No collateral for synthetic side (`1/$USDC` isn't backed)
+- ✅ No collateral for synthetic side (`1/0xUSDC` isn't backed)
 - ✅ No liquidations (spot tokens, supply/demand via forge)
 
 **The reciprocal IS the derivative**, and its price is mathematically enforced.
@@ -84,11 +84,11 @@ Compound units with exponents create leveraged exposure without borrowing.
 
 ### Squared Units
 
-**`$WETH^2` (ETH squared):**
+**`0xWETH^2` (ETH squared):**
 
-Price relationship: `price($WETH^2) = price($WETH)²`
+Price relationship: `price(0xWETH^2) = price(0xWETH)²`
 
-| ETH Moves | $WETH Change | $WETH^2 Change |
+| ETH Moves | 0xWETH Change | 0xWETH^2 Change |
 |-----------|--------------|----------------|
 | 2x | +100% | +300% (4x) |
 | 1.5x | +50% | +125% (2.25x) |
@@ -96,14 +96,14 @@ Price relationship: `price($WETH^2) = price($WETH)²`
 
 **Leveraged upside, amplified downside** — without liquidation risk.
 
-**`1/$WETH^2` (inverse squared):**
+**`1/0xWETH^2` (inverse squared):**
 - Convex hedge against ETH dumps
 - If ETH drops 50%, this gains 300% (4x)
 - Non-linear protection
 
 ### Rational Exponents
 
-**`$WETH^3:2` (ETH to the 3/2 power):**
+**`0xWETH^3:2` (ETH to the 3/2 power):**
 - Custom convexity profiles
 - Design exact risk/reward curves
 - Build exotic options-like payoffs
@@ -130,48 +130,48 @@ Compound units combine multiple tokens into single derivatives.
 
 ### Ratio Units (Pair Trading)
 
-**`$WETH/$USDC` — the ETH/USD price ratio itself:**
+**`0xWETH/0xUSDC` — the ETH/USD price ratio itself:**
 
 Not tracking the price — **this token IS the price ratio**.
 
-Enforced by: `price($WETH/$USDC) = price($WETH) / price($USDC)`
+Enforced by: `price(0xWETH/0xUSDC) = price(0xWETH) / price(0xUSDC)`
 
 - Long this = long ETH, short USD
 - Arbitrage keeps it aligned with external markets
 - Pure directional bet on ETH vs USD
 
-**`$WBTC/$WETH` — BTC/ETH relative value:**
+**`0xWBTC/0xWETH` — BTC/ETH relative value:**
 - Don't care about USD price
 - Only care about BTC vs ETH
 - Oracle-free pair trading
 
 ### Product Units (Baskets)
 
-**`$WETH*$WBTC` — diversified crypto basket:**
+**`0xWETH*0xWBTC` — diversified crypto basket:**
 
-Price relationship: `price($WETH*$WBTC) = price($WETH) × price($WBTC)`
+Price relationship: `price(0xWETH*0xWBTC) = price(0xWETH) × price(0xWBTC)`
 
 - If either pumps, basket pumps
 - Diversified exposure in one token
 - No index fund operator needed
 
 **Multi-asset baskets:**
-- `$WETH*$WBTC*$LINK` — three-token basket
+- `0xWETH*0xWBTC*0xLINK` — three-token basket
 - Automatically rebalances via arbitrage
 - Permissionless index creation
 
 ### Complex Combinations
 
-**`$WETH^2/$USDC` — squared ETH vs USD:**
+**`0xWETH^2/0xUSDC` — squared ETH vs USD:**
 - Leveraged ETH exposure relative to USD
 - Combines power perpetual with ratio
 
-**`$WBTC*$WETH/$USDC^2` — complex multi-asset derivative:**
+**`0xWBTC*0xWETH/0xUSDC^2` — complex multi-asset derivative:**
 - Long BTC+ETH
 - Inverse squared USD exposure
 - Custom risk profile
 
-**`1/($WETH*$WBTC)` — short the crypto market:**
+**`1/(0xWETH*0xWBTC)` — short the crypto market:**
 - Inverse of basket
 - Gains when crypto dumps
 - Relative to "1" token
@@ -180,7 +180,7 @@ Price relationship: `price($WETH*$WBTC) = price($WETH) × price($WBTC)`
 
 ### Straddle-Like Positions
 
-**Hold both `$WETH` and `1/$WETH`:**
+**Hold both `0xWETH` and `1/0xWETH`:**
 
 When WETH is stable:
 - Both trade near parity
@@ -194,7 +194,7 @@ When WETH moves (either direction):
 
 ### Correlation Trading
 
-**Long `$WETH/$WBTC`, short `$WETH*$WBTC`:**
+**Long `0xWETH/0xWBTC`, short `0xWETH*0xWBTC`:**
 - Profits when correlation between ETH and BTC changes
 - Previously required complex derivatives
 - Accessible through simple unit composition
@@ -298,11 +298,11 @@ Real format: `$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2` (WETH)
 Created via: `one().anchored(IERC20(0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2))`
 
 Common anchored units (click for details):
-- [$WETH](/reference/anchored-units/weth/) — `$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
-- [$USDC](/reference/anchored-units/usdc/) — `$0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
-- [$USDT](/reference/anchored-units/usdt/) — `$0xdAC17F958D2ee523a2206206994597C13D831ec7`
-- [$WBTC](/reference/anchored-units/wbtc/) — `$0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599`
-- [$DAI](/reference/anchored-units/dai/) — `$0x6B175474E89094C44Da98b954EedeAC495271d0F`
+- [0xWETH](/reference/anchored-units/weth/) — `$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
+- [0xUSDC](/reference/anchored-units/usdc/) — `$0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
+- [0xUSDT](/reference/anchored-units/usdt/) — `$0xdAC17F958D2ee523a2206206994597C13D831ec7`
+- [0xWBTC](/reference/anchored-units/wbtc/) — `$0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599`
+- [0xDAI](/reference/anchored-units/dai/) — `$0x6B175474E89094C44Da98b954EedeAC495271d0F`
 
 See [Anchored Units Reference](/reference/anchored-units/) for complete list and usage examples.
 

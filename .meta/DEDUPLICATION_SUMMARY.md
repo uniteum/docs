@@ -45,7 +45,7 @@ These sections are **essential AI context** with no user-facing equivalent:
 
 ✅ **Writing Guidelines** — How to format Etherscan links, use shorthands, structure pages
 ✅ **Linking Contract Addresses** — Network selection, section anchors (#code, #writeContract, etc.)
-✅ **Anchored Unit Notation Convention** — Shorthand rules ($WETH vs $0x...)
+✅ **Anchored Unit Notation Convention** — Shorthand rules (0xWETH vs $0x...)
 ✅ **Do/Don't Lists** — Content policy guardrails
 ✅ **Key Concepts to Emphasize** — Common user misconceptions AI should address
 ✅ **Documentation Approach** — Target audience, voice, tone

@@ -57,8 +57,8 @@ But instead of being paid via explicit swap fees, their reward is **the rebalanc
 
 Once `U` and `1/U` are connected to `1`, any two anchored Units can trade by routing through `1`:
 
-* swap `$BTC` exposure → `1`
-* swap `1` → `$ETH` exposure
+* swap `0xBTC` exposure → `1`
+* swap `1` → `0xETH` exposure
 
 So a “BTC → ETH” trade is internally just two forge-driven moves that pass through the shared mediator. That’s how Uniteum gets a constant-product-AMM-like routing behavior without requiring bespoke pools for every pair: the mesh already exists, and `1` is the common connective tissue.  
 

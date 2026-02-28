@@ -66,7 +66,7 @@ Compound units are first-class citizens. They have their own reciprocals and can
 ### Anchored Units
 
 {: .note }
-> For documentation shorthands ($WETH, $USDC, etc.) and complete reference, see [Anchored Units](/reference/anchored-units/).
+> For documentation shorthands (0xWETH, 0xUSDC, etc.) and complete reference, see [Anchored Units](/reference/anchored-units/).
 
 **Format:** `$0xTokenAddress`
 
