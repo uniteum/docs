@@ -11,7 +11,7 @@ last_updated: 2024-12-18
 # 0xUSDT (Tether USD)
 
 **Documentation Shorthand:** `0xUSDT`
-**Actual Symbol:** `$0xdAC17F958D2ee523a2206206994597C13D831ec7`
+**Actual Symbol:** `0xdAC17F958D2ee523a2206206994597C13D831ec7`
 
 ## What This Represents
 
@@ -20,7 +20,7 @@ In Uniteum documentation, `0xUSDT` is a **readable shorthand** for an anchored u
 
 The actual Uniteum symbol uses the full USDT contract address:
 ```
-${{ usdt.mainnet }}
+{{ usdt.mainnet }}
 ```
 
 ## Backing Token
@@ -40,7 +40,7 @@ Tether USD is the largest stablecoin by market cap, pegged to the US Dollar. Int
 
 | Symbol | Type | Backing |
 |--------|------|---------|
-| `$0xdAC17F958D2ee523a2206206994597C13D831ec7` | Anchored unit | 1:1 USDT in contract |
+| `0xdAC17F958D2ee523a2206206994597C13D831ec7` | Anchored unit | 1:1 USDT in contract |
 | `USDT` (no $) | Floating unit | None (just a label) |
 | `0xUSDT` | Documentation shorthand | Refers to anchored version |
 
@@ -54,12 +54,12 @@ IUnit one = IUnit({% include uniteum_address.html %});
 IERC20 usdt = IERC20({{ site.data.tokens.usdt.mainnet }});
 IUnit usdtUnit = one.anchored(usdt);
 
-// usdtUnit.symbol() returns: "${{ site.data.tokens.usdt.mainnet }}"
+// usdtUnit.symbol() returns: "{{ site.data.tokens.usdt.mainnet }}"
 ```
 
 ## Reciprocal Unit
 
-**`1/0xUSDT`** (shorthand) = `1/$0xdAC17F958D2ee523a2206206994597C13D831ec7` (actual)
+**`1/0xUSDT`** (shorthand) = `1/0xdAC17F958D2ee523a2206206994597C13D831ec7` (actual)
 
 Synthetic unit (not backed) that provides depeg hedge similar to `1/0xUSDC`.
 
@@ -90,4 +90,4 @@ With both [0xUSDC](/reference/anchored-units/usdc/) and `0xUSDT` anchored:
 
 ---
 
-**Remember:** In your code, use the full address `$0xdAC17F958D2ee523a2206206994597C13D831ec7`. The `0xUSDT` shorthand is for documentation readability only.
+**Remember:** In your code, use the full address `0xdAC17F958D2ee523a2206206994597C13D831ec7`. The `0xUSDT` shorthand is for documentation readability only.

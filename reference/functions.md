@@ -205,13 +205,13 @@ Create an anchored unit backed 1:1 by an external ERC-20 token. The Unit contrac
 **Returns:**
 - `unit` — Address of anchored unit
 
-**Symbol Format:** `$0xTokenAddress`
+**Symbol Format:** `0xTokenAddress`
 
 **Example:**
 ```solidity
 IERC20 usdt = IERC20(0xdAC17F958D2ee523a2206206994597C13D831ec7);
 IUnit anchoredUSDT = one().anchored(usdt);
-// symbol: "$0xdAC17F958D2ee523a2206206994597C13D831ec7"
+// symbol: "0xdAC17F958D2ee523a2206206994597C13D831ec7"
 ```
 
 **Important:**
@@ -365,7 +365,7 @@ Get the symbol format for an anchored unit (pure function).
 - `token` — Token address
 
 **Returns:**
-- `symbol` — Format: `$0x...`
+- `symbol` — Format: `0x...`
 
 ---
 

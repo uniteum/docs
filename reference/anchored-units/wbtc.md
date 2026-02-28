@@ -11,7 +11,7 @@ last_updated: 2024-12-18
 # 0xWBTC (Wrapped Bitcoin)
 
 **Documentation Shorthand:** `0xWBTC`
-**Actual Symbol:** `$0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599`
+**Actual Symbol:** `0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599`
 
 ## What This Represents
 
@@ -20,7 +20,7 @@ In Uniteum documentation, `0xWBTC` is a **readable shorthand** for an anchored u
 
 The actual Uniteum symbol uses the full WBTC contract address:
 ```
-${{ wbtc.mainnet }}
+{{ wbtc.mainnet }}
 ```
 
 ## Backing Token
@@ -40,7 +40,7 @@ Wrapped Bitcoin is Bitcoin represented as an ERC-20 token on Ethereum. 1 WBTC = 
 
 | Symbol | Type | Backing |
 |--------|------|---------|
-| `$0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599` | Anchored unit | 1:1 WBTC in contract |
+| `0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599` | Anchored unit | 1:1 WBTC in contract |
 | `WBTC` (no $) | Floating unit | None (just a label) |
 | `BTC` (no $) | Floating unit | None (NOT Bitcoin!) |
 | `0xWBTC` | Documentation shorthand | Refers to anchored version |
@@ -55,12 +55,12 @@ IUnit one = IUnit({% include uniteum_address.html %});
 IERC20 wbtc = IERC20({{ site.data.tokens.wbtc.mainnet }});
 IUnit wbtcUnit = one.anchored(wbtc);
 
-// wbtcUnit.symbol() returns: "${{ site.data.tokens.wbtc.mainnet }}"
+// wbtcUnit.symbol() returns: "{{ site.data.tokens.wbtc.mainnet }}"
 ```
 
 ## Reciprocal Unit
 
-**`1/0xWBTC`** (shorthand) = `1/$0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599` (actual)
+**`1/0xWBTC`** (shorthand) = `1/0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599` (actual)
 
 Synthetic unit providing inverse BTC exposure. If BTC dumps, `1/0xWBTC` gains.
 
@@ -116,4 +116,4 @@ See [Use Cases: Correlation Trading](/use-cases/#correlation-trading).
 
 ---
 
-**Remember:** In your code, use the full address `$0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599`. The `0xWBTC` shorthand is for documentation readability only.
+**Remember:** In your code, use the full address `0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599`. The `0xWBTC` shorthand is for documentation readability only.

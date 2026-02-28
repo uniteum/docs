@@ -124,7 +124,7 @@ This generalizes beyond Uniswap's 0.5 power perp to support arbitrary convexity 
 ### 4. Anchored vs Floating Units
 
 **Anchored Units:**
-- Format: `$0xTokenAddress` (e.g., `$0xdAC17F958D2ee523a2206206994597C13D831ec7` for USDT)
+- Format: `0xTokenAddress` (e.g., `0xdAC17F958D2ee523a2206206994597C13D831ec7` for USDT)
 - Backed 1:1 by external ERC-20 held by the Unit contract
 - Real value, custodial
 - Created via: `one().anchored(IERC20(address))`
@@ -472,7 +472,7 @@ When displaying unit expressions (base units, compound units, or anchored units)
 
 **Examples:**
 - Simple compound: `meter/second` (not `meter`/`second`)
-- With links: Use `<code>$0xC02a...56Cc2/second</code>` as the link text (not `<code>$0xC02a...56Cc2</code>` followed by `/second`)
+- With links: Use `<code>0xC02a...56Cc2/second</code>` as the link text (not `<code>0xC02a...56Cc2</code>` followed by `/second`)
 - In prose: "The unit `kg*meter/second^2` represents force" (not "The unit `kg*meter`/`second^2`...")
 
 **CRITICAL: Three Distinct Entities for Tokens**
@@ -485,15 +485,15 @@ When working with tokens like WETH, there are THREE distinct entities that must 
    - Link using: `{% include token.html address=site.data.tokens.weth.mainnet %}`
    - This is what backs the anchored unit
 
-2. **Anchored Uniteum Unit** - `$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
+2. **Anchored Uniteum Unit** - `0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
    - This is the Uniteum Unit that wraps the external WETH token 1:1
    - Has its own address (different from the WETH contract!)
-   - Stored in `site.data.units` as symbol `$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
-   - Link using: `{% include unit.html symbol="$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" %}`
-   - The `$` prefix indicates it's an anchored Unit
+   - Stored in `site.data.units` as symbol `0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
+   - Link using: `{% include unit.html symbol="0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" %}`
+   - The symbol IS the token address (no prefix needed)
 
 3. **Floating WETH Unit** - `WETH`
-   - This is a Uniteum Unit with the symbol "WETH" (NO $ prefix, NO address)
+   - This is a Uniteum Unit with the symbol "WETH" (short name, NOT an address)
    - Has ZERO connection to real WETH or the WETH contract
    - Just a label/symbol, value emerges only from liquidity
    - Stored in `site.data.units` as symbol `WETH` (if it exists)
@@ -502,16 +502,16 @@ When working with tokens like WETH, there are THREE distinct entities that must 
 **Linking Rules:**
 
 - External token (0xC02a...): Use `token.html` with address from `tokens.*.mainnet`
-- Anchored Unit ($0xC02a...): Use `unit.html` with symbol including `$` prefix
-- Floating Unit (WETH): Use `unit.html` with symbol (no `$` prefix)
+- Anchored Unit (0xC02a...): Use `unit.html` with the address as symbol (e.g., `symbol="0xC02a..."`)
+- Floating Unit (WETH): Use `unit.html` with the short symbol name (e.g., `symbol="WETH"`)
 
 **Common Mistakes to Avoid:**
 
 - ❌ **CRITICAL:** Using `token.html` for anchored Units
-  - Example wrong: `{% include token.html address=site.data.tokens.weth.mainnet text="$0xC02a..." %}`
+  - Example wrong: `{% include token.html address=site.data.tokens.weth.mainnet text="0xC02a..." %}`
   - **Why wrong:** This links to the external WETH contract (0xC02a...), NOT the anchored Uniteum Unit
-  - **Correct:** `{% include unit.html symbol="$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" %}`
-- ❌ Linking `$0xC02a...` to the WETH contract (they're different contracts!)
+  - **Correct:** `{% include unit.html symbol="0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" %}`
+- ❌ Linking `0xC02a...` to the WETH contract (they're different contracts!)
 - ❌ Treating `WETH` (floating) as if it has connection to real WETH
 - ❌ Confusing the external token address with the anchored Unit address
 
@@ -521,8 +521,8 @@ When working with tokens like WETH, there are THREE distinct entities that must 
 {%- comment -%} External WETH token contract (0xC02a...) - NOT anchored Unit {%- endcomment -%}
 {% include token.html address=site.data.tokens.weth.mainnet %}
 
-{%- comment -%} Anchored Uniteum Unit ($0xC02a...) - The wrapper Unit {%- endcomment -%}
-{% include unit.html symbol="$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" %}
+{%- comment -%} Anchored Uniteum Unit (0xC02a...) - The wrapper Unit {%- endcomment -%}
+{% include unit.html symbol="0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" %}
 
 {%- comment -%} Floating Uniteum Unit (WETH) - No connection to real WETH {%- endcomment -%}
 {% include unit.html symbol="WETH" %}
@@ -535,14 +535,14 @@ For documentation readability, use shorthand notation like `0xWETH`, `0xUSDC`, `
 - **Link first occurrence** to token reference pages (e.g., `[0xWETH](/reference/anchored-units/weth/)`)
 - Add callout at top of page: "We use [0xWETH](/reference/anchored-units/weth/), [0xUSDC](/reference/anchored-units/usdc/), etc. as readable shorthands. See [Anchored Units](/reference/anchored-units/) for actual symbols."
 - In technical reference or code examples, show real addresses
-- Emphasize the distinction: floating `WETH` ≠ anchored `$0xC02a...56Cc2` ≠ WETH contract `0xC02a...56Cc2`
+- Emphasize the distinction: floating `WETH` ≠ anchored `0xC02a...56Cc2` ≠ WETH contract `0xC02a...56Cc2`
 
 Common anchored unit shorthands (all have dedicated reference pages):
-- [0xWETH](/reference/anchored-units/weth/) = anchored Unit `$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2` (backed by WETH contract)
-- [0xUSDC](/reference/anchored-units/usdc/) = anchored Unit `$0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48` (backed by USDC contract)
-- [0xUSDT](/reference/anchored-units/usdt/) = anchored Unit `$0xdAC17F958D2ee523a2206206994597C13D831ec7` (backed by USDT contract)
-- [0xWBTC](/reference/anchored-units/wbtc/) = anchored Unit `$0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599` (backed by WBTC contract)
-- [0xDAI](/reference/anchored-units/dai/) = anchored Unit `$0x6B175474E89094C44Da98b954EedeAC495271d0F` (backed by DAI contract)
+- [0xWETH](/reference/anchored-units/weth/) = anchored Unit `0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2` (backed by WETH contract)
+- [0xUSDC](/reference/anchored-units/usdc/) = anchored Unit `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48` (backed by USDC contract)
+- [0xUSDT](/reference/anchored-units/usdt/) = anchored Unit `0xdAC17F958D2ee523a2206206994597C13D831ec7` (backed by USDT contract)
+- [0xWBTC](/reference/anchored-units/wbtc/) = anchored Unit `0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599` (backed by WBTC contract)
+- [0xDAI](/reference/anchored-units/dai/) = anchored Unit `0x6B175474E89094C44Da98b954EedeAC495271d0F` (backed by DAI contract)
 
 **Anchored Unit Pages:** Located in `/reference/anchored-units/` directory. Each page explains:
 - The shorthand vs actual symbol

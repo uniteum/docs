@@ -300,7 +300,7 @@ Forge transforms tokens within a valid triad while preserving the invariant:
 ### 4. Anchored vs Floating Units
 
 **Anchored Units:**
-- Format: `$0xTokenAddress` (e.g., `$0xdAC17F958D2ee523a2206206994597C13D831ec7` for USDT)
+- Format: `0xTokenAddress` (e.g., `0xdAC17F958D2ee523a2206206994597C13D831ec7` for USDT)
 - Backed 1:1 by external ERC-20 held by the Unit contract
 - Real value, custodial
 - Created via: `one().anchored(IERC20(address))`
@@ -322,9 +322,9 @@ Forge transforms tokens within a valid triad while preserving the invariant:
 ```
 ### Anchored Units
 
-**Format:** `$0xTokenAddress`
+**Format:** `0xTokenAddress`
 
-**Example:** `$0xdAC17F958D2ee523a2206206994597C13D831ec7` (USDT)
+**Example:** `0xdAC17F958D2ee523a2206206994597C13D831ec7` (USDT)
 
 Anchored units are backed 1:1 by an external ERC-20 token. The backing tokens are held by the Unit contract.
 
@@ -362,7 +362,7 @@ Throughout Uniteum documentation, we use **readable shorthands** like `0xWETH`, 
 
 **Actual anchored unit format:**
 ```
-$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2
+0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2
 ```
 
 This is accurate but unwieldy in documentation. Reading paragraphs full of 42-character hexadecimal addresses hurts comprehension.
@@ -378,11 +378,11 @@ This is readable and matches how developers think about tokens, while clearly in
 
 | Format | What It Is | Backing |
 |--------|-----------|---------|
-| `0xWETH` (shorthand) | Documentation convenience | Refers to `$0xC02a...56Cc2` |
-| `$0xC02a...56Cc2` (actual) | Real anchored unit symbol | 1:1 backed by WETH |
+| `0xWETH` (shorthand) | Documentation convenience | Refers to `0xC02a...56Cc2` |
+| `0xC02a...56Cc2` (actual) | Real anchored unit symbol | 1:1 backed by WETH |
 | `WETH` (no $) | Floating unit | NO backing, just a label |
 
-**Floating `WETH` ≠ Anchored `$0xC02a...56Cc2`**
+**Floating `WETH` ≠ Anchored `0xC02a...56Cc2`**
 ```
 
 ### Recommendation
@@ -643,11 +643,11 @@ Full detailed documentation of every function, parameter, return value, example,
 ### CLAUDE.md (Lines 261-266)
 ```
 Common anchored unit shorthands (all have dedicated reference pages):
-- [0xWETH](/reference/anchored-units/weth/) = `$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
-- [0xUSDC](/reference/anchored-units/usdc/) = `$0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
-- [0xUSDT](/reference/anchored-units/usdt/) = `$0xdAC17F958D2ee523a2206206994597C13D831ec7`
-- [0xWBTC](/reference/anchored-units/wbtc/) = `$0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599`
-- [0xDAI](/reference/anchored-units/dai/) = `$0x6B175474E89094C44Da98b954EedeAC495271d0F`
+- [0xWETH](/reference/anchored-units/weth/) = `0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
+- [0xUSDC](/reference/anchored-units/usdc/) = `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
+- [0xUSDT](/reference/anchored-units/usdt/) = `0xdAC17F958D2ee523a2206206994597C13D831ec7`
+- [0xWBTC](/reference/anchored-units/wbtc/) = `0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599`
+- [0xDAI](/reference/anchored-units/dai/) = `0x6B175474E89094C44Da98b954EedeAC495271d0F`
 ```
 
 ### Duplicated in:
@@ -656,11 +656,11 @@ Common anchored unit shorthands (all have dedicated reference pages):
 ```
 | Shorthand | Token Name | Actual Symbol (first 10 & last 4) | Mainnet Contract |
 |-----------|------------|-----------------------------------|------------------|
-| [0xWETH](/reference/anchored-units/weth/) | Wrapped Ether | `$0xC02aaA39...56Cc2` | [View on Etherscan](https://etherscan.io/address/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2) |
-| [0xUSDC](/reference/anchored-units/usdc/) | USD Coin | `$0xA0b86991...eB48` | [View on Etherscan](https://etherscan.io/address/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48) |
-| [0xUSDT](/reference/anchored-units/usdt/) | Tether USD | `$0xdAC17F95...1ec7` | [View on Etherscan](https://etherscan.io/address/0xdAC17F958D2ee523a2206206994597C13D831ec7) |
-| [0xWBTC](/reference/anchored-units/wbtc/) | Wrapped BTC | `$0x2260FAC5...2C599` | [View on Etherscan](https://etherscan.io/address/0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599) |
-| [0xDAI](/reference/anchored-units/dai/) | Dai Stablecoin | `$0x6B175474...cB4` | [View on Etherscan](https://etherscan.io/address/0x6B175474E89094C44Da98b954EedeAC495271d0F) |
+| [0xWETH](/reference/anchored-units/weth/) | Wrapped Ether | `0xC02aaA39...56Cc2` | [View on Etherscan](https://etherscan.io/address/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2) |
+| [0xUSDC](/reference/anchored-units/usdc/) | USD Coin | `0xA0b86991...eB48` | [View on Etherscan](https://etherscan.io/address/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48) |
+| [0xUSDT](/reference/anchored-units/usdt/) | Tether USD | `0xdAC17F95...1ec7` | [View on Etherscan](https://etherscan.io/address/0xdAC17F958D2ee523a2206206994597C13D831ec7) |
+| [0xWBTC](/reference/anchored-units/wbtc/) | Wrapped BTC | `0x2260FAC5...2C599` | [View on Etherscan](https://etherscan.io/address/0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599) |
+| [0xDAI](/reference/anchored-units/dai/) | Dai Stablecoin | `0x6B175474...cB4` | [View on Etherscan](https://etherscan.io/address/0x6B175474E89094C44Da98b954EedeAC495271d0F) |
 ```
 
 ### Recommendation

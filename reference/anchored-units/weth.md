@@ -11,7 +11,7 @@ last_updated: 2024-12-18
 # 0xWETH (Wrapped Ether)
 
 **Documentation Shorthand:** `0xWETH`
-**Actual Symbol:** `${{ site.data.tokens.weth.mainnet }}`
+**Actual Symbol:** `{{ site.data.tokens.weth.mainnet }}`
 
 ## What This Represents
 
@@ -20,7 +20,7 @@ In Uniteum documentation, `0xWETH` is a **readable shorthand** for an anchored u
 
 The actual Uniteum symbol uses the full WETH contract address:
 ```
-${{ weth.mainnet }}
+{{ weth.mainnet }}
 ```
 
 ## Backing Token
@@ -40,11 +40,11 @@ Wrapped Ether is ETH converted to an ERC-20 token for DeFi compatibility. 1 WETH
 
 | Symbol | Type | Backing |
 |--------|------|---------|
-| `${{ site.data.tokens.weth.mainnet }}` | Anchored unit | 1:1 WETH in contract |
+| `{{ site.data.tokens.weth.mainnet }}` | Anchored unit | 1:1 WETH in contract |
 | `WETH` (no $) | Floating unit | None (just a label) |
 | `0xWETH` | Documentation shorthand | Refers to anchored version |
 
-**Critical:** Floating `WETH` ≠ Anchored `${{ site.data.tokens.weth.mainnet | slice: 0, 6 }}...{{ site.data.tokens.weth.mainnet | slice: -4, 4 }}`
+**Critical:** Floating `WETH` ≠ Anchored `{{ site.data.tokens.weth.mainnet | slice: 0, 6 }}...{{ site.data.tokens.weth.mainnet | slice: -4, 4 }}`
 
 A floating unit with the label "WETH" has NO connection to real Wrapped Ether. Anyone can create it. It's worthless unless consensus gives it value.
 
@@ -58,14 +58,14 @@ IUnit one = IUnit({% include uniteum_address.html %});
 IERC20 weth = IERC20({{ site.data.tokens.weth.mainnet }});
 IUnit wethUnit = one.anchored(weth);
 
-// wethUnit.symbol() returns: "${{ site.data.tokens.weth.mainnet }}"
+// wethUnit.symbol() returns: "{{ site.data.tokens.weth.mainnet }}"
 ```
 
 ## Reciprocal Unit
 
 Every anchored unit has a reciprocal:
 
-**`1/0xWETH`** (shorthand) = `1/${{ site.data.tokens.weth.mainnet }}` (actual)
+**`1/0xWETH`** (shorthand) = `1/{{ site.data.tokens.weth.mainnet }}` (actual)
 
 This is a **synthetic unit** (NOT backed by WETH). Its price is the inverse of the WETH unit's price, enforced by the invariant.
 
@@ -140,4 +140,4 @@ See [Forging Guide](/guides/forging/) for detailed instructions.
 
 ---
 
-**Remember:** In your code, use the full address `${{ site.data.tokens.weth.mainnet }}`. The `0xWETH` shorthand is for documentation readability only.
+**Remember:** In your code, use the full address `{{ site.data.tokens.weth.mainnet }}`. The `0xWETH` shorthand is for documentation readability only.

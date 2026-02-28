@@ -31,7 +31,7 @@ A unit expression names either:
 - a **base Unit** (a single symbol), like `meter` or `USD`
 - a **compound Unit** built from other Units, like `meter/second` or `kg*meter/second^2`
 - the **identity Unit**, written as `1`
-- an **anchored Unit** (prefixed with `$`), like {% include unit.html symbol="$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" %} (WETH)
+- an **anchored Unit** (symbol is the token contract address), like {% include unit.html symbol="0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" %} (WETH)
 
 All Units are ERC-20 tokens; the expression describes structure, not magnitude.
 
@@ -133,15 +133,15 @@ Documentation and examples should use canonical forms unless explicitly labeled 
 
 ## Anchored units
 
-**Anchored Units** are backed 1:1 by external ERC-20 tokens. Their syntax uses a `$` prefix followed by the token contract address:
+**Anchored Units** are backed 1:1 by external ERC-20 tokens. Their symbol is the token contract address:
 
 ```
-$0xTokenAddress
+0xTokenAddress
 ```
 
 ### Key properties
 
-- **Format**: `$` + 40-character hexadecimal Ethereum address
+- **Format**: 40-character checksummed hexadecimal Ethereum address
 - **Backing**: Real ERC-20 tokens held custodially by the Unit contract
 - **Value**: Inherits value from the underlying token
 - **Creation**: `one().anchored(IERC20(address))`
@@ -149,10 +149,10 @@ $0xTokenAddress
 ### Examples
 
 Common anchored units (using shorthand notation for readability):
-- `0xWETH` → {% include unit.html symbol="$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" %}
-- `0xUSDC` → {% include unit.html symbol="$0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48" %}
-- `0xUSDT` → {% include unit.html symbol="$0xdAC17F958D2ee523a2206206994597C13D831ec7" %}
-- `0xWBTC` → {% include unit.html symbol="$0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599" %}
+- `0xWETH` → {% include unit.html symbol="0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" %}
+- `0xUSDC` → {% include unit.html symbol="0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48" %}
+- `0xUSDT` → {% include unit.html symbol="0xdAC17F958D2ee523a2206206994597C13D831ec7" %}
+- `0xWBTC` → {% include unit.html symbol="0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599" %}
 
 See [Anchored Units reference](/reference/anchored-units/) for complete list and details.
 
@@ -160,20 +160,20 @@ See [Anchored Units reference](/reference/anchored-units/) for complete list and
 
 **CRITICAL**: An anchored unit like `0xWETH` is fundamentally different from a floating unit `WETH`:
 
-- **Anchored** {% include unit.html symbol="$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" text="<code>$0xC02a...56Cc2</code>" %}: Backed 1:1 by real WETH tokens held by the contract. Custodial, has inherent value.
+- **Anchored** {% include unit.html symbol="0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" text="<code>0xC02a...56Cc2</code>" %}: Backed 1:1 by real WETH tokens held by the contract. Custodial, has inherent value.
 - **Floating** `WETH`: Just a label with NO connection to the real WETH token. Value emerges only from liquidity/consensus.
 
 This distinction applies to ALL symbols:
-- {% include unit.html symbol="$0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48" text="<code>0xUSDC</code>" %} (anchored) has real value from backing tokens
+- {% include unit.html symbol="0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48" text="<code>0xUSDC</code>" %} (anchored) has real value from backing tokens
 - `USDC` (floating) is just a label with zero inherent value
 
 ### Using anchored units in compounds
 
 Anchored units can be combined with other units using the standard operators:
 
-- {% include unit.html symbol="$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2*meter" %}
-- {% include unit.html symbol="$0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/second" %}
-- {% include unit.html symbol="$0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599^2" %}
+- {% include unit.html symbol="0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2*meter" %}
+- {% include unit.html symbol="0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/second" %}
+- {% include unit.html symbol="0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599^2" %}
 
 The full address form must be used in canonical expressions.
 
@@ -185,8 +185,8 @@ The full address form must be used in canonical expressions.
 - `1` (identity)
 
 ### Anchored units
-- {% include unit.html symbol="$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" %} (WETH, anchored)
-- {% include unit.html symbol="$0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48" %} (USDC, anchored)
+- {% include unit.html symbol="0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" %} (WETH, anchored)
+- {% include unit.html symbol="0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48" %} (USDC, anchored)
 
 ### Compound products
 - {% include unit.html symbol="bar*foo" %}
@@ -200,7 +200,7 @@ The full address form must be used in canonical expressions.
 - {% include unit.html symbol="foo" %} `*` ({% include unit.html symbol="1/foo" %}) → canonicalizes to `1`
 
 ### Anchored compounds
-- {% include unit.html symbol="$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/second" %} (WETH per second)
+- {% include unit.html symbol="0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/second" %} (WETH per second)
 
 ## See also
 

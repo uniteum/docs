@@ -23,7 +23,7 @@ status: draft
 
 Uniteum enables novel financial primitives through algebraic composition of units. Here are the key value propositions and use cases.
 
-> **Notation:** For readability, we use [0xWETH](/reference/anchored-units/weth/), [0xUSDC](/reference/anchored-units/usdc/), etc. in examples. Remember that anchored units actually use full contract addresses: `$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2` for WETH. Click any link to see its actual symbol. See [Anchored Units Reference](/reference/anchored-units/) and [Anchored Units](#anchored-units) below.
+> **Notation:** For readability, we use [0xWETH](/reference/anchored-units/weth/), [0xUSDC](/reference/anchored-units/usdc/), etc. in examples. Remember that anchored units actually use full contract addresses: `0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2` for WETH. Click any link to see its actual symbol. See [Anchored Units Reference](/reference/anchored-units/) and [Anchored Units](#anchored-units) below.
 
 ## Hedging with Reciprocals
 
@@ -293,22 +293,22 @@ Design complex financial instruments knowing price structure is self-consistent.
 
 **Anchored units use full contract addresses:**
 
-Real format: `$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2` (WETH)
+Real format: `0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2` (WETH)
 
 Created via: `one().anchored(IERC20(0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2))`
 
 Common anchored units (click for details):
-- [0xWETH](/reference/anchored-units/weth/) — `$0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
-- [0xUSDC](/reference/anchored-units/usdc/) — `$0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
-- [0xUSDT](/reference/anchored-units/usdt/) — `$0xdAC17F958D2ee523a2206206994597C13D831ec7`
-- [0xWBTC](/reference/anchored-units/wbtc/) — `$0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599`
-- [0xDAI](/reference/anchored-units/dai/) — `$0x6B175474E89094C44Da98b954EedeAC495271d0F`
+- [0xWETH](/reference/anchored-units/weth/) — `0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
+- [0xUSDC](/reference/anchored-units/usdc/) — `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
+- [0xUSDT](/reference/anchored-units/usdt/) — `0xdAC17F958D2ee523a2206206994597C13D831ec7`
+- [0xWBTC](/reference/anchored-units/wbtc/) — `0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599`
+- [0xDAI](/reference/anchored-units/dai/) — `0x6B175474E89094C44Da98b954EedeAC495271d0F`
 
 See [Anchored Units Reference](/reference/anchored-units/) for complete list and usage examples.
 
 ### Anchored vs Floating
 
-| Aspect | Anchored (`$0xAddress`) | Floating (`symbol`) |
+| Aspect | Anchored (`0xAddress`) | Floating (`symbol`) |
 |--------|------------------------|---------------------|
 | Backing | 1:1 ERC-20 in contract | None |
 | Value | Real, custodial | Consensus/liquidity only |
@@ -316,7 +316,7 @@ See [Anchored Units Reference](/reference/anchored-units/) for complete list and
 | Redeemable | Yes, for underlying | No |
 | Trust | Contract security | Market belief |
 
-**Floating `WETH` ≠ Anchored `$0xC02a...56Cc2`**
+**Floating `WETH` ≠ Anchored `0xC02a...56Cc2`**
 
 A floating unit with label "WETH" has no connection to actual WETH. It's just a name.
 

@@ -11,7 +11,7 @@ last_updated: 2024-12-18
 # 0xUSDC (USD Coin)
 
 **Documentation Shorthand:** `0xUSDC`
-**Actual Symbol:** `$0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
+**Actual Symbol:** `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
 
 ## What This Represents
 
@@ -20,7 +20,7 @@ In Uniteum documentation, `0xUSDC` is a **readable shorthand** for an anchored u
 
 The actual Uniteum symbol uses the full USDC contract address:
 ```
-${{ usdc.mainnet }}
+{{ usdc.mainnet }}
 ```
 
 ## Backing Token
@@ -40,12 +40,12 @@ USD Coin is a stablecoin pegged to the US Dollar, issued by Circle. Intended to 
 
 | Symbol | Type | Backing |
 |--------|------|---------|
-| `$0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48` | Anchored unit | 1:1 USDC in contract |
+| `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48` | Anchored unit | 1:1 USDC in contract |
 | `USDC` (no $) | Floating unit | None (just a label) |
 | `USD` (no $) | Floating unit | None (NOT US dollars!) |
 | `0xUSDC` | Documentation shorthand | Refers to anchored version |
 
-**Critical:** Floating `USDC` or `USD` ≠ Anchored `$0xA0b8...eB48` ≠ Real US Dollars
+**Critical:** Floating `USDC` or `USD` ≠ Anchored `0xA0b8...eB48` ≠ Real US Dollars
 
 Anyone can create floating units with labels like "USDC" or "USD". They have NO connection to real stablecoins or US currency.
 
@@ -59,12 +59,12 @@ IUnit one = IUnit({% include uniteum_address.html %});
 IERC20 usdc = IERC20({{ site.data.tokens.usdc.mainnet }});
 IUnit usdcUnit = one.anchored(usdc);
 
-// usdcUnit.symbol() returns: "${{ site.data.tokens.usdc.mainnet }}"
+// usdcUnit.symbol() returns: "{{ site.data.tokens.usdc.mainnet }}"
 ```
 
 ## Reciprocal Unit: Depeg Hedge
 
-**`1/0xUSDC`** (shorthand) = `1/$0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48` (actual)
+**`1/0xUSDC`** (shorthand) = `1/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48` (actual)
 
 This is a **synthetic unit** (NOT backed) that acts as an automatic hedge against USDC depeg events.
 
@@ -148,4 +148,4 @@ To get USDC back:
 
 ---
 
-**Remember:** In your code, use the full address `$0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`. The `0xUSDC` shorthand is for documentation readability only.
+**Remember:** In your code, use the full address `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`. The `0xUSDC` shorthand is for documentation readability only.

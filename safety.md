@@ -65,7 +65,7 @@ Uniteum's price discovery mechanism is untested at scale:
 - Their value comes purely from liquidity and market consensus
 - A floating unit named `USD` has zero connection to US dollars
 
-Only anchored units (format: `$0xAddress`) have real backing.
+Only anchored units (format: `0xAddress`) have real backing.
 
 ## Anchored Unit Risk
 

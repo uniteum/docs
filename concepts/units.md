@@ -68,9 +68,9 @@ Compound units are first-class citizens. They have their own reciprocals and can
 {: .note }
 > For documentation shorthands (0xWETH, 0xUSDC, etc.) and complete reference, see [Anchored Units](/reference/anchored-units/).
 
-**Format:** `$0xTokenAddress`
+**Format:** `0xTokenAddress`
 
-**Example:** `$0xdAC17F958D2ee523a2206206994597C13D831ec7` (USDT)
+**Example:** `0xdAC17F958D2ee523a2206206994597C13D831ec7` (USDT)
 
 Anchored units are backed 1:1 by an external ERC-20 token. The backing tokens are held by the Unit contract.
 
