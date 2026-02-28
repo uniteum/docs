@@ -46,7 +46,9 @@ echo ""
 
 # Extract all symbols from input file and build JSON array using yq
 unit_count=$(yq eval '. | length' "$INPUT_FILE")
-symbols_json=$(yq eval 'keys[]' "$INPUT_FILE" | jq -R . | jq -s -c .)
+# Strip leading '$' from anchored unit expressions (e.g. $0xC02a... -> 0xC02a...)
+# The '$' is a documentation convention; the contract parser expects raw '0x...' addresses.
+symbols_json=$(yq eval 'keys[]' "$INPUT_FILE" | sed 's/^\$//' | jq -R . | jq -s -c .)
 
 echo "Found $unit_count units to process"
 echo ""
@@ -55,9 +57,8 @@ echo "Calling UnitHelper.product() to batch-predict addresses..."
 
 # Call UnitHelper.product() to get all addresses and canonical forms in one call
 # Returns: (address[] units, string[] symbols)
-result=$(cast call "$HELPER" "product(address,string[])(address[],string[])" "$ONE" "$symbols_json" --rpc-url "$RPC_URL" 2>&1)
-
-if [ $? -ne 0 ]; then
+# Note: use `if !` to capture exit code properly under set -e
+if ! result=$(cast call "$HELPER" "product(address,string[])(address[],string[])" "$ONE" "$symbols_json" --rpc-url "$RPC_URL" 2>&1); then
     echo "Error: Failed to call UnitHelper.product()" >&2
     echo "$result" >&2
     exit 1

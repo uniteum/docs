@@ -4,13 +4,13 @@
 uniteum:
   name: "Uniteum 0.5 '1'"
   description: "Current version with full Uniteum functionality"
-  address: "0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da"
+  address: "0xace41cf6d750d7ba06f4de57ac9e063246b2b090"
   ens: "uniteum.eth"
 
 genesis:
   name: "Uniteum 0.0 '1'"
-  description: "Genesis token—simple ERC-20 with initial 1 billion supply"
-  address: "0x8af6774Bec3b698a6dC873b117c4415367dEfea6"
+  description: "Genesis token"
+  address: "0x7D5B1349157335aEEB929080a51003B529758830"
   ens: "0-0.uniteum.eth"
 
 kiosk:
@@ -21,8 +21,8 @@ kiosk:
 
 helper:
   name: "UnitHelper 0.5"
-  description: "Helper contract for Uniteum 0.5"
-  address: "0x456dcb7a3f7d9A6DB77DDf6a4eA8B10453acF7F9"
+  description: "Helper contract for Uniteum"
+  address: "0x67f7BCf38a6fc08617c9DdDF5b3E6d5edd5026af"
   ens: "helper.uniteum.eth"
 
 deployer:
