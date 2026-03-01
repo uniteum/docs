@@ -1,8 +1,9 @@
 ---
-layout: page
+layout: default
 title: "Email Template - Collaboration"
-permalink: /research/email-template-collaboration/
-parent: Research Materials - Volatility Hedge Discovery
+permalink: /uniteum/research/email-template-collaboration/
+parent: Research
+grand_parent: Uniteum
 published: false
 ---
 

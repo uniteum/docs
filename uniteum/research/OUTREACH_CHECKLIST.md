@@ -1,8 +1,9 @@
 ---
-layout: page
+layout: default
 title: "Academic Outreach Checklist"
-permalink: /research/outreach-checklist/
-parent: Research Materials - Volatility Hedge Discovery
+permalink: /uniteum/research/outreach-checklist/
+parent: Research
+grand_parent: Uniteum
 published: false
 ---
 

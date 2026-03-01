@@ -1,8 +1,9 @@
 ---
-layout: page
+layout: default
 title: "Volatility Hedge Test Case - Code Analysis"
-permalink: /research/test-case-analysis/
-parent: Research Materials - Volatility Hedge Discovery
+permalink: /uniteum/research/test-case-analysis/
+parent: Research
+grand_parent: Uniteum
 ---
 
 # Volatility Hedge Test Case Analysis

@@ -1,8 +1,9 @@
 ---
-layout: page
+layout: default
 title: "Native Volatility Hedging - One Page Summary"
-permalink: /research/one-page-summary/
-parent: Research Materials - Volatility Hedge Discovery
+permalink: /uniteum/research/one-page-summary/
+parent: Research
+grand_parent: Uniteum
 ---
 
 # Native Volatility Hedging in Uniteum

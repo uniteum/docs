@@ -1,8 +1,9 @@
 ---
-layout: page
+layout: default
 title: "Volatility Hedge Mechanism - Research Summary"
-permalink: /research/volatility-hedge/
-parent: Research Materials - Volatility Hedge Discovery
+permalink: /uniteum/research/volatility-hedge/
+parent: Research
+grand_parent: Uniteum
 ---
 
 # Native Volatility Hedging in Uniteum: A Research Summary

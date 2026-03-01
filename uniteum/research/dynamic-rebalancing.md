@@ -1,8 +1,9 @@
 ---
-layout: page
+layout: default
 title: "Dynamic Rebalancing Strategy - Maximizing Hedge Returns"
-permalink: /research/dynamic-rebalancing/
-parent: Research Materials - Volatility Hedge Discovery
+permalink: /uniteum/research/dynamic-rebalancing/
+parent: Research
+grand_parent: Uniteum
 ---
 
 # Dynamic Rebalancing: Maximizing Volatility Hedge Returns

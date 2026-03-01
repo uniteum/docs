@@ -1,7 +1,10 @@
 ---
-layout: page
-title: "Research Materials - Volatility Hedge Discovery"
-permalink: /research/
+layout: default
+title: Research
+nav_order: 8
+parent: Uniteum
+has_children: true
+permalink: /uniteum/research/
 ---
 
 # Uniteum Research Materials
@@ -211,9 +214,9 @@ For research collaboration inquiries:
 ## 📚 Additional Resources
 
 - [Uniteum Documentation](https://uniteum.one)
-- [Concepts: Forge Mechanism](https://uniteum.one/concepts/forge/)
-- [Concepts: Triads](https://uniteum.one/concepts/triads/)
-- [Concepts: Tokenomics](https://uniteum.one/concepts/tokenomics/)
+- [Concepts: Forge Mechanism](https://uniteum.one/uniteum/concepts/forge/)
+- [Concepts: Triads](https://uniteum.one/uniteum/concepts/triads/)
+- [Concepts: Tokenomics](https://uniteum.one/uniteum/concepts/tokenomics/)
 - [Smart Contract Reference](https://etherscan.io/address/0x5bA96211E3679FDcc7047a5c64d40A4Dd3fBdAD7#code)
 
 ---
