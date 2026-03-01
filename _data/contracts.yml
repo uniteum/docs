@@ -2,16 +2,16 @@
 # All contracts use deterministic deployment (same address on all networks)
 
 uniteum:
-  name: "Uniteum 0.5 '1'"
+  name: "Uniteum-0.7 1"
   description: "Current version with full Uniteum functionality"
   address: "0xace41cf6d750d7ba06f4de57ac9e063246b2b090"
   ens: "uniteum.eth"
 
 genesis:
-  name: "Uniteum 0.0 '1'"
+  name: "Uniteum 1"
   description: "Genesis token"
   address: "0x7D5B1349157335aEEB929080a51003B529758830"
-  ens: "0-0.uniteum.eth"
+  ens: "1.uniteum.eth"
 
 kiosk:
   name: "Buy Uniteum 0.5 '1'"
@@ -20,7 +20,7 @@ kiosk:
   ens: "buy.uniteum.eth"
 
 helper:
-  name: "UnitHelper 0.5"
+  name: "Unit Helper"
   description: "Helper contract for Uniteum"
   address: "0x67f7BCf38a6fc08617c9DdDF5b3E6d5edd5026af"
   ens: "helper.uniteum.eth"
