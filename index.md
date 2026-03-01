@@ -50,7 +50,7 @@ Uniteum:
 
 **Reciprocal pairs:** Every unit has a reciprocal. Hold both sides to dampen volatility or speculate on relative price movements within diversified baskets.
 
-See [Use Cases](/use-cases/) for detailed examples and strategies.
+See [Use Cases](/uniteum/use-cases/) for detailed examples and strategies.
 
 ## Current Status
 
@@ -58,7 +58,7 @@ Experimental, unaudited, deployed on Mainnet.
 
 This is novel mechanism design. We don't know what emerges at scale. Proceed with curiosity and caution.
 
-No known issues. See [Known Issues](/known-issues/) for version history and reporting guidelines.
+No known issues. See [Known Issues](/uniteum/known-issues/) for version history and reporting guidelines.
 
 ## Support This Experiment
 
@@ -66,15 +66,15 @@ If this work interests you and you'd like to participate: the best way to contri
 
 The Kiosk uses linear discount pricing—price increases as inventory depletes. Early acquisition is cheaper.
 
-Early "1" token holders may benefit if the [value hypothesis](/economics-of-one/) holds: as anchored collateral and participation grow, "1" could reflect aggregate system value.
+Early "1" token holders may benefit if the [value hypothesis](/uniteum/economics-of-one/) holds: as anchored collateral and participation grow, "1" could reflect aggregate system value.
 
 ## Quick Links
 
-- [Getting Started](/getting-started/) — Buy "1", create your first unit
-- [Use Cases](/use-cases/) — What you can build and why it matters
-- [Concepts](/concepts/) — Understand how the system works
-- [Known Issues](/known-issues/) — Version history and bug reporting
-- [Safety](/safety/) — Risks and disclaimers
+- [Getting Started](/uniteum/getting-started/) — Buy "1", create your first unit
+- [Use Cases](/uniteum/use-cases/) — What you can build and why it matters
+- [Concepts](/uniteum/concepts/) — Understand how the system works
+- [Known Issues](/uniteum/known-issues/) — Version history and bug reporting
+- [Safety](/uniteum/safety/) — Risks and disclaimers
 
 ## Contracts
 

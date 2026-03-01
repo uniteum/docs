@@ -119,13 +119,9 @@ defaults:
 # Navigation
 nav_order:
   - Introduction
-  - Getting Started
-  - Concepts
-  - Operations
-  - Examples
-  - Technical Reference
-  - Use Cases
-  - Safety & Risks
+  - Uniteum
+  - Solid
+  - Liquid
 
 # Site Features
 show_excerpts: true

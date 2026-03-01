@@ -301,6 +301,6 @@ Regenerate the `.env` file and recompute addresses:
 
 ## See Also
 
-- [Example Units Reference](/reference/example-units/) - Documentation page
-- [Creating Units Guide](/guides/creating-units/) - How to create custom units
-- [Contracts Reference](/reference/contracts/) - Contract addresses
+- [Example Units Reference](/uniteum/reference/example-units/) - Documentation page
+- [Creating Units Guide](/uniteum/guides/creating-units/) - How to create custom units
+- [Contracts Reference](/uniteum/reference/contracts/) - Contract addresses

@@ -36,7 +36,7 @@ THE UNITEUM PROTOCOL IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EXPRESS O
 
 This is experimental software deployed in version 0.1. The contracts are unaudited. Use at your own risk.
 
-See [Safety](/safety/) for detailed risk disclosures.
+See [Safety](/uniteum/safety/) for detailed risk disclosures.
 
 ## No Investment Advice
 

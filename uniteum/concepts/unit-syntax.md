@@ -1,0 +1,212 @@
+---
+title: Unit syntax
+description: >-
+  How Uniteum unit expressions are written, parsed, and rendered canonically.
+
+# Navigation
+nav_order: 2
+parent: Concepts
+grand_parent: Uniteum
+has_children: false
+
+# Taxonomy
+categories:
+  - core
+  - units
+
+# Metadata
+last_updated: 2024-12-20
+version: "0.2"
+status: draft
+---
+
+# Unit syntax
+
+Uniteum represents Units (ERC-20 tokens) using **symbolic unit expressions**. These expressions are parsed into a structured form and then **canonicalized** so that equivalent expressions map to a single Unit identity.
+
+This page describes the **string syntax** used for unit expressions. For canonicalization rules, see [Canonicalization](/uniteum/concepts/canonicalization). For how new Units arise from expressions, see [Unit Creation](/uniteum/concepts/unit-creation).
+
+## What a unit expression names
+
+A unit expression names either:
+- a **base Unit** (a single symbol), like `meter` or `USD`
+- a **compound Unit** built from other Units, like `meter/second` or `kg*meter/second^2`
+- the **identity Unit**, written as `1`
+- an **anchored Unit** (symbol is the token contract address), like {% include unit.html symbol="0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" %} (WETH)
+
+All Units are ERC-20 tokens; the expression describes structure, not magnitude.
+
+## Operators
+
+Unit expressions use three structural operators:
+
+- `*` multiplication (product)
+- `/` division (structural reciprocal)
+- `^` exponentiation
+
+Examples:
+- `meter*second`
+- `meter/second`
+- `second^2`
+- `kg*meter/second^2`
+
+### Precedence
+
+Expressions are interpreted with the following precedence:
+
+1. Exponentiation (`^`)
+2. Multiplication and division (`*` and `/`) evaluated left-to-right
+
+Parentheses may be supported by the implementation. Documentation should prefer forms that do not require parentheses.
+
+## Identity
+
+The identity Unit is written as:
+
+```
+
+1
+
+```
+
+Examples:
+- `meter*1` canonicalizes to `meter`
+- `meter/meter` canonicalizes to `1`
+
+## Multiplication
+
+`*` combines Units into a compound Unit.
+
+Examples:
+- `foo*bar`
+- `kg*meter`
+- `meter*second`
+
+In canonical form, terms are ordered deterministically.
+
+## Division and reciprocals
+
+`/` expresses structural reciprocals.
+
+Examples:
+- `1/foo`
+- `meter/second`
+- `meter/(second^2)` (if parentheses are supported)
+
+Canonical form **never uses negative exponents**. For example, if the parser accepts `foo^-1`, it canonicalizes to `1/foo` (and if the parser does not accept `-`, `foo^-1` is simply invalid input).
+
+## Exponents
+
+A Unit term may be raised to a power with `^`.
+
+Examples:
+- `meter^2`
+- `second^2`
+- `foo^4`
+
+### Rational exponents
+
+Uniteum supports **rational exponents** as part of its symbolic structure. The exact textual encoding of rational exponents is implementation-defined (see `Unit.json`). Documentation should follow the canonical renderer’s output.
+
+Examples of intent (not necessarily exact syntax):
+- `meter^(1/2)`
+- `foo^(3/2)`
+
+## Canonical form (summary)
+
+Canonical rendering is deterministic. Key rules:
+
+- Identity is written as `1`
+- Canonical output never uses negative exponents
+- Reciprocals are structural (`1/x`, not `x^-1`)
+- Terms are ordered canonically
+
+See [Canonicalization](/uniteum/concepts/canonicalization) for the normative list.
+
+## Validity vs canonicality
+
+A parser may accept more inputs than the canonical renderer emits.
+
+- **Valid input**: an expression the parser accepts
+- **Canonical output**: the unique normalized representation
+
+Documentation and examples should use canonical forms unless explicitly labeled “non-canonical input”.
+
+## Anchored units
+
+**Anchored Units** are backed 1:1 by external ERC-20 tokens. Their symbol is the token contract address:
+
+```
+0xTokenAddress
+```
+
+### Key properties
+
+- **Format**: 40-character checksummed hexadecimal Ethereum address
+- **Backing**: Real ERC-20 tokens held custodially by the Unit contract
+- **Value**: Inherits value from the underlying token
+- **Creation**: `one().anchored(IERC20(address))`
+
+### Examples
+
+Common anchored units (using shorthand notation for readability):
+- `0xWETH` → {% include unit.html symbol="0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" %}
+- `0xUSDC` → {% include unit.html symbol="0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48" %}
+- `0xUSDT` → {% include unit.html symbol="0xdAC17F958D2ee523a2206206994597C13D831ec7" %}
+- `0xWBTC` → {% include unit.html symbol="0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599" %}
+
+See [Anchored Units reference](/uniteum/reference/anchored-units/) for complete list and details.
+
+### Floating vs anchored distinction
+
+**CRITICAL**: An anchored unit like `0xWETH` is fundamentally different from a floating unit `WETH`:
+
+- **Anchored** {% include unit.html symbol="0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" text="<code>0xC02a...56Cc2</code>" %}: Backed 1:1 by real WETH tokens held by the contract. Custodial, has inherent value.
+- **Floating** `WETH`: Just a label with NO connection to the real WETH token. Value emerges only from liquidity/consensus.
+
+This distinction applies to ALL symbols:
+- {% include unit.html symbol="0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48" text="<code>0xUSDC</code>" %} (anchored) has real value from backing tokens
+- `USDC` (floating) is just a label with zero inherent value
+
+### Using anchored units in compounds
+
+Anchored units can be combined with other units using the standard operators:
+
+- {% include unit.html symbol="0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2*meter" %}
+- {% include unit.html symbol="0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/second" %}
+- {% include unit.html symbol="0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599^2" %}
+
+The full address form must be used in canonical expressions.
+
+## Examples
+
+### Base and identity
+- {% include unit.html symbol="USD" %} (floating)
+- {% include unit.html symbol="meter" %} (floating)
+- `1` (identity)
+
+### Anchored units
+- {% include unit.html symbol="0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" %} (WETH, anchored)
+- {% include unit.html symbol="0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48" %} (USDC, anchored)
+
+### Compound products
+- {% include unit.html symbol="bar*foo" %}
+- {% include unit.html symbol="kg*m" %}
+
+### Ratios
+- {% include unit.html symbol="meter/second" %}
+- {% include unit.html symbol="kg*m/s^2" %}
+
+### Reciprocal pair
+- {% include unit.html symbol="foo" %} `*` ({% include unit.html symbol="1/foo" %}) → canonicalizes to `1`
+
+### Anchored compounds
+- {% include unit.html symbol="0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/second" %} (WETH per second)
+
+## See also
+
+- [Canonicalization](/uniteum/concepts/canonicalization)
+- [Unit Creation](/uniteum/concepts/unit-creation)
+- [Triads](/uniteum/concepts/triads)
+- [Forge](/uniteum/concepts/forge)
+- [Anchored Units Reference](/uniteum/reference/anchored-units/)

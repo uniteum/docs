@@ -113,7 +113,7 @@ Examples of allowed use:
 
 Canonical source: [github.com/uniteum/uniteum](https://github.com/uniteum/uniteum)
 
-Deployed contracts are **immutable** and **unaudited**. See [Safety](/safety/) for risk disclosures.
+Deployed contracts are **immutable** and **unaudited**. See [Safety](/uniteum/safety/) for risk disclosures.
 
 ## Questions?
 
