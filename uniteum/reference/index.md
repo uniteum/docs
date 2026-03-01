@@ -27,7 +27,7 @@ Technical reference documentation for developers and advanced users.
 1. **[Contracts](/uniteum/reference/contracts/)** — Addresses, deployment info, verification
 2. **[Functions](/uniteum/reference/functions/)** — Contract function reference
 3. **[ENS](/uniteum/reference/ens/)** — ENS naming structure
-4. **[Example Units](/uniteum/reference/example-units/)** — Catalog of example units with addresses
+4. **[Floating Units](/uniteum/reference/floating-units/)** — Catalog of example units with addresses
 
 ## Quick Reference
 

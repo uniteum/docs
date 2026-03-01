@@ -99,7 +99,7 @@ If you want to build your own algebraic liquidity system with different properti
 
 You **can** use the "Uniteum" and "1" names if your system:
 
-1. **Recognizes the canonical contracts** (see [deployments](/contracts/))
+1. **Recognizes the canonical contracts** (see [deployments](/uniteum/reference/contracts/))
 2. **Maintains full interoperability** (your units can forge with official units)
 3. **Doesn't fragment liquidity** into competing bases
 
