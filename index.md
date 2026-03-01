@@ -1,88 +1,75 @@
 ---
-title: Uniteum
+title: Introduction
 description: >-
-  Tokens and derivatives with units like physics and finance.
-  Relationships create liquidity, arbitrage sets prices.
+  Three independent protocols for creating, trading, and composing tokens on Ethereum.
+  No governance. No oracles. Just math.
 
 # Navigation
 nav_order: 1
 has_children: false
 
-# Taxonomy
-categories:
-  - getting-started
-
 # Metadata
-last_updated: 2024-12-17
-version: "0.3"
+last_updated: 2026-03-01
 status: draft
 ---
 
-# Uniteum
+# uniteum.one
 
-<img src="/assets/images/uniteum-one-icon.svg" alt="Uniteum 1 Token" width="120" height="120" style="float: right; margin-left: 20px; margin-bottom: 10px;">
+Three independent protocols for creating, trading, and composing tokens on Ethereum.
 
-Uniteum is an algebraic liquidity protocol on Ethereum.
-
-Tokens have dimensional units that compose algebraically: `meter/second`, `USD/BTC`, `foo*bar`. The value of `meter/second` is the value of `meter` divided by the value of `second`. The value of `foo²` tracks `foo` squared. What you see is what you get—the notation is the price relationship.
-
-One operation—**forge**—maintains these algebraic relationships through arbitrage. Build custom derivatives with any power profile. No oracles needed.
+Each protocol is permissionless, immutable, and governed entirely by on-chain math—no admin keys, no governance, no oracles.
 
 ---
 
-## What Makes This Different
+## [Solid](/solid/) — Fair-Launch Tokens
 
-Traditional AMMs: isolated pools, oracle-dependent synthetics, external price feeds.
+**Make a token that starts fair, stays tradeable, and never goes to zero.**
 
-Uniteum:
-- **Geometric mean triads**: Every forge operates on (U, V, √(U*V)) where liquidity units mediate reserve units
-- **One invariant** governs all operations: `√(u · v) = w`
-- **Infinite interconnected pools** through algebraic composition
-- **Arbitrary power perps**: Generalizes beyond Uniswap's 0.5 power perps—create any convexity profile (0.5x, 1x, 2x, custom rational exponents)
-- **No oracles**—prices emerge from forge operations and arbitrage
-- **Permissionless liquidity creation**—anyone can create units and provide "1" token liquidity
+A single transaction creates a token, its trading pool, a fair starting price, and a permanent price floor. 100% of the supply begins in the pool. The maker buys in like everyone else.
 
-## Why This Matters
+- Always tradeable, always liquid
+- Permanent price floor via virtual reserve
+- No free allocation, no operator, no governance
 
-**Power perpetuals:** Create any convexity profile through geometric mean triads. `0xWETH^2` (2x power) gives squared exposure, `0xWETH` (1x power) gives linear exposure, `0xWETH^(1/2)` (0.5x power like Uniswap) gives square root exposure—all without borrowing, collateral, or liquidation risk. Design custom convexity with any rational exponent.
+---
 
-**Multi-token derivatives:** `0xWETH/0xUSDC` IS the ETH/USD price ratio. `0xWETH*0xWBTC` is a diversified basket. Combine them algebraically for complex positions. Prices are enforced by arbitrage, not oracles.
+## [Liquid](/liquid/) — Liquidity Wrappers
 
-**Reciprocal pairs:** Every unit has a reciprocal. Hold both sides to dampen volatility or speculate on relative price movements within diversified baskets.
+**Wrap any ERC-20 with built-in liquidity. Zero fees, no LP tokens.**
 
-See [Use Cases](/uniteum/use-cases/) for detailed examples and strategies.
+Every Liquid token is both a standard ERC-20 and its own AMM. Deposits create instant tradeable depth through the 2x mint pattern. All Liquid tokens connect through a Hub token, enabling cross-pool swaps—100 tokens need 100 pools, not 5,000.
 
-## Current Status
+- Zero fees, hardcoded forever
+- Automatic liquidity on every deposit
+- Universal cross-swap via Hub routing
 
-Experimental, unaudited, deployed on Mainnet.
+---
 
-This is novel mechanism design. We don't know what emerges at scale. Proceed with curiosity and caution.
+## [Uniteum](/uniteum/) — Algebraic Liquidity
 
-No known issues. See [Known Issues](/uniteum/known-issues/) for version history and reporting guidelines.
+**Tokens with dimensional units that compose like physics: `meter/second`, `USD/BTC`, `foo*bar`.**
 
-## Support This Experiment
+The notation is the price relationship. One operation—**forge**—maintains algebraic consistency through arbitrage. Build custom derivatives with any power profile. No oracles needed.
 
-If this work interests you and you'd like to participate: the best way to contribute is to {% include etherscan.html address="0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9" section="writeContract" text="buy \"1\" tokens from the Discount Kiosk" %}. You're not just supporting development—you're acquiring the liquidity backbone of the system and becoming part of the experiment.
+- Geometric mean triads: every forge operates on (U, V, √(U*V))
+- Arbitrary power perpetuals (0.5x, 1x, 2x, custom exponents)
+- Infinite interconnected pools through algebraic composition
 
-The Kiosk uses linear discount pricing—price increases as inventory depletes. Early acquisition is cheaper.
+---
 
-Early "1" token holders may benefit if the [value hypothesis](/uniteum/economics-of-one/) holds: as anchored collateral and participation grow, "1" could reflect aggregate system value.
+## Common Thread
 
-## Quick Links
+All three protocols share a design philosophy: simple on-chain primitives with complex emergent behavior. No governance tokens, no admin keys, no upgrade paths. Once deployed, the rules are permanent.
 
-- [Getting Started](/uniteum/getting-started/) — Buy "1", create your first unit
-- [Use Cases](/uniteum/use-cases/) — What you can build and why it matters
-- [Concepts](/uniteum/concepts/) — Understand how the system works
-- [Known Issues](/uniteum/known-issues/) — Version history and bug reporting
-- [Safety](/uniteum/safety/) — Risks and disclaimers
+They are connected by strategic choice, not architectural dependency. The [Solid "Uniteum 1"](/solid/uniteum-1) token serves as the backing for both the Liquid Hub and the Uniteum "1" identity Unit—amplifying its value across all three protocols.
 
-## Contracts
+---
 
-| Contract | Address |
-|----------|---------|
-| {{ site.data.contracts.uniteum.name }} | {% include etherscan.html address=site.data.contracts.uniteum.address section="code" text=site.data.contracts.uniteum.address %} |
-| {{ site.data.contracts.genesis.name }} | {% include etherscan.html address=site.data.contracts.genesis.address section="code" text=site.data.contracts.genesis.address %} |
-| {{ site.data.contracts.kiosk.name }} | {% include etherscan.html address=site.data.contracts.kiosk.address section="code" text=site.data.contracts.kiosk.address %} |
+## Status
+
+Experimental, unaudited, deployed on Mainnet. This is novel mechanism design. Proceed with curiosity and caution.
+
+See [Safety](/uniteum/safety/) and [Legal](/legal/).
 
 ---
 
