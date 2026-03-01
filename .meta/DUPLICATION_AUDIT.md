@@ -23,7 +23,7 @@ This audit identifies specific content duplication between CLAUDE.md (AI instruc
 
 ### Duplicated in:
 
-**concepts/units.md (Lines 27-34)**
+**uniteum/concepts/units.md (Lines 27-34)**
 ```
 ## The "1" Token
 
@@ -35,7 +35,7 @@ At the center is "1"—the dimensionless unit. It mediates all base units and se
 - **Versions:** v0.0 (genesis ERC-20, primordial supply), current version (full Uniteum features)
 ```
 
-**economics-of-one.md (Lines 260-277)**
+**uniteum/economics-of-one.md (Lines 260-277)**
 ```
 ### The "1" Supply
 
@@ -47,12 +47,12 @@ The current version's "1" supply grows through migration from v0.0. At any given
 - v0.0 supply decreases as users migrate to current version
 ```
 
-**getting-started.md (Lines 64-65)**
+**uniteum/getting-started.md (Lines 64-65)**
 ```
 **Why migrate?** Genesis "1" (v0.0) is a simple ERC-20 that holds the primordial 1 billion token supply (the ceiling for all versions). The current contract implements all the core Uniteum mechanisms...
 ```
 
-**concepts/tokenomics.md (Lines 170-185)**
+**uniteum/concepts/tokenomics.md (Lines 170-185)**
 ```
 ### The "1" Supply
 
@@ -66,8 +66,8 @@ The current version's "1" supply grows through migration from v0.0. At any given
 
 ### Recommendation
 - **Keep in CLAUDE.md**: Brief bullet point summary (essential context for AI)
-- **Canonical user doc**: Make concepts/units.md the authoritative source
-- **Other pages**: Reference concepts/units.md instead of re-explaining
+- **Canonical user doc**: Make uniteum/concepts/units.md the authoritative source
+- **Other pages**: Reference uniteum/concepts/units.md instead of re-explaining
 
 ---
 
@@ -89,7 +89,7 @@ Invariant enforcement: `sqrt(a * b) = ab` where lowercase = supplies
 
 ### Duplicated in:
 
-**concepts/units.md (Lines 92-101)**
+**uniteum/concepts/units.md (Lines 92-101)**
 ```
 ## Reciprocals
 
@@ -103,7 +103,7 @@ Where:
 - w = supply of "1" held by the U contract
 ```
 
-**concepts/forge.md (Lines 29-34, 84-90)**
+**uniteum/concepts/forge.md (Lines 29-34, 84-90)**
 ```
 ## What Forge Does
 
@@ -120,7 +120,7 @@ You can't forge arbitrary amounts. The invariant constrains the relationship:
 $$u_1 \cdot v_1 = w_1^2$$
 ```
 
-**concepts/triads.md (Lines 84-96)**
+**uniteum/concepts/triads.md (Lines 84-96)**
 ```
 ## The Universal Invariant
 
@@ -131,7 +131,7 @@ $$u \cdot v = w^2$$
 Where u, v, w are supplies of the three tokens in positional order.
 ```
 
-**concepts/tokenomics.md (Lines 42-58, 250-259)**
+**uniteum/concepts/tokenomics.md (Lines 42-58, 250-259)**
 ```
 ## The Invariant
 
@@ -151,8 +151,8 @@ The product of the two operand supplies equals the square of the mediator supply
 ```
 
 ### Recommendation
-- **Keep in CLAUDE.md**: Brief mention only ("see concepts/tokenomics.md for details")
-- **Canonical user doc**: concepts/tokenomics.md (comprehensive mathematical treatment)
+- **Keep in CLAUDE.md**: Brief mention only ("see uniteum/concepts/tokenomics.md for details")
+- **Canonical user doc**: uniteum/concepts/tokenomics.md (comprehensive mathematical treatment)
 - **Other pages**: Reference tokenomics.md for formula details
 
 ---
@@ -171,7 +171,7 @@ The product of the two operand supplies equals the square of the mediator supply
 
 ### Duplicated in:
 
-**concepts/tokenomics.md (Lines 122-141, 250-259)**
+**uniteum/concepts/tokenomics.md (Lines 122-141, 250-259)**
 ```
 ## Price Relationships
 
@@ -196,7 +196,7 @@ $$\text{price}(U) = \frac{w^2}{u^2}$$
 | Price of U | v / u |
 ```
 
-**guides/price-control.md (Lines 26-36)**
+**uniteum/guides/price-control.md (Lines 26-36)**
 ```
 ## Price Mechanics
 
@@ -211,7 +211,7 @@ Where:
 To change price, change the ratio.
 ```
 
-**reference/functions.md (Lines 236-243)**
+**uniteum/reference/functions.md (Lines 236-243)**
 ```
 **Price Calculation:**
 - Price of U = `v / u`
@@ -220,8 +220,8 @@ To change price, change the ratio.
 ```
 
 ### Recommendation
-- **Keep in CLAUDE.md**: Formula only with note "see concepts/tokenomics.md"
-- **Canonical user doc**: concepts/tokenomics.md (full derivation and explanation)
+- **Keep in CLAUDE.md**: Formula only with note "see uniteum/concepts/tokenomics.md"
+- **Canonical user doc**: uniteum/concepts/tokenomics.md (full derivation and explanation)
 - **Other pages**: Reference or use formula without re-deriving
 
 ---
@@ -247,7 +247,7 @@ Forge works on ANY algebraically valid triad:
 
 ### Duplicated in:
 
-**concepts/triads.md (Lines 24-62)**
+**uniteum/concepts/triads.md (Lines 24-62)**
 ```
 # Triads
 
@@ -274,7 +274,7 @@ But this is just one pattern. Forge works on **any algebraically valid triad**.
 ...
 ```
 
-**concepts/forge.md (Lines 23-66)**
+**uniteum/concepts/forge.md (Lines 23-66)**
 ```
 # Forge
 
@@ -288,7 +288,7 @@ Forge transforms tokens within a valid triad while preserving the invariant:
 
 ### Recommendation
 - **Keep in CLAUDE.md**: Key concept emphasis ("NOT just (U, 1/U, 1)") for AI awareness
-- **Canonical user doc**: concepts/triads.md (comprehensive pattern catalog)
+- **Canonical user doc**: uniteum/concepts/triads.md (comprehensive pattern catalog)
 - **Other pages**: Link to triads.md when mentioning compound forging
 
 ---
@@ -318,7 +318,7 @@ Forge transforms tokens within a valid triad while preserving the invariant:
 
 ### Duplicated in:
 
-**concepts/units.md (Lines 63-88)**
+**uniteum/concepts/units.md (Lines 63-88)**
 ```
 ### Anchored Units
 
@@ -348,7 +348,7 @@ Floating units have no backing. They're just labels. Value emerges from liquidit
 **Warning:** A floating unit named `USD` has no connection to US dollars. Avoid real-world financial symbols to prevent confusion.
 ```
 
-**reference/anchored-units/index.md (Lines 22-56)**
+**uniteum/reference/anchored-units/index.md (Lines 22-56)**
 ```
 # Anchored Units
 
@@ -387,8 +387,8 @@ This is readable and matches how developers think about tokens, while clearly in
 
 ### Recommendation
 - **Keep in CLAUDE.md**: Core distinction and format rules (AI needs to know this for writing docs)
-- **Canonical user doc**: reference/anchored-units/index.md (full explanation of shorthands and distinction)
-- **concepts/units.md**: Keep as introduction, but link to reference/anchored-units for details
+- **Canonical user doc**: uniteum/reference/anchored-units/index.md (full explanation of shorthands and distinction)
+- **uniteum/concepts/units.md**: Keep as introduction, but link to uniteum/reference/anchored-units for details
 
 ---
 
@@ -419,7 +419,7 @@ uniteum.eth
 
 ### Duplicated in:
 
-**reference/ens.md (Lines 26-57)**
+**uniteum/reference/ens.md (Lines 26-57)**
 ```
 ## Hierarchy
 
@@ -457,8 +457,8 @@ uniteum.eth
 
 ### Recommendation
 - **Remove from CLAUDE.md**: Full hierarchy diagram
-- **Replace with**: "See reference/ens.md for complete ENS structure"
-- **Canonical user doc**: reference/ens.md (uses dynamic contract data from YAML)
+- **Replace with**: "See uniteum/reference/ens.md for complete ENS structure"
+- **Canonical user doc**: uniteum/reference/ens.md (uses dynamic contract data from YAML)
 
 ---
 
@@ -474,7 +474,7 @@ uniteum.eth
 
 ### Duplicated in:
 
-**reference/functions.md (Lines 42-48)**
+**uniteum/reference/functions.md (Lines 42-48)**
 ```
 **Parameters:**
 - `du` — Signed change of caller's unit balance
@@ -487,7 +487,7 @@ uniteum.eth
 
 ### Recommendation
 - **Keep in CLAUDE.md**: Brief reminder (AI needs to know for explaining code)
-- **Canonical user doc**: reference/functions.md (detailed parameter documentation)
+- **Canonical user doc**: uniteum/reference/functions.md (detailed parameter documentation)
 - **No duplication issue**: This is appropriately minimal in CLAUDE.md
 
 ---
@@ -532,7 +532,7 @@ uniteum.eth
 
 ### Duplicated in:
 
-**reference/functions.md (Lines 420-456)**
+**uniteum/reference/functions.md (Lines 420-456)**
 ```
 ## Constants & Immutables
 
@@ -575,7 +575,7 @@ Address of v0.0 "1" token accepted for migration.
 
 ### Recommendation
 - **Keep in CLAUDE.md**: All implementation details (AI needs context for technical questions)
-- **Canonical user doc**: reference/functions.md (complete technical reference)
+- **Canonical user doc**: uniteum/reference/functions.md (complete technical reference)
 - **Acceptable duplication**: CLAUDE.md provides context, functions.md provides precision
 
 ---
@@ -627,13 +627,13 @@ This is a quick reference. See IUnit.sol for complete signatures and documentati
 
 ### Duplicated in:
 
-**reference/functions.md (Complete file, 638 lines)**
+**uniteum/reference/functions.md (Complete file, 638 lines)**
 
 Full detailed documentation of every function, parameter, return value, example, etc.
 
 ### Recommendation
 - **Keep in CLAUDE.md**: Quick reference (AI needs fast lookup)
-- **Canonical user doc**: reference/functions.md (comprehensive API reference)
+- **Canonical user doc**: uniteum/reference/functions.md (comprehensive API reference)
 - **Acceptable duplication**: Quick reference vs detailed docs serve different purposes
 
 ---
@@ -643,29 +643,29 @@ Full detailed documentation of every function, parameter, return value, example,
 ### CLAUDE.md (Lines 261-266)
 ```
 Common anchored unit shorthands (all have dedicated reference pages):
-- [0xWETH](/reference/anchored-units/weth/) = `0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
-- [0xUSDC](/reference/anchored-units/usdc/) = `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
-- [0xUSDT](/reference/anchored-units/usdt/) = `0xdAC17F958D2ee523a2206206994597C13D831ec7`
-- [0xWBTC](/reference/anchored-units/wbtc/) = `0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599`
-- [0xDAI](/reference/anchored-units/dai/) = `0x6B175474E89094C44Da98b954EedeAC495271d0F`
+- [0xWETH](/uniteum/reference/anchored-units/weth/) = `0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
+- [0xUSDC](/uniteum/reference/anchored-units/usdc/) = `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
+- [0xUSDT](/uniteum/reference/anchored-units/usdt/) = `0xdAC17F958D2ee523a2206206994597C13D831ec7`
+- [0xWBTC](/uniteum/reference/anchored-units/wbtc/) = `0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599`
+- [0xDAI](/uniteum/reference/anchored-units/dai/) = `0x6B175474E89094C44Da98b954EedeAC495271d0F`
 ```
 
 ### Duplicated in:
 
-**reference/anchored-units/index.md (Lines 58-68)**
+**uniteum/reference/anchored-units/index.md (Lines 58-68)**
 ```
 | Shorthand | Token Name | Actual Symbol (first 10 & last 4) | Mainnet Contract |
 |-----------|------------|-----------------------------------|------------------|
-| [0xWETH](/reference/anchored-units/weth/) | Wrapped Ether | `0xC02aaA39...56Cc2` | [View on Etherscan](https://etherscan.io/address/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2) |
-| [0xUSDC](/reference/anchored-units/usdc/) | USD Coin | `0xA0b86991...eB48` | [View on Etherscan](https://etherscan.io/address/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48) |
-| [0xUSDT](/reference/anchored-units/usdt/) | Tether USD | `0xdAC17F95...1ec7` | [View on Etherscan](https://etherscan.io/address/0xdAC17F958D2ee523a2206206994597C13D831ec7) |
-| [0xWBTC](/reference/anchored-units/wbtc/) | Wrapped BTC | `0x2260FAC5...2C599` | [View on Etherscan](https://etherscan.io/address/0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599) |
-| [0xDAI](/reference/anchored-units/dai/) | Dai Stablecoin | `0x6B175474...cB4` | [View on Etherscan](https://etherscan.io/address/0x6B175474E89094C44Da98b954EedeAC495271d0F) |
+| [0xWETH](/uniteum/reference/anchored-units/weth/) | Wrapped Ether | `0xC02aaA39...56Cc2` | [View on Etherscan](https://etherscan.io/address/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2) |
+| [0xUSDC](/uniteum/reference/anchored-units/usdc/) | USD Coin | `0xA0b86991...eB48` | [View on Etherscan](https://etherscan.io/address/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48) |
+| [0xUSDT](/uniteum/reference/anchored-units/usdt/) | Tether USD | `0xdAC17F95...1ec7` | [View on Etherscan](https://etherscan.io/address/0xdAC17F958D2ee523a2206206994597C13D831ec7) |
+| [0xWBTC](/uniteum/reference/anchored-units/wbtc/) | Wrapped BTC | `0x2260FAC5...2C599` | [View on Etherscan](https://etherscan.io/address/0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599) |
+| [0xDAI](/uniteum/reference/anchored-units/dai/) | Dai Stablecoin | `0x6B175474...cB4` | [View on Etherscan](https://etherscan.io/address/0x6B175474E89094C44Da98b954EedeAC495271d0F) |
 ```
 
 ### Recommendation
 - **Keep in CLAUDE.md**: The list (AI needs to know shorthands for writing examples)
-- **Canonical user doc**: reference/anchored-units/index.md (authoritative mapping with Etherscan links)
+- **Canonical user doc**: uniteum/reference/anchored-units/index.md (authoritative mapping with Etherscan links)
 - **Acceptable duplication**: AI reference vs user reference serve different needs
 
 ---
@@ -676,14 +676,14 @@ Common anchored unit shorthands (all have dedicated reference pages):
 
 **High-priority removals:**
 
-- ✂️ **Full ENS hierarchy diagram** → Replace with: "See [reference/ens.md](/reference/ens/) for complete structure"
-- ✂️ **Distribution Strategy details** (lines 180-187) → Reference: "See [getting-started.md](/getting-started/) for acquisition and migration"
+- ✂️ **Full ENS hierarchy diagram** → Replace with: "See [uniteum/reference/ens.md](/uniteum/reference/ens/) for complete structure"
+- ✂️ **Distribution Strategy details** (lines 180-187) → Reference: "See [uniteum/getting-started.md](/uniteum/getting-started/) for acquisition and migration"
 
 **Medium-priority streamlining:**
 
-- 📝 **"1" Token section**: Reduce to 2-3 bullets, add "See [concepts/units.md](/concepts/units/) for details"
-- 📝 **Invariant formulas**: Mention briefly, reference [concepts/tokenomics.md](/concepts/tokenomics/)
-- 📝 **Price formulas**: Brief mention, reference [concepts/tokenomics.md](/concepts/tokenomics/)
+- 📝 **"1" Token section**: Reduce to 2-3 bullets, add "See [uniteum/concepts/units.md](/uniteum/concepts/units/) for details"
+- 📝 **Invariant formulas**: Mention briefly, reference [uniteum/concepts/tokenomics.md](/uniteum/concepts/tokenomics/)
+- 📝 **Price formulas**: Brief mention, reference [uniteum/concepts/tokenomics.md](/uniteum/concepts/tokenomics/)
 
 ### 2. Keep in CLAUDE.md (Essential AI Context)
 
@@ -708,23 +708,23 @@ Common anchored unit shorthands (all have dedicated reference pages):
 
 **Economics of "1" page overlaps:**
 
-economics-of-one.md and concepts/tokenomics.md both explain "1" supply mechanics (lines 170-185 duplicated word-for-word).
+uniteum/economics-of-one.md and uniteum/concepts/tokenomics.md both explain "1" supply mechanics (lines 170-185 duplicated word-for-word).
 
 **Recommended fix:**
-- Keep full explanation in concepts/tokenomics.md (canonical technical source)
-- In economics-of-one.md, add brief reference: "For supply mechanics details, see [Tokenomics](/concepts/tokenomics/). Here we focus on value hypotheses..."
+- Keep full explanation in uniteum/concepts/tokenomics.md (canonical technical source)
+- In uniteum/economics-of-one.md, add brief reference: "For supply mechanics details, see [Tokenomics](/uniteum/concepts/tokenomics/). Here we focus on value hypotheses..."
 
 **Anchored units explanation:**
 
 Appears in 3 places:
-- concepts/units.md (introduction)
-- reference/anchored-units/index.md (comprehensive reference)
-- use-cases.md (brief mention)
+- uniteum/concepts/units.md (introduction)
+- uniteum/reference/anchored-units/index.md (comprehensive reference)
+- uniteum/use-cases.md (brief mention)
 
 **Recommended fix:**
-- concepts/units.md: Keep introduction, link to reference/anchored-units for details
-- reference/anchored-units/index.md: Keep as authoritative source
-- use-cases.md: Brief mention with link, no re-explanation
+- uniteum/concepts/units.md: Keep introduction, link to uniteum/reference/anchored-units for details
+- uniteum/reference/anchored-units/index.md: Keep as authoritative source
+- uniteum/use-cases.md: Brief mention with link, no re-explanation
 
 ---
 

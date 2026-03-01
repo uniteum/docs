@@ -197,11 +197,11 @@ docs/
 │   ├── README.md                 # Full API docs
 │   ├── EXAMPLES.md               # Usage examples
 │   └── CHEATSHEET.md             # Quick reference
-├── reference/
-│   └── contracts.md              # Uses version-agnostic approach
-├── tokens/
-│   └── weth.md                   # Example updated page
-└── CONTRACT_REFERENCES.md        # This file
+├── uniteum/
+│   └── reference/
+│       └── contracts.md          # Uses version-agnostic approach
+└── .meta/
+    └── CONTRACT_REFERENCES.md    # This file
 ```
 
 ## Notes

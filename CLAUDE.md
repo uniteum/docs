@@ -2,9 +2,52 @@
 
 ## Project Overview
 
-Uniteum is an algebraic liquidity protocol on Ethereum where ERC-20 tokens have dimensional units (like physical quantities: m/s, kg*m, etc.) or floating units (USD, BTC, foo). Units compose algebraically, and price consistency is maintained through arbitrage-enforced forge operations rather than oracles.
+This documentation site (uniteum.one) covers **three independent protocols** under the Uniteum umbrella:
 
-**Key Innovation:** Multi-dimensional constant-product AMM where algebraic relationships create liquidity pools. Forge operations work on triads (U, V, √(U·V)) where the geometric-mean Unit is √(U·V), creating a mesh topology of arbitrage paths.
+1. **Solid** — A protocol for making tokens with fair launch, built-in trading pools, and permanent price floors. Standalone, no dependencies on the other protocols.
+2. **Liquid** — A protocol that wraps ERC-20 tokens with built-in AMM liquidity via a hub-and-spoke model. Standalone protocol.
+3. **Uniteum** — An algebraic liquidity protocol where ERC-20 tokens have dimensional units (like physical quantities: m/s, kg*m, etc.) or floating units (USD, BTC, foo). Units compose algebraically, and price consistency is maintained through arbitrage-enforced forge operations rather than oracles.
+
+**Key Innovation (Uniteum):** Multi-dimensional constant-product AMM where algebraic relationships create liquidity pools. Forge operations work on triads (U, V, √(U·V)) where the geometric-mean Unit is √(U·V), creating a mesh topology of arbitrage paths.
+
+**Relationship between protocols:** The three protocols are **independent peers**, not layers. They share an ecosystem and a strategic token choice: the **Solid "Uniteum 1"** token is used as:
+- The backing token for the **Liquid Hub** (Solid → Liquid)
+- The backing token for **Unit "1"** in the Uniteum protocol (Solid → Uniteum)
+
+These are **strategic choices** to concentrate value and stability around the Solid "Uniteum 1" token — not architectural dependencies. Either protocol could use a different backing token.
+
+## Site Structure
+
+The site is organized as three peer protocol sections plus shared root-level pages:
+
+```
+uniteum.one/
+├── index.md              ← Umbrella landing page for all three protocols
+├── legal.md              ← Site-wide legal (root level)
+├── license.md            ← Site-wide license (root level)
+├── uniteum/              ← Uniteum protocol docs
+│   ├── index.md
+│   ├── getting-started.md
+│   ├── economics-of-one.md
+│   ├── use-cases.md
+│   ├── safety.md
+│   ├── known-issues.md
+│   ├── concepts/
+│   ├── guides/
+│   ├── reference/
+│   └── examples/
+├── solid/                ← Solid protocol docs (peer)
+│   ├── index.md
+│   ├── protocol.md
+│   └── use-cases/
+└── liquid/               ← Liquid protocol docs (peer)
+    ├── index.md
+    ├── introduction.md
+    ├── design.md
+    └── use-cases/
+```
+
+**Path convention:** All Uniteum-specific content lives under `/uniteum/`. Solid under `/solid/`. Liquid under `/liquid/`. Only truly site-wide pages (legal, license, landing page) remain at root.
 
 ## Collaboration Context
 
@@ -41,7 +84,7 @@ All contracts use Nick's deterministic deployer (same addresses across networks)
 
 ## ENS Structure
 
-See [reference/ens.md](/reference/ens/) for the complete ENS naming hierarchy. Key points:
+See [reference/ens.md](/uniteum/reference/ens/) for the complete ENS naming hierarchy. Key points:
 - All names under `uniteum.eth`
 - Version format: `{major}-{minor}.uniteum.eth` (e.g., `0-1.uniteum.eth`)
 - Current and genesis "1" tokens have dedicated ENS names with Kiosk subdomains
@@ -56,7 +99,7 @@ See [reference/ens.md](/reference/ens/) for the complete ENS naming hierarchy. K
 - Current version supply grows through migration from v0.0 (reversible)
 - Can also serve as reserve in triads like (1, U², U) where √(1 * U²) = U
 
-See [concepts/units.md](/concepts/units/) for complete "1" token mechanics and [economics-of-one.md](/economics-of-one/) for value hypotheses.
+See [concepts/units.md](/uniteum/concepts/units/) for complete "1" token mechanics and [economics-of-one.md](/uniteum/economics-of-one/) for value hypotheses.
 
 ### 2. Units & Reciprocals
 
@@ -66,7 +109,7 @@ See [concepts/units.md](/concepts/units/) for complete "1" token mechanics and [
 - For reciprocal pairs (U, 1/U): "1" serves as the liquidity unit, so √(u · v) = 1's supply
 - For compound units: the geometric mean unit serves as the liquidity unit
 
-See [concepts/tokenomics.md](/concepts/tokenomics/) for complete invariant mathematics and derivations.
+See [concepts/tokenomics.md](/uniteum/concepts/tokenomics/) for complete invariant mathematics and derivations.
 
 ### 3. Forge Operation (CRITICAL)
 
@@ -118,7 +161,7 @@ This generalizes beyond Uniswap's 0.5 power perp to support arbitrary convexity 
 - This is fundamental to the mesh topology design
 
 **Price Formula:**
-- `price(U) = v/u` where v = 1/U supply, u = U supply (see [concepts/tokenomics.md](/concepts/tokenomics/) for derivation)
+- `price(U) = v/u` where v = 1/U supply, u = U supply (see [concepts/tokenomics.md](/uniteum/concepts/tokenomics/) for derivation)
 - Equal supplies → parity; more U → U cheaper, 1/U more expensive
 
 ### 4. Anchored vs Floating Units
@@ -233,14 +276,14 @@ ChatGPT has established a clear framework distinguishing two layers that are oft
 - Canonicalization (deterministic normalization)
 - Does NOT mint/burn balances
 - Does NOT affect prices
-- See [concepts/unit-creation.md](/concepts/unit-creation/)
+- See [concepts/unit-creation.md](/uniteum/concepts/unit-creation/)
 
 **Layer 2: Forge Operations** (economic, balance changes)
 - Mints and burns balances of **existing Units**
 - Operates on triads with geometric-mean invariants
 - Changes prices through supply changes
 - Never creates new Unit identities
-- See [concepts/forge.md](/concepts/forge/)
+- See [concepts/forge.md](/uniteum/concepts/forge/)
 
 **Why this matters:**
 - Confusing these layers leads to incorrect mental models
@@ -250,7 +293,7 @@ ChatGPT has established a clear framework distinguishing two layers that are oft
 
 ### 9. Canonicalization Rules (ChatGPT Normative)
 
-From `.meta/PROJECT_CONSTITUTION.md` and [concepts/canonicalization.md](/concepts/canonicalization/):
+From `.meta/PROJECT_CONSTITUTION.md` and [concepts/canonicalization.md](/uniteum/concepts/canonicalization/):
 
 **Canonical Form Rules:**
 - The identity unit is named **`1`** (not "unity" - this is a recent clarification)
@@ -341,7 +384,7 @@ forge script <script>    # deployment scripts
 
 ## Distribution Strategy
 
-See [getting-started.md](/getting-started/) for complete acquisition and migration instructions. Key points:
+See [getting-started.md](/uniteum/getting-started/) for complete acquisition and migration instructions. Key points:
 - Genesis supply: 1B "1" tokens (primordial ceiling for all versions)
 - Available via Discount Kiosk with linear discount pricing
 - Current version supply grows through migration from v0.0 (reversible)
@@ -376,27 +419,27 @@ The following pages provide normative definitions and conceptual framework:
 
 ### Core Conceptual Pages
 
-1. **[Mental Model](/concepts/mental-model/)** - High-level way to think about Uniteum
+1. **[Mental Model](/uniteum/concepts/mental-model/)** - High-level way to think about Uniteum
    - "Units are tokens, not labels"
    - "Triads are the only place economics happens"
    - "Everything is local, consistency is global"
 
-2. **[Unit Syntax](/concepts/unit-syntax/)** - How unit expressions are written
+2. **[Unit Syntax](/uniteum/concepts/unit-syntax/)** - How unit expressions are written
    - Operators: `*`, `/`, `^`
    - Identity unit: `1`
    - Precedence rules
 
-3. **[Unit Creation](/concepts/unit-creation/)** - How Unit identities come into existence
+3. **[Unit Creation](/uniteum/concepts/unit-creation/)** - How Unit identities come into existence
    - **Separate from forge** (this is critical)
    - Parsing, multiplication, reciprocals
    - Canonicalization
 
-4. **[Canonicalization](/concepts/canonicalization/)** - Normalization rules
+4. **[Canonicalization](/uniteum/concepts/canonicalization/)** - Normalization rules
    - Ensures uniqueness of Unit identities
    - No negative exponents in canonical form
    - Deterministic rendering
 
-5. **[Glossary](/reference/glossary/)** - Canonical definitions
+5. **[Glossary](/uniteum/reference/glossary/)** - Canonical definitions
    - Unit, Base Unit, Compound Unit
    - Identity Unit, Reciprocal
    - Forge, Triad, Geometric-Mean Unit
@@ -438,14 +481,28 @@ The following pages provide normative definitions and conceptual framework:
 
 ```
 uniteum.one/
-├── Introduction (what/why/how)
-├── Getting Started (practical first steps)
-├── Concepts (forge, units, invariants, composition)
-├── Operations (creating units, forging, price control)
-├── Examples (concrete use cases with transactions)
-├── Technical Reference (contracts, functions, addresses)
-├── Use Cases (speculation on possibilities)
-└── Safety & Risks (disclaimers, experimental status)
+├── Landing Page (umbrella intro to all three protocols)
+├── uniteum/
+│   ├── Introduction (what/why/how)
+│   ├── Getting Started (practical first steps)
+│   ├── Concepts (forge, units, invariants, composition)
+│   ├── Guides (creating units, forging, price control)
+│   ├── Examples (concrete use cases with transactions)
+│   ├── Reference (contracts, functions, addresses)
+│   ├── Use Cases (speculation on possibilities)
+│   └── Safety & Risks (disclaimers, experimental status)
+├── solid/
+│   ├── Introduction
+│   ├── Protocol
+│   └── Use Cases
+├── liquid/
+│   ├── Introduction
+│   ├── Design
+│   ├── Vision
+│   ├── Use Cases
+│   └── Tokenomics
+├── Legal (site-wide)
+└── License (site-wide)
 ```
 
 ### Writing Guidelines
@@ -532,19 +589,19 @@ When working with tokens like WETH, there are THREE distinct entities that must 
 
 For documentation readability, use shorthand notation like `0xWETH`, `0xUSDC`, `0xWBTC` in explanations and examples, BUT:
 
-- **Link first occurrence** to token reference pages (e.g., `[0xWETH](/reference/anchored-units/weth/)`)
-- Add callout at top of page: "We use [0xWETH](/reference/anchored-units/weth/), [0xUSDC](/reference/anchored-units/usdc/), etc. as readable shorthands. See [Anchored Units](/reference/anchored-units/) for actual symbols."
+- **Link first occurrence** to token reference pages (e.g., `[0xWETH](/uniteum/reference/anchored-units/weth/)`)
+- Add callout at top of page: "We use [0xWETH](/uniteum/reference/anchored-units/weth/), [0xUSDC](/uniteum/reference/anchored-units/usdc/), etc. as readable shorthands. See [Anchored Units](/uniteum/reference/anchored-units/) for actual symbols."
 - In technical reference or code examples, show real addresses
 - Emphasize the distinction: floating `WETH` ≠ anchored `0xC02a...56Cc2` ≠ WETH contract `0xC02a...56Cc2`
 
 Common anchored unit shorthands (all have dedicated reference pages):
-- [0xWETH](/reference/anchored-units/weth/) = anchored Unit `0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2` (backed by WETH contract)
-- [0xUSDC](/reference/anchored-units/usdc/) = anchored Unit `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48` (backed by USDC contract)
-- [0xUSDT](/reference/anchored-units/usdt/) = anchored Unit `0xdAC17F958D2ee523a2206206994597C13D831ec7` (backed by USDT contract)
-- [0xWBTC](/reference/anchored-units/wbtc/) = anchored Unit `0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599` (backed by WBTC contract)
-- [0xDAI](/reference/anchored-units/dai/) = anchored Unit `0x6B175474E89094C44Da98b954EedeAC495271d0F` (backed by DAI contract)
+- [0xWETH](/uniteum/reference/anchored-units/weth/) = anchored Unit `0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2` (backed by WETH contract)
+- [0xUSDC](/uniteum/reference/anchored-units/usdc/) = anchored Unit `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48` (backed by USDC contract)
+- [0xUSDT](/uniteum/reference/anchored-units/usdt/) = anchored Unit `0xdAC17F958D2ee523a2206206994597C13D831ec7` (backed by USDT contract)
+- [0xWBTC](/uniteum/reference/anchored-units/wbtc/) = anchored Unit `0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599` (backed by WBTC contract)
+- [0xDAI](/uniteum/reference/anchored-units/dai/) = anchored Unit `0x6B175474E89094C44Da98b954EedeAC495271d0F` (backed by DAI contract)
 
-**Anchored Unit Pages:** Located in `/reference/anchored-units/` directory. Each page explains:
+**Anchored Unit Pages:** Located in `/uniteum/reference/anchored-units/` directory. Each page explains:
 - The shorthand vs actual symbol
 - What the token is backed by (with Etherscan link to the external token contract)
 - Floating vs anchored distinction
@@ -749,5 +806,5 @@ When you realize you've been doing X wrong:
 
 ---
 
-**Last Updated:** December 2024
+**Last Updated:** March 2026
 **Creator:** Paul Reinholdtsen (reinholdtsen.eth)

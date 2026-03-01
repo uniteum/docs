@@ -15,12 +15,12 @@ Successfully reduced duplication between CLAUDE.md and user-facing documentation
 
 **ENS Hierarchy Diagram** (19 lines → 4 lines)
 - **Before:** Full ASCII tree diagram with all addresses
-- **After:** Brief description with reference to `/reference/ens.md`
+- **After:** Brief description with reference to `/uniteum/reference/ens.md`
 - **Rationale:** ENS reference uses dynamic YAML data; static diagram in CLAUDE.md would become stale
 
 **Distribution Strategy Details** (7 lines → 4 lines)
 - **Before:** Detailed breakdown of genesis supply allocation
-- **After:** Summary with reference to `/getting-started.md`
+- **After:** Summary with reference to `/uniteum/getting-started.md`
 - **Rationale:** Acquisition instructions belong in getting-started guide
 
 ### Condensed with References
@@ -28,16 +28,16 @@ Successfully reduced duplication between CLAUDE.md and user-facing documentation
 **"1" Token Mechanics** (5 bullets → 3 bullets + reference)
 - Kept essential facts
 - Added references to:
-  - `/concepts/units.md` (complete mechanics)
-  - `/economics-of-one.md` (value hypotheses)
+  - `/uniteum/concepts/units.md` (complete mechanics)
+  - `/uniteum/economics-of-one.md` (value hypotheses)
 
 **Units & Reciprocals** (4 bullets → 3 bullets + reference)
 - Simplified invariant explanation
-- Added reference to `/concepts/tokenomics.md` (full mathematics)
+- Added reference to `/uniteum/concepts/tokenomics.md` (full mathematics)
 
 **Price Formula** (5 bullets → 2 bullets + reference)
 - Kept core formula
-- Added reference to `/concepts/tokenomics.md` (derivation)
+- Added reference to `/uniteum/concepts/tokenomics.md` (derivation)
 
 ### What Remains in CLAUDE.md (And Why)
 
@@ -49,7 +49,7 @@ These sections are **essential AI context** with no user-facing equivalent:
 ✅ **Do/Don't Lists** — Content policy guardrails
 ✅ **Key Concepts to Emphasize** — Common user misconceptions AI should address
 ✅ **Documentation Approach** — Target audience, voice, tone
-✅ **Key Functions Quick Reference** — Fast lookup for AI (detailed docs in `/reference/functions.md`)
+✅ **Key Functions Quick Reference** — Fast lookup for AI (detailed docs in `/uniteum/reference/functions.md`)
 ✅ **Forge Triad Emphasis** — Critical "NOT just (U, 1/U, 1)" reminder
 ✅ **Contract Implementation Details** — Sign convention, reentrancy protection, etc.
 
@@ -63,24 +63,24 @@ These sections are **essential AI context** with no user-facing equivalent:
 
 Created a **documentation graph** where each concept page points to related authoritative sources:
 
-#### `/concepts/units.md`
-- Added reference to `/reference/functions.md` (technical specs)
-- Added reference to `/concepts/tokenomics.md` (supply mechanics)
-- Added reference to `/reference/anchored-units/` (anchored unit details)
+#### `/uniteum/concepts/units.md`
+- Added reference to `/uniteum/reference/functions.md` (technical specs)
+- Added reference to `/uniteum/concepts/tokenomics.md` (supply mechanics)
+- Added reference to `/uniteum/reference/anchored-units/` (anchored unit details)
 
-#### `/concepts/forge.md`
-- Added reference to `/concepts/triads.md` (valid patterns)
-- Added reference to `/concepts/tokenomics.md` (mathematics)
+#### `/uniteum/concepts/forge.md`
+- Added reference to `/uniteum/concepts/triads.md` (valid patterns)
+- Added reference to `/uniteum/concepts/tokenomics.md` (mathematics)
 
-#### `/concepts/triads.md`
-- Added reference to `/concepts/forge.md` (operation details)
-- Added reference to `/concepts/tokenomics.md` (invariant math)
+#### `/uniteum/concepts/triads.md`
+- Added reference to `/uniteum/concepts/forge.md` (operation details)
+- Added reference to `/uniteum/concepts/tokenomics.md` (invariant math)
 
-#### `/concepts/tokenomics.md`
-- Added reference to `/economics-of-one.md` (value hypotheses)
+#### `/uniteum/concepts/tokenomics.md`
+- Added reference to `/uniteum/economics-of-one.md` (value hypotheses)
 
-#### `/economics-of-one.md`
-- Added reference to `/concepts/tokenomics.md` (supply mechanics)
+#### `/uniteum/economics-of-one.md`
+- Added reference to `/uniteum/concepts/tokenomics.md` (supply mechanics)
 
 ### Established Canonical Sources
 
@@ -88,13 +88,13 @@ Each major concept now has ONE authoritative page:
 
 | Concept | Canonical Page | Other References |
 |---------|---------------|------------------|
-| "1" Supply Mechanics | `/concepts/tokenomics.md` | Referenced by units.md, economics-of-one.md |
-| Invariant Formula (u·v=w²) | `/concepts/tokenomics.md` | Referenced by forge.md, triads.md, units.md |
-| Price Formula (v/u) | `/concepts/tokenomics.md` | Referenced by price-control.md, CLAUDE.md |
-| Anchored vs Floating | `/reference/anchored-units/` | Introduced in concepts/units.md |
-| Forge Triads | `/concepts/triads.md` | Referenced by forge.md, CLAUDE.md |
-| ENS Structure | `/reference/ens.md` | Referenced by CLAUDE.md |
-| Function API | `/reference/functions.md` | Referenced by CLAUDE.md, units.md |
+| "1" Supply Mechanics | `/uniteum/concepts/tokenomics.md` | Referenced by units.md, economics-of-one.md |
+| Invariant Formula (u·v=w²) | `/uniteum/concepts/tokenomics.md` | Referenced by forge.md, triads.md, units.md |
+| Price Formula (v/u) | `/uniteum/concepts/tokenomics.md` | Referenced by price-control.md, CLAUDE.md |
+| Anchored vs Floating | `/uniteum/reference/anchored-units/` | Introduced in concepts/units.md |
+| Forge Triads | `/uniteum/concepts/triads.md` | Referenced by forge.md, CLAUDE.md |
+| ENS Structure | `/uniteum/reference/ens.md` | Referenced by CLAUDE.md |
+| Function API | `/uniteum/reference/functions.md` | Referenced by CLAUDE.md, units.md |
 
 ### What Duplication Remains (Intentionally)
 
@@ -166,20 +166,20 @@ Comprehensive analysis (3,500 words) documenting:
    - Condensed distribution strategy
    - Added references to user docs
 
-2. **`concepts/units.md`**
+2. **`uniteum/concepts/units.md`**
    - Added reference to functions.md, tokenomics.md
    - Added reference to anchored-units reference
 
-3. **`concepts/forge.md`**
+3. **`uniteum/concepts/forge.md`**
    - Added reference to triads.md, tokenomics.md
 
-4. **`concepts/triads.md`**
+4. **`uniteum/concepts/triads.md`**
    - Added reference to forge.md, tokenomics.md
 
-5. **`concepts/tokenomics.md`**
+5. **`uniteum/concepts/tokenomics.md`**
    - Added reference to economics-of-one.md
 
-6. **`economics-of-one.md`**
+6. **`uniteum/economics-of-one.md`**
    - Added reference to tokenomics.md at top
 
 ### Created Files

@@ -114,21 +114,21 @@ The [`meter/second`](https://etherscan.io/token/0xCbdc3D8ca6255CbbD1a49F19AE2816
 
 Continue using shorthands like `0xWETH`, `0xUSDC` in documentation text, but:
 1. Link first occurrence to anchored unit reference pages
-2. Add callout at top: "We use [0xWETH](/reference/anchored-units/weth/), [0xUSDC](/reference/anchored-units/usdc/), etc. as shorthands. See [Anchored Units](/reference/anchored-units/)."
+2. Add callout at top: "We use [0xWETH](/uniteum/reference/anchored-units/weth/), [0xUSDC](/uniteum/reference/anchored-units/usdc/), etc. as shorthands. See [Anchored Units](/uniteum/reference/anchored-units/)."
 3. In code examples, show real addresses
 
 ## Documentation Updates Needed
 
 After deploying, update these files to link to example units:
 
-1. **`getting-started.md`** - Link first `foo` example
-2. **`concepts/units.md`** - Link floating unit examples
-3. **`concepts/forge.md`** - Link triad examples
-4. **`concepts/triads.md`** - Link compound units
-5. **`concepts/arbitrage.md`** - Link multi-unit examples
-6. **`guides/creating-units.md`** - Link step-by-step examples
-7. **`guides/forging.md`** - Link forge operation examples
-8. **`use-cases.md`** - Link gaming/community examples
+1. **`uniteum/getting-started.md`** - Link first `foo` example
+2. **`uniteum/concepts/units.md`** - Link floating unit examples
+3. **`uniteum/concepts/forge.md`** - Link triad examples
+4. **`uniteum/concepts/triads.md`** - Link compound units
+5. **`uniteum/concepts/arbitrage.md`** - Link multi-unit examples
+6. **`uniteum/guides/creating-units.md`** - Link step-by-step examples
+7. **`uniteum/guides/forging.md`** - Link forge operation examples
+8. **`uniteum/use-cases.md`** - Link gaming/community examples
 
 ## Future Enhancements
 
@@ -172,7 +172,7 @@ cast send 0x9df9b0501e8f6c05623b5b519f9f18b598d9b253 \
 
 See [`_data/units.yml`](_data/units.yml) for the complete structured list.
 
-See [`reference/floating-units.md`](reference/floating-units.md) for the user-facing reference page.
+See [`uniteum/reference/floating-units.md`](uniteum/reference/floating-units.md) for the user-facing reference page.
 
 ---
 
