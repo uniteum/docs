@@ -48,6 +48,9 @@ The core forge mechanics for floating units work. The mechanics around anchored 
 
 No known issues with current functionality. See [Known Issues](/uniteum/known-issues/) for version history and reporting guidelines.
 
+{: .warning }
+> **Anchored units are incomplete.** The current contract does not fully support anchored units—units backed 1:1 by external ERC-20 tokens. The deposit and withdrawal mechanics need further work, and it may turn out that the design cannot accommodate them. All documentation referencing anchored units (0xWETH, 0xUSDC, etc.) describes intended behavior, not current capability. Floating units and their forge operations work as documented.
+
 ## Support This Experiment
 
 If this work interests you and you'd like to participate, see [Getting Started](/uniteum/getting-started/) for how to acquire "1" tokens. You're not just supporting development—you're acquiring the liquidity backbone of the system and becoming part of the experiment.
