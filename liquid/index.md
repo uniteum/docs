@@ -99,6 +99,7 @@ Use the read functions before trading:
 ## Resources
 
 - [Introduction]({{ site.baseurl }}/liquid/introduction) - Detailed user guide
+- [The 2x Mint]({{ site.baseurl }}/liquid/2x-mint) - The novel liquidity mechanism
 - [Design]({{ site.baseurl }}/liquid/design) - Mathematical specification
 - [Vision]({{ site.baseurl }}/liquid/vision) - The trillion-dollar thesis
 - [Use Cases]({{ site.baseurl }}/liquid/use-cases) - Practical applications
