@@ -67,7 +67,13 @@ They are connected by strategic choice, not architectural dependency. The [Solid
 
 ## Status
 
-Experimental, unaudited, deployed on Mainnet. This is novel mechanism design. Proceed with curiosity and caution.
+All three protocols are deployed on Mainnet, unaudited, and at different stages of maturity:
+
+- **Solid** — Complete. The protocol is simple and does what it says.
+- **Liquid** — Likely complete, but not yet tested at scale.
+- **Uniteum** — Under active development. The mechanics around anchored units are incomplete, and it may not be possible to get them working.
+
+None of these contracts have been formally audited. Audits can give a false sense of security — audited contracts are regularly found to have severe defects after the fact. Read the code, understand the risks, and proceed with caution.
 
 See [Safety](/uniteum/safety/) and [Legal](/legal/).
 

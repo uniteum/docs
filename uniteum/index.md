@@ -42,11 +42,11 @@ See [Use Cases](/uniteum/use-cases/) for detailed examples and strategies.
 
 ## Current Status
 
-Experimental, unaudited, deployed on Mainnet.
+Under active development, unaudited, deployed on Mainnet.
 
-This is novel mechanism design. We don't know what emerges at scale. Proceed with curiosity and caution.
+The core forge mechanics for floating units work. The mechanics around anchored units are incomplete, and it may not be possible to get them working. This is novel mechanism design—we don't know what emerges at scale.
 
-No known issues. See [Known Issues](/uniteum/known-issues/) for version history and reporting guidelines.
+No known issues with current functionality. See [Known Issues](/uniteum/known-issues/) for version history and reporting guidelines.
 
 ## Support This Experiment
 
