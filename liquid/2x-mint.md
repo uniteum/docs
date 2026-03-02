@@ -8,29 +8,36 @@ nav_order: 2.5
 
 # The 2x Mint
 
-When you deposit tokens into Liquid, the protocol mints **twice as many** wrapped tokens as you deposited: half go to you, half go to the pool. When you withdraw, the reverse happens — tokens are burned from both you and the pool.
+When you deposit tokens into Liquid, the protocol mints **twice as many** wrapped tokens as you deposited — split proportionally between you and the pool based on the current state of the system. When you withdraw, the reverse happens — tokens are burned proportionally from both you and the pool.
 
 This is the 2x mint pattern. It is the mechanism by which Liquid turns every deposit into instant, tradeable AMM liquidity — without LP tokens, without separate liquidity provision, and without anyone's permission.
 
 ## Definition
 
-**Heat** (deposit N backing tokens):
+**Heat** (deposit `s` backing tokens into a spoke with total supply `T` and pool balance `P`):
 
 ```
-Mint N wrapped tokens → user
-Mint N wrapped tokens → pool
-Total minted: 2N
+p = 2s × P / T          (minted to pool — proportional to pool's share)
+u = 2s − p              (minted to user — the remainder)
+Total minted: u + p = 2s
 ```
 
-**Cool** (withdraw N wrapped tokens):
+On the first deposit (`T = 0`), the split is 50/50: user and pool each receive `s`. After that, the split preserves the existing ratio between pooled and circulating tokens.
+
+**Cool** (user burns `u` wrapped tokens from their balance):
 
 ```
-Burn from user:  proportional to user's share of circulating supply
-Burn from pool:  proportional to pool's share of total supply
-Total burned: 2N
+U = T − P               (circulating supply outside pool)
+s = u × T / U / 2       (backing tokens returned)
+p = 2s − u              (burned from pool)
+Total burned: u + p = 2s
 ```
+
+Both operations are proportional: the split between user and pool depends on the current distribution of the wrapped token supply.
 
 The user's wrapped tokens and the pool's wrapped tokens are the **same ERC-20 token**. There is no distinction at the token level between "user tokens" and "pool tokens" — the pool's tokens are simply the contract's own balance.
+
+**Hub exception:** The Hub instance (which wraps "Uniteum 1") uses a simple 1:1 mint/burn — no pool allocation. The 2x pattern applies only to spoke instances.
 
 ## Why 2x?
 
@@ -40,13 +47,15 @@ The 2x mint collapses wrapping and liquidity provision into a single operation:
 
 | | WETH (1x mint) | Liquid (2x mint) |
 |:--|:--|:--|
-| Deposit 1,000 tokens | Receive 1,000 wrapped | Receive 1,000 wrapped |
-| Pool receives | Nothing | 1,000 wrapped |
+| Deposit 1,000 tokens | Receive 1,000 wrapped | Receive ~1,000 wrapped* |
+| Pool receives | Nothing | ~1,000 wrapped* |
 | Tradeable immediately? | No — needs external DEX | Yes — built-in AMM |
 | Separate LP step? | Yes | No |
 | LP tokens to manage? | Yes | No |
 
-The extra N tokens minted to the pool are the price of instant liquidity. You hold half the wrapped supply; the pool holds the other half, ready to trade against.
+*Exact split depends on pool state. On first deposit it's 50/50; subsequent deposits preserve the existing pool-to-supply ratio. Total minted is always exactly 2,000.
+
+The extra tokens minted to the pool are the price of instant liquidity. The proportional split ensures that deposits don't dilute or concentrate the pool's share of the total supply — the system's balance is preserved regardless of when you deposit.
 
 ## What the Pattern Eliminates
 
@@ -60,13 +69,13 @@ The extra N tokens minted to the pool are the price of instant liquidity. You ho
 
 ## Symmetry
 
-The 2x burn on withdrawal mirrors the 2x mint on deposit. When you cool N wrapped tokens:
+The 2x burn on withdrawal mirrors the 2x mint on deposit. Both operations are proportional and both always total exactly `2s`:
 
-1. N tokens are burned from your balance (proportional to your share of the circulating supply)
-2. A matching amount is burned from the pool's balance
-3. You receive backing tokens proportional to the contract's reserves
+**Heat:** `2s` tokens minted, split proportionally between user (`u`) and pool (`p`) based on `P/T`.
 
-This symmetry means the system's total wrapped supply always reflects exactly twice the backing token deposits, minus any that have been sold into the pool through trading.
+**Cool:** User burns `u` tokens, pool burns `p = 2s − u` tokens, user receives `s` backing tokens — where `s` depends on the circulating-to-total ratio `U/T`.
+
+The formulas are inverses: a heat followed immediately by a cool (with no intervening trades) returns you to your starting position minus rounding. The proportional split in both directions means the pool's share of total supply is preserved through deposits and withdrawals alike.
 
 ## The Wrapped Token Serves Three Roles
 
