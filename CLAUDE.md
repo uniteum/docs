@@ -72,7 +72,6 @@ Current contract addresses are maintained in `_data/contracts.yml`. Key contract
 
 - **Current Uniteum "1"**: `site.data.contracts.uniteum` (flat, no version indirection)
 - **Genesis Uniteum "1"**: `site.data.contracts.genesis` (original v0.0 supply)
-- **Current Kiosk**: `site.data.contracts.kiosk`
 - **Helper**: `site.data.contracts.helper`
 - **Deployer**: `site.data.contracts.deployer`
 
@@ -87,7 +86,7 @@ All contracts use Nick's deterministic deployer (same addresses across networks)
 See [reference/ens.md](/uniteum/reference/ens/) for the complete ENS naming hierarchy. Key points:
 - All names under `uniteum.eth`
 - Version format: `{major}-{minor}.uniteum.eth` (e.g., `0-1.uniteum.eth`)
-- Current and genesis "1" tokens have dedicated ENS names with Kiosk subdomains
+- Current and genesis "1" tokens have dedicated ENS names
 
 ## Core Mechanisms
 
@@ -386,7 +385,6 @@ forge script <script>    # deployment scripts
 
 See [getting-started.md](/uniteum/getting-started/) for complete acquisition and migration instructions. Key points:
 - Genesis supply: 1B "1" tokens (primordial ceiling for all versions)
-- Available via Discount Kiosk with linear discount pricing
 - Current version supply grows through migration from v0.0 (reversible)
 
 ## Design Philosophy
@@ -626,7 +624,7 @@ Common anchored unit shorthands (all have dedicated reference pages):
 - Specific transaction: Full tx hash link (e.g., `https://etherscan.io/tx/0x...`)
 
 **Link Format by Type:**
-- **Contracts** (Uniteum, Kiosk, etc.): Use `/address/<ADDRESS>#code`
+- **Contracts** (Uniteum, Helper, etc.): Use `/address/<ADDRESS>#code`
   - Example: `https://etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#code`
 - **Unit Tokens** (foo, bar, meter, etc.): Use `/token/<ADDRESS>`
   - Example: `https://etherscan.io/token/0x966108210F3B2eC0f01B646a61Ce7D8F1aDE7430`

@@ -18,7 +18,6 @@ echo "Generating .env from $CONTRACTS_FILE..."
 # Extract addresses directly from flat structure
 ONE=$(yq eval '.uniteum.address' "$CONTRACTS_FILE")
 GENESIS=$(yq eval '.genesis.address' "$CONTRACTS_FILE")
-KIOSK=$(yq eval '.kiosk.address' "$CONTRACTS_FILE")
 HELPER=$(yq eval '.helper.address' "$CONTRACTS_FILE")
 
 # Generate .env file
@@ -28,7 +27,6 @@ cat > "$ENV_FILE" << EOF
 
 ONE=$ONE
 GENESIS=$GENESIS
-KIOSK=$KIOSK
 HELPER=$HELPER
 EOF
 
@@ -37,5 +35,4 @@ echo ""
 echo "Environment variables available:"
 echo "  ONE=$ONE"
 echo "  GENESIS=$GENESIS"
-echo "  KIOSK=$KIOSK"
 echo "  HELPER=$HELPER"

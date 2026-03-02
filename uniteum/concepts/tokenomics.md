@@ -187,7 +187,6 @@ The current version's "1" supply grows through migration from v0.0. At any given
 Within each version, the supply is distributed across:
 - User wallets
 - Unit contracts (as locked liquidity)
-- The Discount Kiosk (unsold inventory for v0.0)
 
 When you forge a base unit, "1" moves between your wallet and the unit contract. The invariant determines how much.
 

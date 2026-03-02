@@ -1,9 +1,0 @@
-{%- comment -%}
-Returns the current Kiosk contract object.
-
-Usage: {% assign kiosk = site.data.contracts.kiosk %}
-       {{ kiosk.name }}
-       {{ kiosk.address }}
-       {% include contract.html address=kiosk.address %}
-{%- endcomment -%}
-{{ site.data.contracts.kiosk }}

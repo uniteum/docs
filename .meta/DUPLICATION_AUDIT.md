@@ -403,9 +403,7 @@ Owned by `0xd441...6401`:
 ```
 uniteum.eth
 ├── 0-0.uniteum.eth → Genesis "1" (v0.0, see _data/contracts.yml)
-│   └── buy.0-0.uniteum.eth → Genesis Kiosk
 ├── [version].uniteum.eth → Current "1" (see current.uniteum in _data/contracts.yml)
-│   └── buy.[version].uniteum.eth → Current Kiosk
 ├── eoa.uniteum.eth → 0x6056...496e
 │   ├── 0.eoa.uniteum.eth → 0xff96...1004 (main deployer)
 │   ├── 1.eoa.uniteum.eth → 0x215a...7003
@@ -425,19 +423,13 @@ uniteum.eth
 
 {% assign current_uniteum = site.data.contracts.uniteum[site.data.contracts.current.uniteum] -%}
 {% assign genesis_uniteum = site.data.contracts.uniteum.v0_0 -%}
-{% assign current_kiosk = site.data.contracts.kiosk[site.data.contracts.current.kiosk] -%}
-{% assign genesis_kiosk = site.data.contracts.kiosk.v0_0 -%}
 ```
 uniteum.eth
 ├── {{ genesis_uniteum.ens }}          → {{ genesis_uniteum.mainnet }}
-│   │                           ({{ genesis_uniteum.name }} - genesis)
-│   └── {{ genesis_kiosk.ens }}  → {{ genesis_kiosk.mainnet }}
-│                               ({{ genesis_kiosk.name }})
+│                               ({{ genesis_uniteum.name }} - genesis)
 │
 ├── {{ current_uniteum.ens }}          → {{ current_uniteum.mainnet }}
-│   │                           ({{ current_uniteum.name }})
-│   └── {{ current_kiosk.ens }}  → {{ current_kiosk.mainnet }}
-│                               ({{ current_kiosk.name }})
+│                               ({{ current_uniteum.name }})
 │
 ├── eoa.uniteum.eth          → 0x6056...496e
 │   ├── 0.eoa.uniteum.eth    → 0xff96a8c70dcc85a0cc4d690bfc02166a90e71004

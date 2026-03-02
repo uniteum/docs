@@ -11,9 +11,6 @@ Successfully refactored the entire documentation repository to eliminate hardcod
 Created two new helper includes for accessing current contract objects:
 
 - **[_includes/uniteum_contract.html](_includes/uniteum_contract.html)** - Returns current Uniteum contract object
-- **[_includes/kiosk_contract.html](_includes/kiosk_contract.html)** - Returns current Kiosk contract object
-
-These are not actively used yet but available for future use.
 
 ### 2. Updated Documentation Files
 
@@ -54,21 +51,18 @@ Complete rewrite to be fully data-driven:
 ```bash
 # Hardcoded version extraction
 UNITEUM_0_3=$(grep -A5 "^  v0_3:" ...)
-KIOSK_0_3=$(grep -A5 "kiosk:" "$CONTRACTS_FILE" | grep -A5 "v0_3:" ...)
 ```
 
 **After:**
 ```bash
 # Data-driven version extraction
 CURRENT_UNITEUM_VERSION=$(yq eval '.current.uniteum' "$CONTRACTS_FILE")
-CURRENT_KIOSK_VERSION=$(yq eval '.current.kiosk' "$CONTRACTS_FILE")
 UNITEUM_CURRENT=$(yq eval ".uniteum.${CURRENT_UNITEUM_VERSION}.mainnet" "$CONTRACTS_FILE")
-KIOSK_CURRENT=$(yq eval ".kiosk.${CURRENT_KIOSK_VERSION}.mainnet" "$CONTRACTS_FILE")
 ```
 
 **Generated .env changes:**
-- Old: `UNITEUM_0_3=...`, `KIOSK_0_3=...`
-- New: `UNITEUM_CURRENT=...`, `KIOSK_CURRENT=...`
+- Old: `UNITEUM_0_3=...`
+- New: `UNITEUM_CURRENT=...`
 - Aliases now point to `$UNITEUM_CURRENT` instead of `$UNITEUM_0_3`
 
 ### 4. Documentation Pattern
@@ -126,7 +120,6 @@ When deploying v0.4, the workflow is now:
    ```yaml
    current:
      uniteum: "v0_4"  # Changed from v0_3
-     kiosk: "v0_4"
    ```
 
 3. **Regenerate .env** (if needed):
@@ -151,7 +144,6 @@ All documentation, includes, and scripts automatically use the new version.
 ## Files Created
 
 - [_includes/uniteum_contract.html](_includes/uniteum_contract.html)
-- [_includes/kiosk_contract.html](_includes/kiosk_contract.html)
 
 ## Next Steps
 

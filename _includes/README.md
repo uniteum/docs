@@ -76,7 +76,6 @@ Contract data is defined in `_data/contracts.yml`:
 ```yaml
 current:
   uniteum: "v0_3"  # Update this pointer when releasing new versions
-  kiosk: "v0_3"
 
 uniteum:
   v0_3:

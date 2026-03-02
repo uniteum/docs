@@ -57,7 +57,6 @@ Generates `.env` file from `contracts.yml` with current contract addresses.
 **Output:**
 ```bash
 UNITEUM_CURRENT=0x419d44A1d28e5B8e320Ee31Cc04dC1C75B8b89da
-KIOSK_CURRENT=0xBFdf4Cf25EC0DB0Be49a04213D230495291C6fFA
 HELPER_CURRENT=0x456dcb7a3f7d9A6DB77DDf6a4eA8B10453acF7F9
 ONE=$UNITEUM_CURRENT
 HELPER=$HELPER_CURRENT
@@ -171,7 +170,6 @@ Contract addresses for all versions and networks.
 ```yaml
 current:
   uniteum: "v0_5"
-  kiosk: "v0_5"
   helper: "v0_5"
 
 uniteum:

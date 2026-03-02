@@ -13,12 +13,6 @@ genesis:
   address: "0x7D5B1349157335aEEB929080a51003B529758830"
   ens: "1.uniteum.eth"
 
-kiosk:
-  name: "Buy Uniteum 0.5 '1'"
-  description: "Kiosk for purchasing Uniteum 0.5 tokens"
-  address: "0xBFdf4Cf25EC0DB0Be49a04213D230495291C6fFA"
-  ens: "buy.uniteum.eth"
-
 helper:
   name: "Unit Helper"
   description: "Helper contract for Uniteum"

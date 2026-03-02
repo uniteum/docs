@@ -32,34 +32,9 @@ This guide walks you through your first interactions with Uniteum.
 
 The "1" token is the liquidity backbone of Uniteum. You need "1" tokens to create units, forge, and use the full Uniteum feature set.
 
-### One-Step Purchase (Recommended)
+### Migration from v0.0
 
-**The easiest way:** Send ETH directly to `{{ site.data.contracts.kiosk.ens }}` (resolves to {% include etherscan.html address=site.data.contracts.kiosk.address section="code" text=site.data.contracts.kiosk.address %}). Your "1" tokens will be returned automatically.
-
-**Alternative:** Call `buy()` on the {% include etherscan.html address=site.data.contracts.kiosk.address section="writeContract" text="Kiosk contract via Etherscan" %} with ETH attached.
-
-**What happens behind the scenes:**
-- The Kiosk buys v0.0 tokens from the genesis Discount Kiosk
-- Automatically migrates them to the current version
-- Sends you the tokens—ready to use immediately
-
-**Alternative (v0.0 only):** Send ETH to `buy.0-0.uniteum.eth` (resolves to {% include etherscan.html address="0x64dB548312da6D88fB4016157e521d9f2f65AFFc" section="code" text="0x64dB548312da6D88fB4016157e521d9f2f65AFFc" %}) to receive v0.0 tokens, then manually migrate (see below).
-
-*(Secondary markets do not yet exist, but if they emerge, you can also acquire "1" tokens there.)*
-
-### Why Buy from the Kiosk?
-
-Beyond supporting ongoing development, you're:
-- Acquiring the universal liquidity token for the entire ecosystem
-- Taking an early position if the ["1" as value index](/uniteum/economics-of-one/) hypothesis proves correct
-- Enabling yourself to create units, forge, and experiment
-- Participating in novel mechanism design from the ground up
-
-The Kiosk uses linear discount pricing—price increases as inventory depletes toward capacity. Early acquisition is cheaper and positions you before broader discovery.
-
-## Step 2: Manual Migration (Optional)
-
-If you already have v0.0 "1" tokens or bought them directly from the genesis Discount Kiosk, you can manually migrate to the current version.
+If you have v0.0 "1" tokens, you can migrate them to the current version.
 
 **Why migrate?** Genesis "1" (v0.0) is a simple ERC-20 that holds the primordial 1 billion token supply (the ceiling for all versions). The current contract implements all the core Uniteum mechanisms: algebraic unit composition, forge operations, invariant enforcement, and reciprocal pairs. The v0.0 token exists only as the primordial supply source.
 

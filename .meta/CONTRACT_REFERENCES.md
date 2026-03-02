@@ -12,7 +12,6 @@ Edit [_data/contracts.yml](_data/contracts.yml):
 # Update the current version pointer
 current:
   uniteum: "v0_4"  # Change this when releasing new version
-  kiosk: "v0_4"
 
 # Add new version data
 uniteum:
@@ -32,7 +31,6 @@ uniteum:
 **Version-agnostic (recommended):**
 ```liquid
 {% include uniteum.html %}
-{% include kiosk.html %}
 ```
 
 **In code blocks:**
@@ -51,7 +49,6 @@ IUnit one = IUnit({% include uniteum_address.html %});
 ### Version-Agnostic (Recommended)
 
 - `uniteum.html` - Current Uniteum contract link
-- `kiosk.html` - Current Kiosk contract link
 - `uniteum_address.html` - Current Uniteum address (for code blocks)
 
 These automatically use the version defined in `current:` section of `_data/contracts.yml`.
@@ -71,14 +68,9 @@ All contracts defined in [_data/contracts.yml](_data/contracts.yml):
 # Version pointers (update these when releasing)
 current:
   uniteum: "v0_3"
-  kiosk: "v0_3"
 
 # Contract data
 uniteum:
-  v0_3: { ... }
-  v0_0: { ... }
-
-kiosk:
   v0_3: { ... }
   v0_0: { ... }
 
@@ -124,8 +116,6 @@ Benefits:
 ## Getting Started
 
 Deploy to {% include uniteum.html %}.
-
-Purchase tokens from {% include kiosk.html section="writeContract" %}.
 
 \`\`\`solidity
 IUnit one = IUnit({% include uniteum_address.html %});
@@ -175,7 +165,6 @@ When you deploy v0.4:
    ```yaml
    current:
      uniteum: "v0_4"  # Changed from v0_3
-     kiosk: "v0_4"
    ```
 
 3. **Commit and push**. Done!
@@ -190,7 +179,6 @@ docs/
 │   └── contracts.yml              # Single source of truth with version pointers
 ├── _includes/
 │   ├── uniteum.html              # Current Uniteum link (version-agnostic)
-│   ├── kiosk.html                # Current Kiosk link (version-agnostic)
 │   ├── uniteum_address.html      # Current Uniteum address (for code)
 │   ├── contract_link.html        # Generic single link
 │   ├── contract_table.html       # Generic table

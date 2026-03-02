@@ -34,9 +34,7 @@ uniteum.eth
 │                               (Buy Uniteum 0.0 '1')
 │
 ├── {{ site.data.contracts.uniteum.ens }}          → {{ site.data.contracts.uniteum.address }}
-│   │                           ({{ site.data.contracts.uniteum.name }})
-│   └── {{ site.data.contracts.kiosk.ens }}  → {{ site.data.contracts.kiosk.address }}
-│                               ({{ site.data.contracts.kiosk.name }})
+│                               ({{ site.data.contracts.uniteum.name }})
 │
 ├── eoa.uniteum.eth          → 0x6056...496e
 │   ├── 0.eoa.uniteum.eth    → 0xff96a8c70dcc85a0cc4d690bfc02166a90e71004

@@ -38,14 +38,6 @@ All Uniteum contracts are deployed using Nick's deterministic deployer, resultin
 
 {% include contract_table.html contract=site.data.contracts.genesis %}
 
-## Kiosk Contracts
-
-### {{ site.data.contracts.kiosk.name }}
-
-{{ site.data.contracts.kiosk.description }}
-
-{% include contract_table.html contract=site.data.contracts.kiosk %}
-
 ## Deployment
 
 ### Deployer

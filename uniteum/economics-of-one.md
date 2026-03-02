@@ -494,15 +494,12 @@ These hypotheses raise questions that can only be answered through observation:
 
 ## Participating in the Experiment
 
-If these hypotheses intrigue you, the most direct way to participate is to acquire "1" tokens via the {% include etherscan.html address=site.data.contracts.kiosk.address section="writeContract" text="Discount Kiosk" %}.
+If these hypotheses intrigue you, the most direct way to participate is to acquire "1" tokens and experiment with the protocol. See [Getting Started](/uniteum/getting-started/) for how to obtain tokens.
 
-This isn't just financial support—it's a position in the experiment:
-- You hold the universal liquidity token
-- If the value index hypothesis holds, early accumulation matters
-- You can create units, provide liquidity, test the mechanism
-- Your participation contributes to the bootstrapping question
-
-The Kiosk's linear discount pricing means earlier buyers pay less (price increases as inventory depletes). Acquire now before wider discovery.
+With "1" tokens you can:
+- Create units, provide liquidity, test the mechanism
+- Hold the universal liquidity token
+- Contribute to answering the bootstrapping question
 
 ## Related Concepts
 

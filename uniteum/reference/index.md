@@ -37,7 +37,6 @@ Technical reference documentation for developers and advanced users.
 |----------|---------|
 | {{ site.data.contracts.uniteum.name }} | {% include etherscan.html address=site.data.contracts.uniteum.address section="code" text=site.data.contracts.uniteum.address %} |
 | {{ site.data.contracts.genesis.name }} | {% include etherscan.html address=site.data.contracts.genesis.address section="code" text=site.data.contracts.genesis.address %} |
-| {{ site.data.contracts.kiosk.name }} | {% include etherscan.html address=site.data.contracts.kiosk.address section="code" text=site.data.contracts.kiosk.address %} |
 
 ### Networks
 

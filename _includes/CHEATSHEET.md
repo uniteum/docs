@@ -20,11 +20,6 @@ Quick copy-paste snippets for common scenarios.
 IUnit one = IUnit({% include uniteum_address.html %});
 ```
 
-### Current Kiosk
-```liquid
-{% include kiosk.html %}
-```
-
 ### Custom Link Text
 ```liquid
 {% include uniteum.html text="the Uniteum contract" %}
@@ -42,11 +37,9 @@ These automatically use the current version defined in `_data/contracts.yml`:
 ### Get Current Contracts
 ```liquid
 {%- assign uniteum = site.data.contracts.uniteum[site.data.contracts.current.uniteum] %}
-{%- assign kiosk = site.data.contracts.kiosk[site.data.contracts.current.kiosk] %}
 
 {{ uniteum.name }}        # "Uniteum 0.3 '1'"
 {{ uniteum.mainnet }}     # "0x210C..."
-{{ kiosk.name }}          # "Buy Uniteum 0.3 '1'"
 ```
 
 ### In Code Blocks
@@ -59,7 +52,6 @@ IUnit one = IUnit({% include uniteum_address.html %});
 ### In Documentation
 ```liquid
 Deploy to {% include uniteum.html %}.
-Purchase from {% include kiosk.html section="writeContract" %}.
 ```
 
 ## Specific Version Access (When Needed)
@@ -116,7 +108,6 @@ When you release a new version, edit `_data/contracts.yml`:
 ```yaml
 current:
   uniteum: "v0_4"  # Changed from v0_3
-  kiosk: "v0_4"    # Changed from v0_3
 ```
 
 All documentation automatically updates!

@@ -36,8 +36,6 @@ From `scripts/.env`:
 ```bash
 UNITEUM_0_1         # Current version '1' token (0x9df9...)
 UNITEUM_0_0         # Genesis '1' token (0xC833...)
-DISCOUNT_KIOSK      # v0.0 kiosk (0x5581...)
-MIGRATING_KIOSK     # v0.1 kiosk (0xb1e1...)
 ONE                 # Alias for UNITEUM_0_1
 GENESIS             # Alias for UNITEUM_0_0
 ```

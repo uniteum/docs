@@ -31,7 +31,6 @@
 
 **Examples:**
 - "Go to the [Uniteum contract](https://etherscan.io/address/0x5bA...#writeContract)"
-- "You can [buy '1' tokens from the Discount Kiosk](https://etherscan.io/address/0xffA...#writeContract)"
 - "Check the [current Uniteum contract](https://etherscan.io/address/0x5bA...#code)"
 
 ---
@@ -237,22 +236,17 @@ Use `/tx/` path with `type="tx"`:
 
 ```liquid
 {% assign current_uniteum = site.data.contracts.uniteum[site.data.contracts.current.uniteum] -%}
-{% assign current_kiosk = site.data.contracts.kiosk[site.data.contracts.current.kiosk] -%}
 
 | Contract | Mainnet | Sepolia |
 |----------|---------|---------|
 | {{ current_uniteum.name }} | {% include etherscan.html address=current_uniteum.mainnet section="code" text=current_uniteum.mainnet %} | {% include etherscan.html address=current_uniteum.sepolia network="sepolia" section="code" text=current_uniteum.sepolia %} |
-| {{ current_kiosk.name }} | {% include etherscan.html address=current_kiosk.mainnet section="code" text=current_kiosk.mainnet %} | {% include etherscan.html address=current_kiosk.sepolia network="sepolia" section="code" text=current_kiosk.sepolia %} |
 ```
 
 ### 3. Call to Action
 
 ```liquid
-If this work interests you and you'd like to participate: the best way to contribute is to
-{% include etherscan.html
-   address="0xffAcC47570dfE1B1980b0475b13Fb07479CEf7EA"
-   section="writeContract"
-   text="buy \"1\" tokens from the Discount Kiosk" %}.
+If this work interests you and you'd like to participate, see
+[Getting Started](/uniteum/getting-started/) for how to acquire "1" tokens.
 ```
 
 ### 4. Unit Token Reference

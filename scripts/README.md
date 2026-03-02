@@ -101,7 +101,7 @@ Generates `scripts/.env` from `_data/contracts.yml`. Run once after cloning or w
 ./scripts/generate-env.sh
 ```
 
-**Output:** `scripts/.env` with `ONE`, `GENESIS`, `KIOSK`, `HELPER` variables.
+**Output:** `scripts/.env` with `ONE`, `GENESIS`, `HELPER` variables.
 
 ### `compute-all-addresses.sh`
 

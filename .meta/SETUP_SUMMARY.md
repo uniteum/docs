@@ -11,7 +11,6 @@ Set up a **truly version-agnostic** data-driven contract reference system for Je
 ```yaml
 current:
   uniteum: "v0_4"  # Change this → all docs update automatically
-  kiosk: "v0_4"
 ```
 
 No more `v0_3` sprinkled throughout documentation!
@@ -22,13 +21,11 @@ No more `v0_3` sprinkled throughout documentation!
 - **[_data/contracts.yml](_data/contracts.yml)** - Single source of truth
   - **`current:` section** - Version pointers (update when releasing)
   - Uniteum contracts (v0.3, v0.0)
-  - Kiosk contracts (v0.3, v0.0)
   - Deployer addresses
   - Common tokens (WETH, USDC, USDT, WBTC, DAI)
 
 ### Version-Agnostic Includes
 - **[_includes/uniteum.html](_includes/uniteum.html)** - Current Uniteum contract link
-- **[_includes/kiosk.html](_includes/kiosk.html)** - Current Kiosk contract link
 - **[_includes/uniteum_address.html](_includes/uniteum_address.html)** - Current Uniteum address (for code blocks)
 
 ### General Includes
@@ -143,7 +140,6 @@ docs/
 │   └── contracts.yml                  # Version pointers + contract data
 ├── _includes/
 │   ├── uniteum.html                  # {% include uniteum.html %}
-│   ├── kiosk.html                    # {% include kiosk.html %}
 │   ├── uniteum_address.html          # {% include uniteum_address.html %}
 │   ├── contract_link.html            # Generic link
 │   ├── contract_table.html           # Generic table
@@ -214,11 +210,6 @@ See [_includes/CHEATSHEET.md](_includes/CHEATSHEET.md) for copy-paste snippets.
 **Link to current Uniteum:**
 ```liquid
 {% include uniteum.html %}
-```
-
-**Link to current Kiosk:**
-```liquid
-{% include kiosk.html %}
 ```
 
 **Address in code:**

@@ -50,9 +50,7 @@ No known issues. See [Known Issues](/uniteum/known-issues/) for version history 
 
 ## Support This Experiment
 
-If this work interests you and you'd like to participate: the best way to contribute is to {% include etherscan.html address="0x55816c3e5d999e2f45ce0146ffd89b2e78a56dc9" section="writeContract" text="buy \"1\" tokens from the Discount Kiosk" %}. You're not just supporting development—you're acquiring the liquidity backbone of the system and becoming part of the experiment.
-
-The Kiosk uses linear discount pricing—price increases as inventory depletes. Early acquisition is cheaper.
+If this work interests you and you'd like to participate, see [Getting Started](/uniteum/getting-started/) for how to acquire "1" tokens. You're not just supporting development—you're acquiring the liquidity backbone of the system and becoming part of the experiment.
 
 Early "1" token holders may benefit if the [value hypothesis](/uniteum/economics-of-one/) holds: as anchored collateral and participation grow, "1" could reflect aggregate system value.
 
@@ -70,4 +68,3 @@ Early "1" token holders may benefit if the [value hypothesis](/uniteum/economics
 |----------|---------|
 | {{ site.data.contracts.uniteum.name }} | {% include etherscan.html address=site.data.contracts.uniteum.address section="code" text=site.data.contracts.uniteum.address %} |
 | {{ site.data.contracts.genesis.name }} | {% include etherscan.html address=site.data.contracts.genesis.address section="code" text=site.data.contracts.genesis.address %} |
-| {{ site.data.contracts.kiosk.name }} | {% include etherscan.html address=site.data.contracts.kiosk.address section="code" text=site.data.contracts.kiosk.address %} |

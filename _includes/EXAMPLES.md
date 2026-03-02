@@ -129,7 +129,6 @@ title: Getting Started
 {%- assign current_uniteum_version = site.data.contracts.current.uniteum -%}
 {%- assign uniteum = site.data.contracts.uniteum[current_uniteum_version] -%}
 {%- assign genesis = site.data.contracts.uniteum.v0_0 -%}
-{%- assign genesis_kiosk = site.data.contracts.kiosk.v0_0 -%}
 
 # Getting Started with Uniteum
 
@@ -139,11 +138,7 @@ You'll need to interact with {{ uniteum.name }} at:
 
 {% include contract_table.html contract=uniteum %}
 
-## Step 1: Buy Genesis Tokens
-
-Purchase tokens from {% include contract_link.html contract=genesis_kiosk section="writeContract" text="the v0.0 kiosk" %}.
-
-## Step 2: Migrate to Current Version
+## Step 1: Migrate to Current Version
 
 Migrate your tokens using the {% include contract_link.html contract=uniteum section="writeContract" text="migrate function" %}.
 

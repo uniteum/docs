@@ -183,8 +183,6 @@ uniteum:
     
   supply:
     total: "1000000000" # 1 billion
-    kiosk: "900000000"  # 900M
-    reserve: "100000000" # 100M
     
   networks:
     - name: "Ethereum Mainnet"
