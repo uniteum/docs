@@ -150,4 +150,4 @@ The 2x mint creates several emergent properties that follow from the mechanism:
 
 **No liquidity mining needed.** Protocols typically incentivize liquidity with token rewards because LP provision is a separate, voluntary step. When every deposit automatically creates liquidity, the incentive problem disappears.
 
-**Variable redemption ratio.** Because the pool's token balance changes through trading (buys remove tokens, sells add them), the cool operation doesn't always return exactly 1:1. On average across all users it approaches 1:1, but individual redemptions depend on the pool distribution at the time of cooling. This is the cost of the automatic liquidity — your wrapped tokens carry implicit LP exposure.
+**Variable redemption ratio.** Because the pool's token balance changes through trading (buys remove tokens, sells add them), the cool operation doesn't always return exactly 1:1. On average across all users it approaches 1:1, but individual redemptions depend on the pool distribution at the time of cooling. Your wrapped tokens carry implicit LP exposure — which can work for or against you depending on how the pool has been traded since you deposited.
