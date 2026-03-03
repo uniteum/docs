@@ -10,6 +10,9 @@ nav_order: 4
 
 > How a simple, fee-free liquidity protocol could become the backbone of tokenized finance
 
+{: .warning }
+> **Author's note:** This page is aspirational by design. It presents the most optimistic case for Liquid — the version where everything goes right, adoption curves steepen on schedule, and trillion-dollar projections materialize. Real outcomes will be messier, slower, and smaller. Read this as a directional argument for *why* the architecture matters, not as a forecast of what *will* happen.
+
 ## The Inflection Point
 
 We stand at the threshold of the largest capital migration in human history: the tokenization of real-world assets. Goldman Sachs estimates this market will reach **$16 trillion by 2030**. McKinsey projects **$2 trillion in annual transaction volume** by 2030 for tokenized money-market funds alone. Boston Consulting Group forecasts the tokenized asset market could hit **$16 trillion by 2030**, representing roughly 10% of global GDP.
