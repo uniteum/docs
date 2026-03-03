@@ -142,6 +142,7 @@ exclude:
   - .gitignore
   - .git/
   - CLAUDE.md
+  - "**/CLAUDE.md"
   - lib/
   - EXAMPLE_UNITS_SUMMARY.md
   - scripts/
