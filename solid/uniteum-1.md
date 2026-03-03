@@ -51,7 +51,7 @@ It's not a donation. It's not an investment. It's somewhere in between — a way
 | **Name** | Uniteum 1 |
 | **Symbol** | 1 |
 | **Contract** | [{{site.data.solids["1"].address}}](https://etherscan.io/token/{{site.data.solids["1"].address}}){:target="_blank"} |
-| **NOTHING** | [{{site.data.solids["1"].NOTHING}}](https://etherscan.io/address/{{site.data.solids["1"].NOTHING}}){:target="_blank"} |
+| **NOTHING** | [{{site.data.solids.NOTHING.address}}](https://etherscan.io/address/{{site.data.solids.NOTHING.address}}){:target="_blank"} |
 | **Network** | Ethereum Mainnet |
 
 You can interact with Uniteum 1 directly on [Etherscan](https://etherscan.io/token/{{site.data.solids["1"].address}}){:target="_blank"} — no special interface required.

@@ -81,3 +81,24 @@ WETH:
 ```
 
 **Result:** `address` is the universal primary field everywhere. `sepolia` (or other network fields) are optional overrides for external contracts that differ on testnets.
+
+## Avoiding Redundancy
+
+Don't repeat data that can be looked up from another entry or file.
+
+❌ WRONG: Denormalized constant repeated on every entry
+```yaml
+foo:
+  address: "0x..."
+  one: "0xace4..."    # same on every entry — just use contracts.yml
+bar:
+  address: "0x..."
+  one: "0xace4..."
+```
+
+✅ CORRECT: Look up shared values from their canonical location
+```liquid
+{{ site.data.contracts.uniteum.address }}
+```
+
+**Note on `units.yml`:** The `canonical` field is NOT redundant with the map key. The key is the user-facing input form (e.g., `s*m`), while `canonical` is the protocol's normalized form (e.g., `m*s` — alphabetically sorted).
