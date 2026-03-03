@@ -9,7 +9,7 @@ Conventions for all YAML data files in this directory.
 ✅ CORRECT: Separate files for different schemas
 ```
 _data/contracts.yml    ← all entries have name, description, address, ens
-_data/tokens.yml       ← all entries have name, mainnet, sepolia
+_data/tokens.yml       ← all entries have name, address, sepolia
 ```
 
 ❌ WRONG: Mixed schemas in one file
@@ -72,12 +72,12 @@ uniteum:
   sepolia: "0xace4..."
 ```
 
-**External contracts** (e.g., WETH, USDC) may have different addresses per network. Use per-network fields (`mainnet`, `sepolia`, etc.) only for these.
+**External contracts** (e.g., WETH, USDC) may have different addresses per network. Use `address` for the primary (mainnet) address plus optional per-network overrides (e.g., `sepolia`).
 
 ```yaml
 WETH:
-  mainnet: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
+  address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
   sepolia: "0x7b79995e5f793A07Bc00c21412e50Ecae098E7f9"
 ```
 
-**Rule of thumb:** If the address is the same everywhere, use `address`. If it differs by network, use named network fields.
+**Result:** `address` is the universal primary field everywhere. `sepolia` (or other network fields) are optional overrides for external contracts that differ on testnets.

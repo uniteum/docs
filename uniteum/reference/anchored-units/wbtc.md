@@ -17,16 +17,16 @@ last_updated: 2024-12-18
 ## What This Represents
 
 {% assign wbtc = site.data.tokens.WBTC -%}
-In Uniteum documentation, `0xWBTC` is a **readable shorthand** for an anchored unit backed by {% include token.html address=wbtc.mainnet text="Wrapped Bitcoin (WBTC)" %}.
+In Uniteum documentation, `0xWBTC` is a **readable shorthand** for an anchored unit backed by {% include token.html address=wbtc.address text="Wrapped Bitcoin (WBTC)" %}.
 
 The actual Uniteum symbol uses the full WBTC contract address:
 ```
-{{ wbtc.mainnet }}
+{{ wbtc.address }}
 ```
 
 ## Backing Token
 
-**WBTC Contract:** {% include token.html address=wbtc.mainnet text=wbtc.mainnet %}
+**WBTC Contract:** {% include token.html address=wbtc.address text=wbtc.address %}
 
 Wrapped Bitcoin is Bitcoin represented as an ERC-20 token on Ethereum. 1 WBTC = 1 BTC, backed by Bitcoin held by custodians.
 
@@ -53,10 +53,10 @@ Wrapped Bitcoin is Bitcoin represented as an ERC-20 token on Ethereum. 1 WBTC = 
 IUnit one = IUnit({% include uniteum_address.html %});
 
 // Create anchored WBTC unit
-IERC20 wbtc = IERC20({{ site.data.tokens.WBTC.mainnet }});
+IERC20 wbtc = IERC20({{ site.data.tokens.WBTC.address }});
 IUnit wbtcUnit = one.anchored(wbtc);
 
-// wbtcUnit.symbol() returns: "{{ site.data.tokens.WBTC.mainnet }}"
+// wbtcUnit.symbol() returns: "{{ site.data.tokens.WBTC.address }}"
 ```
 
 ## Reciprocal Unit

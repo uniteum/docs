@@ -17,16 +17,16 @@ last_updated: 2024-12-18
 ## What This Represents
 
 {% assign usdc = site.data.tokens.USDC -%}
-In Uniteum documentation, `0xUSDC` is a **readable shorthand** for an anchored unit backed by {% include token.html address=usdc.mainnet text="USD Coin (USDC)" %}.
+In Uniteum documentation, `0xUSDC` is a **readable shorthand** for an anchored unit backed by {% include token.html address=usdc.address text="USD Coin (USDC)" %}.
 
 The actual Uniteum symbol uses the full USDC contract address:
 ```
-{{ usdc.mainnet }}
+{{ usdc.address }}
 ```
 
 ## Backing Token
 
-**USDC Contract:** {% include token.html address=usdc.mainnet text=usdc.mainnet %}
+**USDC Contract:** {% include token.html address=usdc.address text=usdc.address %}
 
 USD Coin is a stablecoin pegged to the US Dollar, issued by Circle. Intended to maintain 1 USDC = $1 USD.
 
@@ -57,10 +57,10 @@ Anyone can create floating units with labels like "USDC" or "USD". They have NO 
 IUnit one = IUnit({% include uniteum_address.html %});
 
 // Create anchored USDC unit
-IERC20 usdc = IERC20({{ site.data.tokens.USDC.mainnet }});
+IERC20 usdc = IERC20({{ site.data.tokens.USDC.address }});
 IUnit usdcUnit = one.anchored(usdc);
 
-// usdcUnit.symbol() returns: "{{ site.data.tokens.USDC.mainnet }}"
+// usdcUnit.symbol() returns: "{{ site.data.tokens.USDC.address }}"
 ```
 
 ## Reciprocal Unit: Depeg Hedge
