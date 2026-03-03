@@ -77,11 +77,9 @@ Current contract addresses are maintained in `_data/contracts.yml`. Key contract
 - **Helper**: `site.data.contracts.helper`
 - **Deployer**: `site.data.contracts.deployer`
 
-**Address field**: Use `.address` (not `.mainnet` — `sepolia` field removed, same address on all networks).
+All our contracts use deterministic deployment (same address on all networks). Use `.address` to access. See `_data/CLAUDE.md` for the address field convention (single `address` for our contracts, per-network fields for external contracts).
 
-**IMPORTANT**: No version indirection. Access data directly: `site.data.contracts.uniteum.address`, not `site.data.contracts.uniteum[site.data.contracts.current.uniteum].mainnet`.
-
-All contracts use Nick's deterministic deployer (same addresses across networks).
+**IMPORTANT**: No version indirection. Access data directly: `site.data.contracts.uniteum.address`.
 
 ## Project Status
 

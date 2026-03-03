@@ -54,3 +54,30 @@ Use maps keyed by identifier, not arrays. This enables direct lookup (`site.data
 ❌ `- symbol: weth` / `- symbol: usdc` (array)
 
 Exception: arrays are acceptable when there is no natural key or ordering is the primary concern (e.g., a list of references).
+
+## Address Fields
+
+**Our contracts** use deterministic deployment (Nick's deployer / CREATE2) and have identical addresses on all networks including testnets. Use a single `address` field.
+
+✅ CORRECT: Single `address` field (our contracts)
+```yaml
+uniteum:
+  address: "0xace41cf6d750d7ba06f4de57ac9e063246b2b090"
+```
+
+❌ WRONG: Network-split fields for our contracts
+```yaml
+uniteum:
+  mainnet: "0xace4..."
+  sepolia: "0xace4..."
+```
+
+**External contracts** (e.g., WETH, USDC) may have different addresses per network. Use per-network fields (`mainnet`, `sepolia`, etc.) only for these.
+
+```yaml
+weth:
+  mainnet: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
+  sepolia: "0x7b79995e5f793A07Bc00c21412e50Ecae098E7f9"
+```
+
+**Rule of thumb:** If the address is the same everywhere, use `address`. If it differs by network, use named network fields.
