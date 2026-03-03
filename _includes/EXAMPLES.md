@@ -153,11 +153,11 @@ For testing on Sepolia, use {% include contract_link.html contract=uniteum netwo
 
 ```liquid
 {%- comment -%} Reference common tokens {%- endcomment -%}
-WETH address: {{ site.data.tokens.weth.mainnet }}
+WETH address: {{ site.data.tokens.WETH.mainnet }}
 
-Create anchored unit for {% include contract_link.html contract=site.data.tokens.usdc text="USDC" %}:
+Create anchored unit for {% include contract_link.html contract=site.data.tokens.USDC text="USDC" %}:
 \`\`\`solidity
-one().anchored(IERC20({{ site.data.tokens.usdc.mainnet }}))
+one().anchored(IERC20({{ site.data.tokens.USDC.mainnet }}))
 \`\`\`
 ```
 

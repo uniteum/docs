@@ -94,11 +94,11 @@ section="events"         # Event logs
 Tokens don't have versions, just direct reference:
 
 ```liquid
-{{ site.data.tokens.weth.mainnet }}
-{{ site.data.tokens.usdc.mainnet }}
-{{ site.data.tokens.usdt.mainnet }}
-{{ site.data.tokens.wbtc.mainnet }}
-{{ site.data.tokens.dai.mainnet }}
+{{ site.data.tokens.WETH.mainnet }}
+{{ site.data.tokens.USDC.mainnet }}
+{{ site.data.tokens.USDT.mainnet }}
+{{ site.data.tokens.WBTC.mainnet }}
+{{ site.data.tokens.DAI.mainnet }}
 ```
 
 ## Updating Current Version
@@ -132,7 +132,7 @@ For testing on Sepolia, use {% include uniteum.html network="sepolia" section="w
 IUnit one = IUnit({% include uniteum_address.html %});
 
 // Create anchored USDC unit
-IERC20 usdc = IERC20({{ site.data.tokens.usdc.mainnet }});
+IERC20 usdc = IERC20({{ site.data.tokens.USDC.mainnet }});
 IUnit usdcUnit = one.anchored(usdc);
 \`\`\`
 ```

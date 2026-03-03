@@ -9,7 +9,7 @@ Conventions for all YAML data files in this directory.
 ✅ CORRECT: Separate files for different schemas
 ```
 _data/contracts.yml    ← all entries have name, description, address, ens
-_data/tokens.yml       ← all entries have name, symbol, mainnet, sepolia
+_data/tokens.yml       ← all entries have name, mainnet, sepolia
 ```
 
 ❌ WRONG: Mixed schemas in one file
@@ -48,10 +48,10 @@ dai:
 
 ## Collections: Maps not Arrays
 
-Use maps keyed by identifier, not arrays. This enables direct lookup (`site.data.tokens.weth`) without searching.
+Use maps keyed by identifier, not arrays. This enables direct lookup (`site.data.tokens.WETH`) without searching.
 
-✅ `weth:` / `usdc:` / `dai:` (keyed map)
-❌ `- symbol: weth` / `- symbol: usdc` (array)
+✅ `WETH:` / `USDC:` / `DAI:` (keyed map)
+❌ `- symbol: WETH` / `- symbol: USDC` (array)
 
 Exception: arrays are acceptable when there is no natural key or ordering is the primary concern (e.g., a list of references).
 
@@ -75,7 +75,7 @@ uniteum:
 **External contracts** (e.g., WETH, USDC) may have different addresses per network. Use per-network fields (`mainnet`, `sepolia`, etc.) only for these.
 
 ```yaml
-weth:
+WETH:
   mainnet: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
   sepolia: "0x7b79995e5f793A07Bc00c21412e50Ecae098E7f9"
 ```
