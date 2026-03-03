@@ -21,5 +21,6 @@ helper:
 
 deployer:
   name: "Main Deployer EOA"
+  description: "Creator EOA used for deterministic deployments"
   address: "0xff96a8c70dcc85a0cc4d690bfc02166a90e71004"
   ens: "0.eoa.uniteum.eth"
