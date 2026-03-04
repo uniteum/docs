@@ -126,6 +126,7 @@ All our contracts use deterministic deployment (same address on all networks). U
 
 ### Writing Guidelines
 
+- Never hardcode values that exist in `_data/` files — always reference the data
 - Lead with concrete examples before theory
 - Include Etherscan transaction links for everything
 - Link related concepts bidirectionally
