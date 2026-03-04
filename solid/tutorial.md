@@ -152,18 +152,18 @@ The result is how many He tokens you'd receive.
 
 ## Quick reference
 
-| Action | Function | Tab | Payable | No approval needed |
-|:-------|:---------|:----|:--------|:-------------------|
-| Create | `make(name, symbol)` | Write | No | — |
-| Check existence | `made(name, symbol)` | Read | — | — |
-| Buy | `buy()` | Write | **Yes** (send ETH) | — |
-| Sell | `sell(s)` | Write | No | Yes |
-| Swap | `sellFor(that, s)` | Write | No | Yes |
-| Preview buy | `buys(e)` | Read | — | — |
-| Preview sell | `sells(s)` | Read | — | — |
-| Preview swap | `sellsFor(that, s)` | Read | — | — |
-| Pool state | `pool()` | Read | — | — |
-| Your balance | `balanceOf(address)` | Read | — | — |
+| Action | Function | Payable | No approval needed |
+|:-------|:---------|:--------|:-------------------|
+| Create | [`make(name, symbol)`](https://etherscan.io/token/{{site.data.solids.NOTHING.address}}#writeContract#F3){:target="_blank"} | No | — |
+| Check existence | [`made(name, symbol)`](https://etherscan.io/token/{{site.data.solids.NOTHING.address}}#readContract#F7){:target="_blank"} | — | — |
+| Buy | [`buy()`](https://etherscan.io/token/{{site.data.solids.H.address}}#writeContract#F2){:target="_blank"} | **Yes** (send ETH) | — |
+| Sell | [`sell(s)`](https://etherscan.io/token/{{site.data.solids.H.address}}#writeContract#F4){:target="_blank"} | No | Yes |
+| Swap | [`sellFor(that, s)`](https://etherscan.io/token/{{site.data.solids.H.address}}#writeContract#F5){:target="_blank"} | No | Yes |
+| Preview buy | [`buys(e)`](https://etherscan.io/token/{{site.data.solids.H.address}}#readContract#F5){:target="_blank"} | — | — |
+| Preview sell | [`sells(s)`](https://etherscan.io/token/{{site.data.solids.H.address}}#readContract#F10){:target="_blank"} | — | — |
+| Preview swap | [`sellsFor(that, s)`](https://etherscan.io/token/{{site.data.solids.H.address}}#readContract#F11){:target="_blank"} | — | — |
+| Pool state | [`pool()`](https://etherscan.io/token/{{site.data.solids.H.address}}#readContract#F9){:target="_blank"} | — | — |
+| Your balance | [`balanceOf(address)`](https://etherscan.io/token/{{site.data.solids.H.address}}#readContract#F4){:target="_blank"} | — | — |
 
 All amounts use 18 decimals. 1 token = `1000000000000000000` wei.
 
