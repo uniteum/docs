@@ -62,6 +62,7 @@ This project uses both **Claude** and **ChatGPT** for documentation and developm
 - `.meta/CHATGPT.md` - ChatGPT's guidelines and constraints
 - `.meta/PROJECT_CONSTITUTION.md` - Normative rules (authoritative alongside Unit.json)
 - `.meta/HANDOFF_TEMPLATE.md` - Template for handoffs between AI assistants
+- `.meta/EXAMPLES.md` - Cross-protocol convention for worked examples (load when creating/editing examples)
 
 **Authoritative sources (in order):**
 1. Unit.json (compiled source bundle / canonical reference for implementation intent)
