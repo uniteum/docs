@@ -1,0 +1,16 @@
+# Liquid Protocol - Deployed Contracts
+# All contracts use deterministic deployment (same address on all networks).
+
+hub:
+  name: Hub
+  address: "0x67f7ec69555335f4a3942EA81dFd86694F1446F0"
+
+# Spoke tokens
+# Key identifies the spoke by its backing token's symbol.
+
+# TODO: add spokes once created, e.g.:
+# H:
+#   name: "liquid Hydrogen"
+#   symbol: "lH"
+#   address: "TODO"
+#   backing: "0x51b8c19c10e296A0CB10378FDa4663C3C80588C6"
