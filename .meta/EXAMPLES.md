@@ -1,145 +1,108 @@
-# Working Examples Convention
+# Working Examples — Design Patterns
 
-Cross-protocol convention for worked examples across Solid, Liquid, and Uniteum.
+Convention for writing worked examples and tutorials across this documentation site.
 
 ## What "Working" Means
 
 Every example must be **reproducible on-chain** — real addresses, real transactions, real results. No hypothetical numbers or placeholder addresses.
 
-## Required Data Per Protocol
+## Three Example Patterns
 
-Each protocol needs a data file in `_data/` with its example ingredients:
+Use the pattern that best fits the material. A single page can combine patterns.
 
-### Contract Addresses
+### Pattern 1: Narrative Use Case
 
-| Protocol | What's Needed |
-|----------|---------------|
-| **Solid** | Solid contract address, at least 1-2 deployed token addresses |
-| **Liquid** | Hub address, 2-3 spoke addresses with their backing tokens |
-| **Uniteum** | Uniteum contract address (already in `contracts.yml`), 2-3 Unit token addresses |
+Lead with a human problem, not protocol mechanics. Use a character to ground the abstract.
 
-### Example Transactions
+**Structure:**
+1. **Hook** — A relatable problem (one paragraph)
+2. **Character** — Who is doing this and why
+3. **Mechanism** — How the protocol solves it, woven into the story (not a spec dump)
+4. **Trust signal** — What the character *cannot* do (immutability, no admin keys)
+5. **Outcome** — The surprising social or economic effect
 
-Each protocol should have **real transaction hashes** for its core operations:
+**Benchmark:** `solid/use-cases/gift-certificates.md` (Mara's story)
 
-| Protocol | Core Operations |
-|----------|----------------|
-| **Solid** | `buy`, `sell`, token creation |
-| **Liquid** | `heat`, `cool`, `buy`, `sell`, `sellFor`, `make` |
-| **Uniteum** | `forge`, `multiply`, `divide`, unit creation |
+**When to use:** Introducing a protocol to non-technical readers, showing *why* someone would care, use-case pages.
 
-Store these in the protocol's data file (e.g., `_data/liquid-examples.yml`).
+**Key principles:**
+- Show, don't spec — concrete scenarios over feature lists
+- The mechanism should feel inevitable, not clever
+- End on what happens, not what could happen
 
-### Data File Pattern
+### Pattern 2: How-To Tutorial
+
+Step-by-step walkthrough of a specific on-chain operation using Etherscan.
+
+**Structure:**
+1. **Goal** — One sentence: what you'll accomplish
+2. **Prerequisites** — What you need before starting (tokens, approvals, wallet)
+3. **Preview** — Read-only check of the expected result (`sells()`, `buys()`, `made()`)
+4. **Action** — Numbered steps on Etherscan's Write Contract interface
+5. **What happened** — Concrete outcomes with real numbers
+6. **Verify** — Read Contract link to confirm state change
+
+**Benchmark:** `liquid/introduction.md` (Heat, Cool, Sell, Buy, Cross-swap sections)
+
+**When to use:** Teaching a specific operation, "try it yourself" guides, getting-started pages.
+
+**Key principles:**
+- Always preview before executing (read before write)
+- Every write step links to a real example transaction
+- State what happens if the operation fails (zero balance, unapproved, etc.)
+
+### Pattern 3: Conceptual Example
+
+Show how a mechanism works through price tables, relationships, and comparison to alternatives.
+
+**Structure:**
+1. **Setup** — Define the tokens/units/pools involved
+2. **Scenario** — A market condition or user action
+3. **Table** — Show concrete numbers across states (before, during, after)
+4. **Why this is novel** — Comparison to traditional approaches (with checkmarks/crosses)
+
+**Benchmark:** `uniteum/use-cases.md` (Hedging with Reciprocals section)
+
+**When to use:** Explaining economic mechanics, price relationships, arbitrage dynamics, protocol comparisons.
+
+**Key principles:**
+- Tables with real numbers beat prose explanations
+- Show the traditional approach first, then show how this is different
+- Be honest about unknowns
+
+## Consistency Rules
+
+These apply across all patterns:
+
+1. **Voice:** Second person ("you"), present tense, imperative for instructions
+2. **Verification:** Every state-changing action has a way to confirm the result on-chain
+3. **Prerequisites first:** Always state what the reader needs before starting
+4. **Real data:** Use actual on-chain values and addresses, not round hypothetical amounts
+5. **Transaction links:** Link to real example transactions where possible
+6. **Safety:** Mention risks, failure modes, and what *cannot* happen (immutability guarantees)
+
+## Data Requirements
+
+Working examples need real on-chain data. Store these in `_data/` files following the conventions in `_data/CLAUDE.md`:
+
+- **Contract addresses** — deployed contracts referenced in examples
+- **Example transactions** — real tx hashes demonstrating each operation
+
+When developing examples, use `TODO` placeholders for values that must come from actual deployments:
 
 ```yaml
-# _data/{protocol}-examples.yml
-#
-# Schema: each example is keyed by a short slug.
-# Fields:
-#   tx:          transaction hash
-#   network:     mainnet | sepolia
-#   operation:   protocol operation name (heat, forge, buy, etc.)
-#   description: one-line human summary
-#   params:      key-value pairs of function inputs (optional)
-
-heat-first:
-  tx: "0xabc123..."
-  network: mainnet
-  operation: heat
-  description: "First heat of 1,000 USDC into liquid-USDC"
-  params:
-    solid: "1000000000"
-    token: "USDC"
+address: "TODO"  # Contract address (fill from Etherscan)
+tx: "TODO"       # Example transaction hash
 ```
 
-## Example Page Structure
+## Page Ordering
 
-All example pages across protocols should follow this template:
+Within an examples section, order by increasing complexity:
 
-```markdown
----
-title: [Example Title]
-parent: Examples
-grand_parent: [Protocol]
-nav_order: N
----
-
-# [Example Title]
-
-> One-line summary of what this example demonstrates.
-
-## Prerequisites
-
-- What tokens/contracts the reader needs
-- Links to acquire them (with Etherscan #writeContract links)
-
-## Setup
-
-Starting balances/state, with links to verify on-chain.
-
-## Steps
-
-### Step 1: [Operation Name]
-
-**What we're doing:** [Plain English]
-
-**On Etherscan:**
-1. Go to [contract](link#writeContract)
-2. Find `functionName`
-3. Enter: `param1` = value, `param2` = value
-4. Confirm transaction
-
-**What happened:**
-- [Concrete result with real numbers]
-- [Link to example transaction](etherscan.io/tx/0x...)
-
-**Verify:** [Read contract link to confirm state change]
-
-### Step 2: ...
-
-## Result
-
-Final state summary with verification links.
-
-## What to Try Next
-
-Links to related examples or operations.
-```
-
-## Cross-Protocol Consistency Rules
-
-1. **Same voice:** Second person ("you"), present tense, imperative for instructions
-2. **Same verification pattern:** Every state-changing step has a "Verify:" line linking to Etherscan #readContract
-3. **Same prerequisite pattern:** Always state what the reader needs before starting
-4. **Real numbers:** Use actual on-chain values, not round hypothetical amounts
-5. **Transaction links:** Every write operation links to a real example transaction
-6. **Error cases:** Mention what happens if the operation fails (insufficient balance, unapproved, etc.)
-
-## Network Strategy
-
-- **Primary examples:** Mainnet (real value, production state)
-- **"Try it yourself" variants:** Sepolia (safe to experiment)
-- **Label clearly:** Always state which network an example targets
-- Use the Etherscan include helpers from `.meta/STYLE_GUIDE.md`
-
-## Directory Structure
-
-```
-{protocol}/
-└── examples/
-    ├── index.md              ← Overview + links to individual examples
-    ├── first-{operation}.md  ← Simplest operation (entry point)
-    ├── {workflow}.md         ← Multi-step workflow
-    └── ...
-```
-
-## Ordering Convention
-
-1. **Simplest single operation** (buy a token, heat, forge a pair)
-2. **Round-trip** (buy + sell, heat + cool, forge + unforge)
-3. **Multi-step workflow** (cross-swap, arbitrage path, dimensional chain)
-4. **Advanced/exploratory** (strategies, emergent patterns)
+1. **Simplest single operation** — one function call
+2. **Round-trip** — do and undo (buy + sell, wrap + unwrap)
+3. **Multi-step workflow** — chained operations
+4. **Advanced/exploratory** — strategies, emergent patterns
 
 ---
 
