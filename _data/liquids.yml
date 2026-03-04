@@ -11,7 +11,13 @@ hub:
 
 # TODO: add spokes once created, e.g.:
 # H:
-#   name: "liquid Hydrogen"
+#   name: "Hydrogen"
 #   symbol: "H"
 #   address: "TODO"
 #   backing: "0x51b8c19c10e296A0CB10378FDa4663C3C80588C6"
+
+H:
+  name: "Hydrogen"
+  symbol: "H"
+  address: "0x03b7E38B3049a44292fe4f291d031A2BCCfD67Bf"
+  backing: "0x51b8c19c10e296A0CB10378FDa4663C3C80588C6"
