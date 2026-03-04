@@ -2,8 +2,9 @@
 # All contracts use deterministic deployment (same address on all networks).
 
 hub:
-  name: Hub
-  address: "0x67f7ec69555335f4a3942EA81dFd86694F1446F0"
+  name: "Uniteum 1"
+  symbol: "1"
+  address: "0x008D0231E903d7171F03FA78992dC1735166C500"
 
 # Spoke tokens
 # Key identifies the spoke by its backing token's symbol.
@@ -11,6 +12,6 @@ hub:
 # TODO: add spokes once created, e.g.:
 # H:
 #   name: "liquid Hydrogen"
-#   symbol: "lH"
+#   symbol: "H"
 #   address: "TODO"
 #   backing: "0x51b8c19c10e296A0CB10378FDa4663C3C80588C6"
