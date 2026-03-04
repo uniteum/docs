@@ -48,7 +48,7 @@ The Hub needs permission to transfer your "Uniteum 1" tokens.
 - Your "Uniteum 1" tokens were deposited into the Hub
 - You received the same amount of Hub tokens (1:1)
 
-**Verify:** Call [`balanceOf`](https://etherscan.io/address/{{site.data.liquids.hub.address}}#readContract#F5){:target="_blank"} on the Hub with your wallet address.
+**Verify:** Call [`balanceOf`](https://etherscan.io/address/{{site.data.liquids.hub.address}}#readContract#F15){:target="_blank"} on the Hub with your wallet address.
 
 <!-- TODO: example tx hash for a Hub heat transaction -->
 
@@ -60,7 +60,7 @@ The Hub needs permission to transfer your "Uniteum 1" tokens.
 
 ### Check if it already exists
 
-1. Go to [Hub → made](https://etherscan.io/address/{{site.data.liquids.hub.address}}#readContract#F16){:target="_blank"}
+1. Go to [Hub → made](https://etherscan.io/address/{{site.data.liquids.hub.address}}#readContract#F13){:target="_blank"}
 2. Enter `backing`: the address of the ERC-20 you want to wrap
 3. Click **Query**
 
@@ -69,7 +69,7 @@ If `cloned` = `false`, you can create it — and `home` shows where it will be d
 
 ### Create it
 
-1. Go to [Hub → make](https://etherscan.io/address/{{site.data.liquids.hub.address}}#writeContract#F8){:target="_blank"}
+1. Go to [Hub → make](https://etherscan.io/address/{{site.data.liquids.hub.address}}#writeContract#F10){:target="_blank"}
 2. Enter `backing`: the ERC-20 token address
 3. Click **Write** and confirm
 
@@ -78,7 +78,7 @@ If `cloned` = `false`, you can create it — and `home` shows where it will be d
 - The spoke wraps your chosen ERC-20 with a built-in AMM pool connected to Hub
 - The spoke starts empty — someone needs to heat it to create liquidity
 
-**Find the address:** Call [`made`](https://etherscan.io/address/{{site.data.liquids.hub.address}}#readContract#F16){:target="_blank"} again with the same backing address. The `home` field is your spoke's contract.
+**Find the address:** Call [`made`](https://etherscan.io/address/{{site.data.liquids.hub.address}}#readContract#F13){:target="_blank"} again with the same backing address. The `home` field is your spoke's contract.
 
 <!-- TODO: example tx hash for a make transaction -->
 
@@ -110,7 +110,7 @@ This is where the **2x mint** happens: you deposit N backing tokens, you get N l
 - The pool also received {{spoke.symbol}} tokens (instant liquidity)
 - Total minted: 2 × your deposit, split between you and the pool
 
-**Verify:** Call [`pool`](https://etherscan.io/address/{{spoke.address}}#readContract#F7){:target="_blank"} on {{spoke.symbol}} — it returns `(P, E)` where P is spoke tokens in the pool and E is Hub tokens in the pool.
+**Verify:** Call [`pool`](https://etherscan.io/address/{{spoke.address}}#readContract#F4){:target="_blank"} on {{spoke.symbol}} — it returns `(P, E)` where P is spoke tokens in the pool and E is Hub tokens in the pool.
 
 <!-- TODO: example tx hash for a spoke heat transaction -->
 
@@ -122,7 +122,7 @@ This is where the **2x mint** happens: you deposit N backing tokens, you get N l
 
 ### Preview
 
-1. Go to [{{spoke.symbol}} → sells](https://etherscan.io/address/{{spoke.address}}#readContract#F13){:target="_blank"}
+1. Go to [{{spoke.symbol}} → sells](https://etherscan.io/address/{{spoke.address}}#readContract#F10){:target="_blank"}
 2. Enter the amount of {{spoke.symbol}} tokens to sell
 3. Click **Query**
 
@@ -139,7 +139,7 @@ The result is how many Hub tokens you'd receive.
 - Hub tokens moved from the pool's lake to your wallet
 - The pool's constant-product invariant (P × E = k) was maintained
 
-**Verify:** Call [`balanceOf`](https://etherscan.io/address/{{site.data.liquids.hub.address}}#readContract#F5){:target="_blank"} on the Hub with your wallet address.
+**Verify:** Call [`balanceOf`](https://etherscan.io/address/{{site.data.liquids.hub.address}}#readContract#F15){:target="_blank"} on the Hub with your wallet address.
 
 <!-- TODO: example tx hash for a sell transaction -->
 
@@ -151,7 +151,7 @@ The result is how many Hub tokens you'd receive.
 
 ### Preview
 
-1. Go to [{{spoke.symbol}} → buys](https://etherscan.io/address/{{spoke.address}}#readContract#F15){:target="_blank"}
+1. Go to [{{spoke.symbol}} → buys](https://etherscan.io/address/{{spoke.address}}#readContract#F12){:target="_blank"}
 2. Enter the amount of Hub tokens to spend
 3. Click **Query**
 
@@ -167,7 +167,7 @@ The result is how many {{spoke.symbol}} tokens you'd receive.
 - Hub tokens moved from your wallet into the pool's lake
 - {{spoke.symbol}} tokens moved from the pool to your wallet
 
-**Verify:** Call [`balanceOf`](https://etherscan.io/address/{{spoke.address}}#readContract#F5){:target="_blank"} on {{spoke.symbol}} with your wallet address.
+**Verify:** Call [`balanceOf`](https://etherscan.io/address/{{spoke.address}}#readContract#F15){:target="_blank"} on {{spoke.symbol}} with your wallet address.
 
 <!-- TODO: example tx hash for a buy transaction -->
 
@@ -179,7 +179,7 @@ The result is how many {{spoke.symbol}} tokens you'd receive.
 
 ### Preview
 
-1. On spoke A, go to [`sellsFor`](https://etherscan.io/address/{{spoke.address}}#readContract#F14){:target="_blank"}
+1. On spoke A, go to [`sellsFor`](https://etherscan.io/address/{{spoke.address}}#readContract#F11){:target="_blank"}
 2. Enter:
    - `that`: spoke B's contract address
    - `spokes`: amount of spoke A to trade
@@ -213,7 +213,7 @@ The result shows Hub used and spoke B tokens you'd receive.
 
 ### Preview
 
-1. Go to [{{spoke.symbol}} → cools](https://etherscan.io/address/{{spoke.address}}#readContract#F11){:target="_blank"} (the one with just `uint256 u`)
+1. Go to [{{spoke.symbol}} → cools](https://etherscan.io/address/{{spoke.address}}#readContract#F8){:target="_blank"} (the one with just `uint256 u`)
 2. Enter the amount of {{spoke.symbol}} tokens to burn
 3. Click **Query**
 
@@ -244,8 +244,8 @@ To unwrap Hub back to "Uniteum 1", call [`cool`](https://etherscan.io/address/{{
 |:-------|:---------|:----------------|
 | Wrap "1" → Hub | [`heat(s)`](https://etherscan.io/address/{{site.data.liquids.hub.address}}#writeContract#F1){:target="_blank"} | Approve "1" for Hub |
 | Unwrap Hub → "1" | [`cool(u)`](https://etherscan.io/address/{{site.data.liquids.hub.address}}#writeContract#F3){:target="_blank"} | No |
-| Create spoke | [`make(backing)`](https://etherscan.io/address/{{site.data.liquids.hub.address}}#writeContract#F8){:target="_blank"} | No |
-| Check spoke | [`made(backing)`](https://etherscan.io/address/{{site.data.liquids.hub.address}}#readContract#F16){:target="_blank"} | — |
+| Create spoke | [`make(backing)`](https://etherscan.io/address/{{site.data.liquids.hub.address}}#writeContract#F10){:target="_blank"} | No |
+| Check spoke | [`made(backing)`](https://etherscan.io/address/{{site.data.liquids.hub.address}}#readContract#F13){:target="_blank"} | — |
 
 ### Spoke (links use [{{spoke.symbol}}](https://etherscan.io/address/{{spoke.address}}){:target="_blank"} — any spoke works the same way)
 
@@ -256,11 +256,11 @@ To unwrap Hub back to "Uniteum 1", call [`cool`](https://etherscan.io/address/{{
 | Sell spoke → Hub | [`sell(spokes)`](https://etherscan.io/address/{{spoke.address}}#writeContract#F5){:target="_blank"} | No |
 | Buy spoke ← Hub | [`buy(hubs)`](https://etherscan.io/address/{{spoke.address}}#writeContract#F7){:target="_blank"} | No |
 | Cross-swap | [`sellFor(that, spokes)`](https://etherscan.io/address/{{spoke.address}}#writeContract#F6){:target="_blank"} | No |
-| Preview sell | [`sells(spokes)`](https://etherscan.io/address/{{spoke.address}}#readContract#F13){:target="_blank"} | — |
-| Preview buy | [`buys(hubs)`](https://etherscan.io/address/{{spoke.address}}#readContract#F15){:target="_blank"} | — |
-| Preview swap | [`sellsFor(that, spokes)`](https://etherscan.io/address/{{spoke.address}}#readContract#F14){:target="_blank"} | — |
-| Pool state | [`pool()`](https://etherscan.io/address/{{spoke.address}}#readContract#F7){:target="_blank"} | — |
-| Backing balance | [`mass()`](https://etherscan.io/address/{{spoke.address}}#readContract#F8){:target="_blank"} | — |
+| Preview sell | [`sells(spokes)`](https://etherscan.io/address/{{spoke.address}}#readContract#F10){:target="_blank"} | — |
+| Preview buy | [`buys(hubs)`](https://etherscan.io/address/{{spoke.address}}#readContract#F12){:target="_blank"} | — |
+| Preview swap | [`sellsFor(that, spokes)`](https://etherscan.io/address/{{spoke.address}}#readContract#F11){:target="_blank"} | — |
+| Pool state | [`pool()`](https://etherscan.io/address/{{spoke.address}}#readContract#F4){:target="_blank"} | — |
+| Backing balance | [`mass()`](https://etherscan.io/address/{{spoke.address}}#readContract#F5){:target="_blank"} | — |
 
 All amounts use the token's own decimals. Hub and "Uniteum 1" use 18 decimals.
 
