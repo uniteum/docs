@@ -4,7 +4,7 @@
 hub:
   name: "Uniteum 1"
   symbol: "1"
-  address: "0x008D0231E903d7171F03FA78992dC1735166C500"
+  address: "0x429a58602817Fa79Bbdcf56d8986Fa66CFC44F8a"
 
 # Spoke tokens
 # Key identifies the spoke by its backing token's symbol.
@@ -19,5 +19,5 @@ hub:
 H:
   name: "Hydrogen"
   symbol: "H"
-  address: "0x03b7E38B3049a44292fe4f291d031A2BCCfD67Bf"
+  address: "0xbA21D2155aE290121F82223562D772e2b796DE43"
   backing: "0x51b8c19c10e296A0CB10378FDa4663C3C80588C6"
