@@ -1,0 +1,58 @@
+# Etherscan function references for Liquid protocol contracts.
+# f = position in Etherscan's alphabetically-sorted function list.
+#
+# To verify: open the contract on Etherscan, select the Read/Write Contract
+# tab, and count the function's position.
+
+hub:
+  write:
+    - name: "heat(s)"
+      f: 1
+      purpose: "Wrap \"1\" into Hub tokens (1:1)"
+    - name: "cool(u)"
+      f: 3
+      purpose: "Unwrap Hub tokens back to \"1\" (1:1)"
+    - name: "make(backing)"
+      f: 10
+      purpose: "Create a new spoke for any ERC-20"
+  read:
+    - name: "made(backing)"
+      f: 13
+      purpose: "Check if a spoke exists for a given ERC-20"
+
+spoke:
+  write:
+    - name: "heat(s)"
+      f: 1
+      purpose: "Deposit backing and mint liquid tokens (2x mint)"
+    - name: "cool(u)"
+      f: 3
+      purpose: "Burn liquid tokens and withdraw backing"
+    - name: "sell(spokes)"
+      f: 5
+      purpose: "Sell spoke tokens for Hub tokens"
+    - name: "sellFor(that, spokes)"
+      f: 6
+      purpose: "Cross-swap: sell for another spoke in one tx"
+    - name: "buy(hubs)"
+      f: 7
+      purpose: "Buy spoke tokens with Hub tokens"
+  read:
+    - name: "pool()"
+      f: 4
+      purpose: "Pool reserves: spoke tokens (P) and Hub tokens (E)"
+    - name: "mass()"
+      f: 5
+      purpose: "Backing token balance held by contract"
+    - name: "cools(u)"
+      f: 8
+      purpose: "Preview cool: backing received and pool tokens burned"
+    - name: "sells(spokes)"
+      f: 10
+      purpose: "Preview sell: Hub tokens received"
+    - name: "sellsFor(that, spokes)"
+      f: 11
+      purpose: "Preview cross-swap: Hub used and spoke B received"
+    - name: "buys(hubs)"
+      f: 12
+      purpose: "Preview buy: spoke tokens received"

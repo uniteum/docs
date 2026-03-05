@@ -238,29 +238,37 @@ To unwrap Hub back to "Uniteum 1", call [`cool`](https://etherscan.io/address/{{
 
 ## Quick reference
 
-### Hub
+### Hub ([`{{site.data.liquids.hub.address}}`](https://etherscan.io/address/{{site.data.liquids.hub.address}}){:target="_blank"})
 
-| Action | Function | Approval needed |
-|:-------|:---------|:----------------|
-| Wrap "1" → Hub | [`heat(s)`](https://etherscan.io/address/{{site.data.liquids.hub.address}}#writeContract#F1){:target="_blank"} | Approve "1" for Hub |
-| Unwrap Hub → "1" | [`cool(u)`](https://etherscan.io/address/{{site.data.liquids.hub.address}}#writeContract#F3){:target="_blank"} | No |
-| Create spoke | [`make(backing)`](https://etherscan.io/address/{{site.data.liquids.hub.address}}#writeContract#F10){:target="_blank"} | No |
-| Check spoke | [`made(backing)`](https://etherscan.io/address/{{site.data.liquids.hub.address}}#readContract#F13){:target="_blank"} | — |
+#### Write
+
+| Action | Purpose |
+|:-------|:--------|
+{% for fn in site.data.liquid-functions.hub.write %}| [`{{fn.name}}`](https://etherscan.io/address/{{site.data.liquids.hub.address}}#writeContract#F{{fn.f}}){:target="_blank"} | {{fn.purpose}} |
+{% endfor %}
+
+#### Read
+
+| Action | Purpose |
+|:-------|:--------|
+{% for fn in site.data.liquid-functions.hub.read %}| [`{{fn.name}}`](https://etherscan.io/address/{{site.data.liquids.hub.address}}#readContract#F{{fn.f}}){:target="_blank"} | {{fn.purpose}} |
+{% endfor %}
 
 ### Spoke (links use [{{spoke.symbol}}](https://etherscan.io/address/{{spoke.address}}){:target="_blank"} — any spoke works the same way)
 
-| Action | Function | Approval needed |
-|:-------|:---------|:----------------|
-| Deposit backing | [`heat(s)`](https://etherscan.io/address/{{spoke.address}}#writeContract#F1){:target="_blank"} | Approve backing for spoke |
-| Withdraw backing | [`cool(u)`](https://etherscan.io/address/{{spoke.address}}#writeContract#F3){:target="_blank"} | No |
-| Sell spoke → Hub | [`sell(spokes)`](https://etherscan.io/address/{{spoke.address}}#writeContract#F5){:target="_blank"} | No |
-| Buy spoke ← Hub | [`buy(hubs)`](https://etherscan.io/address/{{spoke.address}}#writeContract#F7){:target="_blank"} | No |
-| Cross-swap | [`sellFor(that, spokes)`](https://etherscan.io/address/{{spoke.address}}#writeContract#F6){:target="_blank"} | No |
-| Preview sell | [`sells(spokes)`](https://etherscan.io/address/{{spoke.address}}#readContract#F10){:target="_blank"} | — |
-| Preview buy | [`buys(hubs)`](https://etherscan.io/address/{{spoke.address}}#readContract#F12){:target="_blank"} | — |
-| Preview swap | [`sellsFor(that, spokes)`](https://etherscan.io/address/{{spoke.address}}#readContract#F11){:target="_blank"} | — |
-| Pool state | [`pool()`](https://etherscan.io/address/{{spoke.address}}#readContract#F4){:target="_blank"} | — |
-| Backing balance | [`mass()`](https://etherscan.io/address/{{spoke.address}}#readContract#F5){:target="_blank"} | — |
+#### Write
+
+| Action | Purpose |
+|:-------|:--------|
+{% for fn in site.data.liquid-functions.spoke.write %}| [`{{fn.name}}`](https://etherscan.io/address/{{spoke.address}}#writeContract#F{{fn.f}}){:target="_blank"} | {{fn.purpose}} |
+{% endfor %}
+
+#### Read
+
+| Action | Purpose |
+|:-------|:--------|
+{% for fn in site.data.liquid-functions.spoke.read %}| [`{{fn.name}}`](https://etherscan.io/address/{{spoke.address}}#readContract#F{{fn.f}}){:target="_blank"} | {{fn.purpose}} |
+{% endfor %}
 
 All amounts use the token's own decimals. Hub and "Uniteum 1" use 18 decimals.
 

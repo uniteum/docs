@@ -162,6 +162,42 @@ All our contracts use deterministic deployment (same address on all networks). U
 - Checking invariants: `[read the invariant](https://etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#readContract)` (descriptive anchor text)
 - Example transaction: `[This forge transaction](https://etherscan.io/tx/0xabcd1234...)` (use full tx hash in URL, can shorten display text)
 
+### Data-Driven Function Reference Tables
+
+Tutorial quick reference tables are **data-driven** — function names, Etherscan F# indices, and descriptions live in `_data/<protocol>-functions.yml`, not hardcoded in markdown.
+
+**Data file schema** (`_data/<protocol>-functions.yml`):
+```yaml
+<contract-role>:          # e.g., hub, spoke, token, factory
+  write:                  # functions on the Write Contract tab
+    - name: "heat(s)"     # display name (used as link text)
+      f: 1                # Etherscan F# index
+      purpose: "..."      # short description
+  read:                   # functions on the Read Contract tab
+    - name: "pool()"
+      f: 4
+      purpose: "..."
+```
+
+**Template pattern** (in tutorial markdown):
+```markdown
+#### Write
+
+| Action | Purpose |
+|:-------|:--------|
+{% raw %}{% for fn in site.data.<protocol>-functions.<role>.write %}| [`{{fn.name}}`](https://etherscan.io/address/{{<address>}}#writeContract#F{{fn.f}}){:target="_blank"} | {{fn.purpose}} |
+{% endfor %}{% endraw %}
+```
+
+**Verifying F# indices:** Open the contract on Etherscan, select Read/Write Contract tab, and count the function's alphabetical position. Etherscan sorts all public/external functions alphabetically (including inherited ERC20 functions like `approve`, `transfer`, `balanceOf`, etc.).
+
+**Current data files:**
+- `_data/liquid-functions.yml` — Hub and Spoke functions
+
+❌ WRONG: Hardcoded F# indices in markdown tables
+❌ WRONG: Combining read and write functions in one table
+✅ CORRECT: Separate Write and Read tables, driven by `_data/<protocol>-functions.yml`
+
 ## Self-Improvement Protocol
 
 **CRITICAL:** When you make mistakes or the user corrects your understanding, IMMEDIATELY update the relevant CLAUDE.md file to prevent repeating the same mistake.
