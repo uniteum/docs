@@ -6,74 +6,74 @@
 
 hub:
   write:
-    - name: "heat(m)"
+    "heat(m)":
       f: 6
       purpose: "Deposit backing tokens, mint liquid tokens"
-    - name: "cool(u)"
+    "cool(u)":
       f: 4
       purpose: "Burn liquid tokens and redeem proportional backing tokens"
-    - name: "make(backing)"
+    "make(backing)":
       f: 8
       purpose: "Deploy a new spoke for the given backing token"
   read:
-    - name: "solid()"
+    "solid()":
       f: 16
       purpose: "The backing ERC-20 token this instance wraps"
-    - name: "made(backing)"
+    "made(backing)":
       f: 10
       purpose: "Check whether a spoke for the given backing token exists"
 
 spoke:
   write:
-    - name: "heat(m)"
+    "heat(m)":
       f: 6
       purpose: "Deposit backing tokens, mint liquid tokens (2× split: caller and pool)"
-    - name: "heat(m, e)"
+    "heat(m, e)":
       f: 7
       purpose: "Deposit backing and hub tokens, mint liquid tokens"
-    - name: "cool(u)"
+    "cool(u)":
       f: 4
       purpose: "Burn liquid tokens and redeem proportional backing tokens"
-    - name: "cool(u, e)"
+    "cool(u, e)":
       f: 5
       purpose: "Burn liquid tokens and redeem backing tokens plus hub tokens"
-    - name: "sell(s)"
+    "sell(s)":
       f: 9
       purpose: "Sell spoke tokens for hub tokens via the constant-product AMM"
-    - name: "sellFor(that, s)"
+    "sellFor(that, s)":
       f: 10
       purpose: "Atomic cross-spoke swap: sell this spoke's tokens, buy another's"
-    - name: "buy(e)"
+    "buy(e)":
       f: 3
       purpose: "Buy spoke tokens with hub tokens via the constant-product AMM"
   read:
-    - name: "pool()"
+    "pool()":
       f: 13
       purpose: "Current pool reserves: spoke tokens (S) and hub tokens (E)"
-    - name: "mass()"
+    "mass()":
       f: 11
       purpose: "Backing token balance held by this contract, redeemable via cool"
-    - name: "heats(m)"
+    "heats(m)":
       f: 9
       purpose: "Quote a heat: liquid tokens for caller and pool"
-    - name: "heats(m, e)"
+    "heats(m, e)":
       f: 8
       purpose: "Quote a heat with explicit hub-token deposit"
-    - name: "cools(u)"
+    "cools(u)":
       f: 6
       purpose: "Quote a cool: backing tokens received and pool tokens burned"
-    - name: "cools(u, e)"
+    "cools(u, e)":
       f: 5
       purpose: "Quote a cool with explicit hub-token withdrawal"
-    - name: "sells(s)"
+    "sells(s)":
       f: 14
       purpose: "Quote a sell: hub tokens that would be received"
-    - name: "sellsFor(that, s)"
+    "sellsFor(that, s)":
       f: 15
       purpose: "Quote a cross-spoke swap: hub tokens used and target spoke tokens received"
-    - name: "buys(e)"
+    "buys(e)":
       f: 4
       purpose: "Quote a buy: spoke tokens that would be received"
-    - name: "solid()"
+    "solid()":
       f: 16
       purpose: "The backing ERC-20 token this instance wraps"

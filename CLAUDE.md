@@ -166,27 +166,29 @@ All our contracts use deterministic deployment (same address on all networks). U
 
 Tutorial quick reference tables are **data-driven** — function names, Etherscan F# indices, and descriptions live in `_data/<protocol>-functions.yml`, not hardcoded in markdown.
 
-**Data file schema** (`_data/<protocol>-functions.yml`):
+**Data file schema** (`_data/<protocol>-functions.yml`) — maps keyed by function signature:
 ```yaml
 <contract-role>:          # e.g., hub, spoke, token, factory
   write:                  # functions on the Write Contract tab
-    - name: "heat(s)"     # display name (used as link text)
-      f: 1                # Etherscan F# index
+    "heat(m)":            # key = function signature (used as link text)
+      f: 6                # Etherscan F# index
       purpose: "..."      # short description
   read:                   # functions on the Read Contract tab
-    - name: "pool()"
-      f: 4
+    "pool()":
+      f: 13
       purpose: "..."
 ```
 
-**Template pattern** (in tutorial markdown):
+**Table pattern** (quick reference — iterates the map):
 ```markdown
-#### Write
-
-| Action | Purpose |
-|:-------|:--------|
-{% raw %}{% for fn in site.data.<protocol>-functions.<role>.write %}| [`{{fn.name}}`](https://etherscan.io/address/{{<address>}}#writeContract#F{{fn.f}}){:target="_blank"} | {{fn.purpose}} |
+{% raw %}{% for fn in site.data.<protocol>-functions.<role>.write %}| [`{{ fn[0] }}`](...#writeContract#F{{ fn[1].f }}){:target="_blank"} | {{ fn[1].purpose }} |
 {% endfor %}{% endraw %}
+```
+
+**Inline pattern** (tutorial body — random access by function name):
+```markdown
+{% raw %}{% assign spoke_fn = site.data.<protocol>-functions.spoke %}
+[sell](https://etherscan.io/address/{{spoke.address}}#writeContract#F{{ spoke_fn.write["sell(s)"].f }}){:target="_blank"}{% endraw %}
 ```
 
 **Verifying F# indices:** Open the contract on Etherscan, select Read/Write Contract tab, and count the function's alphabetical position. Etherscan sorts all public/external functions alphabetically (including inherited ERC20 functions like `approve`, `transfer`, `balanceOf`, etc.).
@@ -194,8 +196,10 @@ Tutorial quick reference tables are **data-driven** — function names, Ethersca
 **Current data files:**
 - `_data/liquid-functions.yml` — Hub and Spoke functions
 
-❌ WRONG: Hardcoded F# indices in markdown tables
+❌ WRONG: Hardcoded F# indices in markdown (inline or tables)
 ❌ WRONG: Combining read and write functions in one table
+❌ WRONG: Using arrays in the YAML (use maps keyed by function signature)
+✅ CORRECT: Maps keyed by function signature, enabling both iteration and random access
 ✅ CORRECT: Separate Write and Read tables, driven by `_data/<protocol>-functions.yml`
 
 ## Self-Improvement Protocol
