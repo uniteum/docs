@@ -83,6 +83,9 @@ This automatically creates the necessary intermediate units and sets up the geom
 
 ## Creating an Anchored Unit
 
+{: .note }
+> Anchored units are not yet fully implemented. The instructions below describe intended behavior.
+
 To create a unit backed by USDT:
 
 ```solidity

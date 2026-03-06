@@ -34,7 +34,7 @@ Practical how-to guides for Uniteum operations.
 Before following these guides:
 
 - Complete [Getting Started](/uniteum/getting-started/)
-- Have "1" tokens (v0.1) in your wallet
+- Have "1" tokens ({{ site.data.contracts.uniteum.name }}) in your wallet
 - Understand the [Concepts](/uniteum/concepts/)
 
 ## Tools

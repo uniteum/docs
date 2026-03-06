@@ -374,18 +374,18 @@ Get the symbol format for an anchored unit (pure function).
 
 ### `migrate(uint256 units)`
 
-Migrate v0.0 "1" tokens to v0.1 "1" tokens.
+Migrate v0.0 "1" tokens to current version "1" tokens.
 
 **Parameters:**
 - `units` — Amount of v0.0 tokens to migrate
 
 **Requirements:**
 - Only callable on "1" token
-- Must approve v0.1 contract to spend v0.0 tokens
+- Must approve current version contract to spend v0.0 tokens
 
 **Effect:**
-- v0.0 tokens transferred to v0.1 contract
-- v0.1 tokens minted to caller
+- v0.0 tokens transferred to current version contract
+- current version tokens minted to caller
 - Total circulating supply conserved
 
 **Example:**
@@ -401,16 +401,16 @@ current.migrate(1000e18);
 
 ### `unmigrate(uint256 units)`
 
-Reverse migration—convert v0.1 "1" back to v0.0 "1".
+Reverse migration—convert current version "1" back to v0.0 "1".
 
 **Parameters:**
-- `units` — Amount of v0.1 tokens to unmigrate
+- `units` — Amount of current version tokens to unmigrate
 
 **Requirements:**
 - Only callable on "1" token
 
 **Effect:**
-- v0.1 tokens burned from caller
+- current version tokens burned from caller
 - v0.0 tokens transferred back to caller
 
 ---
@@ -429,9 +429,9 @@ Constant string for "1" token symbol.
 
 Prefix for all unit names.
 
-**Value:** Version-specific (e.g., `"Uniteum 0.3 "` for current version)
+**Value:** Version-specific (e.g., `"{{ site.data.contracts.uniteum.name }} "`)
 
-**Example:** Unit "meter" has name "Uniteum 0.3 meter" (on current version)
+**Example:** Unit "meter" has name `{{ site.data.contracts.uniteum.name }} meter`
 
 ---
 

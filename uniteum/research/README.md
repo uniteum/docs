@@ -190,7 +190,7 @@ Critical questions requiring academic rigor:
 
 ## 📊 Current Status
 
-**Protocol:** Uniteum v0.4
+**Protocol:** {{ site.data.contracts.uniteum.name }}
 **Network:** Ethereum Mainnet + Sepolia Testnet
 **Audit:** Unaudited (experimental)
 **Stage:** Early deployment, limited real-world usage

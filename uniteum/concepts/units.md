@@ -69,6 +69,9 @@ Compound units are first-class citizens. They have their own reciprocals and can
 {: .note }
 > For documentation shorthands (0xWETH, 0xUSDC, etc.) and complete reference, see [Anchored Units](/uniteum/reference/anchored-units/).
 
+{: .warning }
+> Anchored units are not yet fully implemented. The description below covers intended design.
+
 **Format:** `0xTokenAddress`
 
 **Example:** `0xdAC17F958D2ee523a2206206994597C13D831ec7` (USDT)

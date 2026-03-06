@@ -24,6 +24,9 @@ status: draft
 
 Uniteum enables novel financial primitives through algebraic composition of units. Here are the key value propositions and use cases.
 
+{: .warning }
+> **Anchored units are not yet fully implemented.** Many examples on this page use anchored unit notation (0xWETH, 0xUSDC, etc.) to illustrate what becomes possible once anchored units work. These describe intended/future behavior. Today, floating units (foo, meter, bar, etc.) and their forge operations work as documented. The algebraic composition mechanics are the same for both unit types.
+
 > **Notation:** For readability, we use [0xWETH](/uniteum/reference/anchored-units/weth/), [0xUSDC](/uniteum/reference/anchored-units/usdc/), etc. in examples. Remember that anchored units actually use full contract addresses: `0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2` for WETH. Click any link to see its actual symbol. See [Anchored Units Reference](/uniteum/reference/anchored-units/) and [Anchored Units](#anchored-units) below.
 
 ## Hedging with Reciprocals
@@ -352,6 +355,6 @@ Open research questions:
 
 ---
 
-**Remember:** This is Version 0.1 — experimental, unaudited, novel mechanism design. Proceed with curiosity and caution.
+**Remember:** This is {{ site.data.contracts.uniteum.name }} — experimental, unaudited, novel mechanism design. Proceed with curiosity and caution.
 
 Uniteum, "1", and related marks are trademarks. See [Legal](/legal/) for details.

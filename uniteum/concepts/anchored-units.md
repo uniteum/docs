@@ -16,6 +16,9 @@ categories:
 permalink: /uniteum/concepts/anchored-units
 -----------------------------------
 
+{: .warning }
+> **Anchored units are not yet fully implemented.** The mechanics described on this page represent intended design, not current capability. The deposit and withdrawal mechanisms need further work, and it may not be possible to get them working as described. Floating units and their forge operations work today.
+
 Uniteum can treat an external ERC-20 (like wBTC or WETH) as an **anchored Unit**: a Unit whose “meaning” is pegged to an outside token balance rather than being purely endogenous.
 
 The simplest anchored setup is the **reciprocal triad**:

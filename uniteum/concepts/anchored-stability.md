@@ -26,6 +26,9 @@ status: hypothesis
 
 Anchored units create a unique stabilization mechanism for the "1" token through **asymmetric arbitrage reactance**. This page explores why anchored units actively dampen "1" price volatility while floating units passively float.
 
+{: .warning }
+> **Anchored units are not yet fully implemented.** Everything on this page describes hypothesized behavior that depends on anchored units working as designed. The anchored unit mechanics are incomplete and may not be achievable. This page is retained as a theoretical exploration of what *could* happen, not a description of current capability.
+
 > **Note:** This is a hypothesis about emergent behavior, not a proven mechanism. See also [Economics of "1"](/uniteum/economics-of-one/) for broader context.
 
 ## The Core Asymmetry

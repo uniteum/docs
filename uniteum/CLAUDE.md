@@ -149,8 +149,8 @@ Since the same unit can serve as a reserve in one triad and a liquidity unit in 
 - Set at deployment, provides supply ceiling
 
 **Name Prefix:**
-- All units are prefixed with version name (e.g., "Uniteum 0.3 ") in their ERC-20 name
-- Example: "Uniteum 0.3 meter"
+- All units are prefixed with version name (from `site.data.contracts.uniteum.name`) in their ERC-20 name
+- Example: "Uniteum-0.7 1 meter" (for version 0.7)
 - Version prefix comes from contract deployment
 
 **Sign Convention for Forge:**

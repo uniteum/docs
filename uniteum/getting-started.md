@@ -32,6 +32,18 @@ This guide walks you through your first interactions with Uniteum.
 
 The "1" token is the liquidity backbone of Uniteum. You need "1" tokens to create units, forge, and use the full Uniteum feature set.
 
+### How to Get "1" Tokens
+
+The genesis "1" token is a [Solid](/solid/) token — [Uniteum 1](/solid/uniteum-1/). You can buy it directly from the contract's built-in pool by sending ETH:
+
+1. Go to the {% include etherscan.html address=site.data.contracts.genesis.address section="writeContract" text="Uniteum 1 contract on Etherscan" %}
+2. Connect your wallet
+3. Find the **`buy`** function
+4. In the **payable amount** field, enter the ETH to spend (e.g., `0.1`)
+5. Click **Write** and confirm
+
+This gives you genesis "1" tokens (v0.0). To use the full Uniteum feature set (forge, unit creation, etc.), migrate them to the current version using the process below.
+
 ### Migration from v0.0
 
 If you have v0.0 "1" tokens, you can migrate them to the current version.

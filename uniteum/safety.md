@@ -25,9 +25,9 @@ Uniteum is experimental. Read this page before interacting with the protocol.
 
 ## Current Status
 
-No known issues as of December 2024.
+No known issues with current functionality as of the last review.
 
-All core functionality is operational. However, Uniteum remains experimental and unaudited. Smart contract risk persists even with no currently known bugs.
+Floating units and their forge operations are operational. Anchored units are incomplete and may not work as documented. Uniteum remains experimental and unaudited. Smart contract risk persists even with no currently known bugs.
 
 Before using:
 1. Check [Known Issues](/uniteum/known-issues/) for current status
@@ -69,6 +69,9 @@ Uniteum's price discovery mechanism is untested at scale:
 Only anchored units (format: `0xAddress`) have real backing.
 
 ## Anchored Unit Risk
+
+{: .note }
+> Anchored units are not yet fully implemented. The risks below describe future risk once anchored units are functional, not current risk.
 
 Anchored units are backed 1:1 by external ERC-20 tokens held by the Unit contract. Risks include:
 

@@ -32,9 +32,12 @@ Uniteum:
 
 ## Why This Matters
 
-**Power perpetuals:** Create any convexity profile through geometric mean triads. `0xWETH^2` (2x power) gives squared exposure, `0xWETH` (1x power) gives linear exposure, `0xWETH^(1/2)` (0.5x power like Uniswap) gives square root exposure—all without borrowing, collateral, or liquidation risk. Design custom convexity with any rational exponent.
+{: .note }
+> The examples below use anchored unit notation (0xWETH, 0xUSDC, etc.) to illustrate what becomes possible once anchored units are fully implemented. Today, floating units (foo, meter, etc.) and their forge operations work as documented. See the [anchored units caveat](#current-status) above.
 
-**Multi-token derivatives:** `0xWETH/0xUSDC` IS the ETH/USD price ratio. `0xWETH*0xWBTC` is a diversified basket. Combine them algebraically for complex positions. Prices are enforced by arbitrage, not oracles.
+**Power perpetuals:** Create any convexity profile through geometric mean triads. `foo^2` (2x power) gives squared exposure, `foo` (1x power) gives linear exposure, `foo^(1/2)` (0.5x power like Uniswap) gives square root exposure—all without borrowing, collateral, or liquidation risk. Design custom convexity with any rational exponent. Once anchored units work, the same applies to `0xWETH^2`, `0xWETH`, etc.
+
+**Multi-token derivatives:** With anchored units, `0xWETH/0xUSDC` would BE the ETH/USD price ratio. `0xWETH*0xWBTC` would be a diversified basket. Today, floating units already compose algebraically—`foo/bar` IS the foo/bar price ratio, enforced by arbitrage, not oracles.
 
 **Reciprocal pairs:** Every unit has a reciprocal. Hold both sides to dampen volatility or speculate on relative price movements within diversified baskets.
 
@@ -55,11 +58,11 @@ No known issues with current functionality. See [Known Issues](/uniteum/known-is
 
 If this work interests you and you'd like to participate, see [Getting Started](/uniteum/getting-started/) for how to acquire "1" tokens. You're not just supporting development—you're acquiring the liquidity backbone of the system and becoming part of the experiment.
 
-Early "1" token holders may benefit if the [value hypothesis](/uniteum/economics-of-one/) holds: as anchored collateral and participation grow, "1" could reflect aggregate system value.
+Early "1" token holders may benefit if the [value hypothesis](/uniteum/economics-of-one/) holds: as participation grows, "1" could reflect aggregate system value.
 
 ## Quick Links
 
-- [Getting Started](/uniteum/getting-started/) — Buy "1", create your first unit
+- [Getting Started](/uniteum/getting-started/) — Acquire "1", create your first unit
 - [Use Cases](/uniteum/use-cases/) — What you can build and why it matters
 - [Concepts](/uniteum/concepts/) — Understand how the system works
 - [Known Issues](/uniteum/known-issues/) — Version history and bug reporting

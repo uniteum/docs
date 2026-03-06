@@ -26,7 +26,7 @@ This guide explains how to execute forge operations on triads with geometric mea
 
 ## Prerequisites
 
-- "1" tokens (v0.1) in your wallet
+- "1" tokens ({{ site.data.contracts.uniteum.name }}) in your wallet
 - The unit(s) you want to forge must exist
 - Understanding of [Triads](/uniteum/concepts/triads/) — every forge operates on (U, V, √(U*V))
 

@@ -27,6 +27,9 @@ status: hypothesis
 
 The "1" token is Uniteum's universal mediator—the backbone that connects all base units and enables forge operations. But what determines the value of "1" itself?
 
+{: .warning }
+> **Anchored units are not yet fully implemented.** This page describes intended/future behavior involving anchored units (0xWETH, 0xUSDC, 0xWBTC, etc.). The anchored unit mechanics are incomplete and may not be achievable as described. Floating units and their forge operations work today. Read the scenarios below as hypotheses about what *could* happen once anchored units are functional, not as descriptions of current capability.
+
 This page explores three related hypotheses about "1" token economics. **These are hypotheses, not proven mechanisms.** They represent testable predictions about emergent system behavior.
 
 ## Hypothesis 1: "1" as Aggregate Value Index

@@ -29,9 +29,7 @@ Uniteum uses ENS for human-readable addressing. All names are under `uniteum.eth
 ```
 uniteum.eth
 ├── {{ site.data.contracts.genesis.ens }}          → {{ site.data.contracts.genesis.address }}
-│   │                           ({{ site.data.contracts.genesis.name }} - genesis)
-│   └── buy.0-0.uniteum.eth  → 0x64dB548312da6D88fB4016157e521d9f2f65AFFc
-│                               (Buy Uniteum 0.0 '1')
+│                               ({{ site.data.contracts.genesis.name }} - genesis)
 │
 ├── {{ site.data.contracts.uniteum.ens }}          → {{ site.data.contracts.uniteum.address }}
 │                               ({{ site.data.contracts.uniteum.name }})
@@ -58,7 +56,7 @@ uniteum.eth
 Format: `{major}-{minor}.uniteum.eth`
 
 - `0-0.uniteum.eth` — Version 0.0 (genesis)
-- `0-1.uniteum.eth` — Version 0.1 (current)
+- `{{ site.data.contracts.uniteum.ens }}` — {{ site.data.contracts.uniteum.name }} (current)
 
 ### EOA Names
 
@@ -78,7 +76,7 @@ Use any ENS-compatible tool:
 
 ```javascript
 // ethers.js
-const address = await provider.resolveName("0-1.uniteum.eth");
+const address = await provider.resolveName("uniteum.eth");
 ```
 
 Or check directly on [app.ens.domains](https://app.ens.domains).

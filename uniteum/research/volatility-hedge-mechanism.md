@@ -262,7 +262,7 @@ The hedged position resembles a variance swap:
 
 ## 7. Implementation Details
 
-**Smart Contract:** [Uniteum 0.4](https://etherscan.io/address/0x5bA96211E3679FDcc7047a5c64d40A4Dd3fBdAD7#code)
+**Smart Contract:** [{{ site.data.contracts.uniteum.name }}](https://etherscan.io/address/{{ site.data.contracts.uniteum.address }}#code)
 **Network:** Ethereum Mainnet (also on Sepolia testnet)
 **Language:** Solidity 0.8.30
 **Audit Status:** Unaudited (experimental protocol)

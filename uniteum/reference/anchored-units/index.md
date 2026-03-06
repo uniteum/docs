@@ -21,6 +21,9 @@ status: reference
 
 # Anchored Units
 
+{: .warning }
+> **Anchored units are not yet fully implemented.** The deposit and withdrawal mechanics need further work, and it may not be possible to get them working as currently designed. The reference information below describes intended behavior. Floating units and their forge operations work today.
+
 ## Documentation Convention
 
 Throughout Uniteum documentation, we use **readable shorthands** like `0xWETH`, `0xUSDC`, `0xWBTC` for clarity in examples and explanations.
