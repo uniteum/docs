@@ -277,6 +277,5 @@ All amounts use the token's own decimals. Hub and "Uniteum 1" use 18 decimals.
 ## What to try next
 
 - [Introduction]({{ site.baseurl }}/liquid/introduction) — detailed walkthrough with example scenarios
-- [The 2x Mint]({{ site.baseurl }}/liquid/2x-mint) — why deposits create double the liquidity
+- [The 2x Mint]({{ site.baseurl }}/liquid/2x-mint) — the liquidity mechanism, equilibrium, and arbitrage
 - [Design]({{ site.baseurl }}/liquid/design) — mathematical specification of all formulas
-- [Tokenomics]({{ site.baseurl }}/liquid/tokenomics) — equilibrium mechanics and price stability

@@ -28,7 +28,7 @@ liquid/
 ├── index.md          ← Protocol landing page
 ├── introduction.md   ← What Liquid is and why
 ├── design.md         ← Technical design
-├── 2x-mint.md        ← 2x mint mechanism
+├── 2x-mint.md        ← 2x mint mechanism, equilibrium, and arbitrage
 └── use-cases/        ← Use-case pages
 ```
 
