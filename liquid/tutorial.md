@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Tutorial
+title: Liquid Tutorial
 parent: Liquid
 permalink: /liquid/tutorial/
 nav_order: 2
