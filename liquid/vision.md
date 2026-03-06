@@ -222,8 +222,6 @@ Tokenization is happening **now**:
 
 The infrastructure needs to exist **before** trillions migrate on-chain.
 
-Liquid is live. Audited. Battle-tested. Ready.
-
 ## Risks and Challenges
 
 ### Technical Risks
