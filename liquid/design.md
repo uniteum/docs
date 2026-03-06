@@ -281,7 +281,7 @@ Both cycles result in net loss, preventing exploitative arbitrage while allowing
 
 ### Liquidity Bootstrapping
 
-The 2x mint mechanism creates automatic liquidity:
+The [2x mint]({{ site.baseurl }}/liquid/2x-mint) mechanism creates automatic liquidity:
 
 ```
 Initial wrap of n tokens:

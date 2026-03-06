@@ -37,7 +37,7 @@ A single transaction creates a token, its trading pool, a fair starting price, a
 
 **Wrap any ERC-20 with built-in liquidity. Zero fees, no LP tokens.**
 
-Every Liquid token is both a standard ERC-20 and its own AMM. Deposits create instant tradeable depth through the 2x mint pattern. All Liquid tokens connect through a Hub token, enabling cross-pool swaps—100 tokens need 100 pools, not 5,000.
+Every Liquid token is both a standard ERC-20 and its own AMM. Deposits create instant tradeable depth through the [2x mint]({{ site.baseurl }}/liquid/2x-mint) pattern. All Liquid tokens connect through a Hub token, enabling cross-pool swaps—100 tokens need 100 pools, not 5,000.
 
 - Zero fees, hardcoded forever
 - Automatic liquidity on every deposit

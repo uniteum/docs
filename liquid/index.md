@@ -16,7 +16,7 @@ Liquid is a protocol that allows any ERC-20 token to become "liquid" — wrapped
 Key properties:
 
 - **Zero Fees** - The protocol charges no fees on any operation
-- **Automatic Liquidity** - Every deposit creates tradeable liquidity via the 2x mint pattern
+- **Automatic Liquidity** - Every deposit creates tradeable liquidity via the [2x mint]({{ site.baseurl }}/liquid/2x-mint) pattern
 - **Universal Connectivity** - All liquid tokens connect through Hub, enabling cross-pool swaps
 - **Permissionless** - Anyone can wrap any ERC-20 token into a liquid token
 - **Immutable** - No governance, no admin keys, no protocol updates

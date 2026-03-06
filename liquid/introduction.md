@@ -66,7 +66,7 @@ All operations can be performed through Etherscan's "Write Contract" interface. 
 - The pool also gets 1,000 liquid tokens
 - Total: 2,000 liquid minted from your 1,000 solid
 
-This 2x minting creates instant liquidity. Half goes to you, half stays in the pool for trading.
+This [2x minting]({{ site.baseurl }}/liquid/2x-mint) creates instant liquidity. Half goes to you, half stays in the pool for trading.
 
 ### Step 3: Cool (Unwrap Back to Original Tokens)
 

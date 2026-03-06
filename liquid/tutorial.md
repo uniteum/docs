@@ -27,7 +27,7 @@ We'll use [{{spoke.name}} ({{spoke.symbol}})](https://etherscan.io/token/{{spoke
 
 **Goal:** Wrap "Uniteum 1" (a Solid) into Hub tokens. You need Hub tokens to interact with spoke pools.
 
-Hub heat is a simple 1:1 wrap — no pool mechanics, no 2x mint.
+Hub heat is a simple 1:1 wrap — no pool mechanics, no [2x mint]({{ site.baseurl }}/liquid/2x-mint).
 
 ### Approve
 
