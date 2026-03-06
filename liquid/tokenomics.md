@@ -16,7 +16,7 @@ This document describes the economic mechanics that ensure **1 liquid = 1 solid*
 
 | Term | Symbol | Description |
 |------|--------|-------------|
-| **Solid** | `s` | The backing ERC-20 token |
+| **Mass** | `m` | Backing (solid) tokens held by the contract |
 | **Liquid** | `u` | The wrapped token with AMM liquidity |
 | **Pool** | `P` | Liquid tokens held by the contract |
 | **Lake** | `E` | Hub tokens held by the contract (for trading) |
@@ -32,8 +32,8 @@ P / T = 1/2
 ```
 
 At equilibrium, the pool holds exactly half of all liquid tokens. When this condition holds:
-- `heat(s)` returns `u = s` (1 solid → 1 liquid)
-- `cool(u)` returns `s = u` (1 liquid → 1 solid)
+- `heat(m)` returns `u = m` (1 solid → 1 liquid)
+- `cool(u)` returns `m = u` (1 liquid → 1 solid)
 
 **This means liquid and solid have equal value at equilibrium.**
 
@@ -44,51 +44,51 @@ At equilibrium, the pool holds exactly half of all liquid tokens. When this cond
 Converts solid backing tokens into liquid tokens.
 
 ```solidity
-function heats(uint256 s) returns (uint256 u, uint256 p)
+function heats(uint256 m) returns (uint256 u, uint256 p)
 ```
 
 **Formula:**
 ```
-p = 2 * s * P / T    (minted to pool)
-u = 2 * s - p        (minted to user)
+p = 2 * m * P / T    (minted to pool)
+u = 2 * m - p        (minted to user)
 ```
 
 **Key property:** Heat preserves the P/T ratio.
 
 | Condition | Result |
 |-----------|--------|
-| P/T = 1/2 | u = s (fair exchange) |
-| P/T < 1/2 | u > s (favorable to heat) |
-| P/T > 1/2 | u < s (unfavorable to heat) |
+| P/T = 1/2 | u = m (fair exchange) |
+| P/T < 1/2 | u > m (favorable to heat) |
+| P/T > 1/2 | u < m (unfavorable to heat) |
 
 ### Cool (Liquid → Solid)
 
 Converts liquid tokens back into solid backing tokens.
 
 ```solidity
-function cools(uint256 u) returns (uint256 s, uint256 p)
+function cools(uint256 u) returns (uint256 m, uint256 p)
 ```
 
 **Formula:**
 ```
-s = u * T / (T - P) / 2    (solid returned)
-p = 2 * s - u              (burned from pool)
+m = u * T / (T - P) / 2    (mass returned)
+p = 2 * m - u              (burned from pool)
 ```
 
 **Key property:** Cool preserves the P/T ratio.
 
 | Condition | Result |
 |-----------|--------|
-| P/T = 1/2 | s = u (fair exchange) |
-| P/T < 1/2 | s < u (unfavorable to cool) |
-| P/T > 1/2 | s > u (favorable to cool) |
+| P/T = 1/2 | m = u (fair exchange) |
+| P/T < 1/2 | m < u (unfavorable to cool) |
+| P/T > 1/2 | m > u (favorable to cool) |
 
 ### Buy (Hub → Liquid)
 
 Purchases liquid from the pool using hub tokens.
 
 ```solidity
-function buy(uint256 hub) returns (uint256 liquid)
+function buy(uint256 e) returns (uint256 s)
 ```
 
 **Effect on pool:**
@@ -103,7 +103,7 @@ function buy(uint256 hub) returns (uint256 liquid)
 Sells liquid to the pool for hub tokens.
 
 ```solidity
-function sell(uint256 liquid) returns (uint256 hub)
+function sell(uint256 s) returns (uint256 e)
 ```
 
 **Effect on pool:**
@@ -135,8 +135,8 @@ An arbitrager who holds only the backing token (solid) can still profit from dis
 After someone buys liquid, the pool has less liquid than equilibrium:
 
 ```
-1. Arbitrageur heats solid S
-   → Gets u > s liquid (favorable! heat bonus)
+1. Arbitrageur heats m solid
+   → Gets u > m liquid (favorable! heat bonus)
    → Pool has scarce liquid, so liquid is "expensive"
 
 2. Arbitrageur sells liquid for hub
@@ -144,7 +144,7 @@ After someone buys liquid, the pool has less liquid than equilibrium:
    → P increases back toward equilibrium
 
 3. Profit realized:
-   → Received bonus liquid from heating (u > s)
+   → Received bonus liquid from heating (u > m)
    → Sold at inflated pool price
    → Net gain in hub value
 ```
@@ -154,8 +154,8 @@ After someone buys liquid, the pool has less liquid than equilibrium:
 After someone sells liquid, the pool has more liquid than equilibrium:
 
 ```
-1. Arbitrageur heats solid S
-   → Gets u < s liquid (unfavorable, but necessary)
+1. Arbitrageur heats m solid
+   → Gets u < m liquid (unfavorable, but necessary)
    → Pool has excess liquid, so liquid is "cheap"
 
 2. Arbitrageur buys more liquid with hub
@@ -163,7 +163,7 @@ After someone sells liquid, the pool has more liquid than equilibrium:
    → P decreases back toward equilibrium
 
 3. Arbitrageur cools all liquid
-   → At restored equilibrium, s = u (fair exchange)
+   → At restored equilibrium, m = u (fair exchange)
    → Profit from buying cheap liquid, cooling at fair value
 ```
 
@@ -171,8 +171,8 @@ After someone sells liquid, the pool has more liquid than equilibrium:
 
 The arbitrageur's profit comes from the **asymmetry between heat/cool rates and pool prices**:
 
-- When P/T < 1/2: Heat is favorable (u > s), AND pool price is high
-- When P/T > 1/2: Cool is favorable (s > u), AND pool price is low
+- When P/T < 1/2: Heat is favorable (u > m), AND pool price is high
+- When P/T > 1/2: Cool is favorable (m > u), AND pool price is low
 
 These conditions are complementary—the same disequilibrium that makes one operation favorable also makes the corresponding trade profitable.
 
@@ -187,8 +187,8 @@ P * E = k  (maintained by buy/sell)
 ### 2. Heat/Cool Symmetry
 
 ```
-Total minted in heat = 2 * s
-Total burned in cool = 2 * u
+Total minted in heat = 2 * m
+Total burned in cool = u + p
 ```
 
 ### 3. Ratio Preservation
@@ -202,11 +202,11 @@ After cool: P'/T' = P/T
 
 **Proof for heat:**
 ```
-Given:  p = 2*s*P/T,  u = 2*s - p
-After:  P' = P + p,   T' = T + 2*s
+Given:  p = 2*m*P/T,  u = 2*m - p
+After:  P' = P + p,   T' = T + 2*m
 
-P'/T' = (P + 2*s*P/T) / (T + 2*s)
-      = P(T + 2*s)/T / (T + 2*s)
+P'/T' = (P + 2*m*P/T) / (T + 2*m)
+      = P(T + 2*m)/T / (T + 2*m)
       = P/T  ✓
 ```
 
@@ -224,8 +224,8 @@ P'/T' = (P + 2*s*P/T) / (T + 2*s)
 
 At P/T = 1/2:
 ```
-heats(s) → u = s
-cools(u) → s = u
+heats(m) → u = m
+cools(u) → m = u
 ```
 
 ## Economic Summary
@@ -241,7 +241,7 @@ cools(u) → s = u
          ▼                                    ▼
 ┌─────────────────────┐          ┌─────────────────────┐
 │    P/T < 1/2        │          │    P/T > 1/2        │
-│    u > s            │          │    s > u            │
+│    u > m            │          │    m > u            │
 │  (heat favorable)   │          │  (cool favorable)   │
 └─────────────────────┘          └─────────────────────┘
          │                                    │

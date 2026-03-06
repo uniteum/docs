@@ -14,23 +14,23 @@ This is the 2x mint pattern. It is the mechanism by which Liquid turns every dep
 
 ## Definition
 
-**Heat** (deposit `s` backing tokens into a spoke with total supply `T` and pool balance `P`):
+**Heat** (deposit `m` mass (backing) tokens into a spoke with total supply `T` and pool balance `P`):
 
 ```
-p = 2s × P / T          (minted to pool — proportional to pool's share)
-u = 2s − p              (minted to user — the remainder)
-Total minted: u + p = 2s
+p = 2m × P / T          (minted to pool — proportional to pool's share)
+u = 2m − p              (minted to user — the remainder)
+Total minted: u + p = 2m
 ```
 
-On the first deposit (`T = 0`), the split is 50/50: user and pool each receive `s`. After that, the split preserves the existing ratio between pooled and circulating tokens.
+On the first deposit (`T = 0`), the split is 50/50: user and pool each receive `m`. After that, the split preserves the existing ratio between pooled and circulating tokens.
 
 **Cool** (user burns `u` wrapped tokens from their balance):
 
 ```
 U = T − P               (circulating supply outside pool)
-s = u × T / U / 2       (backing tokens returned)
-p = 2s − u              (burned from pool)
-Total burned: u + p = 2s
+m = u × T / U / 2       (mass returned)
+p = 2m − u              (burned from pool)
+Total burned: u + p = 2m
 ```
 
 Both operations are proportional: the split between user and pool depends on the current distribution of the wrapped token supply.
@@ -69,11 +69,11 @@ The extra tokens minted to the pool are the price of instant liquidity. The prop
 
 ## Symmetry
 
-The 2x burn on withdrawal mirrors the 2x mint on deposit. Both operations are proportional and both always total exactly `2s`:
+The 2x burn on withdrawal mirrors the 2x mint on deposit. Both operations are proportional and both always total exactly `2m`:
 
-**Heat:** `2s` tokens minted, split proportionally between user (`u`) and pool (`p`) based on `P/T`.
+**Heat:** `2m` tokens minted, split proportionally between user (`u`) and pool (`p`) based on `P/T`.
 
-**Cool:** User burns `u` tokens, pool burns `p = 2s − u` tokens, user receives `s` backing tokens — where `s` depends on the circulating-to-total ratio `U/T`.
+**Cool:** User burns `u` tokens, pool burns `p = 2m − u` tokens, user receives `m` mass (backing) tokens — where `m` depends on the circulating-to-total ratio `U/T`.
 
 The formulas are inverses: a heat followed immediately by a cool (with no intervening trades) returns you to your starting position minus rounding. The proportional split in both directions means the pool's share of total supply is preserved through deposits and withdrawals alike.
 

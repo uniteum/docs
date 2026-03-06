@@ -89,16 +89,16 @@ When a user unwraps `n` wrapped tokens from their balance `held`:
 
 #### Buy (Hub → Spoke)
 
-To purchase `h` spoke tokens:
+To purchase `s` spoke tokens:
 
 ```
-pool' = pool - h
+pool' = pool - s
 lake' = (pool × lake) / pool'
 hub_cost = lake' - lake
 ```
 
 **Transfer**:
-- `h` spoke tokens: protocol → user
+- `s` spoke tokens: protocol → user
 - `hub_cost` hub tokens: user → protocol
 
 **Properties**:
@@ -108,16 +108,16 @@ hub_cost = lake' - lake
 
 #### Sell (Spoke → Hub)
 
-To sell `h` spoke tokens:
+To sell `s` spoke tokens:
 
 ```
-pool' = pool + h
+pool' = pool + s
 lake' = (pool × lake) / pool'
 hub_received = lake - lake'
 ```
 
 **Transfer**:
-- `h` spoke tokens: user → protocol
+- `s` spoke tokens: user → protocol
 - `hub_received` hub tokens: protocol → user
 
 **Properties**:
@@ -233,14 +233,14 @@ This creates a self-balancing mechanism where price moves to equilibrate supply 
 
 ### Slippage Characteristics
 
-For a buy of size `h`:
+For a buy of size `s`:
 
 ```
 slippage = (marginal_price - average_price) / average_price
 
 where:
-  marginal_price = lake / (pool - h)
-  average_price = hub_cost / h
+  marginal_price = lake / (pool - s)
+  average_price = hub_cost / s
 ```
 
 **Properties**:
@@ -544,12 +544,12 @@ The protocol can be generalized to support different wrapping ratios:
 **Proof** (Buy operation):
 ```
 Given: pool × lake = k
-Buy h tokens:
-  pool' = pool - h
-  lake' = k / pool' = (pool × lake) / (pool - h)
+Buy s tokens:
+  pool' = pool - s
+  lake' = k / pool' = (pool × lake) / (pool - s)
 
 Verify invariant:
-  pool' × lake' = (pool - h) × (pool × lake) / (pool - h)
+  pool' × lake' = (pool - s) × (pool × lake) / (pool - s)
                 = pool × lake
                 = k ✓
 ```
@@ -557,12 +557,12 @@ Verify invariant:
 **Proof** (Sell operation):
 ```
 Given: pool × lake = k
-Sell h tokens:
-  pool' = pool + h
-  lake' = k / pool' = (pool × lake) / (pool + h)
+Sell s tokens:
+  pool' = pool + s
+  lake' = k / pool' = (pool × lake) / (pool + s)
 
 Verify invariant:
-  pool' × lake' = (pool + h) × (pool × lake) / (pool + h)
+  pool' × lake' = (pool + s) × (pool × lake) / (pool + s)
                 = pool × lake
                 = k ✓
 ```

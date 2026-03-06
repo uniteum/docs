@@ -43,7 +43,7 @@ The Hub needs permission to transfer your "Uniteum 1" tokens.
 ### Heat
 
 1. Go to [Hub → heat(m)](https://etherscan.io/token/{{site.data.liquids.hub.address}}#writeContract#F{{ hub_fn.write["heat(m)"].f }}){:target="_blank"}
-2. Enter `s` — the amount of "Uniteum 1" to wrap (in wei, 18 decimals)
+2. Enter `m` — the amount of "Uniteum 1" to wrap (in wei, 18 decimals)
 3. Click **Write** and confirm
 
 **What happened:**
@@ -103,7 +103,7 @@ This is where the **2x mint** happens: you deposit N backing tokens, you get N l
 ### Heat
 
 1. Go to [{{spoke.symbol}} → heat(m)](https://etherscan.io/token/{{spoke.address}}#writeContract#F{{ spoke_fn.write["heat(m)"].f }}){:target="_blank"}
-2. Enter `s` — the amount of {{backing.name}} tokens to deposit
+2. Enter `m` — the amount of {{backing.name}} tokens to deposit
 3. Click **Write** and confirm
 
 **What happened:**
@@ -133,7 +133,7 @@ The result is how many Hub tokens you'd receive.
 ### Sell
 
 1. Go to [{{spoke.symbol}} → sell](https://etherscan.io/token/{{spoke.address}}#writeContract#F{{ spoke_fn.write["sell(s)"].f }}){:target="_blank"}
-2. Enter `spokes` — the amount to sell
+2. Enter `s` — the amount of spokes to sell
 3. Click **Write** and confirm
 
 **What happened:**
@@ -162,7 +162,7 @@ The result is how many {{spoke.symbol}} tokens you'd receive.
 ### Buy
 
 1. Go to [{{spoke.symbol}} → buy](https://etherscan.io/token/{{spoke.address}}#writeContract#F{{ spoke_fn.write["buy(e)"].f }}){:target="_blank"}
-2. Enter `hubs` — the amount of Hub to spend
+2. Enter `e` — the amount of Hub (lake) to spend
 3. Click **Write** and confirm
 
 **What happened:**

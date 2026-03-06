@@ -81,20 +81,20 @@ All operations can be performed through Etherscan's "Write Contract" interface. 
 ### Adding Liquidity
 
 1. Approve the liquid contract to spend your backing tokens
-2. Call `heat(amount)` on the liquid contract
+2. Call `heat(m)` on the liquid contract
 3. Receive liquid tokens (you get N, pool gets N)
 
 ### Trading
 
-- Call `sell(amount)` to trade liquid for Hub
-- Call `buy(amount)` to trade Hub for liquid
-- Call `sellFor(otherLiquid, amount)` to cross-swap between liquid tokens
+- Call `sell(s)` to trade spokes for Hub
+- Call `buy(e)` to trade Hub for spokes
+- Call `sellFor(that, s)` to cross-swap between spoke tokens
 
 ### Checking Prices
 
 Use the read functions before trading:
-- `sells(amount)` - Preview Hub received for selling liquid
-- `buys(amount)` - Preview liquid received for spending Hub
+- `sells(s)` - Preview hub (lake) received for selling spokes
+- `buys(e)` - Preview spokes received for spending hub
 
 ## Resources
 

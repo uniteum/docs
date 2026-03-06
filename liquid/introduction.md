@@ -56,7 +56,7 @@ All operations can be performed through Etherscan's "Write Contract" interface. 
    - `amount`: How much solid you want to heat (in token's decimals)
 
 **To heat:**
-1. On the liquid contract, find the `heat` function (with `uint256 solid` parameter)
+1. On the liquid contract, find the `heat` function (with `uint256 m` parameter)
 2. Enter the amount (in token's decimals, e.g., `1000000000` for 1000 USDC with 6 decimals)
 3. Click "Write" and confirm the transaction
 
@@ -89,13 +89,13 @@ The 2x burn (from you and pool) maintains symmetry with the 2x mint in heat.
 **Goal:** Trade liquid (spoke) tokens for hub tokens.
 
 **To sell:**
-1. On the liquid contract, find the `sell` function (the one with just `uint256 liquid` parameter)
+1. On the liquid contract, find the `sell` function (with `uint256 s` parameter)
 2. Enter how many liquid tokens you want to sell
 3. Click "Write" and confirm the transaction
 
 **What happens:**
-- Calculates hub received using: `hub = lake - pool * lake / (pool + liquid)`
-- Transfers liquid tokens from you to the pool
+- Calculates hub received using: `e = E - S * E / (S + s)`
+- Transfers spoke tokens from you to the pool
 - Transfers hub from pool's lake to you
 
 **To check the return before selling:**
@@ -111,12 +111,12 @@ The 2x burn (from you and pool) maintains symmetry with the 2x mint in heat.
 1. You need hub tokens in your wallet
 
 **To buy:**
-1. On the liquid contract, find the `buy` function (the one with just `uint256 hub` parameter)
+1. On the liquid contract, find the `buy` function (with `uint256 e` parameter)
 2. Enter how much hub you want to spend
 3. Click "Write" and confirm the transaction
 
 **What happens:**
-- Calculates liquid received using: `liquid = pool - pool * lake / (lake + hub)`
+- Calculates spokes received using: `s = S - S * E / (E + e)`
 - Transfers hub from you to the pool's lake
 - Transfers liquid tokens from pool to you
 
@@ -182,7 +182,7 @@ The 2x burn (from you and pool) maintains symmetry with the 2x mint in heat.
 ### Workflow 3: Add Liquidity to Existing Liquid
 
 1. Approve the backing token (solid, e.g., USDC)
-2. Call `heat(amount)` on the liquid contract
+2. Call `heat(m)` on the liquid contract
 3. Receive liquid tokens (you get N, pool gets N)
 4. Pool now has more liquidity for trading
 
@@ -436,8 +436,8 @@ The constant-product formula prevents complete drainage. As pool liquidity decre
 
 Pure math based on pool reserves:
 ```
-sell: hub_return = lake - pool × lake / (pool + liquid)
-buy:  liquid_return = pool - pool × lake / (lake + hub)
+sell: e = E - S × E / (S + s)
+buy:  s = S - S × E / (E + e)
 ```
 
 No oracles, no governance, no external inputs.
