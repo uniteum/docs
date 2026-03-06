@@ -19,7 +19,7 @@ Everything here uses [Etherscan](https://etherscan.io){:target="_blank"} directl
 
 The [Hub](https://etherscan.io/address/{{site.data.liquids.hub.address}}){:target="_blank"} is the central contract — it wraps [Uniteum 1](https://etherscan.io/token/{{site.data.solids["1"].address}}){:target="_blank"} and acts as the factory for all spoke tokens.
 
-We'll use [{{spoke.name}} ({{spoke.symbol}})](https://etherscan.io/address/{{spoke.address}}){:target="_blank"} as our example spoke, backed by [{{backing.name}} ({{backing.symbol}})](https://etherscan.io/token/{{backing.address}}){:target="_blank"}.
+We'll use [{{spoke.name}} ({{spoke.symbol}})](https://etherscan.io/token/{{spoke.address}}#readContract#F16){:target="_blank"} as our example spoke, backed by [{{backing.name}} (H)](https://etherscan.io/token/{{backing.address}}){:target="_blank"}.
 
 ---
 
