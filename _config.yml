@@ -3,10 +3,12 @@
 
 # Site Settings
 title: Uniteum
-tagline: Algebraic Liquidity Protocol
+tagline: Solid · Liquid · Uniteum
 description: >-
-  An experimental liquidity protocol on Ethereum where tokens have dimensional units 
-  that compose algebraically. Price consistency through arbitrage-enforced forge operations.
+  Three experimental Ethereum protocols — Solid for fair-launch tokens with built-in
+  price floors, Liquid for wrapped tokens with hub-and-spoke AMM liquidity, and
+  Uniteum for algebraic liquidity where tokens have dimensional units that compose
+  like physical quantities.
 
 # URLs
 url: "https://uniteum.one"
