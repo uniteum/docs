@@ -1,3 +1,11 @@
+---
+layout: default
+title: "The 2x Mint: Formal Analysis"
+parent: Liquid
+permalink: /liquid/2x-mint-formal/
+nav_order: 2.6
+---
+
 # Symmetric Token Emission and the Ratio-Preserving Automated Market Maker
 
 **Paul Reinholdtsen** · reinholdtsen.eth · uniteum.one
