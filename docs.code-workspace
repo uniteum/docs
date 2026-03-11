@@ -1,0 +1,16 @@
+{
+    "folders": [
+        {
+            "name": "docs",
+            "path": "."
+        },
+        {
+            "name": "liquid-promo",
+            "path": "../liquid-promo"
+        },
+        {
+            "name": "private",
+            "path": "../private"
+        }
+    ]
+}
