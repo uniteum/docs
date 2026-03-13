@@ -174,33 +174,12 @@ P'/T' = (P − u·P/U) / (T − u·T/U)
 
 ### 4.3 The Orthogonality Principle
 
-The state space has two natural coordinates: *price* `π = L/P` and *depth* `k = P · L`.
+The system has two fundamental invariants:
 
-Define operations on these coordinates:
+- `P/T` — the pool-to-supply ratio (fraction of total supply held by the AMM)
+- `P·L` — the constant-product depth (determines trade execution quality)
 
-| Operation | Effect on π | Effect on k |
-|-----------|-------------|-------------|
-| Heat(m)   | None        | k' = k + p·L |
-| Cool(u)   | None        | k' = k − p·L |
-| Buy(s)    | π increases | None         |
-| Sell(s)   | π decreases | None         |
-
-Heat and cool are *price-neutral*: they do not change the instantaneous spot price `π = L/P`.
-
-**Proof.** After Heat(m): `P' = P + p`, `L' = L` (lake unchanged).
-```
-π' = L'/P' = L/(P + p)
-```
-This is *not* equal to `L/P` unless `p = 0`. So Heat *does* move the price!
-
-Wait — let me reconsider. If we define price as `lake/pool`, then adding pool tokens (without adding lake tokens) *lowers* the price of the wrapped token in hub terms. This is the "favorable heat" effect when `P/T < 1/2`. The orthogonality is more subtle.
-
-The correct statement is that Heat is neutral with respect to the *ratio* coordinate `P/T`, not the price coordinate `L/P`. The two invariants live in different parts of the state space:
-
-- `P/T` is the deposit/withdrawal invariant (conserved by Heat/Cool)
-- `P·L` is the trading invariant (conserved by Buy/Sell)
-
-These two quantities together characterize the full state `(P, L, T)` (given `B` separately). Every operation changes exactly one of these invariants (modifying the other):
+Each class of operations preserves exactly one invariant and modifies the other:
 
 | Operation | Preserves | Changes |
 |-----------|-----------|---------|
@@ -209,7 +188,11 @@ These two quantities together characterize the full state `(P, L, T)` (given `B`
 | Buy(s)    | P·L       | P/T     |
 | Sell(s)   | P·L       | P/T     |
 
-This clean separation is the **Orthogonality Principle**: the two fundamental invariants of the system are each preserved by exactly one class of operations and modified by the other. Deposits control depth; trades control price.
+This clean separation is the **Orthogonality Principle**: deposits control depth; trades control price.
+
+**Proof.** Ratio preservation was established in Theorem 1. For depth: after Heat(m), `P' = P + p` and `L' = L` (lake unchanged), so `P'·L' = (P + p)·L = P·L + p·L ≠ P·L`. After Buy(s), `P'·L' = P·L` by Theorem 2. □
+
+**Remark.** Note that Heat *does* change the spot price `π = L/P`, since it increases `P` without changing `L`. This is the "favorable heat" effect when `P/T < 1/2`: pool tokens are scarce, so adding them lowers the price. The orthogonality is between `P/T` and `P·L`, not between price and depth. The two invariant coordinates `(P/T, P·L)` together with `B` characterize the full state `(P, L, T, B)`.
 
 ---
 
@@ -300,15 +283,11 @@ Traditional token-based AMMs require three distinct financial instruments:
 
 ## 7. Generalized r-Fold Mint
 
-**Definition.** An **r-fold mint** (for `r > 1`) is a generalization of the 2x mint where depositing `m` backing tokens mints `r·m` wrapped tokens total: `u = m` to the user and `(r−1)·m` to the pool (on the first deposit; subsequent deposits preserve ratio proportionally).
+**Definition.** An **r-fold mint** (for `r > 1`) is a generalization of the 2x mint where depositing `m` backing tokens mints `r·m` wrapped tokens total. On the first deposit (`T = 0`), the allocation is `(r−1)·m` to the pool and `m` to the user. Subsequent deposits preserve the `P/T` ratio: `p = r·m·P/T`, `u = r·m − p`.
 
-**Equilibrium of r-fold mint.** The equilibrium ratio is `P/T = (r−1)/r`, and at equilibrium the user receives `m/r` wrapped tokens from `m` backing (wait — let me reconsider).
-
-Actually the generalization is: total minted = `r·m`, allocated `(r-1)/r` to pool and `1/r` to user on first deposit. Subsequent deposits preserve `P/T` ratio.
-
-At equilibrium `P/T = (r−1)/r`:
+**Equilibrium of r-fold mint.** The equilibrium ratio is `P/T = (r−1)/r`. At equilibrium:
 - Heat(m): `p = r·m·(r−1)/r = m(r−1)`, `u = r·m − m(r−1) = m`
-- User always receives `m` wrapped per `m` backing (1:1 at equilibrium, independent of `r`)
+- User receives `m` wrapped per `m` backing (1:1 at equilibrium, independent of `r`)
 
 **Observation.** The equilibrium exchange rate is always 1:1 regardless of `r`. The parameter `r` controls:
 - **Liquidity depth:** Pool holds fraction `(r−1)/r` of total supply, deepening with `r`
@@ -350,9 +329,11 @@ Spoke A → Hub → Spoke B
 
 This ensures maximum path length of 2 for any token pair, at the cost of hub price impact. The number of AMM pools required is `n` (linear) rather than `n(n−1)/2` (quadratic).
 
-**Proposition 4 (Liquidity Concentration).** In a hub-and-spoke network, all liquidity for backing token `Aᵢ` is concentrated in a single instance. In a mesh topology, the same liquidity would be split across `n−1` pairs. For large `n`, the hub-and-spoke topology provides strictly better execution for any individual pair.
+**Proposition 4 (Liquidity Concentration).** In a hub-and-spoke network, all liquidity for backing token `Aᵢ` is concentrated in a single pool. In a mesh topology with the same total liquidity, that liquidity would be split across `n−1` pairs. For direct spoke-to-hub trades, the concentrated pool provides strictly better execution than any single fragmented pair.
 
-*Proof.* Under the constant-product formula, price impact for a trade of size `s` in a pool with reserve `P` is `s/(P − s)`. With reserves concentrated in one pool of size `P` versus split across `k` pools each of size `P/k`, the total effective liquidity for a single pair is strictly higher in the concentrated case. □
+*Proof.* Under the constant-product formula, price impact for a trade of size `s` in a pool with reserve `P` is `s/(P − s)`. With reserves concentrated in one pool of size `P` versus split across `k` pools each of size `P/k`, a single-hop trade executes against strictly deeper liquidity in the concentrated case. □
+
+**Remark.** Spoke-to-spoke trades require two hops (Spoke A → Hub → Spoke B), incurring price impact on both legs. The proposition does not claim that two-hop execution is always superior to a direct mesh pair — only that per-pool liquidity concentration is strictly higher. For large `n`, the quadratic reduction in pool count dominates the two-hop cost for most pairs.
 
 ### 8.3 Cross-Spoke Equilibrium
 
@@ -372,17 +353,17 @@ We have established (Lemma 3) that a heat-cool round trip without trades is loss
 
 *Proof sketch.* Sell(u) followed by Buy(u') with the same hub amount buys strictly fewer than `u` wrapped tokens due to the constant-product curve's concavity. Thus `u' < u`. Cooling `u'` returns `m' < m` backing. □
 
-**Corollary 3.** There are no profitable arbitrage cycles that do not move the system closer to equilibrium. All profitable cycles are equilibrating.
+**Corollary 3.** Round-trip cycles of the form Heat → Sell → Buy → Cool are always unprofitable. Combined with Proposition 1 (profitable arbitrage exists only when `ρ ≠ 1/2` and moves `ρ` toward `1/2`), this suggests that profitable strategies are necessarily equilibrating. A full proof covering all possible cycle structures is left to future work (see Problem 2).
 
 ### 9.2 Sandwich Attack Immunity
 
 A common attack on AMMs is the *sandwich attack*: front-run a large trade to move price, then back-run to capture profit.
 
-**Proposition 6.** The Heat and Cool operations are immune to sandwich attack losses. A sandwiched Heat(m) operation returns the same `u` regardless of interleaved trades.
+**Proposition 6.** The Heat and Cool operations do not amplify sandwich attack profitability beyond what exists for ordinary AMM trades.
 
-*Proof.* Heat(m) is determined by `P/T` at the time of execution. Interleaved trades change `P` and `L` but not `T` (no tokens minted/burned). However, they *do* change `P/T` if trades occur *between* the time `m` is committed and the Heat executes. In an atomic transaction (no interleaving), this is trivially safe.
+*Proof.* Heat(m) is determined by `P/T` at the time of execution. Trades change `P` (and thus `P/T`) but not `T`. Within a single atomic transaction, no interleaving is possible. For MEV-based front-running of a submitted Heat transaction: an attacker could trade before the Heat to shift `P/T`, changing the depositor's mint split. However, the attacker must move `P/T` via a trade that itself incurs slippage, and the resulting `P/T` shift only redistributes the `2m` mint between user and pool — it does not create value for the attacker to extract beyond what a standard AMM sandwich on a trade of comparable size would yield. The protocol introduces no amplification mechanism specific to Heat or Cool. □
 
-More precisely: within a single atomic transaction, no sandwiching is possible. The relevant attack vector is MEV-based front-running of the *submitted transaction*, which is a property of the execution environment, not the protocol mechanics. The protocol provides no amplification mechanism for such attacks — Heat does not offer arbitrage to an attacker unless they also move the price, and moving the price requires providing liquidity in return. □
+**Remark.** This is *not* a claim of full sandwich immunity. A sufficiently large trade before a Heat can shift `P/T` unfavorably for the depositor. The claim is that Heat/Cool do not make sandwich attacks *worse* than they already are for AMM trades.
 
 ---
 
