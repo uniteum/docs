@@ -371,7 +371,7 @@ A common attack on AMMs is the *sandwich attack*: front-run a large trade to mov
 
 The 2x mint mechanism raises several interesting theoretical questions:
 
-**Problem 1 (Stability Analysis).** Provide a formal dynamical systems treatment of convergence to the equilibrium `ρ = 1/2`. Under what assumptions on arbitrageur behavior (e.g., myopic best-response, Bayesian rational) does the system converge? What is the convergence rate?
+**Problem 1 (Stability Analysis).** Provide a formal dynamical systems treatment of convergence to the equilibrium `ρ = 1/2`. Under what assumptions on arbitrageur behavior (e.g., myopic best-response, rational expectations) does the system converge? What is the convergence rate?
 
 **Problem 2 (Optimal Arbitrage).** Characterize the optimal arbitrage strategy (amount to heat/cool, amount to trade) for an arbitrageur starting with some amount of backing tokens and observing system state `(P, L, T, B)`. This is a one-shot optimization problem; a full solution would characterize arbitrage profitability as a function of disequilibrium magnitude.
 
@@ -381,7 +381,7 @@ The 2x mint mechanism raises several interesting theoretical questions:
 
 **Problem 5 (Generalization to Non-Fungible Positions).** The 2x mint creates fungible LP exposure because all wrapped tokens are identical. Can the mechanism be adapted to issue *differentiated* LP positions that track individual entry states? What invariants would such a generalization need to preserve?
 
-**Problem 6 (Information Aggregation).** In a hub-and-spoke network with many spokes, the hub price aggregates information about all backed assets. What are the information-theoretic properties of this aggregation? Does the hub price converge to a sufficient statistic for cross-spoke exchange ratios?
+**Problem 6 (Hub Price as Aggregator).** In a hub-and-spoke network with many spokes, the hub price reflects demand across all connected assets. Does the hub price (together with individual spoke ratios `ρᵢ`) uniquely determine all cross-spoke exchange rates? Under what conditions can cross-spoke rates be inferred from hub-denominated prices alone?
 
 **Problem 7 (Optimal r).** For a given distribution of trader arrival rates and trade sizes, what value of `r` in the r-fold mint maximizes social welfare (defined as minimizing total slippage across all participants)?
 
