@@ -62,11 +62,11 @@ All operations can be performed through Etherscan's "Write Contract" interface. 
 
 **What happens:**
 - You deposit 1,000 USDC (solid backing token)
-- You receive 1,000 liquid tokens (liquid-USDC)
-- The pool also gets 1,000 liquid tokens
 - Total: 2,000 liquid minted from your 1,000 solid
+- The split between you and the pool depends on the current pool-to-supply ratio
+- At equilibrium (or on first deposit): you get 1,000, pool gets 1,000
 
-This [2x minting]({{ site.baseurl }}/liquid/2x-mint) creates instant liquidity. Half goes to you, half stays in the pool for trading.
+This [2x minting]({{ site.baseurl }}/liquid/2x-mint) creates instant liquidity. The pool's share provides tradeable depth; the exact split preserves the existing ratio between pooled and circulating tokens.
 
 ### Step 3: Cool (Unwrap Back to Original Tokens)
 
@@ -183,7 +183,7 @@ The 2x burn (from you and pool) maintains symmetry with the 2x mint in heat.
 
 1. Approve the backing token (solid, e.g., USDC)
 2. Call `heat(m)` on the liquid contract
-3. Receive liquid tokens (you get N, pool gets N)
+3. Receive liquid tokens (total 2N minted, split between you and pool based on current ratio)
 4. Pool now has more liquidity for trading
 
 ### Workflow 4: Exit Your Position
@@ -328,7 +328,7 @@ Liquid improves on traditional AMM designs in several key ways:
 **Note**: Backing token risk still exists. If your solid token (USDC, DAI, etc.) has governance issues or fails, the liquid token inherits that risk.
 
 ### Automatic Liquidity Creation
-- **2x mint pattern**: When you heat 1,000 solid, you get 1,000 liquid AND the pool gets 1,000 liquid
+- **2x mint pattern**: When you heat 1,000 solid, 2,000 liquid are minted — split between you and the pool (50/50 at equilibrium)
 - **Instant liquidity**: Every deposit automatically creates tradeable liquidity
 - **No separate LP tokens**: You hold the liquid tokens directly—no staking or complex LP positions
 - **Simple exit**: Cool back to solid anytime, no unstaking required
@@ -403,8 +403,9 @@ Yes. Risks include:
 ### Who provides the liquidity?
 
 Everyone who heats. When you heat 1,000 USDC (solid):
-- You get 1,000 liquid tokens (liquid-USDC) to hold
-- Pool gets 1,000 liquid tokens to trade
+- 2,000 liquid tokens are minted total
+- Split between you and the pool based on the current ratio (50/50 at equilibrium)
+- The pool's share provides tradeable liquidity
 
 You're both a holder and liquidity provider simultaneously.
 

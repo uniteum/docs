@@ -82,7 +82,7 @@ All operations can be performed through Etherscan's "Write Contract" interface. 
 
 1. Approve the liquid contract to spend your backing tokens
 2. Call `heat(m)` on the liquid contract
-3. Receive liquid tokens (you get N, pool gets N)
+3. Receive liquid tokens (2N minted total, split between you and pool based on current ratio)
 
 ### Trading
 

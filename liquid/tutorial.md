@@ -90,7 +90,7 @@ If `cloned` = `false`, you can create it — and `home` shows where it will be d
 
 **Goal:** Deposit backing tokens into a spoke to get liquid tokens and create pool liquidity.
 
-This is where the **2x mint** happens: you deposit N backing tokens, you get N liquid tokens, and the pool also gets N liquid tokens. Instant tradeable liquidity.
+This is where the **2x mint** happens: you deposit N backing tokens, the protocol mints 2N liquid tokens total — split between you and the pool based on the current ratio. On first deposit (or at equilibrium), the split is 50/50. Instant tradeable liquidity.
 
 ### Approve
 

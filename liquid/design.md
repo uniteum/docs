@@ -53,37 +53,44 @@ This is the classical constant-product formula used in automated market makers, 
 
 ### Wrapping Operation
 
-When a user deposits `n` backing tokens:
+When a user deposits `n` backing tokens into a spoke with current pool balance `P` and total supply `T`:
 
-1. Mint `n` wrapped tokens to user
-2. Mint `n` wrapped tokens to protocol pool
-3. Total supply increases by `2n`
+```
+p = 2n × P / T      (minted to pool — proportional to pool's share)
+u = 2n − p           (minted to user — the remainder)
+Total minted: u + p = 2n
+```
+
+On the first deposit (`T = 0`), the split is 50/50: user and pool each receive `n`. Subsequent deposits preserve the existing pool-to-supply ratio `P/T`.
 
 **Effect**: Creates liquidity proportional to deposits without requiring separate liquidity provision. The user receives tradeable tokens while simultaneously deepening the available pool for other traders.
 
-**Mathematical properties**:
+**At equilibrium** (`P/T = 1/2`):
 - User receives: `n` wrapped tokens
 - Pool receives: `n` wrapped tokens
 - Total minted: `2n`
 - User ownership: `n / 2n = 50%` of new issuance
 
+**Away from equilibrium** the split shifts: when `P/T < 1/2` (pool depleted after buying), the user receives more than `n`; when `P/T > 1/2` (pool oversupplied after selling), the user receives less than `n`. See [The 2x Mint]({{ site.baseurl }}/liquid/2x-mint) for full analysis.
+
 ### Unwrapping Operation
 
-When a user unwraps `n` wrapped tokens from their balance `held`:
+When a user burns `u` wrapped tokens from a spoke with current pool balance `P`, total supply `T`, and backing balance `B`:
 
-1. Calculate user's share: `s = held / total_supply`
-2. Calculate protocol's share: `p = pool / total_supply`
-3. Burn `2n × s` from user
-4. Burn `2n × p` from pool
-5. Return `solid = n × (backing_balance / held)` backing tokens
+```
+U = T − P                (circulating supply outside pool)
+m = u × T / (U × 2)     (backing tokens returned)
+p = 2m − u               (burned from pool)
+Total burned: u + p = 2m
+```
 
-**Invariant**: Total burned equals `2n`, maintaining symmetry with wrapping.
+**Invariant**: The ratio `P/T` is preserved, maintaining symmetry with wrapping. The user receives backing tokens proportional to their share of the circulating supply.
 
 **Mathematical properties**:
-- Burns are proportional to holdings
-- Maintains ratio between circulating and pooled tokens
-- Redemption value based on backing token reserves
-- Total burned: `2n × s + 2n × p = 2n`
+- Burns are split between user (`u`) and pool (`p`) to preserve `P/T`
+- Backing returned: `m = u × T / (2U)` where `U = T − P`
+- At equilibrium (`P/T = 1/2`): `m = u` (1:1 redemption)
+- Away from equilibrium: redemption rate shifts (see [The 2x Mint]({{ site.baseurl }}/liquid/2x-mint))
 
 ### Trading Operations
 
@@ -284,15 +291,20 @@ Both cycles result in net loss, preventing exploitative arbitrage while allowing
 The [2x mint]({{ site.baseurl }}/liquid/2x-mint) mechanism creates automatic liquidity:
 
 ```
-Initial wrap of n tokens:
+First wrap of n tokens:
   User receives: n wrapped tokens
   Pool receives: n wrapped tokens
   Tradeable depth: 50% of wrapped supply
+
+Subsequent wraps of n tokens (given pool ratio P/T):
+  Pool receives: 2n × P/T wrapped tokens
+  User receives: 2n − pool's share
+  Ratio P/T preserved
 ```
 
 **Comparison to traditional AMMs**:
 - Traditional: User must deposit both sides of pair (e.g., 50 A + 50 B)
-- Liquid: User deposits only backing token (e.g., 100 solid) and automatically creates 50/50 pool
+- Liquid: User deposits only backing token (e.g., 100 solid) and the protocol creates pool liquidity automatically
 
 This eliminates the bootstrapping problem where new tokens cannot trade until someone provides initial liquidity.
 
@@ -355,7 +367,7 @@ The constant-product formula `x × y = k` provides:
 
 ### Why 2x Mint?
 
-The symmetric mint mechanism (1x to user, 1x to pool) provides:
+The symmetric mint mechanism (total 2x, split between user and pool) provides:
 
 1. **Automatic liquidity**: No solid-start problem for new tokens
 2. **Proportional depth**: Liquidity scales with wrapping activity
@@ -524,14 +536,14 @@ batch_execute([
 The protocol can be generalized to support different wrapping ratios:
 
 **Standard (2x)**:
-- Mint n to user
-- Mint n to pool
-- Creates 50/50 split
+- Total minted: 2n
+- On first deposit: n to user, n to pool (50/50)
+- Subsequent deposits preserve existing P/T ratio
 
 **Generalized (rx)**:
-- Mint n to user
-- Mint (r-1)n to pool
-- Creates 1/r user share
+- Total minted: r×n
+- On first deposit: n to user, (r-1)n to pool
+- Equilibrium at P/T = (r-1)/r
 
 **Trade-off**: Higher r creates deeper liquidity but dilutes user ownership more.
 
@@ -574,32 +586,28 @@ Verify invariant:
 **Proof**:
 ```
 Initial state:
-  pool = P
-  total_supply = T
-  backing = B
+  pool = P, total_supply = T, backing = B
 
-Wrap n:
-  pool' = P + n
-  total_supply' = T + 2n
-  user_held = n
-  backing' = B + n
+Heat(n) — using the ratio-preserving formula:
+  p = 2n × P/T          (minted to pool)
+  u = 2n − p             (minted to user)
+  P' = P + p,  T' = T + 2n,  B' = B + n
 
-Unwrap n (immediately):
-  user_share = n / (T + 2n)
-  pool_share = (P + n) / (T + 2n)
-  total_burned = 2n × (user_share + pool_share)
+Cool(u) — immediately after:
+  U' = T' − P' = (T + 2n) − (P + p) = T − P + 2n − p = T − P + u
+  m  = u × T' / (U' × 2)
 
-  cold_received = n × backing' / user_held
-                = n × (B + n) / n
-                = B + n
+Substituting T' = T + 2n and U' = T − P + u:
+  m  = u × (T + 2n) / (2 × (T − P + u))
 
-But user's proportional share is:
-  solid = n × (pool_share + user_share)
+At equilibrium (P/T = 1/2, so P = T/2):
+  u = n, U' = T/2 + n
+  m = n × (T + 2n) / (2 × (T/2 + n)) = n × (T + 2n) / (T + 2n) = n ✓
 
-Since user_share < 1 and pool_share < 1:
-  solid < n (except in edge case where T = 0 initially)
+When T > 0 and P > 0 (non-first deposit):
+  u < 2n and U' > u, so m < n in general.
 
-Therefore: cold_received ≤ n ✓
+Therefore: backing_received ≤ n ✓
 ```
 
 ### Theorem 3: No-Arbitrage in Heat-Cool Cycles
@@ -608,10 +616,10 @@ Therefore: cold_received ≤ n ✓
 
 **Proof sketch**:
 ```
-1. Heat n: Receive n tokens, pool grows by n
-2. Sell n: Receive hub H < n × price (due to slippage)
-3. Buy with W: Receive tokens T < n (due to slippage)
-4. Cool T: Receive backing < T (due to proportional burn)
+1. Heat n: Receive u tokens, pool grows by p (where u + p = 2n)
+2. Sell u: Receive hub H (with AMM slippage)
+3. Buy with H: Receive tokens u' < u (due to constant-product concavity)
+4. Cool u': Receive backing m' < n (due to proportional burn)
 
 Result: backing_received < n = backing_deposited
 
@@ -641,14 +649,14 @@ price = lake / pool  (integer division)
 ### Edge Cases
 
 **Empty pool** (`pool = 0`):
-- Cannot buy (no tokens available)
-- Can sell (adds to pool)
-- Can wrap (creates initial pool)
+- Cannot buy (no tokens in pool to purchase)
+- Cannot sell profitably (with `k = pool × lake = 0`, selling adds to pool but yields zero hub)
+- Can wrap (creates initial pool via 2x mint)
 
 **Empty lake** (`lake = 0`):
-- Cannot sell (no hub available)
-- Can buy (adds to lake via cross-swap)
-- Requires seeding via cross-instance swap
+- Cannot sell profitably (with `k = pool × lake = 0`, selling yields zero hub)
+- Cannot buy profitably (buying removes pool tokens but costs zero hub — no meaningful price)
+- Requires seeding: a cross-instance swap or direct hub transfer to establish `k > 0`
 
 **Maximum trade size**:
 - Buy: Limited by pool size (cannot buy more than pool)
@@ -663,9 +671,9 @@ price = lake / pool  (integer division)
 
 **Bootstrapping**:
 1. Deploy Hub instance with initial backing (Uniteum 1)
-2. Wrap backing into hub (creates initial pool)
+2. Wrap backing into hub (1:1 mint — hub has no pool or lake)
 3. Deploy additional spoke instances as needed
-4. Cross-swaps automatically seed lakes
+4. Heat spokes to create initial pools; cross-swaps seed lakes
 
 ## Conclusion
 
