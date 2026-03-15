@@ -170,8 +170,8 @@ Tutorial quick reference tables are **data-driven** — function names, Ethersca
 ```yaml
 <contract-role>:          # e.g., hub, spoke, token, factory
   write:                  # functions on the Write Contract tab
-    "heat(m)":            # key = function signature (used as link text)
-      f: 6                # Etherscan F# index
+    "buy(m)":             # key = function signature (used as link text)
+      f: 3                # Etherscan F# index
       purpose: "..."      # short description
   read:                   # functions on the Read Contract tab
     "pool()":

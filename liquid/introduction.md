@@ -182,14 +182,14 @@ The 2x burn (from you and pool) maintains symmetry with the 2x mint in heat.
 ### Workflow 3: Add Liquidity to Existing Liquid
 
 1. Approve the backing token (solid, e.g., USDC)
-2. Call `heat(m)` on the liquid contract
+2. Call `heat(m, e)` on the liquid contract
 3. Receive liquid tokens (total 2N minted, split between you and pool based on current ratio)
 4. Pool now has more liquidity for trading
 
 ### Workflow 4: Exit Your Position
 
 **Option A: Cool to backing token**
-1. Call `cool(amount)` on the liquid contract
+1. Call `cool(s, e)` on the liquid contract
 2. Receive solid backing tokens based on pool reserves
 
 **Option B: Sell for hub, then cool hub**

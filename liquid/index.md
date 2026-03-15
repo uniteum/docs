@@ -81,7 +81,7 @@ All operations can be performed through Etherscan's "Write Contract" interface. 
 ### Adding Liquidity
 
 1. Approve the liquid contract to spend your backing tokens
-2. Call `heat(m)` on the liquid contract
+2. Call `heat(m, e)` on the liquid contract
 3. Receive liquid tokens (2N minted total, split between you and pool based on current ratio)
 
 ### Trading

@@ -42,7 +42,7 @@ The Hub needs permission to transfer your "Uniteum 1" tokens.
 
 ### Heat
 
-1. Go to [Hub → heat(m)](https://etherscan.io/token/{{site.data.liquids.hub.address}}#writeContract#F{{ hub_fn.write["heat(m)"].f }}){:target="_blank"}
+1. Go to [Hub → heat(m, e)](https://etherscan.io/token/{{site.data.liquids.hub.address}}#writeContract#F{{ hub_fn.write["heat(m, e)"].f }}){:target="_blank"}
 2. Enter `m` — the amount of "Uniteum 1" to wrap (in wei, 18 decimals)
 3. Click **Write** and confirm
 
@@ -102,7 +102,7 @@ This is where the **2x mint** happens: you deposit N backing tokens, the protoco
 
 ### Heat
 
-1. Go to [{{spoke.symbol}} → heat(m)](https://etherscan.io/token/{{spoke.address}}#writeContract#F{{ spoke_fn.write["heat(m)"].f }}){:target="_blank"}
+1. Go to [{{spoke.symbol}} → heat(m, e)](https://etherscan.io/token/{{spoke.address}}#writeContract#F{{ spoke_fn.write["heat(m, e)"].f }}){:target="_blank"}
 2. Enter `m` — the amount of {{backing.name}} tokens to deposit
 3. Click **Write** and confirm
 
