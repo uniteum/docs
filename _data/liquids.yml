@@ -2,9 +2,9 @@
 # All contracts use deterministic deployment (same address on all networks).
 
 hub:
-  name: "Uniteum 1"
+  name: "Liquid Uniteum 1"
   symbol: "1"
-  address: "0x7B208Fa0BC51faF5B2A9E2e70c4F18Ef45Fe95Be"
+  address: "0xd31D65108B9A10244448225652aEdde74058c1e5"
   backing: "0x7D5B1349157335aEEB929080a51003B529758830"
 
 # Spoke tokens
@@ -18,7 +18,7 @@ hub:
 #   backing: "0x51b8c19c10e296A0CB10378FDa4663C3C80588C6"
 
 H:
-  name: "Hydrogen"
-  symbol: "H"
-  address: "0xf00CA9c2E54D5c8ae1619c14c763a77c92C97212"
+  name: "Liquid Hydrogen"
+  symbol: "H_L"
+  address: "0xBc6815C31be06200b5DbE3b13447cCa1DAD8A676"
   backing: "0x51b8c19c10e296A0CB10378FDa4663C3C80588C6"
