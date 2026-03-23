@@ -3,8 +3,8 @@
 
 hub:
   name: "Liquid Uniteum 1"
-  symbol: "1"
-  address: "0xd31D65108B9A10244448225652aEdde74058c1e5"
+  symbol: "1_L"
+  address: "0x5f59C42265b93fbFD95110e79c13F376fe62313B"
   backing: "0x7D5B1349157335aEEB929080a51003B529758830"
 
 # Spoke tokens
@@ -17,8 +17,8 @@ hub:
 #   address: "TODO"
 #   backing: "0x51b8c19c10e296A0CB10378FDa4663C3C80588C6"
 
-H:
-  name: "Liquid Hydrogen"
-  symbol: "H_L"
-  address: "0xBc6815C31be06200b5DbE3b13447cCa1DAD8A676"
-  backing: "0x51b8c19c10e296A0CB10378FDa4663C3C80588C6"
+spoke:
+  name: "Liquid pi"
+  symbol: "π_L"
+  address: "0x06FB4aa448c1531076A58850111da69e36069d1e"
+  backing: "0x53b9551F11596199E3B375fE0897382a45B65fe4"

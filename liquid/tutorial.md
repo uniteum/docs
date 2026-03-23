@@ -6,7 +6,7 @@ permalink: /liquid/tutorial/
 nav_order: 2
 ---
 
-{% assign spoke = site.data.liquids.H %}
+{% assign spoke = site.data.liquids.spoke %}
 {% assign backing = site.data.solids.H %}
 {% assign hub_fn = site.data.liquid-functions.hub %}
 {% assign spoke_fn = site.data.liquid-functions.spoke %}
