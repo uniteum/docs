@@ -57,6 +57,18 @@ The notation is the price relationship. One operation—**forge**—maintains al
 
 ---
 
+## [Lepton](/lepton/) — Token Factory
+
+**One call makes a fixed-supply ERC-20. Deterministic address, no owner, no inflation.**
+
+Lepton deploys standard ERC-20 tokens as minimal proxy clones via CREATE2. You pick a name, symbol, and supply — the entire supply is minted to you in a single transaction. Idempotent: the same parameters always produce the same token.
+
+- Fixed supply, minted once at creation
+- Deterministic addresses via CREATE2
+- Permissionless, no owner, no governance
+
+---
+
 ## Common Thread
 
 All three protocols share a design philosophy: simple on-chain primitives with complex emergent behavior. No governance tokens, no admin keys, no upgrade paths. Once deployed, the rules are permanent.
@@ -72,6 +84,7 @@ All three protocols are deployed on Mainnet, unaudited, and at different stages 
 - **Solid** — Complete. The protocol is simple and does what it says.
 - **Liquid** — Likely complete, but not yet tested at scale.
 - **Uniteum** — Under active development. The mechanics around anchored units are incomplete, and it may not be possible to get them working.
+- **Lepton** — Complete. A minimal factory with a small, fixed interface.
 
 None of these contracts have been formally audited. Audits can give a false sense of security — audited contracts are regularly found to have severe defects after the fact. Read the code, understand the risks, and proceed with caution.
 

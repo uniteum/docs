@@ -3,12 +3,12 @@
 
 # Site Settings
 title: Uniteum
-tagline: Solid · Liquid · Uniteum
+tagline: Solid · Liquid · Uniteum · Lepton
 description: >-
-  Three experimental Ethereum protocols — Solid for fair-launch tokens with built-in
-  price floors, Liquid for wrapped tokens with hub-and-spoke AMM liquidity, and
+  Ethereum protocols — Solid for fair-launch tokens with built-in
+  price floors, Liquid for wrapped tokens with hub-and-spoke AMM liquidity,
   Uniteum for algebraic liquidity where tokens have dimensional units that compose
-  like physical quantities.
+  like physical quantities, and Lepton for minimalist fixed-supply token creation.
 
 # URLs
 url: "https://uniteum.one"
@@ -124,6 +124,7 @@ nav_order:
   - Uniteum
   - Solid
   - Liquid
+  - Lepton
 
 # Site Features
 show_excerpts: true
@@ -164,18 +165,8 @@ sass:
 # Timezone
 timezone: UTC
 
-# Experimental/Development Flags
-experimental: true
-version: "0.3"
-audit_status: "unaudited"
-
 # Custom variables (accessible via site.*)
 uniteum:
-  version: "0.3"
-  version_name: "1"
-  genesis_version: "0.0"
-  show_v01_warning: false  # Version 0.3 has no known issues
-  
   # Note: Contract addresses are now in _data/contracts.yml
   # Use includes like {% include uniteum_address.html %} for current version
 
