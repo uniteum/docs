@@ -16,8 +16,10 @@ status: draft
 
 # Elemental
 
-A contract is **Elemental** if it satisfies eight properties. All eight.
-No exceptions, no "partially Elemental," no spectrum.
+A contract is **Elemental** if it satisfies eight properties — the
+concrete, testable form of the [design philosophy](/philosophy/)
+behind the Uniteum protocols. All eight. No exceptions, no
+"partially Elemental," no spectrum.
 
 The term is not trademarked. Anyone can build Elemental contracts.
 If a contract meets the criteria below, it qualifies — regardless of
