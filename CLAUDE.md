@@ -164,37 +164,36 @@ All our contracts use deterministic deployment (same address on all networks). U
 
 ### Data-Driven Function Reference Tables
 
-Tutorial quick reference tables are **data-driven** — function names, Etherscan F# indices, and descriptions live in `_data/<protocol>-functions.yml`, not hardcoded in markdown.
+Tutorial quick reference tables are **data-driven** — function names, Etherscan F# indices, and descriptions live in `_data/<protocol>.yml`, not hardcoded in markdown.
 
-**Data file schema** (`_data/<protocol>-functions.yml`) — maps keyed by function signature:
+**Data file schema** (`_data/<protocol>.yml`) — one file per protocol, maps keyed by function signature:
 ```yaml
-<contract-role>:          # e.g., hub, spoke, token, factory
-  write:                  # functions on the Write Contract tab
-    "buy(m)":             # key = function signature (used as link text)
-      f: 3                # Etherscan F# index
-      purpose: "..."      # short description
-  read:                   # functions on the Read Contract tab
-    "pool()":
-      f: 13
-      purpose: "..."
+write:                    # functions on the Write Contract tab
+  "buy(m)":               # key = function signature (used as link text)
+    f: 3                  # Etherscan F# index
+    description: "..."    # short description
+read:                     # functions on the Read Contract tab
+  "pool()":
+    f: 13
+    description: "..."
 ```
 
 **Table pattern** (quick reference — iterates the map):
 ```markdown
-{% raw %}{% for fn in site.data.<protocol>-functions.<role>.write %}| [`{{ fn[0] }}`](...#writeContract#F{{ fn[1].f }}){:target="_blank"} | {{ fn[1].purpose }} |
+{% raw %}{% for f in site.data.<protocol>.write %}| [`{{ f[0] }}`](...#writeContract#F{{ f[1].f }}){:target="_blank"} | {{ f[1].description }} |
 {% endfor %}{% endraw %}
 ```
 
 **Inline pattern** (tutorial body — random access by function name):
 ```markdown
-{% raw %}{% assign spoke_fn = site.data.<protocol>-functions.spoke %}
-[sell](https://etherscan.io/address/{{spoke.address}}#writeContract#F{{ spoke_fn.write["sell(s)"].f }}){:target="_blank"}{% endraw %}
+{% raw %}{% assign fn = site.data.<protocol> %}
+[sell](https://etherscan.io/address/{{spoke.address}}#writeContract#F{{ fn.write["sell(s)"].f }}){:target="_blank"}{% endraw %}
 ```
 
 **Verifying F# indices:** Open the contract on Etherscan, select Read/Write Contract tab, and count the function's alphabetical position. Etherscan sorts all public/external functions alphabetically (including inherited ERC20 functions like `approve`, `transfer`, `balanceOf`, etc.).
 
 **Current data files:**
-- `_data/liquid-functions.yml` — Hub and Spoke functions
+- `_data/liquid.yml` — Liquid protocol functions
 
 ❌ WRONG: Hardcoded F# indices in markdown (inline or tables)
 ❌ WRONG: Combining read and write functions in one table

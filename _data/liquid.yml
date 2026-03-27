@@ -1,0 +1,51 @@
+# Liquid protocol function signatures.
+# f = position in Etherscan's alphabetically-sorted function list.
+
+write:
+  "buy(e)":
+    f: 2
+    description: "Buy spoke tokens with hub tokens via the constant-product AMM"
+  "cool(u, e)":
+    f: 3
+    description: "Burn liquid tokens and redeem backing tokens"
+  "heat(m, e)":
+    f: 4
+    description: "Deposit backing tokens, mint liquid tokens"
+  "make(backing)":
+    f: 5
+    description: "Deploy a new spoke for the given backing token"
+  "sell(s)":
+    f: 6
+    description: "Sell spoke tokens for hub tokens via the constant-product AMM"
+  "sellFor(that, s)":
+    f: 7
+    description: "Atomic cross-spoke swap: sell this spoke's tokens, buy another's"
+
+read:
+  "buys(e)":
+    f: 6
+    description: "Quote a buy: spoke tokens that would be received"
+  "cools(u, e)":
+    f: 7
+    description: "Quote a cool with explicit hub-token withdrawal"
+  "heats(m, e)":
+    f: 9
+    description: "Quote a heat with explicit hub-token deposit"
+  "made(backing)":
+    f: 10
+    description: "Check whether a spoke for the given backing token exists"
+  "mass()":
+    f: 11
+    description: "Backing token balance held by this contract, redeemable via cool"
+  "pool()":
+    f: 13
+    description: "Current pool reserves: spoke tokens (S) and hub tokens (E)"
+  "sells(s)":
+    f: 14
+    description: "Quote a sell: hub tokens that would be received"
+  "sellsFor(that, s)":
+    f: 15
+    description: "Quote a cross-spoke swap: hub tokens used and target spoke tokens received"
+  "solid()":
+    f: 16
+    description: "The backing ERC-20 token this instance wraps"
