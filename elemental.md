@@ -86,13 +86,16 @@ or an off-chain step? If yes, it is not Elemental.
 
 ### 7. Composable
 
-Inputs and outputs are standard ERC-20 tokens. The contract does
-not require proprietary token standards, wrapper interfaces, or
-protocol-specific abstractions.
+The contract operates through well-defined interfaces. Where it
+produces tokens, those tokens are standard ERC-20s. Where it
+exposes other functionality, it does so through public functions
+with clear inputs and outputs — no off-chain coordination, no
+proprietary coupling, no requirement that callers use a specific
+SDK or wrapper.
 
-**Test:** Can the contract's outputs be used as inputs to any other
-ERC-20-compatible contract without adaptation? If not, it is not
-Elemental.
+**Test:** Can other contracts interact with this contract using
+only its public interface, without proprietary adapters or
+off-chain steps? If not, it is not Elemental.
 
 ### 8. Pure math
 
