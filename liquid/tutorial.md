@@ -32,7 +32,7 @@ Hub heat is a simple 1:1 wrap — no pool mechanics, no [2x mint]({{ site.baseur
 
 The Hub needs permission to transfer your "Uniteum 1" tokens.
 
-1. Go to [Uniteum 1 → approve](https://etherscan.io/token/{{site.data.solids["1"].address}}#writeContract#F2){:target="_blank"}
+1. Go to [Uniteum 1 → approve](https://etherscan.io/token/{{site.data.solids["1"].address}}#writeContract#F1){:target="_blank"}
 2. Connect your wallet
 3. Enter:
    - `spender`: `{{site.data.liquids.hub.address}}` (the Hub)
