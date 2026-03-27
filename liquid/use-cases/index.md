@@ -43,6 +43,14 @@ Instead of asking "Is this balanced?", designers ask "Is this priced correctly?"
 
 > [Liquids as game-native currencies]({{ site.baseurl }}/liquid/use-cases/game-currencies)
 
+## Liquid-first tokens
+
+For token developers, the most natural use of Liquid may be the most overlooked: make the liquid version the primary token.
+
+The backing token handles everything that isn't liquidity — minting, governance, vesting, access controls. The liquid version handles everything that is — trading, price discovery, cross-token swaps. Users hold one token. Developers get both programmable logic and instant liquidity, composed through a clean interface.
+
+> [Making the liquid version the canonical token]({{ site.baseurl }}/liquid/use-cases/liquid-first-tokens)
+
 ## More to come
 
 Additional use cases will be added here, including:
