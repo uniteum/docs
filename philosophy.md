@@ -92,9 +92,13 @@ This means:
   logic. The maker of a token operates under the same code as every
   other participant.
 
-Cloning is not a gas optimization. It is a commitment: the same
-rules apply to everyone, and no one — including the deployer — can
-change them.
+Cloning is also a practical optimization. A minimal proxy is 45 bytes
+of runtime code — a forwarding stub. Deploying a new Solid or Liquid
+spoke costs a fraction of what a full contract deployment would. This
+matters when the protocol is designed for thousands of instances.
+
+But the deeper reason is fairness: the same rules apply to everyone,
+and no one — including the deployer — can change them.
 
 ---
 
@@ -118,6 +122,54 @@ This has practical consequences:
 
 Determinism removes coordination overhead. There is no registry to
 consult, no deployer to ask, no canonical chain to check.
+
+---
+
+## Simple enough to use directly
+
+Every operation in every protocol is a single function call. There is
+no multi-step workflow, no approve-then-execute dance beyond standard
+ERC-20 approvals, no off-chain signature required.
+
+This means the contracts are usable directly from a block explorer.
+Go to Etherscan, connect a wallet, and call `make`, `heat`, `cool`,
+`swap`, or `forge`. No frontend required. No SDK. No CLI.
+
+This is a deliberate constraint. If an operation cannot be expressed
+as one clear function call with obvious parameters, it is too
+complicated. The protocol should be legible at the contract interface
+level — not just to developers, but to anyone who can read a function
+signature.
+
+Frontends are conveniences, not requirements. The protocol works
+without them.
+
+---
+
+## Composable
+
+Each protocol is independent. Solid does not import Liquid. Liquid
+does not depend on Uniteum. They connect through ERC-20 — the only
+interface they share with each other and with the rest of Ethereum.
+
+This means:
+
+- **Any ERC-20 can enter.** Liquid wraps any ERC-20. Solid tokens
+  are ERC-20s. Lepton tokens are ERC-20s. Each protocol's outputs
+  are valid inputs to the others.
+- **No walled garden.** A Solid token can be wrapped with Liquid.
+  A Lepton token can back a Liquid spoke. A Uniteum unit can
+  reference any ERC-20 via anchoring. The protocols compose because
+  they speak the same standard, not because they were designed as a
+  bundle.
+- **External composability.** Because every token is a standard
+  ERC-20, it works with Uniswap, Aave, Gnosis Safe, or any other
+  contract that accepts ERC-20s. Nothing about these protocols
+  requires the rest of the ecosystem to know they exist.
+
+Composability is not a feature that was added. It is a consequence
+of building on a shared standard and not adding proprietary
+abstractions on top.
 
 ---
 
@@ -151,6 +203,8 @@ the mechanism.
 | Zero governance      | No tokens, no votes, no parameter changes          |
 | Cloned               | One implementation, identical for all instances    |
 | Deterministic        | Same parameters → same address, every chain        |
+| Simple               | Every operation is one function call from Etherscan|
+| Composable           | Standard ERC-20 in, standard ERC-20 out            |
 | Pure math            | On-chain invariants, no oracles                    |
 
 These are not ideals to strive for. They are properties of the
