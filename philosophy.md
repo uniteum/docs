@@ -15,8 +15,11 @@ status: draft
 
 # Philosophy
 
-Uniteum protocols share a set of design commitments. These are not
-aspirations — they are properties enforced by the deployed bytecode.
+The hardest problem in DeFi is knowing what to trust. Code gets
+upgraded, fees get switched on, admin keys get compromised. Uniteum
+protocols are designed so you don't have to take anyone's word for
+anything — every property below is enforced by deployed bytecode,
+not promises.
 
 ---
 
