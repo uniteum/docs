@@ -6,6 +6,8 @@ permalink: /solid/tutorial/
 nav_order: 2
 ---
 
+{% assign fn = site.data.solid %}
+
 # Tutorial: Using Solid on Etherscan
 
 > Make a token, buy it, sell it, and swap it — all from a block explorer.
@@ -154,16 +156,16 @@ The result is how many He tokens you'd receive.
 
 | Action | Function | Payable | No approval needed |
 |:-------|:---------|:--------|:-------------------|
-| Create | [`make(name, symbol)`](https://etherscan.io/token/{{site.data.solids.NOTHING.address}}#writeContract#F3){:target="_blank"} | No | — |
-| Check existence | [`made(name, symbol)`](https://etherscan.io/token/{{site.data.solids.NOTHING.address}}#readContract#F7){:target="_blank"} | — | — |
-| Buy | [`buy()`](https://etherscan.io/token/{{site.data.solids.H.address}}#writeContract#F2){:target="_blank"} | **Yes** (send ETH) | — |
-| Sell | [`sell(s)`](https://etherscan.io/token/{{site.data.solids.H.address}}#writeContract#F4){:target="_blank"} | No | Yes |
-| Swap | [`sellFor(that, s)`](https://etherscan.io/token/{{site.data.solids.H.address}}#writeContract#F5){:target="_blank"} | No | Yes |
-| Preview buy | [`buys(e)`](https://etherscan.io/token/{{site.data.solids.H.address}}#readContract#F5){:target="_blank"} | — | — |
-| Preview sell | [`sells(s)`](https://etherscan.io/token/{{site.data.solids.H.address}}#readContract#F10){:target="_blank"} | — | — |
-| Preview swap | [`sellsFor(that, s)`](https://etherscan.io/token/{{site.data.solids.H.address}}#readContract#F11){:target="_blank"} | — | — |
-| Pool state | [`pool()`](https://etherscan.io/token/{{site.data.solids.H.address}}#readContract#F9){:target="_blank"} | — | — |
-| Your balance | [`balanceOf(address)`](https://etherscan.io/token/{{site.data.solids.H.address}}#readContract#F4){:target="_blank"} | — | — |
+| Create | [`make(name, symbol)`](https://etherscan.io/token/{{site.data.solids.NOTHING.address}}#writeContract#F{{ fn.write["make(name, symbol)"].f }}){:target="_blank"} | No | — |
+| Check existence | [`made(name, symbol)`](https://etherscan.io/token/{{site.data.solids.NOTHING.address}}#readContract#F{{ fn.read["made(name, symbol)"].f }}){:target="_blank"} | — | — |
+| Buy | [`buy()`](https://etherscan.io/token/{{site.data.solids.H.address}}#writeContract#F{{ fn.write["buy()"].f }}){:target="_blank"} | **Yes** (send ETH) | — |
+| Sell | [`sell(s)`](https://etherscan.io/token/{{site.data.solids.H.address}}#writeContract#F{{ fn.write["sell(s)"].f }}){:target="_blank"} | No | Yes |
+| Swap | [`sellFor(that, s)`](https://etherscan.io/token/{{site.data.solids.H.address}}#writeContract#F{{ fn.write["sellFor(that, s)"].f }}){:target="_blank"} | No | Yes |
+| Preview buy | [`buys(e)`](https://etherscan.io/token/{{site.data.solids.H.address}}#readContract#F{{ fn.read["buys(e)"].f }}){:target="_blank"} | — | — |
+| Preview sell | [`sells(s)`](https://etherscan.io/token/{{site.data.solids.H.address}}#readContract#F{{ fn.read["sells(s)"].f }}){:target="_blank"} | — | — |
+| Preview swap | [`sellsFor(that, s)`](https://etherscan.io/token/{{site.data.solids.H.address}}#readContract#F{{ fn.read["sellsFor(that, s)"].f }}){:target="_blank"} | — | — |
+| Pool state | [`pool()`](https://etherscan.io/token/{{site.data.solids.H.address}}#readContract#F{{ fn.read["pool()"].f }}){:target="_blank"} | — | — |
+| Your balance | [`balanceOf(address)`](https://etherscan.io/token/{{site.data.solids.H.address}}#readContract#F{{ fn.read["balanceOf(account)"].f }}){:target="_blank"} | — | — |
 
 All amounts use 18 decimals. 1 token = `1000000000000000000` wei.
 

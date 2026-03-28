@@ -193,13 +193,15 @@ read:                     # functions on the Read Contract tab
 **Verifying F# indices:** Open the contract on Etherscan, select Read/Write Contract tab, and count the function's alphabetical position. Etherscan sorts all public/external functions alphabetically (including inherited ERC20 functions like `approve`, `transfer`, `balanceOf`, etc.).
 
 **Current data files:**
-- `_data/liquid.yml` — Liquid protocol functions
+- `_data/liquid.yml` — Liquid protocol functions (includes ERC-20 functions at Liquid-specific positions)
+- `_data/solid.yml` — Solid protocol functions
+- `_data/lepton.yml` — Lepton protocol functions
 
 ❌ WRONG: Hardcoded F# indices in markdown (inline or tables)
 ❌ WRONG: Combining read and write functions in one table
 ❌ WRONG: Using arrays in the YAML (use maps keyed by function signature)
 ✅ CORRECT: Maps keyed by function signature, enabling both iteration and random access
-✅ CORRECT: Separate Write and Read tables, driven by `_data/<protocol>-functions.yml`
+✅ CORRECT: Separate Write and Read tables, driven by `_data/<protocol>.yml`
 
 ## Self-Improvement Protocol
 

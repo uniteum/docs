@@ -2,6 +2,9 @@
 # f = position in Etherscan's alphabetically-sorted function list.
 
 write:
+  "approve(spender, value)":
+    f: 1
+    description: "Approve a spender to transfer tokens on your behalf"
   "buy(e)":
     f: 2
     description: "Buy spoke tokens with hub tokens via the constant-product AMM"
@@ -22,6 +25,9 @@ write:
     description: "Atomic cross-spoke swap: sell this spoke's tokens, buy another's"
 
 read:
+  "balanceOf(account)":
+    f: 5
+    description: "Check token balance of an address"
   "buys(e)":
     f: 6
     description: "Quote a buy: spoke tokens that would be received"

@@ -6,6 +6,8 @@ has_children: true
 permalink: /lepton/
 ---
 
+{% assign fn = site.data.lepton %}
+
 # Lepton
 
 **A minimalist token factory. One call makes a fixed-supply ERC-20.**
@@ -70,8 +72,8 @@ You can interact with Lepton using standard tools like
 
 | Action | What it does |
 |:-------|:-------------|
-| [make(name, symbol, supply)](https://etherscan.io/address/0x14ae57aed6ac1cd48fa811ed885ab4a4c5e28c42#writeContract#F1){:target="_blank"} | Deploy a new ERC-20 token |
-| [made(maker, name, symbol, supply)](https://etherscan.io/address/0x14ae57aed6ac1cd48fa811ed885ab4a4c5e28c42#readContract#F3){:target="_blank"} | Check if a token exists and preview its address |
+| [make(name, symbol, supply)](https://etherscan.io/address/0x14ae57aed6ac1cd48fa811ed885ab4a4c5e28c42#writeContract#F{{ fn.write["make(name, symbol, supply)"].f }}){:target="_blank"} | Deploy a new ERC-20 token |
+| [made(maker, name, symbol, supply)](https://etherscan.io/address/0x14ae57aed6ac1cd48fa811ed885ab4a4c5e28c42#readContract#F{{ fn.read["made(maker, name, symbol, supply)"].f }}){:target="_blank"} | Check if a token exists and preview its address |
 
 Each deployed token is a standard ERC-20 with `name()`, `symbol()`, `totalSupply()`, `balanceOf()`, `transfer()`, `approve()`, and `transferFrom()`.
 

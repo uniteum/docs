@@ -1,0 +1,39 @@
+# Solid protocol function signatures.
+# f = position in Etherscan's alphabetically-sorted function list.
+
+write:
+  "approve(spender, value)":
+    f: 1
+    description: "Approve a spender to transfer tokens on your behalf"
+  "buy()":
+    f: 2
+    description: "Buy tokens from the pool with ETH"
+  "make(name, symbol)":
+    f: 3
+    description: "Create a new Solid token"
+  "sell(s)":
+    f: 4
+    description: "Sell tokens back to the pool for ETH"
+  "sellFor(that, s)":
+    f: 5
+    description: "Swap tokens for another Solid's tokens"
+
+read:
+  "balanceOf(account)":
+    f: 4
+    description: "Check token balance of an address"
+  "buys(e)":
+    f: 5
+    description: "Preview buy: tokens received for a given ETH amount"
+  "made(name, symbol)":
+    f: 7
+    description: "Check if a Solid with this name and symbol exists"
+  "pool()":
+    f: 9
+    description: "Current pool reserves"
+  "sells(s)":
+    f: 10
+    description: "Preview sell: ETH received for a given token amount"
+  "sellsFor(that, s)":
+    f: 11
+    description: "Preview swap: tokens received in a Solid-to-Solid swap"

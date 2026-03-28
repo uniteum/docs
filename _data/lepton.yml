@@ -1,0 +1,12 @@
+# Lepton protocol function signatures.
+# f = position in Etherscan's alphabetically-sorted function list.
+
+write:
+  "make(name, symbol, supply)":
+    f: 1
+    description: "Deploy a new fixed-supply ERC-20 token"
+
+read:
+  "made(maker, name, symbol, supply)":
+    f: 3
+    description: "Check if a token exists and preview its address"

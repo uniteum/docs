@@ -6,6 +6,8 @@ has_children: true
 permalink: /solid/
 ---
 
+{% assign fn = site.data.solid %}
+
 # Solid Protocol
 
 **Make a token that starts fair, stays tradeable, and never goes to zero.**
@@ -95,20 +97,20 @@ as a live example. Any Solid works the same way.
 
 | Action | What it does |
 |:-------|:-------------|
-| [make(name, symbol)](https://etherscan.io/token/{{site.data.solids.NOTHING.address}}#writeContract#F3){:target="_blank"} | Make a new Solid |
-| [buy()](https://etherscan.io/token/{{site.data.solids["1"].address}}#writeContract#F2){:target="_blank"} | Buy tokens from the pool |
-| [sell(amount)](https://etherscan.io/token/{{site.data.solids["1"].address}}#writeContract#F4){:target="_blank"} | Sell tokens back to the pool |
-| [sellFor(solid, amount)](https://etherscan.io/token/{{site.data.solids["1"].address}}#writeContract#F5){:target="_blank"} | Swap one Solid for another |
+| [make(name, symbol)](https://etherscan.io/token/{{site.data.solids.NOTHING.address}}#writeContract#F{{ fn.write["make(name, symbol)"].f }}){:target="_blank"} | Make a new Solid |
+| [buy()](https://etherscan.io/token/{{site.data.solids["1"].address}}#writeContract#F{{ fn.write["buy()"].f }}){:target="_blank"} | Buy tokens from the pool |
+| [sell(amount)](https://etherscan.io/token/{{site.data.solids["1"].address}}#writeContract#F{{ fn.write["sell(s)"].f }}){:target="_blank"} | Sell tokens back to the pool |
+| [sellFor(solid, amount)](https://etherscan.io/token/{{site.data.solids["1"].address}}#writeContract#F{{ fn.write["sellFor(that, s)"].f }}){:target="_blank"} | Swap one Solid for another |
 
 ### Inspect prices and state
 
 | Action | What it shows |
 |:-------|:--------------|
-| [buys(ethAmount)](https://etherscan.io/token/{{site.data.solids["1"].address}}#readContract#F5){:target="_blank"} | Tokens received for a given input |
-| [sells(amount)](https://etherscan.io/token/{{site.data.solids["1"].address}}#readContract#F10){:target="_blank"} | Currency received for selling |
-| [sellsFor(solid, amount)](https://etherscan.io/token/{{site.data.solids["1"].address}}#readContract#F11){:target="_blank"} | Preview a Solid-to-Solid swap |
-| [pool()](https://etherscan.io/token/{{site.data.solids["1"].address}}#readContract#F9){:target="_blank"} | Current pool balances |
-| [made(name, symbol)](https://etherscan.io/token/{{site.data.solids.NOTHING.address}}#readContract#F7){:target="_blank"} | Check if a Solid already exists |
+| [buys(ethAmount)](https://etherscan.io/token/{{site.data.solids["1"].address}}#readContract#F{{ fn.read["buys(e)"].f }}){:target="_blank"} | Tokens received for a given input |
+| [sells(amount)](https://etherscan.io/token/{{site.data.solids["1"].address}}#readContract#F{{ fn.read["sells(s)"].f }}){:target="_blank"} | Currency received for selling |
+| [sellsFor(solid, amount)](https://etherscan.io/token/{{site.data.solids["1"].address}}#readContract#F{{ fn.read["sellsFor(that, s)"].f }}){:target="_blank"} | Preview a Solid-to-Solid swap |
+| [pool()](https://etherscan.io/token/{{site.data.solids["1"].address}}#readContract#F{{ fn.read["pool()"].f }}){:target="_blank"} | Current pool balances |
+| [made(name, symbol)](https://etherscan.io/token/{{site.data.solids.NOTHING.address}}#readContract#F{{ fn.read["made(name, symbol)"].f }}){:target="_blank"} | Check if a Solid already exists |
 
 If you'd like to support continued development, acquiring some
 [Uniteum 1]({{ site.baseurl }}/solid/uniteum-1)

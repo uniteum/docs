@@ -18,7 +18,7 @@ Everything here uses [Etherscan](https://etherscan.io){:target="_blank"} directl
 
 The [Hub](https://etherscan.io/token/{{site.data.liquids.hub.address}}){:target="_blank"} is the central contract — it wraps [Uniteum 1](https://etherscan.io/token/{{site.data.solids["1"].address}}){:target="_blank"} and acts as the factory for all spoke tokens.
 
-We'll use [{{spoke.name}} ({{spoke.symbol}})](https://etherscan.io/token/{{spoke.address}}#readContract#F16){:target="_blank"} as our example spoke, backed by [{{backing.name}} ({{backing.symbol}})](https://etherscan.io/token/{{backing.address}}){:target="_blank"}.
+We'll use [{{spoke.name}} ({{spoke.symbol}})](https://etherscan.io/token/{{spoke.address}}#readContract#F{{ fn.read["solid()"].f }}){:target="_blank"} as our example spoke, backed by [{{backing.name}} ({{backing.symbol}})](https://etherscan.io/token/{{backing.address}}){:target="_blank"}.
 
 ---
 
@@ -32,7 +32,7 @@ Hub heat is a simple 1:1 wrap — no pool mechanics, no [2x mint]({{ site.baseur
 
 The Hub needs permission to transfer your "Uniteum 1" tokens.
 
-1. Go to [Uniteum 1 → approve](https://etherscan.io/token/{{site.data.solids["1"].address}}#writeContract#F1){:target="_blank"}
+1. Go to [Uniteum 1 → approve](https://etherscan.io/token/{{site.data.solids["1"].address}}#writeContract#F{{ site.data.solid.write["approve(spender, value)"].f }}){:target="_blank"}
 2. Connect your wallet
 3. Enter:
    - `spender`: `{{site.data.liquids.hub.address}}` (the Hub)
@@ -49,7 +49,7 @@ The Hub needs permission to transfer your "Uniteum 1" tokens.
 - Your "Uniteum 1" tokens were deposited into the Hub
 - You received the same amount of Hub tokens (1:1)
 
-**Verify:** Call [`balanceOf`](https://etherscan.io/token/{{site.data.liquids.hub.address}}#readContract#F3){:target="_blank"} on the Hub with your wallet address.
+**Verify:** Call [`balanceOf`](https://etherscan.io/token/{{site.data.liquids.hub.address}}#readContract#F{{ fn.read["balanceOf(account)"].f }}){:target="_blank"} on the Hub with your wallet address.
 
 <!-- TODO: example tx hash for a Hub heat transaction -->
 
@@ -93,7 +93,7 @@ This is where the **2x mint** happens: you deposit N backing tokens, the protoco
 
 ### Approve
 
-1. Go to [{{backing.name}} → approve](https://etherscan.io/token/{{backing.address}}#writeContract#F1){:target="_blank"}
+1. Go to [{{backing.name}} → approve](https://etherscan.io/token/{{backing.address}}#writeContract#F{{ site.data.solid.write["approve(spender, value)"].f }}){:target="_blank"}
 2. Enter:
    - `spender`: `{{spoke.address}}` (the {{spoke.symbol}} spoke)
    - `amount`: how much to approve (in wei, 18 decimals)
@@ -140,7 +140,7 @@ The result is how many Hub tokens you'd receive.
 - Hub tokens moved from the pool's lake to your wallet
 - The pool's constant-product invariant (P × E = k) was maintained
 
-**Verify:** Call [`balanceOf`](https://etherscan.io/token/{{site.data.liquids.hub.address}}#readContract#F3){:target="_blank"} on the Hub with your wallet address.
+**Verify:** Call [`balanceOf`](https://etherscan.io/token/{{site.data.liquids.hub.address}}#readContract#F{{ fn.read["balanceOf(account)"].f }}){:target="_blank"} on the Hub with your wallet address.
 
 <!-- TODO: example tx hash for a sell transaction -->
 
@@ -168,7 +168,7 @@ The result is how many {{spoke.symbol}} tokens you'd receive.
 - Hub tokens moved from your wallet into the pool's lake
 - {{spoke.symbol}} tokens moved from the pool to your wallet
 
-**Verify:** Call [`balanceOf`](https://etherscan.io/token/{{spoke.address}}#readContract#F3){:target="_blank"} on {{spoke.symbol}} with your wallet address.
+**Verify:** Call [`balanceOf`](https://etherscan.io/token/{{spoke.address}}#readContract#F{{ fn.read["balanceOf(account)"].f }}){:target="_blank"} on {{spoke.symbol}} with your wallet address.
 
 <!-- TODO: example tx hash for a buy transaction -->
 
