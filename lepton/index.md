@@ -12,6 +12,8 @@ permalink: /lepton/
 
 **A minimalist token factory. One call makes a fixed-supply ERC-20.**
 
+Named after the ancient Greek lepton (λεπτόν) — the smallest denomination coin — and the fundamental particles in physics, which are elementary and indivisible.
+
 Lepton deploys ERC-20 tokens with deterministic addresses. You pick a name, symbol, and supply. One transaction creates the token and mints the entire supply to you. That's it — no inflation, no minting function, no owner.
 
 No launch.
