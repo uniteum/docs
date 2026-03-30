@@ -3,10 +3,10 @@
 
 write:
   "make(name, symbol, supply)":
-    f: 1
+    f: 2
     description: "Deploy a new fixed-supply ERC-20 token"
 
 read:
   "made(maker, name, symbol, supply)":
-    f: 3
+    f: 5
     description: "Check if a token exists and preview its address"
