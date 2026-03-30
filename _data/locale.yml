@@ -1,0 +1,20 @@
+# AddressLookup function signatures.
+# f = position in Etherscan's alphabetically-sorted function list.
+
+address: "0x6adD49A791fF1dDDcd91f0AFCB70Cd91c81821ca"
+
+write:
+  "make(keyValues)":
+    f: 1
+    description: "Deploy a new AddressLookup with chain-specific values"
+
+read:
+  "PROTO()":
+    f: 1
+    description: "Factory address"
+  "made(keyValues)":
+    f: 2
+    description: "Check if a lookup exists and preview its address"
+  "value()":
+    f: 3
+    description: "The chain-specific address for this lookup"

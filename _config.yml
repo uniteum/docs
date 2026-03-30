@@ -3,12 +3,13 @@
 
 # Site Settings
 title: Uniteum
-tagline: Solid · Liquid · Uniteum · Lepton
+tagline: Solid · Liquid · Uniteum · Lepton · Locale
 description: >-
   Ethereum protocols — Solid for fair-launch tokens with built-in
   price floors, Liquid for wrapped tokens with hub-and-spoke AMM liquidity,
   Uniteum for algebraic liquidity where tokens have dimensional units that compose
-  like physical quantities, and Lepton for minimalist fixed-supply token creation.
+  like physical quantities, Lepton for minimalist fixed-supply token creation,
+  and Locale for immutable reference contracts at deterministic cross-chain addresses.
 
 # URLs
 url: "https://uniteum.one"
@@ -125,6 +126,7 @@ nav_order:
   - Solid
   - Liquid
   - Lepton
+  - Locale
 
 # Site Features
 show_excerpts: true
