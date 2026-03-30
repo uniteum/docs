@@ -214,5 +214,5 @@ These are not ideals to strive for. They are properties of the
 deployed contracts. You can verify each one by reading the bytecode.
 
 Taken together, these eight properties define what it means for a
-contract to be [Elemental](/elemental/) — a concrete, testable
+contract to be [Bitsy](/bitsy/) — a concrete, testable
 standard that any contract can meet.

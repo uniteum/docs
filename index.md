@@ -71,7 +71,7 @@ Lepton deploys standard ERC-20 tokens as minimal proxy clones via CREATE2. You p
 
 ## Common Thread
 
-All four protocols are [Elemental](/elemental/) — immutable, permissionless, governance-free, cloned, deterministic, direct, composable, and math-only. These are not aspirations; they are verifiable properties of the deployed bytecode.
+All four protocols are [Bitsy](/bitsy/) — immutable, permissionless, governance-free, cloned, deterministic, direct, composable, and math-only. These are not aspirations; they are verifiable properties of the deployed bytecode.
 
 They are connected by strategic choice, not architectural dependency. The [Solid "Uniteum 1"](/solid/uniteum-1) token serves as the backing for both the Liquid Hub and the Uniteum "1" identity Unit—amplifying its value across all three protocols.
 

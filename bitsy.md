@@ -1,7 +1,7 @@
 ---
-title: Elemental
+title: Bitsy
 description: >-
-  A contract is Elemental if it is immutable, permissionless, governance-free,
+  A contract is Bitsy if it is immutable, permissionless, governance-free,
   cloned, deterministic, direct, composable, and math-only.
   An open standard for minimal, permanent on-chain primitives.
 
@@ -10,18 +10,18 @@ nav_order: 3
 has_children: false
 
 # Metadata
-last_updated: 2026-03-27
+last_updated: 2026-03-30
 status: draft
 ---
 
-# Elemental
+# Bitsy
 
-A contract is **Elemental** if it satisfies eight properties — the
+A contract is **Bitsy** if it satisfies eight properties — the
 concrete, testable form of the [design philosophy](/philosophy/)
 behind the Uniteum protocols. All eight. No exceptions, no
-"partially Elemental," no spectrum.
+"partially Bitsy," no spectrum.
 
-The term is not trademarked. Anyone can build Elemental contracts.
+The term is not trademarked. Anyone can build Bitsy contracts.
 If a contract meets the criteria below, it qualifies — regardless of
 who deployed it or what ecosystem it belongs to.
 
@@ -36,7 +36,7 @@ No `selfdestruct`. The bytecode at deployment is the bytecode forever.
 
 **Test:** Is there any address, key, or governance process that can
 alter the contract's logic after deployment? If yes, it is not
-Elemental.
+Bitsy.
 
 ### 2. Permissionless
 
@@ -45,7 +45,7 @@ no role check, no `onlyOwner`. The contract does not know or care
 who is calling it.
 
 **Test:** Does any function check `msg.sender` against a privileged
-list? If yes, it is not Elemental.
+list? If yes, it is not Bitsy.
 
 ### 3. Zero governance
 
@@ -54,7 +54,7 @@ changed after deployment. Fee rates, reserve ratios, and behavioral
 rules are constants baked into the bytecode.
 
 **Test:** Is there any on-chain or off-chain process that can change
-the contract's parameters? If yes, it is not Elemental.
+the contract's parameters? If yes, it is not Bitsy.
 
 ### 4. Cloned
 
@@ -64,7 +64,7 @@ configuration that alters behavior, no constructor arguments that
 change the rules.
 
 **Test:** Do two instances of the same protocol run different code
-or operate under different rules? If yes, it is not Elemental.
+or operate under different rules? If yes, it is not Bitsy.
 
 ### 5. Deterministic
 
@@ -73,7 +73,7 @@ parameters. Same parameters produce the same address on every
 EVM-compatible chain.
 
 **Test:** Can you compute the contract's address before deployment
-from its inputs alone? If not, it is not Elemental.
+from its inputs alone? If not, it is not Bitsy.
 
 ### 6. Direct
 
@@ -82,7 +82,7 @@ beyond standard ERC-20 approvals. Usable from a block explorer
 without a frontend, SDK, or off-chain signature.
 
 **Test:** Does using the contract require a frontend, a relayer,
-or an off-chain step? If yes, it is not Elemental.
+or an off-chain step? If yes, it is not Bitsy.
 
 ### 7. Composable
 
@@ -95,7 +95,7 @@ SDK or wrapper.
 
 **Test:** Can other contracts interact with this contract using
 only its public interface, without proprietary adapters or
-off-chain steps? If not, it is not Elemental.
+off-chain steps? If not, it is not Bitsy.
 
 ### 8. Pure math
 
@@ -104,13 +104,13 @@ invariants. No oracles, no external data feeds, no off-chain
 computation. Arbitrage maintains correctness.
 
 **Test:** Does the contract depend on any data source outside its
-own state and its invariant math? If yes, it is not Elemental.
+own state and its invariant math? If yes, it is not Bitsy.
 
 ---
 
-## Elemental contracts in practice
+## Bitsy contracts in practice
 
-Every Uniteum protocol is Elemental:
+Every Uniteum protocol is Bitsy:
 
 | Protocol                       | Implementation              | Instances are clones of         |
 |--------------------------------|-----------------------------|---------------------------------|
@@ -120,14 +120,14 @@ Every Uniteum protocol is Elemental:
 | [Lepton](/lepton/)             | Fixed-supply token factory               | Lepton prototype           |
 
 These are not the only contracts that could qualify. Any contract
-that passes all eight tests is Elemental, whether or not it has
+that passes all eight tests is Bitsy, whether or not it has
 any connection to Uniteum.
 
 ---
 
 ## Why this matters
 
-Elemental contracts have a specific trust model: **trust the math,
+Bitsy contracts have a specific trust model: **trust the math,
 not the operator.** There is no operator.
 
 This eliminates entire categories of risk:
@@ -147,7 +147,7 @@ immutably so the code you audit is the code that runs.
 
 ## Relationship to the design philosophy
 
-The eight Elemental properties are the formalized, testable version
+The eight Bitsy properties are the formalized, testable version
 of the [design philosophy](/philosophy/) that guided the Uniteum
 protocols. The philosophy page explains *why* these choices were
 made. This page defines *what* the choices are, concretely enough
@@ -158,10 +158,10 @@ that anyone can check whether a given contract qualifies.
 ## Using the term
 
 If you deploy a contract that satisfies all eight properties, you
-can call it Elemental. No permission needed. No registry. No
+can call it Bitsy. No permission needed. No registry. No
 certification process.
 
 The value of the term depends on it meaning something specific.
-A contract that is "mostly Elemental" or "Elemental except for
-governance" is not Elemental. The properties are binary and the
+A contract that is "mostly Bitsy" or "Bitsy except for
+governance" is not Bitsy. The properties are binary and the
 list is closed.
