@@ -2,7 +2,7 @@
 title: Bitsy
 description: >-
   A contract is Bitsy if it is immutable, permissionless, governance-free,
-  cloned, deterministic, direct, composable, and math-only.
+  cloned, deterministic, direct, composable, and trustless-math.
   An open standard for minimal, permanent on-chain primitives.
 
 # Navigation
@@ -97,14 +97,22 @@ SDK or wrapper.
 only its public interface, without proprietary adapters or
 off-chain steps? If not, it is not Bitsy.
 
-### 8. Pure math
+### 8. Trustless math
 
-Prices and state transitions are determined entirely by on-chain
-invariants. No oracles, no external data feeds, no off-chain
-computation. Arbitrage maintains correctness.
+Prices and state transitions are determined by verifiable
+computation — on-chain invariants, or off-chain computation
+whose correctness is proven on-chain (e.g. ZK proofs). No
+trusted oracles, no unverifiable data feeds, no reliance on
+honest reporters. If an external input is used, its correctness
+must be independently verifiable by the contract itself.
 
-**Test:** Does the contract depend on any data source outside its
-own state and its invariant math? If yes, it is not Bitsy.
+Arbitrage remains the primary correctness mechanism for pricing.
+Where external data is needed, the contract must be able to
+reject invalid inputs through proof verification — not trust
+that the inputs are honest.
+
+**Test:** Does the contract depend on any data whose correctness
+requires trusting an external party? If yes, it is not Bitsy.
 
 ---
 
@@ -135,7 +143,7 @@ This eliminates entire categories of risk:
 - **Rug pulls** — there is no admin key to drain funds.
 - **Governance attacks** — there is no governance to capture.
 - **Upgrade risk** — there is no upgrade path to exploit.
-- **Oracle manipulation** — there are no oracles to manipulate.
+- **Oracle manipulation** — there are no trusted data feeds to manipulate.
 - **Censorship** — there is no whitelist to exclude you from.
 
 What remains is **code risk**: the possibility that the math itself

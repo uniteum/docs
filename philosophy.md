@@ -2,7 +2,7 @@
 title: Philosophy
 description: >-
   Design principles behind all Uniteum protocols:
-  immutable, permissionless, cloned, deterministic, math-only.
+  immutable, permissionless, cloned, deterministic, trustless math.
 
 # Navigation
 nav_order: 2
@@ -176,11 +176,14 @@ abstractions on top.
 
 ---
 
-## Pure math
+## Trustless math
 
-Prices in Uniteum protocols are not set by oracles, keepers, or
-external feeds. They emerge from on-chain invariants maintained by
-arbitrage.
+Prices and state transitions are determined by verifiable
+computation. No trusted oracles, no unverifiable data feeds, no
+reliance on honest reporters.
+
+Today, the Uniteum protocols are fully self-contained — prices
+emerge from on-chain invariants maintained by arbitrage:
 
 - Solid uses a constant-product invariant with a virtual reserve.
 - Liquid uses the constant-product invariant across a hub-and-spoke
@@ -188,12 +191,15 @@ arbitrage.
 - Uniteum uses a geometric mean invariant: `√(u · v) = w`.
 
 These are closed-form mathematical relationships. The contracts
-enforce them. Arbitrageurs correct deviations. No off-chain
-infrastructure is required.
+enforce them. Arbitrageurs correct deviations.
 
-This makes the protocols self-contained. They do not depend on data
-feeds that can be manipulated, delayed, or shut down. The math is
-the mechanism.
+The principle extends beyond pure on-chain computation. Off-chain
+computation is acceptable when its correctness is proven on-chain
+— for example, through ZK proofs that the contract can verify
+independently. What matters is that correctness never depends on
+trusting an external party. If the contract cannot reject bad
+inputs through its own verification, the dependency is not
+trustless.
 
 ---
 
@@ -208,7 +214,7 @@ the mechanism.
 | Deterministic        | Same parameters → same address, every chain        |
 | Simple               | Every operation is one function call from Etherscan|
 | Composable           | Standard ERC-20 in, standard ERC-20 out            |
-| Pure math            | On-chain invariants, no oracles                    |
+| Trustless math       | Verifiable computation, no trusted data feeds      |
 
 These are not ideals to strive for. They are properties of the
 deployed contracts. You can verify each one by reading the bytecode.
