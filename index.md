@@ -1,7 +1,7 @@
 ---
 title: Introduction
 description: >-
-  Three independent protocols for creating, trading, and composing tokens on Ethereum.
+  Independent protocols and infrastructure for creating, trading, and composing tokens on Ethereum.
   No governance. No oracles. Just math.
 
 # Navigation
@@ -15,9 +15,9 @@ status: draft
 
 # uniteum.one
 
-Three independent protocols for creating, trading, and composing tokens on Ethereum.
+Independent protocols and infrastructure for creating, trading, and composing tokens on Ethereum.
 
-Each protocol is permissionless, immutable, and governed entirely by on-chain math—no admin keys, no governance, no oracles.
+Each project is permissionless, immutable, and governed entirely by on-chain math—no admin keys, no governance, no oracles.
 
 ---
 
@@ -69,9 +69,21 @@ Lepton deploys standard ERC-20 tokens as minimal proxy clones via CREATE2. You p
 
 ---
 
+## [Locale](/locale/) — On-Chain Reference Data
+
+**Immutable reference contracts at deterministic addresses, with data native to each chain.**
+
+Locale deploys lookup contracts that resolve to chain-specific values. The same address exists on every supported network. Query it on Ethereum mainnet and you get one answer. Query it on Arbitrum and you get another. The address never changes. The data never changes. There is no owner.
+
+- Same address on every chain, different data per chain
+- Initialized once, immutable forever
+- No owner, no upgrade path, no governance
+
+---
+
 ## Common Thread
 
-All four protocols are [Bitsy](/bitsy/) — immutable, permissionless, governance-free, cloned, deterministic, direct, composable, and math-only. These are not aspirations; they are verifiable properties of the deployed bytecode.
+All five projects are [Bitsy](/bitsy/) — immutable, permissionless, governance-free, cloned, deterministic, direct, composable, and math-only. These are not aspirations; they are verifiable properties of the deployed bytecode.
 
 They are connected by strategic choice, not architectural dependency. The [Solid "Uniteum 1"](/solid/uniteum-1) token serves as the backing for both the Liquid Hub and the Uniteum "1" identity Unit—amplifying its value across all three protocols.
 
@@ -79,12 +91,13 @@ They are connected by strategic choice, not architectural dependency. The [Solid
 
 ## Status
 
-All three protocols are deployed on Mainnet, unaudited, and at different stages of maturity:
+All projects are deployed on Mainnet, unaudited, and at different stages of maturity:
 
 - **Solid** — Complete. The protocol is simple and does what it says.
 - **Liquid** — Likely complete, but not yet tested at scale.
 - **Uniteum** — Under active development. The mechanics around anchored units are incomplete, and it may not be possible to get them working.
 - **Lepton** — Complete. A minimal factory with a small, fixed interface.
+- **Locale** — Complete. Immutable reference contracts with a fixed interface.
 
 None of these contracts have been formally audited. Audits can give a false sense of security — audited contracts are regularly found to have severe defects after the fact. Read the code, understand the risks, and proceed with caution.
 
