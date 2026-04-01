@@ -45,18 +45,6 @@ Every Liquid token is both a standard ERC-20 and its own AMM. Deposits create in
 
 ---
 
-## [Uniteum](/uniteum/) — Algebraic Liquidity
-
-**Tokens with dimensional units that compose like physics: `meter/second`, `USD/BTC`, `foo*bar`.**
-
-The notation is the price relationship. One operation—**forge**—maintains algebraic consistency through arbitrage. Build custom derivatives with any power profile. No oracles needed.
-
-- Geometric mean triads: every forge operates on (U, V, √(U*V))
-- Arbitrary power perpetuals (0.5x, 1x, 2x, custom exponents)
-- Infinite interconnected pools through algebraic composition
-
----
-
 ## [Lepton](/lepton/) — Token Factory
 
 **One call makes a fixed-supply ERC-20. Deterministic address, no owner, no inflation.**
@@ -81,6 +69,18 @@ Locale deploys lookup contracts that resolve to chain-specific values. The same 
 
 ---
 
+## [Uniteum](/uniteum/) — Algebraic Liquidity
+
+**Tokens with dimensional units that compose like physics: `meter/second`, `USD/BTC`, `foo*bar`.**
+
+The notation is the price relationship. One operation—**forge**—maintains algebraic consistency through arbitrage. Build custom derivatives with any power profile. No oracles needed.
+
+- Geometric mean triads: every forge operates on (U, V, √(U*V))
+- Arbitrary power perpetuals (0.5x, 1x, 2x, custom exponents)
+- Infinite interconnected pools through algebraic composition
+
+---
+
 ## Common Thread
 
 All five projects are [Bitsy](/bitsy/) — immutable, permissionless, governance-free, cloned, deterministic, direct, composable, and math-only. These are not aspirations; they are verifiable properties of the deployed bytecode.
@@ -95,9 +95,9 @@ All projects are deployed on Mainnet, unaudited, and at different stages of matu
 
 - **Solid** — Complete. The protocol is simple and does what it says.
 - **Liquid** — Likely complete, but not yet tested at scale.
-- **Uniteum** — Under active development. The mechanics around anchored units are incomplete, and it may not be possible to get them working.
 - **Lepton** — Complete. A minimal factory with a small, fixed interface.
 - **Locale** — Complete. Immutable reference contracts with a fixed interface.
+- **Uniteum** — Under active development. The mechanics around anchored units are incomplete, and it may not be possible to get them working.
 
 None of these contracts have been formally audited. Audits can give a false sense of security — audited contracts are regularly found to have severe defects after the fact. Read the code, understand the risks, and proceed with caution.
 
