@@ -15,8 +15,9 @@ status: draft
 
 # Why
 
-Every digital system you use today works the same way: you trust
-someone else to run the computer.
+Almost every digital system that holds your money, your data, or your
+identity works the same way: you trust someone else to run the
+computer.
 
 Your bank runs the ledger. Your broker runs the order book. Your
 social network runs the feed. Your cloud provider runs your
