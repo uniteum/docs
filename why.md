@@ -1,8 +1,8 @@
 ---
 title: Why
 description: >-
-  Why permissionless, immutable smart contracts matter —
-  even if you think crypto is dead.
+  Why trustless, distributed computing changes everything —
+  regardless of which chain wins.
 
 # Navigation
 nav_order: 8
@@ -15,154 +15,163 @@ status: draft
 
 # Why
 
-You own nothing online. Not really.
+Every digital system you use today works the same way: you trust
+someone else to run the computer.
 
-Your bank account is a promise from a bank. Your brokerage balance is
-a record on a broker's server. Your social media account exists at the
-pleasure of a platform. Every digital asset you think you own is
-actually a row in someone else's database — and they can change the
-rules whenever they want.
+Your bank runs the ledger. Your broker runs the order book. Your
+social network runs the feed. Your cloud provider runs your
+applications. You don't verify what these systems do — you can't.
+You trust the operator, and hope the incentives hold.
 
-This isn't paranoia. It's how the system works:
+This model has built the modern internet. It has also produced its
+defining failures:
 
-- In 2022, FTX collapsed overnight. Users with billions on the
-  exchange discovered they were unsecured creditors in a bankruptcy.
-  The "balances" on their screens were fiction.
-- In 2021, Robinhood disabled the buy button on GameStop during a
-  short squeeze. Users couldn't access a market that was open.
-- Banks routinely freeze accounts, sometimes for months, on automated
-  fraud flags that turn out to be false.
-- PayPal's terms of service let it fine users $2,500 for
-  "misinformation" — then walked it back only after public backlash.
+- Exchanges that fabricated balances until they collapsed.
+- Platforms that changed the rules mid-game when the outcome
+  threatened their partners.
+- Banks that froze accounts on automated flags with no recourse.
+- Cloud providers that deplatformed businesses overnight.
 
-These aren't bugs. They're features of custodial systems. When someone
-else holds your assets, they decide what you can do with them.
+These aren't aberrations. They're the predictable result of a model
+where one party controls the computation and everyone else takes
+their word for it.
 
 ---
 
-## The alternative exists
+## A different model
 
-A smart contract on Ethereum is not a promise. It is a program that
-runs exactly as written, enforced by thousands of independent nodes
-running the same computation. No one — not the developer, not a
-company, not a government — can change a finalized contract's
-behavior.
+There is now a credible alternative: computation that no single party
+controls.
 
-This isn't theoretical. In 2022, the US Treasury sanctioned Tornado
-Cash. The website was taken down. The developer was arrested. But the
-smart contracts kept running, because no one has the ability to stop
-them. The protocol has no admin key, no kill switch, no upgrade
-mechanism. It does what the code says, regardless of who objects.
+Instead of trusting an operator, you verify the output. Instead of
+asking permission, you send a transaction. Instead of hoping the
+rules won't change, you read the code and confirm it can't.
 
-That property — *unstoppable execution* — is what makes smart
-contracts different from every other form of digital agreement.
+The key properties:
 
----
+**Distributed execution.** Thousands of independent nodes run the
+same program and agree on the result. No single machine, company, or
+jurisdiction is in control. The system doesn't go down because one
+operator decides to pull the plug.
 
-## What this enables
+**Deterministic rules.** The program does what the code says. Not
+what the terms of service say. Not what the operator decides is
+appropriate today. The same input produces the same output, every
+time, verified by every participant.
 
-### You hold your own assets
+**Permissionless access.** No whitelist, no approval process, no
+identity check. If you can construct a valid transaction, the network
+processes it. The system cannot discriminate because there is no one
+with the power to discriminate.
 
-In DeFi, tokens live in your wallet — a cryptographic key pair that
-only you control. There is no exchange to go insolvent, no platform to
-freeze your account, no terms of service to change.
-
-Trading happens through smart contracts that transfer tokens
-atomically: you send X, you receive Y, in the same transaction. At no
-point does a third party take custody.
-
-### No one can change the rules
-
-An immutable contract has no governance, no parameter knobs, no fee
-switch. The rules at deployment are the rules forever.
-
-This matters because governance is a vulnerability. Every protocol with
-a governance token has a price at which someone can buy enough votes to
-change the rules in their favor. Every upgradeable contract has a
-multisig that can be compromised, coerced, or corrupted.
-
-Immutability removes the question entirely. There is no one to lobby,
-no proposal to submit, no vote to buy.
-
-### Anyone can participate
-
-Permissionless means no whitelist, no approval process, no listing
-committee. A contract that serves one address serves all addresses
-equally. No function checks `msg.sender` against a privileged list.
-
-This isn't about ideology. It's about reliability. A system that can
-exclude you at its discretion is a system that includes you at its
-discretion. The guarantee only holds if it holds for everyone.
-
-### Everything composes
-
-Public smart contracts are open by default. Any contract can call any
-other contract. New financial instruments can be assembled from
-existing pieces without asking permission, negotiating APIs, or
-signing partnership agreements.
-
-In traditional finance, integrating with another institution takes
-months of legal and technical work. In DeFi, it takes one function
-call. This is why DeFi moves fast — not because the people are
-smarter, but because the infrastructure doesn't have gatekeepers.
+**Immutable agreements.** Once deployed, the rules don't change. No
+board meeting, no governance vote, no emergency hotfix. The program
+you interact with today is the program that runs next year. This is
+the property that makes the other three credible — without
+immutability, every guarantee is just a promise dressed up as code.
 
 ---
 
-## What this doesn't solve
+## Why this matters
 
-Honest accounting of real limitations — because a technology that
-oversells itself isn't worth trusting:
+Every institution is a bundle of promises. A bank promises to honor
+withdrawals. A broker promises to execute your orders. A platform
+promises to apply its rules consistently. These promises are backed
+by regulation, reputation, and legal systems — all of which work,
+until they don't.
 
-**User experience is still painful.** Gas fees, key management, and
-irreversible transactions make on-chain interaction unforgiving.
-Losing a private key means losing everything. There is no customer
-support to call.
+Trustless computing doesn't eliminate risk. It changes the kind of
+risk. Instead of trusting people you can't verify, you trust code you
+can read. Instead of relying on institutions to follow their own
+rules, you use systems where the rules are self-enforcing.
 
-**Smart contract bugs are permanent too.** Immutability cuts both
-ways. If a contract has a vulnerability, it cannot be patched. The
-same property that prevents admin abuse prevents admin rescue.
+This is not a philosophical preference. It's an engineering
+tradeoff with concrete consequences:
 
-**MEV extracts invisible taxes.** Validators and searchers can
-reorder, insert, and censor transactions for profit. Your swap might
-get sandwiched. Your liquidation might get front-run. This is a real
-cost that users often don't see.
-
-**Most "decentralized" apps aren't.** Many DeFi protocols depend on
-centralized frontends, RPC providers, and off-chain infrastructure.
-The smart contracts may be immutable, but the interfaces people
-actually use often aren't.
-
-**Regulation is unresolved.** Governments are still deciding how to
-treat DeFi — as securities, as money transmission, as something new.
-The legal landscape shifts constantly, and enforcement has been
-inconsistent.
-
-These are real problems. They don't invalidate the core properties —
-they constrain where and how those properties are useful today.
+- **No counterparty risk.** If no one holds your assets, no one can
+  lose them, freeze them, or steal them. Custody is a solved problem
+  when the answer is "you hold your own keys."
+- **No platform risk.** If the application logic lives on a
+  distributed network, no company can shut it down, change its
+  behavior, or revoke your access.
+- **No coordination overhead.** If every program is public and
+  composable, building on someone else's work doesn't require a
+  partnership, an API key, or a legal agreement. You just call the
+  function.
+- **No jurisdictional single point of failure.** A program running
+  on thousands of nodes across dozens of countries cannot be stopped
+  by any single government. This isn't a loophole — it's a
+  structural property.
 
 ---
 
-## The question
+## What it costs
 
-The question isn't whether crypto is dead or alive, whether the market
-is up or down, or whether your uncle's meme coin will recover.
+Honest accounting, because a paradigm that oversells itself isn't
+worth adopting:
 
-The question is simpler:
+**It's slow.** Distributed consensus is inherently slower than a
+single server. Always will be. You're trading speed for guarantees.
 
-*Do you want financial infrastructure where the guarantees depend on
-institutions choosing to behave? Or infrastructure where the
-guarantees are mathematical — enforced by code that no one can
-change?*
+**It's unforgiving.** No customer support. No undo button. Lose your
+key, lose everything. Send to the wrong address, gone. The system's
+indifference to authority extends to you.
 
-The first kind works until it doesn't. The second kind works until
-Ethereum stops producing blocks.
+**Bugs are permanent.** Immutability means flaws can't be patched.
+The same property that prevents rule changes prevents fixes. You
+deploy carefully, or you deploy a liability.
 
-Both involve risk. But they're different kinds of risk. Institutional
-risk is trusting people you can't verify. Smart contract risk is
-trusting code you can read.
+**Most interfaces are still centralized.** The underlying computation
+may be distributed, but the websites, wallets, and tools people use
+to access it usually aren't. The chain of trust is only as strong as
+its weakest link.
 
-We build for the second kind. Every Uniteum protocol is immutable,
-permissionless, and governed entirely by on-chain math. No admin keys.
-No governance. No fee switch. The
-[philosophy](/philosophy/) page explains how. The contracts themselves
-are the proof.
+**Regulation is unresolved.** Governments haven't decided how to
+treat systems that don't fit existing categories. The legal
+landscape is uncertain, and uncertainty itself is a cost.
+
+These are real constraints. They limit where trustless computing is
+the right choice today. But they're engineering and policy problems —
+not fundamental flaws in the model.
+
+---
+
+## The trajectory
+
+Every computing paradigm starts expensive, slow, and hard to use.
+Then it gets cheaper and easier, while its structural advantages
+remain.
+
+Mainframes gave way to PCs. PCs gave way to the internet. The
+internet gave way to mobile. Each transition followed the same
+pattern: the new model was worse on every conventional metric except
+the one that mattered most. PCs were less powerful than mainframes
+but put computing in your hands. The internet was slower than local
+software but connected everyone. Mobile was more constrained than
+desktop but was always with you.
+
+Trustless, distributed computing is worse than centralized systems on
+speed, cost, and usability. But it's better on the one dimension
+that centralized systems can never match: **it doesn't require you
+to trust the operator.**
+
+That property doesn't degrade. It doesn't get revoked. It doesn't
+depend on quarterly earnings or regulatory capture or good faith.
+It's a mathematical guarantee, not a corporate policy.
+
+As the costs come down — and they are coming down — the structural
+advantage stays. That's why this isn't going away, regardless of
+market cycles, regulatory crackdowns, or which chain is popular this
+year.
+
+---
+
+## What we build
+
+We build [protocols](/philosophy/) that take these properties
+seriously. Immutable, permissionless, zero-governance — not as
+aspirations, but as deployed facts. The code is the guarantee.
+
+Not because we're ideologues. Because once you understand what
+trustless computing makes possible, building any other way feels like
+asking permission to use your own money.
