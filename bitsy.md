@@ -1,9 +1,10 @@
 ---
 title: Bitsy
 description: >-
-  A contract is Bitsy if it is immutable, permissionless, governance-free,
-  cloned, deterministic, direct, composable, and trustless-math.
-  An open standard for minimal, permanent on-chain primitives.
+  A Bitsy contract is a prototype — immutable, permissionless,
+  governance-free, cloned, deterministic, direct, composable, and
+  trustless-math — from which anyone can make clones. An open
+  standard for minimal, permanent on-chain primitives.
 
 # Navigation
 nav_order: 3
@@ -16,14 +17,22 @@ status: draft
 
 # Bitsy
 
-A contract is **Bitsy** if it satisfies eight properties — the
-concrete, testable form of the [design philosophy](/philosophy/)
-behind the Uniteum protocols. All eight. No exceptions, no
-"partially Bitsy," no spectrum.
+A **Bitsy contract** is a prototype/factory: a single contract
+deployed once, from which anyone can create clones permissionlessly.
+The prototype satisfies eight properties — the concrete, testable
+form of the [design philosophy](/philosophy/) behind the Uniteum
+protocols.
+
+Clones delegate to the prototype's code via EIP-1167, so they
+inherit its immutability. But a clone may carry mutable per-instance
+state, owners (mutable or immutable), or even internal governance —
+whatever the prototype's code encodes once and for all. The control
+plane has to be baked into the prototype; clone users consent to
+the rules the prototype already fixes.
 
 The term is not trademarked. Anyone can build Bitsy contracts.
-If a contract meets the criteria below, it qualifies — regardless of
-who deployed it or what ecosystem it belongs to.
+If a prototype meets the criteria below, it qualifies — regardless
+of who deployed it or what ecosystem it belongs to.
 
 ---
 
@@ -31,40 +40,56 @@ who deployed it or what ecosystem it belongs to.
 
 ### 1. Immutable
 
-No upgrade mechanism. No admin key. No proxy that can be repointed.
-No `selfdestruct`. The bytecode at deployment is the bytecode forever.
+No upgrade mechanism on the prototype. No admin key that alters
+prototype behavior. No proxy that can be repointed. No
+`selfdestruct`. The prototype's bytecode at deployment is the
+bytecode forever — and since clones delegate to it, they can't
+be upgraded either.
 
 **Test:** Is there any address, key, or governance process that can
-alter the contract's logic after deployment? If yes, it is not
+alter the prototype's logic after deployment? If yes, it is not
 Bitsy.
 
 ### 2. Permissionless
 
-Every external function is callable by every address. No whitelist,
-no role check, no `onlyOwner`. The contract does not know or care
-who is calling it.
+Anyone can create a clone. Every external function on the
+prototype's factory surface — `make()`, `made()` — is callable
+by every address. No whitelist, no role check, no `onlyOwner`
+on the factory or on any prototype-scope behavior.
 
-**Test:** Does any function check `msg.sender` against a privileged
-list? If yes, it is not Bitsy.
+Per-clone access control is fine: a clone whose owner gates its
+own setters doesn't compromise the prototype's permissionlessness,
+since the rules are fixed by the prototype's code and clone users
+opt into them.
+
+**Test:** Does any prototype-scope function check `msg.sender`
+against a privileged list? If yes, it is not Bitsy.
 
 ### 3. Zero governance
 
-No governance token. No voting mechanism. No parameter that can be
-changed after deployment. Fee rates, reserve ratios, and behavioral
-rules are constants baked into the bytecode.
+No governance over the prototype. No voting on prototype behavior,
+no adjustable prototype-scope parameters. Fee rates, reserve ratios,
+and behavioral rules that apply to every clone are constants baked
+into the prototype's bytecode.
 
-**Test:** Is there any on-chain or off-chain process that can change
-the contract's parameters? If yes, it is not Bitsy.
+Per-clone governance is a different matter: a clone may have its
+own voters, proposals, and quorum — whatever the prototype encodes.
+Mob is the canonical example. The Mob prototype has no governance;
+each mob (clone) runs its own internal vote.
+
+**Test:** Is there any process that can change parameters baked
+into the prototype? If yes, it is not Bitsy.
 
 ### 4. Cloned
 
-Every instance of the contract is a minimal proxy clone of a single
-implementation. Same logic for every instance — no per-instance
-configuration that alters behavior, no constructor arguments that
-change the rules.
+Every instance is an EIP-1167 minimal proxy of the prototype.
+Clones share the prototype's code; they may carry their own
+per-instance state, initialized once via `zzInit()` at clone
+creation. Two clones run the same code under the same rules,
+even if they hold different values within those rules.
 
-**Test:** Do two instances of the same protocol run different code
-or operate under different rules? If yes, it is not Bitsy.
+**Test:** Do instances run different code? If yes, it is not
+Bitsy. (Different per-instance *state* is fine.)
 
 ### 5. Deterministic
 
@@ -170,6 +195,7 @@ can call it Bitsy. No permission needed. No registry. No
 certification process.
 
 The value of the term depends on it meaning something specific.
-A contract that is "mostly Bitsy" or "Bitsy except for
+A prototype that is "mostly Bitsy" or "Bitsy except for
 governance" is not Bitsy. The properties are binary and the
-list is closed.
+list is closed — they apply to the prototype. What clones do
+within the rules the prototype encodes is separate.
