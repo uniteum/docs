@@ -9,5 +9,7 @@
             <path fill-opacity=".2" d="M16.498 20.573l7.497-4.353-7.497-3.348z" />
             <path fill-opacity=".602" d="M9 16.22l7.498 4.353v-7.701z" />
         </g>
+        <text x="5" y="18" fill="#FFF" font-family="Arial, sans-serif" font-size="6"
+            font-weight="bold" text-anchor="middle">1x</text>
     </g>
 </svg>
