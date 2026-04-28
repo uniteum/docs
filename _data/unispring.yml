@@ -1,0 +1,35 @@
+# Unispring contract addresses and function signatures.
+# Contracts are not yet deployed — addresses left blank until launch.
+# `f` = position in Etherscan's alphabetically-sorted function list.
+
+# Per-contract entries. Each has the same shape: address + optional write/read maps.
+
+fountain:
+  name: "Fountain"
+  description: "Owns every Unispring V4 position. Forwards swap fees to taker; no decrease-liquidity path."
+  address:
+
+unispring:
+  name: "Unispring (prototype)"
+  description: "Per-(hub, tickLower, tickUpper) clone factory. Calls Fountain to seat positions."
+  address:
+
+neutrinoSource:
+  name: "NeutrinoSource (prototype)"
+  description: "Mints a Lepton spoke and hands it to a Unispring clone for funding."
+  address:
+
+neutrinoChannel:
+  name: "NeutrinoChannel (prototype)"
+  description: "Relays a single Coinage.make() call per clone."
+  address:
+
+mimicoinage:
+  name: "Mimicoinage"
+  description: "Sibling factory. Mints permissionless 1:1 ERC-20 mirrors with a hard 1-bp peg corridor."
+  address:
+
+hub:
+  name: "Hub"
+  description: "Canonical hub token. Vanity address chosen so spokes sort below it without salt mining."
+  address:

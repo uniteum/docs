@@ -42,14 +42,21 @@ uniteum.one/
 │   ├── index.md
 │   ├── protocol.md
 │   └── use-cases/
-└── liquid/               ← Liquid protocol docs (peer)
+├── liquid/               ← Liquid protocol docs (peer)
+│   ├── index.md
+│   ├── introduction.md
+│   ├── design.md
+│   └── use-cases/
+├── lepton/               ← Lepton factory docs (peer)
+│   └── index.md
+├── unispring/            ← Unispring factory docs (peer; includes Mimicoinage)
+│   └── index.md
+└── locale/               ← Locale reference-data docs (peer)
     ├── index.md
-    ├── introduction.md
-    ├── design.md
-    └── use-cases/
+    └── deterministic-lookup.md
 ```
 
-**Path convention:** All Uniteum-specific content lives under `/uniteum/`. Solid under `/solid/`. Liquid under `/liquid/`. Only truly site-wide pages (legal, license, landing page) remain at root.
+**Path convention:** All Uniteum-specific content lives under `/uniteum/`. Solid under `/solid/`. Liquid under `/liquid/`. Lepton under `/lepton/`. Unispring (and the Mimicoinage sibling factory) under `/unispring/`. Locale under `/locale/`. Only truly site-wide pages (legal, license, landing page) remain at root.
 
 ## Collaboration Context
 

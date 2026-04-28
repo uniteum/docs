@@ -57,6 +57,20 @@ Lepton deploys standard ERC-20 tokens as minimal proxy clones via CREATE2. You p
 
 ---
 
+## [Unispring](/unispring/) — Fair Launch on Uniswap V4
+
+**Fair-launch tokens deployed directly into Uniswap V4. Permanent liquidity, built-in price floor, zero maker capital.**
+
+A single transaction mints a fixed-supply ERC-20, initializes a V4 pool against a hub token, and locks 100% of the supply as a single-sided concentrated position. The maker provides only gas. The position is owned by a Fountain clone with no decrease-liquidity path.
+
+- Native Uniswap V4 — routable by every aggregator from block one
+- Permanent floor enforced by the absence of liquidity below `tickLower`
+- Hub-and-spoke topology gives any two Unispring tokens a two-hop swap path
+
+A sibling factory, **Mimicoinage**, mints permissionless 1:1 mirrors of any ERC-20 with a hard 1-bp peg corridor (`1xUSDC`, `1xWBTC`, `1xETH`).
+
+---
+
 ## [Locale](/locale/) — On-Chain Reference Data
 
 **Immutable reference contracts at deterministic addresses, with data native to each chain.**
@@ -83,9 +97,9 @@ The notation is the price relationship. One operation—**forge**—maintains al
 
 ## Common Thread
 
-All five projects are [Bitsy](/bitsy/) — immutable, permissionless, governance-free, cloned, deterministic, direct, composable, and math-only. These are not aspirations; they are verifiable properties of the deployed bytecode.
+All six projects are [Bitsy](/bitsy/) — immutable, permissionless, governance-free, cloned, deterministic, direct, composable, and math-only. These are not aspirations; they are verifiable properties of the deployed bytecode.
 
-They are connected by strategic choice, not architectural dependency. The [Solid "Uniteum 1"](/solid/uniteum-1) token serves as the backing for both the Liquid Hub and the Uniteum "1" identity Unit—amplifying its value across all three protocols.
+They are connected by strategic choice, not architectural dependency. The [Solid "Uniteum 1"](/solid/uniteum-1) token serves as the backing for both the Liquid Hub and the Uniteum "1" identity Unit—amplifying its value across all three protocols. Unispring uses its own dedicated hub on Uniswap V4.
 
 ---
 
@@ -96,6 +110,7 @@ All projects are deployed on Mainnet, unaudited, and at different stages of matu
 - **Solid** — Complete. The protocol is simple and does what it says.
 - **Liquid** — Likely complete, but not yet tested at scale.
 - **Lepton** — Complete. A minimal factory with a small, fixed interface.
+- **Unispring** — Code complete; contracts not yet deployed. Fair-launch factory on Uniswap V4; Mimicoinage sibling for 1:1 mirrors.
 - **Locale** — Complete. Immutable reference contracts with a fixed interface.
 - **Uniteum** — Under active development. The mechanics around anchored units are incomplete, and it may not be possible to get them working.
 
