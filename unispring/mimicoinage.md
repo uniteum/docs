@@ -7,12 +7,13 @@ nav_order: 3
 ---
 
 {% assign u = site.data.unispring %}
+{% assign m = u.mimicoinage %}
 
 # Mimicoinage — 1:1 mirror factory
 
-Mimicoinage lets anyone mint an ERC-20 mirror of any existing token (or native ETH). The mirror trades 1:1 against its original within a hard 1-basis-point corridor, backed token-for-token by real originals locked in a Uniswap V4 pool.
+[Mimicoinage](https://etherscan.io/address/{{ m.address }}#code){:target="_blank"} lets anyone mint an ERC-20 mirror of any existing token (or native ETH). The mirror trades 1:1 against its original within a hard 1-basis-point corridor, backed token-for-token by real originals locked in a Uniswap V4 pool.
 
-A single call to `mimic(original, name, symbol)` deploys the mirror and funds its pool in the same transaction. From that moment, every unit of the mirror is redeemable 1:1 against the original by swapping in the pool — on any aggregator, frontend, or contract that routes through V4. No oracle, no rebalance keeper, no governance, no unwind path.
+A single call to [`mimic(original, name, symbol)`](https://etherscan.io/address/{{ m.address }}#writeContract#F{{ m.write["mimic(original, name, symbol)"].f }}){:target="_blank"} deploys the mirror and funds its pool in the same transaction. From that moment, every unit of the mirror is redeemable 1:1 against the original by swapping in the pool — on any aggregator, frontend, or contract that routes through V4. No oracle, no rebalance keeper, no governance, no unwind path.
 
 ---
 
@@ -59,7 +60,7 @@ The mirror's only behaviour is "trades close to its original". It is not a wrapp
 
 ## How to use it
 
-**Deploy a mirror.** Call `mimic(original, name, symbol)` on Mimicoinage. Pass `address(0)` as `original` to mirror native ETH. The mirror is deployed, fully funded, and tradeable in the same transaction. Use `predictMimic(original, name, symbol)` first to see the deterministic address (and whether it already exists) without spending gas.
+**Deploy a mirror.** Call [`mimic(original, name, symbol)`](https://etherscan.io/address/{{ m.address }}#writeContract#F{{ m.write["mimic(original, name, symbol)"].f }}){:target="_blank"} on Mimicoinage. Pass `address(0)` as `original` to mirror native ETH. The mirror is deployed, fully funded, and tradeable in the same transaction. Use [`predictMimic(original, name, symbol)`](https://etherscan.io/address/{{ m.address }}#readContract#F{{ m.read["predictMimic(original, name, symbol)"].f }}){:target="_blank"} first to see the deterministic address (and whether it already exists) without spending gas.
 
 **Buy or sell.** Route a swap through any V4-aware aggregator or frontend — `original → 1xORIGINAL` to acquire, `1xORIGINAL → original` to redeem. There is no separate "redeem" function: the pool *is* the redemption path.
 

@@ -6,12 +6,14 @@
 
 fountain:
   name: "Fountain"
-  description: "Owns every Unispring V4 position. Forwards swap fees to taker; no decrease-liquidity path."
-  address:
+  description: "Owns every Unispring V4 position. Forwards swap fees to taker; no
+    decrease-liquidity path."
+  address: "0x634850E4eA5FFF0C6466DDAA7879725446738Ba9"
 
 manifold:
   name: "Manifold (prototype)"
-  description: "Per-(hub, tickLower, tickUpper) clone factory. Calls Fountain to seat positions."
+  description: "Per-(hub, tickLower, tickUpper) clone factory. Calls Fountain to
+    seat positions."
   address:
 
 neutrinoSource:
@@ -26,10 +28,40 @@ neutrinoChannel:
 
 mimicoinage:
   name: "Mimicoinage"
-  description: "Sibling factory. Mints permissionless 1:1 ERC-20 mirrors with a hard 1-bp peg corridor."
-  address:
+  description: "Sibling factory. Mints permissionless 1:1 ERC-20 mirrors with a
+    hard 1-bp peg corridor."
+  address: "0x745d872bCC29E6e38582EDbAc823564E47B3717b"
+  write:
+    "mimic(original, name, symbol)":
+      f: 1
+      description: "Mint a 1:1 mirror of an original currency and seat its full supply
+        in a single-tick V4 position"
+  read:
+    "coinage()":
+      f: 1
+      description: "The Coinage factory used to mint mimic ERC-20s"
+    "isMimic(token)":
+      f: 2
+      description: "Whether a token was minted by this factory as a mimic"
+    "maxSupply()":
+      f: 3
+      description: "Cap on raw supply minted for any mimic (10^27)"
+    "originalOf(mimic)":
+      f: 4
+      description: "Original currency paired with a given mimic"
+    "placer()":
+      f: 5
+      description: "The Fountain that holds each mimic's single-tick position"
+    "predictMimic(original, name, symbol)":
+      f: 6
+      description: "Preview the deterministic address (and existence) of a mimic
+        before deploying"
+    "version()":
+      f: 7
+      description: "Contract version string"
 
 hub:
   name: "Hub"
-  description: "Canonical hub token. Vanity address chosen so spokes sort below it without salt mining."
+  description: "Canonical hub token. Vanity address chosen so spokes sort below it
+    without salt mining."
   address:
