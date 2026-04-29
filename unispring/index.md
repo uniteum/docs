@@ -13,71 +13,69 @@ status: draft
 {: .label .label-yellow }
 Draft — contracts not yet deployed.
 
-**Fair-launch tokens on Uniswap V4. Permanent liquidity, built-in price floor, zero maker capital.**
+**A family of permissionless contracts on Uniswap V4. One primitive. Two factories. Permanent liquidity.**
 
-Unispring is a token factory that deploys directly into Uniswap V4. In a single transaction it mints a fixed-supply ERC-20, initializes a V4 pool against a hub token, deposits 100% of supply as a single-sided concentrated position, and locks that position permanently in a `Fountain` clone.
+At the core is **{{ u.fountain.name }}** — a V4 position owner with no withdraw path. Two sibling factories seat tokens into Fountain positions and walk away:
 
-No allocation. No presale. No operator. No capital from the maker.
+- **{{ u.unispring.name }}** mints fresh fair-launch ERC-20s and seats 100% of supply single-sided against a hub. Each token launches with a permanent price floor and routable V4 liquidity from block one.
+- **{{ u.mimicoinage.name }}** mints 1:1 mirrors of existing tokens, collateralized by a Fountain position locked at a single tick — a hard 1-bp peg corridor with no oracle.
 
-The only way to acquire a Unispring token is to buy it from the pool — on any Uniswap frontend, DEX aggregator, or contract that routes through V4.
-
----
-
-## Why this exists
-
-Other fair-launch protocols ([Solid]({{ site.baseurl }}/solid/), for example) deliver the same core economic properties — fair start, built-in liquidity, permanent floor — but they live in a custom AMM. Bridging that liquidity to Uniswap requires an external arbitrage keeper, a Chainlink Automation subscription, and ongoing gas. Four moving parts where one should suffice.
-
-Unispring achieves the same outcome by deploying *into* Uniswap V4 directly. No custom AMM. No keeper. No arbitrage latency. The token is routable by every aggregator the moment the deploy transaction confirms.
-
-Every Unispring token:
-
-- Is a **standard ERC-20** — minted by Lepton, immutable, fixed-supply
-- Has **permanent liquidity** — supply is locked in a Fountain-owned V4 position with no withdraw path
-- Has a **price floor** — single-sided seed at `tickLower` enforces the floor through the *absence* of liquidity below it
-- Required **zero hub capital** from the maker — only gas
-- Routes via the **hub** — every Unispring token pairs against the same hub, giving any two tokens a two-hop path
+Both factories are one-shot. After they fund the position, no contract in the stack retains authority over the token, the pool, or the liquidity. The only way to acquire any Unispring or Mimicoinage token is to buy it from its V4 pool — on any aggregator, frontend, or contract that routes through V4.
 
 ---
 
-## How it works
+## Fountain — the primitive
 
-A Unispring deployment is three contracts working in sequence:
+A Fountain clone owns a single V4 position. Three operations, nothing else:
 
-| Contract | Role |
-|:---------|:-----|
-| **{{ u.neutrinoSource.name }}** | Mints the spoke (via Lepton) and hands it to a Unispring clone for funding |
-| **{{ u.unispring.name }}** | Per-`(hub, tickLower, tickUpper)` clone. Calls Fountain to seat the position |
-| **{{ u.fountain.name }}** | Owns every position. Forwards swap fees to its `taker`, but has no decrease-liquidity path |
+- **`offer`** — permissionless deposit. Anyone can fund the position with tokens at a chosen tick range. Liquidity only grows.
+- **`make`** — sets the `taker`. First caller wins.
+- **Fee collection** — the `taker` can sweep accrued swap fees. They cannot pause, modify ticks, or touch principal.
 
-One call to `NeutrinoSource.launch(name, symbol, decimals, supply, salt, tickLower, tickUpper)`:
+There is no `decreaseLiquidity` path. The position's principal is immobile, forever.
 
-1. Lepton mints the spoke at a CREATE2 address that sorts strictly below the hub
-2. The supply is transferred to a Unispring clone
+Fountain knows nothing about fair launches or mirrors. It's a one-way valve for V4 liquidity. What gets seated into it, and why, is the job of the factories below.
+
+---
+
+## Unispring — fair-launch factory
+
+A single call to `{{ u.neutrinoSource.name }}.launch(name, symbol, decimals, supply, salt, tickLower, tickUpper)`:
+
+1. Lepton mints a fresh ERC-20 at a CREATE2 address that sorts strictly below the hub
+2. The supply is transferred to a `{{ u.unispring.name }}` clone keyed by `(hub, tickLower, tickUpper)`
 3. The clone calls `Fountain.offer`
 4. Fountain initializes the V4 pool at `tickLower` and seats the entire supply single-sided in `[tickLower, tickUpper]`
-5. The position is permanently held by Fountain
 
-After the call returns, no contract in the stack has authority over the position, the pool, or the token.
+The maker spends only gas. The token is routable by every V4-aware aggregator the moment the deploy transaction confirms.
 
 ### The hub
 
-Every Unispring clone is keyed by `(hub, tickLower, tickUpper)`. All spokes within a clone pair against the same hub, so any two of them are reachable in two hops via standard aggregator paths.
-
-The canonical hub will be deployed at a vanity address chosen so that almost every spoke address sorts strictly below it without salt mining.
+Every Unispring clone is keyed by `(hub, tickLower, tickUpper)`. All spokes within a clone pair against the same hub, so any two of them are reachable in two hops via standard aggregator paths. The canonical hub will be deployed at a vanity address chosen so that almost every spoke address sorts strictly below it without salt mining.
 
 ### Why the floor holds
 
-The seeded position spans `[tickLower, tickUpper]`. The pool's initial tick is exactly `tickLower`. Below it there is no liquidity at all — V4's swap math cannot cross an empty tick range, so price cannot fall through the floor. No hook, no custom curve. The floor is enforced by the **absence** of liquidity.
+The seeded position spans `[tickLower, tickUpper]` and the pool's initial tick is exactly `tickLower`. Below it there is no liquidity at all — V4's swap math cannot cross an empty tick range, so price cannot fall through the floor. No hook, no custom curve. The floor is enforced by the **absence** of liquidity.
 
 The same geometry is what makes the seed single-sided in the spoke and free for the maker. See [DESIGN.md §6 and §8](https://github.com/uniteum/unispring/blob/main/DESIGN.md){:target="_blank"} for the full argument.
 
 ---
 
-## Mimicoinage
+## Mimicoinage — 1:1 mirror factory
 
-A sibling factory that mints permissionless 1:1 mirrors of any existing ERC-20 (or native ETH).
+`Mimicoinage` mints a mirror of any existing ERC-20 (or native ETH) and seats the entire mimic supply as a single-tick V4 position at tick 0, fee 100 (0.01%), tick-spacing 1. The position is collateralized by real originals locked in a Fountain position no one — including the deployer — can unwind.
 
-Mimicoinage seats the entire mimic supply as a single-tick V4 position at tick 0, fee 100 (0.01%), tick-spacing 1 — yielding a hard 1-bp peg corridor `[0, 1.0001)` with no oracle, collateralized by real originals locked in a Fountain position no one can unwind. Mirror tokens use a `1x` prefix on the original's symbol: `1xUSDC`, `1xWBTC`, `1xETH`.
+The result is a **hard 1-bp peg corridor `[0, 1.0001)`** with no oracle, no rebalance keeper, and no governance. Mirror tokens use a `1x` prefix on the original's symbol: `1xUSDC` mirrors USDC, `1xWBTC` mirrors WBTC, `1xETH` mirrors native ETH.
+
+See [MIMICOIN.md](https://github.com/uniteum/unispring/blob/main/MIMICOIN.md){:target="_blank"} for the peg argument.
+
+---
+
+## Why this design
+
+Other fair-launch protocols ([Solid]({{ site.baseurl }}/solid/), for example) deliver fair start, built-in liquidity, and a permanent floor — but they live in a custom AMM. Bridging that liquidity to Uniswap requires an external arbitrage keeper, a Chainlink Automation subscription, and ongoing gas. Four moving parts where one should suffice.
+
+Building on V4 directly removes the custom AMM, the keeper, and the arbitrage latency. Tokens are routable by every aggregator the moment the deploy transaction confirms.
 
 ---
 
