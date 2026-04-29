@@ -42,7 +42,7 @@ Building on V4 directly removes the custom AMM, the keeper, and the arbitrage la
 | Chainlink dependency | No | Yes | No |
 | Contracts required | 1 | 4 | 1 |
 | Ongoing costs | None | Chainlink + gas | None |
-| Swap fee | None | None | 0.01% (to Fountain `taker`) |
+| Swap fee | None | None | 0.01% (to Fountain clone owner) |
 | Cross-token routing | N/A | Via Uniswap | Two-hop via hub |
 
 ---
@@ -55,9 +55,9 @@ The factories above the position (`NeutrinoSource`, `NeutrinoChannel`, `Manifold
 |:-----------------------------------|:------------------------------------------------------------------|
 | Token transfers, approvals, supply | Lepton (the ERC-20 implementation)                                |
 | Swap math, pool state, liquidity   | The Uniswap V4 PoolManager — plus any router that reaches it      |
-| Accrued swap fees                  | Fountain (forwards to `taker` on demand; no other authority)      |
+| Accrued swap fees                  | Fountain clone (owner withdraws; no other authority)              |
 
-`taker` is the first address to call `Fountain.make()` for a given position. It can collect the 0.01% swap-fee stream — nothing else. It cannot pause, cannot decrease liquidity, cannot modify ticks.
+Each Fountain clone has an immutable `owner` set at deploy time — the address that called `Fountain.make` — and that owner is the only address that can withdraw the clone's accumulated swap fees. The owner cannot pause, cannot decrease liquidity, cannot modify ticks.
 
 ---
 

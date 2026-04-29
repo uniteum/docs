@@ -52,9 +52,9 @@ The Fountain position is owned by a Fountain clone. Mimicoinage retains no autho
 | Mirror supply | Fixed at deploy |
 | Pool position | Owned by Fountain clone, no decrease path |
 | Original collateral | Locked in the V4 position, no unwind |
-| Accrued fees | Fountain `taker` (0.01% of swap volume) |
+| Accrued fees | Fountain clone owner (0.01% of swap volume) |
 
-Even the `taker` cannot harvest the accumulated original by unwinding — only the 0.01% fee stream is extractable.
+Even the clone owner cannot harvest the accumulated original by unwinding — only the 0.01% fee stream is extractable.
 
 ---
 

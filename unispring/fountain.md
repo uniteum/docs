@@ -12,19 +12,29 @@ nav_order: 1
 
 Fountain is the V4 position owner that sits underneath every Unispring token. It has no decrease-liquidity path. Liquidity goes in; principal stays. Only the 0.01% swap-fee stream comes out.
 
-A Fountain *clone* owns a single V4 position keyed by `(owner = clone, tickLower, tickUpper, salt = 0)`. The Manifold and Mimicoinage factories deploy a clone, fund it, and walk away.
+A Fountain *clone* owns its V4 positions and accumulates swap fees in its own balance. The clone's `owner` — the address that called `Fountain.make` to deploy it — is the only address that can withdraw those fees.
 
 ---
 
-## Operations
+## Bitsy factory
 
-Three external surfaces, nothing else:
+Fountain follows the prototype-plus-clones pattern. The prototype holds the logic; clones are EIP-1167 minimal proxies with their own storage.
 
-- **`offer(token, supply, tickLower, tickUpper)`** — permissionless deposit. Anyone can fund the position with their own tokens at a chosen tick range. Liquidity only grows.
-- **`make()`** — sets the `taker`. First caller wins. The taker is the address that gets to collect future swap fees on this clone.
-- **`take(...)`** — the taker sweeps accrued swap fees on a batch of positions. Cannot pause, modify ticks, or touch principal.
+`make(variant)` is called on the prototype. It deploys a clone CREATE2-deterministically at an address derived from `keccak256(msg.sender, variant)`, sets the clone's `owner` to `msg.sender`, and returns the clone address.
 
-There is no `decreaseLiquidity` path anywhere in the contract.
+There is no race. Each unique `(caller, variant)` pair maps to its own clone address. Two different callers calling `make(0)` get two different clones. The same caller calling `make(0)` twice gets the same clone (idempotent — re-calls just return the existing address).
+
+A clone's address is predictable before deploy, so callers can pre-fund it.
+
+---
+
+## Operations on a clone
+
+- **`offer(token, quote, ticks, amounts)`** — seats single-sided V4 liquidity into the clone's positions. Permissionless. Liquidity only grows.
+- **`take(ids)`** — pulls accrued swap fees from a batch of the clone's positions into the clone's own balance via zero-delta `modifyLiquidity` calls. Permissionless to trigger.
+- **`withdraw(currency, amount)`** — `onlyOwner`. Transfers the clone's balance to its owner.
+
+There is no `decreaseLiquidity` path anywhere in the contract. Principal stays.
 
 ---
 
@@ -51,13 +61,13 @@ Together these prevent re-offers from carving gaps above or below spot, or bleed
 
 ## Trust boundary
 
-`taker` collects the 0.01% fee stream. Nothing else.
+The clone's `owner` collects the 0.01% fee stream. Nothing else.
 
 | Surface | Authority |
 |:--------|:----------|
 | Principal | None — no withdraw path |
 | Tick boundaries | None — fixed at offer time |
 | Pause / freeze | None |
-| Accrued fees | `taker` (forwarded on `take`) |
+| Accrued fees | Clone `owner` (via `withdraw`, after permissionless `take`) |
 
-`taker` is the first address to call `Fountain.make()` for a given clone. Once set, immutable.
+The owner is set once at clone deploy by `zzInit` to the address that called `Fountain.make`. It cannot be changed.
