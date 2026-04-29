@@ -9,14 +9,14 @@ fountain:
   description: "Owns every Unispring V4 position. Forwards swap fees to taker; no decrease-liquidity path."
   address:
 
-unispring:
-  name: "Unispring (prototype)"
+manifold:
+  name: "Manifold (prototype)"
   description: "Per-(hub, tickLower, tickUpper) clone factory. Calls Fountain to seat positions."
   address:
 
 neutrinoSource:
   name: "NeutrinoSource (prototype)"
-  description: "Mints a Lepton spoke and hands it to a Unispring clone for funding."
+  description: "Mints a Lepton spoke and hands it to a Manifold clone for funding."
   address:
 
 neutrinoChannel:

@@ -17,10 +17,10 @@ Unispring is a family of permissionless contracts on Uniswap V4. A single primit
 
 At the core is **{{ u.fountain.name }}** — a V4 position owner with no withdraw path. Two sibling factories seat tokens into Fountain positions and walk away:
 
-- **{{ u.unispring.name }}** mints fresh fair-launch ERC-20s and seats 100% of supply single-sided against a hub. Each token launches with a permanent price floor and routable V4 liquidity from the deploy transaction onward.
+- **{{ u.manifold.name }}** mints fresh fair-launch ERC-20s and seats 100% of supply single-sided against a hub. Each token launches with a permanent price floor and routable V4 liquidity from the deploy transaction onward.
 - **{{ u.mimicoinage.name }}** mints 1:1 mirrors of existing tokens, collateralized by a Fountain position locked at a single tick — a hard 1-bp peg corridor with no oracle.
 
-Both factories are one-shot. After they fund the position, no contract in the stack retains authority over the token, the pool, or the liquidity. The only way to acquire any Unispring or Mimicoinage token is to buy it from its V4 pool — on any aggregator, frontend, or contract that routes through V4.
+Both factories are one-shot. After they fund the position, no contract in the stack retains authority over the token, the pool, or the liquidity. The only way to acquire any Manifold or Mimicoinage token is to buy it from its V4 pool — on any aggregator, frontend, or contract that routes through V4.
 
 ---
 
@@ -38,12 +38,12 @@ Fountain knows nothing about fair launches or mirrors. It's a one-way valve for 
 
 ---
 
-## Unispring — fair-launch factory
+## Manifold — fair-launch factory
 
 A single call to `{{ u.neutrinoSource.name }}.launch(name, symbol, decimals, supply, salt, tickLower, tickUpper)`:
 
 1. Lepton mints a fresh ERC-20 at a CREATE2 address that sorts strictly below the hub
-2. The supply is transferred to a `{{ u.unispring.name }}` clone keyed by `(hub, tickLower, tickUpper)`
+2. The supply is transferred to a `{{ u.manifold.name }}` clone keyed by `(hub, tickLower, tickUpper)`
 3. The clone calls `Fountain.offer`
 4. Fountain initializes the V4 pool at `tickLower` and seats the entire supply single-sided in `[tickLower, tickUpper]`
 
@@ -51,7 +51,7 @@ The maker spends only gas. The token is routable by every V4-aware aggregator th
 
 ### The hub
 
-Every Unispring clone is keyed by `(hub, tickLower, tickUpper)`. All spokes within a clone pair against the same hub, so any two of them are reachable in two hops via standard aggregator paths. The canonical hub will be deployed at a vanity address chosen so that almost every spoke address sorts strictly below it without salt mining.
+Every Manifold clone is keyed by `(hub, tickLower, tickUpper)`. All spokes within a clone pair against the same hub, so any two of them are reachable in two hops via standard aggregator paths. The canonical hub will be deployed at a vanity address chosen so that almost every spoke address sorts strictly below it without salt mining.
 
 ### Why the floor holds
 
@@ -81,7 +81,7 @@ Building on V4 directly removes the custom AMM, the keeper, and the arbitrage la
 
 ## Permanence and trust boundaries
 
-The factories above the position (`NeutrinoSource`, `NeutrinoChannel`, `Unispring`, `Mimicoinage`) are one-shot. After they mint, fund, and seat, none of them retains any authority over what they created.
+The factories above the position (`NeutrinoSource`, `NeutrinoChannel`, `Manifold`, `Mimicoinage`) are one-shot. After they mint, fund, and seat, none of them retains any authority over what they created.
 
 | After launch, ...                  | ... is governed by                                                |
 |:-----------------------------------|:------------------------------------------------------------------|
@@ -95,7 +95,7 @@ The factories above the position (`NeutrinoSource`, `NeutrinoChannel`, `Unisprin
 
 ## Patterns
 
-`offer` is permissionless and re-callable. Anyone can fund any Unispring pool with their own tokens at their chosen tick range. Because positions can never be removed, the only way a pool grows is by being added to. A few patterns fall out:
+`offer` is permissionless and re-callable. Anyone can fund any Manifold pool with their own tokens at their chosen tick range. Because positions can never be removed, the only way a pool grows is by being added to. A few patterns fall out:
 
 - **Staged emissions** — fund an initial range; once price moves through it, fund a higher range
 - **Multi-tier launch ladder** — split supply across several `offer` calls at different ranges to shape the offering curve
@@ -131,7 +131,7 @@ Re-offers must start at the current pool tick and seat entirely on one side of i
 | Contract | Address |
 |:---------|:--------|
 {% if u.fountain.address %}| {{ u.fountain.name }} | [`{{ u.fountain.address }}`](https://etherscan.io/address/{{ u.fountain.address }}#code){:target="_blank"} |{% endif %}
-{% if u.unispring.address %}| {{ u.unispring.name }} | [`{{ u.unispring.address }}`](https://etherscan.io/address/{{ u.unispring.address }}#code){:target="_blank"} |{% endif %}
+{% if u.manifold.address %}| {{ u.manifold.name }} | [`{{ u.manifold.address }}`](https://etherscan.io/address/{{ u.manifold.address }}#code){:target="_blank"} |{% endif %}
 {% if u.neutrinoSource.address %}| {{ u.neutrinoSource.name }} | [`{{ u.neutrinoSource.address }}`](https://etherscan.io/address/{{ u.neutrinoSource.address }}#code){:target="_blank"} |{% endif %}
 {% if u.neutrinoChannel.address %}| {{ u.neutrinoChannel.name }} | [`{{ u.neutrinoChannel.address }}`](https://etherscan.io/address/{{ u.neutrinoChannel.address }}#code){:target="_blank"} |{% endif %}
 {% if u.mimicoinage.address %}| {{ u.mimicoinage.name }} | [`{{ u.mimicoinage.address }}`](https://etherscan.io/address/{{ u.mimicoinage.address }}#code){:target="_blank"} |{% endif %}

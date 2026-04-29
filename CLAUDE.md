@@ -49,7 +49,7 @@ uniteum.one/
 │   └── use-cases/
 ├── lepton/               ← Lepton factory docs (peer)
 │   └── index.md
-├── unispring/            ← Unispring factory docs (peer; includes Mimicoinage)
+├── unispring/            ← Unispring docs (Manifold factory + Mimicoinage sibling)
 │   └── index.md
 └── locale/               ← Locale reference-data docs (peer)
     ├── index.md
