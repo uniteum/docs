@@ -13,11 +13,11 @@ status: draft
 {: .label .label-yellow }
 Draft — contracts not yet deployed.
 
-**A family of permissionless contracts on Uniswap V4. One primitive. Two factories. Permanent liquidity.**
+Unispring is a family of permissionless contracts on Uniswap V4. A single primitive owns the V4 positions, and two sibling factories mint the tokens that get seated into them.
 
 At the core is **{{ u.fountain.name }}** — a V4 position owner with no withdraw path. Two sibling factories seat tokens into Fountain positions and walk away:
 
-- **{{ u.unispring.name }}** mints fresh fair-launch ERC-20s and seats 100% of supply single-sided against a hub. Each token launches with a permanent price floor and routable V4 liquidity from block one.
+- **{{ u.unispring.name }}** mints fresh fair-launch ERC-20s and seats 100% of supply single-sided against a hub. Each token launches with a permanent price floor and routable V4 liquidity from the deploy transaction onward.
 - **{{ u.mimicoinage.name }}** mints 1:1 mirrors of existing tokens, collateralized by a Fountain position locked at a single tick — a hard 1-bp peg corridor with no oracle.
 
 Both factories are one-shot. After they fund the position, no contract in the stack retains authority over the token, the pool, or the liquidity. The only way to acquire any Unispring or Mimicoinage token is to buy it from its V4 pool — on any aggregator, frontend, or contract that routes through V4.
@@ -65,7 +65,7 @@ The same geometry is what makes the seed single-sided in the spoke and free for 
 
 `Mimicoinage` mints a mirror of any existing ERC-20 (or native ETH) and seats the entire mimic supply as a single-tick V4 position at tick 0, fee 100 (0.01%), tick-spacing 1. The position is collateralized by real originals locked in a Fountain position no one — including the deployer — can unwind.
 
-The result is a **hard 1-bp peg corridor `[0, 1.0001)`** with no oracle, no rebalance keeper, and no governance. Mirror tokens use a `1x` prefix on the original's symbol: `1xUSDC` mirrors USDC, `1xWBTC` mirrors WBTC, `1xETH` mirrors native ETH.
+The single-tick geometry constrains the mirror's price to the corridor `[0, 1.0001)` — a 1-basis-point peg enforced by V4 swap math, with no oracle, no rebalance keeper, and no governance. Mirror tokens use a `1x` prefix on the original's symbol: `1xUSDC` mirrors USDC, `1xWBTC` mirrors WBTC, `1xETH` mirrors native ETH.
 
 See [MIMICOIN.md](https://github.com/uniteum/unispring/blob/main/MIMICOIN.md){:target="_blank"} for the peg argument.
 
