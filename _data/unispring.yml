@@ -26,8 +26,8 @@ neutrinoChannel:
   description: "Relays a single Coinage.make() call per clone."
   address:
 
-mimicoinage:
-  name: "Mimicoinage"
+mimicry:
+  name: "Mimicry"
   description: "Sibling factory. Mints permissionless 1:1 ERC-20 mirrors with a
     hard 1-bp peg corridor."
   address: "0x745d872bCC29E6e38582EDbAc823564E47B3717b"

@@ -1,18 +1,18 @@
 ---
 layout: default
-title: Mimicoinage — peg mechanics
+title: Mimicry — peg mechanics
 parent: Unispring
-permalink: /unispring/mimicoinage-mechanics/
+permalink: /unispring/mimicry-mechanics/
 nav_order: 4
 ---
 
 {% assign u = site.data.unispring %}
 
-# Mimicoinage — peg mechanics
+# Mimicry — peg mechanics
 
 How the 1-bp corridor is enforced, why the band is hard, and why the backing can never be unwound.
 
-For the user-facing description of what Mimicoinage does and how to use it, see [Mimicoinage]({{ site.baseurl }}/unispring/mimicoinage).
+For the user-facing description of what Mimicry does and how to use it, see [Mimicry]({{ site.baseurl }}/unispring/mimicry).
 
 ---
 
@@ -43,7 +43,7 @@ No hook, no oracle, no keeper. The peg is geometric: the only place trade can ha
 
 ## Why the backing is permanent
 
-The V4 position is owned by a [Fountain]({{ site.baseurl }}/unispring/fountain) clone. Mimicoinage retains no authority over it after seating, and Fountain itself exposes no decrease-liquidity path — principal cannot be withdrawn by anyone, ever.
+The V4 position is owned by a [Fountain]({{ site.baseurl }}/unispring/fountain) clone. Mimicry retains no authority over it after seating, and Fountain itself exposes no decrease-liquidity path — principal cannot be withdrawn by anyone, ever.
 
 The clone's owner is set once at deploy to the address that called `Fountain.make`. The owner can call `withdraw` on the clone to pull accrued swap fees (after anyone calls `take` to harvest them from the V4 position into the clone's balance). Nothing else.
 
@@ -51,7 +51,7 @@ The clone's owner is set once at deploy to the address that called `Fountain.mak
 
 ## Native ETH originals
 
-When the original is `Currency.wrap(address(0))`, Mimicoinage mints the mirror with 18 decimals and `10²⁷` supply, then funds the V4 position against native ETH. Fountain handles ETH-denominated `PoolManager` calls without a separate WETH wrapper step.
+When the original is `Currency.wrap(address(0))`, Mimicry mints the mirror with 18 decimals and `10²⁷` supply, then funds the V4 position against native ETH. Fountain handles ETH-denominated `PoolManager` calls without a separate WETH wrapper step.
 
 ---
 
