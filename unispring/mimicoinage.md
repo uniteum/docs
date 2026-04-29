@@ -10,9 +10,22 @@ nav_order: 3
 
 # Mimicoinage — 1:1 mirror factory
 
-Mimicoinage mints permissionless ERC-20 mirrors of any existing token (or native ETH), pegged within a hard 1-basis-point corridor. No oracle. No rebalance keeper. No governance.
+Mimicoinage lets anyone mint an ERC-20 mirror of any existing token (or native ETH). The mirror trades 1:1 against its original within a hard 1-basis-point corridor, backed token-for-token by real originals locked in a Uniswap V4 pool.
 
-A single call to `mimic(original, name, symbol)` mints a fresh mirror and seats its entire supply into a single-tick V4 position collateralized by real originals locked in a [Fountain]({{ site.baseurl }}/unispring/fountain) clone no one — including the deployer — can unwind.
+A single call to `mimic(original, name, symbol)` deploys the mirror and funds its pool in the same transaction. From that moment, every unit of the mirror is redeemable 1:1 against the original by swapping in the pool — on any aggregator, frontend, or contract that routes through V4. No oracle, no rebalance keeper, no governance, no unwind path.
+
+---
+
+## Why this is useful
+
+The point is *durability of the peg*. Nobody — including the deployer — can rug, dilute, or unwind the backing. Once the mirror exists, its redemption guarantee is as permanent as the V4 pool itself.
+
+That makes mirrors useful in places where the original isn't, or where the peg of a wrapped token would normally depend on a custodian or governance:
+
+- **Permissionless stablecoin mirror** — deploy `1xUSDC` alongside USDC with its own address, integrations, and reputation. Collateralized 1:1 by real USDC in the pool, with no path for anyone to drain it.
+- **Free-floating distribution** — airdrop or distribute the mirror knowing every unit is redeemable 1:1 against the original, forever.
+- **Cross-venue scaffold** — mirror a native asset on a venue where bridging the real thing isn't feasible.
+- **Dev-chain tracking** — sandbox tokens that track real-world prices without oracle plumbing.
 
 ---
 
@@ -28,42 +41,29 @@ Name and symbol are caller-supplied; the `1x` prefix is the project convention, 
 
 ---
 
-## How the peg holds
+## What you get
 
-The mirror's V4 pool uses `tick = 0`, `fee = 100` (0.01%), `tickSpacing = 1`. The position spans a single tick — the narrowest range V4 allows. The starting price sits exactly at the lower edge of that tick, so the position begins 100% mirror and 0% original.
+A real ERC-20 — with its own address and `totalSupply` — that trades inside `[1.0000 × original, 1.0001 × original)`.
 
-A buyer brings the original, receives mirror, walks price across the tick. A seller reverses. V4's swap math constrains price to the corridor `[1.0000, 1.0001)` — a hard 1-bp band.
+| Property | Value |
+|:---------|:------|
+| Decimals | Same as the original (18 for native ETH) |
+| Price corridor | `[1.0000, 1.0001)` × original |
+| Backing | Real originals, locked in a single V4 position |
+| Swap fee | 0.01%, paid to the Fountain clone owner |
+| Supply | Fixed at deploy |
 
-| Side | Bound | Enforced by |
-|:-----|:------|:------------|
-| Floor | `1.0000` | Bottom of the seeded tick |
-| Ceiling | `1.0001` | Top of the seeded tick |
-
-The 10²⁷ raw mimic units seeded are large enough that the pool cannot be drained by any quantity of original that exists.
-
----
-
-## Trust boundary
-
-The Fountain position is owned by a Fountain clone. Mimicoinage retains no authority over it after seating.
-
-| Surface | Authority |
-|:--------|:----------|
-| Mirror supply | Fixed at deploy |
-| Pool position | Owned by Fountain clone, no decrease path |
-| Original collateral | Locked in the V4 position, no unwind |
-| Accrued fees | Fountain clone owner (0.01% of swap volume) |
-
-Even the clone owner cannot harvest the accumulated original by unwinding — only the 0.01% fee stream is extractable.
+The mirror's only behaviour is "trades close to its original". It is not a wrapped-deposit token, not an LP token, and not a claim on yield.
 
 ---
 
-## What it's for
+## How to use it
 
-- **Permissionless stablecoin mirror** — deploy `1xUSDC` alongside USDC with its own address, integrations, and reputation, collateralized 1:1 by real USDC in the pool
-- **Free-floating distribution** — airdrop or distribute the mirror knowing every unit is redeemable 1:1 against the original, forever
-- **Cross-venue scaffold** — mirror a native asset on a venue where bridging the real thing isn't feasible
-- **Dev-chain tracking** — sandbox tokens that track real-world prices without oracle plumbing
+**Deploy a mirror.** Call `mimic(original, name, symbol)` on Mimicoinage. Pass `address(0)` as `original` to mirror native ETH. The mirror is deployed, fully funded, and tradeable in the same transaction. Use `predictMimic(original, name, symbol)` first to see the deterministic address (and whether it already exists) without spending gas.
+
+**Buy or sell.** Route a swap through any V4-aware aggregator or frontend — `original → 1xORIGINAL` to acquire, `1xORIGINAL → original` to redeem. There is no separate "redeem" function: the pool *is* the redemption path.
+
+**Collect fees.** The address that called `Fountain.make` to deploy the underlying clone collects the 0.01% swap-fee stream. Anyone can call `take` to harvest fees from the V4 position into the clone's balance; the clone owner then calls `withdraw` to pull them out. Principal is unreachable.
 
 ---
 
@@ -73,4 +73,24 @@ Even the clone owner cannot harvest the accumulated original by unwinding — on
 - **Not an oracle.** If the original depegs from its reference asset, the mirror tracks the original — not the reference.
 - **Not a yield source beyond fees.** Only the 0.01% swap fee on volume is extractable.
 
-See [MIMICOIN.md](https://github.com/uniteum/unispring/blob/main/MIMICOIN.md){:target="_blank"} for the full peg argument.
+---
+
+## Trust boundary
+
+Once a mirror is deployed, nothing in the stack retains authority over it.
+
+| Surface | Authority |
+|:--------|:----------|
+| Mirror supply | Fixed at deploy |
+| Pool position | Owned by Fountain clone, no decrease path |
+| Original collateral | Locked in the V4 position, no unwind |
+| Accrued fees | Fountain clone owner (0.01% of swap volume) |
+
+Even the clone owner cannot harvest the accumulated original by unwinding — only the fee stream is extractable.
+
+---
+
+## Further reading
+
+- [Peg mechanics]({{ site.baseurl }}/unispring/mimicoinage-mechanics) — how the corridor is enforced and why the band is hard.
+- [MIMICOIN.md](https://github.com/uniteum/unispring/blob/main/MIMICOIN.md){:target="_blank"} — the full peg argument.
