@@ -28,6 +28,7 @@ defaults:
 tokens:
   "0x5e8de60e7b7a00240d49bfdde38c4078da97ce27":
     project_name: "Uniteum Mimicry"
+    project_website: "https://uniteum.one/unispring/mimicry/"
     logo_svg: "https://uniteum.one/assets/images/uniteum-eth.svg"
     description: |
       1:1 ETH mirror minted by the Mimicry prototype on Uniswap V4.
@@ -43,6 +44,7 @@ tokens:
 
   "0xdd76a7267373b32714fa55c6e28a4c5e3228a17e":
     project_name: "Uniteum Mimicry"
+    project_website: "https://uniteum.one/unispring/mimicry/"
     logo_svg: "https://uniteum.one/assets/images/uniteum-usdc.svg"
     description: |
       1:1 USDC mirror minted by a Mimicry clone on Uniswap V4. Single-tick
