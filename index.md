@@ -67,7 +67,7 @@ A single transaction mints a fixed-supply ERC-20, initializes a V4 pool against 
 - Permanent floor enforced by the absence of liquidity below `tickLower`
 - Hub-and-spoke topology gives any two Unispring tokens a two-hop swap path
 
-A sibling factory, **Mimicry**, mints permissionless 1:1 mirrors of any ERC-20 with a hard 1-bp peg corridor (`1xUSDC`, `1xWBTC`, `1xETH`).
+A sibling two-level factory, **Mimicry**, stamps clones per `(original, symbol)` (`1xUSDC`, `1xWBTC`, `1xETH`, …); each clone mints named 1:1 ERC-20 mirrors with a hard 1-bp peg corridor.
 
 ---
 

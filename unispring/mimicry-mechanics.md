@@ -35,7 +35,7 @@ The mirror carries the original's decimals (18 for native ETH), so the V4-native
 
 The corridor is enforced by Uniswap V4 itself. There is no liquidity outside the seeded tick, and V4's swap math cannot cross an empty tick range.
 
-Trade size cannot break the band either. The supply seeded is the lesser of `10²⁷` raw units and the original's total supply, capped to stay below V4's `maxLiquidityPerTick` at `tickSpacing = 1`. For ERC-20 originals that means the pool holds at least as many mirror units as originals exist. For native ETH (no `totalSupply` to mirror) the cap of `10²⁷` is itself larger than any plausible buy-side flow.
+Trade size cannot break the band either. The raw supply minted is `10²⁷` for mirrors with 18 or more decimals, scaled down by a factor of 10 per decimal below 18 — keeping the human-unit supply roughly constant (about a billion tokens) across originals and well below V4's `maxLiquidityPerTick` at `tickSpacing = 1`. For any plausible original this means the pool cannot be drained by a real-world quantity of buyers.
 
 No hook, no oracle, no keeper. The peg is geometric: the only place trade can happen is inside the seeded tick, and that tick is a 1-bp corridor by construction.
 
@@ -51,7 +51,7 @@ The clone's owner is set once at deploy to the address that called `Fountain.mak
 
 ## Native ETH originals
 
-When the original is `Currency.wrap(address(0))`, Mimicry mints the mirror with 18 decimals and `10²⁷` supply, then funds the V4 position against native ETH. Fountain handles ETH-denominated `PoolManager` calls without a separate WETH wrapper step.
+When the original is `Currency.wrap(address(0))`, Mimicry mints the mirror with 18 decimals and `10²⁷` supply, then funds the V4 position against native ETH. Fountain handles ETH-denominated `PoolManager` calls without a separate WETH wrapper step. The Mimicry prototype itself is the canonical clone for `(native ETH, "1xETH")` — see [Mimicry]({{ site.baseurl }}/unispring/mimicry) for the factory layout.
 
 ---
 

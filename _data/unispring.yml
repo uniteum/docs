@@ -27,38 +27,96 @@ neutrinoChannel:
   address:
 
 mimicry:
-  name: "Mimicry"
-  description: "Sibling factory. Mints permissionless 1:1 ERC-20 mirrors with a
-    hard 1-bp peg corridor."
-  address: "0x745d872bCC29E6e38582EDbAc823564E47B3717b"
+  name: "Mimicry (prototype)"
+  description: "Two-level factory. The prototype mints clones keyed by
+    (original, symbol); each clone mints mimic ERC-20s — one per name —
+    pegged 1:1 against its original inside a hard 1-bp corridor. The
+    prototype itself is the canonical clone for (native ETH, \"1xETH\")."
+  address: "0x0710005Fb2CA9A206e0Ca4A8006A0754F052860F"
   write:
-    "mimic(original, name, symbol)":
+    "make(original, symbol)":
       f: 1
-      description: "Mint a 1:1 mirror of an original currency and seat its full supply
-        in a single-tick V4 position"
+      description: "Deploy (or return) the deterministic Mimicry clone for
+        (original, symbol). Pass an IAddressLookup as `original` to peg
+        against a chain-local token while keeping the same clone address
+        across chains. Returns the prototype itself for the proto pair
+        (native ETH, \"1xETH\")."
+    "mimic(name)":
+      f: 2
+      description: "Mint a fresh mimic ERC-20 with this clone's stored
+        (original, symbol) and seat its entire supply as a single-tick V4
+        position. Idempotent per name. Callable on the prototype to mint
+        1xETH mimics, or on any clone to mint mimics under that pair."
+    "zzInit(original, symbol)":
+      f: 3
+      description: "Clone initializer. Records (original, symbol) on a
+        freshly deployed clone. Restricted to the prototype."
   read:
     "coinage()":
       f: 1
-      description: "The Coinage factory used to mint mimic ERC-20s"
-    "isMimic(token)":
+      description: "The Coinage factory used to mint mimic ERC-20s."
+    "made(original, symbol)":
       f: 2
-      description: "Whether a token was minted by this factory as a mimic"
+      description: "Predict the deterministic address (and existence) of a
+        clone for (original, symbol) before calling `make`. Returns the
+        prototype's own address for the proto pair (native ETH, \"1xETH\")."
     "maxSupply()":
       f: 3
-      description: "Cap on raw supply minted for any mimic (10^27)"
-    "originalOf(mimic)":
+      description: "Raw supply minted for an 18-decimal mimic (10^27).
+        Mimics with fewer decimals scale down by 10× per decimal below 18."
+    "mimicked(name)":
       f: 4
-      description: "Original currency paired with a given mimic"
-    "placer()":
+      description: "Predict the deterministic mimic address for `name`
+        under this instance's stored (original, symbol)."
+    "mimicked(original, symbol, name)":
       f: 5
-      description: "The Fountain that holds each mimic's single-tick position"
-    "predictMimic(original, name, symbol)":
+      description: "Predict the deterministic mimic address for `name`
+        under (original, symbol), whether or not the clone is deployed yet."
+    "original()":
       f: 6
-      description: "Preview the deterministic address (and existence) of a mimic
-        before deploying"
-    "version()":
+      description: "The original currency every mimic minted by this
+        instance is pegged against (Currency.wrap(address(0)) for native
+        ETH). The prototype's value is native ETH."
+    "placer()":
       f: 7
-      description: "Contract version string"
+      description: "The Fountain that holds each mimic's single-tick
+        position and routes its swap fees to the Fountain owner."
+    "proto()":
+      f: 8
+      description: "The prototype instance that acts as the clone factory."
+    "symbol()":
+      f: 9
+      description: "The symbol shared by every mimic minted by this
+        instance. The prototype's value is \"1xETH\"."
+    "version()":
+      f: 10
+      description: "Contract version string."
+
+  # Known clones. Each entry is itself a (original, symbol) factory whose
+  # `mimic(name)` mints a mimic ERC-20 sharing this symbol and pegged
+  # against this original.
+  clones:
+    1xETH:
+      symbol: "1xETH"
+      original: "native ETH"
+      address: "0x0710005Fb2CA9A206e0Ca4A8006A0754F052860F"
+      note: "The prototype itself is the canonical (native ETH, \"1xETH\")
+        clone — no separate deploy."
+      mimics:
+        - name: "Uniteum 1xETH"
+          address: "0x5e8de60e7b7a00240d49bfdde38c4078da97ce27"
+    1xUSDC:
+      symbol: "1xUSDC"
+      original: "chain-local USDC (resolved via USDCLookup)"
+      original_lookup: "USDCLookup"
+      original_lookup_address: "0xbF123fB006EDDCF474965e1cb102371da5d392f2"
+      address: "0x8f6a15de39cb0c29fa79a26f55bd82c06af6834a"
+      note: "Deployed by the prototype with USDCLookup as `original`, so
+        the same clone address resolves on every chain that has a
+        USDCLookup."
+      mimics:
+        - name: "Uniteum 1xUSDC"
+          address: "0xdd76a7267373b32714fa55c6e28a4c5e3228a17e"
 
 hub:
   name: "Hub"
