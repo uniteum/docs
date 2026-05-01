@@ -13,9 +13,11 @@ nav_order: 6
 
 # Uniteum 1xUSDC
 
-[`{{ mimic.name }}`](https://etherscan.io/token/{{ mimic.address }}){:target="_blank"} is a personalized 1:1 mirror of USDC, minted via [Mimicry]({{ site.baseurl }}/unispring/mimicry/). It trades against the local chain's USDC inside a hard 1-basis-point corridor and is collateralized token-for-token by real USDC locked in a Uniswap V4 pool that no one can unwind.
+[`{{ mimic.name }}`](https://etherscan.io/token/{{ mimic.address }}){:target="_blank"} is an ERC-20 that always trades 1:1 against USDC. One `{{ mimic.name }}` is worth one USDC, give or take a hundredth of a percent — and every token in circulation is backed, right now, by an equal amount of real USDC locked in a Uniswap V4 pool.
 
-It also demonstrates a second Mimicry feature: cross-chain portability via a [Locale]({{ site.baseurl }}/locale/) lookup. The clone's address is identical on every chain that has a `USDCLookup` deployed, even though the underlying USDC token has a different address on each.
+Mint it, swap it, hold it, send it. It behaves like USDC for any use that wants its own ERC-20 surface — but with its own address, its own name, and the same `(clone, mimic)` addresses on every chain it's deployed to.
+
+This page also shows how to mint your own 1xUSDC-symbol mirror under your own name. The mechanism is permissionless: pick a name, send the mint transaction, and you have a backed ERC-20 with the same peg guarantee.
 
 ---
 
@@ -25,39 +27,53 @@ It also demonstrates a second Mimicry feature: cross-chain portability via a [Lo
 |:---|:---|
 | Name | `{{ mimic.name }}` |
 | Symbol | `{{ clone.symbol }}` |
-| Original | {{ clone.original }} |
-| Original lookup | [`{{ clone.original_lookup }}`](https://etherscan.io/address/{{ clone.original_lookup_address }}#code){:target="_blank"} |
-| Decimals | Matches USDC (6 on Ethereum) |
+| Backing | Chain-local USDC (resolved via [`{{ clone.original_lookup }}`](https://etherscan.io/address/{{ clone.original_lookup_address }}#code){:target="_blank"}), locked in a Uniswap V4 pool |
+| Decimals | 6 on Ethereum (matches USDC) |
+| Trading range | `[1.0000, 1.0001)` × USDC |
 | Mimic ERC-20 | [`{{ mimic.address }}`](https://etherscan.io/token/{{ mimic.address }}){:target="_blank"} |
-| Clone | [`{{ clone.address }}`](https://etherscan.io/address/{{ clone.address }}#code){:target="_blank"} |
-| Pool | Uniswap V4, single tick at 0, fee tier 0.01%, tickSpacing 1 |
-| Price corridor | `[1.0000, 1.0001)` × USDC |
 
 ---
 
-## What "personalized" means here
+## Swap USDC for `{{ mimic.name }}`
 
-[Mimicry]({{ site.baseurl }}/unispring/mimicry/) is a two-level factory. The prototype mints **clones** keyed by `(original, symbol)` — one per peg pair. Each clone in turn mints **mimics** — fresh ERC-20s sharing the clone's symbol and peg, distinguished only by `name`.
+Use any V4-aware DEX or aggregator — Uniswap's own UI, 1inch, Matcha, CoW Swap, custom routers — and pick `USDC ↔ {{ mimic.name }}`. There is no separate "redeem" function: the pool is the redemption path.
 
-`{{ mimic.name }}` is one named mimic under the `(USDCLookup, "{{ clone.symbol }}")` clone. It carries the symbol `{{ clone.symbol }}`, it pegs against chain-local USDC, and its name — "{{ mimic.name }}" — is what makes it ours. Anyone else can call [`mimic(name)`](https://etherscan.io/address/{{ clone.address }}#writeContract#F{{ m.write["mimic(name)"].f }}){:target="_blank"} on the same clone with a different `name` and produce a parallel ERC-20: a different address, the same peg guarantee.
+- `USDC → {{ mimic.name }}` to acquire
+- `{{ mimic.name }} → USDC` to redeem
 
-The personalization is real product surface — its own address, its own listings, its own integrations, its own market reputation. The peg mechanics underneath are shared.
-
----
-
-## Why the clone uses a Locale lookup
-
-USDC lives at a different address on every chain. If the clone keyed off the raw token address, deploying `(0xA0b8…USDC, "{{ clone.symbol }}")` on Ethereum and `(0xaf88…USDC, "{{ clone.symbol }}")` on Arbitrum would produce two different clone addresses — fragmenting integrations and making cross-chain UX hostile.
-
-Passing an [`IAddressLookup`]({{ site.baseurl }}/locale/) — a Locale-deployed contract whose `value()` resolves to the chain-local USDC — solves this. Mimicry computes the clone's CREATE2 salt from the **lookup address**, not from whatever the lookup resolves to. The same lookup address on every chain yields the same clone address on every chain.
-
-So `{{ mimic.name }}` will be the same `(clone, mimic)` pair of addresses on Ethereum, Arbitrum, Base, and any other chain we deploy `{{ clone.original_lookup }}` to — with each chain's mimic backed by its own chain's USDC.
+The swap settles inside the `[1.0000, 1.0001)` × USDC band. You'll never pay more than 1.0001 USDC per token to buy, and you'll never receive less than 1.0000 USDC per token to sell.
 
 ---
 
-## How the peg holds
+## Mint your own personalized 1xUSDC
 
-The mimic's V4 pool is initialized at `tick = 0` with the entire mimic supply (about 1 billion at USDC's 6 decimals) seated single-sided in a single-tick range. Below tick 0 there is no liquidity at all; above the next tick there is no liquidity at all. V4's swap math cannot cross an empty tick range, so price is mathematically constrained to `[1.0000, 1.0001)` × USDC.
+You don't have to use ours. Anyone can mint their own `1xUSDC`-symbol mirror with their own chosen name and their own ERC-20 address. The peg is identical — every named mirror trades inside the same `[1.0000, 1.0001)` × USDC band, backed by USDC locked in its own V4 pool.
+
+**To mint a new named mirror against USDC:**
+
+1. Open the `1xUSDC` clone on Etherscan: [`{{ clone.address }}`](https://etherscan.io/address/{{ clone.address }}#writeContract){:target="_blank"}.
+2. Connect a wallet with enough ETH to cover gas. (No collateral capital is needed — the mint funds itself.)
+3. Call [`mimic(name)`](https://etherscan.io/address/{{ clone.address }}#writeContract#F{{ m.write["mimic(name)"].f }}){:target="_blank"} with the name you want — `"Acme 1xUSDC"`, `"Treasury 1xUSDC"`, whatever.
+
+That single call deploys your ERC-20, mints its full supply, and seats it in a fresh V4 pool against the chain's USDC. Your token is tradeable in the same transaction.
+
+To preview the deterministic address before deploying, call [`mimicked(name)`](https://etherscan.io/address/{{ clone.address }}#readContract#F{{ m.read["mimicked(name)"].f }}){:target="_blank"} with the same name on the read tab.
+
+What you keep, as the deployer, is the 0.01% swap-fee stream from your mirror's pool. You do **not** keep authority over the supply, the price corridor, or the backing — they're locked the moment the mint transaction confirms.
+
+---
+
+## What "personalized" gives you
+
+A named mirror is a real product, not a relabel. It has its own ERC-20 address, its own integrations, its own listing on aggregators, its own market reputation. Two parties can each mint a `1xUSDC`-symbol mirror with different names and end up with two genuinely separate tokens — sharing only the symbol and the underlying peg corridor.
+
+The value is in *whose* mirror it is. `{{ mimic.name }}` is the named mirror Uniteum publishes. `Acme 1xUSDC` would be Acme's. Their backing guarantees are identical; the brand on the token is not.
+
+---
+
+## Why the peg holds
+
+The mimic's V4 pool is initialized at `tick = 0` with the entire supply (about 1 billion at USDC's 6 decimals) seated single-sided in a single-tick range. Below tick 0 there is no liquidity at all; above the next tick there is no liquidity at all. V4's swap math cannot cross an empty tick range, so price is mathematically constrained to `[1.0000, 1.0001)` × USDC.
 
 The pool is owned by a [Fountain]({{ site.baseurl }}/unispring/fountain/) clone with no decrease-liquidity path. The USDC that backs `{{ mimic.name }}` is locked there forever — Mimicry retains no authority over it, and Fountain itself exposes no withdraw-principal function. The deployer has the same redemption rights as everyone else: trade through the pool.
 
@@ -65,24 +81,13 @@ For the geometric argument in detail, see [Mimicry — peg mechanics]({{ site.ba
 
 ---
 
-## How to trade it
+## Behind the scenes: cross-chain portability
 
-Route any V4-aware aggregator or frontend through the USDC ↔ `{{ clone.symbol }}` pool:
+USDC lives at a different address on every chain. If the `1xUSDC` clone keyed off the raw USDC address, deploying it on Ethereum versus Arbitrum would produce two different clone addresses — fragmenting integrations and making cross-chain UX hostile.
 
-- `USDC → {{ mimic.name }}` to acquire
-- `{{ mimic.name }} → USDC` to redeem
+Instead, the clone keys off [`{{ clone.original_lookup }}`]({{ site.baseurl }}/locale/) — a [Locale]({{ site.baseurl }}/locale/) lookup contract whose `value()` resolves to the chain-local USDC. Mimicry computes the clone's CREATE2 salt from the **lookup address**, not from whatever the lookup resolves to. The same lookup address on every chain yields the same clone address on every chain.
 
-There is no separate redeem function. The pool *is* the redemption path. Any router that reaches Uniswap V4 — Uniswap's own UI, 1inch, Matcha, CoW Swap, custom contracts — can route through it.
-
----
-
-## Mint your own named mirror under the same clone
-
-To deploy a new named mirror that pegs against chain-local USDC under the `{{ clone.symbol }}` symbol, call [`mimic(name)`](https://etherscan.io/address/{{ clone.address }}#writeContract#F{{ m.write["mimic(name)"].f }}){:target="_blank"} on the clone with your chosen name. The supply is fixed at mint, the V4 position seats automatically, and the token is tradeable in the same transaction.
-
-Preview the address before deploying with [`mimicked(name)`](https://etherscan.io/address/{{ clone.address }}#readContract#F{{ m.read["mimicked(name)"].f }}){:target="_blank"} on the clone, or [`mimicked(original, symbol, name)`](https://etherscan.io/address/{{ m.address }}#readContract#F{{ m.read["mimicked(original, symbol, name)"].f }}){:target="_blank"} on the prototype if the clone hasn't been deployed yet on the target chain.
-
-The Fountain owner — the address that originally called `Fountain.make` for the clone's position-holder — collects the 0.01% swap-fee stream from every mimic minted under this clone, including any new ones. Collateral, supply, and the price corridor are not at the deployer's discretion.
+So `{{ mimic.name }}` will be the same `(clone, mimic)` pair of addresses on Ethereum, Arbitrum, Base, and any other chain we deploy `{{ clone.original_lookup }}` to — with each chain's mimic backed by its own chain's USDC.
 
 ---
 
