@@ -9,28 +9,25 @@ defaults:
   requester_email: "team@uniteum.one"
   project_website: "https://uniteum.one"
   project_email: "team@uniteum.one"
-  project_sector: ""  # freeform — fill per token if useful
+  project_sector: "Personalized Wrapped Token" # freeform — fill per token if useful
   socials:
     whitepaper: ""
     medium: ""
-    github: ""
-    reddit: ""
+    github: "https://github.com/uniteum/unispring"
+    reddit: "https://www.reddit.com/r/uniteum/"
     telegram: ""
     slack: ""
     wechat: ""
     facebook: ""
-    linkedin: ""
-    twitter: ""
+    linkedin: "https://www.linkedin.com/in/paulreinholdtsen/"
+    twitter: "https://x.com/uniteum1"
     discord: ""
     bitcointalk: ""
     opensea: ""
-  price_data:
-    coinmarketcap_ticker: ""
-    coingecko_ticker: ""
 
 tokens:
   "0x5e8de60e7b7a00240d49bfdde38c4078da97ce27":
-    project_name: "Uniteum 1xETH"
+    project_name: "Uniteum Mimicry"
     logo_svg: "https://uniteum.one/assets/images/uniteum-eth.svg"
     description: |
       1:1 ETH mirror minted by the Mimicry prototype on Uniswap V4.
@@ -38,9 +35,14 @@ tokens:
       corridor [1.0, 1.0001). Fully collateralized by ETH locked in a
       Fountain clone with no decrease-liquidity path. No governance, no
       fees beyond the 0.01% swap fee.
+    price_data:
+      coinmarketcap_ticker: "https://dex.coinmarketcap.com/token/ethereum/0x5e8de60e7\
+        b7a00240d49bfdde38c4078da97ce27/"
+      coingecko_ticker: "https://www.geckoterminal.com/eth/pools/0x98914a9e6f2d97d37e\
+        db9488c9fc06adac83bde637106c4d24ee6e18655898eb"
 
   "0xdd76a7267373b32714fa55c6e28a4c5e3228a17e":
-    project_name: "Uniteum 1xUSDC"
+    project_name: "Uniteum Mimicry"
     logo_svg: "https://uniteum.one/assets/images/uniteum-usdc.svg"
     description: |
       1:1 USDC mirror minted by a Mimicry clone on Uniswap V4. Single-tick
@@ -48,3 +50,8 @@ tokens:
       USDC (resolved via USDCLookup, so the clone address is identical on
       every supported chain). No governance, no fees beyond the 0.01% swap
       fee.
+    price_data:
+      coinmarketcap_ticker: "https://dex.coinmarketcap.com/token/ethereum/0xdd76a7267\
+        373b32714fa55c6e28a4c5e3228a17e/"
+      coingecko_ticker: "https://www.geckoterminal.com/eth/pools/0x985202affcc89f4e8c\
+        a9dd3fe906a6c7f6afe4f6f5172db9bc52ad2bd5ef166b"
