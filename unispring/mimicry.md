@@ -111,7 +111,7 @@ The mimic's only behaviour is "trades close to its original". It is not a wrappe
 
 | Name | Address |
 |:-----|:--------|
-{% for mimic in c.mimics %}| {{ mimic.name }} | [`{{ mimic.address }}`](https://etherscan.io/address/{{ mimic.address }}){:target="_blank"} |
+{% for mimic in c.mimics %}| {% if mimic.permalink %}[{{ mimic.name }}]({{ site.baseurl }}{{ mimic.permalink }}){% else %}{{ mimic.name }}{% endif %} | [`{{ mimic.address }}`](https://etherscan.io/address/{{ mimic.address }}){:target="_blank"} |
 {% endfor %}
 {% endfor %}
 

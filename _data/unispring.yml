@@ -105,6 +105,7 @@ mimicry:
       mimics:
         - name: "Uniteum 1xETH"
           address: "0x5e8de60e7b7a00240d49bfdde38c4078da97ce27"
+          permalink: "/unispring/uniteum-1xeth/"
     1xUSDC:
       symbol: "1xUSDC"
       original: "chain-local USDC (resolved via USDCLookup)"
@@ -117,6 +118,7 @@ mimicry:
       mimics:
         - name: "Uniteum 1xUSDC"
           address: "0xdd76a7267373b32714fa55c6e28a4c5e3228a17e"
+          permalink: "/unispring/uniteum-1xusdc/"
 
 hub:
   name: "Hub"
