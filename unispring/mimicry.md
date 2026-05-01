@@ -47,7 +47,6 @@ That makes mirrors useful where the original isn't, or where a wrapped token's p
 
 - **Permissionless stablecoin mirror** — deploy `1xUSDC` alongside USDC with its own address, integrations, and reputation. Collateralized 1:1 by real USDC in the pool, with no path for anyone to drain it.
 - **Free-floating distribution** — airdrop or distribute a mimic knowing every unit is redeemable 1:1 against the original, forever.
-- **Cross-venue scaffold** — mirror a native asset on a venue where bridging the real thing isn't feasible.
 - **Dev-chain tracking** — sandbox tokens that track real-world prices without oracle plumbing.
 
 ---
