@@ -59,7 +59,9 @@ That single call deploys your ERC-20, mints its full supply, and seats it in a f
 
 To preview the deterministic address before deploying, call [`mimicked(name)`](https://etherscan.io/address/{{ clone.address }}#readContract#F{{ m.read["mimicked(name)"].f }}){:target="_blank"} with the same name on the read tab.
 
-What you keep, as the deployer, is the 0.01% swap-fee stream from your mirror's pool. You do **not** keep authority over the supply, the price corridor, or the backing — they're locked the moment the mint transaction confirms.
+**What you keep as the deployer:** the wallet that submits the `mimic(name)` transaction is recorded on-chain as the creator of your new ERC-20. That's the address Etherscan, CoinGecko, CoinMarketCap, and similar registries verify against when you submit token info — icon, description, project website, social links. The token's public identity is yours to claim.
+
+**What you don't keep:** the 0.01% swap fees flow to the Fountain owner of the clone's [placer]({{ site.baseurl }}/unispring/fountain/), set once when the placer was deployed; later mimics don't change that. Supply, the price corridor, and the backing are all locked the moment the mint transaction confirms.
 
 ---
 
@@ -67,7 +69,7 @@ What you keep, as the deployer, is the 0.01% swap-fee stream from your mirror's 
 
 A named mirror is a real product, not a relabel. It has its own ERC-20 address, its own integrations, its own listing on aggregators, its own market reputation. Two parties can each mint a `1xUSDC`-symbol mirror with different names and end up with two genuinely separate tokens — sharing only the symbol and the underlying peg corridor.
 
-The value is in *whose* mirror it is. `{{ mimic.name }}` is the named mirror Uniteum publishes. `Acme 1xUSDC` would be Acme's. Their backing guarantees are identical; the brand on the token is not.
+Crucially, the wallet that mints it is the on-chain deployer of that ERC-20 — which is the lever block explorers and token registries use to verify ownership when you submit token info. So `{{ mimic.name }}`'s icon, description, and project links on Etherscan are ours to set; `Acme 1xUSDC`'s would be Acme's. Their backing guarantees are identical; the brand on the token is not.
 
 ---
 
