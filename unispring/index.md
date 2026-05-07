@@ -19,9 +19,9 @@ Unispring is a family of permissionless contracts on Uniswap V4. A single primit
 |:---------|:-----|
 | **[{{ u.fountain.name }}]({{ site.baseurl }}/unispring/fountain)** | V4 position owner. No decrease-liquidity path; principal locked, fees forwarded. |
 | **[{{ u.manifold.name }}]({{ site.baseurl }}/unispring/manifold)** | Fair-launch factory. Mints fresh ERC-20s and seats 100% of supply single-sided against a hub. |
-| **[{{ u.mimicry.name }}]({{ site.baseurl }}/unispring/mimicry)** | Two-level mirror factory. Stamps clones per `(original, symbol)`; each clone mints named 1:1 ERC-20 mirrors with a hard 1-bp peg corridor. |
+| **[{{ u.notable.name }}]({{ site.baseurl }}/unispring/notable)** | Two-level mirror factory. Stamps clones per `(original, symbol)`; each clone issues named 1:1 ERC-20 mirrors with a hard 1-bp peg corridor. |
 
-Both factories are one-shot. After they fund the position, no contract in the stack retains authority over the token, the pool, or the liquidity. The only way to acquire any Manifold or Mimicry token is to buy it from its V4 pool — on any aggregator, frontend, or contract that routes through V4.
+Both factories are one-shot. After they fund the position, no contract in the stack retains authority over the token, the pool, or the liquidity. The only way to acquire any Manifold or Notable token is to buy it from its V4 pool — on any aggregator, frontend, or contract that routes through V4.
 
 ---
 
@@ -49,7 +49,7 @@ Building on V4 directly removes the custom AMM, the keeper, and the arbitrage la
 
 ## Permanence and trust boundaries
 
-The factories above the position (`NeutrinoSource`, `NeutrinoChannel`, `Manifold`, `Mimicry`) are one-shot. After they mint, fund, and seat, none of them retains any authority over what they created.
+The factories above the position (`NeutrinoSource`, `NeutrinoChannel`, `Manifold`, `Notable`) are one-shot. After they mint, fund, and seat, none of them retains any authority over what they created.
 
 | After launch, ...                  | ... is governed by                                                |
 |:-----------------------------------|:------------------------------------------------------------------|
@@ -70,7 +70,7 @@ Each Fountain clone has an immutable `owner` set at deploy time — the address 
 {% if u.manifold.address %}| {{ u.manifold.name }} | [`{{ u.manifold.address }}`](https://etherscan.io/address/{{ u.manifold.address }}#code){:target="_blank"} |{% endif %}
 {% if u.neutrinoSource.address %}| {{ u.neutrinoSource.name }} | [`{{ u.neutrinoSource.address }}`](https://etherscan.io/address/{{ u.neutrinoSource.address }}#code){:target="_blank"} |{% endif %}
 {% if u.neutrinoChannel.address %}| {{ u.neutrinoChannel.name }} | [`{{ u.neutrinoChannel.address }}`](https://etherscan.io/address/{{ u.neutrinoChannel.address }}#code){:target="_blank"} |{% endif %}
-{% if u.mimicry.address %}| {{ u.mimicry.name }} | [`{{ u.mimicry.address }}`](https://etherscan.io/address/{{ u.mimicry.address }}#code){:target="_blank"} |{% endif %}
+{% if u.notable.address %}| {{ u.notable.name }} | [`{{ u.notable.address }}`](https://etherscan.io/address/{{ u.notable.address }}#code){:target="_blank"} |{% endif %}
 {% if u.hub.address %}| {{ u.hub.name }} | [`{{ u.hub.address }}`](https://etherscan.io/address/{{ u.hub.address }}#code){:target="_blank"} |{% endif %}
 {% else %}
 Contracts have not yet been deployed. Addresses will be published in `_data/unispring.yml` at launch.
@@ -83,4 +83,4 @@ Contracts have not yet been deployed. Addresses will be published in `_data/unis
 - [GitHub Repository](https://github.com/uniteum/unispring)
 - [DESIGN.md](https://github.com/uniteum/unispring/blob/main/DESIGN.md){:target="_blank"} — design rationale, section by section
 - [CRITIQUE.md](https://github.com/uniteum/unispring/blob/main/CRITIQUE.md){:target="_blank"} — open questions and concerns
-- [MIMICOIN.md](https://github.com/uniteum/unispring/blob/main/MIMICOIN.md){:target="_blank"} — Mimicry in depth
+- [NOTABLE.md](https://github.com/uniteum/unispring/blob/main/NOTABLE.md){:target="_blank"} — Notable in depth

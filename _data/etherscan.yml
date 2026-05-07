@@ -25,13 +25,16 @@ defaults:
     bitcointalk: ""
     opensea: ""
 
+# Token addresses below are Mimicry-era predictions and will be replaced
+# once Notable is deployed (Notable's bytecode differs from Mimicry's, so
+# every CREATE2-derived address downstream changes too).
 tokens:
   "0x5e8de60e7b7a00240d49bfdde38c4078da97ce27":
-    project_name: "Uniteum Mimicry"
-    project_website: "https://uniteum.one/unispring/mimicry/"
+    project_name: "Uniteum Notable"
+    project_website: "https://uniteum.one/unispring/notable/"
     logo_svg: "https://uniteum.one/assets/images/uniteum-eth.svg"
     description: |
-      1:1 ETH mirror minted by the Mimicry prototype on Uniswap V4.
+      1:1 ETH mirror issued by the Notable prototype on Uniswap V4.
       Single-tick position at tick 0 pegs price inside a hard 1-bp
       corridor [1.0, 1.0001). Fully collateralized by ETH locked in a
       Fountain clone with no decrease-liquidity path. No governance, no
@@ -43,11 +46,11 @@ tokens:
         db9488c9fc06adac83bde637106c4d24ee6e18655898eb"
 
   "0xdd76a7267373b32714fa55c6e28a4c5e3228a17e":
-    project_name: "Uniteum Mimicry"
-    project_website: "https://uniteum.one/unispring/mimicry/"
+    project_name: "Uniteum Notable"
+    project_website: "https://uniteum.one/unispring/notable/"
     logo_svg: "https://uniteum.one/assets/images/uniteum-usdc.svg"
     description: |
-      1:1 USDC mirror minted by a Mimicry clone on Uniswap V4. Single-tick
+      1:1 USDC mirror issued by a Notable clone on Uniswap V4. Single-tick
       V4 position pegs price inside a hard 1-bp corridor against chain-local
       USDC (resolved via USDCLookup, so the clone address is identical on
       every supported chain). No governance, no fees beyond the 0.01% swap
