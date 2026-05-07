@@ -8,7 +8,13 @@ fountain:
   name: "Fountain"
   description: "Owns every Unispring V4 position. Forwards swap fees to taker; no
     decrease-liquidity path."
-  address: "0x634850E4eA5FFF0C6466DDAA7879725446738Ba9"
+  address: "0xf0071849DD48444cf8B2b49C2B394EF1A087e080"
+  clones:
+    fountain1:
+      name: "Fountain1"
+      description: "Canonical Fountain clone instantiated by the Fountain
+        prototype. Used by Notable as its single-tick position holder."
+      address: "0xf11e17473f8D933CFC439Ef694a0285c8D19e080"
 
 manifold:
   name: "Manifold (prototype)"
@@ -35,8 +41,8 @@ notable:
     symbol is resolved at construction from a chain-local IStringLookup
     (\"1xETH\" on mainnet, \"1xMATIC\" on Polygon, etc.)."
   # Notable bytecode differs from Mimicry's, so its CREATE2 address
-  # differs too. Address will be filled in after vanity mining + deploy.
-  address:
+  # differs too. Vanity-mined and deployed via Nick on Arbitrum.
+  address: "0x3131cE680E5Dd6d3fCF4BB3942186B49f7330080"
   write:
     "issue(name)":
       f: 1
@@ -105,7 +111,7 @@ notable:
     1xETH:
       symbol: "1xETH"
       original: "native ETH"
-      address:
+      address: "0x3131cE680E5Dd6d3fCF4BB3942186B49f7330080"
       note: "On mainnet the prototype itself is the canonical native-pair
         clone — no separate deploy. The pair's symbol is resolved at
         construction from a chain-local IStringLookup (\"1xETH\" on
@@ -118,7 +124,7 @@ notable:
       symbol: "1xUSDC"
       original: "chain-local USDC (resolved via USDCLookup)"
       original_lookup: "USDCLookup"
-      original_lookup_address: "0xbF123fB006EDDCF474965e1cb102371da5d392f2"
+      original_lookup_address: "0xc5dcC241a5927fc9e3750Ecf654dAfa9893de220"
       address:
       note: "Deployed by the prototype with USDCLookup as `original`, so
         the same clone address resolves on every chain that has a
