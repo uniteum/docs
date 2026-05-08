@@ -11,7 +11,7 @@ nav_order: 7
 
 # Notable — plain-English intro
 
-A guide for crypto hobbyists who want to know what Notable is and what they could actually do with one.
+A plain-English intro to what a Notable is and what you can do with one.
 
 For the technical reference, see [Notable]({{ site.baseurl }}/unispring/notable/). For the peg mechanics, see [Notable — peg mechanics]({{ site.baseurl }}/unispring/notable-mechanics/).
 
@@ -31,10 +31,9 @@ When you create a Notable, the entire supply starts out seated inside a Uniswap 
 
 ## What you might do with one
 
-- **Gift money with a personal label.** Issue something like "Birthday Cash for Sam" backed by USDC, spend $100 buying 100 of them, send to a friend. They can sell for USDC anytime — or just hold the novelty token because it has their name on it.
-- **Wedding favors, party tokens, in-jokes.** Real redeemable value plus a custom name.
-- **Branded "shares" of an asset.** ETH-backed Notable named after a friend group; everyone holds the same thing.
-- **Just for fun.** Fixed supply, hard peg, immutable contract — once it's out there, it's a permanent on-chain artifact.
+- **A personally labeled gift.** Issue something like "Birthday Cash for Sam" backed by USDC, buy a hundred of them, send to a friend. They can sell for USDC anytime, or hold it as a keepsake.
+- **A token for a group, project, or event.** Backed by ETH, USDC, or whatever the family supports — everyone holds the same thing under a name that means something to them.
+- **A permanent on-chain artifact.** Fixed supply, hard peg, immutable contract. Once it's issued, it stays put — and unlike most on-chain artifacts, it has real redeemable value.
 
 ---
 
@@ -54,7 +53,7 @@ The Notable prototype on mainnet is a special case — it's the family for nativ
 
 ---
 
-## How to actually try it
+## How to try it
 
 You'd need a wallet with a bit of ETH for gas. Operations happen on Etherscan's Write Contract tab — no special frontend required. If the family for your backing token already exists, you go straight to `issue(name)`. If not, you'd `make()` it first.
 
