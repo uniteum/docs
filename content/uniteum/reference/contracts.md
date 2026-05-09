@@ -22,13 +22,13 @@ All Uniteum contracts are deployed using Nick's deterministic deployer, resultin
 
 {{< val "contracts.uniteum.description" >}}
 
-{{% contract_table contract=site.data.contracts.uniteum %}}
+{{% contract_table key="uniteum" %}}
 
 ### {{< val "contracts.genesis.name" >}}
 
 {{< val "contracts.genesis.description" >}}
 
-{{% contract_table contract=site.data.contracts.genesis %}}
+{{% contract_table key="genesis" %}}
 
 ## Deployment
 
@@ -36,7 +36,7 @@ All Uniteum contracts are deployed using Nick's deterministic deployer, resultin
 
 Nick's deterministic deployment method ensures identical addresses across any EVM chain.
 
-**Deployer EOA:** {{< contract address=site.data.contracts.deployer.address text="0.eoa.uniteum.eth" >}}
+**Deployer EOA:** {{< contract address="0xff96a8c70dcc85a0cc4d690bfc02166a90e71004" text="0.eoa.uniteum.eth" >}}
 
 ### Architecture
 

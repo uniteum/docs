@@ -7,7 +7,7 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-INPUT_FILE="$SCRIPT_DIR/../_data/unit-inputs.yml"
+INPUT_FILE="$SCRIPT_DIR/../data/unit-inputs.yml"
 NETWORK="mainnet"
 DRY_RUN=true  # Default to dry-run for safety
 

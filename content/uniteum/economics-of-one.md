@@ -506,7 +506,7 @@ With "1" tokens you can:
 ## Observing in Practice
 
 **Check "1" contract:**
-- {{< etherscan address=site.data.contracts.uniteum.address section="readContract" text="Mainnet" >}}
+- {{< etherscan address="0xace41cf6d750d7ba06f4de57ac9e063246b2b090" section="readContract" text="Mainnet" >}}
 
 **Query total supply:**
 ```solidity

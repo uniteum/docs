@@ -6,18 +6,18 @@ This directory contains scripts for managing example units used throughout the U
 
 The scripts follow a clean separation of concerns:
 
-- **Config files** (`_data/*.yml`) define what units exist
+- **Config files** (`data/*.yml`) define what units exist
 - **Wrapper scripts** process all units from YAML config
 - **Computed data** is generated and stored separately from input data
 
 ## Architecture
 
 ```
-_data/unit-inputs.yml  (manual, input only)
+data/unit-inputs.yml  (manual, input only)
            ↓
     compute-all-addresses.sh  (generates addresses)
            ↓
-_data/units.yml  (generated, for Jekyll)
+data/units.yml  (generated, for Hugo)
            ↓
     deploy-all-units.sh  (optional deployment)
 ```
@@ -50,13 +50,13 @@ Before running any scripts, generate the `.env` file from contract configuration
 ./scripts/generate-env.sh
 ```
 
-This creates `scripts/.env` with contract addresses sourced from `_data/contracts.yml`. The `.env` file is gitignored and should be regenerated when contract addresses change (though they're deterministic and unlikely to change).
+This creates `scripts/.env` with contract addresses sourced from `data/contracts.yml`. The `.env` file is gitignored and should be regenerated when contract addresses change (though they're deterministic and unlikely to change).
 
-**Important:** Run this once after cloning the repository, or after updating `_data/contracts.yml`.
+**Important:** Run this once after cloning the repository, or after updating `data/contracts.yml`.
 
 ## Config Files
 
-### `_data/contracts.yml`
+### `data/contracts.yml`
 
 Contract addresses for Uniteum protocol contracts. Manually maintained.
 
@@ -68,7 +68,7 @@ uniteum:
   ens: "uniteum.eth"
 ```
 
-### `_data/unit-inputs.yml`
+### `data/unit-inputs.yml`
 
 Input file listing example units. Manually maintained.
 
@@ -80,7 +80,7 @@ meter/second:
   description: "Velocity unit"
 ```
 
-### `_data/units.yml`
+### `data/units.yml`
 
 Generated output with computed addresses. **DO NOT EDIT MANUALLY.**
 
@@ -95,7 +95,7 @@ foo:
 
 ### `generate-env.sh`
 
-Generates `scripts/.env` from `_data/contracts.yml`. Run once after cloning or when contracts change.
+Generates `scripts/.env` from `data/contracts.yml`. Run once after cloning or when contracts change.
 
 ```bash
 ./scripts/generate-env.sh
@@ -105,13 +105,13 @@ Generates `scripts/.env` from `_data/contracts.yml`. Run once after cloning or w
 
 ### `compute-all-addresses.sh`
 
-Generates `_data/units.yml` with computed addresses for all units in `_data/unit-inputs.yml`.
+Generates `data/units.yml` with computed addresses for all units in `data/unit-inputs.yml`.
 
 ```bash
 ./scripts/compute-all-addresses.sh
 
 # Output:
-# Computing addresses for units from: _data/unit-inputs.yml
+# Computing addresses for units from: data/unit-inputs.yml
 # Uniteum: 0x419d...
 # UnitHelper: 0x456d...
 # Found 42 units to process
@@ -125,7 +125,7 @@ Generates `_data/units.yml` with computed addresses for all units in `_data/unit
 ./scripts/compute-all-addresses.sh [rpc-url]
 ```
 
-**Output file:** `_data/units.yml`
+**Output file:** `data/units.yml`
 
 ### `deploy-all-units.sh`
 
@@ -162,7 +162,7 @@ export PRIVATE_KEY=0x...
 
 1. **Add to input file:**
    ```bash
-   # Edit _data/unit-inputs.yml
+   # Edit data/unit-inputs.yml
    # Add new entry with symbol as key and description as value
    ```
 
@@ -173,7 +173,7 @@ export PRIVATE_KEY=0x...
 
 3. **Commit changes:**
    ```bash
-   git add _data/unit-inputs.yml _data/units.yml
+   git add data/unit-inputs.yml data/units.yml
    git commit -m "Add new example unit: your-symbol"
    ```
 
@@ -189,8 +189,8 @@ If the contract changes or you want to refresh all computed data:
 
 ```bash
 ./scripts/compute-all-addresses.sh
-git diff _data/units.yml  # Review changes
-git add _data/units.yml
+git diff data/units.yml  # Review changes
+git add data/units.yml
 git commit -m "Regenerate example unit addresses"
 ```
 
@@ -229,16 +229,18 @@ All scripts:
 - Provide clear error messages
 - Validate inputs before processing
 
-## Integration with Jekyll
+## Integration with Hugo
 
-Jekyll automatically reads `_data/units.yml` and makes it available as `site.data.units` in Liquid templates.
+Hugo automatically reads `data/units.yml` and makes it available as `hugo.Data.units` in templates and shortcodes.
 
-Example usage in markdown:
-```liquid
-{% for pair in site.data.units %}
-- [{{ pair[0] }}](https://etherscan.io/token/{{ pair[1].address }})
-{% endfor %}
+Example usage in a shortcode (`layouts/shortcodes/units_list.html`):
+```go-template
+{{- range $sym, $u := hugo.Data.units -}}
+- [{{ $sym }}](https://etherscan.io/token/{{ $u.address }})
+{{ end -}}
 ```
+
+Then call it from markdown with `{{</* units_list */>}}`. To pull a single value inline, use the project's `val` shortcode: `{{</* val "units.foo.address" */>}}`.
 
 ## CI/CD Integration
 

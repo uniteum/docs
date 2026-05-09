@@ -1,32 +1,52 @@
 # Uniteum Documentation
 
-This repository contains the documentation site for Uniteum, built with Hugo and hosted on Cloudflare.
+This repository contains the documentation site for Uniteum, built with [Hugo](https://gohugo.io) (theme: [hugo-book](https://github.com/alex-shpak/hugo-book)) and deployed to Cloudflare Workers.
+
+Live site: [uniteum.one](https://uniteum.one)
 
 ## User-Facing Documentation
 
-The main documentation is organized as:
+Top-level sections under `content/`:
 
-- [index.md](index.md) - Homepage
-- [getting-started.md](getting-started.md) - Quick start guide
-- [economics-of-one.md](economics-of-one.md) - The "1" token value hypothesis
-- [use-cases.md](use-cases.md) - What you can build
-- [safety.md](safety.md) - Risks and disclaimers
-- [known-issues.md](known-issues.md) - Version history and bug reporting
-- [legal.md](legal.md) - Legal notices
-- [license.md](license.md) - Licensing information
-
-Additional documentation is organized under:
-- `/concepts/` - Core concepts and mechanics
-- `/reference/` - Technical reference and contract details
-- `/research/` - Research papers and theoretical foundations
+- [content/_index.md](content/_index.md) — Homepage
+- [content/liquid/](content/liquid/) — Liquid protocol
+- [content/solid/](content/solid/) — Solid protocol
+- [content/uniteum/](content/uniteum/) — Algebraic Uniteum protocol
+- [content/lepton/](content/lepton/) — Minimal token factory
+- [content/locale/](content/locale/) — Deterministic on-chain reference data
+- [content/notable/](content/notable/) — 1:1 mirror factory
+- [content/unispring/](content/unispring/) — Family of permissionless V4 contracts
 
 ## Site Configuration
 
-- `_config.yml` - Jekyll site configuration
-- `_data/` - Contract addresses, navigation, and other data files
-- `_includes/` - Reusable templates and components
-- `_layouts/` - Page layouts
-- `assets/` - Images, CSS, and other static assets
+- `hugo.toml` — Hugo site configuration
+- `data/` — Contract addresses, function tables, and other YAML data
+- `layouts/shortcodes/` — Custom shortcodes for Etherscan links and data lookups
+- `layouts/partials/docs/inject/head.html` — Favicon, OG meta, KaTeX
+- `layouts/_markup/render-link.html` — Render hook that opens external links in new tabs
+- `static/` — Images and other static assets served at the root
+- `themes/hugo-book/` — Theme submodule
+
+## Local Development
+
+```bash
+# After cloning, initialize the theme submodule
+git submodule update --init --recursive
+
+# Run local server (hot reload)
+hugo server
+
+# Build to ./public/
+hugo --minify
+```
+
+The site will be available at `http://localhost:1313`.
+
+## Deployment
+
+The site is automatically deployed to Cloudflare Workers on push to `main` via [.github/workflows/deploy.yml](.github/workflows/deploy.yml).
+
+Required repo secrets: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`. The Worker is configured in [wrangler.toml](wrangler.toml).
 
 <details>
 <summary><strong>Meta Documents (Collaboration & Development)</strong></summary>
@@ -34,42 +54,19 @@ Additional documentation is organized under:
 These documents support our development process and collaboration with Claude. They're organized in the `.meta/` directory but aren't part of the user-facing documentation.
 
 ### Primary References
-- [CLAUDE.md](CLAUDE.md) - **Main instructions for Claude Code** - Project overview, conventions, and guidelines (kept at root)
-- [.meta/STYLE_GUIDE.md](.meta/STYLE_GUIDE.md) - Writing style and formatting standards
+- [CLAUDE.md](CLAUDE.md) — Main instructions for Claude Code (kept at root)
+- [.meta/STYLE_GUIDE.md](.meta/STYLE_GUIDE.md) — Writing style and formatting standards
 
 ### Development Summaries
-- [.meta/CONTRACT_REFERENCES.md](.meta/CONTRACT_REFERENCES.md) - How contract addresses are referenced in docs
-- [.meta/ENV_INTEGRATION.md](.meta/ENV_INTEGRATION.md) - Environment setup and Jekyll integration
-- [.meta/SCRIPTS_SUMMARY.md](.meta/SCRIPTS_SUMMARY.md) - Available scripts and their usage
+- [.meta/CONTRACT_REFERENCES.md](.meta/CONTRACT_REFERENCES.md) — How contract addresses are referenced in docs
+- [.meta/SCRIPTS_SUMMARY.md](.meta/SCRIPTS_SUMMARY.md) — Available scripts and their usage
 
 ### Content Management
-- [.meta/EXAMPLE_UNITS_SUMMARY.md](.meta/EXAMPLE_UNITS_SUMMARY.md) - Catalog of example units used across docs
-- [.meta/SETUP_SUMMARY.md](.meta/SETUP_SUMMARY.md) - Site setup and initialization details
+- [.meta/EXAMPLE_UNITS_SUMMARY.md](.meta/EXAMPLE_UNITS_SUMMARY.md) — Catalog of example units used across docs
 
 ### Code Quality
-- [.meta/DUPLICATION_AUDIT.md](.meta/DUPLICATION_AUDIT.md) - Content duplication analysis
-- [.meta/DEDUPLICATION_SUMMARY.md](.meta/DEDUPLICATION_SUMMARY.md) - Deduplication actions taken
-- [.meta/REFACTORING_SUMMARY.md](.meta/REFACTORING_SUMMARY.md) - Major refactoring decisions
+- [.meta/DUPLICATION_AUDIT.md](.meta/DUPLICATION_AUDIT.md) — Content duplication analysis
+- [.meta/DEDUPLICATION_SUMMARY.md](.meta/DEDUPLICATION_SUMMARY.md) — Deduplication actions taken
+- [.meta/REFACTORING_SUMMARY.md](.meta/REFACTORING_SUMMARY.md) — Major refactoring decisions
 
 </details>
-
-## Local Development
-
-```bash
-# Install dependencies
-bundle install
-
-# Run local server
-bundle exec jekyll serve
-
-# Build site
-bundle exec jekyll build
-```
-
-The site will be available at `http://localhost:4000`.
-
-## Deployment
-
-The site is automatically deployed to GitHub Pages when changes are pushed to the main branch.
-
-Live site: [uniteum.one](https://uniteum.one) → [uniteum.github.io](https://uniteum.github.io)

@@ -6,7 +6,7 @@ bookCollapseSection: true
 
 # Uniteum Protocol
 
-<img src="/assets/images/uniteum-one-icon.svg" alt="Uniteum 1 Token" width="120" height="120" style="float: right; margin-left: 20px; margin-bottom: 10px;">
+<img src="/images/uniteum-one-icon.svg" alt="Uniteum 1 Token" width="120" height="120" style="float: right; margin-left: 20px; margin-bottom: 10px;">
 
 Uniteum is an algebraic liquidity protocol on Ethereum.
 
@@ -70,5 +70,5 @@ Early "1" token holders may benefit if the [value hypothesis](/uniteum/economics
 
 | Contract | Address |
 |----------|---------|
-| {{< val "contracts.uniteum.name" >}} | {{< etherscan address=site.data.contracts.uniteum.address section="code" text=site.data.contracts.uniteum.address >}} |
-| {{< val "contracts.genesis.name" >}} | {{< etherscan address=site.data.contracts.genesis.address section="code" text=site.data.contracts.genesis.address >}} |
+| {{< val "contracts.uniteum.name" >}} | {{< etherscan address="0xace41cf6d750d7ba06f4de57ac9e063246b2b090" section="code" text="0xace41cf6d750d7ba06f4de57ac9e063246b2b090" >}} |
+| {{< val "contracts.genesis.name" >}} | {{< etherscan address="0x7D5B1349157335aEEB929080a51003B529758830" section="code" text="0x7D5B1349157335aEEB929080a51003B529758830" >}} |

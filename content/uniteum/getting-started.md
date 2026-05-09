@@ -30,7 +30,7 @@ The "1" token is the liquidity backbone of Uniteum. You need "1" tokens to creat
 
 The genesis "1" token is a [Solid](/solid/) token — [Uniteum 1](/solid/uniteum-1/). You can buy it directly from the contract's built-in pool by sending ETH:
 
-1. Go to the {{< etherscan address=site.data.contracts.genesis.address section="writeContract" text="Uniteum 1 contract on Etherscan" >}}
+1. Go to the {{< etherscan address="0x7D5B1349157335aEEB929080a51003B529758830" section="writeContract" text="Uniteum 1 contract on Etherscan" >}}
 2. Connect your wallet
 3. Find the **`buy`** function
 4. In the **payable amount** field, enter the ETH to spend (e.g., `0.1`)
@@ -44,7 +44,7 @@ If you have v0.0 "1" tokens, you can migrate them to the current version.
 
 **Why migrate?** Genesis "1" (v0.0) is a simple ERC-20 that holds the primordial 1 billion token supply (the ceiling for all versions). The current contract implements all the core Uniteum mechanisms: algebraic unit composition, forge operations, invariant enforcement, and reciprocal pairs. The v0.0 token exists only as the primordial supply source.
 
-**Current Uniteum Contract:** {{< etherscan address=site.data.contracts.uniteum.address section="code" text=site.data.contracts.uniteum.address >}}
+**Current Uniteum Contract:** {{< etherscan address="0xace41cf6d750d7ba06f4de57ac9e063246b2b090" section="code" text="0xace41cf6d750d7ba06f4de57ac9e063246b2b090" >}}
 
 ### Migration Process
 
@@ -52,7 +52,7 @@ If you have v0.0 "1" tokens, you can migrate them to the current version.
 
 First, authorize the current Uniteum contract to transfer your v0.0 tokens.
 
-1. Go to the {{< etherscan address=site.data.contracts.genesis.address section="writeContract" text="v0.0 '1' contract on Etherscan" >}}
+1. Go to the {{< etherscan address="0x7D5B1349157335aEEB929080a51003B529758830" section="writeContract" text="v0.0 '1' contract on Etherscan" >}}
 2. Connect your wallet
 3. Find the `approve` function
 4. Enter:
@@ -64,7 +64,7 @@ First, authorize the current Uniteum contract to transfer your v0.0 tokens.
 
 Now call the migration function to exchange your v0.0 tokens for current version tokens.
 
-1. Go to the {{< etherscan address=site.data.contracts.uniteum.address section="writeContract" text="current Uniteum contract on Etherscan" >}}
+1. Go to the {{< etherscan address="0xace41cf6d750d7ba06f4de57ac9e063246b2b090" section="writeContract" text="current Uniteum contract on Etherscan" >}}
 2. Connect your wallet
 3. Find the `migrate` function
 4. Enter the `amount` to migrate (same format as approval—in wei)
@@ -76,7 +76,7 @@ Now call the migration function to exchange your v0.0 tokens for current version
 
 Migration is **fully reversible**. If you want to convert current version tokens back to v0.0:
 
-1. Go to the {{< etherscan address=site.data.contracts.uniteum.address section="writeContract" text="current Uniteum contract on Etherscan" >}}
+1. Go to the {{< etherscan address="0xace41cf6d750d7ba06f4de57ac9e063246b2b090" section="writeContract" text="current Uniteum contract on Etherscan" >}}
 2. Call `unmigrate(amount)`
 3. Your current version tokens are burned, and your v0.0 tokens are returned
 

@@ -5,7 +5,7 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-CONTRACTS_FILE="$SCRIPT_DIR/../_data/contracts.yml"
+CONTRACTS_FILE="$SCRIPT_DIR/../data/contracts.yml"
 ENV_FILE="$SCRIPT_DIR/.env"
 
 if [ ! -f "$CONTRACTS_FILE" ]; then
@@ -22,7 +22,7 @@ HELPER=$(yq eval '.helper.address' "$CONTRACTS_FILE")
 
 # Generate .env file
 cat > "$ENV_FILE" << EOF
-# Auto-generated from _data/contracts.yml
+# Auto-generated from data/contracts.yml
 # DO NOT EDIT MANUALLY - Run ./generate-env.sh to regenerate
 
 ONE=$ONE

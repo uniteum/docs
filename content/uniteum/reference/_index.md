@@ -30,8 +30,8 @@ Technical reference documentation for developers and advanced users.
 
 | Contract | Address |
 |----------|---------|
-| {{< val "contracts.uniteum.name" >}} | {{< etherscan address=site.data.contracts.uniteum.address section="code" text=site.data.contracts.uniteum.address >}} |
-| {{< val "contracts.genesis.name" >}} | {{< etherscan address=site.data.contracts.genesis.address section="code" text=site.data.contracts.genesis.address >}} |
+| {{< val "contracts.uniteum.name" >}} | {{< etherscan address="0xace41cf6d750d7ba06f4de57ac9e063246b2b090" section="code" text="0xace41cf6d750d7ba06f4de57ac9e063246b2b090" >}} |
+| {{< val "contracts.genesis.name" >}} | {{< etherscan address="0x7D5B1349157335aEEB929080a51003B529758830" section="code" text="0x7D5B1349157335aEEB929080a51003B529758830" >}} |
 
 ### Networks
 

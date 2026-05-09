@@ -28,7 +28,7 @@ This creates both `foo` and its reciprocal `1/foo`, bound by the invariant.
 
 ### Via Etherscan
 
-1. Go to the {{< etherscan address=site.data.contracts.uniteum.address section="writeContract" text="Uniteum contract on Etherscan" >}}
+1. Go to the {{< etherscan address="0xace41cf6d750d7ba06f4de57ac9e063246b2b090" section="writeContract" text="Uniteum contract on Etherscan" >}}
 2. Connect your wallet
 3. Find the `multiply` function
 4. Enter your symbol (e.g., `foo`)
@@ -65,7 +65,7 @@ IUnit meterPerSecond = one().product("meter/second");
 
 ### Via Etherscan
 
-1. Go to the {{< etherscan address=site.data.contracts.uniteum.address section="writeContract" text="Uniteum contract on Etherscan" >}}
+1. Go to the {{< etherscan address="0xace41cf6d750d7ba06f4de57ac9e063246b2b090" section="writeContract" text="Uniteum contract on Etherscan" >}}
 2. Connect your wallet
 3. Find the `product` function (string version)
 4. Enter the expression (e.g., `meter/second` or `kg*m/s^2`)

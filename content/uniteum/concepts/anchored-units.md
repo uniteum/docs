@@ -1,20 +1,7 @@
 ---
 title: Anchored units and impermanent gain
-
-# Navigation
-nav_order: 2
-parent: Concepts
-grand_parent: Uniteum
-has_children: false
-
-# Taxonomy
-categories:
-  - core
-  - units
-
-# Metadata
-permalink: /uniteum/concepts/anchored-units
------------------------------------
+weight: 2
+---
 
 
 > **Anchored units are not yet fully implemented.** The mechanics described on this page represent intended design, not current capability. The deposit and withdrawal mechanisms need further work, and it may not be possible to get them working as described. Floating units and their forge operations work today.

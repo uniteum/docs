@@ -376,7 +376,7 @@ When working with tokens like WETH, there are THREE distinct entities that must 
 1. **External ERC-20 Token Contract** - `0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
    - This is the actual WETH contract on Ethereum
    - Lives in `site.data.tokens.WETH.address`
-   - Link using: `{{< token address=site.data.tokens.WETH.address >}}`
+   - Link using: `{{< token address="0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" >}}`
    - This is what backs the anchored unit
 
 2. **Anchored Uniteum Unit** - `0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
@@ -402,7 +402,7 @@ When working with tokens like WETH, there are THREE distinct entities that must 
 **Common Mistakes to Avoid:**
 
 - ❌ **CRITICAL:** Using `token.html` for anchored Units
-  - Example wrong: `{{< token address=site.data.tokens.WETH.address text="0xC02a..." >}}`
+  - Example wrong: `{{< token address="0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" text="0xC02a..." >}}`
   - **Why wrong:** This links to the external WETH contract (0xC02a...), NOT the anchored Uniteum Unit
   - **Correct:** `{{< unit symbol="0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" >}}`
 - ❌ Linking `0xC02a...` to the WETH contract (they're different contracts!)
@@ -413,7 +413,7 @@ When working with tokens like WETH, there are THREE distinct entities that must 
 
 ```liquid
 {%- comment -%} External WETH token contract (0xC02a...) - NOT anchored Unit {%- endcomment -%}
-{{< token address=site.data.tokens.WETH.address >}}
+{{< token address="0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" >}}
 
 {%- comment -%} Anchored Uniteum Unit (0xC02a...) - The wrapper Unit {%- endcomment -%}
 {{< unit symbol="0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" >}}
