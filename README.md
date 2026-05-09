@@ -1,6 +1,6 @@
 # Uniteum Documentation
 
-This repository contains the documentation site for Uniteum, built with Jekyll and hosted on GitHub Pages.
+This repository contains the documentation site for Uniteum, built with Hugo and hosted on Cloudflare.
 
 ## User-Facing Documentation
 
