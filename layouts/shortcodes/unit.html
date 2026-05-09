@@ -1,0 +1,15 @@
+{{- $symbol := .Get "symbol" -}}
+{{- $text := .Get "text" -}}
+{{- $network := .Get "network" -}}
+{{- $entry := index hugo.Data.units $symbol -}}
+{{- if $entry -}}
+  {{- $linkText := $text | default (printf "<code>%s</code>" $symbol) -}}
+  {{- partial "etherscan-link" (dict
+    "address" $entry.address
+    "text" $linkText
+    "network" $network
+    "type" "token"
+  ) -}}
+{{- else -}}
+<code>{{ $symbol }}</code>
+{{- end -}}

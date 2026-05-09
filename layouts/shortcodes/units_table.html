@@ -1,0 +1,23 @@
+{{- /*
+  Render a markdown table of every entry in hugo.Data.units.
+  Optional arg `filter` selects categories: "base" | "compound" | "reciprocal".
+*/ -}}
+{{- $filter := .Get "filter" | default "all" -}}
+
+| Symbol | Address | Canonical | Description |
+|--------|---------|-----------|-------------|
+{{- range $sym, $u := hugo.Data.units }}
+{{- $isReciprocal := strings.HasPrefix $sym "1/" -}}
+{{- $hasOp := or (in $sym "*") (or (in $sym "/") (in $sym "^")) -}}
+{{- $isCompound := and $hasOp (not $isReciprocal) -}}
+{{- $isBase := and (not $isReciprocal) (not $hasOp) -}}
+{{- $include := false -}}
+{{- if eq $filter "all" -}}{{- $include = true -}}
+{{- else if eq $filter "base" -}}{{- $include = $isBase -}}
+{{- else if eq $filter "compound" -}}{{- $include = $isCompound -}}
+{{- else if eq $filter "reciprocal" -}}{{- $include = $isReciprocal -}}
+{{- end -}}
+{{- if $include }}
+| [`{{ $sym }}`](https://etherscan.io/token/{{ $u.address }}) | `{{ $u.address }}` | `{{ $u.canonical }}` | {{ $u.description }} |
+{{- end -}}
+{{- end }}

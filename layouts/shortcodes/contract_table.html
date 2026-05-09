@@ -1,0 +1,11 @@
+{{- /*
+  Renders a markdown table with a single Address row linking to Etherscan.
+  Args: key (looks up hugo.Data.contracts.<key>), section (default "code")
+*/ -}}
+{{- $key := .Get "key" -}}
+{{- $section := .Get "section" | default "code" -}}
+{{- $contract := index hugo.Data.contracts $key -}}
+
+| Address |
+|---------|
+| {{ partial "etherscan-link" (dict "address" $contract.address "section" $section "text" $contract.address "type" "address") | safeHTML }} |

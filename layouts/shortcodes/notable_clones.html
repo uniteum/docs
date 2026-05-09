@@ -1,0 +1,35 @@
+{{- /*
+  Render the "Deployed instances" markdown for Notable clones from data.
+*/ -}}
+{{- $notable := hugo.Data.unispring.notable -}}
+
+{{- if $notable.address -}}
+{{- range $name, $c := $notable.clones }}
+
+### {{ $c.symbol }} — clone for {{ $c.original }}
+
+| | |
+|:---|:---|
+| Symbol | `{{ $c.symbol }}` |
+| Original | {{ $c.original }} |
+{{- if $c.original_lookup }}
+| Original lookup | [`{{ $c.original_lookup }}`](https://etherscan.io/address/{{ $c.original_lookup_address }}#code) |
+{{- end }}
+{{- if $c.address }}
+| Clone | [`{{ $c.address }}`](https://etherscan.io/address/{{ $c.address }}#code) |
+{{- end }}
+
+{{ $c.note }}
+
+{{ if $c.issues }}**Issues minted:**
+
+| Name | Address |
+|:-----|:--------|
+{{- range $iss := $c.issues }}
+| {{ if $iss.permalink }}[{{ $iss.name }}]({{ $iss.permalink }}){{ else }}{{ $iss.name }}{{ end }} | {{ if $iss.address }}[`{{ $iss.address }}`](https://etherscan.io/address/{{ $iss.address }}){{ else }}_(pending deploy)_{{ end }} |
+{{- end }}
+{{- end }}
+{{- end }}
+{{- else -}}
+Notable is not yet deployed. Clone and issue addresses will be published once the prototype is mined and deployed.
+{{- end -}}

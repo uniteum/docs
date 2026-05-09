@@ -1,0 +1,55 @@
+{{- /*
+  Render the References page sections from hugo.Data.references.
+*/ -}}
+
+## Research
+
+{{ range hugo.Data.references.research }}
+### {{ .title }}
+
+**Authors:** {{ .authors }}
+**Published:** {{ .date }} — {{ .publisher }}
+
+{{ .description }}
+
+**Relevance to Uniteum:** {{ .relevance }}
+
+[Read the article →]({{ .url }})
+
+---
+{{ end }}
+
+## Related Protocols
+
+{{ if hugo.Data.references.protocols }}
+{{ range hugo.Data.references.protocols }}
+### {{ .name }}
+
+{{ .description }}
+
+{{ if .resources }}
+**Resources:**
+{{ range $name, $url := .resources }}
+- [{{ $name | humanize }}]({{ $url }})
+{{ end }}
+{{ end }}
+
+{{ if .relevance }}
+**Relevance:** {{ .relevance }}
+{{ end }}
+
+---
+{{ end }}
+{{ else }}
+*No protocol references yet.*
+{{ end }}
+
+## Technical Resources
+
+{{ if hugo.Data.references.technical }}
+{{ range hugo.Data.references.technical }}
+- [**{{ .name }}**]({{ .url }}) — {{ .description }}
+{{ end }}
+{{ else }}
+*No technical references yet.*
+{{ end }}

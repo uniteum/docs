@@ -1,0 +1,45 @@
+{{- /*
+  Etherscan function link rendered as raw HTML (so it works inside
+  list items, table cells, and other markdown contexts).
+
+  Args:
+    addr     - dotted data path to the contract address
+    fn       - dotted data path to the function .f number
+               OR
+    fn_path  - dotted data path to the write/read map
+    fn_key   - key within that map (supports keys with parens/spaces)
+    section  - Etherscan section anchor (default "code")
+    type     - URL type: "address" (default) or "token"
+    text     - link text (rendered as safeHTML)
+*/ -}}
+{{- $section := .Get "section" | default "code" -}}
+{{- $type := .Get "type" | default "address" -}}
+{{- $text := .Get "text" -}}
+
+{{- $addrPath := .Get "addr" -}}
+{{- $addr := hugo.Data -}}
+{{- range split $addrPath "." -}}{{- $addr = index $addr . -}}{{- end -}}
+
+{{- $fNum := "" -}}
+{{- with .Get "fn" -}}
+  {{- $cur := hugo.Data -}}
+  {{- range split . "." -}}{{- $cur = index $cur . -}}{{- end -}}
+  {{- $fNum = $cur -}}
+{{- else -}}
+  {{- $fnPath := .Get "fn_path" -}}
+  {{- $fnKey := .Get "fn_key" -}}
+  {{- if and $fnPath $fnKey -}}
+    {{- $cur := hugo.Data -}}
+    {{- range split $fnPath "." -}}{{- $cur = index $cur . -}}{{- end -}}
+    {{- $entry := index $cur $fnKey -}}
+    {{- $fNum = $entry.f -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if $addr -}}
+  {{- $url := printf "https://etherscan.io/%s/%s#%s" $type $addr $section -}}
+  {{- if $fNum -}}{{- $url = printf "%s#F%v" $url $fNum -}}{{- end -}}
+  <a href="{{ $url }}" target="_blank" rel="noopener noreferrer">{{ $text | safeHTML }}</a>
+{{- else -}}
+{{ $text | safeHTML }}
+{{- end -}}

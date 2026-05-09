@@ -1,0 +1,17 @@
+{{- /*
+  Generic hugo.Data path lookup.
+  Accepts either:
+    {{< val "contracts.uniteum.address" >}}      (dotted path)
+    {{< val "solids" "1" "address" >}}           (positional segments — use when keys contain dots/digits)
+*/ -}}
+{{- $cur := hugo.Data -}}
+{{- if eq (len .Params) 1 -}}
+  {{- range split (index .Params 0) "." -}}
+    {{- $cur = index $cur . -}}
+  {{- end -}}
+{{- else -}}
+  {{- range .Params -}}
+    {{- $cur = index $cur . -}}
+  {{- end -}}
+{{- end -}}
+{{- $cur -}}

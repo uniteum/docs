@@ -1,0 +1,9 @@
+name = "uniteum-docs"
+compatibility_date = "2026-04-04"
+
+[build]
+command = "hugo --minify"
+
+[assets]
+directory = "./public"
+not_found_handling = "404-page"

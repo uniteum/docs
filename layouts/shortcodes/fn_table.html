@@ -1,0 +1,25 @@
+{{- /*
+  Render a markdown table of contract functions from data.
+
+  Args:
+    proto    - data key under hugo.Data for the function map (e.g. "liquid", "solid")
+    kind     - "read" or "write"
+    token    - dotted data path to the token address (e.g. "liquids.hub.address")
+    type     - URL type: "token" or "address" (default "token")
+*/ -}}
+{{- $proto := .Get "proto" -}}
+{{- $kind  := .Get "kind" -}}
+{{- $type  := .Get "type" | default "token" -}}
+{{- $tokenPath := .Get "token" -}}
+
+{{- $tokenAddr := hugo.Data -}}
+{{- range split $tokenPath "." -}}{{- $tokenAddr = index $tokenAddr . -}}{{- end -}}
+
+{{- $fnMap := index (index hugo.Data $proto) $kind -}}
+{{- $section := cond (eq $kind "read") "readContract" "writeContract" -}}
+
+| Action | Description |
+|:-------|:------------|
+{{- range $name, $entry := $fnMap }}
+| [`{{ $name }}`](https://etherscan.io/{{ $type }}/{{ $tokenAddr }}#{{ $section }}#F{{ $entry.f }}) | {{ $entry.description }} |
+{{- end }}

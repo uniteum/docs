@@ -9,3 +9,6 @@
 	path = lib/liquid
 	url = https://github.com/uniteum/liquid.git
 	branch = jekyll
+[submodule "themes/hugo-book"]
+	path = themes/hugo-book
+	url = https://github.com/alex-shpak/hugo-book

@@ -1,0 +1,23 @@
+{{- /*
+  Build an Etherscan link.
+  Args (dict): address, section, text, network ("mainnet"|"sepolia"), type ("address"|"token"|"tx")
+*/ -}}
+{{- $address := .address -}}
+{{- $section := .section -}}
+{{- $text := .text -}}
+{{- $network := .network -}}
+{{- $type := .type | default "address" -}}
+{{- $base := cond (eq $network "sepolia") "https://sepolia.etherscan.io" "https://etherscan.io" -}}
+{{- $url := "" -}}
+{{- if eq $type "tx" -}}
+  {{- $url = printf "%s/tx/%s" $base $address -}}
+{{- else if eq $type "token" -}}
+  {{- $url = printf "%s/token/%s" $base $address -}}
+  {{- if $section -}}{{- $url = printf "%s#%s" $url $section -}}{{- end -}}
+{{- else -}}
+  {{- $url = printf "%s/address/%s" $base $address -}}
+  {{- if $section -}}{{- $url = printf "%s#%s" $url $section -}}{{- end -}}
+{{- end -}}
+{{- $linkText := $address -}}
+{{- if $text -}}{{- $linkText = $text -}}{{- end -}}
+<a href="{{ $url }}" target="_blank" rel="noopener noreferrer">{{ $linkText | safeHTML }}</a>

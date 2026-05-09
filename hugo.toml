@@ -1,0 +1,47 @@
+baseURL = "https://uniteum.one"
+title = "Uniteum"
+languageCode = "en-us"
+theme = "hugo-book"
+enableGitInfo = false
+
+ignoreFiles = ["CLAUDE\\.md$", "README\\.md$", "OUTREACH_CHECKLIST\\.md$"]
+
+[params]
+  description = "Solid · Liquid · Uniteum · Lepton · Locale"
+  BookTheme = "auto"
+  BookToC = true
+  BookSection = "/"
+  BookRepo = "https://github.com/uniteum/docs"
+  BookEditPath = "edit/main"
+  BookSearch = true
+  BookComments = false
+
+  # Custom params surfaced in templates
+  twitter = "uniteum1"
+  github = "uniteum"
+  ethereum_mainnet = "0x9df9b0501e8f6c05623b5b519f9f18b598d9b253"
+  ens_primary = "uniteum.eth"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+    [markup.goldmark.parser]
+      [markup.goldmark.parser.attribute]
+        block = true
+        title = true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 4
+    ordered = false
+
+[outputs]
+  home = ["HTML", "RSS"]
+  section = ["HTML", "RSS"]
+
+[taxonomies]
+  category = "categories"
+
+# Treat top-level dirs as the "docs" section so hugo-book renders sidebar nav.
+# Hugo Book convention is to put content under content/docs/, but we want our
+# site rooted at /. Override BookSection above and let pages live at root.

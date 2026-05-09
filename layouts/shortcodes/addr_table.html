@@ -1,0 +1,28 @@
+{{- /*
+  Render a markdown table of contract names + Etherscan address links from data.
+  Skips entries with no address. Renders "not yet deployed" if all are blank.
+
+  Args:
+    data - dotted path to a map of contract entries
+           (each entry has .name and .address)
+*/ -}}
+{{- $path := .Get "data" -}}
+{{- $cur := hugo.Data -}}
+{{- range split $path "." -}}{{- $cur = index $cur . -}}{{- end -}}
+
+{{- $any := false -}}
+{{- range $key, $entry := $cur -}}
+  {{- if and (reflect.IsMap $entry) $entry.address -}}{{- $any = true -}}{{- end -}}
+{{- end -}}
+
+{{ if $any -}}
+| Contract | Address |
+|:---------|:--------|
+{{- range $key, $entry := $cur -}}
+{{- if and (reflect.IsMap $entry) $entry.address }}
+| {{ $entry.name }} | [`{{ $entry.address }}`](https://etherscan.io/address/{{ $entry.address }}#code) |
+{{- end -}}
+{{- end }}
+{{ else -}}
+Contracts have not yet been deployed.
+{{- end -}}

@@ -1,9 +1,0 @@
-{%- comment -%}
-Returns the current Uniteum contract object.
-
-Usage: {% assign uniteum = site.data.contracts.uniteum %}
-       {{ uniteum.name }}
-       {{ uniteum.address }}
-       {% include contract.html address=uniteum.address %}
-{%- endcomment -%}
-{{ site.data.contracts.uniteum }}
