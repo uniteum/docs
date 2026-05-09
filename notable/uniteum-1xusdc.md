@@ -1,9 +1,9 @@
 ---
 layout: default
 title: Uniteum 1xUSDC
-parent: Unispring
-permalink: /unispring/uniteum-1xusdc/
-nav_order: 6
+parent: Notable
+permalink: /notable/uniteum-1xusdc/
+nav_order: 5
 ---
 
 {% assign u = site.data.unispring %}
@@ -79,7 +79,7 @@ The issue's V4 pool is initialized at `tick = 0` with the entire supply (about 1
 
 The pool is owned by a [Fountain]({{ site.baseurl }}/unispring/fountain/) clone with no decrease-liquidity path. The USDC that backs `{{ issue.name }}` is locked there forever — Notable retains no authority over it, and Fountain itself exposes no withdraw-principal function. The deployer has the same redemption rights as everyone else: trade through the pool.
 
-For the geometric argument in detail, see [Notable — peg mechanics]({{ site.baseurl }}/unispring/notable-mechanics/).
+For the geometric argument in detail, see [Notable — peg mechanics]({{ site.baseurl }}/notable/mechanics/).
 
 ---
 
@@ -95,8 +95,8 @@ So `{{ issue.name }}` will be the same `(clone, issue)` pair of addresses on Eth
 
 ## Further reading
 
-- [Notable]({{ site.baseurl }}/unispring/notable/) — the factory, its layout, and the full set of operations
-- [Notable — peg mechanics]({{ site.baseurl }}/unispring/notable-mechanics/) — why the 1-bp corridor is hard
+- [Notable]({{ site.baseurl }}/notable/) — the factory, its layout, and the full set of operations
+- [Notable — peg mechanics]({{ site.baseurl }}/notable/mechanics/) — why the 1-bp corridor is hard
 - [Fountain]({{ site.baseurl }}/unispring/fountain/) — the V4 position primitive backing every issue
 - [Locale]({{ site.baseurl }}/locale/) — the deterministic lookup contract used as the clone's `original`
-- [Uniteum 1xETH]({{ site.baseurl }}/unispring/uniteum-1xeth/) — the same pattern applied to native ETH
+- [Uniteum 1xETH]({{ site.baseurl }}/notable/uniteum-1xeth/) — the same pattern applied to native ETH

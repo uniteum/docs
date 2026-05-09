@@ -1,9 +1,9 @@
 ---
 layout: default
 title: Uniteum 1xETH
-parent: Unispring
-permalink: /unispring/uniteum-1xeth/
-nav_order: 5
+parent: Notable
+permalink: /notable/uniteum-1xeth/
+nav_order: 4
 ---
 
 {% assign u = site.data.unispring %}
@@ -51,7 +51,7 @@ You don't have to use ours. Anyone can mint their own `1xETH`-symbol mirror with
 
 **To mint a new named mirror against native ETH:**
 
-1. Open the [Notable prototype]({{ site.baseurl }}/unispring/notable/) on Etherscan: {% if n.address %}[`{{ n.address }}`](https://etherscan.io/address/{{ n.address }}#writeContract){:target="_blank"}{% else %}_(pending deploy)_{% endif %}.
+1. Open the [Notable prototype]({{ site.baseurl }}/notable/) on Etherscan: {% if n.address %}[`{{ n.address }}`](https://etherscan.io/address/{{ n.address }}#writeContract){:target="_blank"}{% else %}_(pending deploy)_{% endif %}.
 2. Connect a wallet with enough ETH to cover gas. (No collateral capital is needed — the mint funds itself.)
 3. Call [`issue(name)`]({% if n.address %}https://etherscan.io/address/{{ n.address }}#writeContract#F{{ n.write["issue(name)"].f }}{% else %}#{% endif %}){:target="_blank"} with the name you want — `"Acme 1xETH"`, `"Bob 1xETH"`, whatever.
 
@@ -79,21 +79,21 @@ The issue's V4 pool is initialized at `tick = 0` with the entire supply (`10²�
 
 The pool is owned by a [Fountain]({{ site.baseurl }}/unispring/fountain/) clone with no decrease-liquidity path. The ETH that backs `{{ issue.name }}` is locked there forever — Notable retains no authority over it, and Fountain itself exposes no withdraw-principal function. The deployer has the same redemption rights as everyone else: trade through the pool.
 
-For the geometric argument in detail, see [Notable — peg mechanics]({{ site.baseurl }}/unispring/notable-mechanics/).
+For the geometric argument in detail, see [Notable — peg mechanics]({{ site.baseurl }}/notable/mechanics/).
 
 ---
 
 ## Behind the scenes: the native-pair clone
 
-[Notable]({{ site.baseurl }}/unispring/notable/) is organized as a prototype that mints **clones** keyed by `(original, symbol)` — one clone per peg pair. For native ETH and the `{{ clone.symbol }}` symbol, the prototype itself **is** the canonical clone — no separate clone is ever deployed for that pair. That's why the mint instructions above point at the prototype directly. (The native pair's symbol is resolved at construction from a chain-local `IStringLookup` — `"1xETH"` here on mainnet, `"1xMATIC"` on Polygon, etc.)
+[Notable]({{ site.baseurl }}/notable/) is organized as a prototype that mints **clones** keyed by `(original, symbol)` — one clone per peg pair. For native ETH and the `{{ clone.symbol }}` symbol, the prototype itself **is** the canonical clone — no separate clone is ever deployed for that pair. That's why the mint instructions above point at the prototype directly. (The native pair's symbol is resolved at construction from a chain-local `IStringLookup` — `"1xETH"` here on mainnet, `"1xMATIC"` on Polygon, etc.)
 
-For any other peg pair (`(USDC, "1xUSDC")`, `(WBTC, "1xWBTC")`, etc.), `issue(name)` is called on the corresponding clone instead. See [Uniteum 1xUSDC]({{ site.baseurl }}/unispring/uniteum-1xusdc/) for an example with a non-native original.
+For any other peg pair (`(USDC, "1xUSDC")`, `(WBTC, "1xWBTC")`, etc.), `issue(name)` is called on the corresponding clone instead. See [Uniteum 1xUSDC]({{ site.baseurl }}/notable/uniteum-1xusdc/) for an example with a non-native original.
 
 ---
 
 ## Further reading
 
-- [Notable]({{ site.baseurl }}/unispring/notable/) — the factory, its layout, and the full set of operations
-- [Notable — peg mechanics]({{ site.baseurl }}/unispring/notable-mechanics/) — why the 1-bp corridor is hard
+- [Notable]({{ site.baseurl }}/notable/) — the factory, its layout, and the full set of operations
+- [Notable — peg mechanics]({{ site.baseurl }}/notable/mechanics/) — why the 1-bp corridor is hard
 - [Fountain]({{ site.baseurl }}/unispring/fountain/) — the V4 position primitive backing every issue
-- [Uniteum 1xUSDC]({{ site.baseurl }}/unispring/uniteum-1xusdc/) — the same pattern applied to a stablecoin original
+- [Uniteum 1xUSDC]({{ site.baseurl }}/notable/uniteum-1xusdc/) — the same pattern applied to a stablecoin original

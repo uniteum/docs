@@ -10,9 +10,9 @@ search_exclude: true
 
 # This page has moved
 
-The Mimicry factory has been renamed to **[Notable]({{ site.baseurl }}/unispring/notable/)**.
+The Mimicry factory has been renamed to **[Notable]({{ site.baseurl }}/notable/)**, and Notable now lives in its own top-level section.
 
-- New page: [Notable]({{ site.baseurl }}/unispring/notable/)
-- New mechanics page: [Notable — peg mechanics]({{ site.baseurl }}/unispring/notable-mechanics/)
+- New page: [Notable]({{ site.baseurl }}/notable/)
+- New mechanics page: [Peg mechanics]({{ site.baseurl }}/notable/mechanics/)
 
 The `mimic(name)` write function is now `issue(name)`, and the `mimicked(...)` read functions are now `issued(...)`. The `make(original, symbol)` signature is unchanged.

@@ -1,9 +1,9 @@
 ---
 layout: default
 title: Notable
-parent: Unispring
-permalink: /unispring/notable/
-nav_order: 3
+nav_order: 13
+has_children: true
+permalink: /notable/
 ---
 
 {% assign u = site.data.unispring %}
@@ -144,5 +144,7 @@ Even the Fountain `taker` cannot harvest the accumulated original by unwinding �
 
 ## Further reading
 
-- [Peg mechanics]({{ site.baseurl }}/unispring/notable-mechanics) — how the corridor is enforced and why the band is hard.
+- [Peg mechanics]({{ site.baseurl }}/notable/mechanics/) — how the corridor is enforced and why the band is hard.
+- [Plain-English intro]({{ site.baseurl }}/notable/intro/) — the same thing for non-engineers.
+- [About the FDV]({{ site.baseurl }}/notable/fdv/) — why the headline valuation is harmless.
 - [NOTABLE.md](https://github.com/uniteum/unispring/blob/main/NOTABLE.md){:target="_blank"} — the full peg argument.

@@ -1,9 +1,9 @@
 ---
 layout: default
-title: Notable — peg mechanics
-parent: Unispring
-permalink: /unispring/notable-mechanics/
-nav_order: 4
+title: Peg mechanics
+parent: Notable
+permalink: /notable/mechanics/
+nav_order: 2
 ---
 
 {% assign u = site.data.unispring %}
@@ -12,7 +12,7 @@ nav_order: 4
 
 How the 1-bp corridor is enforced, why the band is hard, and why the backing can never be unwound.
 
-For the user-facing description of what Notable does and how to use it, see [Notable]({{ site.baseurl }}/unispring/notable).
+For the user-facing description of what Notable does and how to use it, see [Notable]({{ site.baseurl }}/notable/).
 
 ---
 
@@ -51,7 +51,7 @@ The clone's owner is set once at deploy to the address that called `Fountain.mak
 
 ## Native-pair originals
 
-When the original is `Currency.wrap(address(0))`, Notable mints the issue with 18 decimals and `10²⁷` supply, then funds the V4 position against native ETH. Fountain handles ETH-denominated `PoolManager` calls without a separate WETH wrapper step. The Notable prototype itself is the canonical clone for the native pair `(address(0), nativeSymbol)` — where `nativeSymbol` is resolved at construction from a chain-local `IStringLookup` (`"1xETH"` on mainnet, `"1xMATIC"` on Polygon, etc.). See [Notable]({{ site.baseurl }}/unispring/notable) for the factory layout.
+When the original is `Currency.wrap(address(0))`, Notable mints the issue with 18 decimals and `10²⁷` supply, then funds the V4 position against native ETH. Fountain handles ETH-denominated `PoolManager` calls without a separate WETH wrapper step. The Notable prototype itself is the canonical clone for the native pair `(address(0), nativeSymbol)` — where `nativeSymbol` is resolved at construction from a chain-local `IStringLookup` (`"1xETH"` on mainnet, `"1xMATIC"` on Polygon, etc.). See [Notable]({{ site.baseurl }}/notable/) for the factory layout.
 
 ---
 

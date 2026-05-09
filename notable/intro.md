@@ -1,9 +1,9 @@
 ---
 layout: default
-title: Notable — plain-English intro
-parent: Unispring
-permalink: /unispring/notable-intro/
-nav_order: 7
+title: Plain-English intro
+parent: Notable
+permalink: /notable/intro/
+nav_order: 1
 ---
 
 {% assign u = site.data.unispring %}
@@ -13,7 +13,7 @@ nav_order: 7
 
 A plain-English intro to what a Notable is and what you can do with one.
 
-For the technical reference, see [Notable]({{ site.baseurl }}/unispring/notable/). For the peg mechanics, see [Notable — peg mechanics]({{ site.baseurl }}/unispring/notable-mechanics/).
+For the technical reference, see [Notable]({{ site.baseurl }}/notable/). For the peg mechanics, see [Notable — peg mechanics]({{ site.baseurl }}/notable/mechanics/).
 
 ---
 
@@ -57,18 +57,18 @@ The Notable prototype on mainnet is a special case — it's the family for nativ
 
 You'd need a wallet with a bit of ETH for gas. Operations happen on Etherscan's Write Contract tab — no special frontend required. If the family for your backing token already exists, you go straight to `issue(name)`. If not, you'd `make()` it first.
 
-For a step-by-step walkthrough of an ETH-backed Notable, see [Uniteum 1xETH]({{ site.baseurl }}/unispring/uniteum-1xeth/). For the equivalent with a non-native original, see [Uniteum 1xUSDC]({{ site.baseurl }}/unispring/uniteum-1xusdc/).
+For a step-by-step walkthrough of an ETH-backed Notable, see [Uniteum 1xETH]({{ site.baseurl }}/notable/uniteum-1xeth/). For the equivalent with a non-native original, see [Uniteum 1xUSDC]({{ site.baseurl }}/notable/uniteum-1xusdc/).
 
 ---
 
 ## Before you check it on a price tracker
 
-The fully diluted valuation will look enormous — around $2.3 trillion for ETH-backed Notables, 1 billion tokens for stablecoin-backed Notables. That's not a warning sign. See [Why the FDV looks astronomical]({{ site.baseurl }}/unispring/notable-fdv/) for the reasoning.
+The fully diluted valuation will look enormous — around $2.3 trillion for ETH-backed Notables, 1 billion tokens for stablecoin-backed Notables. That's not a warning sign. See [Why the FDV looks astronomical]({{ site.baseurl }}/notable/fdv/) for the reasoning.
 
 ---
 
 ## Further reading
 
-- [Notable]({{ site.baseurl }}/unispring/notable/) — the factory and operations in full
-- [Notable — peg mechanics]({{ site.baseurl }}/unispring/notable-mechanics/) — why the corridor is hard
-- [Notable — about the FDV]({{ site.baseurl }}/unispring/notable-fdv/) — why the trillion-dollar number is harmless
+- [Notable]({{ site.baseurl }}/notable/) — the factory and operations in full
+- [Peg mechanics]({{ site.baseurl }}/notable/mechanics/) — why the corridor is hard
+- [About the FDV]({{ site.baseurl }}/notable/fdv/) — why the trillion-dollar number is harmless

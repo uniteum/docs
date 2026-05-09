@@ -119,7 +119,7 @@ notable:
       issues:
         - name: "Uniteum 1xETH"
           address:
-          permalink: "/unispring/uniteum-1xeth/"
+          permalink: "/notable/uniteum-1xeth/"
     1xUSDC:
       symbol: "1xUSDC"
       original: "chain-local USDC (resolved via USDCLookup)"
@@ -132,7 +132,7 @@ notable:
       issues:
         - name: "Uniteum 1xUSDC"
           address:
-          permalink: "/unispring/uniteum-1xusdc/"
+          permalink: "/notable/uniteum-1xusdc/"
 
 hub:
   name: "Hub"

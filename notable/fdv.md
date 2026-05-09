@@ -1,9 +1,9 @@
 ---
 layout: default
-title: Notable — about the FDV
-parent: Unispring
-permalink: /unispring/notable-fdv/
-nav_order: 8
+title: About the FDV
+parent: Notable
+permalink: /notable/fdv/
+nav_order: 3
 ---
 
 {% assign u = site.data.unispring %}
@@ -31,7 +31,7 @@ FDV ≈ 1,000,000,000 × (price of one backing token)
 | USDC, USDT, DAI, etc. | 1 billion of that stable | ~$1 billion |
 | Any other ERC-20 | 1 billion of that token | a billion × spot price |
 
-Why a billion? It's an artifact of how the supply is sized to fit Uniswap V4's tick geometry. The Notable factory mints `10²⁷` raw units for any original with 18 or more decimals, and scales down by a factor of 10 per decimal below 18 — which keeps the human-unit supply roughly constant at a billion across originals. See [Notable — peg mechanics]({{ site.baseurl }}/unispring/notable-mechanics/) for the geometric reasoning.
+Why a billion? It's an artifact of how the supply is sized to fit Uniswap V4's tick geometry. The Notable factory mints `10²⁷` raw units for any original with 18 or more decimals, and scales down by a factor of 10 per decimal below 18 — which keeps the human-unit supply roughly constant at a billion across originals. See [Peg mechanics]({{ site.baseurl }}/notable/mechanics/) for the geometric reasoning.
 
 ---
 
@@ -75,6 +75,6 @@ The FDV figure on a tracker is correct, just irrelevant.
 
 ## Further reading
 
-- [Notable — plain-English intro]({{ site.baseurl }}/unispring/notable-intro/)
-- [Notable]({{ site.baseurl }}/unispring/notable/) — the factory and operations
-- [Notable — peg mechanics]({{ site.baseurl }}/unispring/notable-mechanics/) — why the corridor is hard
+- [Plain-English intro]({{ site.baseurl }}/notable/intro/)
+- [Notable]({{ site.baseurl }}/notable/) — the factory and operations
+- [Peg mechanics]({{ site.baseurl }}/notable/mechanics/) — why the corridor is hard

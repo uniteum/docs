@@ -19,7 +19,7 @@ Unispring is a family of permissionless contracts on Uniswap V4. A single primit
 |:---------|:-----|
 | **[{{ u.fountain.name }}]({{ site.baseurl }}/unispring/fountain)** | V4 position owner. No decrease-liquidity path; principal locked, fees forwarded. |
 | **[{{ u.manifold.name }}]({{ site.baseurl }}/unispring/manifold)** | Fair-launch factory. Mints fresh ERC-20s and seats 100% of supply single-sided against a hub. |
-| **[{{ u.notable.name }}]({{ site.baseurl }}/unispring/notable)** | Two-level mirror factory. Stamps clones per `(original, symbol)`; each clone issues named 1:1 ERC-20 mirrors with a hard 1-bp peg corridor. |
+| **[{{ u.notable.name }}]({{ site.baseurl }}/notable/)** | Two-level mirror factory. Stamps clones per `(original, symbol)`; each clone issues named 1:1 ERC-20 mirrors with a hard 1-bp peg corridor. Documented in its own section: [Notable]({{ site.baseurl }}/notable/). |
 
 Both factories are one-shot. After they fund the position, no contract in the stack retains authority over the token, the pool, or the liquidity. The only way to acquire any Manifold or Notable token is to buy it from its V4 pool — on any aggregator, frontend, or contract that routes through V4.
 
