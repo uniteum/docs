@@ -1,12 +1,12 @@
 # CLAUDE.md - Solid Protocol Docs
 
-Protocol-specific guidance for Solid documentation pages. See `lib/solid/CLAUDE.md` for contract mechanics, formulas, and development workflow.
+Protocol-specific guidance for Solid documentation pages.
 
 ## Voice & Tone (Solid-specific)
 
 Solid docs target a **curious non-expert** audience. Unlike Uniteum docs (which assume crypto-native readers), Solid content should be accessible to people unfamiliar with blockchain, AMMs, or Solidity.
 
-Key principles from `lib/solid/CLAUDE.md`:
+Key principles:
 - **Lead with what people can do**, not how the protocol works internally
 - **Use plain language first** — introduce concepts in everyday terms, then offer technical depth
 - **Show, don't spec** — concrete scenarios and stories over feature lists
