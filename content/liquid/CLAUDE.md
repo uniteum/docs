@@ -1,6 +1,6 @@
 # CLAUDE.md - Liquid Protocol Docs
 
-Protocol-specific guidance for Liquid documentation pages. See `lib/liquid/CLAUDE.md` for contract mechanics, formulas, and development workflow.
+Protocol-specific guidance for Liquid documentation pages.
 
 ## Key Protocol Concepts
 

@@ -1,6 +1,6 @@
 # CLAUDE.md - Uniteum Protocol Docs
 
-Protocol-specific guidance for the Uniteum algebraic liquidity protocol documentation. See also `lib/uniteum/CLAUDE.md` for contract-level details.
+Protocol-specific guidance for the Uniteum algebraic liquidity protocol documentation.
 
 ## ENS Structure
 
