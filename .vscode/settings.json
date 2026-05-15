@@ -1,9 +1,14 @@
 {
-    // Use Foundry formatter for Solidity files
+    "[json,jsonc]": {
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true,
+        "editor.detectIndentation": false
+    },
     "[solidity]": {
-        "editor.defaultFormatter": "NomicFoundation.hardhat-solidity",
+        "editor.defaultFormatter": "JuanBlanco.solidity",
         "editor.formatOnSave": true
     },
-    // Configure Solidity extension to use forge fmt
     "solidity.formatter": "forge",
+    "solidity.packageDefaultDependenciesContractsDirectory": "src",
+    "solidity.packageDefaultDependenciesDirectory": "lib"
 }

@@ -5,12 +5,28 @@
             "path": "."
         },
         {
-            "name": "liquid-promo",
-            "path": "../liquid-promo"
+            "name": "promo",
+            "path": "../promo"
         },
         {
-            "name": "private",
-            "path": "../private"
+            "name": "lepton",
+            "path": "../lepton"
+        },
+        {
+            "name": "locale",
+            "path": "../locale"
+        },
+        {
+            "name": "uniswap-lookup",
+            "path": "../uniswap-lookup"
+        },
+        {
+            "name": "unispring",
+            "path": "../unispring"
+        },
+        {
+            "name": "crucible",
+            "path": "../crucible"
         }
     ]
 }
