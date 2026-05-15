@@ -163,4 +163,4 @@ but the system remains coherent anyway.
 - [Triads](/uniteum/concepts/triads)
 - [Unit Creation](/uniteum/concepts/unit-creation)
 - [Canonicalization](/uniteum/concepts/canonicalization)
-- [Glossary](/uniteum/reference/glossary)
+- [Glossary](/glossary/)

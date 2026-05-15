@@ -19,7 +19,7 @@ Both terms are first-class: each has its own glossary entry (`#decimal-amount` a
    - Integer side: use "integer amount" or "base units." Do not use "raw amount," "raw value," "smallest unit," "atomic amount," or "base amount." (`wei` is fine, but only when the token actually has 18 decimals.)
    - If you encounter a banned synonym while editing existing content, replace it with the canonical term unless the substitution would be awkward (in which case, flag it rather than forcing it).
 
-2. **Link the first use per page to the glossary.** On each page (each Markdown file), the *first* occurrence of "decimal amount" links to `[decimal amount](/uniteum/reference/glossary/#decimal-amount)`, and the *first* occurrence of the phrase **"integer amount"** links to `[integer amount](/uniteum/reference/glossary/#integer-amount)`. The repo's only glossary lives at `content/uniteum/reference/glossary.md`. Subsequent uses of either term on the same page are plain text — do not link every occurrence. **Never auto-link the bare phrase "base unit"/"base units"** — see the caution below.
+2. **Link the first use per page to the glossary.** On each page (each Markdown file), the *first* occurrence of "decimal amount" links to `[decimal amount](/glossary/#decimal-amount)`, and the *first* occurrence of the phrase **"integer amount"** links to `[integer amount](/glossary/#integer-amount)`. The repo's only glossary lives at `content/glossary.md` (site-wide, served at `/glossary/`). Subsequent uses of either term on the same page are plain text — do not link every occurrence. **Never auto-link the bare phrase "base unit"/"base units"** — see the caution below.
 
    **Caution: "base unit(s)" is overloaded in this repo.** In the Uniteum protocol docs, *base Unit* / *base units* almost always means an atomic symbolic Unit (e.g., `meter`, `second`, `USD`), defined at glossary `#base-unit` — **not** the ERC-20 integer representation. Therefore: (a) when the ERC-20 integer sense is meant, prefer "integer amount" in prose; reserve "base units" for that sense only in tight `wei`-contrast contexts where the meaning is unambiguous; (b) only the phrase "integer amount" carries the first-use `#integer-amount` link — the protocol's "base Unit" usages must keep linking to `#base-unit` (or stay plain) as before.
 
@@ -33,7 +33,7 @@ Both terms are first-class: each has its own glossary entry (`#decimal-amount` a
 
 ### Glossary entries
 
-Both entries exist in `content/uniteum/reference/glossary.md` (anchors `#decimal-amount`, `#integer-amount`), roughly:
+Both entries exist in `content/glossary.md` (anchors `#decimal-amount`, `#integer-amount`), roughly:
 
 > **decimal amount** — The human-readable representation of a token amount, expressed with a decimal point (e.g., `1.5 USDC`). Contrast with *integer amount* (or *base units*), the on-chain `uint256` value scaled by `10^decimals()` (e.g., `1_500_000` for 1.5 USDC with 6 decimals). The two representations encode the same value; conversion requires the token's `decimals()`.
 

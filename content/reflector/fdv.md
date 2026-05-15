@@ -12,7 +12,7 @@ These numbers are real. They are not warning signs. This page explains why.
 
 ## Where the number comes from
 
-Every Reflector issue mints a fixed supply whose [decimal amount](/uniteum/reference/glossary/#decimal-amount) is 1 billion tokens, scaled on-chain by the backing token's `decimals()`. The peg holds the price tightly close to 1:1 against the original, so the FDV simplifies to:
+Every Reflector issue mints a fixed supply whose [decimal amount](/glossary/#decimal-amount) is 1 billion tokens, scaled on-chain by the backing token's `decimals()`. The peg holds the price tightly close to 1:1 against the original, so the FDV simplifies to:
 
 ```
 FDV ≈ 1,000,000,000 × (price of one backing token)
@@ -24,7 +24,7 @@ FDV ≈ 1,000,000,000 × (price of one backing token)
 | USDC, USDT, DAI, etc. | 1 billion of that stable | $1 billion |
 | Any other ERC-20 | 1 billion of that token | a billion × spot price |
 
-Why a billion? It's an artifact of how the supply is sized to fit Uniswap V4's tick geometry. The Reflector factory mints an [integer amount](/uniteum/reference/glossary/#integer-amount) of `10²⁷` for any original with 18 or more decimals, and scales down by a factor of 10 per decimal below 18 — which keeps the decimal amount at a billion across originals. See [Peg mechanics](/reflector/mechanics/) for the geometric reasoning.
+Why a billion? It's an artifact of how the supply is sized to fit Uniswap V4's tick geometry. The Reflector factory mints an [integer amount](/glossary/#integer-amount) of `10²⁷` for any original with 18 or more decimals, and scales down by a factor of 10 per decimal below 18 — which keeps the decimal amount at a billion across originals. See [Peg mechanics](/reflector/mechanics/) for the geometric reasoning.
 
 ---
 

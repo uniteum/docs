@@ -324,7 +324,7 @@ The following pages provide normative definitions and conceptual framework:
    - No negative exponents in canonical form
    - Deterministic rendering
 
-5. **[Glossary](/uniteum/reference/glossary/)** - Canonical definitions
+5. **[Glossary](/glossary/)** - Canonical definitions (site-wide, at the content root)
    - Unit, Base Unit, Compound Unit
    - Identity Unit, Reciprocal
    - Forge, Triad, Geometric-Mean Unit

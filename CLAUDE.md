@@ -25,6 +25,7 @@ The site is organized as three peer protocol sections plus shared root-level pag
 ```
 uniteum.one/
 ├── index.md              ← Umbrella landing page for all three protocols
+├── glossary.md           ← Site-wide glossary (root level, served at /glossary/)
 ├── legal.md              ← Site-wide legal (root level)
 ├── license.md            ← Site-wide license (root level)
 ├── uniteum/              ← Uniteum protocol docs
@@ -56,7 +57,7 @@ uniteum.one/
     └── deterministic-lookup.md
 ```
 
-**Path convention:** All Uniteum-specific content lives under `/uniteum/`. Solid under `/solid/`. Liquid under `/liquid/`. Lepton under `/lepton/`. Unispring under `/unispring/`. Reflector (the sibling 1:1 mirror factory) under `/reflector/`. Locale under `/locale/`. Only truly site-wide pages (legal, license, landing page) remain at root.
+**Path convention:** All Uniteum-specific content lives under `/uniteum/`. Solid under `/solid/`. Liquid under `/liquid/`. Lepton under `/lepton/`. Unispring under `/unispring/`. Reflector (the sibling 1:1 mirror factory) under `/reflector/`. Locale under `/locale/`. Only truly site-wide pages (glossary, legal, license, landing page) remain at root. The glossary is site-wide and must stay alphabetized — see `.claude/rules/glossary.md`.
 
 ## Collaboration Context
 
