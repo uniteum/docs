@@ -5,9 +5,9 @@ bookCollapseSection: true
 ---
 # Reflector
 
-A plain-English intro to what a Reflector issue is and what you can do with one.
+**Mint your own ERC-20, pegged 1:1 to a token you already trust.**
 
-For the full technical reference, see [Factory reference](/reflector/reference/). For the peg mechanics, see [Peg mechanics](/reflector/mechanics/).
+You put up no capital to create it, pay no protocol fees, and end up with a token whose backing nobody — not even you — can rug, dilute, or unwind. This page walks through what that means and what you can do with one, in plain English. Engineers who want the full factory mechanics should head to the [Factory reference](/reflector/reference/) and [Peg mechanics](/reflector/mechanics/).
 
 ---
 
