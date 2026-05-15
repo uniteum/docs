@@ -4,7 +4,7 @@ weight: 3
 ---
 # Why a Reflector issue's FDV looks astronomical
 
-When you look up a Reflector issue on a price tracker, the fully diluted valuation will look insane. For an ETH-backed issue it's roughly **$2.3 trillion**. For a USDC- or other stablecoin-backed issue it's **1 billion of that token** — about $1 billion for USD stables. Other backing tokens scale the same way: 1 billion of whatever the original is, valued at whatever a billion of that token is worth.
+When you look up a Reflector issue on a price tracker, the fully diluted valuation will look insane. For an ETH-backed issue it's roughly **$2.3 trillion**. For a USDC- or other stablecoin-backed issue it's **1 billion of that token** — $1 billion for USD stables. Other backing tokens scale the same way: 1 billion of whatever the original is, valued at whatever a billion of that token is worth.
 
 These numbers are real. They are not warning signs. This page explains why.
 
@@ -12,7 +12,7 @@ These numbers are real. They are not warning signs. This page explains why.
 
 ## Where the number comes from
 
-Every Reflector issue mints a fixed supply of about 1 billion human-unit tokens, denominated in the backing token's units. The peg holds the price tightly close to 1:1 against the original, so the FDV simplifies to:
+Every Reflector issue mints a fixed supply of 1 billion human-unit tokens, denominated in the backing token's units. The peg holds the price tightly close to 1:1 against the original, so the FDV simplifies to:
 
 ```
 FDV ≈ 1,000,000,000 × (price of one backing token)
@@ -21,7 +21,7 @@ FDV ≈ 1,000,000,000 × (price of one backing token)
 | Backing token | Approx FDV (in backing units) | Approx FDV (USD) |
 |:---|:---|:---|
 | ETH | 1 billion ETH | ~$2.3 trillion |
-| USDC, USDT, DAI, etc. | 1 billion of that stable | ~$1 billion |
+| USDC, USDT, DAI, etc. | 1 billion of that stable | $1 billion |
 | Any other ERC-20 | 1 billion of that token | a billion × spot price |
 
 Why a billion? It's an artifact of how the supply is sized to fit Uniswap V4's tick geometry. The Reflector factory mints `10²⁷` raw units for any original with 18 or more decimals, and scales down by a factor of 10 per decimal below 18 — which keeps the human-unit supply roughly constant at a billion across originals. See [Peg mechanics](/reflector/mechanics/) for the geometric reasoning.
@@ -40,7 +40,7 @@ A Reflector issue inverts that picture. **Every single token of supply is alread
 - No mint authority
 - No insider stash
 
-The FDV is a theoretical ceiling no one could come close to reaching. To buy a meaningful fraction of supply, you'd have to swap in an equally meaningful fraction of the original — for an ETH-backed issue, that would mean putting up something on the order of all the ETH in existence. Long before any of this happened, the pool would have run out of original to absorb (the pool's math caps fills inside the seeded tick).
+The FDV is a theoretical ceiling no one could come close to reaching. To buy a meaningful fraction of supply, you'd have to swap in an equally meaningful fraction of the original — for an ETH-backed issue, that would mean putting up more than all the ETH in existence. Long before this happened, the pool would have run out of original to absorb (the pool's math caps fills inside the seeded tick).
 
 The number you see exists because the pool needs a billion units of the new token sitting on the bid side to give buyers something to swap into. That's it. It's a supply scoreboard, not a debt overhang.
 
