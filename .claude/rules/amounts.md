@@ -12,22 +12,31 @@ When writing or editing documentation in this repo, use the following terms cons
 
 ### Rules
 
-1. **Use "decimal amount" — not synonyms.** Do not use "formatted amount," "display amount," "human-readable amount," "scaled amount," "real amount," or "UI amount" in new or edited prose. If you encounter these terms while editing existing content, replace them with "decimal amount" unless the surrounding context makes the substitution awkward (in which case, flag it rather than forcing it).
+Both terms are first-class: each has its own glossary entry (`#decimal-amount` and `#integer-amount`). The rules below apply **symmetrically** to both sides.
 
-2. **Link the first use per page to the glossary.** On each page (each Markdown file), the *first* occurrence of "decimal amount" should be a link to the glossary entry: `[decimal amount](/uniteum/reference/glossary/#decimal-amount)` (the repo's only glossary lives at `content/uniteum/reference/glossary.md`). Subsequent uses on the same page should be plain text — do not link every occurrence.
+1. **Use the canonical terms — not synonyms.**
+   - Decimal side: use "decimal amount." Do not use "formatted amount," "display amount," "human-readable amount," "scaled amount," "real amount," or "UI amount."
+   - Integer side: use "integer amount" or "base units." Do not use "raw amount," "raw value," "smallest unit," "atomic amount," or "base amount." (`wei` is fine, but only when the token actually has 18 decimals.)
+   - If you encounter a banned synonym while editing existing content, replace it with the canonical term unless the substitution would be awkward (in which case, flag it rather than forcing it).
 
-3. **Do not link inside headings, code blocks, or code spans.** If the first occurrence on a page falls inside a heading or inline code, link the next prose occurrence instead.
+2. **Link the first use per page to the glossary.** On each page (each Markdown file), the *first* occurrence of "decimal amount" links to `[decimal amount](/uniteum/reference/glossary/#decimal-amount)`, and the *first* occurrence of the phrase **"integer amount"** links to `[integer amount](/uniteum/reference/glossary/#integer-amount)`. The repo's only glossary lives at `content/uniteum/reference/glossary.md`. Subsequent uses of either term on the same page are plain text — do not link every occurrence. **Never auto-link the bare phrase "base unit"/"base units"** — see the caution below.
 
-4. **Do not link inside the glossary entry itself.** The glossary entry for "decimal amount" should not link to itself.
+   **Caution: "base unit(s)" is overloaded in this repo.** In the Uniteum protocol docs, *base Unit* / *base units* almost always means an atomic symbolic Unit (e.g., `meter`, `second`, `USD`), defined at glossary `#base-unit` — **not** the ERC-20 integer representation. Therefore: (a) when the ERC-20 integer sense is meant, prefer "integer amount" in prose; reserve "base units" for that sense only in tight `wei`-contrast contexts where the meaning is unambiguous; (b) only the phrase "integer amount" carries the first-use `#integer-amount` link — the protocol's "base Unit" usages must keep linking to `#base-unit` (or stay plain) as before.
 
-5. **Italicize on definition, not on use.** When a page defines or introduces the term (e.g., "we use *decimal amount* to mean..."), italicize it. In ordinary use, leave it unformatted (aside from the first-use glossary link).
+3. **Do not link inside headings, code blocks, or code spans.** If the first occurrence of a term on a page falls inside a heading or inline code, link the next prose occurrence instead.
 
-6. **Preserve the contrast.** When "decimal amount" appears, the corresponding integer-side term ("integer amount" or "base units") should be used consistently within the same document. Do not mix "integer amount" and "raw amount" in the same page.
+4. **Glossary entries do not link to each other or to themselves.** Neither the **Decimal Amount** nor the **Integer Amount** glossary entry may link to itself or to the other entry. Within those entries, the contrasting term stays as *italicized plain text* (e.g., *integer amount*), never a link.
 
-### Glossary entry
+5. **Italicize on definition, not on use.** When a page defines or introduces a term (e.g., "we use *decimal amount* to mean..."), italicize it. In ordinary use, leave it unformatted (aside from the first-use glossary link).
 
-The glossary should contain an entry roughly like:
+6. **Preserve the contrast.** When one side appears, use the corresponding other-side term consistently within the same document — pair "decimal amount" with "integer amount" or "base units," and don't switch integer-side wording (or fall back to a banned synonym) mid-page.
+
+### Glossary entries
+
+Both entries exist in `content/uniteum/reference/glossary.md` (anchors `#decimal-amount`, `#integer-amount`), roughly:
 
 > **decimal amount** — The human-readable representation of a token amount, expressed with a decimal point (e.g., `1.5 USDC`). Contrast with *integer amount* (or *base units*), the on-chain `uint256` value scaled by `10^decimals()` (e.g., `1_500_000` for 1.5 USDC with 6 decimals). The two representations encode the same value; conversion requires the token's `decimals()`.
 
-If the glossary entry does not exist yet, create it when first needed and notify the user.
+> **integer amount** (also **base units**) — The on-chain `uint256` representation of a token amount, scaled by `10^decimals()` (e.g., `1_500_000` for 1.5 USDC). For 18-decimal tokens the base unit is named `wei`. Contrast with *decimal amount*. The two representations encode the same value; conversion requires the token's `decimals()`.
+
+If either entry is missing, create it to match this wording and notify the user.
