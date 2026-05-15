@@ -244,6 +244,16 @@ The two representations encode the same value; conversion requires the token's `
 
 ---
 
+## Integer Amount
+
+An **integer amount** (also **base units**) is the on-chain `uint256` representation of a token amount: the value scaled by `10^decimals()` (e.g., `1_500_000` for 1.5 USDC with 6 decimals).
+
+Every on-chain quantity is an integer amount — ERC-20 balances, transfer values, and event arguments are never decimal. For 18-decimal tokens the base unit is named `wei`, so `1` token = `1_000_000_000_000_000_000` wei.
+
+Contrast with *decimal amount*, the human-readable value expressed with a decimal point (e.g., `1.5 USDC`).
+
+---
+
 ## Non-Goals
 
 The following are explicitly **out of scope**:
