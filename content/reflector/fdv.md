@@ -68,6 +68,6 @@ The FDV figure on a tracker is correct, just irrelevant.
 
 ## Further reading
 
-- [Plain-English intro](/reflector/intro/)
-- [Reflector](/reflector/) — the factory and operations
+- [Plain-English intro](/reflector/)
+- [Factory reference](/reflector/reference/) — the factory and operations
 - [Peg mechanics](/reflector/mechanics/) — why the corridor is hard

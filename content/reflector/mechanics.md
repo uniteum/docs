@@ -45,7 +45,7 @@ The clone's owner is set once at deploy to the address that called `Fountain.mak
 
 ## Native-pair originals
 
-When the original is `Currency.wrap(address(0))`, Reflector mints the issue with 18 decimals and `10²⁷` supply, then funds the V4 position against native ETH. Fountain handles ETH-denominated `PoolManager` calls without a separate WETH wrapper step. The Reflector prototype itself is the canonical clone for the native pair `(address(0), nativeSymbol)` — where `nativeSymbol` is resolved at construction from a chain-local `IStringLookup` (`"1xETH"` on mainnet, `"1xMATIC"` on Polygon, etc.). See [Reflector](/reflector/) for the factory layout.
+When the original is `Currency.wrap(address(0))`, Reflector mints the issue with 18 decimals and `10²⁷` supply, then funds the V4 position against native ETH. Fountain handles ETH-denominated `PoolManager` calls without a separate WETH wrapper step. The Reflector prototype itself is the canonical clone for the native pair `(address(0), nativeSymbol)` — where `nativeSymbol` is resolved at construction from a chain-local `IStringLookup` (`"1xETH"` on mainnet, `"1xMATIC"` on Polygon, etc.). See [Factory reference](/reflector/reference/) for the factory layout.
 
 ---
 

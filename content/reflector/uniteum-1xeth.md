@@ -42,7 +42,7 @@ You don't have to use ours. Anyone can mint their own `1xETH`-symbol mirror with
 
 **To mint a new named mirror against native ETH:**
 
-1. Open the [Reflector prototype](/reflector/) on Etherscan: [`{{< val "unispring.reflector.address" >}}`](https://etherscan.io/address/{{< val "unispring.reflector.address" >}}#writeContract).
+1. Open the [Reflector prototype](/reflector/reference/) on Etherscan: [`{{< val "unispring.reflector.address" >}}`](https://etherscan.io/address/{{< val "unispring.reflector.address" >}}#writeContract).
 2. Connect a wallet with enough ETH to cover gas. (No collateral capital is needed — the mint funds itself.)
 3. Call [`issue(name)`](https://etherscan.io/address/{{< val "unispring.reflector.address" >}}#writeContract#F{{< val "unispring" "reflector" "write" "issue(name)" "f" >}}) with the name you want — `"Acme 1xETH"`, `"Bob 1xETH"`, whatever.
 
@@ -76,7 +76,7 @@ For the geometric argument in detail, see [Reflector — peg mechanics](/reflect
 
 ## Behind the scenes: the native-pair clone
 
-[Reflector](/reflector/) is organized as a prototype that mints **clones** keyed by `(original, symbol)` — one clone per peg pair. For native ETH and the `1xETH` symbol, the prototype itself **is** the canonical clone — no separate clone is ever deployed for that pair. That's why the mint instructions above point at the prototype directly. (The native pair's symbol is resolved at construction from a chain-local `IStringLookup` — `"1xETH"` here on mainnet, `"1xMATIC"` on Polygon, etc.)
+[Reflector](/reflector/reference/) is organized as a prototype that mints **clones** keyed by `(original, symbol)` — one clone per peg pair. For native ETH and the `1xETH` symbol, the prototype itself **is** the canonical clone — no separate clone is ever deployed for that pair. That's why the mint instructions above point at the prototype directly. (The native pair's symbol is resolved at construction from a chain-local `IStringLookup` — `"1xETH"` here on mainnet, `"1xMATIC"` on Polygon, etc.)
 
 For any other peg pair (`(USDC, "1xUSDC")`, `(WBTC, "1xWBTC")`, etc.), `issue(name)` is called on the corresponding clone instead. See [Uniteum 1xUSDC](/reflector/uniteum-1xusdc/) for an example with a non-native original.
 
@@ -84,7 +84,7 @@ For any other peg pair (`(USDC, "1xUSDC")`, `(WBTC, "1xWBTC")`, etc.), `issue(na
 
 ## Further reading
 
-- [Reflector](/reflector/) — the factory, its layout, and the full set of operations
+- [Factory reference](/reflector/reference/) — the factory, its layout, and the full set of operations
 - [Reflector — peg mechanics](/reflector/mechanics/) — why the 1-bp corridor is hard
 - [Fountain](/unispring/fountain/) — the V4 position primitive backing every issue
 - [Uniteum 1xUSDC](/reflector/uniteum-1xusdc/) — the same pattern applied to a stablecoin original

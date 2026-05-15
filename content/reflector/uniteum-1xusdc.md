@@ -86,7 +86,7 @@ So `Uniteum 1xUSDC` will be the same `(clone, issue)` pair of addresses on Ether
 
 ## Further reading
 
-- [Reflector](/reflector/) — the factory, its layout, and the full set of operations
+- [Factory reference](/reflector/reference/) — the factory, its layout, and the full set of operations
 - [Reflector — peg mechanics](/reflector/mechanics/) — why the 1-bp corridor is hard
 - [Fountain](/unispring/fountain/) — the V4 position primitive backing every issue
 - [Locale](/locale/) — the deterministic lookup contract used as the clone's `original`
