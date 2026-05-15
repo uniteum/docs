@@ -18,7 +18,7 @@ This page also shows how to mint your own 1xUSDC-symbol mirror under your own na
 |:---|:---|
 | Name | `Uniteum 1xUSDC` |
 | Symbol | `1xUSDC` |
-| Backing | Chain-local USDC (resolved via [`{{< val "unispring.notable.clones.1xUSDC.original_lookup" >}}`](https://etherscan.io/address/{{< val "unispring.notable.clones.1xUSDC.original_lookup_address" >}}#code)), locked in a Uniswap V4 pool |
+| Backing | Chain-local USDC (resolved via [`{{< val "unispring.reflector.clones.1xUSDC.original_lookup" >}}`](https://etherscan.io/address/{{< val "unispring.reflector.clones.1xUSDC.original_lookup_address" >}}#code)), locked in a Uniswap V4 pool |
 | Decimals | 6 on Ethereum (matches USDC) |
 | Trading range | `[1.0000, 1.0001)` × USDC |
 | Issue ERC-20 | [``](https://etherscan.io/token/) |
@@ -42,13 +42,13 @@ You don't have to use ours. Anyone can mint their own `1xUSDC`-symbol mirror wit
 
 **To mint a new named mirror against USDC:**
 
-1. Open the `1xUSDC` clone on Etherscan: [`{{< val "unispring.notable.clones.1xUSDC.address" >}}`](https://etherscan.io/address/{{< val "unispring.notable.clones.1xUSDC.address" >}}#writeContract).
+1. Open the `1xUSDC` clone on Etherscan: [`{{< val "unispring.reflector.clones.1xUSDC.address" >}}`](https://etherscan.io/address/{{< val "unispring.reflector.clones.1xUSDC.address" >}}#writeContract).
 2. Connect a wallet with enough ETH to cover gas. (No collateral capital is needed — the mint funds itself.)
-3. Call [`issue(name)`](https://etherscan.io/address/{{< val "unispring.notable.clones.1xUSDC.address" >}}#writeContract#F{{< val "unispring" "notable" "write" "issue(name)" "f" >}}) with the name you want — `"Acme 1xUSDC"`, `"Treasury 1xUSDC"`, whatever.
+3. Call [`issue(name)`](https://etherscan.io/address/{{< val "unispring.reflector.clones.1xUSDC.address" >}}#writeContract#F{{< val "unispring" "reflector" "write" "issue(name)" "f" >}}) with the name you want — `"Acme 1xUSDC"`, `"Treasury 1xUSDC"`, whatever.
 
 That single call deploys your ERC-20, mints its full supply, and seats it in a fresh V4 pool against the chain's USDC. Your token is tradeable in the same transaction.
 
-To preview the deterministic address before deploying, call [`issued(name)`](https://etherscan.io/address/{{< val "unispring.notable.clones.1xUSDC.address" >}}#readContract#F{{< val "unispring" "notable" "read" "issued(name)" "f" >}}) with the same name on the read tab.
+To preview the deterministic address before deploying, call [`issued(name)`](https://etherscan.io/address/{{< val "unispring.reflector.clones.1xUSDC.address" >}}#readContract#F{{< val "unispring" "reflector" "read" "issued(name)" "f" >}}) with the same name on the read tab.
 
 **What you keep as the deployer:** the wallet that submits the `issue(name)` transaction is recorded on-chain as the creator of your new ERC-20. That's the address Etherscan, CoinGecko, CoinMarketCap, and similar registries verify against when you submit token info — icon, description, project website, social links. The token's public identity is yours to claim.
 
@@ -68,9 +68,9 @@ Crucially, the wallet that mints it is the on-chain deployer of that ERC-20 — 
 
 The issue's V4 pool is initialized at `tick = 0` with the entire supply (about 1 billion at USDC's 6 decimals) seated single-sided in a single-tick range. Below tick 0 there is no liquidity at all; above the next tick there is no liquidity at all. V4's swap math cannot cross an empty tick range, so price is mathematically constrained to `[1.0000, 1.0001)` × USDC.
 
-The pool is owned by a [Fountain](/unispring/fountain/) clone with no decrease-liquidity path. The USDC that backs `Uniteum 1xUSDC` is locked there forever — Notable retains no authority over it, and Fountain itself exposes no withdraw-principal function. The deployer has the same redemption rights as everyone else: trade through the pool.
+The pool is owned by a [Fountain](/unispring/fountain/) clone with no decrease-liquidity path. The USDC that backs `Uniteum 1xUSDC` is locked there forever — Reflector retains no authority over it, and Fountain itself exposes no withdraw-principal function. The deployer has the same redemption rights as everyone else: trade through the pool.
 
-For the geometric argument in detail, see [Notable — peg mechanics](/notable/mechanics/).
+For the geometric argument in detail, see [Reflector — peg mechanics](/reflector/mechanics/).
 
 ---
 
@@ -78,16 +78,16 @@ For the geometric argument in detail, see [Notable — peg mechanics](/notable/m
 
 USDC lives at a different address on every chain. If the `1xUSDC` clone keyed off the raw USDC address, deploying it on Ethereum versus Arbitrum would produce two different clone addresses — fragmenting integrations and making cross-chain UX hostile.
 
-Instead, the clone keys off [`{{< val "unispring.notable.clones.1xUSDC.original_lookup" >}}`](/locale/) — a [Locale](/locale/) lookup contract whose `value()` resolves to the chain-local USDC. Notable computes the clone's CREATE2 salt from the **lookup address**, not from whatever the lookup resolves to. The same lookup address on every chain yields the same clone address on every chain.
+Instead, the clone keys off [`{{< val "unispring.reflector.clones.1xUSDC.original_lookup" >}}`](/locale/) — a [Locale](/locale/) lookup contract whose `value()` resolves to the chain-local USDC. Reflector computes the clone's CREATE2 salt from the **lookup address**, not from whatever the lookup resolves to. The same lookup address on every chain yields the same clone address on every chain.
 
-So `Uniteum 1xUSDC` will be the same `(clone, issue)` pair of addresses on Ethereum, Arbitrum, Base, and any other chain we deploy `{{< val "unispring.notable.clones.1xUSDC.original_lookup" >}}` to — with each chain's issue backed by its own chain's USDC.
+So `Uniteum 1xUSDC` will be the same `(clone, issue)` pair of addresses on Ethereum, Arbitrum, Base, and any other chain we deploy `{{< val "unispring.reflector.clones.1xUSDC.original_lookup" >}}` to — with each chain's issue backed by its own chain's USDC.
 
 ---
 
 ## Further reading
 
-- [Notable](/notable/) — the factory, its layout, and the full set of operations
-- [Notable — peg mechanics](/notable/mechanics/) — why the 1-bp corridor is hard
+- [Reflector](/reflector/) — the factory, its layout, and the full set of operations
+- [Reflector — peg mechanics](/reflector/mechanics/) — why the 1-bp corridor is hard
 - [Fountain](/unispring/fountain/) — the V4 position primitive backing every issue
 - [Locale](/locale/) — the deterministic lookup contract used as the clone's `original`
-- [Uniteum 1xETH](/notable/uniteum-1xeth/) — the same pattern applied to native ETH
+- [Uniteum 1xETH](/reflector/uniteum-1xeth/) — the same pattern applied to native ETH

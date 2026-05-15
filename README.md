@@ -14,7 +14,7 @@ Top-level sections under `content/`:
 - [content/uniteum/](content/uniteum/) — Algebraic Uniteum protocol
 - [content/lepton/](content/lepton/) — Minimal token factory
 - [content/locale/](content/locale/) — Deterministic on-chain reference data
-- [content/notable/](content/notable/) — 1:1 mirror factory
+- [content/reflector/](content/reflector/) — 1:1 mirror factory (Reflector)
 - [content/unispring/](content/unispring/) — Family of permissionless V4 contracts
 
 ## Site Configuration

@@ -64,7 +64,7 @@ A single transaction mints a fixed-supply ERC-20, initializes a V4 pool against 
 - Permanent floor enforced by the absence of liquidity below `tickLower`
 - Hub-and-spoke topology gives any two Unispring tokens a two-hop swap path
 
-A sibling two-level factory, **Notable**, stamps clones per `(original, symbol)` (`1xUSDC`, `1xWBTC`, `1xETH`, …); each clone issues named 1:1 ERC-20 mirrors with a hard 1-bp peg corridor.
+A sibling two-level factory, **[Reflector](/reflector/)**, stamps clones per `(original, symbol)` (`1xUSDC`, `1xWBTC`, `1xETH`, …); each clone issues named 1:1 ERC-20 mirrors with a hard 1-bp peg corridor.
 
 ---
 
@@ -107,7 +107,7 @@ All projects are deployed on Mainnet, unaudited, and at different stages of matu
 - **Solid** — Complete. The protocol is simple and does what it says.
 - **Liquid** — Likely complete, but not yet tested at scale.
 - **Lepton** — Complete. A minimal factory with a small, fixed interface.
-- **Unispring** — Code complete; contracts not yet deployed. Fair-launch factory on Uniswap V4; Notable sibling for 1:1 mirrors.
+- **Unispring** — Code complete; contracts not yet deployed. Fair-launch factory on Uniswap V4; Reflector sibling for 1:1 mirrors.
 - **Locale** — Complete. Immutable reference contracts with a fixed interface.
 - **Uniteum** — Under active development. The mechanics around anchored units are incomplete, and it may not be possible to get them working.
 

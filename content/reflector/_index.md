@@ -1,31 +1,31 @@
 ---
-title: Notable
+title: Reflector
 weight: 13
 bookCollapseSection: true
 ---
-# Notable — 1:1 mirror factory
+# Reflector — 1:1 mirror factory
 
-[Notable](https://etherscan.io/address/{{< val "unispring.notable.address" >}}#code) issues permissionless ERC-20 mirrors of any existing token (or native ETH). Each mirror trades 1:1 against its original within a hard 1-basis-point corridor, backed token-for-token by real originals locked in a Uniswap V4 pool. No oracle, no rebalance keeper, no governance, no unwind path.
+[Reflector](https://etherscan.io/address/{{< val "unispring.reflector.address" >}}#code) issues permissionless ERC-20 mirrors of any existing token (or native ETH). Each mirror trades 1:1 against its original within a hard 1-basis-point corridor, backed token-for-token by real originals locked in a Uniswap V4 pool. No oracle, no rebalance keeper, no governance, no unwind path.
 
-Notable is a **two-level factory**. The prototype mints **clones** keyed by `(original, symbol)`. Each clone is itself a token factory whose `issue(name)` mints fresh ERC-20s — many distinct issues under one shared `(original, symbol)`, differing only by `name`. Every issue carries the clone's symbol and is pegged against the clone's original.
+Reflector is a **two-level factory**. The prototype mints **clones** keyed by `(original, symbol)`. Each clone is itself a token factory whose `issue(name)` mints fresh ERC-20s — many distinct issues under one shared `(original, symbol)`, differing only by `name`. Every issue carries the clone's symbol and is pegged against the clone's original.
 
 ---
 
 ## How the factory is laid out
 
 ```
-prototype Notable  →  clone per (original, symbol)  →  issue per name
+prototype Reflector  →  clone per (original, symbol)  →  issue per name
 ```
 
-1. **Prototype.** Deployed once per chain. Holds all the logic. Not used directly to mint mirrors of arbitrary originals — instead, it stamps clones via {{< efn addr="unispring.notable.address" fn_path="unispring.notable.write" fn_key="make(original, symbol)" section="writeContract" text="<code>make(original, symbol)</code>" >}}.
-2. **Clone.** A minimal proxy at a deterministic CREATE2 address derived from `(original, symbol)`. Carries only its own configuration (the `original` and `symbol` it issues under). Calling {{< efn addr="unispring.notable.address" fn_path="unispring.notable.write" fn_key="issue(name)" section="writeContract" text="<code>issue(name)</code>" >}} on the clone mints a fresh ERC-20 carrying the clone's symbol and seats its full supply as a single-tick V4 position against the clone's original.
+1. **Prototype.** Deployed once per chain. Holds all the logic. Not used directly to mint mirrors of arbitrary originals — instead, it stamps clones via {{< efn addr="unispring.reflector.address" fn_path="unispring.reflector.write" fn_key="make(original, symbol)" section="writeContract" text="<code>make(original, symbol)</code>" >}}.
+2. **Clone.** A minimal proxy at a deterministic CREATE2 address derived from `(original, symbol)`. Carries only its own configuration (the `original` and `symbol` it issues under). Calling {{< efn addr="unispring.reflector.address" fn_path="unispring.reflector.write" fn_key="issue(name)" section="writeContract" text="<code>issue(name)</code>" >}} on the clone mints a fresh ERC-20 carrying the clone's symbol and seats its full supply as a single-tick V4 position against the clone's original.
 3. **Issue.** A real ERC-20 minted by the clone via [Coinage](https://github.com/uniteum/lepton). Its address is deterministic in `(clone, name, symbol, decimals, supply)`, so distinct names produce distinct issues under the same clone.
 
 `make` and `issue` are both **idempotent**. Calling `make` with a `(original, symbol)` that already has a clone returns the existing clone. Calling `issue` with a `name` that's already been minted returns the existing token.
 
 ### The native-pair special case
 
-The prototype itself is the canonical clone for the native pair `(address(0), nativeSymbol)`, where `nativeSymbol` is resolved at construction from a chain-local `IStringLookup` — `"1xETH"` on mainnet, `"1xMATIC"` on Polygon, and so on. Calling `make(address(0), nativeSymbol)` returns the prototype directly — no separate clone is deployed for that pair. To mint a native-pair mirror, call {{< efn addr="unispring.notable.address" fn_path="unispring.notable.write" fn_key="issue(name)" section="writeContract" text="<code>issue(name)</code>" >}} on the prototype.
+The prototype itself is the canonical clone for the native pair `(address(0), nativeSymbol)`, where `nativeSymbol` is resolved at construction from a chain-local `IStringLookup` — `"1xETH"` on mainnet, `"1xMATIC"` on Polygon, and so on. Calling `make(address(0), nativeSymbol)` returns the prototype directly — no separate clone is deployed for that pair. To mint a native-pair mirror, call {{< efn addr="unispring.reflector.address" fn_path="unispring.reflector.write" fn_key="issue(name)" section="writeContract" text="<code>issue(name)</code>" >}} on the prototype.
 
 ### IAddressLookup originals
 
@@ -77,9 +77,9 @@ The issue's only behaviour is "trades close to its original". It is not a wrappe
 
 ## How to use it
 
-**Find or deploy a clone.** Call {{< efn addr="unispring.notable.address" fn_path="unispring.notable.write" fn_key="make(original, symbol)" section="writeContract" text="<code>make(original, symbol)</code>" >}} on the prototype. Pass `address(0)` for native ETH, an `IAddressLookup` for chain-local resolution, or any other address as the token directly. Use {{< efn addr="unispring.notable.address" fn_path="unispring.notable.read" fn_key="made(original, symbol)" section="readContract" text="<code>made(original, symbol)</code>" >}} first to preview the deterministic clone address and whether it already exists.
+**Find or deploy a clone.** Call {{< efn addr="unispring.reflector.address" fn_path="unispring.reflector.write" fn_key="make(original, symbol)" section="writeContract" text="<code>make(original, symbol)</code>" >}} on the prototype. Pass `address(0)` for native ETH, an `IAddressLookup` for chain-local resolution, or any other address as the token directly. Use {{< efn addr="unispring.reflector.address" fn_path="unispring.reflector.read" fn_key="made(original, symbol)" section="readContract" text="<code>made(original, symbol)</code>" >}} first to preview the deterministic clone address and whether it already exists.
 
-**Mint an issue.** Call {{< efn addr="unispring.notable.address" fn_path="unispring.notable.write" fn_key="issue(name)" section="writeContract" text="<code>issue(name)</code>" >}} on the clone (or on the prototype, for the native pair). The issue is deployed, fully funded, and tradeable in the same transaction. The wallet that submits the call is recorded on-chain as the deployer of the new ERC-20 — relevant when submitting token-info updates (icon, description, project URL) to Etherscan and other registries that verify ownership against the deployer address. Use {{< efn addr="unispring.notable.address" fn_path="unispring.notable.read" fn_key="issued(name)" section="readContract" text="<code>issued(name)</code>" >}} on the clone — or {{< efn addr="unispring.notable.address" fn_path="unispring.notable.read" fn_key="issued(original, symbol, name)" section="readContract" text="<code>issued(original, symbol, name)</code>" >}} on the prototype — to preview the issue address before deploying.
+**Mint an issue.** Call {{< efn addr="unispring.reflector.address" fn_path="unispring.reflector.write" fn_key="issue(name)" section="writeContract" text="<code>issue(name)</code>" >}} on the clone (or on the prototype, for the native pair). The issue is deployed, fully funded, and tradeable in the same transaction. The wallet that submits the call is recorded on-chain as the deployer of the new ERC-20 — relevant when submitting token-info updates (icon, description, project URL) to Etherscan and other registries that verify ownership against the deployer address. Use {{< efn addr="unispring.reflector.address" fn_path="unispring.reflector.read" fn_key="issued(name)" section="readContract" text="<code>issued(name)</code>" >}} on the clone — or {{< efn addr="unispring.reflector.address" fn_path="unispring.reflector.read" fn_key="issued(original, symbol, name)" section="readContract" text="<code>issued(original, symbol, name)</code>" >}} on the prototype — to preview the issue address before deploying.
 
 **Buy or sell.** Route a swap through any V4-aware aggregator or frontend — `original → issue` to acquire, `issue → original` to redeem. There is no separate "redeem" function: the pool *is* the redemption path.
 
@@ -89,7 +89,7 @@ The issue's only behaviour is "trades close to its original". It is not a wrappe
 
 ## Deployed instances
 
-{{% notable_clones %}}
+{{% reflector_clones %}}
 
 ---
 
@@ -118,7 +118,7 @@ Even the Fountain `taker` cannot harvest the accumulated original by unwinding �
 
 ## Further reading
 
-- [Peg mechanics](/notable/mechanics/) — how the corridor is enforced and why the band is hard.
-- [Plain-English intro](/notable/intro/) — the same thing for non-engineers.
-- [About the FDV](/notable/fdv/) — why the headline valuation is harmless.
-- [NOTABLE.md](https://github.com/uniteum/unispring/blob/main/NOTABLE.md) — the full peg argument.
+- [Peg mechanics](/reflector/mechanics/) — how the corridor is enforced and why the band is hard.
+- [Plain-English intro](/reflector/intro/) — the same thing for non-engineers.
+- [About the FDV](/reflector/fdv/) — why the headline valuation is harmless.
+- [REFLECTOR.md](https://github.com/uniteum/unispring/blob/main/REFLECTOR.md) — the full peg argument.

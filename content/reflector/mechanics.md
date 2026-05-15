@@ -2,11 +2,11 @@
 title: Peg mechanics
 weight: 2
 ---
-# Notable — peg mechanics
+# Reflector — peg mechanics
 
 How the 1-bp corridor is enforced, why the band is hard, and why the backing can never be unwound.
 
-For the user-facing description of what Notable does and how to use it, see [Notable](/notable/).
+For the user-facing description of what Reflector does and how to use it, see [Reflector](/reflector/).
 
 ---
 
@@ -37,7 +37,7 @@ No hook, no oracle, no keeper. The peg is geometric: the only place trade can ha
 
 ## Why the backing is permanent
 
-The V4 position is owned by a [Fountain](/unispring/fountain) clone. Notable retains no authority over it after seating, and Fountain itself exposes no decrease-liquidity path — principal cannot be withdrawn by anyone, ever.
+The V4 position is owned by a [Fountain](/unispring/fountain) clone. Reflector retains no authority over it after seating, and Fountain itself exposes no decrease-liquidity path — principal cannot be withdrawn by anyone, ever.
 
 The clone's owner is set once at deploy to the address that called `Fountain.make`. The owner can call `withdraw` on the clone to pull accrued swap fees (after anyone calls `take` to harvest them from the V4 position into the clone's balance). Nothing else.
 
@@ -45,12 +45,12 @@ The clone's owner is set once at deploy to the address that called `Fountain.mak
 
 ## Native-pair originals
 
-When the original is `Currency.wrap(address(0))`, Notable mints the issue with 18 decimals and `10²⁷` supply, then funds the V4 position against native ETH. Fountain handles ETH-denominated `PoolManager` calls without a separate WETH wrapper step. The Notable prototype itself is the canonical clone for the native pair `(address(0), nativeSymbol)` — where `nativeSymbol` is resolved at construction from a chain-local `IStringLookup` (`"1xETH"` on mainnet, `"1xMATIC"` on Polygon, etc.). See [Notable](/notable/) for the factory layout.
+When the original is `Currency.wrap(address(0))`, Reflector mints the issue with 18 decimals and `10²⁷` supply, then funds the V4 position against native ETH. Fountain handles ETH-denominated `PoolManager` calls without a separate WETH wrapper step. The Reflector prototype itself is the canonical clone for the native pair `(address(0), nativeSymbol)` — where `nativeSymbol` is resolved at construction from a chain-local `IStringLookup` (`"1xETH"` on mainnet, `"1xMATIC"` on Polygon, etc.). See [Reflector](/reflector/) for the factory layout.
 
 ---
 
 ## Further reading
 
-- [NOTABLE.md](https://github.com/uniteum/unispring/blob/main/NOTABLE.md) — the full peg argument
+- [REFLECTOR.md](https://github.com/uniteum/unispring/blob/main/REFLECTOR.md) — the full peg argument
 - [DESIGN.md](https://github.com/uniteum/unispring/blob/main/DESIGN.md) — Unispring design rationale, section by section
 - [Fountain](/unispring/fountain) — the V4 position primitive both factories build on

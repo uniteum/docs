@@ -13,9 +13,9 @@ Unispring is a family of permissionless contracts on Uniswap V4. A single primit
 |:---------|:-----|
 | **[{{< val "unispring.fountain.name" >}}](/unispring/fountain)** | V4 position owner. No decrease-liquidity path; principal locked, fees forwarded. |
 | **[{{< val "unispring.manifold.name" >}}](/unispring/manifold)** | Fair-launch factory. Mints fresh ERC-20s and seats 100% of supply single-sided against a hub. |
-| **[{{< val "unispring.notable.name" >}}](/notable/)** | Two-level mirror factory. Stamps clones per `(original, symbol)`; each clone issues named 1:1 ERC-20 mirrors with a hard 1-bp peg corridor. Documented in its own section: [Notable](/notable/). |
+| **[{{< val "unispring.reflector.name" >}}](/reflector/)** | Two-level mirror factory. Stamps clones per `(original, symbol)`; each clone issues named 1:1 ERC-20 mirrors with a hard 1-bp peg corridor. Documented in its own section: [Reflector](/reflector/). |
 
-Both factories are one-shot. After they fund the position, no contract in the stack retains authority over the token, the pool, or the liquidity. The only way to acquire any Manifold or Notable token is to buy it from its V4 pool — on any aggregator, frontend, or contract that routes through V4.
+Both factories are one-shot. After they fund the position, no contract in the stack retains authority over the token, the pool, or the liquidity. The only way to acquire any Manifold or Reflector token is to buy it from its V4 pool — on any aggregator, frontend, or contract that routes through V4.
 
 ---
 
@@ -43,7 +43,7 @@ Building on V4 directly removes the custom AMM, the keeper, and the arbitrage la
 
 ## Permanence and trust boundaries
 
-The factories above the position (`NeutrinoSource`, `NeutrinoChannel`, `Manifold`, `Notable`) are one-shot. After they mint, fund, and seat, none of them retains any authority over what they created.
+The factories above the position (`NeutrinoSource`, `NeutrinoChannel`, `Manifold`, `Reflector`) are one-shot. After they mint, fund, and seat, none of them retains any authority over what they created.
 
 | After launch, ...                  | ... is governed by                                                |
 |:-----------------------------------|:------------------------------------------------------------------|
@@ -64,7 +64,7 @@ Each Fountain clone has an immutable `owner` set at deploy time — the address 
 | {{< val "unispring.manifold.name" >}} | [`{{< val "unispring.manifold.address" >}}`](https://etherscan.io/address/{{< val "unispring.manifold.address" >}}#code) |
 | {{< val "unispring.neutrinoSource.name" >}} | [`{{< val "unispring.neutrinoSource.address" >}}`](https://etherscan.io/address/{{< val "unispring.neutrinoSource.address" >}}#code) |
 | {{< val "unispring.neutrinoChannel.name" >}} | [`{{< val "unispring.neutrinoChannel.address" >}}`](https://etherscan.io/address/{{< val "unispring.neutrinoChannel.address" >}}#code) |
-| {{< val "unispring.notable.name" >}} | [`{{< val "unispring.notable.address" >}}`](https://etherscan.io/address/{{< val "unispring.notable.address" >}}#code) |
+| {{< val "unispring.reflector.name" >}} | [`{{< val "unispring.reflector.address" >}}`](https://etherscan.io/address/{{< val "unispring.reflector.address" >}}#code) |
 | {{< val "unispring.hub.name" >}} | [`{{< val "unispring.hub.address" >}}`](https://etherscan.io/address/{{< val "unispring.hub.address" >}}#code) |
 
 
@@ -75,4 +75,4 @@ Each Fountain clone has an immutable `owner` set at deploy time — the address 
 - [GitHub Repository](https://github.com/uniteum/unispring)
 - [DESIGN.md](https://github.com/uniteum/unispring/blob/main/DESIGN.md) — design rationale, section by section
 - [CRITIQUE.md](https://github.com/uniteum/unispring/blob/main/CRITIQUE.md) — open questions and concerns
-- [NOTABLE.md](https://github.com/uniteum/unispring/blob/main/NOTABLE.md) — Notable in depth
+- [REFLECTOR.md](https://github.com/uniteum/unispring/blob/main/REFLECTOR.md) — Reflector in depth

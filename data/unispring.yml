@@ -13,7 +13,7 @@ fountain:
     fountain1:
       name: "Fountain1"
       description: "Canonical Fountain clone instantiated by the Fountain
-        prototype. Used by Notable as its single-tick position holder."
+        prototype. Used by Reflector as its single-tick position holder."
       address: "0xf11e17473f8D933CFC439Ef694a0285c8D19e080"
 
 manifold:
@@ -32,16 +32,17 @@ neutrinoChannel:
   description: "Relays a single Coinage.make() call per clone."
   address:
 
-notable:
-  name: "Notable (prototype)"
+reflector:
+  name: "Reflector (prototype)"
   description: "Two-level factory. The prototype mints clones keyed by
     (original, symbol); each clone issues ERC-20s — one per name —
     pegged 1:1 against its original inside a hard 1-bp corridor. The
     prototype itself is the canonical clone for the native pair, whose
     symbol is resolved at construction from a chain-local IStringLookup
     (\"1xETH\" on mainnet, \"1xMATIC\" on Polygon, etc.)."
-  # Notable bytecode differs from Mimicry's, so its CREATE2 address
-  # differs too. Vanity-mined and deployed via Nick on Arbitrum.
+  # Reflector bytecode differs from earlier Notable/Mimicry revisions,
+  # so its CREATE2 address differs too. Vanity-mined and deployed via
+  # Nick on Arbitrum.
   address: "0x3131cE680E5Dd6d3fCF4BB3942186B49f7330080"
   write:
     "issue(name)":
@@ -52,7 +53,7 @@ notable:
         native-pair issues, or on any clone to mint issues under that pair."
     "make(original, symbol)":
       f: 2
-      description: "Deploy (or return) the deterministic Notable clone for
+      description: "Deploy (or return) the deterministic Reflector clone for
         (original, symbol). Pass an IAddressLookup as `original` to peg
         against a chain-local token while keeping the same clone address
         across chains. Returns the prototype itself for the native pair."
@@ -104,9 +105,9 @@ notable:
 
   # Known clones. Each entry is itself a (original, symbol) factory whose
   # `issue(name)` mints an issue ERC-20 sharing this symbol and pegged
-  # against this original. Addresses will be republished after Notable is
-  # deployed — Mimicry-era addresses are stale because Notable's bytecode
-  # differs.
+  # against this original. Addresses will be republished after Reflector
+  # is deployed — earlier Notable/Mimicry-era addresses are stale because
+  # Reflector's bytecode differs.
   clones:
     1xETH:
       symbol: "1xETH"
@@ -119,7 +120,7 @@ notable:
       issues:
         - name: "Uniteum 1xETH"
           address:
-          permalink: "/notable/uniteum-1xeth/"
+          permalink: "/reflector/uniteum-1xeth/"
     1xUSDC:
       symbol: "1xUSDC"
       original: "chain-local USDC (resolved via USDCLookup)"
@@ -132,7 +133,7 @@ notable:
       issues:
         - name: "Uniteum 1xUSDC"
           address:
-          permalink: "/notable/uniteum-1xusdc/"
+          permalink: "/reflector/uniteum-1xusdc/"
 
 hub:
   name: "Hub"

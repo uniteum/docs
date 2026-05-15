@@ -1,10 +1,10 @@
 {{- /*
-  Render the "Deployed instances" markdown for Notable clones from data.
+  Render the "Deployed instances" markdown for Reflector clones from data.
 */ -}}
-{{- $notable := hugo.Data.unispring.notable -}}
+{{- $reflector := hugo.Data.unispring.reflector -}}
 
-{{- if $notable.address -}}
-{{- range $name, $c := $notable.clones }}
+{{- if $reflector.address -}}
+{{- range $name, $c := $reflector.clones }}
 
 ### {{ $c.symbol }} — clone for {{ $c.original }}
 
@@ -31,5 +31,5 @@
 {{- end }}
 {{- end }}
 {{- else -}}
-Notable is not yet deployed. Clone and issue addresses will be published once the prototype is mined and deployed.
+Reflector is not yet deployed. Clone and issue addresses will be published once the prototype is mined and deployed.
 {{- end -}}
