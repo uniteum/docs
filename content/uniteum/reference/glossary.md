@@ -234,6 +234,16 @@ Unit creation does not mint balances or affect prices.
 
 ---
 
+## Decimal Amount
+
+A **decimal amount** is the human-readable representation of a token amount, expressed with a decimal point (e.g., `1.5 USDC`).
+
+Contrast with *integer amount* (or *base units*), the on-chain `uint256` value scaled by `10^decimals()` (e.g., `1_500_000` for 1.5 USDC with 6 decimals).
+
+The two representations encode the same value; conversion requires the token's `decimals()`.
+
+---
+
 ## Non-Goals
 
 The following are explicitly **out of scope**:

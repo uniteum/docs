@@ -9,7 +9,7 @@ When writing or editing documentation in this repo, use the following terms cons
 
 1. **Use "decimal amount" — not synonyms.** Do not use "formatted amount," "display amount," "human-readable amount," "scaled amount," "real amount," or "UI amount" in new or edited prose. If you encounter these terms while editing existing content, replace them with "decimal amount" unless the surrounding context makes the substitution awkward (in which case, flag it rather than forcing it).
 
-2. **Link the first use per page to the glossary.** On each page (each Markdown file), the *first* occurrence of "decimal amount" should be a link to the glossary entry: `[decimal amount](/glossary.md#decimal-amount)` (adjust the path to match this repo's glossary location). Subsequent uses on the same page should be plain text — do not link every occurrence.
+2. **Link the first use per page to the glossary.** On each page (each Markdown file), the *first* occurrence of "decimal amount" should be a link to the glossary entry: `[decimal amount](/uniteum/reference/glossary/#decimal-amount)` (the repo's only glossary lives at `content/uniteum/reference/glossary.md`). Subsequent uses on the same page should be plain text — do not link every occurrence.
 
 3. **Do not link inside headings, code blocks, or code spans.** If the first occurrence on a page falls inside a heading or inline code, link the next prose occurrence instead.
 
