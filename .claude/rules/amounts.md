@@ -1,3 +1,8 @@
+---
+paths:
+  - "**/*.md"
+---
+
 ## Terminology: token amount representations
 
 When writing or editing documentation in this repo, use the following terms consistently for ERC-20 (and ERC-20-like) token amount representations:
