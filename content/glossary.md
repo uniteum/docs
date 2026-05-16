@@ -173,6 +173,20 @@ Properties of the mesh:
 
 ---
 
+## Par Token
+
+A **par token** is a token whose price against a single reference asset is structurally bounded to a hard band starting at parity, backed at least 1:1 by that reference asset held in a locked position.
+
+A par token:
+- trades within a hard corridor `[1.0000, 1.0001)` against its reference asset
+- is fully reserved in the real reference asset — not a synthetic or oracle-priced proxy
+- has no redemption function, no oracle, and no governance
+- is exited by selling back into the same locked position at ≥ par, not by burning a claim
+
+A **Reflector issue** is Uniteum's implementation of a par token. "Par token" names the generic instrument class; "Reflector issue" names an instance produced by the Reflector factory.
+
+---
+
 ## Reciprocal
 
 The **reciprocal** of a Unit `U` is the Unit `1/U`.
