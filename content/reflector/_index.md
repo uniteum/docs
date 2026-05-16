@@ -31,9 +31,11 @@ When you create a Reflector issue, the entire supply starts out seated inside a 
 
 ---
 
-## What it costs
+## What it costs to create one
 
-Just gas. No protocol fees, no approvals. The only money you actually spend is whatever you choose to buy of your own issue to distribute.
+*Creating* an issue costs only gas — no protocol fees, no approvals, no capital locked up to back it. (*Buying* one is a separate question: that's just the market price plus the usual DEX swap fee, like any other token.)
+
+So the only money you actually spend is whatever you choose to buy of your own issue afterward — to hold, gift, or distribute.
 
 ---
 
