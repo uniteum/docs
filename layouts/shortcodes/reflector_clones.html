@@ -6,14 +6,14 @@
 {{- if $reflector.address -}}
 {{- range $name, $c := $reflector.clones }}
 
-### {{ $c.symbol }} — clone for {{ $c.original }}
+### {{ $c.symbol }} — clone for {{ $c.peg }}
 
 | | |
 |:---|:---|
 | Symbol | `{{ $c.symbol }}` |
-| Original | {{ $c.original }} |
-{{- if $c.original_lookup }}
-| Original lookup | [`{{ $c.original_lookup }}`](https://etherscan.io/address/{{ $c.original_lookup_address }}#code) |
+| Peg | {{ $c.peg }} |
+{{- if $c.peg_lookup }}
+| Peg lookup | [`{{ $c.peg_lookup }}`](https://etherscan.io/address/{{ $c.peg_lookup_address }}#code) |
 {{- end }}
 {{- if $c.address }}
 | Clone | [`{{ $c.address }}`](https://etherscan.io/address/{{ $c.address }}#code) |

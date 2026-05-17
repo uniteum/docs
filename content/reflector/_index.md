@@ -41,7 +41,7 @@ So the only money you actually spend is whatever you choose to buy of your own i
 
 ## How it's organized
 
-There's a separate Reflector family per backing token. To set up a new family, someone calls [`make(token, symbol)`](https://etherscan.io/address/{{< val "unispring.reflector.address" >}}#writeContract#F{{< val "unispring" "reflector" "write" "make(original, symbol)" "f" >}}) on the Reflector factory once. By convention the symbol is `1x` + the original — `1xUSDC`, `1xWBTC` — but it's whatever the maker types, so a family is only as trustworthy as whoever set it up.
+There's a separate Reflector family per backing token. To set up a new family, someone calls [`make(token, symbol)`](https://etherscan.io/address/{{< val "unispring.reflector.address" >}}#writeContract#F{{< val "unispring" "reflector" "write" "make(peg, symbol)" "f" >}}) on the Reflector factory once. By convention the symbol is `1x` + the backing token — `1xUSDC`, `1xWBTC` — but it's whatever the maker types, so a family is only as trustworthy as whoever set it up.
 
 After the family exists, anyone can call [`issue("Some Name")`](https://etherscan.io/address/{{< val "unispring.reflector.address" >}}#writeContract#F{{< val "unispring" "reflector" "write" "issue(name)" "f" >}}) inside it to mint their own issue. They all share the family symbol but each has its own name and its own pool.
 

@@ -18,7 +18,7 @@ This page also shows how to mint your own 1xUSDC-symbol mirror under your own na
 |:---|:---|
 | Name | `Uniteum 1xUSDC` |
 | Symbol | `1xUSDC` |
-| Backing | Chain-local USDC (resolved via [`{{< val "unispring.reflector.clones.1xUSDC.original_lookup" >}}`](https://etherscan.io/address/{{< val "unispring.reflector.clones.1xUSDC.original_lookup_address" >}}#code)), locked in a Uniswap V4 pool |
+| Backing | Chain-local USDC (resolved via [`{{< val "unispring.reflector.clones.1xUSDC.peg_lookup" >}}`](https://etherscan.io/address/{{< val "unispring.reflector.clones.1xUSDC.peg_lookup_address" >}}#code)), locked in a Uniswap V4 pool |
 | Decimals | 6 on Ethereum (matches USDC) |
 | Trading range | `[1.0000, 1.0001)` × USDC |
 | Issue ERC-20 | [``](https://etherscan.io/token/) |
@@ -78,9 +78,9 @@ For the geometric argument in detail, see [Reflector — peg mechanics](/reflect
 
 USDC lives at a different address on every chain. If the `1xUSDC` clone keyed off the raw USDC address, deploying it on Ethereum versus Arbitrum would produce two different clone addresses — fragmenting integrations and making cross-chain UX hostile.
 
-Instead, the clone keys off [`{{< val "unispring.reflector.clones.1xUSDC.original_lookup" >}}`](/locale/) — a [Locale](/locale/) lookup contract whose `value()` resolves to the chain-local USDC. Reflector computes the clone's CREATE2 salt from the **lookup address**, not from whatever the lookup resolves to. The same lookup address on every chain yields the same clone address on every chain.
+Instead, the clone keys off [`{{< val "unispring.reflector.clones.1xUSDC.peg_lookup" >}}`](/locale/) — a [Locale](/locale/) lookup contract whose `value()` resolves to the chain-local USDC. Reflector computes the clone's CREATE2 salt from the **lookup address**, not from whatever the lookup resolves to. The same lookup address on every chain yields the same clone address on every chain.
 
-So `Uniteum 1xUSDC` will be the same `(clone, issue)` pair of addresses on Ethereum, Arbitrum, Base, and any other chain we deploy `{{< val "unispring.reflector.clones.1xUSDC.original_lookup" >}}` to — with each chain's issue backed by its own chain's USDC.
+So `Uniteum 1xUSDC` will be the same `(clone, issue)` pair of addresses on Ethereum, Arbitrum, Base, and any other chain we deploy `{{< val "unispring.reflector.clones.1xUSDC.peg_lookup" >}}` to — with each chain's issue backed by its own chain's USDC.
 
 ---
 
@@ -89,5 +89,5 @@ So `Uniteum 1xUSDC` will be the same `(clone, issue)` pair of addresses on Ether
 - [Factory reference](/reflector/reference/) — the factory, its layout, and the full set of operations
 - [Reflector — peg mechanics](/reflector/mechanics/) — why the 1-bp corridor is hard
 - [Fountain](/unispring/fountain/) — the V4 position primitive backing every issue
-- [Locale](/locale/) — the deterministic lookup contract used as the clone's `original`
+- [Locale](/locale/) — the deterministic lookup contract used as the clone's `peg`
 - [Uniteum 1xETH](/reflector/uniteum-1xeth/) — the same pattern applied to native ETH

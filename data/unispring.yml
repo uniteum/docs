@@ -9,6 +9,57 @@ fountain:
   description: "Owns every Unispring V4 position. Forwards swap fees to taker; no
     decrease-liquidity path."
   address: "0xf0071849DD48444cf8B2b49C2B394EF1A087e080"
+  write:
+    "offer(token, quote, ticks, amounts)":
+      f: 1
+      description: "Lock liquidity: pull `token` from the caller and open one
+        permanent V4 position per tick segment of the caller-described
+        curve. Principal can never be withdrawn — only swap fees."
+    "take(ids)":
+      f: 3
+      description: "Sweep accrued swap fees from a batch of Fountain-owned
+        positions into Fountain's balance. Permissionless."
+    "unlockCallback(data)":
+      f: 5
+      description: "Uniswap V4 unlock callback. PoolManager-only;
+        selector-dispatches the original offer/take call. Not called
+        directly."
+    "withdraw(currency, amount)":
+      f: 6
+      description: "Owner-only. Forward collected fees (and any starter
+        funds sent in for flipped-case bootstraps) to the Fountain owner."
+  read:
+    "fee()":
+      f: 1
+      description: "Fixed pool fee applied to every position: 0.01% (100)."
+    "owner()":
+      f: 2
+      description: "The address swept swap fees are forwarded to via
+        `withdraw`."
+    "poolManager()":
+      f: 3
+      description: "Chain-local Uniswap V4 PoolManager this Fountain opens
+        positions on."
+    "positions(index)":
+      f: 4
+      description: "Position record at `index` (currency0/1, fee,
+        tickSpacing, tickLower/Upper), in creation order."
+    "positionsCount()":
+      f: 5
+      description: "Number of positions opened by this Fountain."
+    "positionsSlice(offset, count)":
+      f: 6
+      description: "Bulk-read `count` positions starting at `offset`."
+    "tickSpacing()":
+      f: 7
+      description: "Fixed tick spacing: 1 (exact tick precision)."
+    "untaken(ids)":
+      f: 8
+      description: "Swap fees accrued but not yet swept for the given
+        position ids — returns (amounts0, amounts1)."
+    "version()":
+      f: 9
+      description: "Contract version string."
   clones:
     fountain1:
       name: "Fountain1"
@@ -21,22 +72,125 @@ manifold:
   description: "Per-(hub, tickLower, tickUpper) clone factory. Calls Fountain to
     seat positions."
   address:
+  write:
+    "make(hub, tickLower, tickUpper)":
+      f: 1
+      description: "Deploy (or return) the deterministic Manifold clone for
+        `(hub, tickLower, tickUpper)`. Idempotent."
+    "offer(token, supply, tickLower, tickUpper)":
+      f: 2
+      description: "Lock `supply` of `token` into a single-sided permanent
+        V4 position paired against the hub (or ETH when `token` is the
+        hub). Permissionless and re-callable."
+    "zzInit(hub, tickLower, tickUpper)":
+      f: 3
+      description: "Clone initializer. Sets the hub and seeds its ETH pool
+        from the hub balance held at the clone. Proto-only."
+  read:
+    "hub()":
+      f: 1
+      description: "The hub token this clone pairs spokes against."
+    "made(hub, tickLower, tickUpper)":
+      f: 2
+      description: "Predict the deterministic clone address and whether it
+        exists — returns (exists, home, salt)."
+    "placer()":
+      f: 3
+      description: "The Fountain that holds every position funded through
+        this Manifold; accrued fees flow to its owner."
+    "proto()":
+      f: 4
+      description: "The prototype instance that acts as the clone factory."
+    "version()":
+      f: 5
+      description: "Contract version string."
 
 neutrinoSource:
   name: "NeutrinoSource (prototype)"
   description: "Mints a Lepton spoke and hands it to a Manifold clone for funding."
   address:
+  write:
+    "launch(name, symbol, decimals, supply, salt, tickLower, tickUpper)":
+      f: 1
+      description: "One-call fair launch: mint a spoke token and lock its
+        entire supply as a permanent single-sided pool against this
+        clone's hub. Permissionless; caller pays gas, no pre-mint."
+    "make(name, symbol, decimals, supply, tickLower, tickUpper, tokenSalt, variant)":
+      f: 2
+      description: "Create a hub token, its Manifold clone, and a
+        NeutrinoSource clone that bundles them. Idempotent."
+    "zzInit(args)":
+      f: 4
+      description: "Clone initializer. Stores the Manifold clone (`spring`)
+        for this clone's hub. Proto-only."
+  read:
+    "channelProto()":
+      f: 1
+      description: "The NeutrinoChannel prototype cloned per tick range so
+        each range mints at a distinct token address."
+    "coinage()":
+      f: 2
+      description: "The Coinage prototype used to mint hub and spoke tokens."
+    "hub()":
+      f: 4
+      description: "This clone's hub token, derived from `spring`."
+    "made(name, symbol, decimals, supply, tickLower, tickUpper, tokenSalt, variant)":
+      f: 6
+      description: "Predict the deterministic clone address, salt, and
+        hub-token address before calling `make` — returns
+        (exists, home, salt, hubHome)."
+    "proto()":
+      f: 8
+      description: "The prototype instance that acts as the clone factory."
+    "spring()":
+      f: 9
+      description: "The Manifold clone for this clone's hub."
+    "springProto()":
+      f: 10
+      description: "The Manifold prototype used to create fair-launch pools."
+    "version()":
+      f: 11
+      description: "Contract version string."
 
 neutrinoChannel:
   name: "NeutrinoChannel (prototype)"
   description: "Relays a single Coinage.make() call per clone."
   address:
+  write:
+    "make(tickLower, tickUpper, variant)":
+      f: 1
+      description: "Deploy (or return) the caller's deterministic relay
+        clone for a tick range and salt variant. Idempotent."
+    "mint(minter, name, symbol, decimals, supply, salt)":
+      f: 3
+      description: "Source-only. Mint a token through Coinage and forward
+        the entire supply to the caller. The tick-keyed clone address
+        gives each tick range a distinct minted-token address."
+    "zzInit(args)":
+      f: 4
+      description: "Clone initializer. Records the creating `source`.
+        Proto-only."
+  read:
+    "made(sender, tickLower, tickUpper, variant)":
+      f: 3
+      description: "Predict the deterministic clone address for
+        `(sender, tickRange, variant)` — returns (exists, home, salt)."
+    "proto()":
+      f: 5
+      description: "The prototype instance that acts as the clone factory."
+    "source()":
+      f: 6
+      description: "The address that created this clone and the only caller
+        allowed to invoke `mint`."
+    "version()":
+      f: 7
+      description: "Contract version string."
 
 reflector:
   name: "Reflector (prototype)"
   description: "Two-level factory. The prototype mints clones keyed by
-    (original, symbol); each clone issues ERC-20s — one per name —
-    pegged 1:1 against its original inside a hard 1-bp corridor. The
+    (peg, symbol); each clone issues ERC-20s — one per name —
+    pegged 1:1 against its peg inside a hard 1-bp corridor. The
     prototype itself is the canonical clone for the native pair, whose
     symbol is resolved at construction from a chain-local IStringLookup
     (\"1xETH\" on mainnet, \"1xMATIC\" on Polygon, etc.)."
@@ -44,74 +198,76 @@ reflector:
   # so its CREATE2 address differs too. Vanity-mined and deployed via
   # Nick on Arbitrum.
   address: "0x3131cE680E5Dd6d3fCF4BB3942186B49f7330080"
+  # `f` values are positions on the live, verified peg v0.9.0 contract.
+  # Gaps (write F3; read F2/F4/F6) are inherited Prototype plumbing
+  # — encode() and the generic make(bytes)/made(bytes)/made(bytes32)
+  # overloads — left undocumented, same convention as liquid.yml.
   write:
     "issue(name)":
       f: 1
       description: "Mint a fresh issue ERC-20 with this clone's stored
-        (original, symbol) and seat its entire supply as a single-tick V4
-        position. Idempotent per name. Callable on the prototype to mint
-        native-pair issues, or on any clone to mint issues under that pair."
-    "make(original, symbol)":
+        (peg, symbol) and seat its entire supply as a single-tick V4
+        position at price 1. Idempotent per name. Callable on the
+        prototype to mint native-pair issues, or on any clone to mint
+        issues under that pair."
+    "make(peg, symbol)":
       f: 2
       description: "Deploy (or return) the deterministic Reflector clone for
-        (original, symbol). Pass an IAddressLookup as `original` to peg
-        against a chain-local token while keeping the same clone address
-        across chains. Returns the prototype itself for the native pair."
-    "zzInit(original, symbol)":
-      f: 3
-      description: "Clone initializer. Records (original, symbol) on a
-        freshly deployed clone. Restricted to the prototype."
+        (peg, symbol). Pass an IAddressLookup as `peg` to mirror a
+        chain-local token while keeping the same clone address across
+        chains. Returns the prototype itself for the native pair."
+    "zzInit(args)":
+      f: 4
+      description: "Clone initializer. Decodes and records (peg, symbol) on
+        a freshly deployed clone. Proto-only; reverts on the reserved
+        native pair."
   read:
     "coinage()":
       f: 1
       description: "The Coinage factory used to mint issue ERC-20s."
     "issued(name)":
-      f: 2
-      description: "Predict the deterministic issue address for `name`
-        under this instance's stored (original, symbol)."
-    "issued(original, symbol, name)":
       f: 3
       description: "Predict the deterministic issue address for `name`
-        under (original, symbol), whether or not the clone is deployed yet."
-    "made(original, symbol)":
-      f: 4
+        under this instance's stored (peg, symbol)."
+    "made(peg, symbol)":
+      f: 5
       description: "Predict the deterministic address (and existence) of a
-        clone for (original, symbol) before calling `make`. Returns the
+        clone for (peg, symbol) before calling `make`. Returns the
         prototype's own address for the native pair."
     "maxSupply()":
-      f: 5
+      f: 7
       description: "Raw supply minted for an 18-decimal issue (10^27).
         Issues with fewer decimals scale down by 10× per decimal below 18."
-    "original()":
-      f: 6
-      description: "The original currency every issue minted by this
-        instance is pegged against (Currency.wrap(address(0)) for native
-        ETH). The prototype's value is native ETH."
+    "peg()":
+      f: 8
+      description: "The currency every issue minted by this instance is
+        pegged 1:1 against (address(0) for native ETH). The prototype's
+        value is native ETH."
     "placer()":
-      f: 7
+      f: 9
       description: "The Fountain that holds each issue's single-tick
         position and routes its swap fees to the Fountain owner."
     "proto()":
-      f: 8
+      f: 10
       description: "The prototype instance that acts as the clone factory."
     "symbol()":
-      f: 9
+      f: 11
       description: "The symbol shared by every issue minted by this
         instance. The prototype resolves its value from a chain-local
         IStringLookup at construction (e.g. \"1xETH\" on mainnet)."
     "version()":
-      f: 10
+      f: 12
       description: "Contract version string."
 
-  # Known clones. Each entry is itself a (original, symbol) factory whose
+  # Known clones. Each entry is itself a (peg, symbol) factory whose
   # `issue(name)` mints an issue ERC-20 sharing this symbol and pegged
-  # against this original. Addresses will be republished after Reflector
+  # against this peg. Addresses will be republished after Reflector
   # is deployed — earlier Notable/Mimicry-era addresses are stale because
   # Reflector's bytecode differs.
   clones:
     1xETH:
       symbol: "1xETH"
-      original: "native ETH"
+      peg: "native ETH"
       address: "0x3131cE680E5Dd6d3fCF4BB3942186B49f7330080"
       note: "On mainnet the prototype itself is the canonical native-pair
         clone — no separate deploy. The pair's symbol is resolved at
@@ -123,11 +279,11 @@ reflector:
           permalink: "/reflector/uniteum-1xeth/"
     1xUSDC:
       symbol: "1xUSDC"
-      original: "chain-local USDC (resolved via USDCLookup)"
-      original_lookup: "USDCLookup"
-      original_lookup_address: "0xc5dcC241a5927fc9e3750Ecf654dAfa9893de220"
+      peg: "chain-local USDC (resolved via USDCLookup)"
+      peg_lookup: "USDCLookup"
+      peg_lookup_address: "0xc5dcC241a5927fc9e3750Ecf654dAfa9893de220"
       address:
-      note: "Deployed by the prototype with USDCLookup as `original`, so
+      note: "Deployed by the prototype with USDCLookup as `peg`, so
         the same clone address resolves on every chain that has a
         USDCLookup."
       issues:
