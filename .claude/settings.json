@@ -1,5 +1,6 @@
 {
     "permissions": {
+        "defaultMode": "auto",
         "additionalDirectories": [
             "/home/paul/git/uniteum/docs/lib/solid/docs/_data"
         ],
