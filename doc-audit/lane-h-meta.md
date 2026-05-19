@@ -1,0 +1,8 @@
+# Lane H — Meta / site-wide · **HIGH** (do first — stops future drift)
+
+- [ ] **H1 (HIGH)** [CLAUDE.md](../CLAUDE.md) — Rewrite for Hugo: real `content/` tree (incl. `_index.md`, `bitsy.md`, `philosophy.md`, `why.md`, `reflector/`); `_data/` → `data/`; `site.data.*` → `{{< val >}}`/`hugo.Data`; replace Jekyll Liquid table patterns with actual shortcodes (`fn_table`, `addr_table`, `val`, `efn`, `reflector_clones`); solc 0.8.30 → 0.8.34; Tech Stack → Hugo + hugo-book + Cloudflare; fix domain line; reconcile/remove dangling `Unit.json` authoritative-source claim; bump "Last Updated".
+- [ ] **H2 (MED)** `.meta/CHATGPT.md`, `.meta/PROJECT_CONSTITUTION.md` — Jekyll → Hugo; mark `Unit.json` historical/external or point to real canonical source; optionally archive stale `*_SUMMARY.md`/audit snapshots.
+- [ ] **H3 (MED)** Project memory note (`.claude/memory/MEMORY.md` per `always.md`) — Correct "source repos are submodules under `docs/lib/`": `docs/lib/` is **empty**; sources are sibling repos under `/home/paul/git/uniteum/`; only submodule is `themes/hugo-book`.
+- [ ] **H4 (MED)** [content/legal.md](../content/legal.md) — Fix stale "deployed in version 0.1" (line 34) and "Last updated: December 2024" (line 58); make version-agnostic / reference data.
+- [ ] **H5 (LOW)** content/legal.md — Broaden disclaimer/third-party scope from Uniteum-only to all six projects (or state Uniteum scope explicitly + note the others).
+- [ ] **H6 (MED)** [content/bitsy.md](../content/bitsy.md):143-154 — Add **Locale** and **Unispring** rows to the practice table (both `Prototype`/Bitsy-based per `_index.md:97`).
