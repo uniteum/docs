@@ -5,6 +5,10 @@
             "path": "."
         },
         {
+            "name": "wiki",
+            "path": "../../bitsy-services/wiki"
+        },
+        {
             "name": "promo",
             "path": "../promo"
         },
