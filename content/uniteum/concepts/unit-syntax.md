@@ -133,7 +133,7 @@ Documentation and examples should use canonical forms unless explicitly labeled 
 
 ### Key properties
 
-- **Format**: 40-character checksummed hexadecimal Ethereum address
+- **Format**: 42-character `0x`-prefixed [EIP-55](https://eips.ethereum.org/EIPS/eip-55) checksummed Ethereum address string (the `0x` prefix plus 40 hex characters)
 - **Backing**: Real ERC-20 tokens held custodially by the Unit contract
 - **Value**: Inherits value from the underlying token
 - **Creation**: `one().anchored(IERC20(address))`
@@ -144,7 +144,7 @@ Common anchored units (using shorthand notation for readability):
 - `0xWETH` → {{< unit symbol="0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" >}}
 - `0xUSDC` → {{< unit symbol="0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48" >}}
 - `0xUSDT` → {{< unit symbol="0xdAC17F958D2ee523a2206206994597C13D831ec7" >}}
-- `0xWBTC` → {{< unit symbol="0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599" >}}
+- `0xWBTC` → {{< unit symbol="0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599" >}}
 
 See [Anchored Units reference](/uniteum/reference/anchored-units/) for complete list and details.
 

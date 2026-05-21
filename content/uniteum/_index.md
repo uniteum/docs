@@ -24,7 +24,7 @@ Uniteum:
 - **Geometric mean triads**: Every forge operates on (U, V, √(U*V)) where liquidity units mediate reserve units
 - **One invariant** governs all operations: `√(u · v) = w`
 - **Infinite interconnected pools** through algebraic composition
-- **Arbitrary power perps**: Generalizes beyond Uniswap's 0.5 power perps—create any convexity profile (0.5x, 1x, 2x, custom rational exponents)
+- **Arbitrary power perps (intended)**: Enables power-perp-style exposures beyond Uniswap's 0.5 power perp — any convexity profile (0.5x, 1x, 2x, custom rational exponents) is structurally expressible. Note: the v1 contract does not enforce cross-power value constraints between, e.g., A and A^k; consistency is expected to emerge from arbitrage rather than contract logic. See [Known Issues](/uniteum/known-issues/).
 - **No oracles**—prices emerge from forge operations and arbitrage
 - **Permissionless liquidity creation**—anyone can create units and provide "1" token liquidity
 

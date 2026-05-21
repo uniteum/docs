@@ -110,6 +110,13 @@ Calculate the change in "1" balance required for a forge operation.
 
 **Use:** Preview forge costs before execution
 
+**Floating-side scaling:** The returned `dw` is scaled by the number of **non-anchored** sides in the (U, 1/U) pair:
+- both sides floating → `dw` is doubled (×2)
+- exactly one side anchored → `dw` is unscaled (×1)
+- both sides anchored → `dw` is zero (×0), since the anchor tokens themselves carry all of the value movement
+
+This mirrors the source: `if (address(anchor) == address(0) && address(reciprocal.anchor()) == address(0)) dw *= 2;` in `Unit.sol`'s `forgeQuote(int256,int256)`.
+
 ---
 
 #### `forgeQuote(IUnit V, int256 du, int256 dv) → (IUnit W, int256 dw)`
@@ -124,6 +131,8 @@ Calculate the product unit and balance change for a compound forge operation.
 **Returns:**
 - `W` — Product unit address
 - `dw` — Signed change of W's balance
+
+**Floating-side scaling:** As with the reciprocal overload, the returned `dw` is multiplied by a `floatingCount` of 0, 1, or 2 — one count for each side of the pair whose `anchor()` is the zero address. Both floating → ×2; one anchored → ×1; both anchored → ×0. See `Unit.sol`'s `forgeQuote(IUnit,int256,int256)` for the exact expression.
 
 ---
 
@@ -429,21 +438,23 @@ Prefix for all unit names.
 
 ### `ONE_MINTED`
 
-Immutable value tracking the total original "1" supply minted in genesis.
+Immutable `uint256` declared on `Unit.sol`. On deployed `Unit` and its clones this immutable is **never assigned**, so it reads back as `0` — it is **not** an enforced supply ceiling.
 
 **Type:** `uint256`
 
-**Note:** Total "1" supply will never exceed this value
+**Value:** `0` on the deployed Uniteum "1" contract and all of its Unit clones (the immutable is declared but not set in the constructor).
+
+**Note:** The 1 billion figure sometimes cited as a ceiling is the **fixed supply of the separate genesis "1" token** ([`{{< val "contracts.genesis.address" >}}`](https://etherscan.io/address/{{< val "contracts.genesis.address" >}}#code)), not a value enforced by `ONE_MINTED`. Total current "1" supply is bounded indirectly by how much genesis "1" has been migrated in via {{< val "contracts.uniteum.name" >}}'s `migrate()`.
 
 ---
 
-### `UPSTREAM_ONE()`
+### `UPSTREAM()`
 
-Address of v0.0 "1" token accepted for migration.
+Address of v0.0 "1" token accepted for migration. Declared on `IMigratable` and implemented as the immutable `UPSTREAM` on `Unit`.
 
 **Returns:** ERC-20 address of upstream "1"
 
-**Value:** [`0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4`](https://etherscan.io/address/0xC833f0B7cd7FC479DbbF6581EB4eEFc396Cf39E4#code) (v0.0)
+**Value:** [`{{< val "contracts.genesis.address" >}}`](https://etherscan.io/address/{{< val "contracts.genesis.address" >}}#code) — the genesis "1" token (currently `0x7D5B1349157335aEEB929080a51003B529758830`).
 
 ---
 
@@ -471,6 +482,32 @@ Emitted when a forge operation completes.
 - `du` — Signed change in unit balance
 - `dv` — Signed change in reciprocal/pair balance
 - `dw` — Signed change in "1" or product unit balance
+
+---
+
+### `Migrate`
+
+Emitted when v0.0 "1" tokens are migrated into the current "1" token.
+
+**Parameters:**
+- `user` (indexed) — Address that migrated tokens
+- `amount` — Amount of tokens migrated
+
+**Note:** `migrate()` also emits `Forge` (the underlying `__forge` mints the new "1" supply to the caller). See `IUnit.sol:304-311` and `Unit.sol:391,399`.
+
+---
+
+### `Unmigrate`
+
+Emitted when current "1" tokens are unmigrated back to v0.0 "1".
+
+**Parameters:**
+- `user` (indexed) — Address that unmigrated tokens
+- `amount` — Amount of tokens unmigrated
+
+**Note:** `unmigrate()` also emits `Forge` (the underlying `__forge` burns the current "1" supply).
+
+> The `Migrated` / `Unmigrated` events declared in `IMigratable.sol` are not emitted by `Unit.sol` — only `Migrate` / `Unmigrate` (above) are emitted. The `IMigratable` events are dead code in this implementation.
 
 ---
 

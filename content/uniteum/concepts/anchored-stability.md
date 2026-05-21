@@ -137,8 +137,10 @@ For an anchored unit like `0xWETH`:
 
 **Invariant:**
 ```
-sqrt(supply_0xWETH × supply_1/0xWETH) = locked_"1"_in_contract
+sqrt(supply_0xWETH × supply_1/0xWETH) = w  (the geometric-mean bookkeeping value)
 ```
+
+`w` is computed from the reserve supplies on demand. It is **not** a custodied `1` balance — `1` is minted and burned globally on the ONE contract during forge.
 
 **External WETH price:** `P_WETH` (e.g., $2000)
 
@@ -146,7 +148,7 @@ sqrt(supply_0xWETH × supply_1/0xWETH) = locked_"1"_in_contract
 
 **Implied "1" price:**
 ```
-P_1_implied = (supply_0xWETH × P_WETH) / locked_"1"
+P_1_implied = (supply_0xWETH × P_WETH) / w
 ```
 
 If market "1" price `P_1_market ≠ P_1_implied`, arbitrage profit exists.
@@ -180,9 +182,9 @@ Arbitrageurs exploit by:
 With N anchored units, each provides independent implied price:
 
 ```
-P_1_implied_WETH = f(WETH_locked, "1"_locked_in_WETH_contract, P_WETH)
-P_1_implied_USDC = f(USDC_locked, "1"_locked_in_USDC_contract, P_USDC)
-P_1_implied_WBTC = f(WBTC_locked, "1"_locked_in_WBTC_contract, P_WBTC)
+P_1_implied_WETH = f(WETH_locked, w_WETH, P_WETH)   // w_WETH = sqrt(u * v) for the 0xWETH pair
+P_1_implied_USDC = f(USDC_locked, w_USDC, P_USDC)
+P_1_implied_WBTC = f(WBTC_locked, w_WBTC, P_WBTC)
 ...
 ```
 

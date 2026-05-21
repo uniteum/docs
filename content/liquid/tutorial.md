@@ -206,24 +206,26 @@ The result shows Hub used and spoke B tokens you'd receive.
 
 ### Preview
 
-1. Go to [{{< val "liquids.spoke.symbol" >}} → cools](https://etherscan.io/token/{{< val "liquids.spoke.address" >}}#readContract#F{{< val "liquid" "read" "cools(u)" "f" >}}) (the one with just `uint256 u`)
-2. Enter the amount of {{< val "liquids.spoke.symbol" >}} tokens to burn
-3. Click **Query**
+1. Go to [{{< val "liquids.spoke.symbol" >}} → cools](https://etherscan.io/token/{{< val "liquids.spoke.address" >}}#readContract#F{{< val "liquid" "read" "cools(u, e)" "f" >}})
+2. Enter `u` — the amount of {{< val "liquids.spoke.symbol" >}} tokens to burn
+3. Enter `e = 0` — pass `0` for a liquid-only exit (no hub withdrawn from the lake)
+4. Click **Query**
 
-The result shows how many {{< val "backing.spoke.name" >}} tokens you'd receive (`s`) and how many pool tokens get burned alongside yours (`p`).
+The result shows how many {{< val "backing.spoke.name" >}} tokens you'd receive (`m`) and how many pool tokens get burned alongside yours (`p`).
 
 ### Cool
 
-1. Go to [{{< val "liquids.spoke.symbol" >}} → cool](https://etherscan.io/token/{{< val "liquids.spoke.address" >}}#writeContract#F{{< val "liquid" "write" "cool(u)" "f" >}}) (the one with just `uint256 u`)
+1. Go to [{{< val "liquids.spoke.symbol" >}} → cool](https://etherscan.io/token/{{< val "liquids.spoke.address" >}}#writeContract#F{{< val "liquid" "write" "cool(u, e)" "f" >}})
 2. Enter `u` — the amount of {{< val "liquids.spoke.symbol" >}} tokens to burn
-3. Click **Write** and confirm
+3. Enter `e = 0` — pass `0` for a liquid-only exit (no hub withdrawn from the lake)
+4. Click **Write** and confirm
 
 **What happened:**
 - Your {{< val "liquids.spoke.symbol" >}} tokens were burned
 - A matching amount was burned from the pool (maintaining the 2x symmetry from heat)
 - {{< val "backing.spoke.name" >}} tokens were returned to your wallet proportional to pool reserves
 
-To unwrap Hub back to "Uniteum 1", call [`cool`](https://etherscan.io/token/{{< val "liquids.hub.address" >}}#writeContract#F{{< val "liquid" "write" "cool(u)" "f" >}}) on the Hub — this is a simple 1:1 unwrap.
+To unwrap Hub back to "Uniteum 1", call [`cool`](https://etherscan.io/token/{{< val "liquids.hub.address" >}}#writeContract#F{{< val "liquid" "write" "cool(u, e)" "f" >}}) on the Hub with `e = 0` — this is a simple 1:1 unwrap (the Hub ignores `e`).
 
 <!-- TODO: example tx hash for a cool transaction -->
 

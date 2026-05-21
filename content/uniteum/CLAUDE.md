@@ -143,13 +143,13 @@ Since the same unit can serve as a reserve in one triad and a liquidity unit in 
 ### 7. Key Contract Implementation Details
 
 **ONE_MINTED Constant:**
-- Immutable value tracking the primordial "1" supply ceiling (1 billion)
-- Total "1" supply across all versions will never exceed this value
-- For current version: acts as maximum possible supply (reached only if 100% migration from v0.0)
-- Set at deployment, provides supply ceiling
+- Declared `immutable` on `Unit` (`Unit.sol:27`), but the v1 constructor does **not** assign it. On deployed Unit clones, `ONE_MINTED` returns `0`.
+- The "1 billion" figure is the **separate genesis token's** fixed supply (the v0.0 ERC-20). It is *not* an enforced on-chain ceiling on the current Unit contract.
+- The genesis token's totalSupply caps how much can be migrated into the current version, but no `ONE_MINTED` check enforces a cap on the current Unit.
+- Documentation should describe 1B as the genesis supply, not as an `ONE_MINTED` ceiling on the deployed Unit.
 
 **Name Prefix:**
-- All units are prefixed with version name (from `site.data.contracts.uniteum.name`) in their ERC-20 name
+- All units are prefixed with version name (rendered via `{{< val "contracts.uniteum.name" >}}`, sourced from `data/contracts.yml`) in their ERC-20 name
 - Example: "Uniteum-0.7 1 meter" (for version 0.7)
 - Version prefix comes from contract deployment
 
@@ -157,6 +157,16 @@ Since the same unit can serve as a reserve in one triad and a liquidity unit in 
 - Positive `du`/`dv` values: mint units to caller
 - Negative `du`/`dv` values: burn units from caller
 - Critical for understanding forge operations
+
+**`dw` scaling by non-anchored side count (`Unit.sol:75-88`):**
+
+`forgeQuote` computes the natural `dw = w₀ − w₁` from the invariant and then multiplies by the number of **floating** sides in the pair:
+
+- **Both sides floating (×2):** `dw = 2·(w₀ − w₁)`. The `1` balance change is doubled.
+- **One side anchored (×1):** `dw = w₀ − w₁`. Standard invariant `dw`.
+- **Both sides anchored (×0):** `dw = 0`. The `1` balance is untouched; only the anchored ERC-20 transfers occur.
+
+When writing examples, always identify which case applies before computing a numeric `dw`. The doubling is easy to miss and is a frequent source of doc errors.
 
 **Exponent Division:**
 - Uses `:` character for division in exponents (not `/`)
@@ -176,7 +186,7 @@ Since the same unit can serve as a reserve in one triad and a liquidity unit in 
 **UnitHelper Contract:**
 - Helper contract for batch operations on units
 - Deployed at same address across networks (deterministic deployment)
-- See `site.data.contracts.helper` in contracts.yml for addresses
+- See `data/contracts.yml` (helper entry) for addresses; render with `{{< val "contracts.helper.address" >}}` or `{{< etherscan address="..." >}}`
 - Key functions:
   - `multiply(IUnit unit, string[] expressions)` - Create multiple units in one transaction
   - `product(IUnit unit, string[] expressions)` - Predict multiple unit addresses (view-only)
@@ -362,7 +372,7 @@ When displaying unit expressions (base units, compound units, or anchored units)
 - ✅ CORRECT: `meter/second`, `0xWETH/second`, `foo*bar^2`
 - ❌ WRONG: `meter`/`second`, {{< token ... >}}`/second`, `foo*`bar`^2`
 
-**Key principle:** Never split a unit expression across formatting boundaries. If using code formatting, links, or Jekyll includes, the entire compound expression should be treated as one unit.
+**Key principle:** Never split a unit expression across formatting boundaries. If using code formatting, links, or Hugo shortcodes, the entire compound expression should be treated as one unit.
 
 **Examples:**
 - Simple compound: `meter/second` (not `meter`/`second`)
@@ -375,14 +385,14 @@ When working with tokens like WETH, there are THREE distinct entities that must 
 
 1. **External ERC-20 Token Contract** - `0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
    - This is the actual WETH contract on Ethereum
-   - Lives in `site.data.tokens.WETH.address`
+   - Lives in `data/tokens.yml` under `WETH.address`; render via `{{< val "tokens.WETH.address" >}}` (or the dedicated `token` shortcode)
    - Link using: `{{< token address="0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" >}}`
    - This is what backs the anchored unit
 
 2. **Anchored Uniteum Unit** - `0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
    - This is the Uniteum Unit that wraps the external WETH token 1:1
    - Has its own address (different from the WETH contract!)
-   - Stored in `site.data.units` as symbol `0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
+   - Stored in `data/units.yml` keyed by symbol `0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
    - Link using: `{{< unit symbol="0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" >}}`
    - The symbol IS the token address (no prefix needed)
 
@@ -390,7 +400,7 @@ When working with tokens like WETH, there are THREE distinct entities that must 
    - This is a Uniteum Unit with the symbol "WETH" (short name, NOT an address)
    - Has ZERO connection to real WETH or the WETH contract
    - Just a label/symbol, value emerges only from liquidity
-   - Stored in `site.data.units` as symbol `WETH` (if it exists)
+   - Stored in `data/units.yml` keyed by symbol `WETH` (if it exists)
    - Link using: `{{< unit symbol="WETH" >}}`
 
 **Linking Rules:**
@@ -409,16 +419,16 @@ When working with tokens like WETH, there are THREE distinct entities that must 
 - ❌ Treating `WETH` (floating) as if it has connection to real WETH
 - ❌ Confusing the external token address with the anchored Unit address
 
-**Quick Reference - Which Include to Use:**
+**Quick Reference - Which Shortcode to Use:**
 
-```liquid
-{%- comment -%} External WETH token contract (0xC02a...) - NOT anchored Unit {%- endcomment -%}
+```go-html-template
+{{/* External WETH token contract (0xC02a...) - NOT anchored Unit */}}
 {{< token address="0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" >}}
 
-{%- comment -%} Anchored Uniteum Unit (0xC02a...) - The wrapper Unit {%- endcomment -%}
+{{/* Anchored Uniteum Unit (0xC02a...) - The wrapper Unit */}}
 {{< unit symbol="0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" >}}
 
-{%- comment -%} Floating Uniteum Unit (WETH) - No connection to real WETH {%- endcomment -%}
+{{/* Floating Uniteum Unit (WETH) - No connection to real WETH */}}
 {{< unit symbol="WETH" >}}
 ```
 
@@ -435,7 +445,7 @@ Common anchored unit shorthands (all have dedicated reference pages):
 - [0xWETH](/uniteum/reference/anchored-units/weth/) = anchored Unit `0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2` (backed by WETH contract)
 - [0xUSDC](/uniteum/reference/anchored-units/usdc/) = anchored Unit `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48` (backed by USDC contract)
 - [0xUSDT](/uniteum/reference/anchored-units/usdt/) = anchored Unit `0xdAC17F958D2ee523a2206206994597C13D831ec7` (backed by USDT contract)
-- [0xWBTC](/uniteum/reference/anchored-units/wbtc/) = anchored Unit `0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599` (backed by WBTC contract)
+- [0xWBTC](/uniteum/reference/anchored-units/wbtc/) = anchored Unit `0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599` (backed by WBTC contract)
 - [0xDAI](/uniteum/reference/anchored-units/dai/) = anchored Unit `0x6B175474E89094C44Da98b954EedeAC495271d0F` (backed by DAI contract)
 
 **Anchored Unit Pages:** Located in `/uniteum/reference/anchored-units/` directory. Each page explains:
@@ -529,11 +539,13 @@ This is a quick reference. See IUnit.sol for complete signatures and documentati
 - `forge(int256 du, int256 dv)` - Simplified forge with reciprocal
 - `forgeQuote(...)` - Preview forge results before execution (view function)
 
-**IMPORTANT NOTE ON FORGE BEHAVIOR:** There are two distinct forge mechanics:
-1. **Reciprocal forging via "1"** (U, 1/U, 1 triad): Only mints/burns tokens, no transfers. "1" serves as liquidity unit.
-2. **Compound unit forging** (e.g., (A², B², A*B) triad): Mints/burns the liquidity unit (A*B) AND transfers the reserve units (A² and B²) custodially to/from the caller during the forge operation.
+**IMPORTANT NOTE ON FORGE BEHAVIOR:** Two forge entry points exist, but the v1 contract behaves as follows:
 
-**Note on triad structure:** All valid triads follow `(U, V, √(U*V))` where √(U*V) is the liquidity unit (geometric mean).
+1. **Reciprocal forge `forge(int256 du, int256 dv)`** (U, 1/U, 1 triad): Mints/burns U, 1/U, and `1` against the caller's balances. No ERC-20 transfers occur for floating Units. **Qualification:** if either side is an *anchored* Unit, `__mint` / `__burn` transfer the underlying ERC-20 between the caller and the Unit contract (see `Unit.sol:156-176`). So "no transfers" applies only to floating-only pairs.
+
+2. **Compound forge `forge(IUnit V, int256 du, int256 dv)`** — **incomplete** in v1: although the documented intent is to operate the `(this, V, sqrt(this·V))` triad, `Unit.sol:124-129` actually operates the `(this, reciprocal, ONE)` triad regardless of `V` (it calls `ONE.__forge(msg.sender, this, reciprocal, du, dv, dw)`). True compound-triad forging is not yet implemented. See [Known Issues](/uniteum/known-issues/) and `Unit.sol:124-129`.
+
+**Note on triad structure:** All valid triads follow `(U, V, √(U*V))` where √(U*V) is the geometric-mean Unit. In v1, only the `(U, 1/U, 1)` shape is fully wired through forge.
 
 **Unit Creation:**
 - `multiply(string symbol)` - Create base unit from "1"

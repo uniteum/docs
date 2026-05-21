@@ -129,45 +129,32 @@ hub_received = lake - lake'
 - Invariant preserved: `pool' × lake' = pool × lake`
 - Always provides some liquidity (never fully depleted)
 
-#### Inverse Operations
+#### Deployed Trading Functions
 
-**BuyWith**: Specify hub input amount, calculate spoke output
-```
-lake' = lake + hub
-pool' = (pool × lake) / lake'
-spoke_received = pool - pool'
-```
+The protocol exposes exactly two single-instance trading operations, each with a `view` quote function and an executing function:
 
-**SellFor**: Specify desired hub output, calculate required spoke input
-```
-lake' = lake - hub
-pool' = (pool × lake) / lake'
-spoke_required = pool' - pool
-```
+- **`buy(e)`** — spend `e` hub tokens, receive `s = buys(e)` spoke tokens
+- **`sell(s)`** — sell `s` spoke tokens, receive `e = sells(s)` hub tokens
 
-All four operations (buy, sell, buyWith, sellFor) maintain the constant-product invariant while offering different user experience trade-offs.
+Both are *specify-input* operations: the caller specifies what they put in, and the constant-product formula determines what they get out. There are no specify-output variants (no `buyWith`, no `sellFor` in the "specify hub output" sense — see the cross-instance section below for the actual `sellFor`/`sellsFor` signatures).
 
 ### Cross-Instance Swaps
 
-To swap between two different spoke tokens A and B:
+To swap between two different spoke tokens A and B, the protocol routes through the hub atomically in a single transaction. Only one variant is deployed:
 
-1. Execute operation on instance A (sell A for hub, or buy A with hub)
-2. Execute inverse operation on instance B (buy B with hub, or sell B for hub)
-3. Both operations atomic within single transaction
-4. Each instance maintains its own constant-product invariant
+- **`sellFor(that, s)`** on spoke A — sells `s` of A's spoke tokens for hub, then immediately spends that hub to buy B's spoke tokens; returns `(e, thats)` where `e` is the hub used as intermediary and `thats` is the amount of B's spoke tokens received.
+- **`sellsFor(that, s)`** is the corresponding `view` quote.
 
-**Four variants** based on which token amount is specified:
-- `buy(A, B)`: Specify amount of A to receive, calculate B required
-- `sell(A, B)`: Specify amount of A to sell, calculate B received
-- `buyWith(A, B)`: Specify amount of B to spend, calculate A received
-- `sellFor(A, B)`: Specify amount of B to receive, calculate A required
+Both are specify-input on the source spoke side (`s` of A in). There is no specify-output cross-instance variant, no `buy(A, B)` / `sell(A, B)` pair — only the single `sellFor` direction.
 
 **Mathematical composition**:
 ```
-A → Hub: Standard sell/buy operation on instance A
-Hub → B: Standard buy/sell operation on instance B
-Net effect: A ↔ B swap with hub as intermediary
+A → Hub: Standard sell operation on instance A (consumes s of A, produces e hub)
+Hub → B: Standard buy operation on instance B (consumes e hub, produces thats of B)
+Net effect: A → B swap with hub as intermediary
 ```
+
+To swap in the reverse direction (B → A), call `sellFor` on spoke B with A as the target. Each instance maintains its own constant-product invariant.
 
 ## Architectural Design
 
@@ -576,6 +563,8 @@ Verify invariant:
                 = k ✓
 ```
 
+**Integer rounding note.** The deployed implementation computes the lake remainder with ceiling division to guarantee the invariant never *decreases* under integer arithmetic. Concretely, `sells(s)` returns `e = E − ⌈(E·S + E − 1) / (S + s)⌉`, where the deduction is rounded up so `e` is rounded down. Any sub-wei residue stays in the lake on the protocol's side, so the post-trade `pool' × lake' ≥ pool × lake = k` rather than `= k` exactly. The exact-arithmetic identity above is the limit; the deployed identity is a one-sided inequality in favor of the pool.
+
 ### Theorem 2: Wrap/Unwrap Symmetry
 
 **Claim**: Wrapping n tokens then immediately unwrapping results in receiving ≤ n backing tokens.
@@ -651,7 +640,7 @@ price = lake / pool  (integer division)
 - Can wrap (creates initial pool via 2x mint)
 
 **Empty lake** (`lake = 0`):
-- Cannot sell profitably (with `k = pool × lake = 0`, selling yields zero hub)
+- `sells(s)` / `sell(s)` **revert** with arithmetic underflow. The deployed quote computes `e = E − ⌈(E·S + E − 1) / (S + s)⌉`, and the inner `E − 1` underflows when `E = 0` (uint subtraction). Selling into an empty lake is not "yields zero hub" — it is a hard revert.
 - Cannot buy profitably (buying removes pool tokens but costs zero hub — no meaningful price)
 - Requires seeding: a cross-instance swap or direct hub transfer to establish `k > 0`
 

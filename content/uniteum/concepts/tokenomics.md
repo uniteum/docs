@@ -51,69 +51,71 @@ $$w = \sqrt{u \cdot v}$$
 
 This creates a symmetric relationship between the reserve units. Neither reserve is privileged; they jointly determine the liquidity unit supply.
 
-This geometric mean structure implements 0.5 power perpetuals, connecting Uniteum to the theoretical framework of constant product AMMs.
+This geometric mean structure enables 0.5 power perpetuals, connecting Uniteum to the theoretical framework of constant product AMMs. (The v1 contract does not enforce cross-power value constraints — see [_index](/uniteum/) for the design scope.)
 
 ## Forge Mechanics
 
-Forging transforms tokens while preserving the invariant. There are two directions:
+Forging transforms balances while preserving the invariant. Signs are from the **caller's** point of view: positive `du`, `dv` mint U and V to you (increasing their supplies); negative values burn from you.
 
-### Forward Forge: Consume Reserves, Mint Liquidity
+`forgeQuote` then computes the matching `dw`:
 
-You provide some amount of reserve units U and V; you receive liquidity unit W.
+$$dw = w_0 - w_1 \quad\text{where}\quad w_1 = \sqrt{(u_0 + du)(v_0 + dv)}$$
 
-Before: u₀, v₀, w₀ (where u₀ · v₀ = w₀²)
+A positive `dw` mints `1` to your balance; a negative `dw` burns `1` from you.
 
-You contribute Δu of U and Δv of V.
+### The floating-pair doubling
 
-After: u₁ = u₀ + Δu, v₁ = v₀ + Δv, w₁ = ?
+When **both** sides of the triad are floating Units (neither U nor V is anchored to an external ERC-20), the contract applies a factor of 2:
 
-The invariant requires:
+$$dw = 2 \cdot (w_0 - w_1)$$
 
-$$(u_0 + \Delta u)(v_0 + \Delta v) = w_1^2$$
+This factor keeps the invariant balanced when both reserves are mint/burnable Units. With one anchored side, the factor is 1; with both sides anchored, `dw = 0` (the `1` balance is untouched). See `Unit.sol:75-88` for the full implementation.
 
-So:
+### Forward direction: Mint Reserves, Consume `1`
 
-$$w_1 = \sqrt{(u_0 + \Delta u)(v_0 + \Delta v)}$$
+You forge with positive `du` and `dv`. The supplies of U and V increase, so the invariant requires a larger `w` → `dw < 0`, and `1` is **burned from your balance**.
 
-You receive w₁ - w₀ of the mediator token.
+### Reverse direction: Burn Reserves, Release `1`
 
-### Reverse Forge: Burn Liquidity, Receive Reserves
-
-You provide W; you receive U and V.
-
-This is the inverse. You specify how much W to burn, and the invariant determines how much U and V you receive.
+You forge with negative `du` and `dv`. The supplies of U and V decrease, so the invariant requires a smaller `w` → `dw > 0`, and `1` is **minted to your balance**.
 
 ### Numerical Example
 
-Consider the triad (foo, 1/foo, 1) with initial supplies:
+Consider the triad (foo, 1/foo, 1) — both reserves are floating — with initial supplies:
 - u = 1,000 (foo)
 - v = 1,000 (1/foo)
 - w = 1,000 (1)
 
 Check: 1,000 × 1,000 = 1,000² ✓
 
-**Scenario:** You want to forge by adding 100 foo and 100 of 1/foo.
+**Scenario:** You forge with du = +100, dv = +100 (mint 100 foo and 100 of 1/foo to yourself).
 
-New supplies:
+New reserves:
 - u₁ = 1,100
 - v₁ = 1,100
 - w₁ = √(1,100 × 1,100) = 1,100
 
-You receive: 1,100 - 1,000 = **100 "1" tokens**
+Apply the doubled formula (both sides floating):
+
+$$dw = 2 \cdot (w_0 - w_1) = 2 \cdot (1{,}000 - 1{,}100) = -200$$
+
+You receive: **−200 "1"** — i.e., 200 of your `1` are burned to fund the mint.
 
 The invariant holds: 1,100 × 1,100 = 1,100² ✓
 
 ### Asymmetric Forging
 
-You don't have to contribute equal amounts. Suppose instead you add 200 foo but only 50 of 1/foo:
+You don't have to mint equal amounts. With du = +200 and dv = +50:
 
 - u₁ = 1,200
 - v₁ = 1,050
 - w₁ = √(1,200 × 1,050) ≈ 1,122.5
 
-You receive approximately 122.5 "1" tokens.
+$$dw = 2 \cdot (w_0 - w_1) \approx 2 \cdot (1{,}000 - 1{,}122.5) \approx -245$$
 
-But notice: this changes the ratio u/v, which changes the **price**.
+Roughly **−245 "1"** burned from your balance.
+
+This also changes the ratio u/v, which changes the **price**.
 
 ## Price Relationships
 
@@ -133,19 +135,19 @@ Or equivalently:
 
 $$\text{price}(U) = \left(\frac{w}{u}\right)^2$$
 
-This shows how the mediator supply affects price. More "1" locked in the U contract means higher prices for U.
+This shows how the geometric-mean Unit's bookkeeping value `w` relates price to `u`. Larger `w` relative to `u` means a higher price for U.
 
 ### Price Control via Forging
 
 To **increase** U's price:
-- Burn U (decrease u)
-- Mint 1/U (increase v)
-- This consumes "1" from the contract
+- Burn U (negative `du`)
+- Mint 1/U (positive `dv`)
+- The invariant requires more `w`, so `1` is burned from your balance
 
 To **decrease** U's price:
-- Mint U (increase u)
-- Burn 1/U (decrease v)
-- This releases "1" from the contract
+- Mint U (positive `du`)
+- Burn 1/U (negative `dv`)
+- The invariant requires less `w`, so `1` is minted to your balance
 
 Forging is market making. The invariant just ensures you pay a fair price for the trade.
 
@@ -158,10 +160,10 @@ Within a single triad, the invariant u · v = w² is always preserved. You canno
 ### What's Not Conserved
 
 **Total token supply across the system is not fixed.** When you forge (foo, 1/foo, 1):
-- foo and 1/foo supplies change
-- "1" moves between the contract and your wallet
+- foo and 1/foo are minted to (or burned from) your balance
+- "1" is burned from (or minted to) your balance, in the opposite direction
 
-The "1" tokens aren't created or destroyed—they transfer. But foo and 1/foo can be minted or burned as the forge operation requires.
+`1` is minted and burned globally on the ONE contract — it does not sit "locked" in unit contracts. The bookkeeping value `w = √(u·v)` is computed from reserves, not custodied.
 
 ### The "1" Supply
 
@@ -175,11 +177,7 @@ The current version's "1" supply grows through migration from v0.0. At any given
 - Current version supply ≤ 1 billion (less until migration occurs)
 - v0.0 supply decreases as users migrate to current version
 
-Within each version, the supply is distributed across:
-- User wallets
-- Unit contracts (as locked liquidity)
-
-When you forge a base unit, "1" moves between your wallet and the unit contract. The invariant determines how much.
+Within each version, the supply lives in user wallets. When you forge a base unit, `1` is minted to or burned from your balance globally on the ONE contract — it is not custodied in the unit contract. The invariant determines how much.
 
 ## Compound Units
 
@@ -214,10 +212,10 @@ The key insight: **every valid triad obeys the same invariant**.
 
 | Triad | u | v | w |
 |-------|---|---|---|
-| (foo, 1/foo, 1) | foo supply | 1/foo supply | "1" held by foo contract |
+| (foo, 1/foo, 1) | foo supply | 1/foo supply | √(u·v), bookkeeping value of `1` for this pair |
 | (meter, 1/second, meter/second) | meter supply | 1/second supply | meter/second supply |
 | (kilogram·meter, 1/second², force) | kg·m supply | 1/s² supply | force supply |
-| (force, 1/force, 1) | force supply | 1/force supply | "1" held by force contract |
+| (force, 1/force, 1) | force supply | 1/force supply | √(u·v), bookkeeping value of `1` for this pair |
 
 Each row is a separate triad, but all obey u · v = w².
 
@@ -225,11 +223,11 @@ When these triads share tokens—and they do, extensively—arbitrage keeps pric
 
 ## Implications
 
-### Liquidity Depth = Mediator Supply
+### Liquidity Depth = Geometric-Mean Bookkeeping
 
-The mediator supply w determines how much slippage a trade incurs. Higher w means deeper liquidity, smaller price impact per trade.
+The bookkeeping value `w = √(u·v)` determines how much slippage a trade incurs. Higher `w` (driven by larger reserve supplies u and v) means deeper liquidity and smaller price impact per trade.
 
-For base units, this means: **more "1" locked in a unit contract = more liquid that unit is.**
+For base units, this means: **larger reserve supplies (more forge activity on that pair) = more liquid that unit is.**
 
 ### Price Consistency Is Emergent
 
@@ -241,7 +239,7 @@ If `meter/second` is mispriced relative to `meter` and `1/second`, arbitrageurs 
 
 Base units connect to "1". Compound units connect to their constituents. But compound units *also* connect to "1" via their reciprocals.
 
-This means "1" is the liquidity backbone of the entire system. Its distribution across unit contracts determines the liquidity landscape.
+This means "1" is the liquidity backbone of the entire system. Its global minting and burning during forge operations — and the resulting holder balances — shape the liquidity landscape.
 
 ---
 

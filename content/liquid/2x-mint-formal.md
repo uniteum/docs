@@ -75,9 +75,9 @@ We require as an invariant that `T ≥ P` at all times (the pool cannot hold mor
 
 ### 3.2 Operations
 
-Four operations act on the state:
+Four operations act on the state. The deployed signatures on Liquid spoke instances are `heat(m, e)` and `cool(u, e)`, where `e` is an optional hub-token deposit / withdrawal alongside the mass operation. **Throughout this analysis we restrict to the `e = 0` case** — i.e. mass-only deposits and liquid-only redemptions — so that the heat/cool primitives are functions of a single argument and the Ratio Preservation Theorem (Section 4.1) takes its cleanest form. Joint mass-plus-lake operations (`e > 0`) are useful in practice (e.g. for bootstrapping a spoke's lake), but they fold a trade-like adjustment into the deposit and lie outside the scope of this paper.
 
-**Heat(m):** Deposit `m` backing tokens; mint wrapped tokens.
+**Heat(m):** Deposit `m` backing tokens; mint wrapped tokens. (Deployed as `heat(m, e=0)`.)
 ```
 p  = 2m · P / T       (for T > 0; p = m when T = 0)
 u  = 2m − p
@@ -87,7 +87,7 @@ B' = B + m
 ```
 Returns `u` wrapped tokens to caller.
 
-**Cool(u):** Burn `u` wrapped tokens; withdraw backing tokens.
+**Cool(u):** Burn `u` wrapped tokens; withdraw backing tokens. (Deployed as `cool(u, e=0)`.)
 ```
 m  = u · T / (U · 2)   where U = T − P
 p  = 2m − u

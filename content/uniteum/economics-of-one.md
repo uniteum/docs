@@ -40,29 +40,29 @@ Every unit needs "1" for liquidity. When value flows into the system—whether r
 
 When you create an anchored unit like [0xWETH](/uniteum/reference/anchored-units/weth/):
 
-1. Real WETH gets locked in the contract (1:1 backing)
+1. Real WETH gets locked in the contract (1:1 backing) on mint
 2. `0xWETH` and `1/0xWETH` are created as a reciprocal pair
-3. To provide liquidity, users must lock "1" tokens in the contract
-4. The invariant ties these together: `0xWETH × (1/0xWETH) = 1²`
+3. To provide liquidity, users forge against the pair — burning `1` from their balance globally
+4. The invariant ties these together: `0xWETH × (1/0xWETH) = w²` where `w = √(u·v)`
 
 **Result:** Real WETH value becomes indirectly tied to "1" value through the liquidity relationship.
 
-As more anchored units launch ([0xUSDC](/uniteum/reference/anchored-units/usdc/), [0xWBTC](/uniteum/reference/anchored-units/wbtc/), etc.), each brings real collateral that requires "1" for liquidity. The "1" token becomes the common denominator for all this value.
+As more anchored units launch ([0xUSDC](/uniteum/reference/anchored-units/usdc/), [0xWBTC](/uniteum/reference/anchored-units/wbtc/), etc.), each brings real collateral that requires `1` to be burned (and held by ecosystem participants) for liquidity. The "1" token becomes the common denominator for all this value.
 
 ### Mathematical Framing
 
 Consider a simplified scenario with three anchored units:
 
-| Anchored Unit | Collateral Locked | "1" Locked in Contract |
-|---------------|-------------------|------------------------|
-| `0xWETH` | 100 WETH ($200k) | 500k "1" |
-| `0xUSDC` | 300k USDC ($300k) | 300k "1" |
-| `0xWBTC` | 5 WBTC ($500k) | 700k "1" |
-| **Total** | **$1M** | **1.5M "1"** |
+| Anchored Unit | Collateral Locked | `1` Burned to Build the Pair |
+|---------------|-------------------|------------------------------|
+| `0xWETH` | 100 WETH ($200k) | 500k `1` |
+| `0xUSDC` | 300k USDC ($300k) | 300k `1` |
+| `0xWBTC` | 5 WBTC ($500k) | 700k `1` |
+| **Total** | **$1M** | **1.5M `1`** |
 
-If "1" reflects proportional value: `$1M / 1.5M = $0.67 per "1"`
+If `1` reflects proportional value: `$1M / 1.5M = $0.67 per "1"`
 
-This is crude (ignores floating units, compounds, circulation), but illustrates the mechanism: anchored collateral value distributed across locked "1" supply.
+This is crude (ignores floating units, compounds, circulation), but illustrates the mechanism: anchored collateral value spread against the total `1` that participants have burned to build those pairs.
 
 ### Floating Unit Participation
 
@@ -181,8 +181,10 @@ Consider `0xWETH` anchored unit with external WETH price `P_WETH`:
 
 **Internal implied "1" price from this unit:**
 ```
-P_1_implied = (locked WETH value) / (locked "1" in 0xWETH contract)
-            = (supply_0xWETH × P_WETH) / (w)
+P_1_implied = (locked WETH value) / w
+            = (supply_0xWETH × P_WETH) / w
+
+where w = sqrt(u * v) is the geometric-mean bookkeeping value, not a custodied `1` balance.
 ```
 
 If market "1" price diverges from `P_1_implied`, arbitrage profit exists.
@@ -373,13 +375,13 @@ To test these hypotheses, track:
 
 ### Unit Contract Queries
 
-You can check "1" locked in any unit contract:
+You can read the geometric-mean bookkeeping value for any unit:
 
 ```solidity
-IUnit(unitAddress).invariant()  // Returns (u, v, w) where w = "1" locked
+IUnit(unitAddress).invariant()  // Returns (u, v, w) where w = sqrt(u * v)
 ```
 
-Sum across all units for total locked "1" supply.
+`w` is computed from the reserve supplies (u, v), **not** a custodied balance of `1`. `1` is minted and burned globally on the ONE contract during forge — there is no per-unit "locked 1" balance to sum.
 
 ## Scenarios & Predictions
 

@@ -17,7 +17,7 @@ weight: 100
 Core functionality status:
 - ✅ Forge operations with floating units
 - ⚠️ Forge operations with anchored units — **incomplete, may not work as intended**
-- ✅ Forge operations with compound units
+- ⚠️ Forge operations with compound units — **incomplete**: the compound `forge(IUnit V, ...)` path in `Unit.sol:124-129` operates the `(this, reciprocal, ONE)` triad rather than the `(this, V, sqrt(this·V))` triad it documents. Forging across true compound triads is not yet implemented as intended.
 - ✅ Creating units via `multiply()` and `product()`
 - ⚠️ Anchored units via `anchored(IERC20)` — **incomplete**
 - ✅ Migration between versions

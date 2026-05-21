@@ -40,34 +40,34 @@ You provide some combination of the three tokens; forge adjusts all supplies to 
 
 ## Two Directions
 
-### Forward: Reserves → Geometric-Mean Unit
+The forge signature is `forge(du, dv)` returning `dw`. Each signed delta describes a change to *your* balance: positive mints to you, negative burns from you. The contract then mints or burns `dw` of the geometric-mean Unit to keep the invariant satisfied — `dw` is computed by `forgeQuote`, not supplied.
 
-Provide Units U and V, receive the geometric-mean Unit W.
+### Forward: Mint Reserves, Consume Geometric-Mean Unit
+
+Increase the supplies of U and V (positive `du`, `dv`). The invariant `u·v = w²` then requires a larger `w` — so the contract burns `1` from your balance to mint additional geometric-mean Units into the reserve pair.
 
 Example with triad (foo, 1/foo, 1):
-- You provide foo and 1/foo
-- You receive `1`
-- Supplies of foo and 1/foo increase
-- `1` transfers from the contract to you
+- You forge with positive `du` and `dv`
+- foo and 1/foo are minted to you (their supplies increase)
+- `1` is burned from your balance (negative `dw`)
 
-### Reverse: Geometric-Mean Unit → Reserves
+### Reverse: Burn Reserves, Release Geometric-Mean Unit
 
-Provide the geometric-mean Unit W, receive Units U and V.
+Decrease the supplies of U and V (negative `du`, `dv`). The invariant now requires a smaller `w`, so the contract mints `1` to you.
 
 Example:
-- You provide `1`
-- You receive foo and 1/foo
-- `1` transfers to the contract
-- Supplies of foo and 1/foo decrease
+- You forge with negative `du` and `dv`
+- foo and 1/foo are burned from you (supplies decrease)
+- `1` is minted to you (positive `dw`)
 
 ## Forge as Swap
 
 Want to swap foo for 1/foo?
 
-1. Forge forward: provide foo and some 1/foo → receive `1`
-2. Forge reverse: provide `1` → receive foo and 1/foo (in a different ratio)
+1. Forge with positive `du`, smaller positive `dv` → foo and 1/foo are minted to you, `1` is consumed
+2. Forge with negative `du`, more negative `dv` → foo and 1/foo are burned from you, `1` is released
 
-Net effect: you have traded foo for 1/foo, passing through the `1` Unit.
+Net effect: you have shifted exposure from foo to 1/foo, mediated by burning and minting `1` against your balance.
 
 With compound-unit triads like (meter², 1/second², meter/second), you can create more complex exposures. See [Triads](/uniteum/concepts/triads/).
 
@@ -77,15 +77,15 @@ Price effects **emerge from supply changes enforced by the invariant**.
 
 For intuition:
 
-**To increase foo’s price:**
-- Decrease the supply of foo
-- Increase the supply of 1/foo
-- This consumes `1`
+**To increase foo's price:**
+- Burn foo (negative `du`)
+- Mint 1/foo (positive `dv`)
+- The invariant requires more `w`, so `1` is burned from your balance
 
-**To decrease foo’s price:**
-- Increase the supply of foo
-- Decrease the supply of 1/foo
-- This releases `1`
+**To decrease foo's price:**
+- Mint foo (positive `du`)
+- Burn 1/foo (negative `dv`)
+- The invariant requires less `w`, so `1` is minted to your balance
 
 Forging is not just trading—it is market making through invariant-constrained minting and burning.
 

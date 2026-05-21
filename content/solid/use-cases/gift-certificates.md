@@ -34,7 +34,7 @@ Here's the part Mara likes most, because it keeps the whole thing honest:
 
 Even though she *created* the token, she doesn't get to hand out value for free.
 
-Yes, the protocol allocates supply in a fixed, deterministic way at creation—but if Mara wants to distribute tokens as gifts, she has to acquire them by buying from the token's own built-in pool like anyone else.
+At creation, the protocol places 100% of the token's fixed supply directly into the trading pool—the maker receives none. If Mara wants to distribute tokens as gifts, she has to acquire them by buying from the pool like anyone else.
 
 So Mara buys her own `CRED` tokens with ETH.
 

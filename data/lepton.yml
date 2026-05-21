@@ -1,12 +1,17 @@
 # Lepton protocol function signatures.
 # f = position in Etherscan's alphabetically-sorted function list.
+# Note: both `make` and `made` are overloaded in v3.0.0 (a low-level
+# `(bytes,uint256)` variant inherited from Prototype plus the high-level
+# variant shown here). Etherscan groups overloads under one entry sorted by
+# the function *name*, so the F# index reflects the alphabetical position of
+# the name and is the same for every overload.
 
 write:
-  "make(name, symbol, supply)":
+  "make(name, symbol, decimals, supply, variant)":
     f: 2
     description: "Deploy a new fixed-supply ERC-20 token"
 
 read:
-  "made(maker, name, symbol, supply)":
+  "made(maker, name, symbol, decimals, supply, variant)":
     f: 5
     description: "Check if a token exists and preview its address"

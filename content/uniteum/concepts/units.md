@@ -97,9 +97,9 @@ $$u \cdot v = w^2$$
 Where:
 - u = supply of U
 - v = supply of 1/U
-- w = supply of "1" held by the U contract
+- w = √(u·v), the geometric-mean bookkeeping value returned by `invariant()` — **not** a custodied balance of `1`
 
-You cannot have U without 1/U. They are created together and maintain this relationship through all forge operations.
+`1` is minted and burned globally on the ONE contract during forge; it does not sit "locked" inside the U contract. You cannot have U without 1/U: they are created together and maintain this relationship through all forge operations.
 
 ## Address Derivation
 

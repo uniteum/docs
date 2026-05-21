@@ -25,7 +25,7 @@ Typical properties:
 
 As a Solid:
 
-* The base mint represents natural regeneration
+* The fixed supply, fully placed in the pool at creation, sets the scarcity
 * Buying additional energy increases marginal cost
 * Hoarding energy becomes expensive
 
@@ -51,7 +51,7 @@ As a Solid:
 
 * Life can be explicitly staked
 * Risky actions consume or lock life
-* Recovery has increasing marginal cost
+* Buying life back from the pool costs more as supply is drawn down
 
 Result:
 
@@ -70,13 +70,13 @@ Examples:
 * Cooldowns
 * Build timers
 * Daily caps
-* Waiting to regenerate energy
+* Waiting to recharge energy
 
 As a Solid:
 
-* Time-delayed minting replaces timers
-* Players may accelerate at a rising cost
-* Skipping time is never free, only priced
+* Time-pressure mechanics are replaced by curve-based pricing
+* Players who act early pay less; latecomers pay more
+* Skipping ahead is never free, only priced
 
 Result:
 

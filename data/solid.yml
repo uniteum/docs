@@ -1,5 +1,23 @@
 # Solid protocol function signatures.
 # f = position in Etherscan's alphabetically-sorted function list.
+#
+# The f indices below are derived from the FULL alphabetical ordering of every
+# public/external function on the contract — including ERC20-inherited functions
+# (approve, transfer, transferFrom, allowance, balanceOf, decimals, name, symbol,
+# totalSupply), the immutable public state variables (NOTHING, SUPPLY), and the
+# package-private initializer (zzz_). Only the subset documented in the public
+# docs is listed here, but the f values account for the unlisted siblings.
+#
+# Full Write tab ordering (1-based):
+#   1 approve, 2 buy, 3 make, 4 sell, 5 sellFor, 6 transfer, 7 transferFrom, 8 zzz_
+#
+# Full Read tab ordering (1-based):
+#   1 NOTHING, 2 SUPPLY, 3 allowance, 4 balanceOf, 5 buys, 6 decimals, 7 made,
+#   8 name, 9 pool, 10 sells, 11 sellsFor, 12 symbol, 13 totalSupply
+#
+# Etherscan capitalises uppercase letters before lowercase, so NOTHING and SUPPLY
+# sort ahead of the lowercase functions on the Read tab. Do not "fix" these
+# values — they are intentional and CREATE2-verified against the live contract.
 
 write:
   "approve(spender, value)":

@@ -1,5 +1,7 @@
 # Unispring contract addresses and function signatures.
-# Contracts are not yet deployed — addresses left blank until launch.
+# Reflector, Fountain, and the USDCReflector clone are deployed; the
+# Manifold / NeutrinoSource / NeutrinoChannel / Hub stack is not yet
+# deployed (addresses left blank until launch).
 # `f` = position in Etherscan's alphabetically-sorted function list.
 
 # Per-contract entries. Each has the same shape: address + optional write/read maps.
@@ -8,7 +10,7 @@ fountain:
   name: "Fountain"
   description: "Owns every Unispring V4 position. Forwards swap fees to taker; no
     decrease-liquidity path."
-  address: "0xf0071849DD48444cf8B2b49C2B394EF1A087e080"
+  address: "0xF00c0C30CE13f01c77C1F8d60Fc1146014B4E090"
   write:
     "offer(token, quote, ticks, amounts)":
       f: 1
@@ -60,12 +62,6 @@ fountain:
     "version()":
       f: 9
       description: "Contract version string."
-  clones:
-    fountain1:
-      name: "Fountain1"
-      description: "Canonical Fountain clone instantiated by the Fountain
-        prototype. Used by Reflector as its single-tick position holder."
-      address: "0xf11e17473f8D933CFC439Ef694a0285c8D19e080"
 
 manifold:
   name: "Manifold (prototype)"
@@ -196,26 +192,30 @@ reflector:
     (\"1xETH\" on mainnet, \"1xMATIC\" on Polygon, etc.)."
   # Reflector bytecode differs from earlier Notable/Mimicry revisions,
   # so its CREATE2 address differs too. Vanity-mined and deployed via
-  # Nick on Arbitrum.
-  address: "0x3131cE680E5Dd6d3fCF4BB3942186B49f7330080"
-  # `f` values are positions on the live, verified peg v0.9.0 contract.
-  # Gaps (write F3; read F2/F4/F6) are inherited Prototype plumbing
-  # — encode() and the generic make(bytes)/made(bytes)/made(bytes32)
-  # overloads — left undocumented, same convention as liquid.yml.
+  # Nick.
+  address: "0xBDbd6217ADFe1f3AE9fd4eC4D82d62A3a9baE090"
+  # `f` values are positions on the live, verified peg v0.9.3 contract.
+  # Read gaps (F2 encode, F5 made(bytes,…), F6 made(bytes32,…)) and the
+  # write gap (F3 make(bytes,…)) are inherited Prototype plumbing left
+  # undocumented, same convention as liquid.yml.
   write:
-    "issue(name)":
+    "issue(name, variant)":
       f: 1
       description: "Mint a fresh issue ERC-20 with this clone's stored
         (peg, symbol) and seat its entire supply as a single-tick V4
         position at price 1. Idempotent per name. Callable on the
         prototype to mint native-pair issues, or on any clone to mint
-        issues under that pair."
-    "make(peg, symbol)":
+        issues under that pair. `variant` is a vanity-mining nonce —
+        pass `0` unless you're reproducing a specific committed
+        prediction."
+    "make(peg, symbol, variant)":
       f: 2
       description: "Deploy (or return) the deterministic Reflector clone for
         (peg, symbol). Pass an IAddressLookup as `peg` to mirror a
         chain-local token while keeping the same clone address across
-        chains. Returns the prototype itself for the native pair."
+        chains. Returns the prototype itself for the native pair.
+        `variant` is a vanity-mining nonce — pass `0` unless you're
+        reproducing a specific committed prediction."
     "zzInit(args)":
       f: 4
       description: "Clone initializer. Decodes and records (peg, symbol) on
@@ -225,15 +225,19 @@ reflector:
     "coinage()":
       f: 1
       description: "The Coinage factory used to mint issue ERC-20s."
-    "issued(name)":
+    "issued(name, variant)":
       f: 3
       description: "Predict the deterministic issue address for `name`
-        under this instance's stored (peg, symbol)."
-    "made(peg, symbol)":
-      f: 5
+        under this instance's stored (peg, symbol). `variant` is a
+        vanity-mining nonce — pass `0` unless you're reproducing a
+        specific committed prediction."
+    "made(peg, symbol, variant)":
+      f: 4
       description: "Predict the deterministic address (and existence) of a
         clone for (peg, symbol) before calling `make`. Returns the
-        prototype's own address for the native pair."
+        prototype's own address for the native pair. `variant` is a
+        vanity-mining nonce — pass `0` unless you're reproducing a
+        specific committed prediction."
     "maxSupply()":
       f: 7
       description: "Raw supply minted for an 18-decimal issue (10^27).
@@ -260,15 +264,13 @@ reflector:
       description: "Contract version string."
 
   # Known clones. Each entry is itself a (peg, symbol) factory whose
-  # `issue(name)` mints an issue ERC-20 sharing this symbol and pegged
-  # against this peg. Addresses will be republished after Reflector
-  # is deployed — earlier Notable/Mimicry-era addresses are stale because
-  # Reflector's bytecode differs.
+  # `issue(name, variant)` mints an issue ERC-20 sharing this symbol
+  # and pegged against this peg.
   clones:
     1xETH:
       symbol: "1xETH"
       peg: "native ETH"
-      address: "0x3131cE680E5Dd6d3fCF4BB3942186B49f7330080"
+      address: "0xBDbd6217ADFe1f3AE9fd4eC4D82d62A3a9baE090"
       note: "On mainnet the prototype itself is the canonical native-pair
         clone — no separate deploy. The pair's symbol is resolved at
         construction from a chain-local IStringLookup (\"1xETH\" on
@@ -281,8 +283,8 @@ reflector:
       symbol: "1xUSDC"
       peg: "chain-local USDC (resolved via USDCLookup)"
       peg_lookup: "USDCLookup"
-      peg_lookup_address: "0xc5dcC241a5927fc9e3750Ecf654dAfa9893de220"
-      address:
+      peg_lookup_address: "0xC5DC3461ed6653dbC5E6A8bCDcF0354fF178E300"
+      address: "0x05dD50aD3A40629E62635Ea67Dd17C6a0a3cb388"
       note: "Deployed by the prototype with USDCLookup as `peg`, so
         the same clone address resolves on every chain that has a
         USDCLookup."

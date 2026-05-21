@@ -39,19 +39,19 @@ The factory contract holds the implementation logic. Each `make` call deploys a 
 
 ### Make a token
 
-Call `make(name, symbol, supply)` on the Lepton factory. The entire supply is minted to `msg.sender`.
+Call `make(name, symbol, decimals, supply, variant)` on the Lepton factory. The entire supply is minted to `msg.sender`. Pass `variant = 0` unless you need to deploy a second token with otherwise-identical parameters.
 
 ```
-make("MyToken", "MTK", 1000000000000000000000000)
+make("MyToken", "MTK", 18, 1000000000000000000000000, 0)
 ```
 
 ### Check if a token exists
 
-Call `made(maker, name, symbol, supply)` to check whether a token with those exact parameters has already been deployed and to preview its deterministic address.
+Call `made(maker, name, symbol, decimals, supply, variant)` to check whether a token with those exact parameters has already been deployed and to preview its deterministic address.
 
 ### Idempotent deployment
 
-Calling `make` with the same parameters from the same address returns the existing token — it does not deploy a duplicate. The address is derived from `keccak256(abi.encode(maker, name, symbol, supply))`, so different callers or different parameters always produce different tokens.
+Calling `make` with the same parameters from the same address returns the existing token — it does not deploy a duplicate. The deployment salt is `keccak256(abi.encode(maker, name, symbol, decimals, supply)) XOR bytes32(variant)`, so different callers, different parameters, or a different `variant` always produce different tokens. Pass `variant = 0` for the canonical deployment; bump `variant` to deploy additional tokens with otherwise-identical parameters.
 
 ---
 
@@ -69,10 +69,10 @@ You can interact with Lepton using standard tools like
 
 | Action | What it does |
 |:-------|:-------------|
-| [make(name, symbol, supply)](https://etherscan.io/address/0x14ae57aed6ac1cd48fa811ed885ab4a4c5e28c42#writeContract#F{{< val "lepton" "write" "make(name, symbol, supply)" "f" >}}) | Deploy a new ERC-20 token |
-| [made(maker, name, symbol, supply)](https://etherscan.io/address/0x14ae57aed6ac1cd48fa811ed885ab4a4c5e28c42#readContract#F{{< val "lepton" "read" "made(maker, name, symbol, supply)" "f" >}}) | Check if a token exists and preview its address |
+| [make(name, symbol, decimals, supply, variant)](https://etherscan.io/address/0x14ae57aed6ac1cd48fa811ed885ab4a4c5e28c42#writeContract#F{{< val "lepton" "write" "make(name, symbol, decimals, supply, variant)" "f" >}}) | Deploy a new ERC-20 token |
+| [made(maker, name, symbol, decimals, supply, variant)](https://etherscan.io/address/0x14ae57aed6ac1cd48fa811ed885ab4a4c5e28c42#readContract#F{{< val "lepton" "read" "made(maker, name, symbol, decimals, supply, variant)" "f" >}}) | Check if a token exists and preview its address |
 
-Each deployed token is a standard ERC-20 with `name()`, `symbol()`, `totalSupply()`, `balanceOf()`, `transfer()`, `approve()`, and `transferFrom()`.
+Each deployed token is a standard ERC-20 with `name()`, `symbol()`, `decimals()`, `totalSupply()`, `balanceOf()`, `transfer()`, `approve()`, and `transferFrom()`.
 
 ---
 

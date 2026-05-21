@@ -1,20 +1,49 @@
 # AddressLookup function signatures.
 # f = position in Etherscan's alphabetically-sorted function list.
+# Notes:
+#   - `make` and `made` are overloaded in v3.0.0 (low-level `(bytes,uint256)`
+#     and `(bytes32,uint256)` variants inherited from Prototype plus the
+#     high-level `(Entry[],uint256)` variant declared on AddressLookup).
+#     Etherscan lists each overload separately, sorted by full signature
+#     string. The F# indices for the overloaded entries are noted but need
+#     visual confirmation on the verified Etherscan page.
+#   - `zzInit` is `onlyProto` — reachable only from the Prototype itself.
+#     It is included under `write:` because Etherscan lists it on the
+#     Write Contract tab as a non-view function.
 
+# TODO BLK-4: confirm prototype choice (legacy vs current 0xaDDb841F…e300)
 address: "0x6adD49A791fF1dDDcd91f0AFCB70Cd91c81821ca"
 
 write:
-  "make(keyValues)":
-    f: 1
-    description: "Deploy a new AddressLookup with chain-specific values"
+  "make(bytes,uint256)":
+    f: 1  # TODO: confirm overloaded F# on verified Etherscan page
+    description: "Low-level: deploy a clone from the raw ABI-encoded args"
+  "make((uint256,address)[],uint256)":
+    f: 2  # TODO: confirm overloaded F# on verified Etherscan page
+    description: "Deploy a new AddressLookup with chain-specific entries"
+  "zzInit(bytes,uint256)":
+    f: 3
+    description: "onlyProto initializer; stores the entry matching block.chainid"
 
 read:
-  "PROTO()":
+  "encode((uint256,address)[])":
     f: 1
-    description: "Factory address"
-  "made(keyValues)":
-    f: 2
+    description: "ABI-encode entries to derive the deterministic clone address"
+  "made(bytes,uint256)":
+    f: 2  # TODO: confirm overloaded F# on verified Etherscan page
+    description: "Low-level: check existence and preview address from raw args"
+  "made(bytes32,uint256)":
+    f: 3  # TODO: confirm overloaded F# on verified Etherscan page
+    description: "Low-level: check existence and preview address from argshash"
+  "made((uint256,address)[],uint256)":
+    f: 4  # TODO: confirm overloaded F# on verified Etherscan page
     description: "Check if a lookup exists and preview its address"
+  "proto()":
+    f: 5
+    description: "Prototype (factory) address used as the clone implementation"
   "value()":
-    f: 3
-    description: "The chain-specific address for this lookup"
+    f: 6
+    description: "The chain-specific address resolved for this lookup"
+  "version()":
+    f: 7
+    description: "Contract version string"

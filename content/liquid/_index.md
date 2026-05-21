@@ -38,7 +38,7 @@ Each liquid token wraps a backing ERC-20 (solid) and maintains a constant-produc
 |:-----|:--------|
 | **Solid** | The backing ERC-20 token (USDC, DAI, etc.) |
 | **Liquid** | The wrapped version with built-in liquidity |
-| **Hub** | The central Liquid token (wraps "Uniteum 1", symbol "1") used for cross-pool routing |
+| **Hub** | The central Liquid token (wraps the **genesis** Solid "Uniteum 1" — `1.uniteum.eth`, symbol "1") used for cross-pool routing. This is the original genesis token, distinct from the current Uniteum protocol contract. |
 | **Spoke** | Any Liquid token paired with Hub, forming a liquidity pool |
 | **Pool** | Spoke tokens held by the contract |
 | **Lake** | Hub tokens held by the contract |

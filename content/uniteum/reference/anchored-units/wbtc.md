@@ -9,7 +9,7 @@ weight: 4
 # 0xWBTC (Wrapped Bitcoin)
 
 **Documentation Shorthand:** `0xWBTC`
-**Actual Symbol:** `0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599`
+**Actual Symbol:** `0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599`
 
 ## What This Represents
 In Uniteum documentation, `0xWBTC` is a **readable shorthand** for an anchored unit backed by {{< token address=wbtc.address text="Wrapped Bitcoin (WBTC)" >}}.
@@ -36,7 +36,7 @@ Wrapped Bitcoin is Bitcoin represented as an ERC-20 token on Ethereum. 1 WBTC = 
 
 | Symbol | Type | Backing |
 |--------|------|---------|
-| `0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599` | Anchored unit | 1:1 WBTC in contract |
+| `0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599` | Anchored unit | 1:1 WBTC in contract |
 | `WBTC` (no $) | Floating unit | None (just a label) |
 | `BTC` (no $) | Floating unit | None (NOT Bitcoin!) |
 | `0xWBTC` | Documentation shorthand | Refers to anchored version |
@@ -56,7 +56,7 @@ IUnit wbtcUnit = one.anchored(wbtc);
 
 ## Reciprocal Unit
 
-**`1/0xWBTC`** (shorthand) = `1/0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599` (actual)
+**`1/0xWBTC`** (shorthand) = `1/0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599` (actual)
 
 Synthetic unit providing inverse BTC exposure. If BTC dumps, `1/0xWBTC` gains.
 
@@ -112,4 +112,4 @@ See [Use Cases: Correlation Trading](/uniteum/use-cases/#correlation-trading).
 
 ---
 
-**Remember:** In your code, use the full address `0x2260FAC5E5542a773Aa44fBCfEDf7C193bc2C599`. The `0xWBTC` shorthand is for documentation readability only.
+**Remember:** In your code, use the full address `0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599`. The `0xWBTC` shorthand is for documentation readability only.

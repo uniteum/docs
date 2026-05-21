@@ -6,11 +6,13 @@ This project defines a **symbolic unit system** for Ethereum smart contracts.
 
 The following are authoritative, in this order:
 
-1. **Unit.json** (the compiled source bundle / canonical reference for implementation intent)
+1. **The Uniteum Solidity sources** (sibling repo at `/home/paul/git/uniteum/uniteum/`, published at github.com/uniteum/uniteum) — the on-chain bytecode is the ultimate authority; the source repo mirrors that.
 2. **This document** (normative rules and scope)
 3. Other docs in this project (non-normative unless explicitly stated)
 
-If a feature or rule is **not** represented in Unit.json **and** not stated here, assume it **does not exist**.
+If a feature or rule is **not** present in the Solidity sources **and** not stated here, assume it **does not exist**.
+
+> Earlier revisions of this constitution listed a `Unit.json` "compiled source bundle" as the top normative source. That artifact does not exist in this repo or its siblings; the role described for it is filled by the published Solidity sources above. References to `Unit.json` elsewhere in `.meta/` should be read as historical.
 
 ## Scope
 

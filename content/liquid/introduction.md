@@ -70,9 +70,10 @@ This [2x minting](/liquid/2x-mint) creates instant liquidity. The pool's share p
 **Goal:** Convert liquid tokens back to the original solid backing tokens.
 
 **To cool:**
-1. On the liquid contract, find the `cool` function
-2. Enter how many liquid tokens you want to burn (e.g., `500000000` for 500 liquid)
-3. Click "Write" and confirm the transaction
+1. On the liquid contract, find the `cool(u, e)` function
+2. Enter `u` — how many liquid tokens you want to burn (e.g., `500000000` for 500 liquid)
+3. Enter `e = 0` for a liquid-only exit (pass non-zero `e` to also withdraw hub from the pool's lake; the Hub instance ignores `e` entirely)
+4. Click "Write" and confirm the transaction
 
 **What happens:**
 - Burns your liquid tokens
@@ -91,7 +92,7 @@ The 2x burn (from you and pool) maintains symmetry with the 2x mint in heat.
 3. Click "Write" and confirm the transaction
 
 **What happens:**
-- Calculates hub received using: `e = E - S * E / (S + s)`
+- Calculates hub received using `e = E - ceil((E*S + E - 1) / (S + s))` — the deduction term is ceiling-rounded, so `e` is rounded *down*. This is deliberate: it ensures the constant-product invariant `pool × lake = k` never decreases across a sell (any rounding goes in the pool's favor).
 - Transfers spoke tokens from you to the pool
 - Transfers hub from pool's lake to you
 
@@ -186,13 +187,13 @@ The 2x burn (from you and pool) maintains symmetry with the 2x mint in heat.
 ### Workflow 4: Exit Your Position
 
 **Option A: Cool to backing token**
-1. Call `cool(s, e)` on the liquid contract
+1. Call `cool(u, e)` on the liquid contract — `u` is the amount of liquid to burn; pass `e = 0` for a liquid-only exit
 2. Receive solid backing tokens based on pool reserves
 
 **Option B: Sell for hub, then cool hub**
 1. Call `sell(amount)` to convert liquid → hub
 2. Go to Hub contract
-3. Call `cool(amount)` to convert hub → Uniteum 1 (Hub's backing token)
+3. Call `cool(amount, 0)` to convert hub → Uniteum 1 (Hub's backing token; the Hub ignores `e` and unwraps 1:1)
 
 **Option C: Trade on external DEX**
 - Liquid tokens are standard ERC-20s
@@ -434,7 +435,8 @@ The constant-product formula prevents complete drainage. As pool liquidity decre
 
 Pure math based on pool reserves:
 ```
-sell: e = E - S × E / (S + s)
+sell: e = E - ceil((E×S + E - 1) / (S + s))   (deduction ceiling-rounded;
+                                                e rounds down so invariant never decreases)
 buy:  s = S - S × E / (E + e)
 ```
 
@@ -449,7 +451,13 @@ When you cool, the amount of solid you receive depends on how much of the liquid
 - **Less liquid in pool** (more held outside) → You get fewer solid per liquid
 - **On average across all users** → Approaches 1:1 ratio
 
-The formula is: `solid = liquid * mass() / total_held_outside_pool`
+The cool redemption formula (for a liquid-only exit, `e = 0`) is:
+
+```
+m = u · T / (2 · (T − P))
+```
+
+where `u` is the liquid burned, `T` is total supply, and `P` is the contract's own pool balance. At equilibrium (`P/T = 1/2`), this reduces to `m = u` (1:1).
 
 Think of it like wrapping + being an LP simultaneously. Your share of solid backing tokens fluctuates based on pool distribution.
 
@@ -508,8 +516,8 @@ Think of it like wrapping + being an LP simultaneously. Your share of solid back
 - Dave has 3,000 liquid-USDC
 
 **Dave's actions on Etherscan:**
-1. liquid-USDC contract → Read → `cool` preview (via staticcall or quote if available)
-2. liquid-USDC contract → Write → `cool(3000e6)`
+1. liquid-USDC contract → Read → `cools(3000e6, 0)` to preview the redemption
+2. liquid-USDC contract → Write → `cool(3000e6, 0)` (pass `e = 0` for a liquid-only exit)
 
 **Result:**
 - Burns 3,000 liquid from Dave
@@ -541,8 +549,8 @@ Etherscan doesn't support batch transactions directly, but you can:
 To see all activity on a liquid:
 1. Go to "Events" tab on Etherscan
 2. Filter by event type:
-   - `Heat(ILiquid,uint256,uint256,uint256)` - Deposits (heating solid → liquid)
-   - `Cool(ILiquid,uint256,uint256,uint256)` - Withdrawals (cooling liquid → solid)
+   - `Heat(ILiquid,uint256,uint256,uint256,uint256)` - Deposits (heating solid → liquid); fields are `(liquid, m, e, u, p)`
+   - `Cool(ILiquid,uint256,uint256,uint256,uint256)` - Withdrawals (cooling liquid → solid); fields are `(liquid, u, e, m, p)`
    - `Buy(ILiquid,uint256,uint256)` - Purchases from pool
    - `Sell(ILiquid,uint256,uint256)` - Sales to pool
    - `Make(ILiquid,IERC20Metadata)` - New liquid created (factory event)
@@ -575,7 +583,7 @@ Use the appropriate network explorer (e.g., arbiscan.io for Arbitrum, basescan.o
 
 ## Getting Help
 
-- Read the code: [src/Liquid.sol](https://github.com/uniteum/liquid/blob/main/src/Liquid.sol) (241 lines, well-commented)
+- Read the code: [src/Liquid.sol](https://github.com/uniteum/liquid/blob/main/src/Liquid.sol) (well-commented; the ABI surface is small)
 - Technical documentation: [CLAUDE.md](https://github.com/uniteum/liquid/blob/main/CLAUDE.md)
 - Development setup: [README.md](https://github.com/uniteum/liquid/blob/main/README.md)
 

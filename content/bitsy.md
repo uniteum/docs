@@ -148,6 +148,8 @@ Every Uniteum protocol is Bitsy:
 | [Liquid](/liquid/)             | Hub-and-spoke AMM with 2x mint           | Hub                        |
 | [Uniteum](/uniteum/)           | Geometric mean triads                    | The Uniteum contract       |
 | [Lepton](/lepton/)             | Fixed-supply token factory               | Lepton prototype           |
+| [Unispring](/unispring/)       | Uniswap V4 primitive set (Fountain V4-position owner, Manifold fair-launch factory, Reflector 1:1 mirror factory) | Their respective prototypes |
+| [Locale](/locale/)             | Immutable, chain-aware reference-data lookups at deterministic addresses | Locale lookup prototypes (AddressLookup, ImmutableUintToAddress, ImmutableUintToUint) |
 
 These are not the only contracts that could qualify. Any contract
 that passes all eight tests is Bitsy, whether or not it has

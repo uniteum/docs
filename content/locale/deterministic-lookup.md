@@ -35,30 +35,37 @@ From the outside, the address is globally invariant. From the inside, the values
 
 ### Salt derivation
 
-The salt for CREATE2 deployment is derived from the entire array of chain mappings:
+The salt for CREATE2 deployment is derived from the entire array of chain mappings, XORed with a caller-supplied `variant`:
 
 ```
-salt = keccak256(abi.encode(keyValues))
+salt = keccak256(encode(entries)) ^ bytes32(variant)
 ```
 
-Because `keyValues` is the same array on every chain, the salt is the same. Because the factory bytecode is the same (deployed via Nick's CREATE2 factory), the resulting clone address is the same.
+Because `entries` is the same array on every chain, the salt is the same. Because the factory bytecode is also the same (deployed via Nick's CREATE2 factory), the resulting clone address is the same.
+
+The `variant` parameter lets the same `entries` array yield distinct clones — set it to `0` for the canonical lookup, or to any other value to mint a parallel clone of the same map.
 
 ### Chain selection
 
-During initialization, the factory iterates over the key-value pairs and selects the entry matching `block.chainid`:
+The factory deploys the clone first, then atomically calls `zzInit(args, variant)` on it. The chain-id branch lives **inside** `zzInit` on the clone — the factory itself does not inspect `block.chainid`. For `AddressLookup` and `StringLookup`, `zzInit` decodes the entries and stores only the entry matching the local chain id:
 
 ```solidity
-for (uint256 i; i < keyValues.length; ++i) {
-    if (keyValues[i].key == block.chainid) {
-        AddressLookup(home).zzInit(keyValues[i].value);
-        break;
+function zzInit(bytes calldata args, uint256) external override onlyProto {
+    Entry[] memory entries = abi.decode(args, (Entry[]));
+    for (uint256 i; i < entries.length; ++i) {
+        if (entries[i].key == block.chainid) {
+            value = entries[i].value;
+            break;
+        }
     }
 }
 ```
 
+For `ImmutableUintToAddress` and `ImmutableUintToUint`, `zzInit` instead stores **every** entry, exposing the full map via `keyAt[]` and `valueOf(key)`. Both families share the same deterministic deployment pattern; only the per-clone storage policy differs.
+
 ### Atomic deployment
 
-Deploy and init happen in a single `make` call. The `zzInit` function can only be called by the factory (`PROTO`), preventing external initialization. If `make` is called again with the same parameters, it returns the existing address without redeploying.
+Deploy and init happen in a single `make` call on the prototype. The `zzInit` function is `onlyProto` — it reverts unless `msg.sender` is the prototype itself, so external initialization is impossible. If `make` is called again with the same `entries` and `variant`, it returns the existing address without redeploying.
 
 ---
 

@@ -29,11 +29,13 @@ The Uniteum protocol smart contracts are licensed under the **[Uniteum License](
 
 ## Disclaimer
 
-THE UNITEUM PROTOCOL IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED.
+THE UNITEUM PROTOCOLS AND ALL RELATED CONTRACTS (Solid, Liquid, Uniteum, Lepton, Unispring, Reflector, Locale) ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED.
 
-This is experimental software deployed in version 0.1. The contracts are unaudited. Use at your own risk.
+This is experimental software. The contracts are unaudited. Use at your own risk.
 
-See [Safety](/uniteum/safety/) for detailed risk disclosures.
+The current Uniteum protocol release is `{{< val "contracts.uniteum.name" >}}`. Deployed addresses and version labels for every protocol live in the data files under `data/` — see the protocol-specific pages for the up-to-date references.
+
+See [Safety](/uniteum/safety/) for detailed risk disclosures on the Uniteum protocol.
 
 ## No Investment Advice
 
@@ -43,9 +45,9 @@ The "1" token and all derived units are experimental crypto assets with no guara
 
 ## Third-Party References
 
-References to specific ERC-20 tokens (WETH, USDC, WBTC, etc.) are for illustration purposes only. Uniteum is not affiliated with, endorsed by, or connected to the issuers of these tokens.
+References to specific ERC-20 tokens (WETH, USDC, WBTC, etc.) and to third-party infrastructure (Uniswap V4, Etherscan, Chainlink, etc.) anywhere in this documentation — across Solid, Liquid, Uniteum, Lepton, Unispring, Reflector, and Locale — are for illustration purposes only. None of these projects is affiliated with, endorsed by, or connected to the issuers of those tokens or the operators of that infrastructure.
 
-Anchored units created using these tokens are custodial positions in the Uniteum smart contracts, not official products of the underlying token issuers.
+Where any of these protocols wrap, mirror, or otherwise hold third-party tokens (for example: Uniteum anchored units, Liquid spokes, Reflector mirrors), the resulting positions are custodial positions in the respective smart contracts — they are not official products of, and carry no claim against, the underlying token issuers.
 
 ## Contact
 
@@ -55,4 +57,4 @@ For security issues: See [GitHub repository](https://github.com/uniteum) securit
 
 ---
 
-**Last updated:** December 2024
+**Last updated:** May 2026

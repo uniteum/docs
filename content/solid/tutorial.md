@@ -150,8 +150,8 @@ The result is how many He tokens you'd receive.
 
 | Action | Function | Payable | No approval needed |
 |:-------|:---------|:--------|:-------------------|
-| Create | [`make(name, symbol)`](https://etherscan.io/token/{{< val "solids.NOTHING.address" >}}#writeContract#F{{< val "solid" "write" "make(name, symbol)" "f" >}}) | No | — |
-| Check existence | [`made(name, symbol)`](https://etherscan.io/token/{{< val "solids.NOTHING.address" >}}#readContract#F{{< val "solid" "read" "made(name, symbol)" "f" >}}) | — | — |
+| Create | [`make(name, symbol)`](https://etherscan.io/address/{{< val "solids.NOTHING.address" >}}#writeContract#F{{< val "solid" "write" "make(name, symbol)" "f" >}}) | No | — |
+| Check existence | [`made(name, symbol)`](https://etherscan.io/address/{{< val "solids.NOTHING.address" >}}#readContract#F{{< val "solid" "read" "made(name, symbol)" "f" >}}) | — | — |
 | Buy | [`buy()`](https://etherscan.io/token/{{< val "solids.H.address" >}}#writeContract#F{{< val "solid" "write" "buy()" "f" >}}) | **Yes** (send ETH) | — |
 | Sell | [`sell(s)`](https://etherscan.io/token/{{< val "solids.H.address" >}}#writeContract#F{{< val "solid" "write" "sell(s)" "f" >}}) | No | Yes |
 | Swap | [`sellFor(that, s)`](https://etherscan.io/token/{{< val "solids.H.address" >}}#writeContract#F{{< val "solid" "write" "sellFor(that, s)" "f" >}}) | No | Yes |

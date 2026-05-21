@@ -41,6 +41,8 @@ The extra tokens minted to the pool are the price of instant liquidity. The prop
 
 ### Heat (Solid → Liquid)
 
+The deployed signature is `heat(m, e)`; the analysis on this page assumes `e = 0` (mass-only deposit). The `e > 0` form layers a simultaneous lake deposit on top of the 2x mint and is not covered here.
+
 Deposit `m` backing tokens into a spoke with total supply `T` and pool balance `P`:
 
 ```
@@ -52,6 +54,8 @@ Total minted: u + p = 2m
 On the first deposit (`T = 0`), the split is 50/50: user and pool each receive `m`. After that, the split preserves the existing ratio between pooled and circulating tokens.
 
 ### Cool (Liquid → Solid)
+
+The deployed signature is `cool(u, e)`; the analysis on this page assumes `e = 0` (liquid-only exit). The `e > 0` form layers a simultaneous lake withdrawal on top of the 2x burn and is not covered here.
 
 User burns `u` wrapped tokens:
 
