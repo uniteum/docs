@@ -17,9 +17,10 @@
 
 {{- $fnMap := index (index hugo.Data $proto) $kind -}}
 {{- $section := cond (eq $kind "read") "readContract" "writeContract" -}}
+{{- $base := printf "https://%s" (partial "explorer-host" "") -}}
 
 | Action | Description |
 |:-------|:------------|
 {{- range $name, $entry := $fnMap }}
-| [`{{ $name }}`](https://etherscan.io/{{ $type }}/{{ $tokenAddr }}#{{ $section }}#F{{ $entry.f }}) | {{ $entry.description }} |
+| [`{{ $name }}`]({{ $base }}/{{ $type }}/{{ $tokenAddr }}#{{ $section }}#F{{ $entry.f }}) | {{ $entry.description }} |
 {{- end }}

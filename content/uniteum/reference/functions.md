@@ -285,7 +285,7 @@ Get the "1" token address (universal liquidity token).
 
 **Returns:** Address of "1" token
 
-**Contract:** [`{{< val "contracts.uniteum.address" >}}`](https://etherscan.io/address/{{< val "contracts.uniteum.address" >}}#code) ({{< val "contracts.uniteum.name" >}})
+**Contract:** [`{{< val "contracts.uniteum.address" >}}`]({{< escan >}}/address/{{< val "contracts.uniteum.address" >}}#code) ({{< val "contracts.uniteum.name" >}})
 
 ---
 
@@ -444,7 +444,7 @@ Immutable `uint256` declared on `Unit.sol`. On deployed `Unit` and its clones th
 
 **Value:** `0` on the deployed Uniteum "1" contract and all of its Unit clones (the immutable is declared but not set in the constructor).
 
-**Note:** The 1 billion figure sometimes cited as a ceiling is the **fixed supply of the separate genesis "1" token** ([`{{< val "contracts.genesis.address" >}}`](https://etherscan.io/address/{{< val "contracts.genesis.address" >}}#code)), not a value enforced by `ONE_MINTED`. Total current "1" supply is bounded indirectly by how much genesis "1" has been migrated in via {{< val "contracts.uniteum.name" >}}'s `migrate()`.
+**Note:** The 1 billion figure sometimes cited as a ceiling is the **fixed supply of the separate genesis "1" token** ([`{{< val "contracts.genesis.address" >}}`]({{< escan >}}/address/{{< val "contracts.genesis.address" >}}#code)), not a value enforced by `ONE_MINTED`. Total current "1" supply is bounded indirectly by how much genesis "1" has been migrated in via {{< val "contracts.uniteum.name" >}}'s `migrate()`.
 
 ---
 
@@ -454,7 +454,7 @@ Address of v0.0 "1" token accepted for migration. Declared on `IMigratable` and 
 
 **Returns:** ERC-20 address of upstream "1"
 
-**Value:** [`{{< val "contracts.genesis.address" >}}`](https://etherscan.io/address/{{< val "contracts.genesis.address" >}}#code) — the genesis "1" token (currently `0x7D5B1349157335aEEB929080a51003B529758830`).
+**Value:** [`{{< val "contracts.genesis.address" >}}`]({{< escan >}}/address/{{< val "contracts.genesis.address" >}}#code) — the genesis "1" token (currently `0x7D5B1349157335aEEB929080a51003B529758830`).
 
 ---
 

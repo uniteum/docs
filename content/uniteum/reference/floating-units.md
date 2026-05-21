@@ -43,7 +43,7 @@ These units are not automatically deployed. To deploy any unit:
 
 ### Using Etherscan
 
-1. Go to [current Uniteum contract on Etherscan](https://etherscan.io/address/{{< val "contracts.uniteum.address" >}}#writeContract)
+1. Go to [the current Uniteum contract on the block explorer]({{< escan >}}/address/{{< val "contracts.uniteum.address" >}}#writeContract)
 2. Connect your wallet
 3. Call `multiply(string expression)` with the symbol (e.g., `"foo"`)
 4. The unit will be deployed to its deterministic address

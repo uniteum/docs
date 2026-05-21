@@ -6,11 +6,11 @@ weight: 2
 
 > Wrap a token with built-in liquidity, trade it, and swap it — all from a block explorer.
 
-Everything here uses [Etherscan](https://etherscan.io) directly. No custom app, no frontend, no SDK.
+Everything here uses {{< explorer >}} directly. No custom app, no frontend, no SDK.
 
-The [Hub](https://etherscan.io/token/{{< val "liquids.hub.address" >}}) is the central contract — it wraps [Uniteum 1](https://etherscan.io/token/{{< val "solids" "1" "address" >}}) and acts as the factory for all spoke tokens.
+The [Hub]({{< escan >}}/token/{{< val "liquids.hub.address" >}}) is the central contract — it wraps [Uniteum 1]({{< escan >}}/token/{{< val "solids" "1" "address" >}}) and acts as the factory for all spoke tokens.
 
-We'll use [{{< val "liquids.spoke.name" >}} ({{< val "liquids.spoke.symbol" >}})](https://etherscan.io/token/{{< val "liquids.spoke.address" >}}#readContract#F{{< val "liquid" "read" "solid()" "f" >}}) as our example spoke, backed by [{{< val "backing.spoke.name" >}} ({{< val "backing.spoke.symbol" >}})](https://etherscan.io/token/{{< val "backing.spoke.address" >}}).
+We'll use [{{< val "liquids.spoke.name" >}} ({{< val "liquids.spoke.symbol" >}})]({{< escan >}}/token/{{< val "liquids.spoke.address" >}}#readContract#F{{< val "liquid" "read" "solid()" "f" >}}) as our example spoke, backed by [{{< val "backing.spoke.name" >}} ({{< val "backing.spoke.symbol" >}})]({{< escan >}}/token/{{< val "backing.spoke.address" >}}).
 
 ---
 
@@ -24,7 +24,7 @@ Hub heat is a simple 1:1 wrap — no pool mechanics, no [2x mint](/liquid/2x-min
 
 The Hub needs permission to transfer your "Uniteum 1" tokens.
 
-1. Go to [Uniteum 1 → approve](https://etherscan.io/token/{{< val "solids" "1" "address" >}}#writeContract#F{{< val "solid" "write" "approve(spender, value)" "f" >}})
+1. Go to [Uniteum 1 → approve]({{< escan >}}/token/{{< val "solids" "1" "address" >}}#writeContract#F{{< val "solid" "write" "approve(spender, value)" "f" >}})
 2. Connect your wallet
 3. Enter:
    - `spender`: `{{< val "liquids.hub.address" >}}` (the Hub)
@@ -33,7 +33,7 @@ The Hub needs permission to transfer your "Uniteum 1" tokens.
 
 ### Heat
 
-1. Go to [Hub → heat(m, e)](https://etherscan.io/token/{{< val "liquids.hub.address" >}}#writeContract#F{{< val "liquid" "write" "heat(m, e)" "f" >}})
+1. Go to [Hub → heat(m, e)]({{< escan >}}/token/{{< val "liquids.hub.address" >}}#writeContract#F{{< val "liquid" "write" "heat(m, e)" "f" >}})
 2. Enter `m` — the amount of "Uniteum 1" to wrap (in wei, 18 decimals)
 3. Click **Write** and confirm
 
@@ -41,7 +41,7 @@ The Hub needs permission to transfer your "Uniteum 1" tokens.
 - Your "Uniteum 1" tokens were deposited into the Hub
 - You received the same amount of Hub tokens (1:1)
 
-**Verify:** Call [`balanceOf`](https://etherscan.io/token/{{< val "liquids.hub.address" >}}#readContract#F{{< val "liquid" "read" "balanceOf(account)" "f" >}}) on the Hub with your wallet address.
+**Verify:** Call [`balanceOf`]({{< escan >}}/token/{{< val "liquids.hub.address" >}}#readContract#F{{< val "liquid" "read" "balanceOf(account)" "f" >}}) on the Hub with your wallet address.
 
 <!-- TODO: example tx hash for a Hub heat transaction -->
 
@@ -53,7 +53,7 @@ The Hub needs permission to transfer your "Uniteum 1" tokens.
 
 ### Check if it already exists
 
-1. Go to [Hub → made](https://etherscan.io/token/{{< val "liquids.hub.address" >}}#readContract#F{{< val "liquid" "read" "made(backing)" "f" >}})
+1. Go to [Hub → made]({{< escan >}}/token/{{< val "liquids.hub.address" >}}#readContract#F{{< val "liquid" "read" "made(backing)" "f" >}})
 2. Enter `backing`: the address of the ERC-20 you want to wrap
 3. Click **Query**
 
@@ -62,7 +62,7 @@ If `cloned` = `false`, you can create it — and `home` shows where it will be d
 
 ### Create it
 
-1. Go to [Hub → make](https://etherscan.io/token/{{< val "liquids.hub.address" >}}#writeContract#F{{< val "liquid" "write" "make(backing)" "f" >}})
+1. Go to [Hub → make]({{< escan >}}/token/{{< val "liquids.hub.address" >}}#writeContract#F{{< val "liquid" "write" "make(backing)" "f" >}})
 2. Enter `backing`: the ERC-20 token address
 3. Click **Write** and confirm
 
@@ -71,7 +71,7 @@ If `cloned` = `false`, you can create it — and `home` shows where it will be d
 - The spoke wraps your chosen ERC-20 with a built-in AMM pool connected to Hub
 - The spoke starts empty — someone needs to heat it to create liquidity
 
-**Find the address:** Call [`made`](https://etherscan.io/token/{{< val "liquids.hub.address" >}}#readContract#F{{< val "liquid" "read" "made(backing)" "f" >}}) again with the same backing address. The `home` field is your spoke's contract.
+**Find the address:** Call [`made`]({{< escan >}}/token/{{< val "liquids.hub.address" >}}#readContract#F{{< val "liquid" "read" "made(backing)" "f" >}}) again with the same backing address. The `home` field is your spoke's contract.
 
 <!-- TODO: example tx hash for a make transaction -->
 
@@ -85,7 +85,7 @@ This is where the **2x mint** happens: you deposit N backing tokens, the protoco
 
 ### Approve
 
-1. Go to [{{< val "backing.spoke.name" >}} → approve](https://etherscan.io/token/{{< val "backing.spoke.address" >}}#writeContract#F{{< val "solid" "write" "approve(spender, value)" "f" >}})
+1. Go to [{{< val "backing.spoke.name" >}} → approve]({{< escan >}}/token/{{< val "backing.spoke.address" >}}#writeContract#F{{< val "solid" "write" "approve(spender, value)" "f" >}})
 2. Enter:
    - `spender`: `{{< val "liquids.spoke.address" >}}` (the {{< val "liquids.spoke.symbol" >}} spoke)
    - `amount`: how much to approve (in wei, 18 decimals)
@@ -93,7 +93,7 @@ This is where the **2x mint** happens: you deposit N backing tokens, the protoco
 
 ### Heat
 
-1. Go to [{{< val "liquids.spoke.symbol" >}} → heat(m, e)](https://etherscan.io/token/{{< val "liquids.spoke.address" >}}#writeContract#F{{< val "liquid" "write" "heat(m, e)" "f" >}})
+1. Go to [{{< val "liquids.spoke.symbol" >}} → heat(m, e)]({{< escan >}}/token/{{< val "liquids.spoke.address" >}}#writeContract#F{{< val "liquid" "write" "heat(m, e)" "f" >}})
 2. Enter `m` — the amount of {{< val "backing.spoke.name" >}} tokens to deposit
 3. Click **Write** and confirm
 
@@ -103,7 +103,7 @@ This is where the **2x mint** happens: you deposit N backing tokens, the protoco
 - The pool also received {{< val "liquids.spoke.symbol" >}} tokens (instant liquidity)
 - Total minted: 2 × your deposit, split between you and the pool
 
-**Verify:** Call [`pool`](https://etherscan.io/token/{{< val "liquids.spoke.address" >}}#readContract#F{{< val "liquid" "read" "pool()" "f" >}}) on {{< val "liquids.spoke.symbol" >}} — it returns `(P, E)` where P is spoke tokens in the pool and E is Hub tokens in the pool.
+**Verify:** Call [`pool`]({{< escan >}}/token/{{< val "liquids.spoke.address" >}}#readContract#F{{< val "liquid" "read" "pool()" "f" >}}) on {{< val "liquids.spoke.symbol" >}} — it returns `(P, E)` where P is spoke tokens in the pool and E is Hub tokens in the pool.
 
 <!-- TODO: example tx hash for a spoke heat transaction -->
 
@@ -115,7 +115,7 @@ This is where the **2x mint** happens: you deposit N backing tokens, the protoco
 
 ### Preview
 
-1. Go to [{{< val "liquids.spoke.symbol" >}} → sells](https://etherscan.io/token/{{< val "liquids.spoke.address" >}}#readContract#F{{< val "liquid" "read" "sells(s)" "f" >}})
+1. Go to [{{< val "liquids.spoke.symbol" >}} → sells]({{< escan >}}/token/{{< val "liquids.spoke.address" >}}#readContract#F{{< val "liquid" "read" "sells(s)" "f" >}})
 2. Enter the amount of {{< val "liquids.spoke.symbol" >}} tokens to sell
 3. Click **Query**
 
@@ -123,7 +123,7 @@ The result is how many Hub tokens you'd receive.
 
 ### Sell
 
-1. Go to [{{< val "liquids.spoke.symbol" >}} → sell](https://etherscan.io/token/{{< val "liquids.spoke.address" >}}#writeContract#F{{< val "liquid" "write" "sell(s)" "f" >}})
+1. Go to [{{< val "liquids.spoke.symbol" >}} → sell]({{< escan >}}/token/{{< val "liquids.spoke.address" >}}#writeContract#F{{< val "liquid" "write" "sell(s)" "f" >}})
 2. Enter `s` — the amount of spokes to sell
 3. Click **Write** and confirm
 
@@ -132,7 +132,7 @@ The result is how many Hub tokens you'd receive.
 - Hub tokens moved from the pool's lake to your wallet
 - The pool's constant-product invariant (P × E = k) was maintained
 
-**Verify:** Call [`balanceOf`](https://etherscan.io/token/{{< val "liquids.hub.address" >}}#readContract#F{{< val "liquid" "read" "balanceOf(account)" "f" >}}) on the Hub with your wallet address.
+**Verify:** Call [`balanceOf`]({{< escan >}}/token/{{< val "liquids.hub.address" >}}#readContract#F{{< val "liquid" "read" "balanceOf(account)" "f" >}}) on the Hub with your wallet address.
 
 <!-- TODO: example tx hash for a sell transaction -->
 
@@ -144,7 +144,7 @@ The result is how many Hub tokens you'd receive.
 
 ### Preview
 
-1. Go to [{{< val "liquids.spoke.symbol" >}} → buys](https://etherscan.io/token/{{< val "liquids.spoke.address" >}}#readContract#F{{< val "liquid" "read" "buys(e)" "f" >}})
+1. Go to [{{< val "liquids.spoke.symbol" >}} → buys]({{< escan >}}/token/{{< val "liquids.spoke.address" >}}#readContract#F{{< val "liquid" "read" "buys(e)" "f" >}})
 2. Enter the amount of Hub tokens to spend
 3. Click **Query**
 
@@ -152,7 +152,7 @@ The result is how many {{< val "liquids.spoke.symbol" >}} tokens you'd receive.
 
 ### Buy
 
-1. Go to [{{< val "liquids.spoke.symbol" >}} → buy](https://etherscan.io/token/{{< val "liquids.spoke.address" >}}#writeContract#F{{< val "liquid" "write" "buy(e)" "f" >}})
+1. Go to [{{< val "liquids.spoke.symbol" >}} → buy]({{< escan >}}/token/{{< val "liquids.spoke.address" >}}#writeContract#F{{< val "liquid" "write" "buy(e)" "f" >}})
 2. Enter `e` — the amount of Hub (lake) to spend
 3. Click **Write** and confirm
 
@@ -160,7 +160,7 @@ The result is how many {{< val "liquids.spoke.symbol" >}} tokens you'd receive.
 - Hub tokens moved from your wallet into the pool's lake
 - {{< val "liquids.spoke.symbol" >}} tokens moved from the pool to your wallet
 
-**Verify:** Call [`balanceOf`](https://etherscan.io/token/{{< val "liquids.spoke.address" >}}#readContract#F{{< val "liquid" "read" "balanceOf(account)" "f" >}}) on {{< val "liquids.spoke.symbol" >}} with your wallet address.
+**Verify:** Call [`balanceOf`]({{< escan >}}/token/{{< val "liquids.spoke.address" >}}#readContract#F{{< val "liquid" "read" "balanceOf(account)" "f" >}}) on {{< val "liquids.spoke.symbol" >}} with your wallet address.
 
 <!-- TODO: example tx hash for a buy transaction -->
 
@@ -172,7 +172,7 @@ The result is how many {{< val "liquids.spoke.symbol" >}} tokens you'd receive.
 
 ### Preview
 
-1. On spoke A, go to [`sellsFor`](https://etherscan.io/token/{{< val "liquids.spoke.address" >}}#readContract#F{{< val "liquid" "read" "sellsFor(that, s)" "f" >}})
+1. On spoke A, go to [`sellsFor`]({{< escan >}}/token/{{< val "liquids.spoke.address" >}}#readContract#F{{< val "liquid" "read" "sellsFor(that, s)" "f" >}})
 2. Enter:
    - `that`: spoke B's contract address
    - `spokes`: amount of spoke A to trade
@@ -182,7 +182,7 @@ The result shows Hub used and spoke B tokens you'd receive.
 
 ### Swap
 
-1. On spoke A, go to [`sellFor`](https://etherscan.io/token/{{< val "liquids.spoke.address" >}}#writeContract#F{{< val "liquid" "write" "sellFor(that, s)" "f" >}})
+1. On spoke A, go to [`sellFor`]({{< escan >}}/token/{{< val "liquids.spoke.address" >}}#writeContract#F{{< val "liquid" "write" "sellFor(that, s)" "f" >}})
 2. Enter:
    - `that`: spoke B's contract address
    - `spokes`: amount of spoke A to trade
@@ -206,7 +206,7 @@ The result shows Hub used and spoke B tokens you'd receive.
 
 ### Preview
 
-1. Go to [{{< val "liquids.spoke.symbol" >}} → cools](https://etherscan.io/token/{{< val "liquids.spoke.address" >}}#readContract#F{{< val "liquid" "read" "cools(u, e)" "f" >}})
+1. Go to [{{< val "liquids.spoke.symbol" >}} → cools]({{< escan >}}/token/{{< val "liquids.spoke.address" >}}#readContract#F{{< val "liquid" "read" "cools(u, e)" "f" >}})
 2. Enter `u` — the amount of {{< val "liquids.spoke.symbol" >}} tokens to burn
 3. Enter `e = 0` — pass `0` for a liquid-only exit (no hub withdrawn from the lake)
 4. Click **Query**
@@ -215,7 +215,7 @@ The result shows how many {{< val "backing.spoke.name" >}} tokens you'd receive 
 
 ### Cool
 
-1. Go to [{{< val "liquids.spoke.symbol" >}} → cool](https://etherscan.io/token/{{< val "liquids.spoke.address" >}}#writeContract#F{{< val "liquid" "write" "cool(u, e)" "f" >}})
+1. Go to [{{< val "liquids.spoke.symbol" >}} → cool]({{< escan >}}/token/{{< val "liquids.spoke.address" >}}#writeContract#F{{< val "liquid" "write" "cool(u, e)" "f" >}})
 2. Enter `u` — the amount of {{< val "liquids.spoke.symbol" >}} tokens to burn
 3. Enter `e = 0` — pass `0` for a liquid-only exit (no hub withdrawn from the lake)
 4. Click **Write** and confirm
@@ -225,7 +225,7 @@ The result shows how many {{< val "backing.spoke.name" >}} tokens you'd receive 
 - A matching amount was burned from the pool (maintaining the 2x symmetry from heat)
 - {{< val "backing.spoke.name" >}} tokens were returned to your wallet proportional to pool reserves
 
-To unwrap Hub back to "Uniteum 1", call [`cool`](https://etherscan.io/token/{{< val "liquids.hub.address" >}}#writeContract#F{{< val "liquid" "write" "cool(u, e)" "f" >}}) on the Hub with `e = 0` — this is a simple 1:1 unwrap (the Hub ignores `e`).
+To unwrap Hub back to "Uniteum 1", call [`cool`]({{< escan >}}/token/{{< val "liquids.hub.address" >}}#writeContract#F{{< val "liquid" "write" "cool(u, e)" "f" >}}) on the Hub with `e = 0` — this is a simple 1:1 unwrap (the Hub ignores `e`).
 
 <!-- TODO: example tx hash for a cool transaction -->
 
@@ -233,7 +233,7 @@ To unwrap Hub back to "Uniteum 1", call [`cool`](https://etherscan.io/token/{{< 
 
 ## Quick reference
 
-### Hub ([`{{< val "liquids.hub.address" >}}`](https://etherscan.io/token/{{< val "liquids.hub.address" >}}))
+### Hub ([`{{< val "liquids.hub.address" >}}`]({{< escan >}}/token/{{< val "liquids.hub.address" >}}))
 
 #### Write
 
@@ -243,7 +243,7 @@ To unwrap Hub back to "Uniteum 1", call [`cool`](https://etherscan.io/token/{{< 
 
 {{% fn_table proto="liquid" kind="read" token="liquids.hub.address" %}}
 
-### Spoke (links use [{{< val "liquids.spoke.symbol" >}}](https://etherscan.io/token/{{< val "liquids.spoke.address" >}}) — any spoke works the same way)
+### Spoke (links use [{{< val "liquids.spoke.symbol" >}}]({{< escan >}}/token/{{< val "liquids.spoke.address" >}}) — any spoke works the same way)
 
 #### Write
 

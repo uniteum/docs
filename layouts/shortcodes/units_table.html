@@ -3,6 +3,7 @@
   Optional arg `filter` selects categories: "base" | "compound" | "reciprocal".
 */ -}}
 {{- $filter := .Get "filter" | default "all" -}}
+{{- $base := printf "https://%s" (partial "explorer-host" "") -}}
 
 | Symbol | Address | Canonical | Description |
 |--------|---------|-----------|-------------|
@@ -18,6 +19,6 @@
 {{- else if eq $filter "reciprocal" -}}{{- $include = $isReciprocal -}}
 {{- end -}}
 {{- if $include }}
-| [`{{ $sym }}`](https://etherscan.io/token/{{ $u.address }}) | `{{ $u.address }}` | `{{ $u.canonical }}` | {{ $u.description }} |
+| [`{{ $sym }}`]({{ $base }}/token/{{ $u.address }}) | `{{ $u.address }}` | `{{ $u.canonical }}` | {{ $u.description }} |
 {{- end -}}
 {{- end }}

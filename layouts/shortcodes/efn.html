@@ -37,9 +37,10 @@
 {{- end -}}
 
 {{- if $addr -}}
-  {{- $url := printf "https://etherscan.io/%s/%s#%s" $type $addr $section -}}
+  {{- $host := partial "explorer-host" "" -}}
+  {{- $url := printf "https://%s/%s/%s#%s" $host $type $addr $section -}}
   {{- if $fNum -}}{{- $url = printf "%s#F%v" $url $fNum -}}{{- end -}}
-  <a href="{{ $url }}" target="_blank" rel="noopener noreferrer">{{ $text | safeHTML }}</a>
+  <a href="{{ $url }}" data-eslink target="_blank" rel="noopener noreferrer">{{ $text | safeHTML }}</a>
 {{- else -}}
 {{ $text | safeHTML }}
 {{- end -}}

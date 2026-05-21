@@ -81,31 +81,31 @@ For a deeper look at the design, see the [Protocol](/solid/protocol) page.
 ## Try it directly on-chain
 
 You can interact with any Solid using standard tools like
-[Etherscan](https://etherscan.io) or
+{{< explorer >}} or
 [Blockscout](https://eth.blockscout.com).
 
 The links below reference
-[Uniteum 1 (1)](https://etherscan.io/token/{{< val "solids" "1" "address" >}})
+[Uniteum 1 (1)]({{< escan >}}/token/{{< val "solids" "1" "address" >}})
 as a live example. Any Solid works the same way.
 
 ### Make and trade
 
 | Action | What it does |
 |:-------|:-------------|
-| [make(name, symbol)](https://etherscan.io/address/{{< val "solids.NOTHING.address" >}}#writeContract#F{{< val "solid" "write" "make(name, symbol)" "f" >}}) | Make a new Solid |
-| [buy()](https://etherscan.io/token/{{< val "solids" "1" "address" >}}#writeContract#F{{< val "solid" "write" "buy()" "f" >}}) | Buy tokens from the pool |
-| [sell(amount)](https://etherscan.io/token/{{< val "solids" "1" "address" >}}#writeContract#F{{< val "solid" "write" "sell(s)" "f" >}}) | Sell tokens back to the pool |
-| [sellFor(solid, amount)](https://etherscan.io/token/{{< val "solids" "1" "address" >}}#writeContract#F{{< val "solid" "write" "sellFor(that, s)" "f" >}}) | Swap one Solid for another |
+| [make(name, symbol)]({{< escan >}}/address/{{< val "solids.NOTHING.address" >}}#writeContract#F{{< val "solid" "write" "make(name, symbol)" "f" >}}) | Make a new Solid |
+| [buy()]({{< escan >}}/token/{{< val "solids" "1" "address" >}}#writeContract#F{{< val "solid" "write" "buy()" "f" >}}) | Buy tokens from the pool |
+| [sell(amount)]({{< escan >}}/token/{{< val "solids" "1" "address" >}}#writeContract#F{{< val "solid" "write" "sell(s)" "f" >}}) | Sell tokens back to the pool |
+| [sellFor(solid, amount)]({{< escan >}}/token/{{< val "solids" "1" "address" >}}#writeContract#F{{< val "solid" "write" "sellFor(that, s)" "f" >}}) | Swap one Solid for another |
 
 ### Inspect prices and state
 
 | Action | What it shows |
 |:-------|:--------------|
-| [buys(ethAmount)](https://etherscan.io/token/{{< val "solids" "1" "address" >}}#readContract#F{{< val "solid" "read" "buys(e)" "f" >}}) | Tokens received for a given input |
-| [sells(amount)](https://etherscan.io/token/{{< val "solids" "1" "address" >}}#readContract#F{{< val "solid" "read" "sells(s)" "f" >}}) | Currency received for selling |
-| [sellsFor(solid, amount)](https://etherscan.io/token/{{< val "solids" "1" "address" >}}#readContract#F{{< val "solid" "read" "sellsFor(that, s)" "f" >}}) | Preview a Solid-to-Solid swap |
-| [pool()](https://etherscan.io/token/{{< val "solids" "1" "address" >}}#readContract#F{{< val "solid" "read" "pool()" "f" >}}) | Current pool balances |
-| [made(name, symbol)](https://etherscan.io/address/{{< val "solids.NOTHING.address" >}}#readContract#F{{< val "solid" "read" "made(name, symbol)" "f" >}}) | Check if a Solid already exists |
+| [buys(ethAmount)]({{< escan >}}/token/{{< val "solids" "1" "address" >}}#readContract#F{{< val "solid" "read" "buys(e)" "f" >}}) | Tokens received for a given input |
+| [sells(amount)]({{< escan >}}/token/{{< val "solids" "1" "address" >}}#readContract#F{{< val "solid" "read" "sells(s)" "f" >}}) | Currency received for selling |
+| [sellsFor(solid, amount)]({{< escan >}}/token/{{< val "solids" "1" "address" >}}#readContract#F{{< val "solid" "read" "sellsFor(that, s)" "f" >}}) | Preview a Solid-to-Solid swap |
+| [pool()]({{< escan >}}/token/{{< val "solids" "1" "address" >}}#readContract#F{{< val "solid" "read" "pool()" "f" >}}) | Current pool balances |
+| [made(name, symbol)]({{< escan >}}/address/{{< val "solids.NOTHING.address" >}}#readContract#F{{< val "solid" "read" "made(name, symbol)" "f" >}}) | Check if a Solid already exists |
 
 If you'd like to support continued development, acquiring some
 [Uniteum 1](/solid/uniteum-1)

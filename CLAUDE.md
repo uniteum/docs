@@ -178,33 +178,27 @@ The current Uniteum version label lives in the data (e.g. `contracts.uniteum.nam
 
 ### Linking Contract Addresses
 
-**ALWAYS link contract addresses to Etherscan with context-appropriate anchors:**
+**The block-explorer host is configurable — NEVER hardcode `https://etherscan.io` (or any explorer host) in markdown or layouts.**
 
-**Network Selection:**
-- Main documentation → Mainnet (etherscan.io)
-- Developer/testing sections → Sepolia (sepolia.etherscan.io)
-- When showing both networks, clearly label each
+All our contracts deploy to **identical addresses on every network** (deterministic CREATE2). The only thing that varies per network is the explorer *host*. That host comes from `data/explorers.yml` (`default` network), and a sidebar dropdown rewrites every explorer link client-side when more than one network is live. So a link's address path is written once and works on every chain.
 
-**Etherscan Section Anchors:**
-- `#code` - Verified source code (deployment tables, technical reference)
-- `#writeContract` - Interactive write functions (tutorials, "try it yourself")
-- `#readContract` - Query contract state (exploring invariants, checking balances)
-- `#events` - Event logs and transaction history
-- No anchor - General contract overview page
-- Specific transaction: Full tx hash link (e.g., `https://etherscan.io/tx/0x...`)
+**How to write explorer links (in order of preference):**
+1. **Address/function is in `data/`** → use a shortcode that builds the whole link: `etherscan`, `efn`, `fn_table`, `addr_table`, `contract`, `token`, `unit`, `units_table`. These resolve the host from `data/explorers.yml` automatically.
+2. **You must hand-write a markdown link** (custom anchor text or a `#writeContract#F…` double-anchor) → build the host with the `escan` shortcode:
+   - `[text]({{</* escan */>}}/address/{{</* val "contracts.uniteum.address" */>}}#code)`
+   - `[buy()]({{</* escan */>}}/token/{{</* val "solids.H.address" */>}}#writeContract#F3)`
+3. **A "view on the explorer" link whose visible text is the explorer's name** → use the `explorer` shortcode, which renders the current explorer's name (e.g. "Arbiscan") and updates both text and host on switch: `{{</* explorer */>}}` or `{{</* explorer path="/address/0x…#code" */>}}`.
 
-**Link Format by Type:**
-- **Contracts** (Uniteum, Helper, etc.): Use `/address/<ADDRESS>#code`
-  - Example: `https://etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#code`
-- **Unit Tokens** (foo, bar, meter, etc.): Use `/token/<ADDRESS>`
-  - Example: `https://etherscan.io/token/0x966108210F3B2eC0f01B646a61Ce7D8F1aDE7430`
+**Section anchors** (append to `#address/<addr>` or `#token/<addr>`): `#code` (source), `#writeContract` (write tab), `#readContract` (read tab), `#events` (logs), none (overview). Specific tx: use the `etherscan` shortcode with `type="tx"`.
 
-**Examples:**
-- Contract deployment table: `` [`0x9df9b0501e8f6c05623b5b519f9f18b598d9b253`](https://etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#code) `` (display full address)
-- Unit token reference: `[foo](https://etherscan.io/token/0x966108210F3B2eC0f01B646a61Ce7D8F1aDE7430)` (descriptive anchor text)
-- Tutorial forge step: `[Uniteum contract](https://etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#writeContract)` (descriptive anchor text)
-- Checking invariants: `[read the invariant](https://etherscan.io/address/0x9df9b0501e8f6c05623b5b519f9f18b598d9b253#readContract)` (descriptive anchor text)
-- Example transaction: `[This forge transaction](https://etherscan.io/tx/0xabcd1234...)` (use full tx hash in URL, can shorten display text)
+**Type by target:** contracts/factories → `/address/<addr>`; unit/ERC-20 tokens → `/token/<addr>`; transactions → `/tx/<hash>`.
+
+**Pinning a link to one network** (a legacy or chain-specific contract that does NOT share an address everywhere): leave the literal host in the markdown and add the address to the `skip:` list in `data/explorers.yml` so the dropdown won't rewrite it. The legacy v0.0 genesis contract is the existing example.
+
+**Anti-patterns:**
+- ❌ `[x](https://etherscan.io/address/{{</* val "…" */>}}#code)` — hardcoded host won't follow the network selector. Use `{{</* escan */>}}` for the host.
+- ❌ `[Etherscan](https://etherscan.io)` — names a single network in the text. Use `{{</* explorer */>}}`.
+- ❌ Writing per-network address fields in `data/` — addresses are identical across chains; only the host varies.
 
 **Prefer the shortcodes over hand-rolled URLs** whenever the address or function lives in `data/`. The shortcodes below resolve addresses, build URLs, and keep templates consistent.
 
@@ -217,7 +211,9 @@ The site has a small set of shortcodes in `layouts/shortcodes/`. Use them to kee
 | `val` | Generic `hugo.Data` lookup. `{{< val "contracts.uniteum.address" >}}` or `{{< val "solids" "1" "address" >}}` for keys with dots/digits. |
 | `addr_table` | Renders a markdown table of `name`/`address` rows from a data map, with Etherscan links. `{{< addr_table data="contracts" >}}`. |
 | `fn_table` | Renders the read- or write-function quick reference table for a protocol. `{{< fn_table proto="liquid" kind="write" token="liquids.hub.address" type="token" >}}`. |
-| `efn` | Single Etherscan function link as raw HTML (works inside list items, table cells). Accepts `addr`, `fn` (dotted path) or `fn_path`+`fn_key`, plus `section`, `type`, `text`. |
+| `efn` | Single explorer function link as raw HTML (works inside list items, table cells). Accepts `addr`, `fn` (dotted path) or `fn_path`+`fn_key`, plus `section`, `type`, `text`. |
+| `escan` | Emits the configured explorer base URL (e.g. `https://arbiscan.io`) for use inside hand-written markdown link destinations: `[text]({{< escan >}}/address/{{< val "x.address" >}}#code)`. Host comes from `data/explorers.yml`. |
+| `explorer` | A link whose visible text is the explorer name (e.g. "Arbiscan"); both text and host update with the network selector. Optional `path`, `network`. |
 | `reflector_clones` | Renders the Reflector "Deployed instances" section from `data/unispring.yml`'s `reflector.clones` map. |
 | `contract`, `contract_table`, `token`, `unit`, `units_table`, `etherscan`, `genesis_address`, `genesis_name`, `uniteum_address`, `uniteum_name`, `references` | Other helpers — see `layouts/shortcodes/` for each one's parameters. |
 

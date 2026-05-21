@@ -1,0 +1,40 @@
+# Block explorers, one per network.
+#
+# All Uniteum contracts use identical addresses on every network (deterministic
+# CREATE2 deployment), so switching network only swaps the explorer *host* — the
+# address path is unchanged. That's why a single site-wide network selector is
+# correct: every link just changes host.
+#
+# `default`  — network key used for server-rendered links (and the initial
+#              dropdown selection). Set this to whichever chain the contracts are
+#              actually live on.
+# `order`    — dropdown order. Only entries with `live: true` are offered; the
+#              selector is hidden entirely until 2+ networks are live.
+# `networks` — key -> { name (explorer name, shown in the dropdown), host, live }.
+#
+# Mainnet is held out (`live: false`) until the mainnet deploy lands. When it
+# does: set mainnet `live: true` (and, if it becomes primary, change `default`).
+# The selector then appears automatically — no other changes needed.
+
+default: arbitrum
+order: [arbitrum, mainnet, sepolia]
+
+# Addresses that must NEVER be host-swapped by the network selector — legacy or
+# chain-specific contracts that only exist on one network. Any link whose URL
+# contains one of these is left exactly as authored.
+skip:
+  - "0x5bA96211E3679FDcc7047a5c64d40A4Dd3fBdAD7"  # legacy v0.0 genesis, mainnet only
+
+networks:
+  arbitrum:
+    name: "Arbiscan"
+    host: "arbiscan.io"
+    live: true
+  mainnet:
+    name: "Etherscan"
+    host: "etherscan.io"
+    live: false
+  sepolia:
+    name: "Sepolia Etherscan"
+    host: "sepolia.etherscan.io"
+    live: false

@@ -17,7 +17,7 @@ Solid is open source, permissionless, and has no fees. There's no treasury, no t
 
 But building and maintaining it takes work.
 
-Buying [1](https://etherscan.io/token/{{< val "solids" "1" "address" >}}) is a simple, voluntary way to support that work. When you buy, your ETH goes into the token's pool — the same constant-product pool that every Solid uses. You get tokens. The pool gets liquidity.
+Buying [1]({{< escan >}}/token/{{< val "solids" "1" "address" >}}) is a simple, voluntary way to support that work. When you buy, your ETH goes into the token's pool — the same constant-product pool that every Solid uses. You get tokens. The pool gets liquidity.
 
 There's no promise of returns. No governance rights. No special access. Just a straightforward signal that you find this project worth supporting.
 
@@ -47,11 +47,11 @@ It's not a donation. It's not an investment. It's somewhere in between — a way
 |:--|:--|
 | **Name** | Uniteum 1 |
 | **Symbol** | 1 |
-| **Contract** | [{{< val "solids" "1" "address" >}}](https://etherscan.io/token/{{< val "solids" "1" "address" >}}) |
-| **NOTHING** | [{{< val "solids.NOTHING.address" >}}](https://etherscan.io/address/{{< val "solids.NOTHING.address" >}}) |
-| **Network** | Ethereum Mainnet |
+| **Contract** | [{{< val "solids" "1" "address" >}}]({{< escan >}}/token/{{< val "solids" "1" "address" >}}) |
+| **NOTHING** | [{{< val "solids.NOTHING.address" >}}]({{< escan >}}/address/{{< val "solids.NOTHING.address" >}}) |
+| **Network** | Live on Arbitrum (same address on every chain) |
 
-You can interact with Uniteum 1 directly on [Etherscan](https://etherscan.io/token/{{< val "solids" "1" "address" >}}) — no special interface required.
+You can interact with Uniteum 1 directly on the [block explorer]({{< escan >}}/token/{{< val "solids" "1" "address" >}}) — no special interface required.
 
 ## What's ahead
 

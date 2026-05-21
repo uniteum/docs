@@ -1,0 +1,8 @@
+{{- /*
+  Returns the default explorer name (e.g. "Arbiscan") as a string.
+  Optional arg: a network key (string) to force a specific network's name.
+*/ -}}
+{{- $cfg := hugo.Data.explorers -}}
+{{- $key := . | default $cfg.default -}}
+{{- $net := index $cfg.networks $key -}}
+{{- return $net.name -}}

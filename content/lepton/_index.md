@@ -58,19 +58,19 @@ Calling `make` with the same parameters from the same address returns the existi
 ## Try it on-chain
 
 You can interact with Lepton using standard tools like
-[Etherscan](https://etherscan.io) or
+{{< explorer >}} or
 [Blockscout](https://eth.blockscout.com).
 
 ### Factory contract
 
-[`0x14ae57aed6ac1cd48fa811ed885ab4a4c5e28c42`](https://etherscan.io/address/0x14ae57aed6ac1cd48fa811ed885ab4a4c5e28c42#code)
+[`0x14ae57aed6ac1cd48fa811ed885ab4a4c5e28c42`]({{< escan >}}/address/0x14ae57aed6ac1cd48fa811ed885ab4a4c5e28c42#code)
 
 ### Functions
 
 | Action | What it does |
 |:-------|:-------------|
-| [make(name, symbol, decimals, supply, variant)](https://etherscan.io/address/0x14ae57aed6ac1cd48fa811ed885ab4a4c5e28c42#writeContract#F{{< val "lepton" "write" "make(name, symbol, decimals, supply, variant)" "f" >}}) | Deploy a new ERC-20 token |
-| [made(maker, name, symbol, decimals, supply, variant)](https://etherscan.io/address/0x14ae57aed6ac1cd48fa811ed885ab4a4c5e28c42#readContract#F{{< val "lepton" "read" "made(maker, name, symbol, decimals, supply, variant)" "f" >}}) | Check if a token exists and preview its address |
+| [make(name, symbol, decimals, supply, variant)]({{< escan >}}/address/0x14ae57aed6ac1cd48fa811ed885ab4a4c5e28c42#writeContract#F{{< val "lepton" "write" "make(name, symbol, decimals, supply, variant)" "f" >}}) | Deploy a new ERC-20 token |
+| [made(maker, name, symbol, decimals, supply, variant)]({{< escan >}}/address/0x14ae57aed6ac1cd48fa811ed885ab4a4c5e28c42#readContract#F{{< val "lepton" "read" "made(maker, name, symbol, decimals, supply, variant)" "f" >}}) | Check if a token exists and preview its address |
 
 Each deployed token is a standard ERC-20 with `name()`, `symbol()`, `decimals()`, `totalSupply()`, `balanceOf()`, `transfer()`, `approve()`, and `transferFrom()`.
 
@@ -99,4 +99,4 @@ Fixed supply is the simplest useful token model. No mint function means no infla
 ## Resources
 
 - [GitHub Repository](https://github.com/uniteum/lepton)
-- [Contract Source](https://etherscan.io/address/0x14ae57aed6ac1cd48fa811ed885ab4a4c5e28c42#code)
+- [Contract Source]({{< escan >}}/address/0x14ae57aed6ac1cd48fa811ed885ab4a4c5e28c42#code)

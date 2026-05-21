@@ -1,0 +1,27 @@
+{{- /*
+  Network selector for the sidebar. All contracts share one address per chain,
+  so this just changes which block explorer every link points at. Rendered only
+  when 2+ networks are live (see data/explorers.yml). The host/text rewriting is
+  done client-side by the script in docs/inject/body.html.
+*/ -}}
+{{- $cfg := hugo.Data.explorers -}}
+{{- $live := slice -}}
+{{- range $cfg.order -}}
+  {{- $n := index $cfg.networks . -}}
+  {{- if $n.live -}}{{- $live = $live | append (dict "key" . "name" $n.name) -}}{{- end -}}
+{{- end -}}
+{{- if ge (len $live) 2 -}}
+<div class="explorer-network">
+  <label for="explorer-network-select">Explorer network</label>
+  <select id="explorer-network-select">
+    {{- range $live }}
+    <option value="{{ .key }}">{{ .name }}</option>
+    {{- end }}
+  </select>
+</div>
+<style>
+.explorer-network { margin: 0.5rem 0 1rem; font-size: 0.85rem; }
+.explorer-network label { display: block; margin-bottom: 0.25rem; opacity: 0.7; }
+.explorer-network select { width: 100%; padding: 0.35rem; border-radius: 4px; }
+</style>
+{{- end -}}

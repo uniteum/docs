@@ -1,0 +1,84 @@
+{{- /*
+  Client-side block-explorer host switcher.
+
+  Every contract has the same address on every chain, so switching network only
+  swaps the link host (e.g. arbiscan.io -> etherscan.io). This script:
+    - reads the config JSON emitted below (from data/explorers.yml),
+    - on load, sets every explorer link to the saved/default network,
+    - on selector change, rewrites all explorer links and persists the choice.
+  Links whose URL contains a `skip` address are never touched. Links flagged
+  data-esname also get their visible text set to the network's explorer name.
+*/ -}}
+{{- $cfg := hugo.Data.explorers -}}
+{{- $hosts := slice -}}
+{{- range $k, $n := $cfg.networks -}}{{- $hosts = $hosts | append $n.host -}}{{- end -}}
+{{- $live := slice -}}
+{{- range $cfg.order -}}
+  {{- $n := index $cfg.networks . -}}
+  {{- if $n.live -}}{{- $live = $live | append (dict "key" . "name" $n.name "host" $n.host) -}}{{- end -}}
+{{- end -}}
+{{- $config := dict
+  "default" $cfg.default
+  "hosts" $hosts
+  "networks" $live
+  "skip" (default (slice) $cfg.skip)
+-}}
+<script type="application/json" id="explorer-config">{{ $config | jsonify | safeJS }}</script>
+<script>
+(function () {
+  var el = document.getElementById('explorer-config');
+  if (!el) return;
+  var cfg;
+  try { cfg = JSON.parse(el.textContent); } catch (e) { return; }
+  var KNOWN = cfg.hosts || [];
+  var NETS = cfg.networks || [];
+  var SKIP = cfg.skip || [];
+  var KEY = 'uniteum:network';
+  var byKey = {};
+  NETS.forEach(function (n) { byKey[n.key] = n; });
+
+  function currentKey() {
+    var k = null;
+    try { k = localStorage.getItem(KEY); } catch (e) {}
+    return (k && byKey[k]) ? k : cfg.default;
+  }
+  function hostFor(k) {
+    return (byKey[k] || byKey[cfg.default] || {}).host;
+  }
+  function skip(href) {
+    for (var i = 0; i < SKIP.length; i++) {
+      if (SKIP[i] && href.indexOf(SKIP[i]) !== -1) return true;
+    }
+    return false;
+  }
+  function rewrite(k) {
+    var host = hostFor(k);
+    if (!host) return;
+    var name = (byKey[k] || {}).name;
+    var links = document.querySelectorAll('a[href]');
+    for (var i = 0; i < links.length; i++) {
+      var a = links[i];
+      var href = a.getAttribute('href');
+      if (!href || skip(href)) continue;
+      var u;
+      try { u = new URL(href, window.location.href); } catch (e) { continue; }
+      if (KNOWN.indexOf(u.hostname) === -1) continue;
+      if (u.hostname !== host) { u.hostname = host; a.setAttribute('href', u.toString()); }
+      if (name && a.hasAttribute('data-esname')) a.textContent = name;
+    }
+  }
+  function setNetwork(k) {
+    if (!byKey[k]) k = cfg.default;
+    try { localStorage.setItem(KEY, k); } catch (e) {}
+    rewrite(k);
+  }
+
+  var key = currentKey();
+  rewrite(key);
+  var sel = document.getElementById('explorer-network-select');
+  if (sel) {
+    sel.value = key;
+    sel.addEventListener('change', function () { setNetwork(this.value); });
+  }
+})();
+</script>

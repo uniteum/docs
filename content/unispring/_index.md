@@ -60,12 +60,12 @@ Each Fountain clone has an immutable `owner` set at deploy time — the address 
 
 | Contract | Address |
 |:---------|:--------|
-| {{< val "unispring.fountain.name" >}} | [`{{< val "unispring.fountain.address" >}}`](https://etherscan.io/address/{{< val "unispring.fountain.address" >}}#code) |
-| {{< val "unispring.manifold.name" >}} | [`{{< val "unispring.manifold.address" >}}`](https://etherscan.io/address/{{< val "unispring.manifold.address" >}}#code) |
-| {{< val "unispring.neutrinoSource.name" >}} | [`{{< val "unispring.neutrinoSource.address" >}}`](https://etherscan.io/address/{{< val "unispring.neutrinoSource.address" >}}#code) |
-| {{< val "unispring.neutrinoChannel.name" >}} | [`{{< val "unispring.neutrinoChannel.address" >}}`](https://etherscan.io/address/{{< val "unispring.neutrinoChannel.address" >}}#code) |
-| {{< val "unispring.reflector.name" >}} | [`{{< val "unispring.reflector.address" >}}`](https://etherscan.io/address/{{< val "unispring.reflector.address" >}}#code) |
-| {{< val "unispring.hub.name" >}} | [`{{< val "unispring.hub.address" >}}`](https://etherscan.io/address/{{< val "unispring.hub.address" >}}#code) |
+| {{< val "unispring.fountain.name" >}} | [`{{< val "unispring.fountain.address" >}}`]({{< escan >}}/address/{{< val "unispring.fountain.address" >}}#code) |
+| {{< val "unispring.manifold.name" >}} | [`{{< val "unispring.manifold.address" >}}`]({{< escan >}}/address/{{< val "unispring.manifold.address" >}}#code) |
+| {{< val "unispring.neutrinoSource.name" >}} | [`{{< val "unispring.neutrinoSource.address" >}}`]({{< escan >}}/address/{{< val "unispring.neutrinoSource.address" >}}#code) |
+| {{< val "unispring.neutrinoChannel.name" >}} | [`{{< val "unispring.neutrinoChannel.address" >}}`]({{< escan >}}/address/{{< val "unispring.neutrinoChannel.address" >}}#code) |
+| {{< val "unispring.reflector.name" >}} | [`{{< val "unispring.reflector.address" >}}`]({{< escan >}}/address/{{< val "unispring.reflector.address" >}}#code) |
+| {{< val "unispring.hub.name" >}} | [`{{< val "unispring.hub.address" >}}`]({{< escan >}}/address/{{< val "unispring.hub.address" >}}#code) |
 
 
 ---

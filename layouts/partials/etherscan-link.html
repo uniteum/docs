@@ -1,13 +1,21 @@
 {{- /*
-  Build an Etherscan link.
-  Args (dict): address, section, text, network ("mainnet"|"sepolia"), type ("address"|"token"|"tx")
+  Build a block-explorer link.
+
+  Args (dict): address, section, text, network (optional network key, e.g.
+  "mainnet"), type ("address"|"token"|"tx").
+
+  The host comes from data/explorers.yml (default network), or from `network`
+  if given. The address path is identical on every chain, so the network
+  selector dropdown can rewrite the host client-side — see the `data-eslink`
+  marker and assets/explorer-switch.js.
 */ -}}
 {{- $address := .address -}}
 {{- $section := .section -}}
 {{- $text := .text -}}
 {{- $network := .network -}}
 {{- $type := .type | default "address" -}}
-{{- $base := cond (eq $network "sepolia") "https://sepolia.etherscan.io" "https://etherscan.io" -}}
+{{- $host := partial "explorer-host" $network -}}
+{{- $base := printf "https://%s" $host -}}
 {{- $url := "" -}}
 {{- if eq $type "tx" -}}
   {{- $url = printf "%s/tx/%s" $base $address -}}
@@ -20,4 +28,4 @@
 {{- end -}}
 {{- $linkText := $address -}}
 {{- if $text -}}{{- $linkText = $text -}}{{- end -}}
-<a href="{{ $url }}" target="_blank" rel="noopener noreferrer">{{ $linkText | safeHTML }}</a>
+<a href="{{ $url }}" data-eslink target="_blank" rel="noopener noreferrer">{{ $linkText | safeHTML }}</a>

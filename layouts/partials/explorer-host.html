@@ -1,0 +1,9 @@
+{{- /*
+  Returns the default explorer host (e.g. "arbiscan.io") as a string.
+  Optional arg: a network key (string) to force a specific network's host.
+  All contracts share one address across chains, so only the host varies.
+*/ -}}
+{{- $cfg := hugo.Data.explorers -}}
+{{- $key := . | default $cfg.default -}}
+{{- $net := index $cfg.networks $key -}}
+{{- return $net.host -}}

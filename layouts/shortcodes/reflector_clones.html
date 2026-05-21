@@ -2,6 +2,7 @@
   Render the "Deployed instances" markdown for Reflector clones from data.
 */ -}}
 {{- $reflector := hugo.Data.unispring.reflector -}}
+{{- $base := printf "https://%s" (partial "explorer-host" "") -}}
 
 {{- if $reflector.address -}}
 {{- range $name, $c := $reflector.clones }}
@@ -13,10 +14,10 @@
 | Symbol | `{{ $c.symbol }}` |
 | Peg | {{ $c.peg }} |
 {{- if $c.peg_lookup }}
-| Peg lookup | [`{{ $c.peg_lookup }}`](https://etherscan.io/address/{{ $c.peg_lookup_address }}#code) |
+| Peg lookup | [`{{ $c.peg_lookup }}`]({{ $base }}/address/{{ $c.peg_lookup_address }}#code) |
 {{- end }}
 {{- if $c.address }}
-| Clone | [`{{ $c.address }}`](https://etherscan.io/address/{{ $c.address }}#code) |
+| Clone | [`{{ $c.address }}`]({{ $base }}/address/{{ $c.address }}#code) |
 {{- end }}
 
 {{ $c.note }}
@@ -26,7 +27,7 @@
 | Name | Address |
 |:-----|:--------|
 {{- range $iss := $c.issues }}
-| {{ if $iss.permalink }}[{{ $iss.name }}]({{ $iss.permalink }}){{ else }}{{ $iss.name }}{{ end }} | {{ if $iss.address }}[`{{ $iss.address }}`](https://etherscan.io/address/{{ $iss.address }}){{ else }}_(pending deploy)_{{ end }} |
+| {{ if $iss.permalink }}[{{ $iss.name }}]({{ $iss.permalink }}){{ else }}{{ $iss.name }}{{ end }} | {{ if $iss.address }}[`{{ $iss.address }}`]({{ $base }}/address/{{ $iss.address }}){{ else }}_(pending deploy)_{{ end }} |
 {{- end }}
 {{- end }}
 {{- end }}

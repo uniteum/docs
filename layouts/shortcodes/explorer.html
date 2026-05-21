@@ -1,0 +1,14 @@
+{{- /*
+  A link whose visible text is the explorer's name (e.g. "Arbiscan"), used for
+  bare "view on Etherscan" style links. Both the text and the host update when
+  the network selector changes (via data-eslink + data-esname).
+
+  Args:
+    path    - optional path after the host (default ""), e.g. "/address/0x..#code"
+    network - optional network key to force a specific network
+*/ -}}
+{{- $path := .Get "path" | default "" -}}
+{{- $network := .Get "network" -}}
+{{- $host := partial "explorer-host" $network -}}
+{{- $name := partial "explorer-name" $network -}}
+<a href="https://{{ $host }}{{ $path }}" data-eslink data-esname target="_blank" rel="noopener noreferrer">{{ $name }}</a>

@@ -9,6 +9,7 @@
 {{- $path := .Get "data" -}}
 {{- $cur := hugo.Data -}}
 {{- range split $path "." -}}{{- $cur = index $cur . -}}{{- end -}}
+{{- $base := printf "https://%s" (partial "explorer-host" "") -}}
 
 {{- $any := false -}}
 {{- range $key, $entry := $cur -}}
@@ -20,7 +21,7 @@
 |:---------|:--------|
 {{- range $key, $entry := $cur -}}
 {{- if and (reflect.IsMap $entry) $entry.address }}
-| {{ $entry.name }} | [`{{ $entry.address }}`](https://etherscan.io/address/{{ $entry.address }}#code) |
+| {{ $entry.name }} | [`{{ $entry.address }}`]({{ $base }}/address/{{ $entry.address }}#code) |
 {{- end -}}
 {{- end }}
 {{ else -}}
