@@ -23,7 +23,7 @@ order: [arbitrum, mainnet, sepolia]
 # chain-specific contracts that only exist on one network. Any link whose URL
 # contains one of these is left exactly as authored.
 skip:
-  - "0x5bA96211E3679FDcc7047a5c64d40A4Dd3fBdAD7"  # legacy v0.0 genesis, mainnet only
+  - "0x5bA96211E3679FDcc7047a5c64d40A4Dd3fBdAD7" # legacy v0.0 genesis, mainnet only
 
 networks:
   arbitrum:
@@ -33,8 +33,8 @@ networks:
   mainnet:
     name: "Etherscan"
     host: "etherscan.io"
-    live: false
+    live: true
   sepolia:
     name: "Sepolia Etherscan"
     host: "sepolia.etherscan.io"
-    live: false
+    live: true
