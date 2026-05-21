@@ -67,3 +67,7 @@ fine. Not worth fixing.
 - solc pragma: `^0.8.30` for the original three protocols (Uniteum/Solid/Liquid),
   `^0.8.34` for the newer projects (Lepton/Unispring/Locale/Crucible).
 - No redirects needed (low traffic site).
+
+## Project state
+
+- [Deployment networks](canon/deployment-networks.md) — identical addresses on every chain; live on Arbitrum now, mainnet in weeks. Configurability = host swap only, no per-contract address data.
