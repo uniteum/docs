@@ -11,8 +11,10 @@
 #     It is included under `write:` because Etherscan lists it on the
 #     Write Contract tab as a non-view function.
 
-# TODO BLK-4: confirm prototype choice (legacy vs current 0xaDDb841F…e300)
-address: "0x6adD49A791fF1dDDcd91f0AFCB70Cd91c81821ca"
+# BLK-4 resolved: the current AddressLookup prototype is the one the live
+# Locale clones (USDC, PoolManagerLookup — see data/uniswap-lookup.yml) are
+# deployed from. The legacy 0x6adD49A7… prototype is superseded.
+address: "0xaDDb841F7f2D4176C480E3734448047ad83FE300"
 
 write:
   "make(bytes,uint256)":
@@ -47,3 +49,13 @@ read:
   "version()":
     f: 7
     description: "Contract version string"
+
+# StringLookup prototype — the IStringLookup sibling of AddressLookup
+# (chain id → string). Reflector reads a clone of it (GasNameLookup, see
+# data/uniswap-lookup.yml) at construction to derive the native-pair symbol.
+stringLookup:
+  name: "StringLookup"
+  description: "Locale prototype mapping chain id → string. Deploys clones
+    such as GasNameLookup; Reflector uses one to resolve the chain-local
+    native-token symbol."
+  address: "0x555F0018a30F59634af07589ed17f44DF2BCE300"

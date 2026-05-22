@@ -6,6 +6,12 @@
 # the function *name*, so the F# index reflects the alphabetical position of
 # the name and is the same for every overload.
 
+name: "Lepton"
+description: "Fixed-supply ERC-20 token factory (prototype). Acts as the
+  ICoinage that Reflector calls to mint every issue, so every Reflector
+  issue is a Lepton clone deployed by this prototype."
+address: "0x1Eb8dF6040A67025C2aF9a82aB966CCd7bF1e300"
+
 write:
   "make(name, symbol, decimals, supply, variant)":
     f: 2

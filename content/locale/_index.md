@@ -96,11 +96,7 @@ You can interact with the AddressLookup factory using standard tools like
 
 ### Live example: USDC lookup
 
-<!-- TODO BLK-4: this hardcoded address is a clone of the *legacy* AddressLookup
-     prototype; the canonical USDC clone of the current prototype is not yet
-     deployed. Replace with a `{{< val >}}` reference once the maintainer
-     finalizes the prototype choice and the new clone is deployed. -->
-The USDC AddressLookup is deployed at [`0xfE52eC4D4Ac10b5b0718614AA0077F2920f592e8`](https://{{< escan >}}/address/0xfE52eC4D4Ac10b5b0718614AA0077F2920f592e8#readContract). Query `value()` on any supported chain and it returns that chain's USDC address.
+The USDC AddressLookup is deployed at [`{{< val "uniswap-lookup" "usdc" "address" >}}`](https://{{< escan >}}/address/{{< val "uniswap-lookup" "usdc" "address" >}}#readContract). Query `value()` on any supported chain and it returns that chain's USDC address.
 
 ---
 

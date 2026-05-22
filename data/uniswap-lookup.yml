@@ -1,0 +1,29 @@
+# uniswap-lookup contract addresses.
+# Chain-aware Locale clones (deterministic CREATE2 — same address on every
+# chain, contents resolved per chain). These are the external lookups the
+# Unispring contracts depend on. The prototypes they are cloned from live in
+# data/locale.yml (AddressLookup `address`, StringLookup `stringLookup`).
+
+poolManagerLookup:
+  name: "PoolManagerLookup"
+  description: "AddressLookup clone resolving the chain-local Uniswap V4
+    PoolManager. Fountain reads it to find the PoolManager it opens
+    positions on."
+  address: "0xB001b0342E8bf106c8DdB2f858a8cA15A171e300"
+  deployer: "0xaDDb841F7f2D4176C480E3734448047ad83FE300" # AddressLookup prototype
+
+gasNameLookup:
+  name: "GasNameLookup"
+  description: "StringLookup clone resolving the chain-local native-token
+    symbol (e.g. ETH, MATIC). Reflector reads it at construction to form the
+    native-pair symbol (\"1xETH\" on mainnet, \"1xMATIC\" on Polygon, etc.)."
+  address: "0x6A56341F0f08351E7C4eB97540Fb3a848953e300"
+  deployer: "0x555F0018a30F59634af07589ed17f44DF2BCE300" # StringLookup prototype
+
+usdc:
+  name: "USDC Lookup"
+  description: "AddressLookup clone resolving chain-local Circle (native)
+    USDC. Used as the peg for the USDCReflector clone, so the 1xUSDC clone
+    address is identical on every chain."
+  address: "0xC5DC3461ed6653dbC5E6A8bCDcF0354fF178E300"
+  deployer: "0xaDDb841F7f2D4176C480E3734448047ad83FE300" # AddressLookup prototype

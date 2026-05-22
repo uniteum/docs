@@ -275,10 +275,19 @@ reflector:
         clone — no separate deploy. The pair's symbol is resolved at
         construction from a chain-local IStringLookup (\"1xETH\" on
         mainnet, \"1xMATIC\" on Polygon, etc.)."
+      # First entry is the flagship showcase token (page exists, address
+      # pending a canonical mint). The rest are mined ERC-20s issued by the
+      # Reflector prototype against native ETH — see unispring/io/<Name>/.
       issues:
         - name: "Uniteum 1xETH"
           address:
           permalink: "/reflector/uniteum-1xeth/"
+        - name: "Uniteum Ether"
+          address: "0x11111f23395230c29154997CFd9198DbC8FfEE74"
+        - name: "Bitsy ETH"
+          address: "0xB1754A84257ACeD3572e864B3e6740C5cCa64E74"
+        - name: "Gift ETH"
+          address: "0x61F740ecb3555E600D3EB05702346d96cd5a9e74"
     1xUSDC:
       symbol: "1xUSDC"
       peg: "chain-local USDC (resolved via USDCLookup)"
@@ -288,10 +297,23 @@ reflector:
       note: "Deployed by the prototype with USDCLookup as `peg`, so
         the same clone address resolves on every chain that has a
         USDCLookup."
+      # First entry is the flagship showcase token (page exists, address
+      # pending a canonical mint). The rest are mined ERC-20s issued by the
+      # USDCReflector clone against chain-local USDC — see unispring/io/<Name>/.
       issues:
         - name: "Uniteum 1xUSDC"
           address:
           permalink: "/reflector/uniteum-1xusdc/"
+        - name: "Cafe"
+          address: "0xCafE46FE138846791eED3E4CeB5F1483e8E9CafE"
+        - name: "Dad"
+          address: "0xdaD1F0F19cc647c046E451b92dEaC059f6552dAD"
+        - name: "Dadda"
+          address: "0xDadDa032527e34b9F939103a803a7BAd282DADDA"
+        - name: "Good Food"
+          address: "0x600ddC93E542593C6fA19F689183DD26f49Df00d"
+        - name: "Momma"
+          address: "0x3033AbcabA570BE01F669BBc416De31E3A23033A"
 
 hub:
   name: "Hub"
