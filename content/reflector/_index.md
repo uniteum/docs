@@ -53,7 +53,7 @@ The Reflector prototype on mainnet is a special case — it's the family for nat
 
 You'd need a wallet with a bit of ETH for gas. Operations happen on Etherscan's Write Contract tab — no special frontend required. If the family for your backing token already exists, you go straight to `issue(name)`. If not, you'd `make()` it first.
 
-For a step-by-step walkthrough of an ETH-backed issue, see [Uniteum 1xETH](/reflector/uniteum-1xeth/). For the equivalent with a non-native original, see [Uniteum 1xUSDC](/reflector/uniteum-1xusdc/).
+For a step-by-step walkthrough of an ETH-backed issue, see [Uniteum Ether](/reflector/uniteum-1xeth/). For the equivalent with a non-native original, see [Uniteum Dollar](/reflector/uniteum-1xusdc/).
 
 ---
 

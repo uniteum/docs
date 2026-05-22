@@ -1,10 +1,10 @@
 ---
-title: Uniteum 1xUSDC
+title: Uniteum Dollar
 weight: 5
 ---
-# Uniteum 1xUSDC
+# Uniteum Dollar
 
-[`Uniteum 1xUSDC`](https://{{< escan >}}/token/) is an ERC-20 that always trades 1:1 against USDC. One `Uniteum 1xUSDC` is worth one USDC, give or take a hundredth of a percent — and every token in circulation is backed, right now, by an equal amount of real USDC locked in a Uniswap V4 pool.
+`Uniteum Dollar` is an ERC-20 that always trades 1:1 against USDC. One `Uniteum Dollar` is worth one USDC, give or take a hundredth of a percent — and every token in circulation is backed, right now, by an equal amount of real USDC locked in a Uniswap V4 pool.
 
 Mint it, swap it, hold it, send it. It behaves like USDC for any use that wants its own ERC-20 surface — but with its own address, its own name, and the same `(clone, issue)` addresses on every chain it's deployed to.
 
@@ -16,21 +16,21 @@ This page also shows how to mint your own 1xUSDC-symbol mirror under your own na
 
 | | |
 |:---|:---|
-| Name | `Uniteum 1xUSDC` |
+| Name | `Uniteum Dollar` |
 | Symbol | `1xUSDC` |
 | Backing | Chain-local USDC (resolved via [`{{< val "unispring.reflector.clones.1xUSDC.peg_lookup" >}}`](https://{{< escan >}}/address/{{< val "unispring.reflector.clones.1xUSDC.peg_lookup_address" >}}#code)), locked in a Uniswap V4 pool |
 | Decimals | 6 on Ethereum (matches USDC) |
 | Trading range | `[1.0000, 1.0001)` × USDC |
-| Issue ERC-20 | [``](https://{{< escan >}}/token/) |
+| Issue ERC-20 | _(pending deploy)_ |
 
 ---
 
-## Swap USDC for `Uniteum 1xUSDC`
+## Swap USDC for `Uniteum Dollar`
 
-Use any V4-aware DEX or aggregator — Uniswap's own UI, 1inch, Matcha, CoW Swap, custom routers — and pick `USDC ↔ Uniteum 1xUSDC`. There is no separate "redeem" function: the pool is the redemption path.
+Use any V4-aware DEX or aggregator — Uniswap's own UI, 1inch, Matcha, CoW Swap, custom routers — and pick `USDC ↔ Uniteum Dollar`. There is no separate "redeem" function: the pool is the redemption path.
 
-- `USDC → Uniteum 1xUSDC` to acquire
-- `Uniteum 1xUSDC → USDC` to redeem
+- `USDC → Uniteum Dollar` to acquire
+- `Uniteum Dollar → USDC` to redeem
 
 The swap settles inside the `[1.0000, 1.0001)` × USDC band. You'll never pay more than 1.0001 USDC per token to buy, and you'll never receive less than 1.0000 USDC per token to sell.
 
@@ -60,7 +60,7 @@ To preview the deterministic address before deploying, call [`issued(name)`](htt
 
 A named mirror is a real product, not a relabel. It has its own ERC-20 address, its own integrations, its own listing on aggregators, its own market reputation. Two parties can each mint a `1xUSDC`-symbol mirror with different names and end up with two genuinely separate tokens — sharing only the symbol and the underlying peg corridor.
 
-Crucially, the wallet that mints it is the on-chain deployer of that ERC-20 — which is the lever block explorers and token registries use to verify ownership when you submit token info. So `Uniteum 1xUSDC`'s icon, description, and project links on Etherscan are ours to set; `Acme 1xUSDC`'s would be Acme's. Their backing guarantees are identical; the brand on the token is not.
+Crucially, the wallet that mints it is the on-chain deployer of that ERC-20 — which is the lever block explorers and token registries use to verify ownership when you submit token info. So `Uniteum Dollar`'s icon, description, and project links on Etherscan are ours to set; `Acme 1xUSDC`'s would be Acme's. Their backing guarantees are identical; the brand on the token is not.
 
 ---
 
@@ -68,7 +68,7 @@ Crucially, the wallet that mints it is the on-chain deployer of that ERC-20 — 
 
 The issue's V4 pool is initialized at `tick = 0` with the entire supply (about 1 billion at USDC's 6 decimals) seated single-sided in a single-tick range. Below tick 0 there is no liquidity at all; above the next tick there is no liquidity at all. V4's swap math cannot cross an empty tick range, so price is mathematically constrained to `[1.0000, 1.0001)` × USDC.
 
-The pool is owned by a [Fountain](/unispring/fountain/) clone with no decrease-liquidity path. The USDC that backs `Uniteum 1xUSDC` is locked there forever — Reflector retains no authority over it, and Fountain itself exposes no withdraw-principal function. The deployer has the same redemption rights as everyone else: trade through the pool.
+The pool is owned by a [Fountain](/unispring/fountain/) clone with no decrease-liquidity path. The USDC that backs `Uniteum Dollar` is locked there forever — Reflector retains no authority over it, and Fountain itself exposes no withdraw-principal function. The deployer has the same redemption rights as everyone else: trade through the pool.
 
 For the geometric argument in detail, see [Reflector — peg mechanics](/reflector/mechanics/).
 
@@ -80,7 +80,7 @@ USDC lives at a different address on every chain. If the `1xUSDC` clone keyed of
 
 Instead, the clone keys off [`{{< val "unispring.reflector.clones.1xUSDC.peg_lookup" >}}`](/locale/) — a [Locale](/locale/) lookup contract whose `value()` resolves to the chain-local USDC. Reflector computes the clone's CREATE2 salt from the **lookup address**, not from whatever the lookup resolves to. The same lookup address on every chain yields the same clone address on every chain.
 
-So `Uniteum 1xUSDC` will be the same `(clone, issue)` pair of addresses on Ethereum, Arbitrum, Base, and any other chain we deploy `{{< val "unispring.reflector.clones.1xUSDC.peg_lookup" >}}` to — with each chain's issue backed by its own chain's USDC.
+So `Uniteum Dollar` will be the same `(clone, issue)` pair of addresses on Ethereum, Arbitrum, Base, and any other chain we deploy `{{< val "unispring.reflector.clones.1xUSDC.peg_lookup" >}}` to — with each chain's issue backed by its own chain's USDC.
 
 ---
 
@@ -90,4 +90,4 @@ So `Uniteum 1xUSDC` will be the same `(clone, issue)` pair of addresses on Ether
 - [Reflector — peg mechanics](/reflector/mechanics/) — why the 1-bp corridor is hard
 - [Fountain](/unispring/fountain/) — the V4 position primitive backing every issue
 - [Locale](/locale/) — the deterministic lookup contract used as the clone's `peg`
-- [Uniteum 1xETH](/reflector/uniteum-1xeth/) — the same pattern applied to native ETH
+- [Uniteum Ether](/reflector/uniteum-1xeth/) — the same pattern applied to native ETH

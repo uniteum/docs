@@ -275,15 +275,14 @@ reflector:
         clone — no separate deploy. The pair's symbol is resolved at
         construction from a chain-local IStringLookup (\"1xETH\" on
         mainnet, \"1xMATIC\" on Polygon, etc.)."
-      # First entry is the flagship showcase token (page exists, address
-      # pending a canonical mint). The rest are mined ERC-20s issued by the
-      # Reflector prototype against native ETH — see unispring/io/<Name>/.
+      # First entry is the flagship showcase token, Uniteum Ether (the
+      # /reflector/uniteum-1xeth/ page links here). All are mined ERC-20s
+      # issued by the Reflector prototype against native ETH — see
+      # unispring/io/<Name>/.
       issues:
-        - name: "Uniteum 1xETH"
-          address:
-          permalink: "/reflector/uniteum-1xeth/"
         - name: "Uniteum Ether"
           address: "0x11111f23395230c29154997CFd9198DbC8FfEE74"
+          permalink: "/reflector/uniteum-1xeth/"
         - name: "Bitsy ETH"
           address: "0xB1754A84257ACeD3572e864B3e6740C5cCa64E74"
         - name: "Gift ETH"
@@ -297,11 +296,11 @@ reflector:
       note: "Deployed by the prototype with USDCLookup as `peg`, so
         the same clone address resolves on every chain that has a
         USDCLookup."
-      # First entry is the flagship showcase token (page exists, address
-      # pending a canonical mint). The rest are mined ERC-20s issued by the
+      # First entry is the flagship showcase token, Uniteum Dollar — not yet
+      # minted, address pending. The rest are mined ERC-20s issued by the
       # USDCReflector clone against chain-local USDC — see unispring/io/<Name>/.
       issues:
-        - name: "Uniteum 1xUSDC"
+        - name: "Uniteum Dollar"
           address:
           permalink: "/reflector/uniteum-1xusdc/"
         - name: "Cafe"

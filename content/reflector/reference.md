@@ -54,7 +54,7 @@ A clone's symbol is the project convention `1x<ORIGINAL>`:
 - `1xWBTC` clone mirrors WBTC
 - `1xETH` clone (the prototype itself, on mainnet) mirrors native ETH
 
-Within a clone, each issue carries the clone's symbol and is distinguished by `name`. So `Uniteum 1xUSDC` and a different "Foo 1xUSDC" issued later under the same `1xUSDC` clone are two distinct ERC-20s sharing one symbol and one peg corridor.
+Within a clone, each issue carries the clone's symbol and is distinguished by `name`. So `Uniteum Dollar` and a different "Foo 1xUSDC" issued later under the same `1xUSDC` clone are two distinct ERC-20s sharing one symbol and one peg corridor.
 
 The `1x` prefix is convention, not enforcement; symbols and names are caller-supplied. The native pair's symbol is the only one resolved automatically — from the chain-local `IStringLookup` used at prototype construction.
 
