@@ -84,15 +84,15 @@ You can interact with the AddressLookup factory using standard tools like
 
 ### Factory contract
 
-[`{{< val "locale.address" >}}`]({{< escan >}}/address/{{< val "locale.address" >}}#code)
+[`{{< val "locale.address" >}}`](https://{{< escan >}}/address/{{< val "locale.address" >}}#code)
 
 ### Functions
 
 | Action | What it does |
 |:-------|:-------------|
-| [make(entries, variant)]({{< escan >}}/address/{{< val "locale.address" >}}#writeContract#F{{< val "locale" "write" "make((uint256,address)[],uint256)" "f" >}}) | Deploy a new lookup with chain-specific entries |
-| [made(entries, variant)]({{< escan >}}/address/{{< val "locale.address" >}}#readContract#F{{< val "locale" "read" "made((uint256,address)[],uint256)" "f" >}}) | Check if a lookup exists and preview its address |
-| [value()]({{< escan >}}/address/{{< val "locale.address" >}}#readContract#F{{< val "locale" "read" "value()" "f" >}}) | Read the chain-specific address for a deployed lookup |
+| [make(entries, variant)](https://{{< escan >}}/address/{{< val "locale.address" >}}#writeContract#F{{< val "locale" "write" "make((uint256,address)[],uint256)" "f" >}}) | Deploy a new lookup with chain-specific entries |
+| [made(entries, variant)](https://{{< escan >}}/address/{{< val "locale.address" >}}#readContract#F{{< val "locale" "read" "made((uint256,address)[],uint256)" "f" >}}) | Check if a lookup exists and preview its address |
+| [value()](https://{{< escan >}}/address/{{< val "locale.address" >}}#readContract#F{{< val "locale" "read" "value()" "f" >}}) | Read the chain-specific address for a deployed lookup |
 
 ### Live example: USDC lookup
 
@@ -100,7 +100,7 @@ You can interact with the AddressLookup factory using standard tools like
      prototype; the canonical USDC clone of the current prototype is not yet
      deployed. Replace with a `{{< val >}}` reference once the maintainer
      finalizes the prototype choice and the new clone is deployed. -->
-The USDC AddressLookup is deployed at [`0xfE52eC4D4Ac10b5b0718614AA0077F2920f592e8`]({{< escan >}}/address/0xfE52eC4D4Ac10b5b0718614AA0077F2920f592e8#readContract). Query `value()` on any supported chain and it returns that chain's USDC address.
+The USDC AddressLookup is deployed at [`0xfE52eC4D4Ac10b5b0718614AA0077F2920f592e8`](https://{{< escan >}}/address/0xfE52eC4D4Ac10b5b0718614AA0077F2920f592e8#readContract). Query `value()` on any supported chain and it returns that chain's USDC address.
 
 ---
 
@@ -130,5 +130,5 @@ The alternative — deploying different contracts with different addresses per c
 ## Resources
 
 - [GitHub Repository](https://github.com/uniteum/locale)
-- [Contract Source]({{< escan >}}/address/{{< val "locale.address" >}}#code)
+- [Contract Source](https://{{< escan >}}/address/{{< val "locale.address" >}}#code)
 - [Deterministic Lookup](/locale/deterministic-lookup) — the deployment pattern in depth

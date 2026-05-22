@@ -184,9 +184,9 @@ All our contracts deploy to **identical addresses on every network** (determinis
 
 **How to write explorer links (in order of preference):**
 1. **Address/function is in `data/`** → use a shortcode that builds the whole link: `etherscan`, `efn`, `fn_table`, `addr_table`, `contract`, `token`, `unit`, `units_table`. These resolve the host from `data/explorers.yml` automatically.
-2. **You must hand-write a markdown link** (custom anchor text or a `#writeContract#F…` double-anchor) → build the host with the `escan` shortcode:
-   - `[text]({{</* escan */>}}/address/{{</* val "contracts.uniteum.address" */>}}#code)`
-   - `[buy()]({{</* escan */>}}/token/{{</* val "solids.H.address" */>}}#writeContract#F3)`
+2. **You must hand-write a markdown link** (custom anchor text or a `#writeContract#F…` double-anchor) → build the host with the `escan` shortcode, keeping the `https://` scheme **literal** (the render-link hook only adds `target="_blank"` when the destination literally starts with `http`):
+   - `[text](https://{{</* escan */>}}/address/{{</* val "contracts.uniteum.address" */>}}#code)`
+   - `[buy()](https://{{</* escan */>}}/token/{{</* val "solids.H.address" */>}}#writeContract#F3)`
 3. **A "view on the explorer" link whose visible text is the explorer's name** → use the `explorer` shortcode, which renders the current explorer's name (e.g. "Arbiscan") and updates both text and host on switch: `{{</* explorer */>}}` or `{{</* explorer path="/address/0x…#code" */>}}`.
 
 **Section anchors** (append to `#address/<addr>` or `#token/<addr>`): `#code` (source), `#writeContract` (write tab), `#readContract` (read tab), `#events` (logs), none (overview). Specific tx: use the `etherscan` shortcode with `type="tx"`.
@@ -196,7 +196,8 @@ All our contracts deploy to **identical addresses on every network** (determinis
 **Pinning a link to one network** (a legacy or chain-specific contract that does NOT share an address everywhere): leave the literal host in the markdown and add the address to the `skip:` list in `data/explorers.yml` so the dropdown won't rewrite it. The legacy v0.0 genesis contract is the existing example.
 
 **Anti-patterns:**
-- ❌ `[x](https://etherscan.io/address/{{</* val "…" */>}}#code)` — hardcoded host won't follow the network selector. Use `{{</* escan */>}}` for the host.
+- ❌ `[x](https://etherscan.io/address/{{</* val "…" */>}}#code)` — hardcoded host won't follow the network selector. Use `https://{{</* escan */>}}` for the host.
+- ❌ `[x]({{</* escan */>}}/address/…)` — without a literal `https://`, the render-link hook can't tell the link is external and drops `target="_blank"`. Always write `https://{{</* escan */>}}/…`.
 - ❌ `[Etherscan](https://etherscan.io)` — names a single network in the text. Use `{{</* explorer */>}}`.
 - ❌ Writing per-network address fields in `data/` — addresses are identical across chains; only the host varies.
 
@@ -212,7 +213,7 @@ The site has a small set of shortcodes in `layouts/shortcodes/`. Use them to kee
 | `addr_table` | Renders a markdown table of `name`/`address` rows from a data map, with Etherscan links. `{{< addr_table data="contracts" >}}`. |
 | `fn_table` | Renders the read- or write-function quick reference table for a protocol. `{{< fn_table proto="liquid" kind="write" token="liquids.hub.address" type="token" >}}`. |
 | `efn` | Single explorer function link as raw HTML (works inside list items, table cells). Accepts `addr`, `fn` (dotted path) or `fn_path`+`fn_key`, plus `section`, `type`, `text`. |
-| `escan` | Emits the configured explorer base URL (e.g. `https://arbiscan.io`) for use inside hand-written markdown link destinations: `[text]({{< escan >}}/address/{{< val "x.address" >}}#code)`. Host comes from `data/explorers.yml`. |
+| `escan` | Emits the configured explorer host (e.g. `arbiscan.io`) for use inside hand-written markdown link destinations, with a literal `https://` prefix: `[text](https://{{< escan >}}/address/{{< val "x.address" >}}#code)`. Host comes from `data/explorers.yml`. |
 | `explorer` | A link whose visible text is the explorer name (e.g. "Arbiscan"); both text and host update with the network selector. Optional `path`, `network`. |
 | `reflector_clones` | Renders the Reflector "Deployed instances" section from `data/unispring.yml`'s `reflector.clones` map. |
 | `contract`, `contract_table`, `token`, `unit`, `units_table`, `etherscan`, `genesis_address`, `genesis_name`, `uniteum_address`, `uniteum_name`, `references` | Other helpers — see `layouts/shortcodes/` for each one's parameters. |

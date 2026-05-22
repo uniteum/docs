@@ -4,7 +4,7 @@ weight: 4
 ---
 # Uniteum 1xETH
 
-[`Uniteum 1xETH`]({{< escan >}}/token/) is an ERC-20 that always trades 1:1 against ETH. One `Uniteum 1xETH` is worth one ETH, give or take a hundredth of a percent — and every token in circulation is backed, right now, by an equal amount of real ETH locked in a Uniswap V4 pool.
+[`Uniteum 1xETH`](https://{{< escan >}}/token/) is an ERC-20 that always trades 1:1 against ETH. One `Uniteum 1xETH` is worth one ETH, give or take a hundredth of a percent — and every token in circulation is backed, right now, by an equal amount of real ETH locked in a Uniswap V4 pool.
 
 Mint it, swap it, hold it, send it. It behaves like ETH for any use that wants ERC-20 plumbing — but with its own address and its own name.
 
@@ -21,7 +21,7 @@ This page also shows how to mint your own 1xETH-symbol mirror under your own nam
 | Backing | Native ETH, locked in a Uniswap V4 pool |
 | Decimals | 18 (matches ETH) |
 | Trading range | `[1.0000, 1.0001)` × ETH |
-| Issue ERC-20 | [``]({{< escan >}}/token/) |
+| Issue ERC-20 | [``](https://{{< escan >}}/token/) |
 
 ---
 
@@ -42,13 +42,13 @@ You don't have to use ours. Anyone can mint their own `1xETH`-symbol mirror with
 
 **To mint a new named mirror against native ETH:**
 
-1. Open the [Reflector prototype](/reflector/reference/) on Etherscan: [`{{< val "unispring.reflector.address" >}}`]({{< escan >}}/address/{{< val "unispring.reflector.address" >}}#writeContract).
+1. Open the [Reflector prototype](/reflector/reference/) on Etherscan: [`{{< val "unispring.reflector.address" >}}`](https://{{< escan >}}/address/{{< val "unispring.reflector.address" >}}#writeContract).
 2. Connect a wallet with enough ETH to cover gas. (No collateral capital is needed — the mint funds itself.)
-3. Call [`issue(name)`]({{< escan >}}/address/{{< val "unispring.reflector.address" >}}#writeContract#F{{< val "unispring" "reflector" "write" "issue(name, variant)" "f" >}}) with the name you want — `"Acme 1xETH"`, `"Bob 1xETH"`, whatever.
+3. Call [`issue(name)`](https://{{< escan >}}/address/{{< val "unispring.reflector.address" >}}#writeContract#F{{< val "unispring" "reflector" "write" "issue(name, variant)" "f" >}}) with the name you want — `"Acme 1xETH"`, `"Bob 1xETH"`, whatever.
 
 That single call deploys your ERC-20, mints its full supply, and seats it in a fresh V4 pool against native ETH. Your token is tradeable in the same transaction.
 
-To preview the deterministic address before deploying, call [`issued(name)`]({{< escan >}}/address/{{< val "unispring.reflector.address" >}}#readContract#F{{< val "unispring" "reflector" "read" "issued(name, variant)" "f" >}}) with the same name on the read tab.
+To preview the deterministic address before deploying, call [`issued(name)`](https://{{< escan >}}/address/{{< val "unispring.reflector.address" >}}#readContract#F{{< val "unispring" "reflector" "read" "issued(name, variant)" "f" >}}) with the same name on the read tab.
 
 **What you keep as the deployer:** the wallet that submits the `issue(name)` transaction is recorded on-chain as the creator of your new ERC-20. That's the address Etherscan, CoinGecko, CoinMarketCap, and similar registries verify against when you submit token info — icon, description, project website, social links. The token's public identity is yours to claim.
 

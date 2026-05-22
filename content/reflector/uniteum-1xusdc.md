@@ -4,7 +4,7 @@ weight: 5
 ---
 # Uniteum 1xUSDC
 
-[`Uniteum 1xUSDC`]({{< escan >}}/token/) is an ERC-20 that always trades 1:1 against USDC. One `Uniteum 1xUSDC` is worth one USDC, give or take a hundredth of a percent — and every token in circulation is backed, right now, by an equal amount of real USDC locked in a Uniswap V4 pool.
+[`Uniteum 1xUSDC`](https://{{< escan >}}/token/) is an ERC-20 that always trades 1:1 against USDC. One `Uniteum 1xUSDC` is worth one USDC, give or take a hundredth of a percent — and every token in circulation is backed, right now, by an equal amount of real USDC locked in a Uniswap V4 pool.
 
 Mint it, swap it, hold it, send it. It behaves like USDC for any use that wants its own ERC-20 surface — but with its own address, its own name, and the same `(clone, issue)` addresses on every chain it's deployed to.
 
@@ -18,10 +18,10 @@ This page also shows how to mint your own 1xUSDC-symbol mirror under your own na
 |:---|:---|
 | Name | `Uniteum 1xUSDC` |
 | Symbol | `1xUSDC` |
-| Backing | Chain-local USDC (resolved via [`{{< val "unispring.reflector.clones.1xUSDC.peg_lookup" >}}`]({{< escan >}}/address/{{< val "unispring.reflector.clones.1xUSDC.peg_lookup_address" >}}#code)), locked in a Uniswap V4 pool |
+| Backing | Chain-local USDC (resolved via [`{{< val "unispring.reflector.clones.1xUSDC.peg_lookup" >}}`](https://{{< escan >}}/address/{{< val "unispring.reflector.clones.1xUSDC.peg_lookup_address" >}}#code)), locked in a Uniswap V4 pool |
 | Decimals | 6 on Ethereum (matches USDC) |
 | Trading range | `[1.0000, 1.0001)` × USDC |
-| Issue ERC-20 | [``]({{< escan >}}/token/) |
+| Issue ERC-20 | [``](https://{{< escan >}}/token/) |
 
 ---
 
@@ -42,13 +42,13 @@ You don't have to use ours. Anyone can mint their own `1xUSDC`-symbol mirror wit
 
 **To mint a new named mirror against USDC:**
 
-1. Open the `1xUSDC` clone on Etherscan: [`{{< val "unispring.reflector.clones.1xUSDC.address" >}}`]({{< escan >}}/address/{{< val "unispring.reflector.clones.1xUSDC.address" >}}#writeContract).
+1. Open the `1xUSDC` clone on Etherscan: [`{{< val "unispring.reflector.clones.1xUSDC.address" >}}`](https://{{< escan >}}/address/{{< val "unispring.reflector.clones.1xUSDC.address" >}}#writeContract).
 2. Connect a wallet with enough ETH to cover gas. (No collateral capital is needed — the mint funds itself.)
-3. Call [`issue(name)`]({{< escan >}}/address/{{< val "unispring.reflector.clones.1xUSDC.address" >}}#writeContract#F{{< val "unispring" "reflector" "write" "issue(name, variant)" "f" >}}) with the name you want — `"Acme 1xUSDC"`, `"Treasury 1xUSDC"`, whatever.
+3. Call [`issue(name)`](https://{{< escan >}}/address/{{< val "unispring.reflector.clones.1xUSDC.address" >}}#writeContract#F{{< val "unispring" "reflector" "write" "issue(name, variant)" "f" >}}) with the name you want — `"Acme 1xUSDC"`, `"Treasury 1xUSDC"`, whatever.
 
 That single call deploys your ERC-20, mints its full supply, and seats it in a fresh V4 pool against the chain's USDC. Your token is tradeable in the same transaction.
 
-To preview the deterministic address before deploying, call [`issued(name)`]({{< escan >}}/address/{{< val "unispring.reflector.clones.1xUSDC.address" >}}#readContract#F{{< val "unispring" "reflector" "read" "issued(name, variant)" "f" >}}) with the same name on the read tab.
+To preview the deterministic address before deploying, call [`issued(name)`](https://{{< escan >}}/address/{{< val "unispring.reflector.clones.1xUSDC.address" >}}#readContract#F{{< val "unispring" "reflector" "read" "issued(name, variant)" "f" >}}) with the same name on the read tab.
 
 **What you keep as the deployer:** the wallet that submits the `issue(name)` transaction is recorded on-chain as the creator of your new ERC-20. That's the address Etherscan, CoinGecko, CoinMarketCap, and similar registries verify against when you submit token info — icon, description, project website, social links. The token's public identity is yours to claim.
 

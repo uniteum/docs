@@ -8,7 +8,7 @@ weight: 2
 
 Everything here uses {{< explorer >}} directly. No custom app, no frontend, no SDK.
 
-We'll use [Hydrogen (H)]({{< escan >}}/token/{{< val "solids.H.address" >}}) as our example Solid. Any Solid works the same way.
+We'll use [Hydrogen (H)](https://{{< escan >}}/token/{{< val "solids.H.address" >}}) as our example Solid. Any Solid works the same way.
 
 ---
 
@@ -18,7 +18,7 @@ We'll use [Hydrogen (H)]({{< escan >}}/token/{{< val "solids.H.address" >}}) as 
 
 ### Check if it already exists
 
-1. Go to [NOTHING → Read Contract]({{< escan >}}/address/{{< val "solids.NOTHING.address" >}}#readContract)
+1. Go to [NOTHING → Read Contract](https://{{< escan >}}/address/{{< val "solids.NOTHING.address" >}}#readContract)
 2. Find **`made`**
 3. Enter a `name` and `symbol` (e.g., "Hydrogen", "H")
 4. Click **Query**
@@ -28,7 +28,7 @@ If `yes` = `false`, you can create it.
 
 ### Create it
 
-1. Go to [NOTHING → Write Contract]({{< escan >}}/address/{{< val "solids.NOTHING.address" >}}#writeContract)
+1. Go to [NOTHING → Write Contract](https://{{< escan >}}/address/{{< val "solids.NOTHING.address" >}}#writeContract)
 2. Connect your wallet
 3. Find **`make`**
 4. Enter the same `name` and `symbol`
@@ -51,7 +51,7 @@ If `yes` = `false`, you can create it.
 
 ### Preview
 
-1. Go to [Hydrogen → Read Contract]({{< escan >}}/token/{{< val "solids.H.address" >}}#readContract)
+1. Go to [Hydrogen → Read Contract](https://{{< escan >}}/token/{{< val "solids.H.address" >}}#readContract)
 2. Find **`buys`**
 3. Enter an ETH amount in wei (e.g., `100000000000000000` = 0.1 ETH)
 4. Click **Query**
@@ -60,7 +60,7 @@ The result is how many tokens you'd receive (18 decimals).
 
 ### Buy
 
-1. Go to [Hydrogen → Write Contract]({{< escan >}}/token/{{< val "solids.H.address" >}}#writeContract)
+1. Go to [Hydrogen → Write Contract](https://{{< escan >}}/token/{{< val "solids.H.address" >}}#writeContract)
 2. Connect your wallet
 3. Find **`buy`**
 4. In the **payable amount** field at the top, enter the ETH to spend (e.g., `0.1`)
@@ -83,7 +83,7 @@ The result is how many tokens you'd receive (18 decimals).
 
 ### Preview
 
-1. On [Hydrogen → Read Contract]({{< escan >}}/token/{{< val "solids.H.address" >}}#readContract)
+1. On [Hydrogen → Read Contract](https://{{< escan >}}/token/{{< val "solids.H.address" >}}#readContract)
 2. Find **`sells`**
 3. Enter the token amount to sell (in wei, 18 decimals)
 4. Click **Query**
@@ -92,7 +92,7 @@ The result is how much ETH you'd receive (in wei).
 
 ### Sell
 
-1. Go to [Hydrogen → Write Contract]({{< escan >}}/token/{{< val "solids.H.address" >}}#writeContract)
+1. Go to [Hydrogen → Write Contract](https://{{< escan >}}/token/{{< val "solids.H.address" >}}#writeContract)
 2. Find **`sell`**
 3. Enter `s` — the amount to sell (in wei, 18 decimals)
 4. Click **Write** and confirm
@@ -116,7 +116,7 @@ This sells H for ETH internally, then immediately buys He with that ETH — atom
 
 ### Preview
 
-1. On [Hydrogen → Read Contract]({{< escan >}}/token/{{< val "solids.H.address" >}}#readContract)
+1. On [Hydrogen → Read Contract](https://{{< escan >}}/token/{{< val "solids.H.address" >}}#readContract)
 2. Find **`sellsFor`**
 3. Enter:
    - `that`: `{{< val "solids.He.address" >}}` (Helium's address)
@@ -127,7 +127,7 @@ The result is how many He tokens you'd receive.
 
 ### Swap
 
-1. Go to [Hydrogen → Write Contract]({{< escan >}}/token/{{< val "solids.H.address" >}}#writeContract)
+1. Go to [Hydrogen → Write Contract](https://{{< escan >}}/token/{{< val "solids.H.address" >}}#writeContract)
 2. Find **`sellFor`**
 3. Enter:
    - `that`: `{{< val "solids.He.address" >}}`
@@ -140,7 +140,7 @@ The result is how many He tokens you'd receive.
 - He tokens moved from Helium's pool to your wallet
 - All in one transaction — no intermediate steps, no approvals
 
-**Verify:** Call `balanceOf` on the [Helium contract]({{< escan >}}/token/{{< val "solids.He.address" >}}#readContract) with your wallet address.
+**Verify:** Call `balanceOf` on the [Helium contract](https://{{< escan >}}/token/{{< val "solids.He.address" >}}#readContract) with your wallet address.
 
 <!-- TODO: example tx hash for a sellFor transaction -->
 
@@ -150,16 +150,16 @@ The result is how many He tokens you'd receive.
 
 | Action | Function | Payable | No approval needed |
 |:-------|:---------|:--------|:-------------------|
-| Create | [`make(name, symbol)`]({{< escan >}}/address/{{< val "solids.NOTHING.address" >}}#writeContract#F{{< val "solid" "write" "make(name, symbol)" "f" >}}) | No | — |
-| Check existence | [`made(name, symbol)`]({{< escan >}}/address/{{< val "solids.NOTHING.address" >}}#readContract#F{{< val "solid" "read" "made(name, symbol)" "f" >}}) | — | — |
-| Buy | [`buy()`]({{< escan >}}/token/{{< val "solids.H.address" >}}#writeContract#F{{< val "solid" "write" "buy()" "f" >}}) | **Yes** (send ETH) | — |
-| Sell | [`sell(s)`]({{< escan >}}/token/{{< val "solids.H.address" >}}#writeContract#F{{< val "solid" "write" "sell(s)" "f" >}}) | No | Yes |
-| Swap | [`sellFor(that, s)`]({{< escan >}}/token/{{< val "solids.H.address" >}}#writeContract#F{{< val "solid" "write" "sellFor(that, s)" "f" >}}) | No | Yes |
-| Preview buy | [`buys(e)`]({{< escan >}}/token/{{< val "solids.H.address" >}}#readContract#F{{< val "solid" "read" "buys(e)" "f" >}}) | — | — |
-| Preview sell | [`sells(s)`]({{< escan >}}/token/{{< val "solids.H.address" >}}#readContract#F{{< val "solid" "read" "sells(s)" "f" >}}) | — | — |
-| Preview swap | [`sellsFor(that, s)`]({{< escan >}}/token/{{< val "solids.H.address" >}}#readContract#F{{< val "solid" "read" "sellsFor(that, s)" "f" >}}) | — | — |
-| Pool state | [`pool()`]({{< escan >}}/token/{{< val "solids.H.address" >}}#readContract#F{{< val "solid" "read" "pool()" "f" >}}) | — | — |
-| Your balance | [`balanceOf(address)`]({{< escan >}}/token/{{< val "solids.H.address" >}}#readContract#F{{< val "solid" "read" "balanceOf(account)" "f" >}}) | — | — |
+| Create | [`make(name, symbol)`](https://{{< escan >}}/address/{{< val "solids.NOTHING.address" >}}#writeContract#F{{< val "solid" "write" "make(name, symbol)" "f" >}}) | No | — |
+| Check existence | [`made(name, symbol)`](https://{{< escan >}}/address/{{< val "solids.NOTHING.address" >}}#readContract#F{{< val "solid" "read" "made(name, symbol)" "f" >}}) | — | — |
+| Buy | [`buy()`](https://{{< escan >}}/token/{{< val "solids.H.address" >}}#writeContract#F{{< val "solid" "write" "buy()" "f" >}}) | **Yes** (send ETH) | — |
+| Sell | [`sell(s)`](https://{{< escan >}}/token/{{< val "solids.H.address" >}}#writeContract#F{{< val "solid" "write" "sell(s)" "f" >}}) | No | Yes |
+| Swap | [`sellFor(that, s)`](https://{{< escan >}}/token/{{< val "solids.H.address" >}}#writeContract#F{{< val "solid" "write" "sellFor(that, s)" "f" >}}) | No | Yes |
+| Preview buy | [`buys(e)`](https://{{< escan >}}/token/{{< val "solids.H.address" >}}#readContract#F{{< val "solid" "read" "buys(e)" "f" >}}) | — | — |
+| Preview sell | [`sells(s)`](https://{{< escan >}}/token/{{< val "solids.H.address" >}}#readContract#F{{< val "solid" "read" "sells(s)" "f" >}}) | — | — |
+| Preview swap | [`sellsFor(that, s)`](https://{{< escan >}}/token/{{< val "solids.H.address" >}}#readContract#F{{< val "solid" "read" "sellsFor(that, s)" "f" >}}) | — | — |
+| Pool state | [`pool()`](https://{{< escan >}}/token/{{< val "solids.H.address" >}}#readContract#F{{< val "solid" "read" "pool()" "f" >}}) | — | — |
+| Your balance | [`balanceOf(address)`](https://{{< escan >}}/token/{{< val "solids.H.address" >}}#readContract#F{{< val "solid" "read" "balanceOf(account)" "f" >}}) | — | — |
 
 All amounts use 18 decimals. 1 token = `1000000000000000000` wei.
 

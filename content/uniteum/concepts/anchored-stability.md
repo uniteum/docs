@@ -360,7 +360,7 @@ If this mechanism works as hypothesized:
 
 **Check `0xWETH` implied "1" price:**
 
-On the [block explorer]({{< escan >}}/address/{{< val "contracts.uniteum.address" >}}#readContract):
+On the [block explorer](https://{{< escan >}}/address/{{< val "contracts.uniteum.address" >}}#readContract):
 
 1. Call `anchoredPredict(0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2)` to get `0xWETH` address
 2. Call `invariant(address)` on the returned address

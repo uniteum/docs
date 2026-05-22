@@ -1,7 +1,8 @@
 {{- /*
-  Emit the default block-explorer base URL, e.g. "https://arbiscan.io".
-  Use inside markdown link destinations where a full <a> can't be built:
-  [text](BASE/address/ADDR#code), where BASE is this shortcode.
+  Emit the default block-explorer HOST, e.g. "arbiscan.io" (no scheme).
+  Use inside markdown link destinations with a LITERAL https:// prefix so the
+  render-link hook still detects the link as external and adds target=_blank:
+    [text](https://BASE/address/ADDR#code), where BASE is this shortcode.
   The network-selector dropdown rewrites the host client-side at runtime.
 */ -}}
-{{- printf "https://%s" (partial "explorer-host" (.Get 0)) -}}
+{{- partial "explorer-host" (.Get 0) -}}

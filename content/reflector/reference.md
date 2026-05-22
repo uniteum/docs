@@ -4,7 +4,7 @@ weight: 1
 ---
 # Reflector — 1:1 mirror factory
 
-[Reflector]({{< escan >}}/address/{{< val "unispring.reflector.address" >}}#code) issues permissionless ERC-20 mirrors of any existing token (or native ETH). Each mirror trades 1:1 against its original within a hard 1-basis-point corridor, backed token-for-token by real originals locked in a Uniswap V4 pool. No oracle, no rebalance keeper, no governance, no unwind path.
+[Reflector](https://{{< escan >}}/address/{{< val "unispring.reflector.address" >}}#code) issues permissionless ERC-20 mirrors of any existing token (or native ETH). Each mirror trades 1:1 against its original within a hard 1-basis-point corridor, backed token-for-token by real originals locked in a Uniswap V4 pool. No oracle, no rebalance keeper, no governance, no unwind path.
 
 Reflector is a **two-level factory**. The prototype mints **clones** keyed by `(original, symbol)`. Each clone is itself a token factory whose `issue(name)` mints fresh ERC-20s — many distinct issues under one shared `(original, symbol)`, differing only by `name`. Every issue carries the clone's symbol and is pegged against the clone's original.
 
