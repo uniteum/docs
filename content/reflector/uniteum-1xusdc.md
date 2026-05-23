@@ -6,7 +6,7 @@ weight: 5
 
 `Uniteum Dollar` is an ERC-20 that always trades 1:1 against USDC. One `Uniteum Dollar` is worth one USDC, give or take a hundredth of a percent — and every token in circulation is backed, right now, by an equal amount of real USDC locked in a Uniswap V4 pool.
 
-Mint it, swap it, hold it, send it. It behaves like USDC for any use that wants its own ERC-20 surface — but with its own address, its own name, and the same `(clone, issue)` addresses on every chain it's deployed to.
+Mint it, swap it, hold it, send it. It behaves like USDC for any purpose that calls for a distinct ERC-20 — one with its own address and name — and carries the same `(clone, issue)` addresses on every chain it's deployed to.
 
 This page also shows how to mint your own 1xUSDC-symbol mirror under your own name. The mechanism is permissionless: pick a name, send the mint transaction, and you have a backed ERC-20 with the same peg guarantee.
 
@@ -52,7 +52,7 @@ To preview the deterministic address before deploying, call [`issued(name)`](htt
 
 **What you keep as the deployer:** the wallet that submits the `issue(name)` transaction is recorded on-chain as the creator of your new ERC-20. That's the address Etherscan, CoinGecko, CoinMarketCap, and similar registries verify against when you submit token info — icon, description, project website, social links. The token's public identity is yours to claim.
 
-**What you don't keep:** the 0.01% swap fees flow to the Fountain owner of the clone's [placer](/unispring/fountain/), set once when the placer was deployed; later issues don't change that. Supply, the price corridor, and the backing are all locked the moment the mint transaction confirms.
+**What you don't keep:** the 0.01% swap fees flow to the owner of the clone's [placer](/unispring/fountain/) — the Fountain that holds every issue's position — set once when that Fountain was deployed; later issues don't change it. Supply, the price corridor, and the backing are all locked the moment the mint transaction confirms.
 
 ---
 
@@ -66,7 +66,7 @@ Crucially, the wallet that mints it is the on-chain deployer of that ERC-20 — 
 
 ## Why the peg holds
 
-The issue's V4 pool is initialized at `tick = 0` with the entire supply (about 1 billion at USDC's 6 decimals) seated single-sided in a single-tick range. Below tick 0 there is no liquidity at all; above the next tick there is no liquidity at all. V4's swap math cannot cross an empty tick range, so price is mathematically constrained to `[1.0000, 1.0001)` × USDC.
+The issue's V4 pool is initialized at `tick = 0` with the entire supply (about 1 billion at USDC's 6 decimals) seated single-sided in a single-tick range. There is no liquidity below tick 0, and none above the next tick. V4's swap math cannot cross an empty tick range, so price is mathematically constrained to `[1.0000, 1.0001)` × USDC.
 
 The pool is owned by a [Fountain](/unispring/fountain/) clone with no decrease-liquidity path. The USDC that backs `Uniteum Dollar` is locked there forever — Reflector retains no authority over it, and Fountain itself exposes no withdraw-principal function. The deployer has the same redemption rights as everyone else: trade through the pool.
 
@@ -78,7 +78,7 @@ For the geometric argument in detail, see [Reflector — peg mechanics](/reflect
 
 USDC lives at a different address on every chain. If the `1xUSDC` clone keyed off the raw USDC address, deploying it on Ethereum versus Arbitrum would produce two different clone addresses — fragmenting integrations and making cross-chain UX hostile.
 
-Instead, the clone keys off [`{{< val "unispring.reflector.clones.1xUSDC.peg_lookup" >}}`](/locale/) — a [Locale](/locale/) lookup contract whose `value()` resolves to the chain-local USDC. Reflector computes the clone's CREATE2 salt from the **lookup address**, not from whatever the lookup resolves to. The same lookup address on every chain yields the same clone address on every chain.
+Instead, the clone keys off `{{< val "unispring.reflector.clones.1xUSDC.peg_lookup" >}}` — a [Locale](/locale/) lookup contract whose `value()` resolves to the chain-local USDC. Reflector computes the clone's CREATE2 salt from the **lookup address**, not from the address it resolves to. Because that lookup sits at the same address on every chain, the clone does too.
 
 So `Uniteum Dollar` will be the same `(clone, issue)` pair of addresses on Ethereum, Arbitrum, Base, and any other chain we deploy `{{< val "unispring.reflector.clones.1xUSDC.peg_lookup" >}}` to — with each chain's issue backed by its own chain's USDC.
 
