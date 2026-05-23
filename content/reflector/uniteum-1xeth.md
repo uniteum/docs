@@ -4,7 +4,7 @@ weight: 4
 ---
 # Uniteum Ether
 
-[`Uniteum Ether`](https://{{< escan >}}/token/0x11111f23395230c29154997CFd9198DbC8FfEE74) is an ERC-20 that always trades 1:1 against ETH. One `Uniteum Ether` is worth one ETH, give or take a hundredth of a percent — and every token in circulation is backed, right now, by an equal amount of real ETH locked in a Uniswap V4 pool.
+{{< reflector_issue clone="1xETH" name="Uniteum Ether" >}} is an ERC-20 that always trades 1:1 against ETH. One `Uniteum Ether` is worth one ETH, give or take a hundredth of a percent — and every token in circulation is backed, right now, by an equal amount of real ETH locked in a Uniswap V4 pool.
 
 Mint it, swap it, hold it, send it. It behaves like ETH for any purpose that calls for a distinct ERC-20 — one with its own address and name.
 
@@ -21,7 +21,7 @@ This page also shows how to mint your own 1xETH-symbol mirror under your own nam
 | Backing | Native ETH, locked in a Uniswap V4 pool |
 | Decimals | 18 (matches ETH) |
 | Trading range | `[1.0000, 1.0001)` × ETH |
-| Issue ERC-20 | [``](https://{{< escan >}}/token/0x11111f23395230c29154997CFd9198DbC8FfEE74) |
+| Issue ERC-20 | {{< reflector_issue clone="1xETH" name="Uniteum Ether" show="address" >}} |
 
 ---
 

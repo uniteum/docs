@@ -1,0 +1,34 @@
+{{- /*
+  Host-aware token link for a single Reflector issue, looked up by name within
+  a clone's `issues` list in data/unispring.yml. The list keeps its curated
+  order (reflector_clones renders it as-is); this shortcode gives prose and
+  table cells random access to one issue's deployed address.
+
+  Args:
+    clone - clone key under unispring.reflector.clones (e.g. "1xETH")
+    name  - issue name to match within that clone's issues list
+    show  - link-text source when `text` is unset: "name" (default) or "address"
+    text  - explicit link text (overrides `show`)
+
+  Emits a token explorer link (text wrapped in <code>) when the issue has an
+  address; otherwise "<em>(pending deploy)</em>". Rendered as raw HTML so it
+  works inside prose and markdown table cells.
+*/ -}}
+{{- $clone := index hugo.Data.unispring.reflector.clones (.Get "clone") -}}
+{{- $name := .Get "name" -}}
+{{- $issue := dict -}}
+{{- range $clone.issues -}}
+  {{- if eq .name $name -}}{{- $issue = . -}}{{- end -}}
+{{- end -}}
+{{- $addr := index $issue "address" -}}
+{{- if $addr -}}
+  {{- $text := .Get "text" -}}
+  {{- if not $text -}}
+    {{- if eq (.Get "show" | default "name") "address" -}}{{- $text = $addr -}}{{- else -}}{{- $text = index $issue "name" -}}{{- end -}}
+  {{- end -}}
+  {{- $host := partial "explorer-host" "" -}}
+  {{- $url := printf "https://%s/token/%s" $host $addr -}}
+  <a href="{{ $url }}" data-eslink target="_blank" rel="noopener noreferrer"><code>{{ $text | safeHTML }}</code></a>
+{{- else -}}
+<em>(pending deploy)</em>
+{{- end -}}

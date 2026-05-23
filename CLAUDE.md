@@ -216,6 +216,7 @@ The site has a small set of shortcodes in `layouts/shortcodes/`. Use them to kee
 | `escan` | Emits the configured explorer host (e.g. `arbiscan.io`) for use inside hand-written markdown link destinations, with a literal `https://` prefix: `[text](https://{{< escan >}}/address/{{< val "x.address" >}}#code)`. Host comes from `data/explorers.yml`. |
 | `explorer` | A link whose visible text is the explorer name (e.g. "Arbiscan"); both text and host update with the network selector. Optional `path`, `network`. |
 | `reflector_clones` | Renders the Reflector "Deployed instances" section from `data/unispring.yml`'s `reflector.clones` map. |
+| `reflector_issue` | Host-aware token link for one Reflector issue, looked up by `clone` + `name` in `data/unispring.yml`'s `reflector.clones.<clone>.issues` list (which stays a list to preserve curated order). `show="address"` uses the address as the link text instead of the name; renders "(pending deploy)" when the issue has no address yet. |
 | `contract`, `contract_table`, `token`, `unit`, `units_table`, `etherscan`, `genesis_address`, `genesis_name`, `uniteum_address`, `uniteum_name`, `references` | Other helpers — see `layouts/shortcodes/` for each one's parameters. |
 
 **Anti-patterns (DO NOT use — these are Jekyll-era patterns and won't render in Hugo):**
