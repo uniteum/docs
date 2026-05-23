@@ -6,7 +6,7 @@ weight: 4
 
 [`Uniteum Ether`](https://{{< escan >}}/token/0x11111f23395230c29154997CFd9198DbC8FfEE74) is an ERC-20 that always trades 1:1 against ETH. One `Uniteum Ether` is worth one ETH, give or take a hundredth of a percent — and every token in circulation is backed, right now, by an equal amount of real ETH locked in a Uniswap V4 pool.
 
-Mint it, swap it, hold it, send it. It behaves like ETH for any use that wants ERC-20 plumbing — but with its own address and its own name.
+Mint it, swap it, hold it, send it. It behaves like ETH for any purpose that calls for a distinct ERC-20 — one with its own address and name.
 
 This page also shows how to mint your own 1xETH-symbol mirror under your own name. The mechanism is permissionless: pick a name, send the mint transaction, and you have a backed ERC-20 with the same peg guarantee.
 
@@ -52,7 +52,7 @@ To preview the deterministic address before deploying, call [`issued(name)`](htt
 
 **What you keep as the deployer:** the wallet that submits the `issue(name)` transaction is recorded on-chain as the creator of your new ERC-20. That's the address Etherscan, CoinGecko, CoinMarketCap, and similar registries verify against when you submit token info — icon, description, project website, social links. The token's public identity is yours to claim.
 
-**What you don't keep:** the 0.01% swap fees flow to the Fountain owner of the clone's [placer](/unispring/fountain/), set once when the placer was deployed; later issues don't change that. Supply, the price corridor, and the backing are all locked the moment the mint transaction confirms.
+**What you don't keep:** the 0.01% swap fees flow to the owner of the clone's [placer](/unispring/fountain/) — the Fountain that holds every issue's position — set once when that Fountain was deployed; later issues don't change it. Supply, the price corridor, and the backing are all locked the moment the mint transaction confirms.
 
 ---
 
@@ -66,7 +66,7 @@ Crucially, the wallet that mints it is the on-chain deployer of that ERC-20 — 
 
 ## Why the peg holds
 
-The issue's V4 pool is initialized at `tick = 0` with the entire supply (`10²⁷` raw, ~1 billion at 18 decimals) seated single-sided in a single-tick range. Below tick 0 there is no liquidity at all; above the next tick there is no liquidity at all. V4's swap math cannot cross an empty tick range, so price is mathematically constrained to `[1.0000, 1.0001)` × ETH.
+The issue's V4 pool is initialized at `tick = 0` with the entire supply (`10²⁷` raw, ~1 billion at 18 decimals) seated single-sided in a single-tick range. There is no liquidity below tick 0, and none above the next tick. V4's swap math cannot cross an empty tick range, so price is mathematically constrained to `[1.0000, 1.0001)` × ETH.
 
 The pool is owned by a [Fountain](/unispring/fountain/) clone with no decrease-liquidity path. The ETH that backs `Uniteum Ether` is locked there forever — Reflector retains no authority over it, and Fountain itself exposes no withdraw-principal function. The deployer has the same redemption rights as everyone else: trade through the pool.
 
