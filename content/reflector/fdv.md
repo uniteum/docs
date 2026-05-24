@@ -71,3 +71,4 @@ The FDV figure on a tracker is correct, just irrelevant.
 - [Plain-English intro](/reflector/)
 - [Factory reference](/reflector/reference/) — the factory and operations
 - [Peg mechanics](/reflector/mechanics/) — why the corridor is hard
+- [Reputation signals](/reflector/reputation/) — why the FDV rank, and every other reputation metric, is moot here

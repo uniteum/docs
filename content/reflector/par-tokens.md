@@ -28,3 +28,4 @@ Every token above is something you can make yourself — pick a name, send one t
 - [Factory reference](/reflector/reference/) — the factory and its operations in full
 - [Peg mechanics](/reflector/mechanics/) — why the 1-bp corridor is hard
 - [About the FDV](/reflector/fdv/) — why the headline valuation is harmless
+- [Reputation signals](/reflector/reputation/) — why none of the usual token-vetting checks apply

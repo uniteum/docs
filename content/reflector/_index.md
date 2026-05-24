@@ -68,3 +68,4 @@ The fully diluted valuation will look enormous — around $2.3 trillion for ETH-
 - [Factory reference](/reflector/reference/) — the factory and operations in full
 - [Peg mechanics](/reflector/mechanics/) — why the corridor is hard
 - [About the FDV](/reflector/fdv/) — why the trillion-dollar number is harmless
+- [Reputation signals](/reflector/reputation/) — why none of the usual "is this token legit?" checks apply

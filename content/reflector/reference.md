@@ -122,4 +122,5 @@ Even the Fountain `taker` cannot harvest the accumulated original by unwinding �
 - [Plain-English intro](/reflector/) — the same thing for non-engineers.
 - [Peg mechanics](/reflector/mechanics/) — how the corridor is enforced and why the band is hard.
 - [About the FDV](/reflector/fdv/) — why the headline valuation is harmless.
+- [Reputation signals](/reflector/reputation/) — why the trust boundary above makes the usual token-vetting checks moot.
 - [REFLECTOR.md](https://github.com/uniteum/unispring/blob/main/REFLECTOR.md) — the full peg argument.
