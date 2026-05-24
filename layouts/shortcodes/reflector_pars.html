@@ -35,7 +35,6 @@
 {{- $links := slice -}}
 {{- if $mk.uniswap }}{{ $links = $links | append (printf `<a href="https://app.uniswap.org/explore/tokens/%s/%s" target="_blank" rel="noopener noreferrer">Uniswap</a>` $mk.uniswap $iss.address) }}{{ end -}}
 {{- if $mk.geckoterminal }}{{ $links = $links | append (printf `<a href="https://www.geckoterminal.com/%s/tokens/%s" target="_blank" rel="noopener noreferrer">GeckoTerminal</a>` $mk.geckoterminal $iss.address) }}{{ end -}}
-{{- if $mk.dexscreener }}{{ $links = $links | append (printf `<a href="https://dexscreener.com/%s/%s" target="_blank" rel="noopener noreferrer">DEX Screener</a>` $mk.dexscreener $iss.address) }}{{ end -}}
 {{ delimit $links " · " | safeHTML }}</td>
 <td><a href="{{ printf "https://dapps.uniteum.one/reflector/#%s" (querify "chain" $chain "contract" $clone.address "name" $iss.name "variant" $iss.variant) | safeURL }}" target="_blank" rel="noopener noreferrer">Open ↗</a></td>
 {{- else -}}

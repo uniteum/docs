@@ -41,7 +41,6 @@ networks:
     markets:
       uniswap: arbitrum
       geckoterminal: arbitrum
-      dexscreener: arbitrum
   mainnet:
     name: "Etherscan"
     host: "etherscan.io"
@@ -50,7 +49,6 @@ networks:
     markets:
       uniswap: ethereum
       geckoterminal: eth
-      dexscreener: ethereum
   sepolia:
     name: "Sepolia Etherscan"
     host: "sepolia.etherscan.io"
