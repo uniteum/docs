@@ -10,7 +10,14 @@
 #              actually live on.
 # `order`    — dropdown order. Only entries with `live: true` are offered; the
 #              selector is hidden entirely until 2+ networks are live.
-# `networks` — key -> { name (explorer name, shown in the dropdown), host, live }.
+# `networks` — key -> { name (explorer name, shown in the dropdown), host, live,
+#              chain_id, markets }. `chain_id` is the numeric EVM chain id, used
+#              to build deep links into our own dapps (e.g. the Reflector dapp).
+#              `markets` maps each external aggregator to that chain's slug
+#              (their slugs differ: mainnet is "ethereum"/"eth"). These are used
+#              for token-market links and, unlike explorer hosts, are NOT
+#              rewritten by the selector — a token's liquidity lives on the one
+#              chain it was deployed to, so its market/dapp links stay pinned.
 #
 # Mainnet is held out (`live: false`) until the mainnet deploy lands. When it
 # does: set mainnet `live: true` (and, if it becomes primary, change `default`).
@@ -29,12 +36,24 @@ networks:
   arbitrum:
     name: "Arbiscan"
     host: "arbiscan.io"
+    chain_id: 42161
     live: true
+    markets:
+      uniswap: arbitrum
+      geckoterminal: arbitrum
+      dexscreener: arbitrum
   mainnet:
     name: "Etherscan"
     host: "etherscan.io"
+    chain_id: 1
     live: true
+    markets:
+      uniswap: ethereum
+      geckoterminal: eth
+      dexscreener: ethereum
   sepolia:
     name: "Sepolia Etherscan"
     host: "sepolia.etherscan.io"
+    chain_id: 11155111
     live: true
+    # testnet — external market aggregators don't index it; markets omitted.
