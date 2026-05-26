@@ -1,8 +1,8 @@
 {{- /*
-  Render the "Par tokens" directory: one table across every Reflector issue in
-  data/unispring.yml. Columns: token (linked to its docs page when it has one),
-  family symbol, block-explorer contract link, external market links, and a deep
-  link into the Uniteum Reflector dapp.
+  Render the "Par tokens" directory: one table across every Reflector signature
+  token in data/unispring.yml. Columns: token (linked to its docs page when it
+  has one), family symbol, block-explorer contract link, external market links,
+  and a deep link into the Uniteum Reflector dapp.
 
   The contract link uses a known explorer host, so the sidebar network selector
   rewrites its host like any other explorer link. The market and dapp links are
@@ -11,8 +11,8 @@
   to, so those links must not follow the selector.
 
   The dapp deep link mirrors the dapps.uniteum.one/reflector/ fragment format —
-  contract is the issue's *clone* (the (peg, symbol) factory), name is the
-  on-chain issue name, variant is its trimmed vanity nonce.
+  contract is the signature token's *clone* (the (peg, symbol) factory), name is
+  the on-chain signature-token name, variant is its trimmed vanity nonce.
 */ -}}
 {{- $reflector := hugo.Data.unispring.reflector -}}
 {{- $cfg := hugo.Data.explorers -}}
@@ -25,18 +25,18 @@
 <thead><tr><th>Token</th><th>Family</th><th>Contract</th><th>Markets</th><th>Dapp</th></tr></thead>
 <tbody>
 {{- range $sym, $clone := $reflector.clones -}}
-{{- range $iss := $clone.issues -}}
+{{- range $sig := $clone.signatures -}}
 <tr>
-<td>{{ if $iss.permalink }}<a href="{{ $iss.permalink }}">{{ $iss.name }}</a>{{ else }}{{ $iss.name }}{{ end }}</td>
+<td>{{ if $sig.permalink }}<a href="{{ $sig.permalink }}">{{ $sig.name }}</a>{{ else }}{{ $sig.name }}{{ end }}</td>
 <td><code>{{ $clone.symbol }}</code></td>
-{{- if $iss.address -}}
-<td><a href="https://{{ $host }}/token/{{ $iss.address }}" title="{{ $iss.address }}" target="_blank" rel="noopener noreferrer"><code>{{ substr $iss.address 0 6 }}…{{ substr $iss.address -4 }}</code></a></td>
+{{- if $sig.address -}}
+<td><a href="https://{{ $host }}/token/{{ $sig.address }}" title="{{ $sig.address }}" target="_blank" rel="noopener noreferrer"><code>{{ substr $sig.address 0 6 }}…{{ substr $sig.address -4 }}</code></a></td>
 <td>
 {{- $links := slice -}}
-{{- if $mk.uniswap }}{{ $links = $links | append (printf `<a href="https://app.uniswap.org/explore/tokens/%s/%s" target="_blank" rel="noopener noreferrer">Uniswap</a>` $mk.uniswap $iss.address) }}{{ end -}}
-{{- if $mk.geckoterminal }}{{ $links = $links | append (printf `<a href="https://www.geckoterminal.com/%s/tokens/%s" target="_blank" rel="noopener noreferrer">GeckoTerminal</a>` $mk.geckoterminal $iss.address) }}{{ end -}}
+{{- if $mk.uniswap }}{{ $links = $links | append (printf `<a href="https://app.uniswap.org/explore/tokens/%s/%s" target="_blank" rel="noopener noreferrer">Uniswap</a>` $mk.uniswap $sig.address) }}{{ end -}}
+{{- if $mk.geckoterminal }}{{ $links = $links | append (printf `<a href="https://www.geckoterminal.com/%s/tokens/%s" target="_blank" rel="noopener noreferrer">GeckoTerminal</a>` $mk.geckoterminal $sig.address) }}{{ end -}}
 {{ delimit $links " · " | safeHTML }}</td>
-<td><a href="{{ printf "https://dapps.uniteum.one/reflector/#%s" (querify "chain" $chain "contract" $clone.address "name" $iss.name "variant" $iss.variant) | safeURL }}" target="_blank" rel="noopener noreferrer">Open ↗</a></td>
+<td><a href="{{ printf "https://dapps.uniteum.one/reflector/#%s" (querify "chain" $chain "contract" $clone.address "name" $sig.name "variant" $sig.variant) | safeURL }}" target="_blank" rel="noopener noreferrer">Open ↗</a></td>
 {{- else -}}
 <td colspan="3"><em>(pending deploy)</em></td>
 {{- end -}}

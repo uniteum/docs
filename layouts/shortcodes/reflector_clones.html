@@ -22,15 +22,15 @@
 
 {{ $c.note }}
 
-{{ if $c.issues }}**Issues minted:**
+{{ if $c.signatures }}**Signature tokens minted:**
 
 | Name | Address |
 |:-----|:--------|
-{{- range $iss := $c.issues }}
-| {{ if $iss.permalink }}[{{ $iss.name }}]({{ $iss.permalink }}){{ else }}{{ $iss.name }}{{ end }} | {{ if $iss.address }}[`{{ $iss.address }}`]({{ $base }}/address/{{ $iss.address }}){{ else }}_(pending deploy)_{{ end }} |
+{{- range $sig := $c.signatures }}
+| {{ if $sig.permalink }}[{{ $sig.name }}]({{ $sig.permalink }}){{ else }}{{ $sig.name }}{{ end }} | {{ if $sig.address }}[`{{ $sig.address }}`]({{ $base }}/address/{{ $sig.address }}){{ else }}_(pending deploy)_{{ end }} |
 {{- end }}
 {{- end }}
 {{- end }}
 {{- else -}}
-Reflector is not yet deployed. Clone and issue addresses will be published once the prototype is mined and deployed.
+Reflector is not yet deployed. Clone and signature-token addresses will be published once the prototype is mined and deployed.
 {{- end -}}

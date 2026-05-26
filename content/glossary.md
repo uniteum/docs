@@ -183,7 +183,7 @@ A par token:
 - has no redemption function, no oracle, and no governance
 - is exited by selling back into the same locked position at ≥ par, not by burning a claim
 
-A **Reflector issue** is Uniteum's implementation of a par token. "Par token" names the generic instrument class; "Reflector issue" names an instance produced by the Reflector factory.
+A **[signature token](#signature-token)** is Uniteum's implementation of a par token. "Par token" names the generic instrument class; "signature token" names an instance produced by the [Reflector](/reflector/) factory.
 
 ---
 
@@ -205,6 +205,14 @@ Canonical form never uses negative exponents to represent reciprocals.
 A **reserve Unit** is a Unit that appears as one of the two non-geometric-mean Units in a triad.
 
 “Reserve” is a **conventional role**, not a structural distinction.
+
+---
+
+## Signature Token
+
+A **signature token** is a named, fully-backed ERC-20 minted by the [Reflector](/reflector/) factory: the deployer's chosen name and identity ride on top of a token whose value is locked to an existing original (USDC, ETH, anything mirrored). Every signature token is a [par token](#par-token) — it trades 1:1 with its original inside a hard 1-basis-point corridor, with the original held in a Uniswap V4 position that no one (including the deployer) can unwind.
+
+The name carries the brand; the original carries the value. The two are coupled at mint and cannot be decoupled. Use `signature token` for an instance ("Tokyo Steakhouse Dollar is a 1xUSDC signature token") and `par token` for the underlying instrument class ("every signature token is a par token").
 
 ---
 

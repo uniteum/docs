@@ -184,12 +184,12 @@ neutrinoChannel:
 
 reflector:
   name: "Reflector (prototype)"
-  description: "Two-level factory. The prototype mints clones keyed by
-    (peg, symbol); each clone issues ERC-20s — one per name —
-    pegged 1:1 against its peg inside a hard 1-bp corridor. The
-    prototype itself is the canonical clone for the native pair, whose
-    symbol is resolved at construction from a chain-local IStringLookup
-    (\"1xETH\" on mainnet, \"1xMATIC\" on Polygon, etc.)."
+  description: "Two-level signature-token factory. The prototype mints
+    clones keyed by (peg, symbol); each clone mints signature tokens —
+    one per name — pegged 1:1 against its peg inside a hard 1-bp
+    corridor. The prototype itself is the canonical clone for the native
+    pair, whose symbol is resolved at construction from a chain-local
+    IStringLookup (\"1xETH\" on mainnet, \"1xMATIC\" on Polygon, etc.)."
   # Reflector bytecode differs from earlier Notable/Mimicry revisions,
   # so its CREATE2 address differs too. Vanity-mined and deployed via
   # Nick.
@@ -201,13 +201,13 @@ reflector:
   write:
     "issue(name, variant)":
       f: 1
-      description: "Mint a fresh issue ERC-20 with this clone's stored
-        (peg, symbol) and seat its entire supply as a single-tick V4
+      description: "Mint a fresh signature-token ERC-20 with this clone's
+        stored (peg, symbol) and seat its entire supply as a single-tick V4
         position at price 1. Idempotent per name. Callable on the
-        prototype to mint native-pair issues, or on any clone to mint
-        issues under that pair. `variant` is a vanity-mining nonce —
-        pass `0` unless you're reproducing a specific committed
-        prediction."
+        prototype to mint native-pair signature tokens, or on any clone
+        to mint signature tokens under that pair. `variant` is a
+        vanity-mining nonce — pass `0` unless you're reproducing a
+        specific committed prediction."
     "make(peg, symbol, variant)":
       f: 2
       description: "Deploy (or return) the deterministic Reflector clone for
@@ -224,11 +224,12 @@ reflector:
   read:
     "coinage()":
       f: 1
-      description: "The Coinage factory used to mint issue ERC-20s."
+      description: "The Coinage factory used to mint signature-token
+        ERC-20s."
     "issued(name, variant)":
       f: 3
-      description: "Predict the deterministic issue address for `name`
-        under this instance's stored (peg, symbol). `variant` is a
+      description: "Predict the deterministic signature-token address for
+        `name` under this instance's stored (peg, symbol). `variant` is a
         vanity-mining nonce — pass `0` unless you're reproducing a
         specific committed prediction."
     "made(peg, symbol, variant)":
@@ -240,37 +241,39 @@ reflector:
         specific committed prediction."
     "maxSupply()":
       f: 7
-      description: "Raw supply minted for an 18-decimal issue (10^27).
-        Issues with fewer decimals scale down by 10× per decimal below 18."
+      description: "Raw supply minted for an 18-decimal signature token
+        (10^27). Signature tokens with fewer decimals scale down by 10×
+        per decimal below 18."
     "peg()":
       f: 8
-      description: "The currency every issue minted by this instance is
-        pegged 1:1 against (address(0) for native ETH). The prototype's
-        value is native ETH."
+      description: "The currency every signature token minted by this
+        instance is pegged 1:1 against (address(0) for native ETH). The
+        prototype's value is native ETH."
     "placer()":
       f: 9
-      description: "The Fountain that holds each issue's single-tick
-        position and routes its swap fees to the Fountain owner."
+      description: "The Fountain that holds each signature token's
+        single-tick position and routes its swap fees to the Fountain
+        owner."
     "proto()":
       f: 10
       description: "The prototype instance that acts as the clone factory."
     "symbol()":
       f: 11
-      description: "The symbol shared by every issue minted by this
-        instance. The prototype resolves its value from a chain-local
+      description: "The symbol shared by every signature token minted by
+        this instance. The prototype resolves its value from a chain-local
         IStringLookup at construction (e.g. \"1xETH\" on mainnet)."
     "version()":
       f: 12
       description: "Contract version string."
 
   # Known clones. Each entry is itself a (peg, symbol) factory whose
-  # `issue(name, variant)` mints an issue ERC-20 sharing this symbol
-  # and pegged against this peg.
+  # `issue(name, variant)` mints a signature-token ERC-20 sharing this
+  # symbol and pegged against this peg.
   #
-  # Each issue's `variant` is the vanity-mining nonce that produced its
-  # address, with leading zeros trimmed — the form the Reflector dapp
-  # expects in its `variant=` deep-link param. The full 32-byte value
-  # lives in unispring/io/<Name>/<addr>.yml.
+  # Each signature token's `variant` is the vanity-mining nonce that
+  # produced its address, with leading zeros trimmed — the form the
+  # Reflector dapp expects in its `variant=` deep-link param. The full
+  # 32-byte value lives in unispring/io/<Name>/<addr>.yml.
   clones:
     1xETH:
       symbol: "1xETH"
@@ -281,10 +284,10 @@ reflector:
         construction from a chain-local IStringLookup (\"1xETH\" on
         mainnet, \"1xMATIC\" on Polygon, etc.)."
       # First entry is the flagship showcase token, Uniteum Ether (the
-      # /reflector/uniteum-1xeth/ page links here). All are mined ERC-20s
-      # issued by the Reflector prototype against native ETH — see
-      # unispring/io/<Name>/.
-      issues:
+      # /reflector/uniteum-1xeth/ page links here). All are signature
+      # tokens issued by the Reflector prototype against native ETH —
+      # see unispring/io/<Name>/.
+      signatures:
         - name: "Uniteum Ether"
           address: "0x11111f23395230c29154997CFd9198DbC8FfEE74"
           variant: "0x76edb882"
@@ -304,10 +307,10 @@ reflector:
       note: "Deployed by the prototype with USDCLookup as `peg`, so
         the same clone address resolves on every chain that has a
         USDCLookup."
-      # First entry is the flagship showcase token, Uniteum Dollar. All are
-      # mined ERC-20s issued by the USDCReflector clone against chain-local
-      # USDC — see unispring/io/<Name>/.
-      issues:
+      # First entry is the flagship showcase token, Uniteum Dollar. All
+      # are signature tokens issued by the USDCReflector clone against
+      # chain-local USDC — see unispring/io/<Name>/.
+      signatures:
         - name: "Uniteum Dollar"
           address: "0x11111124e8e330BB17e17dfabAd9645A46Cf1c5d"
           variant: "0x24de9b4201"

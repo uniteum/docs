@@ -16,9 +16,9 @@ Reading tokenomics is forecasting *who gets to issue claims against your share, 
 
 ## Why it doesn't apply
 
-A [Reflector issue](/reflector/) has no tokenomics in this sense. There are no levers, because the supply is settled completely at the moment of mint.
+A [signature token](/reflector/) has no tokenomics in this sense. There are no levers, because the supply is settled completely at the moment of mint.
 
-- **No mint function.** The issue is a [Coinage](https://github.com/uniteum/lepton) ERC-20 with a supply fixed at deployment. Nobody — deployer included — can ever increase it. Dilution by issuance is not restricted; it is *absent*.
+- **No mint function.** The signature token is a [Coinage](https://github.com/uniteum/lepton) ERC-20 with a supply fixed at deployment. Nobody — deployer included — can ever increase it. Dilution by issuance is not restricted; it is *absent*.
 - **No allocations, no vesting, no unlocks.** There is no team slice, no investor tranche, no treasury held back to release later. The [entire supply is seated in the pool](/reflector/reputation/liquidity/) in the same transaction that creates the token. There is no float-versus-fully-diluted gap, because float *is* fully diluted on day one.
 - **No emissions.** Nothing is minted over time to reward anyone. The only ongoing flow is the [0.01% swap fee](/reflector/reference/#trust-boundary), which comes out of trade volume — not out of new supply, and not out of holders' shares.
 
@@ -33,10 +33,10 @@ A par token *does* have a conspicuous supply figure — about a billion units, p
 There's no supply schedule to model and no unlock calendar to track. What replaces the entire exercise:
 
 - **Supply is fixed and fully in the pool** — verifiable from the contract and the [trust boundary](/reflector/reference/#trust-boundary).
-- **The backing token's *own* tokenomics** — if the original has a mint function or unlock schedule, the issue inherits that exposure indirectly. The only cap table worth reading is the original's.
+- **The backing token's *own* tokenomics** — if the original has a mint function or unlock schedule, the signature token inherits that exposure indirectly. The only cap table worth reading is the original's.
 
 ## Further reading
 
-- [Why a Reflector issue needs no reputation](/reflector/reputation/) — the unifying argument
+- [Why a signature token needs no reputation](/reflector/reputation/) — the unifying argument
 - [About the FDV](/reflector/fdv/) — why the billion-unit supply and its valuation are harmless
 - [The team behind it](/reflector/reputation/team/) — the matching "who holds power over the token?" question

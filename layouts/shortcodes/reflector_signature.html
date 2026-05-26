@@ -1,12 +1,10 @@
 {{- /*
   Host-aware token link for a single Reflector signature token, looked up by
-  name within a clone's `signatures` list in data/unispring.yml. The list keeps
-  its curated order (reflector_clones renders it as-is); this shortcode gives
-  prose and table cells random access to one signature token's deployed address.
+  name within a clone's `signatures` list in data/unispring.yml.
 
-  Alias: this shortcode is also exposed as `reflector_signature` (see
-  reflector_signature.html) so new prose can use the brand-aligned name; old
-  pages keep working under `reflector_issue`.
+  This is the brand-aligned name. The `reflector_issue` shortcode is kept as
+  an alias so pages written under the previous noun keep working; both
+  shortcodes operate on the same data field and emit identical HTML.
 
   Args:
     clone - clone key under unispring.reflector.clones (e.g. "1xETH")

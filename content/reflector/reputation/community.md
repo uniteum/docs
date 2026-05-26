@@ -10,11 +10,11 @@ For an ordinary token, social proof is a proxy for **future demand** — and fut
 
 ## Why it doesn't apply
 
-A [Reflector issue](/reflector/) is not a bet on future demand, so the signal that measures future demand has nothing to price.
+A [signature token](/reflector/) is not a bet on future demand, so the signal that measures future demand has nothing to price.
 
 **Value doesn't depend on anyone caring.** A par token is redeemable 1:1 for its backing through [the pool itself](/reflector/reference/#how-to-use-it), whether the issue has a thousand-person Discord or no one has ever heard of it. The redemption is mechanical, not social. If every holder lost interest tomorrow and the chat went silent, each remaining unit would still trade at par against the original. Community can't add to that floor and indifference can't subtract from it.
 
-This is the cleanest case of the whole section's thesis. An ordinary token *is* its community's belief — withdraw the belief and the value goes with it. A Reflector issue's value sits in a locked pool, untouched by sentiment. The two assets look alike on a wallet screen and are opposite in kind underneath.
+This is the cleanest case of the whole section's thesis. An ordinary token *is* its community's belief — withdraw the belief and the value goes with it. A signature token's value sits in a locked pool, untouched by sentiment. The two assets look alike on a wallet screen and are opposite in kind underneath.
 
 **Hype has no lever to pull.** On an ordinary token, a coordinated community can move the price — that's why hype is cultivated. On a par token there's nothing to move: the price is [pinned to a 1-bp corridor](/reflector/mechanics/) no amount of buying pressure can breach upward and no selling can breach downward. So even an enthusiastic community can't make the token do anything its mechanics don't already do. There's no pump to organize.
 
@@ -22,7 +22,7 @@ This also makes social proof useless as a *manipulation tell*: with ordinary tok
 
 ## When a community still makes sense
 
-A Reflector issue can absolutely have a community — a group token for a project, an event, a club. That community is meaningful *socially*: it's the people the token is for. What it isn't is **collateral**. The token's redeemable value would be identical with or without them. Enjoy the community for what it is; don't read it as a safety or value signal.
+A signature token can absolutely have a community — a group token for a project, an event, a club. That community is meaningful *socially*: it's the people the token is for. What it isn't is **collateral**. The token's redeemable value would be identical with or without them. Enjoy the community for what it is; don't read it as a safety or value signal.
 
 ## What to look at instead
 
@@ -33,6 +33,6 @@ Don't gauge the chat. The thing social proof stands in for — "will this still 
 
 ## Further reading
 
-- [Why a Reflector issue needs no reputation](/reflector/reputation/) — the unifying argument
+- [Why a signature token needs no reputation](/reflector/reputation/) — the unifying argument
 - [The team behind it](/reflector/reputation/team/) — the matching "trust the humans" signal
 - [Trading volume](/reflector/reputation/volume/) — the other demand proxy that doesn't apply

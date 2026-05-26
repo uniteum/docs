@@ -12,11 +12,11 @@ Every one of these is a guess about *future human behavior*. You're trying to pr
 
 ## Why it doesn't apply
 
-A [Reflector issue](/reflector/) hands its creator no power to predict. The deployer:
+A [signature token](/reflector/) hands its creator no power to predict. The deployer:
 
 - **Cannot mint more.** Supply is fixed at the moment of issue.
 - **Cannot touch the backing.** The entire supply is seated in a Uniswap pool with [no withdrawal path for anyone](/reflector/mechanics/#why-the-backing-is-permanent), the deployer included.
-- **Cannot change the contract.** The issue is an immutable [Coinage](https://github.com/uniteum/lepton) ERC-20; there is no admin key, no proxy, no upgrade.
+- **Cannot change the contract.** The signature token is an immutable [Coinage](https://github.com/uniteum/lepton) ERC-20; there is no admin key, no proxy, no upgrade.
 
 The only thing the deployer keeps is the right to collect the [0.01% swap-fee stream](/reflector/reference/#trust-boundary) — and even that can't be turned into a withdrawal of the principal.
 
@@ -32,6 +32,6 @@ The judgment that replaces "trust the team" is "trust the backing token." See th
 
 ## Further reading
 
-- [Why a Reflector issue needs no reputation](/reflector/reputation/) — the unifying argument
+- [Why a signature token needs no reputation](/reflector/reputation/) — the unifying argument
 - [Factory reference: trust boundary](/reflector/reference/#trust-boundary) — exactly what authority survives a mint
 - [Tokenomics & supply controls](/reflector/reputation/tokenomics/) — the related "can they dilute me?" question

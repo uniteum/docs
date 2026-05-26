@@ -4,11 +4,11 @@ weight: 4
 ---
 # Uniteum Ether
 
-{{< reflector_issue clone="1xETH" name="Uniteum Ether" >}} is an ERC-20 that always trades 1:1 against ETH. One `Uniteum Ether` is worth one ETH, give or take a hundredth of a percent — and every token in circulation is backed, right now, by an equal amount of real ETH locked in a Uniswap V4 pool.
+{{< reflector_signature clone="1xETH" name="Uniteum Ether" >}} is a signature token that always trades 1:1 against ETH. One `Uniteum Ether` is worth one ETH, give or take a hundredth of a percent — and every token in circulation is backed, right now, by an equal amount of real ETH locked in a Uniswap V4 pool.
 
 Mint it, swap it, hold it, send it. It behaves like ETH for any purpose that calls for a distinct ERC-20 — one with its own address and name.
 
-This page also shows how to mint your own 1xETH-symbol mirror under your own name. The mechanism is permissionless: pick a name, send the mint transaction, and you have a backed ERC-20 with the same peg guarantee.
+This page also shows how to mint your own 1xETH signature token under your own name. The mechanism is permissionless: pick a name, send the mint transaction, and you have a backed ERC-20 with the same peg guarantee.
 
 ---
 
@@ -21,7 +21,7 @@ This page also shows how to mint your own 1xETH-symbol mirror under your own nam
 | Backing | Native ETH, locked in a Uniswap V4 pool |
 | Decimals | 18 (matches ETH) |
 | Trading range | `[1.0000, 1.0001)` × ETH |
-| Issue ERC-20 | {{< reflector_issue clone="1xETH" name="Uniteum Ether" show="address" >}} |
+| Token address | {{< reflector_signature clone="1xETH" name="Uniteum Ether" show="address" >}} |
 
 ---
 
@@ -38,9 +38,9 @@ The swap settles inside the `[1.0000, 1.0001)` × ETH band. You'll never pay mor
 
 ## Mint your own personalized 1xETH
 
-You don't have to use ours. Anyone can mint their own `1xETH`-symbol mirror with their own chosen name and their own ERC-20 address. The peg is identical — every named mirror trades inside the same `[1.0000, 1.0001)` × ETH band, backed by ETH locked in its own V4 pool.
+You don't have to use ours. Anyone can mint their own `1xETH` signature token with their own chosen name and their own ERC-20 address. The peg is identical — every named signature token in the family trades inside the same `[1.0000, 1.0001)` × ETH band, backed by ETH locked in its own V4 pool.
 
-**To mint a new named mirror against native ETH:**
+**To mint a new named signature token against native ETH:**
 
 1. Open the [Reflector prototype](/reflector/reference/) on Etherscan: [`{{< val "unispring.reflector.address" >}}`](https://{{< escan >}}/address/{{< val "unispring.reflector.address" >}}#writeContract).
 2. Connect a wallet with enough ETH to cover gas. (No collateral capital is needed — the mint funds itself.)
@@ -52,13 +52,13 @@ To preview the deterministic address before deploying, call [`issued(name)`](htt
 
 **What you keep as the deployer:** the wallet that submits the `issue(name)` transaction is recorded on-chain as the creator of your new ERC-20. That's the address Etherscan, CoinGecko, CoinMarketCap, and similar registries verify against when you submit token info — icon, description, project website, social links. The token's public identity is yours to claim.
 
-**What you don't keep:** the 0.01% swap fees flow to the owner of the clone's [placer](/unispring/fountain/) — the Fountain that holds every issue's position — set once when that Fountain was deployed; later issues don't change it. Supply, the price corridor, and the backing are all locked the moment the mint transaction confirms.
+**What you don't keep:** the 0.01% swap fees flow to the owner of the clone's [placer](/unispring/fountain/) — the Fountain that holds every signature token's position — set once when that Fountain was deployed; later signature tokens don't change it. Supply, the price corridor, and the backing are all locked the moment the mint transaction confirms.
 
 ---
 
 ## What "personalized" gives you
 
-A named mirror is a real product, not a relabel. It has its own ERC-20 address, its own integrations, its own listing on aggregators, its own market reputation. Two parties can each mint a `1xETH`-symbol mirror with different names and end up with two genuinely separate tokens — sharing only the symbol and the underlying peg corridor.
+A named signature token is a real product, not a relabel. It has its own ERC-20 address, its own integrations, its own listing on aggregators, its own market reputation. Two parties can each mint a `1xETH` signature token with different names and end up with two genuinely separate tokens — sharing only the symbol and the underlying peg corridor.
 
 Crucially, the wallet that mints it is the on-chain deployer of that ERC-20 — which is the lever block explorers and token registries use to verify ownership when you submit token info. So `Uniteum Ether`'s icon, description, and project links on Etherscan are ours to set; `Acme 1xETH`'s would be Acme's. Their backing guarantees are identical; the brand on the token is not.
 
@@ -66,7 +66,7 @@ Crucially, the wallet that mints it is the on-chain deployer of that ERC-20 — 
 
 ## Why the peg holds
 
-The issue's V4 pool is initialized at `tick = 0` with the entire supply (`10²⁷` raw, ~1 billion at 18 decimals) seated single-sided in a single-tick range. There is no liquidity below tick 0, and none above the next tick. V4's swap math cannot cross an empty tick range, so price is mathematically constrained to `[1.0000, 1.0001)` × ETH.
+The signature token's V4 pool is initialized at `tick = 0` with the entire supply (`10²⁷` raw, ~1 billion at 18 decimals) seated single-sided in a single-tick range. There is no liquidity below tick 0, and none above the next tick. V4's swap math cannot cross an empty tick range, so price is mathematically constrained to `[1.0000, 1.0001)` × ETH.
 
 The pool is owned by a [Fountain](/unispring/fountain/) clone with no decrease-liquidity path. The ETH that backs `Uniteum Ether` is locked there forever — Reflector retains no authority over it, and Fountain itself exposes no withdraw-principal function. The deployer has the same redemption rights as everyone else: trade through the pool.
 
@@ -86,5 +86,5 @@ For any other peg pair (`(USDC, "1xUSDC")`, `(WBTC, "1xWBTC")`, etc.), `issue(na
 
 - [Factory reference](/reflector/reference/) — the factory, its layout, and the full set of operations
 - [Reflector — peg mechanics](/reflector/mechanics/) — why the 1-bp corridor is hard
-- [Fountain](/unispring/fountain/) — the V4 position primitive backing every issue
+- [Fountain](/unispring/fountain/) — the V4 position primitive backing every signature token
 - [Uniteum Dollar](/reflector/uniteum-1xusdc/) — the same pattern applied to a stablecoin original

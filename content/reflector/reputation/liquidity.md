@@ -12,9 +12,9 @@ A liquidity lock is a promise with a deadline. It's better than nothing, but it'
 
 ## Why it doesn't apply
 
-A [Reflector issue](/reflector/) doesn't lock its liquidity. Its liquidity *is* the token, and it was never withdrawable to begin with.
+A [signature token](/reflector/) doesn't lock its liquidity. Its liquidity *is* the token, and it was never withdrawable to begin with.
 
-When an issue is minted, **its entire supply is seated into a single-tick Uniswap V4 position** paired against the backing token. There is no separate "team allocation" sitting outside the pool, no LP tokens held in a wallet somewhere. The pool isn't a place the token's value is *parked*; the pool is *where the token lives*.
+When a signature token is minted, **its entire supply is seated into a single-tick Uniswap V4 position** paired against the backing token. There is no separate "team allocation" sitting outside the pool, no LP tokens held in a wallet somewhere. The pool isn't a place the token's value is *parked*; the pool is *where the token lives*.
 
 And that position cannot be unwound:
 
@@ -27,7 +27,7 @@ So "is the liquidity locked?" isn't a meaningful question, because locking is th
 
 Depth — how much you can trade before slippage bites — is the half of this signal that does mean something, but it works differently for a par token.
 
-A Reflector issue is minted with a [fixed supply of about a billion units](/reflector/fdv/), all of it on the bid side of the pool. That deliberately large supply gives the pool enough granularity that ordinary swap sizes barely move the inventory. From a trader's seat, the issue behaves like a deep-liquidity wrapped version of the original.
+A signature token is minted with a [fixed supply of about a billion units](/reflector/fdv/), all of it on the bid side of the pool. That deliberately large supply gives the pool enough granularity that ordinary swap sizes barely move the inventory. From a trader's seat, the signature token behaves like a deep-liquidity wrapped version of the original.
 
 But depth here is bounded by the backing on the *other* side of the corridor. As people buy, real backing accumulates in the pool; you can always sell back into exactly that. You're never depending on a third-party market maker to be there — the redemption path is the pool itself, at par, by construction.
 
@@ -40,6 +40,6 @@ Don't hunt for a lock contract; there isn't one and doesn't need to be. The two 
 
 ## Further reading
 
-- [Why a Reflector issue needs no reputation](/reflector/reputation/) — the unifying argument
+- [Why a signature token needs no reputation](/reflector/reputation/) — the unifying argument
 - [Peg mechanics: why the backing is permanent](/reflector/mechanics/#why-the-backing-is-permanent)
 - [About the FDV](/reflector/fdv/) — why the billion-unit supply is a depth feature, not a warning

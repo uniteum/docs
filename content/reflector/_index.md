@@ -5,45 +5,51 @@ bookCollapseSection: true
 ---
 # Reflector
 
-**Mint your own ERC-20, pegged 1:1 to a token you already trust.**
+**Your signature on real money.**
 
-You put up no capital to create it, pay no protocol fees, and end up with a token whose backing nobody — not even you — can rug, dilute, or unwind. This page walks through what that means and what you can do with one, in plain English. Engineers who want the full factory mechanics should head to the [Factory reference](/reflector/reference/) and [Peg mechanics](/reflector/mechanics/).
+A *signature token* is an ERC-20 that wears your name and behaves like the real thing. Pick something to mirror — USDC, ETH, anything you trust. Pick what to call it. Reflector mints the token, backs it 1:1 with the original in a Uniswap V4 pool, and locks the pool so nobody (not even you) can drain it. It trades at par on any DEX. In a wallet, it looks like any other ERC-20. On Etherscan, your name is on the contract.
+
+Reflector is the factory. It takes no fee, requires no capital, and retains no authority. Signature tokens come out the other side.
 
 ---
 
-## What's a Reflector issue?
+## Things people do with one
 
-A Reflector issue is a custom-named ERC-20 token you create yourself, backed 1:1 by a real token you already trust — USDC, WBTC, ETH, whatever has a Reflector family set up for it. You pick the name. It trades within about 0.01% of the original on any DEX that finds the pool, and in a wallet or block explorer it looks like any other ERC-20.
+**Branded loyalty money.** A restaurant mints `Tokyo Steakhouse Dollar` against USDC and offers 5% off the bill for paying in it. The customer who never comes back still holds redeemable USDC — no points-program liability, no breakage to manage, no expiring balance to argue about. The discount is a marketing decision the merchant can change at will; the dollar is the same dollar everywhere else.
+
+**Gift money with a card on it.** A parent mints `Happy Birthday from Dad`, buys $50 of it, and sends it to a kid. The token is a wallet keepsake and real money at the same time — spendable for USDC anytime, or kept for the message.
+
+**A corporate dollar without becoming a custodian.** A business hands out its own Dollar — Etherscan listing, icon, project link, everything — but every token in circulation is already 100% reserved against real USDC in the pool. There is no float to manage, no liability to disclose, no balance sheet to audit. The token is the brand on the bill; the money is the underlying.
+
+These are three slices of the same shape: **you pick who the token is for, and the protocol pins what it's worth.**
 
 ---
 
 ## How it works in practice
 
-When you create a Reflector issue, the entire supply starts out seated inside a Uniswap pool, paired against the backing token. You don't put up any capital to create it. To get some, you go to Uniswap (or any major DEX) and buy it — paying in the backing token, or in anything else the DEX can route a path for. Selling works the same way.
+When you mint a signature token, the entire supply seats into a single-tick Uniswap V4 pool, paired against the original. You put up no capital — the pool starts 100% your token, 0% the original, and the original arrives as buyers swap for your token. To get some of your own, you buy from the same pool. Selling works the same way. The pool *is* the redemption path; there's no separate `redeem()` function.
+
+Two consequences fall out of that geometry:
+
+1. **The peg is hard.** The pool is a single Uniswap tick wide, and Uniswap's swap math cannot cross an empty tick. So the price corridor is exactly `[1.0000, 1.0001)` × the original, enforced by Uniswap itself — no oracle, no keeper, no governance. See [peg mechanics](/reflector/mechanics/).
+
+2. **The backing is permanent.** The pool's V4 position is owned by a [Fountain](/unispring/fountain/) clone with no decrease-liquidity path. The original locked in the pool isn't yours to take back. Neither is anyone else's — the deployer has the same redemption rights as everyone else: trade through the pool.
 
 ---
 
-## What you might do with one
+## What it costs to make one
 
-- **A personally labeled gift.** Issue something like "Birthday Cash for Sam" backed by USDC, buy a hundred of them, send to a friend. They can sell for USDC anytime, or hold it as a keepsake.
-- **A token for a group, project, or event.** Backed by ETH, USDC, or whatever the family supports — everyone holds the same thing under a name that means something to them.
-- **A permanent on-chain artifact.** Fixed supply, hard peg, immutable contract. Once it's issued, it stays put — and unlike most on-chain artifacts, it has real redeemable value.
+*Making* a signature token costs only gas — no protocol fees, no approvals, no capital locked up to back it. The only money you actually spend is whatever you choose to buy of your own afterward, to hold or gift or distribute.
 
----
-
-## What it costs to create one
-
-*Creating* an issue costs only gas — no protocol fees, no approvals, no capital locked up to back it. (*Buying* one is a separate question: that's just the market price plus the usual DEX swap fee, like any other token.)
-
-So the only money you actually spend is whatever you choose to buy of your own issue afterward — to hold, gift, or distribute.
+*Buying* one is a separate question: that's the market price plus the usual DEX swap fee, like any other token.
 
 ---
 
 ## How it's organized
 
-There's a separate Reflector family per backing token. To set up a new family, someone calls [`make(token, symbol)`](https://{{< escan >}}/address/{{< val "unispring.reflector.address" >}}#writeContract#F{{< val "unispring" "reflector" "write" "make(peg, symbol, variant)" "f" >}}) on the Reflector factory once. By convention the symbol is `1x` + the backing token — `1xUSDC`, `1xWBTC` — but it's whatever the maker types, so a family is only as trustworthy as whoever set it up.
+There's a separate **family** per backing token. Each family is a clone of the Reflector prototype, keyed by `(backing, symbol)`. To set up a new family, someone calls [`make(token, symbol)`](https://{{< escan >}}/address/{{< val "unispring.reflector.address" >}}#writeContract#F{{< val "unispring" "reflector" "write" "make(peg, symbol, variant)" "f" >}}) on the Reflector factory once. By convention the symbol is `1x` + the backing token — `1xUSDC`, `1xWBTC` — but it's whatever the maker types, so a family is only as trustworthy as whoever set it up.
 
-After the family exists, anyone can call [`issue("Some Name")`](https://{{< escan >}}/address/{{< val "unispring.reflector.address" >}}#writeContract#F{{< val "unispring" "reflector" "write" "issue(name, variant)" "f" >}}) inside it to mint their own issue. They all share the family symbol but each has its own name and its own pool.
+After the family exists, anyone can call [`issue("Some Name")`](https://{{< escan >}}/address/{{< val "unispring.reflector.address" >}}#writeContract#F{{< val "unispring" "reflector" "write" "issue(name, variant)" "f" >}}) inside it to mint a signature token. All signature tokens in a family share the family symbol but each has its own name and its own pool.
 
 The Reflector prototype on mainnet is a special case — it's the family for native ETH itself, with `1xETH` baked into the contract.
 
@@ -53,13 +59,13 @@ The Reflector prototype on mainnet is a special case — it's the family for nat
 
 You'd need a wallet with a bit of ETH for gas. Operations happen on Etherscan's Write Contract tab — no special frontend required. If the family for your backing token already exists, you go straight to `issue(name)`. If not, you'd `make()` it first.
 
-For a step-by-step walkthrough of an ETH-backed issue, see [Uniteum Ether](/reflector/uniteum-1xeth/). For the equivalent with a non-native original, see [Uniteum Dollar](/reflector/uniteum-1xusdc/).
+For a step-by-step walkthrough of an ETH-backed signature token, see [Uniteum Ether](/reflector/uniteum-1xeth/). For the equivalent with a non-native original, see [Uniteum Dollar](/reflector/uniteum-1xusdc/).
 
 ---
 
 ## Before you check it on a price tracker
 
-The fully diluted valuation will look enormous — around $2.3 trillion for ETH-backed issues, 1 billion tokens for stablecoin-backed issues. That's not a warning sign. See [Why the FDV looks astronomical](/reflector/fdv/) for the reasoning.
+The fully diluted valuation will look enormous — around $2.3 trillion for ETH-backed signature tokens, 1 billion of the backing for stablecoin-backed ones. That's not a warning sign. See [Why the FDV looks astronomical](/reflector/fdv/) for the reasoning.
 
 ---
 
@@ -67,5 +73,6 @@ The fully diluted valuation will look enormous — around $2.3 trillion for ETH-
 
 - [Factory reference](/reflector/reference/) — the factory and operations in full
 - [Peg mechanics](/reflector/mechanics/) — why the corridor is hard
+- [Par tokens](/reflector/par-tokens/) — directory of signature tokens minted so far
 - [About the FDV](/reflector/fdv/) — why the trillion-dollar number is harmless
 - [Reputation signals](/reflector/reputation/) — why none of the usual "is this token legit?" checks apply

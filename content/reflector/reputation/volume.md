@@ -13,9 +13,9 @@ For an ordinary token, volume is a proxy for one practical fear and one speculat
 
 ## Why it doesn't apply
 
-A [Reflector issue](/reflector/) defeats both readings, because its price is pinned and its exit is structural.
+A [signature token](/reflector/) defeats both readings, because its price is pinned and its exit is structural.
 
-**You never need volume to exit.** The whole anxiety behind "is there volume?" is "will there be a buyer when I want out?" For a par token the buyer is the pool, always, at par. Every unit is redeemable 1:1 against the backing token by [trading through the pool itself](/reflector/reference/#how-to-use-it) — there's no separate counterparty to wait for. An issue that has done *zero* trades since it was minted is exactly as redeemable as one doing millions a day. Volume measures how often people have used the exit; it says nothing about whether the exit is open. On a par token, the exit is always open.
+**You never need volume to exit.** The whole anxiety behind "is there volume?" is "will there be a buyer when I want out?" For a par token the buyer is the pool, always, at par. Every unit is redeemable 1:1 against the backing token by [trading through the pool itself](/reflector/reference/#how-to-use-it) — there's no separate counterparty to wait for. A signature token that has done *zero* trades since it was minted is exactly as redeemable as one doing millions a day. Volume measures how often people have used the exit; it says nothing about whether the exit is open. On a par token, the exit is always open.
 
 **Momentum is meaningless inside a 1-bp band.** Price can't trend. It's confined to [`[1.0000, 1.0001)` × the backing token](/reflector/mechanics/), a corridor one basis point wide. There is no chart pattern to read, no breakout, no "up and to the right" — the line is, by design, flat against the original. A par token isn't a momentum instrument and was never meant to be.
 
@@ -32,6 +32,6 @@ The one number worth a glance is [pool depth](/reflector/reputation/liquidity/) 
 
 ## Further reading
 
-- [Why a Reflector issue needs no reputation](/reflector/reputation/) — the unifying argument
+- [Why a signature token needs no reputation](/reflector/reputation/) — the unifying argument
 - [Locked & deep liquidity](/reflector/reputation/liquidity/) — depth, the part of this that does matter
 - [Peg mechanics](/reflector/mechanics/) — why there's no chart to trend
