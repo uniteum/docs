@@ -1,0 +1,25 @@
+{{- /*
+  Emits a deep link URL into the Reflector dapp for one signature token. All
+  values are resolved from data, so addresses and variants stay in lockstep
+  with data/unispring.yml and data/explorers.yml.
+
+  Args:
+    clone - clone key under unispring.reflector.clones (e.g. "1xUSDC")
+    name  - signature-token name to match within that clone's signatures list
+
+  The dapp link is pinned to the default network's chain_id (not the explorer
+  selector), because a signature token's liquidity lives on the one chain it
+  was deployed to.
+
+  Intended for use inline as the URL of a markdown link, e.g. wrapping the
+  shortcode call in parentheses after a link label.
+*/ -}}
+{{- $clone := index hugo.Data.unispring.reflector.clones (.Get "clone") -}}
+{{- $name := .Get "name" -}}
+{{- $sig := dict -}}
+{{- range $clone.signatures -}}
+  {{- if eq .name $name -}}{{- $sig = . -}}{{- end -}}
+{{- end -}}
+{{- $cfg := hugo.Data.explorers -}}
+{{- $chain := (index $cfg.networks $cfg.default).chain_id -}}
+{{- printf "https://dapps.uniteum.one/reflector/#%s" (querify "chain" $chain "contract" $clone.address "name" $sig.name "variant" $sig.variant) -}}

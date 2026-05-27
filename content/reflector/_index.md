@@ -25,6 +25,12 @@ These are three slices of the same shape: **you pick who the token is for, and t
 
 ---
 
+## Try one
+
+The flagship USDC-backed signature token is already live. [**Open `Uniteum Dollar` in the Reflector dapp ↗**]({{< reflector_dapp_url clone="1xUSDC" name="Uniteum Dollar" >}}) — connect a wallet, swap USDC for it, or mint your own signature token under any name you pick. No Etherscan, no contract calls.
+
+---
+
 ## How it works in practice
 
 When you mint a signature token, the entire supply seats into a single-tick Uniswap V4 pool, paired against the original. You put up no capital — the pool starts 100% your token, 0% the original, and the original arrives as buyers swap for your token. To get some of your own, you buy from the same pool. Selling works the same way. The pool *is* the redemption path; there's no separate `redeem()` function.
@@ -57,9 +63,11 @@ The Reflector prototype on mainnet is a special case — it's the family for nat
 
 ## How to try it
 
-You'd need a wallet with a bit of ETH for gas. Operations happen on Etherscan's Write Contract tab — no special frontend required. If the family for your backing token already exists, you go straight to `issue(name)`. If not, you'd `make()` it first.
+The friendly path is the [Reflector dapp ↗](https://dapps.uniteum.one/reflector/) — connect a wallet, pick a family, pick a name, sign. The dapp handles `make()` and `issue()` for you under the hood, and pre-fills against the deployed clones for the families that already exist.
 
-For a step-by-step walkthrough of an ETH-backed signature token, see [Uniteum Ether](/reflector/uniteum-1xeth/). For the equivalent with a non-native original, see [Uniteum Dollar](/reflector/uniteum-1xusdc/).
+Engineers who'd rather skip the frontend can call the contract directly on Etherscan's Write Contract tab. If the family for your backing token already exists, you go straight to `issue(name)`. If not, you'd `make()` it first. Either way you'll need a wallet with a bit of ETH for gas.
+
+For step-by-step walkthroughs, see [Uniteum Ether](/reflector/uniteum-1xeth/) (ETH-backed) and [Uniteum Dollar](/reflector/uniteum-1xusdc/) (USDC-backed).
 
 ---
 
