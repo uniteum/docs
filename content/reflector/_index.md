@@ -27,7 +27,7 @@ These are three slices of the same shape: **you pick who the token is for, and t
 
 ## Try one
 
-The flagship USDC-backed signature token is already live. [**Open `Uniteum Dollar` in the Reflector dapp ↗**]({{< reflector_dapp_url clone="1xUSDC" name="Uniteum Dollar" >}}) — connect a wallet, swap USDC for it, or mint your own signature token under any name you pick. No Etherscan, no contract calls.
+The flagship USDC-backed signature token is already live. [**Open `Uniteum Dollar` in the Reflector dapp ↗**](https://{{< reflector_dapp_url clone="1xUSDC" name="Uniteum Dollar" >}}) — connect a wallet, swap USDC for it, or mint your own signature token under any name you pick. No Etherscan, no contract calls.
 
 ---
 

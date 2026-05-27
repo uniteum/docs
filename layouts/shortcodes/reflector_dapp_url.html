@@ -1,7 +1,12 @@
 {{- /*
-  Emits a deep link URL into the Reflector dapp for one signature token. All
-  values are resolved from data, so addresses and variants stay in lockstep
-  with data/unispring.yml and data/explorers.yml.
+  Emits a Reflector-dapp deep link for one signature token, WITHOUT the
+  `https://` scheme. All values are resolved from data, so addresses and
+  variants stay in lockstep with data/unispring.yml and data/explorers.yml.
+
+  The scheme is omitted so callers can write `https://` literally in the
+  markdown — Hugo's render-link hook only adds `target="_blank"` when a link
+  destination starts with literal `https://`. This mirrors the `escan`
+  shortcode pattern in this codebase.
 
   Args:
     clone - clone key under unispring.reflector.clones (e.g. "1xUSDC")
@@ -10,9 +15,6 @@
   The dapp link is pinned to the default network's chain_id (not the explorer
   selector), because a signature token's liquidity lives on the one chain it
   was deployed to.
-
-  Intended for use inline as the URL of a markdown link, e.g. wrapping the
-  shortcode call in parentheses after a link label.
 */ -}}
 {{- $clone := index hugo.Data.unispring.reflector.clones (.Get "clone") -}}
 {{- $name := .Get "name" -}}
@@ -22,4 +24,4 @@
 {{- end -}}
 {{- $cfg := hugo.Data.explorers -}}
 {{- $chain := (index $cfg.networks $cfg.default).chain_id -}}
-{{- printf "https://dapps.uniteum.one/reflector/#%s" (querify "chain" $chain "contract" $clone.address "name" $sig.name "variant" $sig.variant) -}}
+{{- printf "dapps.uniteum.one/reflector/#%s" (querify "chain" $chain "contract" $clone.address "name" $sig.name "variant" $sig.variant) -}}
