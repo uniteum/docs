@@ -1,6 +1,6 @@
 ---
 title: Locale
-weight: 13
+weight: 12
 bookCollapseSection: true
 ---
 # Locale

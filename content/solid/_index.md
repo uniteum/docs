@@ -1,6 +1,6 @@
 ---
 title: Solid
-weight: 9
+weight: 13
 bookCollapseSection: true
 ---
 # Solid Protocol
