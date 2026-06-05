@@ -13,6 +13,8 @@ No governance.
 No upgrade path.
 No admin functions.
 
+> **The one constraint:** every chain-specific value must be known when the lookup is deployed. The data is baked in at deploy time and can never change. If a value needs to change, or you want to add a new network, you don't edit the existing Locale — you deploy a *new* one. And because the address is derived from the full set of entries, that new lookup lands at a **new address**. Existing integrations keep pointing at the old, unchanged lookup. Plan the complete key set up front.
+
 ---
 
 ## Why this exists
