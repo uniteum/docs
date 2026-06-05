@@ -17,16 +17,18 @@ prototype Reflector  →  clone per (original, symbol)  →  signature token per
 ```
 
 1. **Prototype.** Deployed once per chain. Holds all the logic. Not used directly to mint signature tokens against arbitrary originals — instead, it stamps clones via {{< efn addr="unispring.reflector.address" fn_path="unispring.reflector.write" fn_key="make(peg, symbol, variant)" section="writeContract" text="<code>make(peg, symbol)</code>" >}}.
-2. **Clone.** A minimal proxy at a deterministic CREATE2 address derived from `(original, symbol)`. Carries only its own configuration (the `original` and `symbol` it issues under). Calling {{< efn addr="unispring.reflector.address" fn_path="unispring.reflector.write" fn_key="issue(name, variant)" section="writeContract" text="<code>issue(name)</code>" >}} on the clone mints a fresh ERC-20 carrying the clone's symbol and seats its full supply as a single-tick V4 position against the clone's original.
+2. **Clone.** A minimal proxy at a deterministic CREATE2 address derived from `(original, symbol)`. Carries only its own configuration (the `original` and `symbol` it issues under). Calling {{< efn addr="unispring.reflector.address" fn_path="unispring.reflector.write" fn_key="issue(name, supply, variant)" section="writeContract" text="<code>issue(name)</code>" >}} on the clone mints a fresh ERC-20 carrying the clone's symbol and seats its full supply as a single-tick V4 position against the clone's original.
 3. **Signature token.** A real ERC-20 minted by the clone via [Coinage](https://github.com/uniteum/lepton). Its address is deterministic in `(clone, name, symbol, decimals, supply)`, so distinct names produce distinct signature tokens under the same clone.
 
 `make` and `issue` are both **idempotent**. Calling `make` with a `(original, symbol)` that already has a clone returns the existing clone. Calling `issue` with a `name` that's already been minted returns the existing signature token.
 
 Every public call (`make`, `made`, `issue`, `issued`) also takes a trailing `variant` argument — a `uint256` vanity-mining nonce that perturbs the deterministic salt. Pass `0` for the default address; pass a specific nonce only when reproducing a committed vanity-mined prediction.
 
+`issue` and `issued` take one more argument, `supply`: the raw token amount to mint, caller-chosen and capped at the instance's `maxSupply`. Supply is also part of the address salt, so the same `name` at a different `supply` lands at a different address.
+
 ### The native-pair special case
 
-The prototype itself is the canonical clone for the native pair `(address(0), nativeSymbol)`, where `nativeSymbol` is resolved at construction from a chain-local `IStringLookup` — `"1xETH"` on mainnet, `"1xMATIC"` on Polygon, and so on. Calling `make(address(0), nativeSymbol)` returns the prototype directly — no separate clone is deployed for that pair. To mint a native-pair signature token, call {{< efn addr="unispring.reflector.address" fn_path="unispring.reflector.write" fn_key="issue(name, variant)" section="writeContract" text="<code>issue(name)</code>" >}} on the prototype.
+The prototype itself is the canonical clone for the native pair `(address(0), nativeSymbol)`, where `nativeSymbol` is resolved at construction from a chain-local `IStringLookup` — `"1xETH"` on mainnet, `"1xMATIC"` on Polygon, and so on. Calling `make(address(0), nativeSymbol)` returns the prototype directly — no separate clone is deployed for that pair. To mint a native-pair signature token, call {{< efn addr="unispring.reflector.address" fn_path="unispring.reflector.write" fn_key="issue(name, supply, variant)" section="writeContract" text="<code>issue(name)</code>" >}} on the prototype.
 
 ### IAddressLookup originals
 
@@ -70,7 +72,7 @@ Each signature token is a real ERC-20 — its own address, its own `totalSupply`
 | Price corridor | `[1.0000, 1.0001)` × original |
 | Backing | Real originals, locked in a single-tick V4 position |
 | Swap fee | 0.01%, paid to the Fountain owner |
-| Supply | Fixed at mint, scaled to original's decimals |
+| Supply | Caller-chosen at mint (≤ `maxSupply`), fixed thereafter, scaled to original's decimals |
 
 A signature token's only behaviour is "trades close to its original". It is not a wrapped-deposit token, not an LP token, and not a claim on yield.
 
@@ -80,7 +82,7 @@ A signature token's only behaviour is "trades close to its original". It is not 
 
 **Find or deploy a clone.** Call {{< efn addr="unispring.reflector.address" fn_path="unispring.reflector.write" fn_key="make(peg, symbol, variant)" section="writeContract" text="<code>make(peg, symbol)</code>" >}} on the prototype. Pass `address(0)` for native ETH, an `IAddressLookup` for chain-local resolution, or any other address as the token directly. Use {{< efn addr="unispring.reflector.address" fn_path="unispring.reflector.read" fn_key="made(peg, symbol, variant)" section="readContract" text="<code>made(peg, symbol)</code>" >}} first to preview the deterministic clone address and whether it already exists.
 
-**Mint a signature token.** Call {{< efn addr="unispring.reflector.address" fn_path="unispring.reflector.write" fn_key="issue(name, variant)" section="writeContract" text="<code>issue(name)</code>" >}} on the clone (or on the prototype, for the native pair). The signature token is deployed, fully funded, and tradeable in the same transaction. The wallet that submits the call is recorded on-chain as the deployer of the new ERC-20 — relevant when submitting token-info updates (icon, description, project URL) to Etherscan and other registries that verify ownership against the deployer address. Use {{< efn addr="unispring.reflector.address" fn_path="unispring.reflector.read" fn_key="issued(name, variant)" section="readContract" text="<code>issued(name)</code>" >}} on the clone (or on the prototype, for the native pair) to preview the address before deploying.
+**Mint a signature token.** Call {{< efn addr="unispring.reflector.address" fn_path="unispring.reflector.write" fn_key="issue(name, supply, variant)" section="writeContract" text="<code>issue(name)</code>" >}} on the clone (or on the prototype, for the native pair). Choose any `supply` up to the instance's `maxSupply` (~9 billion at 18 decimals); the Reflector dapp defaults it to a billion. The signature token is deployed, fully funded, and tradeable in the same transaction. The wallet that submits the call is recorded on-chain as the deployer of the new ERC-20 — relevant when submitting token-info updates (icon, description, project URL) to Etherscan and other registries that verify ownership against the deployer address. Use {{< efn addr="unispring.reflector.address" fn_path="unispring.reflector.read" fn_key="issued(name, supply, variant)" section="readContract" text="<code>issued(name)</code>" >}} on the clone (or on the prototype, for the native pair) to preview the address before deploying.
 
 **Buy or sell.** Route a swap through any V4-aware aggregator or frontend — `original → signature token` to acquire, `signature token → original` to redeem. There is no separate "redeem" function: the pool *is* the redemption path.
 
@@ -96,7 +98,7 @@ A signature token's only behaviour is "trades close to its original". It is not 
 
 ## What it isn't
 
-- **Not elastic.** Supply is fixed at mint. The peg is held by pool inventory, not by issuance.
+- **Not elastic.** Supply is chosen once at mint and fixed thereafter. The peg is held by pool inventory, not by issuance.
 - **Not an oracle.** If the original depegs from its reference asset, the signature token tracks the original — not the reference.
 - **Not a yield source beyond fees.** Only the 0.01% swap fee on volume is extractable.
 

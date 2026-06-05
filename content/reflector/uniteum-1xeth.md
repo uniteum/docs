@@ -44,11 +44,11 @@ You don't have to use ours. Anyone can mint their own `1xETH` signature token wi
 
 1. Open the [Reflector prototype](/reflector/reference/) on Etherscan: [`{{< val "unispring.reflector.address" >}}`](https://{{< escan >}}/address/{{< val "unispring.reflector.address" >}}#writeContract).
 2. Connect a wallet with enough ETH to cover gas. (No collateral capital is needed — the mint funds itself.)
-3. Call [`issue(name)`](https://{{< escan >}}/address/{{< val "unispring.reflector.address" >}}#writeContract#F{{< val "unispring" "reflector" "write" "issue(name, variant)" "f" >}}) with the name you want — `"Acme 1xETH"`, `"Bob 1xETH"`, whatever.
+3. Call [`issue(name)`](https://{{< escan >}}/address/{{< val "unispring.reflector.address" >}}#writeContract#F{{< val "unispring" "reflector" "write" "issue(name, supply, variant)" "f" >}}) with the name you want — `"Acme 1xETH"`, `"Bob 1xETH"`, whatever.
 
 That single call deploys your ERC-20, mints its full supply, and seats it in a fresh V4 pool against native ETH. Your token is tradeable in the same transaction.
 
-To preview the deterministic address before deploying, call [`issued(name)`](https://{{< escan >}}/address/{{< val "unispring.reflector.address" >}}#readContract#F{{< val "unispring" "reflector" "read" "issued(name, variant)" "f" >}}) with the same name on the read tab.
+To preview the deterministic address before deploying, call [`issued(name)`](https://{{< escan >}}/address/{{< val "unispring.reflector.address" >}}#readContract#F{{< val "unispring" "reflector" "read" "issued(name, supply, variant)" "f" >}}) with the same name on the read tab.
 
 **What you keep as the deployer:** the wallet that submits the `issue(name)` transaction is recorded on-chain as the creator of your new ERC-20. That's the address Etherscan, CoinGecko, CoinMarketCap, and similar registries verify against when you submit token info — icon, description, project website, social links. The token's public identity is yours to claim.
 
@@ -66,7 +66,7 @@ Crucially, the wallet that mints it is the on-chain deployer of that ERC-20 — 
 
 ## Why the peg holds
 
-The signature token's V4 pool is initialized at `tick = 0` with the entire supply (`10²⁷` raw, ~1 billion at 18 decimals) seated single-sided in a single-tick range. There is no liquidity below tick 0, and none above the next tick. V4's swap math cannot cross an empty tick range, so price is mathematically constrained to `[1.0000, 1.0001)` × ETH.
+The signature token's V4 pool is initialized at `tick = 0` with its full supply — caller-chosen at mint, up to the `maxSupply` cap (~9 billion at 18 decimals) — seated single-sided in a single-tick range. There is no liquidity below tick 0, and none above the next tick. V4's swap math cannot cross an empty tick range, so price is mathematically constrained to `[1.0000, 1.0001)` × ETH.
 
 The pool is owned by a [Fountain](/unispring/fountain/) clone with no decrease-liquidity path. The ETH that backs `Uniteum Ether` is locked there forever — Reflector retains no authority over it, and Fountain itself exposes no withdraw-principal function. The deployer has the same redemption rights as everyone else: trade through the pool.
 

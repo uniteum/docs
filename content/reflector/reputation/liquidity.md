@@ -27,7 +27,7 @@ So "is the liquidity locked?" isn't a meaningful question, because locking is th
 
 Depth — how much you can trade before slippage bites — is the half of this signal that does mean something, but it works differently for a par token.
 
-A signature token is minted with a [fixed supply of about a billion units](/reflector/fdv/), all of it on the bid side of the pool. That deliberately large supply gives the pool enough granularity that ordinary swap sizes barely move the inventory. From a trader's seat, the signature token behaves like a deep-liquidity wrapped version of the original.
+A signature token is minted with a [large fixed supply — about a billion units by default](/reflector/fdv/), all of it on the bid side of the pool. That deliberately large supply gives the pool enough granularity that ordinary swap sizes barely move the inventory. From a trader's seat, the signature token behaves like a deep-liquidity wrapped version of the original.
 
 But depth here is bounded by the backing on the *other* side of the corridor. As people buy, real backing accumulates in the pool; you can always sell back into exactly that. You're never depending on a third-party market maker to be there — the redemption path is the pool itself, at par, by construction.
 

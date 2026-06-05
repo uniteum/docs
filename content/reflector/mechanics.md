@@ -29,7 +29,7 @@ The signature token carries the original's decimals (18 for native ETH), so the 
 
 The corridor is enforced by Uniswap V4 itself. There is no liquidity outside the seeded tick, and V4's swap math cannot cross an empty tick range.
 
-Trade size cannot break the band either. The raw supply minted is `10²⁷` for signature tokens with 18 or more decimals, scaled down by a factor of 10 per decimal below 18 — keeping the human-unit supply roughly constant (about a billion tokens) across originals and well below V4's `maxLiquidityPerTick` at `tickSpacing = 1`. For any plausible original this means the pool cannot be drained by a real-world quantity of buyers.
+Trade size cannot break the band either. The supply seated into the pool is caller-chosen at mint, but capped at `maxSupply` — the largest amount that fits V4's `maxLiquidityPerTick` for a single-tick seat at `tickSpacing = 1` (about 9 billion tokens at 18 decimals). Whatever supply is chosen, all of it sits on the bid side of the one tick, so for any plausible original the pool cannot be drained by a real-world quantity of buyers.
 
 No hook, no oracle, no keeper. The peg is geometric: the only place trade can happen is inside the seeded tick, and that tick is a 1-bp corridor by construction.
 
@@ -45,7 +45,7 @@ The clone's owner is set once at deploy to the address that called `Fountain.mak
 
 ## Native-pair originals
 
-When the original is `Currency.wrap(address(0))`, Reflector mints the signature token with 18 decimals and `10²⁷` supply, then funds the V4 position against native ETH. Fountain handles ETH-denominated `PoolManager` calls without a separate WETH wrapper step. The Reflector prototype itself is the canonical clone for the native pair `(address(0), nativeSymbol)` — where `nativeSymbol` is resolved at construction from a chain-local `IStringLookup` (`"1xETH"` on mainnet, `"1xMATIC"` on Polygon, etc.). See [Factory reference](/reflector/reference/) for the factory layout.
+When the original is `Currency.wrap(address(0))`, Reflector mints the signature token with 18 decimals and the caller-chosen supply, then funds the V4 position against native ETH. Fountain handles ETH-denominated `PoolManager` calls without a separate WETH wrapper step. The Reflector prototype itself is the canonical clone for the native pair `(address(0), nativeSymbol)` — where `nativeSymbol` is resolved at construction from a chain-local `IStringLookup` (`"1xETH"` on mainnet, `"1xMATIC"` on Polygon, etc.). See [Factory reference](/reflector/reference/) for the factory layout.
 
 ---
 

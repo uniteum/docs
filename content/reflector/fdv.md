@@ -12,7 +12,7 @@ These numbers are real. They are not warning signs. This page explains why.
 
 ## Where the number comes from
 
-Every Reflector signature token mints a fixed supply whose [decimal amount](/glossary/#decimal-amount) is 1 billion tokens, scaled on-chain by the backing token's `decimals()`. The peg holds the price tightly close to 1:1 against the original, so the FDV simplifies to:
+Each signature token's supply is chosen by its issuer at mint, up to the `maxSupply` cap. The Reflector dapp defaults to a [decimal amount](/glossary/#decimal-amount) of 1 billion tokens, scaled on-chain by the backing token's `decimals()` — the assumption behind the figures here. The peg holds the price tightly close to 1:1 against the original, so the FDV simplifies to:
 
 ```
 FDV ≈ 1,000,000,000 × (price of one backing token)
@@ -24,7 +24,7 @@ FDV ≈ 1,000,000,000 × (price of one backing token)
 | USDC, USDT, DAI, etc. | 1 billion of that stable | $1 billion |
 | Any other ERC-20 | 1 billion of that token | a billion × spot price |
 
-Why a billion? It's an artifact of how the supply is sized to fit Uniswap V4's tick geometry. The Reflector factory mints an [integer amount](/glossary/#integer-amount) of `10²⁷` for any original with 18 or more decimals, and scales down by a factor of 10 per decimal below 18 — which keeps the decimal amount at a billion across originals. See [Peg mechanics](/reflector/mechanics/) for the geometric reasoning.
+Why a billion? That's the Reflector dapp's default. The hard ceiling — `maxSupply` — is sized to fit Uniswap V4's tick geometry: about 9 billion tokens at 18 decimals (an [integer amount](/glossary/#integer-amount) of `9×10²⁷` raw), scaling down by a factor of 10 per decimal below 18. A default of a billion sits comfortably under that cap. See [Peg mechanics](/reflector/mechanics/) for the geometric reasoning.
 
 ---
 
@@ -42,7 +42,7 @@ A signature token inverts that picture. **Every single token of supply is alread
 
 The FDV is a theoretical ceiling no one could come close to reaching. To buy a meaningful fraction of supply, you'd have to swap in an equally meaningful fraction of the original — for an ETH-backed signature token, that would mean putting up more than all the ETH in existence. Long before this happened, the pool would have run out of original to absorb (the pool's math caps fills inside the seeded tick).
 
-The number you see exists because the pool needs a billion units of the new token sitting on the bid side to give buyers something to swap into. That's it. It's a supply scoreboard, not a debt overhang.
+The number you see exists because the pool needs the token's full supply (a billion units by default) sitting on the bid side to give buyers something to swap into. That's it. It's a supply scoreboard, not a debt overhang.
 
 ---
 
