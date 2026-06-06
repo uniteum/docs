@@ -18,6 +18,44 @@ Each project is permissionless, immutable, and governed entirely by on-chain mat
 
 ---
 
+## [Unispring](/unispring/) — Fair Launch on Uniswap V4
+
+**Fair-launch tokens deployed directly into Uniswap V4. Permanent liquidity, built-in price floor, zero maker capital.**
+
+A single transaction mints a fixed-supply ERC-20, initializes a V4 pool against a hub token, and locks 100% of the supply as a single-sided concentrated position. The maker provides only gas. The position is owned by a Fountain clone with no decrease-liquidity path.
+
+- Native Uniswap V4 — routable by every aggregator from block one
+- Permanent floor enforced by the absence of liquidity below `tickLower`
+- Hub-and-spoke topology gives any two Unispring tokens a two-hop swap path
+
+A sibling two-level factory, **[Reflector](/reflector/)**, stamps clones per `(original, symbol)` (`1xUSDC`, `1xWBTC`, `1xETH`, …); each clone issues named 1:1 ERC-20 mirrors with a hard 1-bp peg corridor.
+
+---
+
+## [Lepton](/lepton/) — Token Factory
+
+**One call makes a fixed-supply ERC-20. Deterministic address, no owner, no inflation.**
+
+Lepton deploys standard ERC-20 tokens as minimal proxy clones via CREATE2. You pick a name, symbol, and supply — the entire supply is minted to you in a single transaction. Idempotent: the same parameters always produce the same token.
+
+- Fixed supply, minted once at creation
+- Deterministic addresses via CREATE2
+- Permissionless, no owner, no governance
+
+---
+
+## [Locale](/locale/) — On-Chain Reference Data
+
+**Immutable reference contracts at deterministic addresses, with data native to each chain.**
+
+Locale deploys lookup contracts that resolve to chain-specific values. The same address exists on every supported network. Query it on Ethereum mainnet and you get one answer. Query it on Arbitrum and you get another. The address never changes. The data never changes. There is no owner.
+
+- Same address on every chain, different data per chain
+- Initialized once, immutable forever
+- No owner, no upgrade path, no governance
+
+---
+
 ## [Solid](/solid/) — Fair-Launch Tokens
 
 **Make a token that starts fair, stays tradeable, and never goes to zero.**
@@ -39,44 +77,6 @@ Every Liquid token is both a standard ERC-20 and its own AMM. Deposits create in
 - Zero fees, hardcoded forever
 - Automatic liquidity on every deposit
 - Universal cross-swap via Hub routing
-
----
-
-## [Lepton](/lepton/) — Token Factory
-
-**One call makes a fixed-supply ERC-20. Deterministic address, no owner, no inflation.**
-
-Lepton deploys standard ERC-20 tokens as minimal proxy clones via CREATE2. You pick a name, symbol, and supply — the entire supply is minted to you in a single transaction. Idempotent: the same parameters always produce the same token.
-
-- Fixed supply, minted once at creation
-- Deterministic addresses via CREATE2
-- Permissionless, no owner, no governance
-
----
-
-## [Unispring](/unispring/) — Fair Launch on Uniswap V4
-
-**Fair-launch tokens deployed directly into Uniswap V4. Permanent liquidity, built-in price floor, zero maker capital.**
-
-A single transaction mints a fixed-supply ERC-20, initializes a V4 pool against a hub token, and locks 100% of the supply as a single-sided concentrated position. The maker provides only gas. The position is owned by a Fountain clone with no decrease-liquidity path.
-
-- Native Uniswap V4 — routable by every aggregator from block one
-- Permanent floor enforced by the absence of liquidity below `tickLower`
-- Hub-and-spoke topology gives any two Unispring tokens a two-hop swap path
-
-A sibling two-level factory, **[Reflector](/reflector/)**, stamps clones per `(original, symbol)` (`1xUSDC`, `1xWBTC`, `1xETH`, …); each clone issues named 1:1 ERC-20 mirrors with a hard 1-bp peg corridor.
-
----
-
-## [Locale](/locale/) — On-Chain Reference Data
-
-**Immutable reference contracts at deterministic addresses, with data native to each chain.**
-
-Locale deploys lookup contracts that resolve to chain-specific values. The same address exists on every supported network. Query it on Ethereum mainnet and you get one answer. Query it on Arbitrum and you get another. The address never changes. The data never changes. There is no owner.
-
-- Same address on every chain, different data per chain
-- Initialized once, immutable forever
-- No owner, no upgrade path, no governance
 
 ---
 
