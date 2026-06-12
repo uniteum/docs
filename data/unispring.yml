@@ -335,6 +335,22 @@ reflector:
         - name: "Momma"
           address: "0x3033A6950603E93395E926EdFCD10388eBf3033A"
           variant: "0x536798405f"
+    USA250:
+      symbol: "USA250"
+      peg: "chain-local USDC (resolved via USDCLookup)"
+      peg_lookup: "USDCLookup"
+      peg_lookup_address: "0xC5DC3461ed6653dbC5E6A8bCDcF0354fF178E300"
+      address: "0x1776eFbe669dA18608a8dA4FB53cD26614312026"
+      note: "USA250Reflector — made by the prototype with USDCLookup as
+        `peg` and the symbol USA250. Shares the USDC peg corridor with
+        1xUSDC but is a distinct (peg, symbol) family. Deploys on first
+        make()/issue()."
+      # Signature tokens issued by USA250Reflector against chain-local
+      # USDC — see unispring/io/<Name>/.
+      signatures:
+        - name: "Liberty Dollar"
+          address: "0x1776a00f15aAf8a5a420Ba3a48Bf2f06828e2026"
+          variant: "0x11c69be1c"
 
 hub:
   name: "Hub"
