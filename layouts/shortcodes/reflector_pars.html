@@ -12,7 +12,10 @@
 
   The dapp deep link mirrors the dapps.uniteum.one/reflector/ fragment format —
   contract is the signature token's *clone* (the (peg, symbol) factory), name is
-  the on-chain signature-token name, variant is its trimmed vanity nonce.
+  the on-chain signature-token name, variant is its trimmed vanity nonce. The
+  optional supply param is the signature's decimal-amount supply, emitted only
+  when the data carries one — set it only for tokens that deviate from the
+  dapp's 1-billion default, so default-supply links stay clean.
 */ -}}
 {{- $reflector := hugo.Data.unispring.reflector -}}
 {{- $cfg := hugo.Data.explorers -}}
@@ -36,7 +39,9 @@
 {{- if $mk.uniswap }}{{ $links = $links | append (printf `<a href="https://app.uniswap.org/explore/tokens/%s/%s" target="_blank" rel="noopener noreferrer">Uniswap</a>` $mk.uniswap $sig.address) }}{{ end -}}
 {{- if $mk.geckoterminal }}{{ $links = $links | append (printf `<a href="https://www.geckoterminal.com/%s/tokens/%s" target="_blank" rel="noopener noreferrer">GeckoTerminal</a>` $mk.geckoterminal $sig.address) }}{{ end -}}
 {{ delimit $links " · " | safeHTML }}</td>
-<td><a href="{{ printf "https://dapps.uniteum.one/reflector/#%s" (querify "chain" $chain "contract" $clone.address "name" $sig.name "variant" $sig.variant) | safeURL }}" target="_blank" rel="noopener noreferrer">Open ↗</a></td>
+{{- $dapp := slice "chain" $chain "contract" $clone.address "name" $sig.name "variant" $sig.variant -}}
+{{- with $sig.supply }}{{ $dapp = $dapp | append "supply" (string .) }}{{ end -}}
+<td><a href="{{ printf "https://dapps.uniteum.one/reflector/#%s" (querify $dapp) | safeURL }}" target="_blank" rel="noopener noreferrer">Open ↗</a></td>
 {{- else -}}
 <td colspan="3"><em>(pending deploy)</em></td>
 {{- end -}}

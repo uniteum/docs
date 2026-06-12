@@ -351,6 +351,10 @@ reflector:
         - name: "Liberty Dollar"
           address: "0x1776a00f15aAf8a5a420Ba3a48Bf2f06828e2026"
           variant: "0x11c69be1c"
+          # Decimal-amount supply, set only when it differs from the dapp's
+          # 1-billion default. Omit on default-supply tokens so the dapp
+          # link leaves out the `supply` param (see /reflector/fdv/).
+          supply: 250000
 
 hub:
   name: "Hub"
