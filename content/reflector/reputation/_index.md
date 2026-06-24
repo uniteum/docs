@@ -48,4 +48,5 @@ That's the whole point of the section: a par token doesn't ask you to trust it, 
 - [Reflector](/reflector/) — what a par token is and how to use one
 - [Peg mechanics](/reflector/mechanics/) — why the corridor is hard and the backing permanent
 - [About the FDV](/reflector/fdv/) — why the headline valuation is harmless
+- [The $0 price display](/unispring/price-display/) — why a tracker can show $0, and why it isn't a defect
 - [Par tokens](/reflector/par-tokens/) — the directory of signature tokens minted so far
